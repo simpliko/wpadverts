@@ -1,0 +1,83 @@
+.adverts-update-notice {
+    border: 0;
+    font-size: 13px;
+    font-weight: 400;
+    margin: 6px 12px 12px;
+    padding: 6px 12px;
+    background-color: rgba(0,0,0,.03);
+    line-height: 27px;
+}
+
+.adverts-update-registered {
+    margin: 0 10px 8px 31px;
+    background-color: rgba(0,0,0,.015);
+}
+
+.adverts-update-notice:before {
+    display: inline-block;
+    font: 400 20px/27px dashicons;
+    speak: none;
+    margin: 0 8px 0 -2px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    vertical-align: middle;
+    color: #d54e21;
+}
+
+.adverts-update-notice.adverts-update-activate:before {
+    content: "\f160";
+}
+
+.adverts-update-notice.adverts-update-registered:before {
+    content: "\f332";
+}
+
+.adverts-update-notice input {
+    vertical-align: middle;
+    margin: 0 4px;
+}
+.adverts-update-row td {
+    border-left: 4px solid #2ea2cc !important;
+    padding: 0 !important;
+}
+
+.adverts-update-row.update td {
+    border-left: 4px solid #d54e21 !important;
+}
+
+.adverts-update-row span {
+    line-height: 26px;
+    vertical-align: top;
+    display: inline-block;
+    padding: 3px 0 1px 0;
+}
+
+.adverts-inline-license,
+.adverts-inline-edit {
+    height: 27px;
+    display: inline-block;
+}
+
+.adverts-off {
+    display: none
+}
+
+.adverts-update-error {
+    color:#d54e21; 
+    padding-left:10px
+}
+
+.adverts-license-key {
+    padding-left: 0px;
+    padding-right: 10px;
+}
+
+.adverts-update-loader {
+    height: 18px;
+    vertical-align: middle;
+}
+
+.adverts-license-link > span {
+    font-size: 16px;
+    vertical-align: middle;
+}

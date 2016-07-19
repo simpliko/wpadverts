@@ -1,0 +1,187 @@
+.adverts-form .adverts-listing-type-x {
+    display: block;
+    clear: both;
+    overflow: hidden;
+    background-color: #fcfcfc;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.adverts-form .adverts-listing-type {
+    width:90%;
+    float: left;
+    border-right: 1px solid whitesmoke;
+    padding: 10px 5px 10px 5px;
+}
+.adverts-form .adverts-listing-radio {
+    width: 10%;
+    padding-left: 10px;
+    padding-top: 26px;
+    border-right: 1px solid transparent;
+}
+
+.adverts-form .adverts-listing-type-title {
+    padding: 4px 0px;
+    display: inline-block;
+    float: left;
+}
+
+.adverts-form .adverts-listing-type-field {
+    margin: 0 110px 0 30px;
+}
+
+.adverts-form .adverts-listing-type-name {
+    padding: 5px 0 5px 0;
+    line-height: 1rem;
+    
+    font-size: 18px;
+    clear: both;
+    overflow: hidden;
+}
+
+.adverts-form .adverts-listing-type-cost {
+    position: absolute;
+    padding: 2px 8px;
+    right: 5px;
+    top: 50%;
+    margin: -17px 0 0 0;
+    
+    font-size: 18px;
+    line-height: 30px;
+    float: right;
+    background: #2aa1c0;
+    color: white;
+    border-radius: 2px;
+    font-weight: bold;
+    display: inline-block;
+    
+
+}
+
+.adverts-form .adverts-listing-type-features {
+    width: 100%; 
+    font-size:13px;
+    line-height: 1.2rem;
+    padding: 0px 0 5px 0;
+}
+
+.adverts-form .adverts-listing-type-features > span:not(:first-child) {
+    border-left: 1px solid #e6e6e6;
+    margin-left: 0.5em;
+    padding-left: 0.5em;
+}
+
+.adverts-form .adverts-listing-type-icon:before {
+    margin-left: 0;
+}
+
+.adverts-listing-type-all .adverts-listing-type-value {
+    font-size: 18px;
+}
+
+/* CUTE INPUT FIELDS */
+
+.adverts-cute-input {
+    position: absolute;
+    display: inline-block;
+    margin-bottom: 15px;
+    padding-right: 30px;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    margin: 0 !important;
+    top: 50%;
+    left: 5px;
+    margin-top: -10px !important;
+    padding: 0 !important;
+}
+
+.adverts-cute-input input {
+   position: absolute;
+   z-index: -1;
+   opacity: 0;
+}
+.adverts-cute-input-indicator {
+   position: absolute;
+   top: 2px;
+   left: 0;
+   width: 20px;
+   height: 20px;
+   background: #e6e6e6;
+}
+
+.adverts-cute-input.adverts-cute-radio .adverts-cute-input-indicator {
+   border-radius: 50%;
+}
+/* Hover and focus states */
+.adverts-cute-input:hover input ~ .adverts-cute-input-indicator,
+.adverts-cute-input input:focus ~ .adverts-cute-input-indicator {
+   background: #ccc;
+}
+
+/* Checked state */
+.adverts-cute-input input:checked ~ .adverts-cute-input-indicator {
+   background: #2aa1c0;
+}
+
+/* Hover state whilst checked */
+.adverts-cute-input:hover input:not([disabled]):checked ~ .adverts-cute-input-indicator,
+.adverts-cute-input input:checked:focus ~ .adverts-cute-input-indicator {
+   background: #0e647d;
+}
+
+/* Disabled state */
+.adverts-cute-input input:disabled ~ .adverts-cute-input-indicator {
+   pointer-events: none;
+   opacity: .6;
+   background: #e6e6e6;
+}
+
+/* Check mark */
+.adverts-cute-input-indicator:after {
+   position: absolute;
+   display: none;
+   content: '';
+}
+
+/* Show check mark */
+.adverts-cute-input input:checked ~ .adverts-cute-input-indicator:after {
+   display: block;
+}
+
+/* Checkbox tick */
+.adverts-cute-input.adverts-cute-checkbox .adverts-cute-input-indicator:after {
+	top: 4px;
+	left: 8px;
+	width: 3px;
+	height: 8px;
+	transform: rotate(45deg);
+	border: solid #fff;
+	border-width: 0 2px 2px 0;
+}
+
+/* Disabled tick colour */
+.adverts-cute-input.adverts-cute-checkbox input:disabled ~ .adverts-cute-input-indicator:after {
+	border-color: #7b7b7b;
+}
+
+/* Radio button inner circle */
+.adverts-cute-input.adverts-cute-radio .adverts-cute-input-indicator:after {
+   top: 7px;
+   left: 7px;
+   width: 6px;
+   height: 6px;
+   border-radius: 50%;
+   background: #fff;
+}
+
+/* Disabled circle colour */
+.adverts-cute-input.adverts-cute-radio input:disabled ~ .adverts-cute-input-indicator:after {
+   background: #7b7b7b;
+}
+
+.adverts-x-label {
+    margin: 0 25px 0 5px;
+    height: 20px;
+    display: inline-block;
+}

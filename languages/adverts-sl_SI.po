@@ -1,0 +1,1322 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Adverts\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: Thu Oct 22 2015 15:29:22 GMT+0200 (Central Europe "
+"Standard Time)\n"
+"PO-Revision-Date: Fri Oct 23 2015 10:49:32 GMT+0200 (Central Europe Standard "
+"Time)\n"
+"Last-Translator: gdolenc <goran.dolenc@siol.net>\n"
+"Language-Team: \n"
+"Language: Slovenian\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : "
+"n%100==3||n%100==4 ? 2 : 3\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Loco-Target-Locale: sl_SI\n"
+"X-Generator: Loco - https://localise.biz/"
+
+#. Name of the plugin
+msgid "WP Adverts"
+msgstr "WP mali oglasi"
+
+#. URI of the plugin
+msgid "http://wpadverts.com"
+msgstr ""
+
+#. Description of the plugin
+msgid "The lightweight WordPress classifieds plugin done right."
+msgstr ""
+
+#. Author of the plugin
+msgid "Greg Winiarski"
+msgstr ""
+
+#: ../wpadverts.php:73
+msgctxt "post"
+msgid "Expired"
+msgstr "Potekel"
+
+#: ../wpadverts.php:76
+#, php-format
+msgid "Expired <span class=\"count\">(%s)</span>"
+msgid_plural "Expired <span class=\"count\">(%s)</span>"
+msgstr[0] "Potekel <span class=\"count\">(%s)</span>"
+msgstr[1] "Potekla <span class=\"count\">(%s)</span>"
+msgstr[2] "Potekli <span class=\"count\">(%s)</span>"
+msgstr[3] "Potekli <span class=\"count\">(%s)</span>"
+
+#: ../wpadverts.php:80
+msgctxt "post"
+msgid "Temporary"
+msgstr ""
+
+#: ../wpadverts.php:83
+#, php-format
+msgid "Temporary <span class=\"count\">(%s)</span>"
+msgid_plural "Temporary <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../wpadverts.php:87
+msgctxt "post type general name"
+msgid "Classifieds"
+msgstr "Oglasi"
+
+#: ../wpadverts.php:88
+msgctxt "post type singular name"
+msgid "Classified"
+msgstr "Oglas"
+
+#: ../wpadverts.php:89
+msgctxt "classified"
+msgid "Add New"
+msgstr "Dodaj"
+
+#: ../wpadverts.php:90
+msgid "Add New Classified"
+msgstr "Dodaj nov oglas"
+
+#: ../wpadverts.php:91
+msgid "Edit Classified"
+msgstr "Uredi oglas"
+
+#: ../wpadverts.php:92
+msgid "New Classified"
+msgstr "Nov oglas"
+
+#: ../wpadverts.php:93
+msgid "All Classifieds"
+msgstr "Vsi oglasi"
+
+#: ../wpadverts.php:94
+msgid "View Classified"
+msgstr "Poglej oglas"
+
+#: ../wpadverts.php:95
+msgid "Search Classifieds"
+msgstr "Najdi oglas"
+
+#: ../wpadverts.php:96
+msgid "No Classifieds found"
+msgstr "Ni zadetkov"
+
+#: ../wpadverts.php:97
+msgid "No Classifieds found in the Trash"
+msgstr "Ni zadetkov med izbrisanimi oglasi"
+
+#: ../wpadverts.php:99
+msgid "Classifieds"
+msgstr "Oglasi"
+
+#: ../wpadverts.php:148
+msgid "Select options ..."
+msgstr "Izberi..."
+
+#: ../wpadverts.php:152 ../includes/gallery.php:78
+msgid "Edit Image"
+msgstr "Uredi sliko"
+
+#: ../wpadverts.php:153
+msgid "Delete Image"
+msgstr "Izbriši sliko"
+
+#: ../wpadverts.php:154
+msgid "View Full Image"
+msgstr "Ogled slike v izvirni velikosti"
+
+#: ../wpadverts.php:155
+msgid "Main"
+msgstr "Priporočamo"
+
+#: ../wpadverts.php:324
+msgid "Module activated successfully."
+msgstr "Modul je bil uspešno aktiviran"
+
+#: ../addons/bank-transfer/bank-transfer.php:42 ../includes/admin-pages.php:107
+msgid "Bank Transfer"
+msgstr "Bančno nakazilo"
+
+#: ../addons/bank-transfer/bank-transfer.php:62 ../addons/payments/includes/admin-
+#: pages.php:557 ../includes/defaults.php:56
+msgid "Contact Person"
+msgstr "Kontaktna oseba"
+
+#: ../addons/bank-transfer/bank-transfer.php:72 ../addons/payments/admin/payment-
+#: history-list.php:68 ../addons/payments/includes/admin-pages.php:567 ..
+#: /includes/defaults.php:66 ../includes/defaults.php:256 ../templates/single.php:
+#: 105
+msgid "Email"
+msgstr "Email"
+
+#: ../addons/bank-transfer/admin/options.php:15
+msgid "Payment Gateway / Bank Transfer"
+msgstr "Način plačila / bančno nakazilo"
+
+#: ../addons/bank-transfer/includes/admin-pages.php:32 ..
+#: /addons/core/includes/admin-pages.php:26 ../addons/payments/includes/admin-
+#: pages.php:35
+msgid "Update Options"
+msgstr "Posodobi"
+
+#: ../addons/bank-transfer/includes/admin-pages.php:41 ..
+#: /addons/core/includes/admin-pages.php:45 ../addons/payments/includes/admin-
+#: pages.php:43
+msgid "Settings updated."
+msgstr "Nastavitve posodobljene."
+
+#: ../addons/bank-transfer/includes/admin-pages.php:43 ..
+#: /addons/core/includes/admin-pages.php:47 ../addons/payments/includes/admin-
+#: pages.php:45 ../addons/payments/includes/admin-pages.php:152 ..
+#: /addons/payments/includes/admin-pages.php:188 ..
+#: /addons/payments/includes/admin-pages.php:303
+msgid "There are errors in your form."
+msgstr "V obrazcu so napake."
+
+#: ../addons/bank-transfer/includes/admin-pages.php:60
+msgid "Payment Name"
+msgstr "Naziv plačila"
+
+#: ../addons/bank-transfer/includes/admin-pages.php:61
+msgid "Payment gateway name visible in the frontend when making a payment."
+msgstr ""
+
+#: ../addons/bank-transfer/includes/admin-pages.php:70
+msgid "Message"
+msgstr "Sporočilo"
+
+#: ../addons/bank-transfer/includes/admin-pages.php:73
+msgid ""
+"User will see this message when asked to make payment, make sure that "
+"instructions here will make it as easy as possible to make a payment."
+"<br/>Allowed variables:<br/>- {total} - total amount to pay (for example $10."
+"00)<br/>- {order_number} - unique order number<br/>To revert to default "
+"message remove whole text from editor and save the form."
+msgstr ""
+
+#: ../addons/core/includes/admin-pages.php:25
+msgid "Core Options"
+msgstr "Osnovne nastavitve"
+
+#: ../addons/core/includes/admin-pages.php:120 ../addons/core/includes/admin-
+#: pages.php:121
+msgid "Common Settings"
+msgstr "Običajne nastavitve"
+
+#: ../addons/core/includes/admin-pages.php:127
+msgid "Default Ads List Page"
+msgstr "Privzeta stran z oglasi"
+
+#: ../addons/core/includes/admin-pages.php:128
+msgid "Select page on which the main [adverts_list] shortcode is being used."
+msgstr ""
+"Izberite stran, na kateri bojo vidni oglasi oz. na kateri bo vključena koda "
+"[adverts_list]."
+
+#: ../addons/core/includes/admin-pages.php:134
+msgid "Default Visibility"
+msgstr "Privzeta vidnost oglasa"
+
+#: ../addons/core/includes/admin-pages.php:135
+msgid "Number of days Ad will be visible by default."
+msgstr "Koliko dni naj bo oglas viden (privzeta nastavitev)"
+
+#: ../addons/core/includes/admin-pages.php:145 ../addons/core/includes/admin-
+#: pages.php:146
+msgid "Currency Settings"
+msgstr "Nastavitve valute"
+
+#: ../addons/core/includes/admin-pages.php:152
+msgid "Currency"
+msgstr "Valuta"
+
+#: ../addons/core/includes/admin-pages.php:159
+msgid "Currency Position"
+msgstr ""
+
+#: ../addons/core/includes/admin-pages.php:161
+msgid "Prefix - $10"
+msgstr ""
+
+#: ../addons/core/includes/admin-pages.php:162
+msgid "Suffix - 10$"
+msgstr ""
+
+#: ../addons/core/includes/admin-pages.php:169
+msgid "Decimal Places"
+msgstr ""
+
+#: ../addons/core/includes/admin-pages.php:179
+msgid "Decimal Separator"
+msgstr ""
+
+#: ../addons/core/includes/admin-pages.php:185
+msgid "Thousands Separator"
+msgstr ""
+
+#: ../addons/payments/payments.php:60
+msgctxt "completed status payment"
+msgid "Completed"
+msgstr ""
+
+#: ../addons/payments/payments.php:65
+#, php-format
+msgid "Unread <span class=\"count\">(%s)</span>"
+msgid_plural "Unread <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../addons/payments/payments.php:69
+msgctxt "failed status payment"
+msgid "Failed"
+msgstr ""
+
+#: ../addons/payments/payments.php:74
+#, php-format
+msgid "Failed <span class=\"count\">(%s)</span>"
+msgid_plural "Failed <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../addons/payments/payments.php:78
+msgctxt "pending status payment"
+msgid "Pending"
+msgstr ""
+
+#: ../addons/payments/payments.php:83 ../addons/payments/payments.php:98
+#, php-format
+msgid "Pending <span class=\"count\">(%s)</span>"
+msgid_plural "Pending <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../addons/payments/payments.php:87
+msgctxt "refunded status payment"
+msgid "Refunded"
+msgstr ""
+
+#: ../addons/payments/payments.php:92
+#, php-format
+msgid "Refunded <span class=\"count\">(%s)</span>"
+msgid_plural "Refunded <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../addons/payments/payments.php:96
+msgctxt "post"
+msgid "Pending"
+msgstr ""
+
+#: ../addons/payments/payments.php:259
+msgid "Listing Information"
+msgstr ""
+
+#: ../addons/payments/payments.php:279 ../addons/payments/admin/pricing-list.php:78
+msgid "Free"
+msgstr "Brezplačno"
+
+#: ../addons/payments/payments.php:283
+#, php-format
+msgid "<b>%1$s</b> - %2$s for %3$d days.%4$s"
+msgstr ""
+
+#: ../addons/payments/payments.php:295
+msgid "Listing"
+msgstr "Objava"
+
+#: ../addons/payments/payments.php:340 ../includes/shortcodes.php:231
+msgid "Thank you for submitting your ad!"
+msgstr "Hvala za posredovanje vašega oglasa!"
+
+#: ../addons/payments/payments.php:394
+msgid "Adverts Payment History"
+msgstr ""
+
+#: ../addons/payments/payments.php:395 ../addons/payments/admin/payment-history-
+#: list.php:16
+msgid "Payment History"
+msgstr "Zgodovina plačil"
+
+#: ../addons/payments/admin/options.php:15 ../addons/payments/admin/pricing-edit.
+#: php:16 ../addons/payments/admin/pricing-list.php:16 ../includes/admin-pages.
+#: php:38
+msgid "Options"
+msgstr "Možnosti"
+
+#: ../addons/payments/admin/options.php:16 ../addons/payments/admin/pricing-edit.
+#: php:18 ../addons/payments/admin/pricing-list.php:18
+msgid "Pricing"
+msgstr "Cena"
+
+#: ../addons/payments/admin/payment-history-edit.php:16
+msgid "Payment History Edit"
+msgstr ""
+
+#: ../addons/payments/admin/payment-history-edit.php:28
+msgid "Payment"
+msgstr "Plačilo"
+
+#: ../addons/payments/admin/payment-history-edit.php:33
+msgid "Gateway"
+msgstr ""
+
+#: ../addons/payments/admin/payment-history-edit.php:44
+msgid "Created"
+msgstr "Ustvarjen"
+
+#: ../addons/payments/admin/payment-history-edit.php:51
+msgid "User IP"
+msgstr "IP uporabnika"
+
+#: ../addons/payments/admin/payment-history-edit.php:60 ..
+#: /addons/payments/admin/payment-history-list.php:71
+msgid "Status"
+msgstr ""
+
+#: ../addons/payments/admin/payment-history-edit.php:72
+msgid "To Pay"
+msgstr ""
+
+#: ../addons/payments/admin/payment-history-edit.php:79
+msgid "Paid"
+msgstr ""
+
+#: ../addons/payments/admin/payment-history-edit.php:90
+msgid "Update Payment"
+msgstr ""
+
+#: ../addons/payments/admin/payment-history-edit.php:105
+msgid "Purchase Details"
+msgstr ""
+
+#: ../addons/payments/admin/payment-history-edit.php:110
+msgid "Purchase Type"
+msgstr ""
+
+#: ../addons/payments/admin/payment-history-edit.php:111
+msgid "Listing Publication"
+msgstr ""
+
+#: ../addons/payments/admin/payment-history-edit.php:115
+msgid "Listing Type"
+msgstr ""
+
+#: ../addons/payments/admin/payment-history-edit.php:129
+msgid "Purchased Item"
+msgstr ""
+
+#: ../addons/payments/admin/payment-history-edit.php:147
+msgid "Customer Details"
+msgstr ""
+
+#: ../addons/payments/admin/payment-history-edit.php:165
+msgid "Payment Log"
+msgstr ""
+
+#: ../addons/payments/admin/payment-history-list.php:23
+msgid "All"
+msgstr "Vsi"
+
+#: ../addons/payments/admin/payment-history-list.php:36 ..
+#: /addons/payments/admin/payment-history-list.php:131 ..
+#: /addons/payments/admin/pricing-list.php:36 ../addons/payments/admin/pricing-
+#: list.php:109
+msgid "Bulk Actions"
+msgstr ""
+
+#: ../addons/payments/admin/payment-history-list.php:40 ..
+#: /addons/payments/admin/payment-history-list.php:87 ..
+#: /addons/payments/admin/payment-history-list.php:87 ..
+#: /addons/payments/admin/payment-history-list.php:135 ..
+#: /addons/payments/admin/pricing-list.php:37 ../addons/payments/admin/pricing-
+#: list.php:69 ../addons/payments/admin/pricing-list.php:69 ..
+#: /addons/payments/admin/pricing-list.php:110 ../templates/manage.php:34
+msgid "Delete"
+msgstr "Izbirši"
+
+#: ../addons/payments/admin/payment-history-list.php:43 ..
+#: /addons/payments/admin/payment-history-list.php:137 ..
+#: /addons/payments/admin/pricing-list.php:40 ../addons/payments/admin/pricing-
+#: list.php:112
+msgid "Apply"
+msgstr "Prilagodi"
+
+#: ../addons/payments/admin/payment-history-list.php:49
+msgid "All dates"
+msgstr "Celotno obdobje"
+
+#: ../addons/payments/admin/payment-history-list.php:50
+msgid "This month"
+msgstr "Ta mesec"
+
+#: ../addons/payments/admin/payment-history-list.php:51
+msgid "Last month"
+msgstr "Prejšnji mesec"
+
+#: ../addons/payments/admin/payment-history-list.php:56
+msgid "Filter"
+msgstr ""
+
+#: ../addons/payments/admin/payment-history-list.php:66
+msgid "ID"
+msgstr ""
+
+#: ../addons/payments/admin/payment-history-list.php:67
+msgid "User"
+msgstr "Uporabnik"
+
+#: ../addons/payments/admin/payment-history-list.php:69 ../includes/admin-post-
+#: type.php:505 ../templates/list.php:28
+msgid "Date"
+msgstr "Datum"
+
+#: ../addons/payments/admin/payment-history-list.php:70
+msgid "Amount"
+msgstr "Znesek"
+
+#: ../addons/payments/admin/payment-history-list.php:84 ..
+#: /addons/payments/admin/payment-history-list.php:86
+msgid "View Order"
+msgstr "Ogled naročila"
+
+#: ../addons/payments/admin/payment-history-list.php:120 ..
+#: /addons/payments/admin/pricing-list.php:98
+msgid "&laquo;"
+msgstr ""
+
+#: ../addons/payments/admin/payment-history-list.php:121 ..
+#: /addons/payments/admin/pricing-list.php:99
+msgid "&raquo;"
+msgstr ""
+
+#: ../addons/payments/admin/pricing-edit.php:19 ../addons/payments/admin/pricing-
+#: list.php:19
+msgid "Add New"
+msgstr "Dodaj"
+
+#: ../addons/payments/admin/pricing-list.php:26
+msgid "listing"
+msgstr "objava"
+
+#: ../addons/payments/admin/pricing-list.php:51 ../addons/payments/includes/admin-
+#: pages.php:635 ../includes/admin-post-type.php:501 ../includes/class-widget-
+#: categories.php:73 ../includes/defaults.php:95 ../includes/gallery.php:95 ..
+#: /includes/gallery.php:211
+msgid "Title"
+msgstr "Naslov"
+
+#: ../addons/payments/admin/pricing-list.php:52 ../addons/payments/includes/admin-
+#: pages.php:650 ../includes/admin-post-type.php:502 ../includes/defaults.php:129
+msgid "Price"
+msgstr "Cena"
+
+#: ../addons/payments/admin/pricing-list.php:53 ../addons/payments/includes/admin-
+#: pages.php:662
+msgid "Visible"
+msgstr "Vidno"
+
+#: ../addons/payments/admin/pricing-list.php:66 ../addons/payments/admin/pricing-
+#: list.php:68 ../addons/payments/admin/pricing-list.php:68 ../includes/admin-
+#: post-type.php:330 ../templates/manage.php:33
+msgid "Edit"
+msgstr ""
+
+#: ../addons/payments/admin/pricing-list.php:83
+#, php-format
+msgid "1 day"
+msgid_plural "%s days"
+msgstr[0] "1 dan"
+msgstr[1] "2 dni"
+msgstr[2] "%s dni"
+msgstr[3] "%s dni"
+
+#: ../addons/payments/includes/admin-pages.php:75
+#, php-format
+msgid ""
+"Enable at least one <a href='%s'>Payment Gateway</a> before selecting "
+"default."
+msgstr ""
+
+#: ../addons/payments/includes/admin-pages.php:88
+#, php-format
+msgid "Create at least one <a href='%s'>Pricing</a> before selecting default."
+msgstr ""
+
+#: ../addons/payments/includes/admin-pages.php:127 ..
+#: /addons/payments/includes/admin-pages.php:128
+msgid "Add Pricing"
+msgstr ""
+
+#: ../addons/payments/includes/admin-pages.php:144 ..
+#: /addons/payments/includes/admin-pages.php:183 ..
+#: /addons/payments/includes/admin-pages.php:298
+msgid "There was an error while saving pricing in database."
+msgstr ""
+
+#: ../addons/payments/includes/admin-pages.php:148
+msgid "New pricing has been added."
+msgstr ""
+
+#: ../addons/payments/includes/admin-pages.php:162
+msgid "Edit Pricing"
+msgstr ""
+
+#: ../addons/payments/includes/admin-pages.php:163
+msgid "Update Pricing"
+msgstr ""
+
+#: ../addons/payments/includes/admin-pages.php:185
+msgid "Pricing updated."
+msgstr ""
+
+#: ../addons/payments/includes/admin-pages.php:198
+msgid "Adverts Pricing with given ID does not exist."
+msgstr ""
+
+#: ../addons/payments/includes/admin-pages.php:205
+msgid "Pricing deleted."
+msgstr ""
+
+#: ../addons/payments/includes/admin-pages.php:225
+#, php-format
+msgid "1 Pricing deleted."
+msgid_plural "%s Pricings deleted."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../addons/payments/includes/admin-pages.php:271
+#, php-format
+msgid "Payment Method [%s] assigned to this Payment does not exist or was disabled."
+msgstr ""
+
+#: ../addons/payments/includes/admin-pages.php:288
+#, php-format
+msgid "<strong>%1$s</strong> changed payment status to <strong>%2$s</strong>"
+msgstr ""
+
+#: ../addons/payments/includes/admin-pages.php:300
+msgid "Payment updated."
+msgstr ""
+
+#: ../addons/payments/includes/admin-pages.php:314
+msgid "Adverts Payment with given ID does not exist."
+msgstr ""
+
+#: ../addons/payments/includes/admin-pages.php:322
+#, php-format
+msgid "1 Payment deleted."
+msgid_plural "%s Payments deleted."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../addons/payments/includes/admin-pages.php:352
+msgid "Payments deleted."
+msgstr ""
+
+#: ../addons/payments/includes/admin-pages.php:365
+#, php-format
+msgid "Status for selected Payments was changed to: %s"
+msgstr ""
+
+#: ../addons/payments/includes/admin-pages.php:391
+#, php-format
+msgid "%1$s %2$d"
+msgstr ""
+
+#: ../addons/payments/includes/admin-pages.php:483
+msgid "View order"
+msgstr "Ogled naročila"
+
+#: ../addons/payments/includes/admin-pages.php:488
+msgid "Abandoned"
+msgstr "Preklicano"
+
+#: ../addons/payments/includes/admin-pages.php:496 ..
+#: /addons/payments/includes/admin-pages.php:528
+msgid "Pending Payment"
+msgstr "Plačilo v teku"
+
+#: ../addons/payments/includes/admin-pages.php:532 ../includes/class-updates-
+#: manager.php:332 ../templates/manage-edit.php:47
+msgid "Update"
+msgstr "Posodobi"
+
+#: ../addons/payments/includes/admin-pages.php:551
+msgid "User ID"
+msgstr "ID uporabnika"
+
+#: ../addons/payments/includes/admin-pages.php:610
+msgid "Default Payment Gateway"
+msgstr "Privzet način plačila"
+
+#: ../addons/payments/includes/admin-pages.php:619
+msgid "Default Pricing"
+msgstr "Privzete nastavitve cene"
+
+#: ../addons/payments/includes/admin-pages.php:644 ../includes/defaults.php:119 ..
+#: /includes/gallery.php:110 ../includes/gallery.php:222
+msgid "Description"
+msgstr "Opis"
+
+#: ../addons/payments/includes/admin-pages.php:663
+msgid "Number of days the Ad will be visible."
+msgstr "Oglas bo aktiven (dni)"
+
+#: ../addons/payments/templates/add-payment.php:15
+msgid "Total"
+msgstr "Skupaj"
+
+#: ../addons/payments/templates/add-payment.php:27
+msgid "No Payment Gateways Enabled!"
+msgstr "Nobena od možnosti plačil ni vključena!"
+
+#: ../addons/payments/templates/add-payment.php:44
+msgid "Place Order"
+msgstr "Naroči"
+
+#: ../admin/options.php:26
+msgid "Cannot be disabled"
+msgstr "Ni mogoče izključiti"
+
+#: ../admin/options.php:27 ../admin/options.php:35 ../admin/options.php:49
+msgid "Settings"
+msgstr "Nastavitve"
+
+#: ../admin/options.php:34
+msgid "Addon Uploaded and Activated"
+msgstr "Dodatek nameščen in aktiviran"
+
+#: ../admin/options.php:37
+msgid "Addon Uploaded but Inactive"
+msgstr "Dodatek nameščen vendar neaktiven"
+
+#: ../admin/options.php:38 ../includes/class-updates-manager.php:317
+msgid "Activate"
+msgstr "Aktiviraj"
+
+#: ../admin/options.php:41
+msgid "Get This Addon"
+msgstr "Namesti ta dodatek"
+
+#: ../admin/options.php:50
+msgid "Disable"
+msgstr "Izključi"
+
+#: ../admin/options.php:52
+msgid "Enable"
+msgstr "Vključi"
+
+#: ../includes/admin-pages.php:37
+msgid "Adverts Options"
+msgstr "Možnosti"
+
+#: ../includes/admin-pages.php:80
+msgid "Modules"
+msgstr "Moduli"
+
+#: ../includes/admin-pages.php:83
+msgid "Core"
+msgstr "Advert"
+
+#: ../includes/admin-pages.php:84
+msgid "Here you can configure most basic Adverts options, applicable on any site."
+msgstr "Tukaj lahko nastavite najbolj osnovne možnosti."
+
+#: ../includes/admin-pages.php:89
+msgid "Payments"
+msgstr "Plačila"
+
+#: ../includes/admin-pages.php:90
+msgid "Charge users for posting classified ads on your site."
+msgstr "Zaračunajte vašim uporabnikom za objavo oglasov na vaši strani."
+
+#: ../includes/admin-pages.php:95
+msgid "WooCommerce Payments"
+msgstr ""
+
+#: ../includes/admin-pages.php:96
+msgid "Use WooCommerce to charge users for posting classifieds."
+msgstr ""
+
+#: ../includes/admin-pages.php:104
+msgid "Payment Gateways"
+msgstr "Načini plačila"
+
+#: ../includes/admin-pages.php:108
+msgid ""
+"Allow users to pay for ad posting using direct bank transfer or cash "
+"payments."
+msgstr ""
+
+#: ../includes/admin-pages.php:113
+msgid "PayPal Standard"
+msgstr ""
+
+#: ../includes/admin-pages.php:114
+msgid "PayPal Payments Standard, allow users to pay for ads via PayPal."
+msgstr ""
+
+#: ../includes/admin-pages.php:256
+msgid "Category Icon"
+msgstr "Ikona kategorije"
+
+#: ../includes/admin-pages.php:259
+msgid "Filter Icons ..."
+msgstr "Filtrirajte ikone..."
+
+#: ../includes/admin-post-type.php:82
+msgid "Whoops, the provided date is invalid."
+msgstr "Vpisan datum ni veljaven."
+
+#: ../includes/admin-post-type.php:163
+msgid ""
+"Post updated, but <strong>cannot be published</strong> since some required "
+"data is not filled properly."
+msgstr ""
+"Oglas je posodobljen, toda <strong>objava še ni mogoča</strong>, ker "
+"nekateri zahtevani podatki niso pravilno izpolnjeni. "
+
+#. translators: 1: month number (01, 02, etc.), 2: month abbreviation
+#: ../includes/admin-post-type.php:235
+#, php-format
+msgid "%1$s-%2$s"
+msgstr ""
+
+#: ../includes/admin-post-type.php:247
+#, php-format
+msgid "%1$s %2$s, %3$s @ %4$s : %5$s"
+msgstr ""
+
+#: ../includes/admin-post-type.php:252 ../includes/admin-post-type.php:304
+msgid "Never Expires"
+msgstr "Trajen"
+
+#: ../includes/admin-post-type.php:270
+msgid "OK"
+msgstr ""
+
+#: ../includes/admin-post-type.php:271 ../includes/class-updates-manager.php:333 .
+#: ./includes/gallery.php:130 ../includes/gallery.php:230
+msgid "Cancel"
+msgstr "Prekliči"
+
+#: ../includes/admin-post-type.php:292
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#: ../includes/admin-post-type.php:317
+#, php-format
+msgid "Expired: <b>%s</b>"
+msgstr "Pretekel: <b>%s</b>"
+
+#: ../includes/admin-post-type.php:319
+#, php-format
+msgid "Expires: <b>%s</b>"
+msgstr "Veljavnost: <b>%s</b>"
+
+#: ../includes/admin-post-type.php:330
+msgid "Edit date and time"
+msgstr "Uredi datum in čas"
+
+#: ../includes/admin-post-type.php:432 ../includes/admin-post-type.php:672
+msgid "Expired"
+msgstr "Pretekel"
+
+#: ../includes/admin-post-type.php:464
+msgid "Additional Information"
+msgstr "Dodatne informacije"
+
+#: ../includes/admin-post-type.php:481 ../includes/defaults.php:113
+msgid "Gallery"
+msgstr "Galerija"
+
+#: ../includes/admin-post-type.php:503
+msgid "Author"
+msgstr "Objavil"
+
+#: ../includes/admin-post-type.php:504
+msgid "Expires"
+msgstr "Veljavnost"
+
+#: ../includes/admin-post-type.php:532
+msgid "Never"
+msgstr "Trajen oglas"
+
+#: ../includes/admin-post-type.php:537
+msgid "Y/m/d g:i:s A"
+msgstr "d/m/Y g:i:s A"
+
+#: ../includes/admin-post-type.php:545
+msgid "Y/m/d"
+msgstr "d.m.Y"
+
+#: ../includes/admin-post-type.php:548
+#, php-format
+msgid "in %s"
+msgstr "v %s"
+
+#: ../includes/admin-post-type.php:550
+#, php-format
+msgid "%s ago"
+msgstr "pred %s"
+
+#: ../includes/admin-post-type.php:565
+msgid "None"
+msgstr "Brez"
+
+#: ../includes/admin-post-type.php:673
+msgid "Expires:"
+msgstr "Veljavnost:"
+
+#: ../includes/admin-post-type.php:674
+msgid "Expired:"
+msgstr "Pretekel:"
+
+#: ../includes/admin-post-type.php:675
+msgid "Start typing user name, email or login below, some suggestions will appear."
+msgstr ""
+"Začnite vnašati uporabniško ime, email ali geslo in pojavili se bodo "
+"nekateri predlogi."
+
+#: ../includes/ajax.php:62 ../includes/ajax.php:144 ../includes/ajax.php:192
+msgid "Invalid Session. Please refresh the page and try again."
+msgstr "Nepravilna seja. Osvežite stran in poizkusite ponovno."
+
+#: ../includes/ajax.php:202
+msgid "Attachment does not exist."
+msgstr "Priloga ne obstaja."
+
+#: ../includes/ajax.php:204
+msgid "Incorrect attachment ID."
+msgstr "ID priloge ni pravi."
+
+#: ../includes/ajax.php:208
+msgid "File could not be deleted."
+msgstr "Datoteke ni bilo mogoče izbirsati."
+
+#: ../includes/ajax.php:235 ../includes/ajax.php:270
+msgid "Post with given ID does not exist."
+msgstr "Oglas s tem ID-jem ne obstaja."
+
+#: ../includes/class-form.php:158
+msgid "Invalid value."
+msgstr "Nepravilna vrednost."
+
+#: ../includes/class-updates-manager.php:116
+msgid "License"
+msgstr "Licenca"
+
+#: ../includes/class-updates-manager.php:150
+msgid "Cannot connect to remote server. Please try again later."
+msgstr "Povezava z oddaljenim strežnikom ni mogoča. Prosim poizkusite kasneje."
+
+#: ../includes/class-updates-manager.php:316
+msgid "License ..."
+msgstr "Licenca..."
+
+#: ../includes/class-updates-manager.php:320
+msgid "Activate your License in order to enable automatic updates."
+msgstr "Aktivirajte vašo licenco in si zagotovite avtomatično posodabljanje."
+
+#: ../includes/class-widget-categories.php:30 ../includes/class-widget-categories.
+#: php:38
+msgid "Advert Categories"
+msgstr "Kategorije za oglas"
+
+#: ../includes/class-widget-categories.php:40
+msgid "Displays list of available categories."
+msgstr "Prikaži seznam vseh kategorij."
+
+#: ../includes/class-widget-categories.php:89
+msgid "Hide empty"
+msgstr "Skrij prazne"
+
+#: ../includes/class-widget-categories.php:103
+msgid "Show post counts"
+msgstr "Prikaži števec oglasov"
+
+#: ../includes/class-widget-categories.php:159
+#, php-format
+msgid "Go Up (%s)"
+msgstr "Navzgor (%s)"
+
+#: ../includes/class-widget-categories.php:161
+msgid "Go Up (Home)"
+msgstr "Navzgor (domov)"
+
+#: ../includes/class-widget-categories.php:211 ../templates/categories-all.php:51 
+#: ../templates/categories-top.php:23
+msgid "No categories found."
+msgstr "Nobena kategorija ni bila najdena."
+
+#: ../includes/defaults.php:44
+msgid "Contact Information"
+msgstr "Kontaktni podatki"
+
+#: ../includes/defaults.php:50
+msgid "Account"
+msgstr "Uporabnik"
+
+#: ../includes/defaults.php:77
+msgid "Phone Number"
+msgstr "Telefonska številka"
+
+#: ../includes/defaults.php:81
+msgid "Text needs to be at least 5 characters long."
+msgstr "Besedilo mora biti dolgo vsaj 5 znakov."
+
+#: ../includes/defaults.php:89
+msgid "Item Information"
+msgstr "Podatki o izdelku oz. storitvi"
+
+#: ../includes/defaults.php:104 ../templates/single.php:59
+msgid "Category"
+msgstr "Kategorija"
+
+#: ../includes/defaults.php:142 ../templates/single.php:74
+msgid "Location"
+msgstr "Kraj"
+
+#: ../includes/defaults.php:245
+msgid "Is Required"
+msgstr "Zahtevano"
+
+#: ../includes/defaults.php:247
+msgid "Field cannot be empty."
+msgstr "Polje ne more biti prazno."
+
+#: ../includes/defaults.php:258
+msgid "Provided email address is invalid."
+msgstr "Vpisana elektronska pošta ni veljavna."
+
+#: ../includes/defaults.php:266
+msgid "Is Integer"
+msgstr "Je število"
+
+#: ../includes/defaults.php:268
+msgid "Provided value is not an integer."
+msgstr "Vpisana vrednost ni številka."
+
+#: ../includes/defaults.php:276
+msgid "String Length"
+msgstr "Dolžina besedila"
+
+#: ../includes/defaults.php:278
+msgid "String is too short."
+msgstr "Besedilo je prekratko."
+
+#: ../includes/events.php:58
+msgid "Every 5 minutes"
+msgstr "Vsakih 5 minut"
+
+#: ../includes/functions.php:268
+msgid "Uploaded file is NOT an image"
+msgstr "Posodobljena datoteka ni slika"
+
+#: ../includes/functions.php:377
+#, php-format
+msgid "Category: %s"
+msgstr "Kategorija: %s"
+
+#: ../includes/functions.php:953
+#, php-format
+msgid ""
+"You are posting as <strong>%1$s</strong>. <br/>If you want to use a "
+"different account, please <a href=\"%2$s\">logout</a>."
+msgstr ""
+"Prijavljeni ste kot <strong>%1$s</strong>. <br/>Če želite uporabiti drug "
+"račun, se prosim <a href=\"%2$s\">odjavite</a>."
+
+#: ../includes/functions.php:958
+#, php-format
+msgid ""
+"Create an account for me so i can manage all my ads from one place (password "
+"will be emailed to you) or <a href=\"%s\">Sign In</a>"
+msgstr "Nov ali <a href=\"%s\">Prijava</a>"
+
+#: ../includes/functions.php:1173
+msgid "Redirecting"
+msgstr "Preusmerjanje"
+
+#: ../includes/functions.php:1174
+#, php-format
+msgid ""
+"Your are being redirected to Edit page. <a href=\"%s\">Click here</a> if it is "
+"taking to long. "
+msgstr ""
+"Preusmerjeni ste na stran za urejanje. <a href=\"%s\">Kliknite tukaj</a> v "
+"kolikor zahtevek traja predolgo. "
+
+#: ../includes/functions.php:1339
+msgid "US Dollars"
+msgstr ""
+
+#: ../includes/functions.php:1340
+msgid "Euros"
+msgstr ""
+
+#: ../includes/functions.php:1341
+msgid "Pounds Sterling"
+msgstr ""
+
+#: ../includes/functions.php:1342
+msgid "Australian Dollars"
+msgstr ""
+
+#: ../includes/functions.php:1343
+msgid "Brazilian Real"
+msgstr ""
+
+#: ../includes/functions.php:1344
+msgid "Canadian Dollars"
+msgstr ""
+
+#: ../includes/functions.php:1345
+msgid "Czech Koruna"
+msgstr ""
+
+#: ../includes/functions.php:1346
+msgid "Danish Krone"
+msgstr ""
+
+#: ../includes/functions.php:1347
+msgid "Hong Kong Dollar"
+msgstr ""
+
+#: ../includes/functions.php:1348
+msgid "Hungarian Forint"
+msgstr ""
+
+#: ../includes/functions.php:1349
+msgid "Israeli Shekel"
+msgstr ""
+
+#: ../includes/functions.php:1350
+msgid "Japanese Yen"
+msgstr ""
+
+#: ../includes/functions.php:1351
+msgid "Malaysian Ringgits"
+msgstr ""
+
+#: ../includes/functions.php:1352
+msgid "Mexican Peso"
+msgstr ""
+
+#: ../includes/functions.php:1353
+msgid "New Zealand Dollar"
+msgstr ""
+
+#: ../includes/functions.php:1354
+msgid "Norwegian Krone"
+msgstr ""
+
+#: ../includes/functions.php:1355
+msgid "Philippine Pesos"
+msgstr ""
+
+#: ../includes/functions.php:1356
+msgid "Polish Zloty"
+msgstr ""
+
+#: ../includes/functions.php:1357
+msgid "Singapore Dollar"
+msgstr ""
+
+#: ../includes/functions.php:1358
+msgid "Swedish Krona"
+msgstr ""
+
+#: ../includes/functions.php:1359
+msgid "Swiss Franc"
+msgstr ""
+
+#: ../includes/functions.php:1360
+msgid "Taiwan New Dollars"
+msgstr ""
+
+#: ../includes/functions.php:1361
+msgid "Thai Baht"
+msgstr ""
+
+#: ../includes/functions.php:1362
+msgid "Indian Rupee"
+msgstr ""
+
+#: ../includes/functions.php:1363
+msgid "Turkish Lira"
+msgstr ""
+
+#: ../includes/functions.php:1364
+msgid "Iranian Rial"
+msgstr ""
+
+#: ../includes/functions.php:1365
+msgid "Russian Rubles"
+msgstr ""
+
+#: ../includes/functions.php:1366
+msgid "Suth African Rand"
+msgstr ""
+
+#: ../includes/gallery.php:44
+msgid "Allowed Files"
+msgstr "Dovoljene datoteke"
+
+#: ../includes/gallery.php:62 ../includes/gallery.php:149
+msgid "Drop Images Here"
+msgstr "Povlecite slike na to mesto"
+
+#: ../includes/gallery.php:63 ../includes/gallery.php:150
+msgid "browse files ..."
+msgstr "izberi datoteke..."
+
+#: ../includes/gallery.php:74
+msgid "Close"
+msgstr "Zapri"
+
+#: ../includes/gallery.php:82 ../includes/gallery.php:205
+msgid "Image Properties"
+msgstr "Lastnosti slike"
+
+#: ../includes/gallery.php:101 ../includes/gallery.php:216
+msgid "Featured"
+msgstr "Izpostavljen"
+
+#: ../includes/gallery.php:105 ../includes/gallery.php:218
+msgid "Use this image as main image"
+msgstr "Dodaj sliki napis 'Priporočamo'"
+
+#: ../includes/gallery.php:131 ../includes/gallery.php:231
+msgid "Update and Close"
+msgstr "Posodobi in zapri"
+
+#: ../includes/shortcodes.php:212
+msgid "There are errors in your form. Please correct them before proceeding."
+msgstr "V obrazcu so napake. Popravite jih pred nadaljevanjem."
+
+#: ../includes/shortcodes.php:264
+#, php-format
+msgid ""
+"Only logged in users can access this page. <a href=\"%1$s\">Login</a> or <a "
+"href=\"%2$s\">Register</a>."
+msgstr ""
+"Samo prijavljeni uporabniki imajo dostop do te strani. <a "
+"href=\"%1$s\">Prijavite se</a> ali <a href=\"%2$s\">registrirajte</a>."
+
+#: ../includes/shortcodes.php:355
+msgid "Ad does not exist."
+msgstr "Oglas ne obstaja."
+
+#: ../includes/shortcodes.php:361
+msgid "You do not own this Ad."
+msgstr "To ni vaš oglas."
+
+#: ../includes/shortcodes.php:369
+#, php-format
+msgid "Incorrect post status [%s]."
+msgstr "Nepravilen status oglasa [%s]."
+
+#: ../includes/shortcodes.php:406
+msgid "Post has been updated."
+msgstr "Oglas je posodobljen."
+
+#: ../includes/shortcodes.php:410
+msgid "Cannot update. There are errors in your form."
+msgstr "Ni mogoče posodobiti zaradi napak v obrazcu."
+
+#: ../templates/add-preview.php:8
+msgid "Edit Listing"
+msgstr "Uredi oglas"
+
+#: ../templates/add-preview.php:14
+msgid "Publish Listing"
+msgstr "Objavi oglas"
+
+#: ../templates/add-save.php:5
+msgid "Your ad has been put into moderation, please wait for admin to approve it."
+msgstr "Vaš oglas čaka na odobritev administratorja."
+
+#: ../templates/add-save.php:7
+#, php-format
+msgid "Your ad has been published. You can view it here \"<a href=\"%1$s\">%2$s</a>\"."
+msgstr "Vaš oglas je objavljen in ga lahko vidite tukaj: \"<a href=\"%1$s\">%2$s</a>\"."
+
+#: ../templates/add.php:42 ../templates/form.php:51
+msgid "Preview"
+msgstr "Predogled"
+
+#: ../templates/categories-all.php:39
+msgid "<em>View All &raquo;</em>"
+msgstr "<em>Preglej vse &raquo;</em>"
+
+#: ../templates/list.php:16
+msgid "Keyword ..."
+msgstr "Ključna beseda..."
+
+#: ../templates/list.php:20
+msgid "Location ..."
+msgstr "Kraj..."
+
+#: ../templates/list.php:32
+msgid "Filters ..."
+msgstr "Filtri..."
+
+#: ../templates/list.php:33
+msgid "SEARCH"
+msgstr "NAJDI"
+
+#: ../templates/list.php:37
+msgid "Filter Results"
+msgstr "Filtriraj"
+
+#: ../templates/list.php:48
+msgid "There are no ads matching your search criteria."
+msgstr "Noben oglas ne ustreza iskalnim kriterijem."
+
+#: ../templates/manage-edit.php:2
+msgid "Go Back"
+msgstr "Nazaj"
+
+#: ../templates/manage-edit.php:3 ../templates/manage.php:32
+msgid "View Ad"
+msgstr "Oglej si oglas."
+
+#: ../templates/manage.php:14
+msgid "This Ad is in moderation."
+msgstr "Ta oglas se trenutno ureja."
+
+#: ../templates/manage.php:18
+msgid "This Ad expired."
+msgstr "Ta oglas je pretekel."
+
+#: ../templates/manage.php:40
+msgid "You do not have any Ads posted yet."
+msgstr "Nimate še objavljenih oglasov."
+
+#: ../templates/single.php:41
+#, php-format
+msgid "by <strong>%s</strong>"
+msgstr "Objavil: <strong>%s</strong>"
+
+#: ../templates/single.php:42
+#, php-format
+msgid "Published: %1$s (%2$s ago)"
+msgstr "Objavljeno: %1$s (%2$s nazaj)"
+
+#: ../templates/single.php:91
+msgid "Show Contact Information"
+msgstr "Prikaži kontaktne podatke"
+
+#: ../templates/single.php:100
+msgid "Phone"
+msgstr "Telefon"

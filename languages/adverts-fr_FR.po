@@ -1,0 +1,1424 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Adverts\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: Thu Dec 10 2015 13:41:32 GMT+0100 (CET)\n"
+"PO-Revision-Date: Tue Dec 22 2015 08:08:11 GMT+0100 (CET)\n"
+"Last-Translator: admin <daniel@pomzed.ch>\n"
+"Language-Team: \n"
+"Language: French (France)\n"
+"Plural-Forms: nplurals=2; plural=n > 1\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ../../plugins/wpadverts\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Loco-Target-Locale: fr_FR\n"
+"X-Generator: Loco - https://localise.biz/"
+
+#: ../../plugins/wpadverts/includes/admin-pages.php:104
+msgid "Features"
+msgstr "Fonctionnalités"
+
+#: ../../plugins/wpadverts/includes/admin-pages.php:107
+msgid "Featured Ads"
+msgstr "Fonctionnalités des petites annonces"
+
+#: ../../plugins/wpadverts/includes/admin-pages.php:108
+msgid "Allow users to post Ads displayed always at the top of the list."
+msgstr ""
+"Permet à l'utilisateur de poster des petites annonces qui seront toujours en "
+"haut de liste."
+
+#: ../../plugins/wpadverts/includes/admin-pages.php:113
+msgid "Maps And Locations"
+msgstr "Plan et localité"
+
+#: ../../plugins/wpadverts/includes/admin-pages.php:114
+msgid "Locations Taxonomy, Google Maps integration and more."
+msgstr "Taxonomie de la localité, intégration Google Maps et plus."
+
+#: ../../plugins/wpadverts/includes/class-widget-categories.php:118
+msgid "Show top categories only"
+msgstr "Montrer que les Tops catégories. "
+
+#: ../../plugins/wpadverts/includes/defaults.php:278
+msgid "Incorrect string length."
+msgstr "Longueur de la chaîne de caractère incorrecte."
+
+#: ../../plugins/wpadverts/includes/defaults.php:280
+#, php-format
+msgid "Text needs to be at least %min% characters long."
+msgstr "Le text doit être d'au moins %min% caractères de long."
+
+#: ../../plugins/wpadverts/includes/defaults.php:281
+#, php-format
+msgid "Text cannot be longer than %max% characters."
+msgstr "Le texte ne peut dépasser les %max% caractères."
+
+#. Name of the plugin
+msgid "WP Adverts"
+msgstr "WP Adverts\n"
+
+#. URI of the plugin
+msgid "http://wpadverts.com"
+msgstr "http://wpadverts.com\n"
+
+#. Description of the plugin
+msgid "The lightweight WordPress classifieds plugin done right."
+msgstr "Le plugin wordpress pour petites annonces."
+
+#. Author of the plugin
+msgid "Greg Winiarski"
+msgstr "Greg Winiarski"
+
+#: ../../plugins/wpadverts/wpadverts.php:73
+msgctxt "post"
+msgid "Expired"
+msgstr "Expiré"
+
+#: ../../plugins/wpadverts/wpadverts.php:76
+#, php-format
+msgid "Expired <span class=\"count\">(%s)</span>"
+msgid_plural "Expired <span class=\"count\">(%s)</span>"
+msgstr[0] "Expiré <span class=\"count\">(%s)</span>"
+msgstr[1] ""
+
+#: ../../plugins/wpadverts/wpadverts.php:80
+msgctxt "post"
+msgid "Temporary"
+msgstr "Temporaire"
+
+#: ../../plugins/wpadverts/wpadverts.php:83
+#, php-format
+msgid "Temporary <span class=\"count\">(%s)</span>"
+msgid_plural "Temporary <span class=\"count\">(%s)</span>"
+msgstr[0] "Temporaire <span class=\"count\">(%s)</span>"
+msgstr[1] ""
+
+#: ../../plugins/wpadverts/wpadverts.php:87
+msgctxt "post type general name"
+msgid "Classifieds"
+msgstr "Petites annonces"
+
+#: ../../plugins/wpadverts/wpadverts.php:88
+msgctxt "post type singular name"
+msgid "Classified"
+msgstr "Petite annonce"
+
+#: ../../plugins/wpadverts/wpadverts.php:89
+msgctxt "classified"
+msgid "Add New"
+msgstr "Ajouter"
+
+#: ../../plugins/wpadverts/wpadverts.php:90
+msgid "Add New Classified"
+msgstr "Ajouter annonce"
+
+#: ../../plugins/wpadverts/wpadverts.php:91
+msgid "Edit Classified"
+msgstr "Editer annonce"
+
+#: ../../plugins/wpadverts/wpadverts.php:92
+msgid "New Classified"
+msgstr "Nouvelle annonce"
+
+#: ../../plugins/wpadverts/wpadverts.php:93
+msgid "All Classifieds"
+msgstr "Toutes les petites annonces"
+
+#: ../../plugins/wpadverts/wpadverts.php:94
+msgid "View Classified"
+msgstr "Voir les annonces"
+
+#: ../../plugins/wpadverts/wpadverts.php:95
+msgid "Search Classifieds"
+msgstr "Rechercher les annonces"
+
+#: ../../plugins/wpadverts/wpadverts.php:96
+msgid "No Classifieds found"
+msgstr "Pas de petites annonces trouvées"
+
+#: ../../plugins/wpadverts/wpadverts.php:97
+msgid "No Classifieds found in the Trash"
+msgstr "Pas de petites annonces trouvées dans la poubelle"
+
+#: ../../plugins/wpadverts/wpadverts.php:99
+msgid "Classifieds"
+msgstr "Petites annonces"
+
+#: ../../plugins/wpadverts/wpadverts.php:148
+msgid "Select options ..."
+msgstr "Choisir l'option"
+
+#: ../../plugins/wpadverts/wpadverts.php:152 ../..
+#: /plugins/wpadverts/includes/gallery.php:78
+msgid "Edit Image"
+msgstr "Editer l'image"
+
+#: ../../plugins/wpadverts/wpadverts.php:153
+msgid "Delete Image"
+msgstr "Supprimer l'image"
+
+#: ../../plugins/wpadverts/wpadverts.php:154
+msgid "View Full Image"
+msgstr "Voir la grande image"
+
+#: ../../plugins/wpadverts/wpadverts.php:155
+msgid "Main"
+msgstr "Principal"
+
+#: ../../plugins/wpadverts/wpadverts.php:325
+msgid "Module activated successfully."
+msgstr "Extension activée avec succès."
+
+#: ../../plugins/wpadverts/addons/bank-transfer/bank-transfer.php:42 ../..
+#: /plugins/wpadverts/includes/admin-pages.php:125
+msgid "Bank Transfer"
+msgstr "Transfer bancaire"
+
+#: ../../plugins/wpadverts/addons/bank-transfer/bank-transfer.php:62 ../..
+#: /plugins/wpadverts/addons/payments/includes/admin-pages.php:557 ../..
+#: /plugins/wpadverts/includes/defaults.php:56
+msgid "Contact Person"
+msgstr "Personne de contact"
+
+#: ../../plugins/wpadverts/addons/bank-transfer/bank-transfer.php:72 ../..
+#: /plugins/wpadverts/addons/payments/admin/payment-history-list.php:68 ../..
+#: /plugins/wpadverts/addons/payments/includes/admin-pages.php:567 ../..
+#: /plugins/wpadverts/includes/defaults.php:66 ../..
+#: /plugins/wpadverts/includes/defaults.php:256 ../..
+#: /plugins/wpadverts/templates/single.php:105
+msgid "Email"
+msgstr "E mail"
+
+#: ../../plugins/wpadverts/addons/bank-transfer/admin/options.php:15
+msgid "Payment Gateway / Bank Transfer"
+msgstr "Système de paiement / Transfert bancaire"
+
+#: ../../plugins/wpadverts/addons/bank-transfer/includes/admin-pages.php:32 ../..
+#: /plugins/wpadverts/addons/core/includes/admin-pages.php:26 ../..
+#: /plugins/wpadverts/addons/payments/includes/admin-pages.php:35
+msgid "Update Options"
+msgstr "Mettre à jour les options"
+
+#: ../../plugins/wpadverts/addons/bank-transfer/includes/admin-pages.php:41 ../..
+#: /plugins/wpadverts/addons/core/includes/admin-pages.php:45 ../..
+#: /plugins/wpadverts/addons/payments/includes/admin-pages.php:43
+msgid "Settings updated."
+msgstr "Réglages mis à jour"
+
+#: ../../plugins/wpadverts/addons/bank-transfer/includes/admin-pages.php:43 ../..
+#: /plugins/wpadverts/addons/core/includes/admin-pages.php:47 ../..
+#: /plugins/wpadverts/addons/payments/includes/admin-pages.php:45 ../..
+#: /plugins/wpadverts/addons/payments/includes/admin-pages.php:152 ../..
+#: /plugins/wpadverts/addons/payments/includes/admin-pages.php:188 ../..
+#: /plugins/wpadverts/addons/payments/includes/admin-pages.php:303
+msgid "There are errors in your form."
+msgstr "Il y'a une erreur dans votre formulaire."
+
+#: ../../plugins/wpadverts/addons/bank-transfer/includes/admin-pages.php:60
+msgid "Payment Name"
+msgstr "Nom du paiement"
+
+#: ../../plugins/wpadverts/addons/bank-transfer/includes/admin-pages.php:61
+msgid "Payment gateway name visible in the frontend when making a payment."
+msgstr ""
+"Nom du système de paiement visible sur l'avant du site lorsqu'un paiement "
+"est effectué."
+
+#: ../../plugins/wpadverts/addons/bank-transfer/includes/admin-pages.php:70
+msgid "Message"
+msgstr "Message"
+
+#: ../../plugins/wpadverts/addons/bank-transfer/includes/admin-pages.php:73
+msgid ""
+"User will see this message when asked to make payment, make sure that "
+"instructions here will make it as easy as possible to make a payment."
+"<br/>Allowed variables:<br/>- {total} - total amount to pay (for example $10."
+"00)<br/>- {order_number} - unique order number<br/>To revert to default "
+"message remove whole text from editor and save the form."
+msgstr ""
+"Utilisateur va voir ce message lorsque il sera demandé de faire le paiement. "
+"Veillez à ce que vos instructions soit claire afin d'effectuer un paiement."
+"<br/>Variables autorisées:<br/>- {total} - montant total à payer(par exemple "
+"$10.00)<br/>- {order_number} - Numéro de l'ordre unique<br/>Pour utiliser le "
+"message par défaut, effacez tout le texte du formulaire et sauvegardez."
+
+#: ../../plugins/wpadverts/addons/core/includes/admin-pages.php:25
+msgid "Core Options"
+msgstr "Options du noyau"
+
+#: ../../plugins/wpadverts/addons/core/includes/admin-pages.php:120 ../..
+#: /plugins/wpadverts/addons/core/includes/admin-pages.php:121
+msgid "Common Settings"
+msgstr "Réglages basiques"
+
+#: ../../plugins/wpadverts/addons/core/includes/admin-pages.php:127
+msgid "Default Ads List Page"
+msgstr "Page par défaut pour les annonces"
+
+#: ../../plugins/wpadverts/addons/core/includes/admin-pages.php:128
+msgid "Select page on which the main [adverts_list] shortcode is being used."
+msgstr "Sélectionnez la page sur laquelle [adverts_list] va être ajouté."
+
+#: ../../plugins/wpadverts/addons/core/includes/admin-pages.php:134
+msgid "Default Visibility"
+msgstr "Visibilité par défaut."
+
+#: ../../plugins/wpadverts/addons/core/includes/admin-pages.php:135
+msgid "Number of days Ad will be visible by default."
+msgstr "Nombre de jour qu'une annonce va rester par défaut."
+
+#: ../../plugins/wpadverts/addons/core/includes/admin-pages.php:145 ../..
+#: /plugins/wpadverts/addons/core/includes/admin-pages.php:146
+msgid "Currency Settings"
+msgstr "Réglage de la devise"
+
+#: ../../plugins/wpadverts/addons/core/includes/admin-pages.php:152
+msgid "Currency"
+msgstr "Devise"
+
+#: ../../plugins/wpadverts/addons/core/includes/admin-pages.php:159
+msgid "Currency Position"
+msgstr "Position de la devise"
+
+#: ../../plugins/wpadverts/addons/core/includes/admin-pages.php:161
+msgid "Prefix - $10"
+msgstr "Prefix - $10"
+
+#: ../../plugins/wpadverts/addons/core/includes/admin-pages.php:162
+msgid "Suffix - 10$"
+msgstr "Suffix - 10$"
+
+#: ../../plugins/wpadverts/addons/core/includes/admin-pages.php:169
+msgid "Decimal Places"
+msgstr "Place des décimaux"
+
+#: ../../plugins/wpadverts/addons/core/includes/admin-pages.php:179
+msgid "Decimal Separator"
+msgstr "Séparateur des décimaux"
+
+#: ../../plugins/wpadverts/addons/core/includes/admin-pages.php:185
+msgid "Thousands Separator"
+msgstr "Séparateur des millièmes"
+
+#: ../../plugins/wpadverts/addons/payments/payments.php:60
+msgctxt "completed status payment"
+msgid "Completed"
+msgstr "Complet [ completed status payment ]"
+
+#: ../../plugins/wpadverts/addons/payments/payments.php:65
+#, php-format
+msgid "Unread <span class=\"count\">(%s)</span>"
+msgid_plural "Unread <span class=\"count\">(%s)</span>"
+msgstr[0] "Pas encore lu <span class=\"count\">(%s)</span>"
+msgstr[1] "Pas encore lus <span class=\"count\">(%s)</span>"
+
+#: ../../plugins/wpadverts/addons/payments/payments.php:69
+msgctxt "failed status payment"
+msgid "Failed"
+msgstr "Echoué [ failed status payment ]"
+
+#: ../../plugins/wpadverts/addons/payments/payments.php:74
+#, php-format
+msgid "Failed <span class=\"count\">(%s)</span>"
+msgid_plural "Failed <span class=\"count\">(%s)</span>"
+msgstr[0] "Echoué <span class=\"count\">(%s)</span>"
+msgstr[1] "Echoués <span class=\"count\">(%s)</span>"
+
+#: ../../plugins/wpadverts/addons/payments/payments.php:78
+msgctxt "pending status payment"
+msgid "Pending"
+msgstr "En suspens [ pending status payment ]"
+
+#: ../../plugins/wpadverts/addons/payments/payments.php:83 ../..
+#: /plugins/wpadverts/addons/payments/payments.php:98
+#, php-format
+msgid "Pending <span class=\"count\">(%s)</span>"
+msgid_plural "Pending <span class=\"count\">(%s)</span>"
+msgstr[0] "En suspens <span class=\"count\">(%s)</span>"
+msgstr[1] "En suspens <span class=\"count\">(%s)</span>"
+
+#: ../../plugins/wpadverts/addons/payments/payments.php:87
+msgctxt "refunded status payment"
+msgid "Refunded"
+msgstr "Remboursement"
+
+#: ../../plugins/wpadverts/addons/payments/payments.php:92
+#, php-format
+msgid "Refunded <span class=\"count\">(%s)</span>"
+msgid_plural "Refunded <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+"\n"
+"Remboursé <span class=\"count\">(%s)</span>"
+msgstr[1] "Remboursés <span class=\"count\">(%s)</span>"
+
+#: ../../plugins/wpadverts/addons/payments/payments.php:96
+msgctxt "post"
+msgid "Pending"
+msgstr "En suspens"
+
+#: ../../plugins/wpadverts/addons/payments/payments.php:259
+msgid "Listing Information"
+msgstr "Information concernant les paiements"
+
+#: ../../plugins/wpadverts/addons/payments/payments.php:279 ../..
+#: /plugins/wpadverts/addons/payments/admin/pricing-list.php:78
+msgid "Free"
+msgstr "Libre"
+
+#: ../../plugins/wpadverts/addons/payments/payments.php:283
+#, php-format
+msgid "<b>%1$s</b> - %2$s for %3$d days.%4$s"
+msgstr "<b>%1$s</b> - %2$s pour %3$d jours.%4$s"
+
+#: ../../plugins/wpadverts/addons/payments/payments.php:295
+msgid "Listing"
+msgstr "Liste"
+
+#: ../../plugins/wpadverts/addons/payments/payments.php:340 ../..
+#: /plugins/wpadverts/includes/shortcodes.php:232
+msgid "Thank you for submitting your ad!"
+msgstr "Merci d'avoir publié votre annonce!"
+
+#: ../../plugins/wpadverts/addons/payments/payments.php:394
+msgid "Adverts Payment History"
+msgstr "Historique de paiement des annonces"
+
+#: ../../plugins/wpadverts/addons/payments/payments.php:395 ../..
+#: /plugins/wpadverts/addons/payments/admin/payment-history-list.php:16
+msgid "Payment History"
+msgstr "Historique des paiements"
+
+#: ../../plugins/wpadverts/addons/payments/admin/options.php:15 ../..
+#: /plugins/wpadverts/addons/payments/admin/pricing-edit.php:16 ../..
+#: /plugins/wpadverts/addons/payments/admin/pricing-list.php:16 ../..
+#: /plugins/wpadverts/includes/admin-pages.php:38
+msgid "Options"
+msgstr "Options"
+
+#: ../../plugins/wpadverts/addons/payments/admin/options.php:16 ../..
+#: /plugins/wpadverts/addons/payments/admin/pricing-edit.php:18 ../..
+#: /plugins/wpadverts/addons/payments/admin/pricing-list.php:18
+msgid "Pricing"
+msgstr "Prix"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-edit.php:16
+msgid "Payment History Edit"
+msgstr "Editer l'historique de paiement"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-edit.php:28
+msgid "Payment"
+msgstr "Paiement"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-edit.php:33
+msgid "Gateway"
+msgstr "Passage"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-edit.php:44
+msgid "Created"
+msgstr "Créé"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-edit.php:51
+msgid "User IP"
+msgstr "Ip de l'utilisateur"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-edit.php:60 ../..
+#: /plugins/wpadverts/addons/payments/admin/payment-history-list.php:71
+msgid "Status"
+msgstr "Statut"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-edit.php:72
+msgid "To Pay"
+msgstr "A payer"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-edit.php:79
+msgid "Paid"
+msgstr "Payé"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-edit.php:90
+msgid "Update Payment"
+msgstr "Mise à jour du paiement"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-edit.php:105
+msgid "Purchase Details"
+msgstr "Voir les détails"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-edit.php:110
+msgid "Purchase Type"
+msgstr "Voir les types"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-edit.php:111
+msgid "Listing Publication"
+msgstr "Liste des publications"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-edit.php:115
+msgid "Listing Type"
+msgstr "Liste par type"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-edit.php:129
+msgid "Purchased Item"
+msgstr "Elément acheté"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-edit.php:147
+msgid "Customer Details"
+msgstr "Détails du client"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-edit.php:165
+msgid "Payment Log"
+msgstr "Historique de paiements"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-list.php:23
+msgid "All"
+msgstr "Toutes"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-list.php:36 ../..
+#: /plugins/wpadverts/addons/payments/admin/payment-history-list.php:131 ../..
+#: /plugins/wpadverts/addons/payments/admin/pricing-list.php:36 ../..
+#: /plugins/wpadverts/addons/payments/admin/pricing-list.php:109
+msgid "Bulk Actions"
+msgstr "Action en masse"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-list.php:40 ../..
+#: /plugins/wpadverts/addons/payments/admin/payment-history-list.php:87 ../..
+#: /plugins/wpadverts/addons/payments/admin/payment-history-list.php:87 ../..
+#: /plugins/wpadverts/addons/payments/admin/payment-history-list.php:135 ../..
+#: /plugins/wpadverts/addons/payments/admin/pricing-list.php:37 ../..
+#: /plugins/wpadverts/addons/payments/admin/pricing-list.php:69 ../..
+#: /plugins/wpadverts/addons/payments/admin/pricing-list.php:69 ../..
+#: /plugins/wpadverts/addons/payments/admin/pricing-list.php:110 ../..
+#: /plugins/wpadverts/templates/manage.php:34
+msgid "Delete"
+msgstr "Supprimer"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-list.php:43 ../..
+#: /plugins/wpadverts/addons/payments/admin/payment-history-list.php:137 ../..
+#: /plugins/wpadverts/addons/payments/admin/pricing-list.php:40 ../..
+#: /plugins/wpadverts/addons/payments/admin/pricing-list.php:112
+msgid "Apply"
+msgstr "Appliquer"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-list.php:49
+msgid "All dates"
+msgstr "Toutes les dates"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-list.php:50
+msgid "This month"
+msgstr "Ce mois"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-list.php:51
+msgid "Last month"
+msgstr "Le dernier mois"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-list.php:56
+msgid "Filter"
+msgstr "Flitrer"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-list.php:66
+msgid "ID"
+msgstr "ID"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-list.php:67
+msgid "User"
+msgstr "Utilisateur"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-list.php:69 ../..
+#: /plugins/wpadverts/includes/admin-post-type.php:522 ../..
+#: /plugins/wpadverts/templates/list.php:28
+msgid "Date"
+msgstr "Date"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-list.php:70
+msgid "Amount"
+msgstr "Somme"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-list.php:84 ../..
+#: /plugins/wpadverts/addons/payments/admin/payment-history-list.php:86
+msgid "View Order"
+msgstr "Voir la commande"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-list.php:120 ../.
+#: ./plugins/wpadverts/addons/payments/admin/pricing-list.php:98
+msgid "&laquo;"
+msgstr "&laquo;"
+
+#: ../../plugins/wpadverts/addons/payments/admin/payment-history-list.php:121 ../.
+#: ./plugins/wpadverts/addons/payments/admin/pricing-list.php:99
+msgid "&raquo;"
+msgstr "&raquo;"
+
+#: ../../plugins/wpadverts/addons/payments/admin/pricing-edit.php:19 ../..
+#: /plugins/wpadverts/addons/payments/admin/pricing-list.php:19
+msgid "Add New"
+msgstr "Ajouter nouveau"
+
+#: ../../plugins/wpadverts/addons/payments/admin/pricing-list.php:26
+msgid "listing"
+msgstr "Liste"
+
+#: ../../plugins/wpadverts/addons/payments/admin/pricing-list.php:51 ../..
+#: /plugins/wpadverts/addons/payments/includes/admin-pages.php:635 ../..
+#: /plugins/wpadverts/includes/admin-post-type.php:518 ../..
+#: /plugins/wpadverts/includes/class-widget-categories.php:74 ../..
+#: /plugins/wpadverts/includes/defaults.php:95 ../..
+#: /plugins/wpadverts/includes/gallery.php:95 ../..
+#: /plugins/wpadverts/includes/gallery.php:211
+msgid "Title"
+msgstr "Titre"
+
+#: ../../plugins/wpadverts/addons/payments/admin/pricing-list.php:52 ../..
+#: /plugins/wpadverts/addons/payments/includes/admin-pages.php:650 ../..
+#: /plugins/wpadverts/includes/admin-post-type.php:519 ../..
+#: /plugins/wpadverts/includes/defaults.php:129
+msgid "Price"
+msgstr "Prix"
+
+#: ../../plugins/wpadverts/addons/payments/admin/pricing-list.php:53 ../..
+#: /plugins/wpadverts/addons/payments/includes/admin-pages.php:659
+msgid "Visible"
+msgstr "Visible"
+
+#: ../../plugins/wpadverts/addons/payments/admin/pricing-list.php:66 ../..
+#: /plugins/wpadverts/addons/payments/admin/pricing-list.php:68 ../..
+#: /plugins/wpadverts/addons/payments/admin/pricing-list.php:68 ../..
+#: /plugins/wpadverts/includes/admin-post-type.php:347 ../..
+#: /plugins/wpadverts/templates/manage.php:33
+msgid "Edit"
+msgstr "Editer"
+
+#: ../../plugins/wpadverts/addons/payments/admin/pricing-list.php:83
+#, php-format
+msgid "1 day"
+msgid_plural "%s days"
+msgstr[0] "1 Jour"
+msgstr[1] "%s jours"
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:75
+#, php-format
+msgid ""
+"Enable at least one <a href='%s'>Payment Gateway</a> before selecting "
+"default."
+msgstr ""
+"Autoriser au moins <a href='%s'>Un système de paiement</a> avant de "
+"sélectionner celui par défaut."
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:88
+#, php-format
+msgid "Create at least one <a href='%s'>Pricing</a> before selecting default."
+msgstr ""
+"Créez au moins une <a href='%s'>liste de prix</a> avant de sélectionner "
+"celle par défaut. "
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:127 ../..
+#: /plugins/wpadverts/addons/payments/includes/admin-pages.php:128
+msgid "Add Pricing"
+msgstr "Ajouter un critère de prix"
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:144 ../..
+#: /plugins/wpadverts/addons/payments/includes/admin-pages.php:183 ../..
+#: /plugins/wpadverts/addons/payments/includes/admin-pages.php:298
+msgid "There was an error while saving pricing in database."
+msgstr "Il y'a eu une erreur en sauvant votre critère de prix dans la base de donnée."
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:148
+msgid "New pricing has been added."
+msgstr "Une nouvelle liste de prix à été ajouté."
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:162
+msgid "Edit Pricing"
+msgstr "Editer un critère de prix"
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:163
+msgid "Update Pricing"
+msgstr "Mettre à jour la liste de prix."
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:185
+msgid "Pricing updated."
+msgstr "Liste de prix mise à jour."
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:198
+msgid "Adverts Pricing with given ID does not exist."
+msgstr "La liste de prix avec cet ID n'existe pas."
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:205
+msgid "Pricing deleted."
+msgstr "Liste de prix supprimé."
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:225
+#, php-format
+msgid "1 Pricing deleted."
+msgid_plural "%s Pricings deleted."
+msgstr[0] "1 liste de prix supprimé."
+msgstr[1] ""
+"\n"
+"%s Listes de prix supprimés."
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:271
+#, php-format
+msgid "Payment Method [%s] assigned to this Payment does not exist or was disabled."
+msgstr ""
+"La méthode de paiement [%s] assigné  à ce paiement n'existe pas ou a été "
+"désactivée."
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:288
+#, php-format
+msgid "<strong>%1$s</strong> changed payment status to <strong>%2$s</strong>"
+msgstr ""
+"<strong>%1$s</strong> a changé le status du paiement par "
+"<strong>%2$s</strong>"
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:300
+msgid "Payment updated."
+msgstr "Paiement mis à jour."
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:314
+msgid "Adverts Payment with given ID does not exist."
+msgstr "Le paiement de l'annonce avec cet ID n'existe pas."
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:322
+#, php-format
+msgid "1 Payment deleted."
+msgid_plural "%s Payments deleted."
+msgstr[0] "1 Paiement supprimé."
+msgstr[1] "%s Paiements supprimés."
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:352
+msgid "Payments deleted."
+msgstr "Paiements supprimés"
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:365
+#, php-format
+msgid "Status for selected Payments was changed to: %s"
+msgstr "Les status pour les paiements sélectionnés ont été changés en: %s"
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:391
+#, php-format
+msgid "%1$s %2$d"
+msgstr "%1$s %2$d"
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:483
+msgid "View order"
+msgstr "Voir l'ordre"
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:488
+msgid "Abandoned"
+msgstr "Abandonné"
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:496 ../..
+#: /plugins/wpadverts/addons/payments/includes/admin-pages.php:528
+msgid "Pending Payment"
+msgstr "Paiement en suspens"
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:532 ../..
+#: /plugins/wpadverts/includes/class-updates-manager.php:332 ../..
+#: /plugins/wpadverts/templates/manage-edit.php:47
+msgid "Update"
+msgstr "Mis à jour"
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:551
+msgid "User ID"
+msgstr "Id de l'utilisateur"
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:610
+msgid "Default Payment Gateway"
+msgstr "Système de paiement par défaut"
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:619
+msgid "Default Pricing"
+msgstr "Prix par défaut"
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:644 ../..
+#: /plugins/wpadverts/includes/defaults.php:119 ../..
+#: /plugins/wpadverts/includes/gallery.php:110 ../..
+#: /plugins/wpadverts/includes/gallery.php:222
+msgid "Description"
+msgstr "Description "
+
+#: ../../plugins/wpadverts/addons/payments/includes/admin-pages.php:660
+msgid "Number of days the Ad will be visible."
+msgstr "Nombre de jour que l'annonce va être publiée"
+
+#: ../../plugins/wpadverts/addons/payments/templates/add-payment.php:15
+msgid "Total"
+msgstr "Total"
+
+#: ../../plugins/wpadverts/addons/payments/templates/add-payment.php:27
+msgid "No Payment Gateways Enabled!"
+msgstr "Pas de système de paiement permis!"
+
+#: ../../plugins/wpadverts/addons/payments/templates/add-payment.php:44
+msgid "Place Order"
+msgstr "Effectuer le paiement"
+
+#: ../../plugins/wpadverts/admin/options.php:26
+msgid "Cannot be disabled"
+msgstr "Ne peut pas être décoché"
+
+#: ../../plugins/wpadverts/admin/options.php:27 ../..
+#: /plugins/wpadverts/admin/options.php:35 ../../plugins/wpadverts/admin/options.
+#: php:49
+msgid "Settings"
+msgstr "Réglages "
+
+#: ../../plugins/wpadverts/admin/options.php:34
+msgid "Addon Uploaded and Activated"
+msgstr "Extension téléchargée et activée"
+
+#: ../../plugins/wpadverts/admin/options.php:37
+msgid "Addon Uploaded but Inactive"
+msgstr "Extension téléchargé mais inactive"
+
+#: ../../plugins/wpadverts/admin/options.php:38 ../..
+#: /plugins/wpadverts/includes/class-updates-manager.php:317
+msgid "Activate"
+msgstr "Activer"
+
+#: ../../plugins/wpadverts/admin/options.php:41
+msgid "Get This Addon"
+msgstr "Avoir cette extension"
+
+#: ../../plugins/wpadverts/admin/options.php:50
+msgid "Disable"
+msgstr "Désactiver"
+
+#: ../../plugins/wpadverts/admin/options.php:52
+msgid "Enable"
+msgstr "Autoriser"
+
+#: ../../plugins/wpadverts/includes/admin-pages.php:37
+msgid "Adverts Options"
+msgstr "Options des annonces"
+
+#: ../../plugins/wpadverts/includes/admin-pages.php:80
+msgid "Modules"
+msgstr "Extension"
+
+#: ../../plugins/wpadverts/includes/admin-pages.php:83
+msgid "Core"
+msgstr "Core"
+
+#: ../../plugins/wpadverts/includes/admin-pages.php:84
+msgid "Here you can configure most basic Adverts options, applicable on any site."
+msgstr ""
+"C'est ici que vous pouvez configurer les options des annonces, applicable "
+"sur tous les sites. "
+
+#: ../../plugins/wpadverts/includes/admin-pages.php:89
+msgid "Payments"
+msgstr "Paiements"
+
+#: ../../plugins/wpadverts/includes/admin-pages.php:90
+msgid "Charge users for posting classified ads on your site."
+msgstr "Charger les utilisateurs de poster des annonces sur votre site."
+
+#: ../../plugins/wpadverts/includes/admin-pages.php:95
+msgid "WooCommerce Payments"
+msgstr "Paiement Woocommerce"
+
+#: ../../plugins/wpadverts/includes/admin-pages.php:96
+msgid "Use WooCommerce to charge users for posting classifieds."
+msgstr "Utiliser WooCommerce pour la gestion de paiement des utilisateurs."
+
+#: ../../plugins/wpadverts/includes/admin-pages.php:122
+msgid "Payment Gateways"
+msgstr "Système de paiement"
+
+#: ../../plugins/wpadverts/includes/admin-pages.php:126
+msgid ""
+"Allow users to pay for ad posting using direct bank transfer or cash "
+"payments."
+msgstr ""
+"Autoriser les utilisateurs à payer avec Bank Transfer ou avec la méthode par "
+"paiement Cash."
+
+#: ../../plugins/wpadverts/includes/admin-pages.php:131
+msgid "PayPal Standard"
+msgstr "Paypal Standard"
+
+#: ../../plugins/wpadverts/includes/admin-pages.php:132
+msgid "PayPal Payments Standard, allow users to pay for ads via PayPal."
+msgstr ""
+"PayPal Payments Standard, permet aux utilisateurs de payer leurs annonces "
+"via PayPal."
+
+#: ../../plugins/wpadverts/includes/admin-pages.php:274
+msgid "Category Icon"
+msgstr "Icône de catégorie"
+
+#: ../../plugins/wpadverts/includes/admin-pages.php:277
+msgid "Filter Icons ..."
+msgstr "Filtrer les icônes…"
+
+#: ../../plugins/wpadverts/includes/admin-post-type.php:93
+msgid "Whoops, the provided date is invalid."
+msgstr "Oups, la date entré n'est pas valide."
+
+#: ../../plugins/wpadverts/includes/admin-post-type.php:180
+msgid ""
+"Post updated, but <strong>cannot be published</strong> since some required "
+"data is not filled properly."
+msgstr "Post mis à jour, mais ne peut pas être publié tant que certaines données"
+
+#. translators: 1: month number (01, 02, etc.), 2: month abbreviation
+#: ../../plugins/wpadverts/includes/admin-post-type.php:252
+#, php-format
+msgid "%1$s-%2$s"
+msgstr "%1$s-%2$s"
+
+#: ../../plugins/wpadverts/includes/admin-post-type.php:264
+#, php-format
+msgid "%1$s %2$s, %3$s @ %4$s : %5$s"
+msgstr "%1$s %2$s, %3$s @ %4$s : %5$s"
+
+#: ../../plugins/wpadverts/includes/admin-post-type.php:269 ../..
+#: /plugins/wpadverts/includes/admin-post-type.php:321
+msgid "Never Expires"
+msgstr "Expire jamais"
+
+#: ../../plugins/wpadverts/includes/admin-post-type.php:287
+msgid "OK"
+msgstr "OK"
+
+#: ../../plugins/wpadverts/includes/admin-post-type.php:288 ../..
+#: /plugins/wpadverts/includes/class-updates-manager.php:333 ../..
+#: /plugins/wpadverts/includes/gallery.php:130 ../..
+#: /plugins/wpadverts/includes/gallery.php:230
+msgid "Cancel"
+msgstr "Supprimer"
+
+#: ../../plugins/wpadverts/includes/admin-post-type.php:309
+msgid "M j, Y @ G:i"
+msgstr "M j, Y @ G:i"
+
+#: ../../plugins/wpadverts/includes/admin-post-type.php:334
+#, php-format
+msgid "Expired: <b>%s</b>"
+msgstr "Expiré: <b>%s</b>"
+
+#: ../../plugins/wpadverts/includes/admin-post-type.php:336
+#, php-format
+msgid "Expires: <b>%s</b>"
+msgstr "Expire: <b>%s</b>"
+
+#: ../../plugins/wpadverts/includes/admin-post-type.php:347
+msgid "Edit date and time"
+msgstr "Editer la date et l'heure"
+
+#: ../../plugins/wpadverts/includes/admin-post-type.php:449 ../..
+#: /plugins/wpadverts/includes/admin-post-type.php:689
+msgid "Expired"
+msgstr "Expiré"
+
+#: ../../plugins/wpadverts/includes/admin-post-type.php:481
+msgid "Additional Information"
+msgstr "Information supplémentaire"
+
+#: ../../plugins/wpadverts/includes/admin-post-type.php:498 ../..
+#: /plugins/wpadverts/includes/defaults.php:113
+msgid "Gallery"
+msgstr "Galerie"
+
+#: ../../plugins/wpadverts/includes/admin-post-type.php:520
+msgid "Author"
+msgstr "Auteur"
+
+#: ../../plugins/wpadverts/includes/admin-post-type.php:521
+msgid "Expires"
+msgstr "Expire"
+
+#: ../../plugins/wpadverts/includes/admin-post-type.php:549
+msgid "Never"
+msgstr "Jamais"
+
+#: ../../plugins/wpadverts/includes/admin-post-type.php:554
+msgid "Y/m/d g:i:s A"
+msgstr "Y/m/d g:i:s A"
+
+#: ../../plugins/wpadverts/includes/admin-post-type.php:562
+msgid "Y/m/d"
+msgstr "Y/m/d"
+
+#: ../../plugins/wpadverts/includes/admin-post-type.php:565
+#, php-format
+msgid "in %s"
+msgstr "Dans %s"
+
+#: ../../plugins/wpadverts/includes/admin-post-type.php:567
+#, php-format
+msgid "%s ago"
+msgstr "Il y a %s"
+
+#: ../../plugins/wpadverts/includes/admin-post-type.php:582
+msgid "None"
+msgstr "Sans"
+
+#: ../../plugins/wpadverts/includes/admin-post-type.php:690
+msgid "Expires:"
+msgstr "Expire:"
+
+#: ../../plugins/wpadverts/includes/admin-post-type.php:691
+msgid "Expired:"
+msgstr "Expiré:"
+
+#: ../../plugins/wpadverts/includes/admin-post-type.php:692
+msgid "Start typing user name, email or login below, some suggestions will appear."
+msgstr ""
+"Commencez de tapper votre nom d'utilisateur, votre email ou votre login ci-"
+"dessous, des suggestions apparaîtront. "
+
+#: ../../plugins/wpadverts/includes/ajax.php:62 ../..
+#: /plugins/wpadverts/includes/ajax.php:144 ../../plugins/wpadverts/includes/ajax.
+#: php:192
+msgid "Invalid Session. Please refresh the page and try again."
+msgstr "Session invalide. Veuillez rafraîchir la page et réessayer."
+
+#: ../../plugins/wpadverts/includes/ajax.php:202
+msgid "Attachment does not exist."
+msgstr "Fichier joint n'existe pas."
+
+#: ../../plugins/wpadverts/includes/ajax.php:204
+msgid "Incorrect attachment ID."
+msgstr "ID incorrect"
+
+#: ../../plugins/wpadverts/includes/ajax.php:208
+msgid "File could not be deleted."
+msgstr "Le fichier n'as pas pu être supprimé."
+
+#: ../../plugins/wpadverts/includes/ajax.php:235 ../..
+#: /plugins/wpadverts/includes/ajax.php:270
+msgid "Post with given ID does not exist."
+msgstr "Le post avec cet ID n'existe pas pas."
+
+#: ../../plugins/wpadverts/includes/class-form.php:169
+msgid "Invalid value."
+msgstr "Valeur incorrecte."
+
+#: ../../plugins/wpadverts/includes/class-updates-manager.php:116
+msgid "License"
+msgstr "License"
+
+#: ../../plugins/wpadverts/includes/class-updates-manager.php:150
+msgid "Cannot connect to remote server. Please try again later."
+msgstr "Ne peut pas se connecter au serveur. Veuillez réessayer plus tard."
+
+#: ../../plugins/wpadverts/includes/class-updates-manager.php:316
+msgid "License ..."
+msgstr "License…"
+
+#: ../../plugins/wpadverts/includes/class-updates-manager.php:320
+msgid "Activate your License in order to enable automatic updates."
+msgstr "Activez votre license afin de profiter des mises à jours automatiques."
+
+#: ../../plugins/wpadverts/includes/class-widget-categories.php:30 ../..
+#: /plugins/wpadverts/includes/class-widget-categories.php:39
+msgid "Advert Categories"
+msgstr "Catégories des annonces"
+
+#: ../../plugins/wpadverts/includes/class-widget-categories.php:41
+msgid "Displays list of available categories."
+msgstr "Afficher la liste des catégories disponibles"
+
+#: ../../plugins/wpadverts/includes/class-widget-categories.php:90
+msgid "Hide empty"
+msgstr "Cacher les vides"
+
+#: ../../plugins/wpadverts/includes/class-widget-categories.php:104
+msgid "Show post counts"
+msgstr "Afficher le nombre de poste"
+
+#: ../../plugins/wpadverts/includes/class-widget-categories.php:180
+#, php-format
+msgid "Go Up (%s)"
+msgstr "Aller en haut (%s)"
+
+#: ../../plugins/wpadverts/includes/class-widget-categories.php:182
+msgid "Go Up (Home)"
+msgstr "Aller en haut (Home)"
+
+#: ../../plugins/wpadverts/includes/class-widget-categories.php:232 ../..
+#: /plugins/wpadverts/templates/categories-all.php:51 ../..
+#: /plugins/wpadverts/templates/categories-top.php:23
+msgid "No categories found."
+msgstr "Pas de catégorie trouvée."
+
+#: ../../plugins/wpadverts/includes/defaults.php:44
+msgid "Contact Information"
+msgstr "Information de contact"
+
+#: ../../plugins/wpadverts/includes/defaults.php:50
+msgid "Account"
+msgstr "Compte"
+
+#: ../../plugins/wpadverts/includes/defaults.php:77
+msgid "Phone Number"
+msgstr "N° de téléphone"
+
+#: ../../plugins/wpadverts/includes/defaults.php:89
+msgid "Item Information"
+msgstr "Texte d'information"
+
+#: ../../plugins/wpadverts/includes/defaults.php:104 ../..
+#: /plugins/wpadverts/templates/single.php:59
+msgid "Category"
+msgstr "Catégorie"
+
+#: ../../plugins/wpadverts/includes/defaults.php:142 ../..
+#: /plugins/wpadverts/templates/single.php:74
+msgid "Location"
+msgstr "Localité"
+
+#: ../../plugins/wpadverts/includes/defaults.php:245
+msgid "Is Required"
+msgstr "Obligatoire"
+
+#: ../../plugins/wpadverts/includes/defaults.php:247
+msgid "Field cannot be empty."
+msgstr "Ce champs ne peut pas être vide"
+
+#: ../../plugins/wpadverts/includes/defaults.php:258
+msgid "Provided email address is invalid."
+msgstr "Cette adresse email est invalide."
+
+#: ../../plugins/wpadverts/includes/defaults.php:266
+msgid "Is Integer"
+msgstr "Est un nombre entier."
+
+#: ../../plugins/wpadverts/includes/defaults.php:268
+msgid "Provided value is not an integer."
+msgstr "La valeur ajouté n'est pas un nombre entier."
+
+#: ../../plugins/wpadverts/includes/defaults.php:276
+msgid "String Length"
+msgstr "Longueur de la chaîne"
+
+#: ../../plugins/wpadverts/includes/events.php:58
+msgid "Every 5 minutes"
+msgstr "Chaque 5 minutes"
+
+#: ../../plugins/wpadverts/includes/functions.php:268
+msgid "Uploaded file is NOT an image"
+msgstr "Le fichier téléchargé n'est pas une image"
+
+#: ../../plugins/wpadverts/includes/functions.php:377
+#, php-format
+msgid "Category: %s"
+msgstr "Catégorie: %s"
+
+#: ../../plugins/wpadverts/includes/functions.php:985
+#, php-format
+msgid ""
+"You are posting as <strong>%1$s</strong>. <br/>If you want to use a "
+"different account, please <a href=\"%2$s\">logout</a>."
+msgstr ""
+"Vous êtes en train de naviguer en tant que <strong>%1$s</strong>. <br/>Si "
+"vous voulez utiliser un autre compte, s'il vous plaît <a "
+"href=\"%2$s\">déconnectez vous</a>."
+
+#: ../../plugins/wpadverts/includes/functions.php:990
+#, php-format
+msgid ""
+"Create an account for me so i can manage all my ads from one place (password "
+"will be emailed to you) or <a href=\"%s\">Sign In</a>"
+msgstr ""
+"Créez moi un compte afin que je puisse éditer mes petites annonces depuis un "
+"endroit (Le mot de passe vous sera envoyé par mail) ou <a href=\"%s\">Se "
+"connecter</a>."
+
+#: ../../plugins/wpadverts/includes/functions.php:1205
+msgid "Redirecting"
+msgstr "Redirection"
+
+#: ../../plugins/wpadverts/includes/functions.php:1206
+#, php-format
+msgid ""
+"Your are being redirected to Edit page. <a href=\"%s\">Click here</a> if it is "
+"taking to long. "
+msgstr ""
+"Vous avez été redirigé vers la page d'édition. <a href=\"%s\">Cliquez ici</a> "
+"si cela prend trop de temps."
+
+#: ../../plugins/wpadverts/includes/functions.php:1371
+msgid "US Dollars"
+msgstr "Dollars US"
+
+#: ../../plugins/wpadverts/includes/functions.php:1372
+msgid "Euros"
+msgstr "Euros"
+
+#: ../../plugins/wpadverts/includes/functions.php:1373
+msgid "Pounds Sterling"
+msgstr "Livre Sterling"
+
+#: ../../plugins/wpadverts/includes/functions.php:1374
+msgid "Australian Dollars"
+msgstr "Dollars Australien"
+
+#: ../../plugins/wpadverts/includes/functions.php:1375
+msgid "Brazilian Real"
+msgstr "Réal Brésilien"
+
+#: ../../plugins/wpadverts/includes/functions.php:1376
+msgid "Canadian Dollars"
+msgstr "Dollars Canadien"
+
+#: ../../plugins/wpadverts/includes/functions.php:1377
+msgid "Czech Koruna"
+msgstr "Couronne Tchèque"
+
+#: ../../plugins/wpadverts/includes/functions.php:1378
+msgid "Danish Krone"
+msgstr "Couronne Danoise"
+
+#: ../../plugins/wpadverts/includes/functions.php:1379
+msgid "Hong Kong Dollar"
+msgstr "Dollars Hong Kong"
+
+#: ../../plugins/wpadverts/includes/functions.php:1380
+msgid "Hungarian Forint"
+msgstr "Forint Hongrois"
+
+#: ../../plugins/wpadverts/includes/functions.php:1381
+msgid "Israeli Shekel"
+msgstr "Shekel Israélien"
+
+#: ../../plugins/wpadverts/includes/functions.php:1382
+msgid "Japanese Yen"
+msgstr "Yen Japonais"
+
+#: ../../plugins/wpadverts/includes/functions.php:1383
+msgid "Malaysian Ringgits"
+msgstr "Ringgits Malaisien"
+
+#: ../../plugins/wpadverts/includes/functions.php:1384
+msgid "Mexican Peso"
+msgstr "Pesos Mexicain"
+
+#: ../../plugins/wpadverts/includes/functions.php:1385
+msgid "New Zealand Dollar"
+msgstr "Dollar Néo-Zélandais"
+
+#: ../../plugins/wpadverts/includes/functions.php:1386
+msgid "Norwegian Krone"
+msgstr "Couronne Norvégienne"
+
+#: ../../plugins/wpadverts/includes/functions.php:1387
+msgid "Philippine Pesos"
+msgstr "Pesos Philippin"
+
+#: ../../plugins/wpadverts/includes/functions.php:1388
+msgid "Polish Zloty"
+msgstr "Zloty Polonais"
+
+#: ../../plugins/wpadverts/includes/functions.php:1389
+msgid "Singapore Dollar"
+msgstr "Dollar Singapourien"
+
+#: ../../plugins/wpadverts/includes/functions.php:1390
+msgid "Swedish Krona"
+msgstr "Couronne Suèdoise"
+
+#: ../../plugins/wpadverts/includes/functions.php:1391
+msgid "Swiss Franc"
+msgstr "Franc Suisse"
+
+#: ../../plugins/wpadverts/includes/functions.php:1392
+msgid "Taiwan New Dollars"
+msgstr "Nouveau Dollar Taiwanais"
+
+#: ../../plugins/wpadverts/includes/functions.php:1393
+msgid "Thai Baht"
+msgstr "Baht Thaïlandais"
+
+#: ../../plugins/wpadverts/includes/functions.php:1394
+msgid "Indian Rupee"
+msgstr "Roupie Indienne"
+
+#: ../../plugins/wpadverts/includes/functions.php:1395
+msgid "Turkish Lira"
+msgstr "Lira Turque"
+
+#: ../../plugins/wpadverts/includes/functions.php:1396
+msgid "Iranian Rial"
+msgstr "Rial Iranien"
+
+#: ../../plugins/wpadverts/includes/functions.php:1397
+msgid "Russian Rubles"
+msgstr "Roubles Russes"
+
+#: ../../plugins/wpadverts/includes/functions.php:1398
+msgid "Suth African Rand"
+msgstr "Rand Sud Africain"
+
+#: ../../plugins/wpadverts/includes/gallery.php:44
+msgid "Allowed Files"
+msgstr "Fichiers autorisés"
+
+#: ../../plugins/wpadverts/includes/gallery.php:62 ../..
+#: /plugins/wpadverts/includes/gallery.php:149
+msgid "Drop Images Here"
+msgstr "Déposer l'image ici"
+
+#: ../../plugins/wpadverts/includes/gallery.php:63 ../..
+#: /plugins/wpadverts/includes/gallery.php:150
+msgid "browse files ..."
+msgstr "Ajouter des images…"
+
+#: ../../plugins/wpadverts/includes/gallery.php:74
+msgid "Close"
+msgstr "Fermer"
+
+#: ../../plugins/wpadverts/includes/gallery.php:82 ../..
+#: /plugins/wpadverts/includes/gallery.php:205
+msgid "Image Properties"
+msgstr "Propriété de l'image"
+
+#: ../../plugins/wpadverts/includes/gallery.php:101 ../..
+#: /plugins/wpadverts/includes/gallery.php:216
+msgid "Featured"
+msgstr "Accompagné"
+
+#: ../../plugins/wpadverts/includes/gallery.php:105 ../..
+#: /plugins/wpadverts/includes/gallery.php:218
+msgid "Use this image as main image"
+msgstr "Utiliser cette image comme image à la une"
+
+#: ../../plugins/wpadverts/includes/gallery.php:131 ../..
+#: /plugins/wpadverts/includes/gallery.php:231
+msgid "Update and Close"
+msgstr "Mettre à jour puis fermer"
+
+#: ../../plugins/wpadverts/includes/shortcodes.php:213
+msgid "There are errors in your form. Please correct them before proceeding."
+msgstr ""
+"Il y a des erreurs dans votre formulaire. Veuillez corriger avant de "
+"poursuivre."
+
+#: ../../plugins/wpadverts/includes/shortcodes.php:265
+#, php-format
+msgid ""
+"Only logged in users can access this page. <a href=\"%1$s\">Login</a> or <a "
+"href=\"%2$s\">Register</a>."
+msgstr ""
+"Seul les utilisateurs connectés peuvent accéder à cette page. <a "
+"href=\"%1$s\">Se connecter</a> ou <a href=\"%2$s\">Créer un compte</a>."
+
+#: ../../plugins/wpadverts/includes/shortcodes.php:356
+msgid "Ad does not exist."
+msgstr "L'annonce n'existe pas"
+
+#: ../../plugins/wpadverts/includes/shortcodes.php:362
+msgid "You do not own this Ad."
+msgstr "Cette annonce ne vous appartient pas."
+
+#: ../../plugins/wpadverts/includes/shortcodes.php:370
+#, php-format
+msgid "Incorrect post status [%s]."
+msgstr "Status du poste incorrect [%s]."
+
+#: ../../plugins/wpadverts/includes/shortcodes.php:407
+msgid "Post has been updated."
+msgstr "Le post a été mis à jour."
+
+#: ../../plugins/wpadverts/includes/shortcodes.php:411
+msgid "Cannot update. There are errors in your form."
+msgstr "Impossible de poursuivre, il y a des erreurs dans votre formulaire."
+
+#: ../../plugins/wpadverts/templates/add-preview.php:8
+msgid "Edit Listing"
+msgstr "Editer les listes"
+
+#: ../../plugins/wpadverts/templates/add-preview.php:14
+msgid "Publish Listing"
+msgstr "Publier une liste"
+
+#: ../../plugins/wpadverts/templates/add-save.php:5
+msgid "Your ad has been put into moderation, please wait for admin to approve it."
+msgstr ""
+"Votre petite annonce a été mis en modération, veuillez attendre que "
+"l'administrateur l'ait approuvé."
+
+#: ../../plugins/wpadverts/templates/add-save.php:7
+#, php-format
+msgid "Your ad has been published. You can view it here \"<a href=\"%1$s\">%2$s</a>\"."
+msgstr ""
+"Votre annonce a été publiée. Vous pouvez la visionner ici \"<a "
+"href=\"%1$s\">%2$s</a>\"."
+
+#: ../../plugins/wpadverts/templates/add.php:42 ../..
+#: /plugins/wpadverts/templates/form.php:51
+msgid "Preview"
+msgstr "Prévisualiser"
+
+#: ../../plugins/wpadverts/templates/categories-all.php:39
+msgid "<em>View All &raquo;</em>"
+msgstr "<em>Tout voir &raquo;</em>"
+
+#: ../../plugins/wpadverts/templates/list.php:16
+msgid "Keyword ..."
+msgstr "Mot clé…"
+
+#: ../../plugins/wpadverts/templates/list.php:20
+msgid "Location ..."
+msgstr "Lieu…"
+
+#: ../../plugins/wpadverts/templates/list.php:32
+msgid "Filters ..."
+msgstr "Filtre…"
+
+#: ../../plugins/wpadverts/templates/list.php:33
+msgid "SEARCH"
+msgstr "RECHERCHER"
+
+#: ../../plugins/wpadverts/templates/list.php:37
+msgid "Filter Results"
+msgstr "Filtrer les résultats"
+
+#: ../../plugins/wpadverts/templates/list.php:48
+msgid "There are no ads matching your search criteria."
+msgstr "Il n'y a pas d'annonce correspondant à vos critères de recherche."
+
+#: ../../plugins/wpadverts/templates/manage-edit.php:2
+msgid "Go Back"
+msgstr "Retour"
+
+#: ../../plugins/wpadverts/templates/manage-edit.php:3 ../..
+#: /plugins/wpadverts/templates/manage.php:32
+msgid "View Ad"
+msgstr "Voir annonce"
+
+#: ../../plugins/wpadverts/templates/manage.php:14
+msgid "This Ad is in moderation."
+msgstr "Cette annonce est en modération."
+
+#: ../../plugins/wpadverts/templates/manage.php:18
+msgid "This Ad expired."
+msgstr "Cette annonce a expirée."
+
+#: ../../plugins/wpadverts/templates/manage.php:40
+msgid "You do not have any Ads posted yet."
+msgstr "Vous n'avez aucune annonce publié actuellement."
+
+#: ../../plugins/wpadverts/templates/single.php:41
+#, php-format
+msgid "by <strong>%s</strong>"
+msgstr "par <strong>%s</strong>"
+
+#: ../../plugins/wpadverts/templates/single.php:42
+#, php-format
+msgid "Published: %1$s (%2$s ago)"
+msgstr "Publié: %1$s (il y a %2$s)"
+
+#: ../../plugins/wpadverts/templates/single.php:91
+msgid "Show Contact Information"
+msgstr "Voir les infos du contact"
+
+#: ../../plugins/wpadverts/templates/single.php:100
+msgid "Phone"
+msgstr "Téléphone"

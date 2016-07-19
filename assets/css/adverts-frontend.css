@@ -1,0 +1,1895 @@
+/* 
+    Document   : adverts-frontend.css
+    Created on : 2014-09-01, 19:10:38
+    Author     : Grzegorz
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.adverts-no-js {
+    display: block;
+}
+
+.adverts-js {
+    display: none;
+}
+
+.advert-item span.advert-link {
+    color: #21759b;
+    font-size: 1.2em;
+    height:1.6em;
+    font-weight: bold;
+}
+
+.advert-item.advert-is-featured {
+    background-color: #F0F8FF;
+    border-color: lightsteelblue;
+}
+
+.advert-img img {
+    display: block;
+    margin: 0 auto;
+}
+
+.adverts-button,
+.adverts-upload-actions a.button {
+    height:35px;
+    background: #F2F2F2; 
+    display: inline-block; 
+    padding: 0 20px; 
+    color: #444444 !important; 
+    text-decoration: none;
+    -moz-border-radius: 2px; 
+    -webkit-border-radius: 2px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+    cursor: pointer;
+    
+    font: 300 15px/35px Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    background-image: -moz-linear-gradient(50% 0%, #F5F5F5, #F1F1F1);
+}
+
+.adverts-button-small {
+    height: 28px;
+    padding: 0 10px;
+    background: whitesmoke;
+    display: inline-block;
+    text-decoration: none;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border: 1px solid #ccc;
+    position: relative;
+    cursor: pointer;
+    font: 300 13px/30px Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    background-image: -moz-linear-gradient(50% 0%, #F5F5F5, #F1F1F1);
+    color: #666;
+}
+body .adverts-button-small:visited {
+    color: #666;
+}
+
+input.adverts-submit[type=submit] {
+    height: 35px;
+    overflow: hidden;
+    padding: 0 20px;
+    outline: none;
+    border: 0;
+    border-radius: 0;
+    font: 300 15px/35px Helvetica, Arial, sans-serif;
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+    text-shadow: none;
+    background: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    text-transform: none;
+    
+    background: #F2F2F2;
+    color: #444444; 
+    
+    background-color: #2da5da;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+    -o-transition: opacity 0.2s;
+    -ms-transition: opacity 0.2s;
+    -moz-transition: opacity 0.2s;
+    -webkit-transition: opacity 0.2s;
+    color: white;
+}
+
+.adverts-inline-icon:before {
+    vertical-align: middle;
+    font-size: 16px;
+    color: gray;
+}
+
+.adverts-button.adverts-button-icon {
+    display: inline-block;
+    overflow: hidden;
+    padding: 0px;
+    margin: 0 0 0 2px;
+    width: 30px;
+    height: 28px;
+    font-size:18px;
+    text-align: center;
+}
+
+.adverts-button.adverts-button-icon:before {
+    vertical-align: top;
+    line-height: 28px;
+}
+
+a.adverts-button:visited,
+.adverts-upload-actions a.button:visited,
+a.adverts-button:hover,
+.adverts-upload-actions a.button:hover {
+    color: #444444 !important; 
+    text-decoration: none;
+}
+
+a.adverts-button:hover {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.adverts-loader {
+    display: none;
+    border: none !important;
+    box-shadow: none !important;
+    font-size: 20px;
+}
+
+.adverts-loader.animate-spin {
+    display: none;
+}
+
+.adverts-list {
+    clear: both;
+    overflow: hidden;
+}
+
+.adverts-list-empty {
+    font-size: 1.1em;
+    padding: 1em 0 1em 0;
+    border-bottom: 1px solid whitesmoke;
+}
+
+.advert-item {
+    background-color: #fff;
+    margin: 0 20px 20px 0;
+    padding: 0;
+    float: left;
+    position: relative;
+    -webkit-backface-visibility: hidden;
+    border: 1px #e5e5e5 solid;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.advert-item .advert-item-grow { 
+    transition: all .2s ease-in-out; 
+    opacity: 1; /* was 0.8 */
+    cursor: pointer;
+    
+    box-shadow: none !important;
+    border-radius: 0px !important;
+}
+
+.advert-item:hover .advert-item-grow { 
+    /*transform: scale(1.1); */
+    overflow: hidden;
+    opacity: 1;
+}
+
+.advert-item:hover .advert-price {
+    opacity: 1;
+    background-color: #b34040;
+    color: white;
+}
+
+.advert-item-col-1-only,
+.advert-item-col-2-only,
+.advert-item-col-3-only,
+.advert-item-col-4-only {
+    display: none;
+}
+
+.advert-item-col-2 {
+    width: 48%;
+    margin: 1%;
+}
+
+.advert-item-col-2:nth-child(2n+1) {
+    width: 49%;
+    margin: 1% 1% 1% 0%;
+}
+
+.advert-item-col-2:nth-child(2n) {
+    width: 49%;
+    margin: 1% 0% 1% 1%;
+}
+
+.advert-item-col-3 {
+    width: 32%;
+    margin: 1%;
+}
+
+.advert-item-col-3:nth-child(3n+1) {
+    width: 32%;
+    margin: 1% 1% 1% 0%;
+}
+
+.advert-item-col-3:nth-child(3n+2) {
+    width: 32%;
+    margin: 1% 1% 1% 1%;
+}
+
+.advert-item-col-3:nth-child(3n+3) {
+    width: 32%;
+    margin: 1% 0% 1% 1%;
+}
+@media all and (min-width: 760px) {
+    
+    
+.advert-item-col-1 .advert-item-col-1-only {
+    display: initial;
+}
+
+.advert-item-col-1 span.advert-link {
+    min-height:1.3em;
+    height: auto;
+}
+.advert-item-col-1 {
+    width: 100%;
+    margin: 0;
+    padding: 10px 0 10px 0;
+    border: 0;
+    border-bottom: 1px solid #e5e5e5;
+}    
+.advert-item-col-1:hover {
+    background: whitesmoke;
+}
+
+.advert-item-col-1 .advert-img {
+    float: left;
+    width: 100px;
+    height: 61px;
+    position: absolute;
+    top: 50%;
+    margin-top: -30px;
+    
+    
+    background: whitesmoke;
+}
+
+.advert-item-col-1 .advert-post-title,
+.advert-item-col-1 .advert-published {
+    margin-left: 110px;
+    clear: none;
+}
+
+.advert-item-col-1 .advert-post-title {
+    padding: 2px 0 2px 0;
+}
+
+.advert-item-col-1 .advert-published {
+    padding: 0;
+    overflow: hidden;
+    clear: both;
+}
+
+.advert-item-col-1 .advert-date,
+.advert-item-col-1 .advert-location {
+    line-height: 2.2rem;
+    padding: 0;
+    display: inline-block;
+    border: 2px solid transparent;
+    width: 33%;
+    float: left;
+}
+
+.advert-item-col-1 .advert-price {
+    position: relative;
+    bottom: 0;
+    right: 0;
+    
+    float: right;
+    line-height: 2.2rem;
+    min-width: 20%;
+}
+
+}
+.advert-img {
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    position: relative;
+    width:100%; 
+    height:190px;
+    line-height:1em;
+    overflow: hidden;
+}
+
+.advert-price {
+    background-color: #b34040;
+    opacity: 1;
+    position: absolute;
+    right: 1em;
+    min-width: 25%;
+    bottom: 10px;
+    text-align: center;
+    font-size: 1.2em;
+    line-height: 1.8em;
+    padding: 0 0.1em 0 0.1em;
+    color: #b34040;
+    border: 2px solid #b34040;
+    border-radius: 4px;
+    font-weight: bold;
+    background-color: transparent;
+}
+
+.advert-link-wrap {
+    display: block;
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.advert-post-title {
+    padding: 0.2em 0.5em 0.2em 0.5em;
+    clear:both;
+}
+
+.advert-post-title .advert-link {
+    display: block;
+    overflow: hidden;
+    font-size: 1.1em;
+    height:1.3em;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.advert-date {
+    line-height: 1.8em;
+padding: 10px 0 10px 0;
+display: inline-block;
+
+}
+
+.advert-published {
+    padding: 0.2em 0.5em 0.2em 0.5em;
+}
+
+.adverts-search {
+    clear:both;
+    overflow:hidden;
+    padding: 1em 0 0em 0;
+    margin: 0;
+    
+    border: 0;
+    border-radius: 2px;
+    background-color: transparent !important;
+    box-shadow: none;
+}
+
+.adverts-search-hidden {
+    display: none;
+    padding: 0;
+}
+
+.adverts-search .advert-input {
+    width:48%;
+    margin: 1.5% 1% 1.5% 1%;
+    padding: 0;
+    display: block;
+    float:left;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.adverts-search .advert-input input[type=text] {
+    width:100%;
+    box-sizing: border-box;
+    display: inline-block;
+    height: 2.1em;
+    font-size: 1.2em;
+    
+    font-family: Helvetica;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+}
+
+.adverts-search .advert-input select {
+    width:100%;
+    box-sizing: border-box;
+    display: inline-block;
+    height: 2.1em;
+    font-size: 1.1em;
+    
+    font-family: Helvetica;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+}
+
+.adverts-search .advert-input.advert-input-type-half:nth-of-type(2n+1) {
+    width: 49%;
+    margin: 0 1% 1em 0%;
+}
+
+.adverts-search .advert-input.advert-input-type-half:nth-of-type(2n+2) {
+    width: 49%;
+    margin: 0 0% 1em 1%;
+}
+
+.adverts-search .advert-input.advert-input-type-full {
+    width: 100%;
+    margin: 0 0 1em 0;
+}
+
+.adverts-square-icon:before {
+    font-size:18px;
+    vertical-align: middle;
+    color: #666;
+}
+.adverts-options {
+    margin-bottom: 1em;
+    line-height: 28px;
+    overflow: hidden;
+    clear: both;
+    border: 1px solid #e5e5e5;
+    border-bottom: 2px solid #e5e5e5;
+    padding: 0em 0.5em 0em 0.5em;
+    background-color: #fbfbfb;
+
+}
+.adverts-options .adverts-options-left {
+    float: left;
+}
+.adverts-options .adverts-options-right {
+    float: right;
+}
+.adverts-options .adverts-options-label {
+    display: inline-block;
+    height:28px;
+    vertical-align: top;
+    border: 1px solid transparent;
+}
+.adverts-options-sort {
+    display: inline-block;
+    height:30px;
+    vertical-align: top;
+    border: 1px solid #ddd;
+    padding: 0 0.2em 0 0.2em;
+    margin: 0 0.4em 0 0.4em;
+    width: 150px;
+    color: #757575;
+    clear:both;
+    overflow: hidden;
+}
+.adverts-options-sort > strong {
+    display: inline-block;
+    float: right;
+}
+
+.adverts-filter-date {
+    min-width: 100px;
+    clear: both;
+}
+
+.adverts-filter-date span {
+    float: right;
+}
+
+.adverts-options-left, .adverts-options-right {
+    padding: 0 0 1em 0 !important;
+}
+
+.adverts-options-fallback {
+    text-align: right; 
+    margin: 1em 0 1em 0 !important;
+}
+    
+
+.adverts-pagination {
+    margin: 20px 0;
+    text-align: right;
+}
+
+.adverts-pagination a {
+    border: 1px solid;
+    padding: 2px 8px;
+    text-decoration: none;
+    font-size: 1.1em;
+}
+
+.adverts-pagination span {
+    border:1px solid;
+    padding:2px 8px;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.adverts-pagination a.next, 
+.adverts-pagination a.prev {
+    border: 0;
+}
+
+.adverts-pagination .dots {
+    border: 1px solid transparent;
+}
+
+
+[class*='adverts-col-'] {
+  float: left;
+}
+
+.adverts-grid {
+    margin: 0% 0% 0% 0%;
+}
+
+.adverts-grid.adverts-grid-closed-top {
+    border-top: 1px solid whitesmoke;
+}
+
+.adverts-grid.adverts-grid-compact .adverts-grid-row > div {
+    padding: 0;
+}
+
+.adverts .adverts-grid:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.adverts-grid .adverts-grid-row {
+    clear:both;
+    overflow:hidden;
+    padding: 1% 0 1% 0;
+    padding: 0.5em 0 0.5em 0;
+    margin: 0 0 0 0;
+    border-bottom: 1px solid whitesmoke;
+}
+
+.adverts-grid .adverts-grid-row > div {
+    padding: 0 0.75em 0 0.75em;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.adverts-grid .adverts-grid-col-right {
+    text-align: right;
+}
+
+.adverts-grid .adverts-grid-col-center {
+    text-align: center;
+}
+
+.adverts-grid .adverts-sub {
+    display: block;
+    font-size: 0.85em;
+    line-height: 0.95em
+}
+
+.adverts-grid .adverts-grid-head > div {
+    text-transform: uppercase;
+    font-size: 0.75em;
+    font-weight: bold;
+    line-height: 0.8em;
+}
+
+.adverts-grid .adverts-col-5 { width: 5%; }
+.adverts-grid .adverts-col-10 { width: 10%; }
+.adverts-grid .adverts-col-15 { width: 15%; }
+.adverts-grid .adverts-col-20 { width: 20%; }
+.adverts-grid .adverts-col-25 { width: 25%; }
+.adverts-grid .adverts-col-30 { width: 30%; }
+.adverts-grid .adverts-col-35 { width: 35%; }
+.adverts-grid .adverts-col-50 { width: 50%; }
+.adverts-grid .adverts-col-65 { width: 65%; }
+.adverts-grid .adverts-col-70 { width: 70%; }
+.adverts-grid .adverts-col-80 { width: 80%; }
+
+/* FLASH MESSAGES */
+
+div.adverts-flash-error {
+    border: 1px solid #DE5400;
+    background-color: #FFE87C;
+    padding: 5px 15px;
+    line-height: 2em;
+}
+
+div.adverts-flash-info {
+    padding: 5px 15px;
+    margin: 20px 0px 10px 0px;
+    border: 1px solid #E6DB55;
+    background-color: #FFFBCC;
+    line-height: 2em;
+}
+
+div.wpjb-flash-small {
+    margin:5px;
+}
+
+.adverts-single-box {
+    clear: both;
+    overflow: hidden;
+    margin: 1em 0 1em 0;
+}
+
+.adverts-single-author-avatar {
+    float:left;
+    width: auto;
+    margin: 0 1em 0 0;
+    padding: 0;
+}
+
+.adverts-single-author-avatar img.avatar {
+    border-radius: 3px;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #f5f5f5;
+}
+
+.adverts-single-author {
+    float:left;
+    width:70%;
+}
+
+.adverts-single-author-name {
+    line-height: 25px;
+}
+
+.adverts-single-actions {
+    display: inline-block;
+}
+
+.adverts-contact-box {
+    border:1px solid whitesmoke; 
+    background-color: #fcfcfc; 
+    display:none; 
+    margin:1em 0 1em 0; 
+    padding: 1em;
+}
+
+.adverts-contact-box .adverts-contact-method {
+    margin: 0 0 0.5em 0;
+    padding: 0;
+}
+
+.adverts-contact-box a {
+    text-decoration: none;
+}
+
+.adverts-contact-box .adverts-contact-phone,
+.adverts-contact-box .adverts-contact-email {
+    font-size: 1.1em;
+}
+
+.adverts-contact-box .adverts-contact-icon:before {
+    font-size: 1.2em;
+    vertical-align: middle;
+}
+
+
+.adverts-single-price {
+    text-align: right;
+    float: right;
+    height: 50px;
+    margin: 8px 0 8px 0;
+}
+
+.adverts-price-box {
+    background-color: #b34040;
+    color: white;
+    text-align: center;
+    font-size: 1.6em;
+    padding: 0.2em 1em 0.2em 1em;
+    
+}
+
+.adverts-content {
+    clear:both;
+    overflow:hidden;
+    margin: 2em 0 2em 0;
+}
+
+.rslides {
+  margin: 0 auto;
+  padding: 0;
+}
+
+.rslides img {
+    border: none !important;
+    box-shadow: none !important;
+    
+    position: absolute;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
+}
+
+.rslides li {
+    list-style-type: none !important;
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 350px;
+    overflow: hidden; 
+    background-color: #fcfcfc;
+    border: 1px solid whitesmoke;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.rslides_container {
+  margin: 0 0 2em 0;
+  position: relative;
+  float: left;
+  width: 100%;
+  clear: both;
+  overflow:hidden;
+  }
+
+.rslides1_nav {
+  position: absolute;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  top: 50%;
+  left: 0;
+  z-index: 99;
+  opacity: 0.7;
+  text-indent: -9999px;
+  overflow: hidden;
+  text-decoration: none;
+  height: 61px;
+  width: 38px;
+  background: transparent url("themes.gif") no-repeat left top;
+  margin-top: -45px;
+  }
+
+.rslides1_nav:active {
+  opacity: 1.0;
+  }
+
+.rslides1_nav.next {
+  left: auto;
+  background-position: right top;
+  right: 0;
+  }
+
+
+.rslides1_nav:focus {
+  outline: none;
+  }
+
+.rslides_tabs {
+  margin-top: 10px;
+  text-align: center;
+  }
+
+.rslides_tabs li {
+  display: inline;
+  float: none;
+  _float: left;
+  *float: left;
+  margin-right: 5px;
+  }
+
+.rslides_tabs a {
+  text-indent: -9999px;
+  overflow: hidden;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  background: #ccc;
+  background: rgba(0,0,0, .2);
+  display: inline-block;
+  _display: block;
+  *display: block;
+  -webkit-box-shadow: inset 0 0 2px 0 rgba(0,0,0,.3);
+  -moz-box-shadow: inset 0 0 2px 0 rgba(0,0,0,.3);
+  box-shadow: inset 0 0 2px 0 rgba(0,0,0,.3);
+  width: 9px;
+  height: 9px;
+  }
+
+.rslides_tabs .rslides_here a {
+  background: #222;
+  background: rgba(0,0,0, .8);
+  }
+
+.caption {
+  position: absolute;
+  display: block;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 15px;
+  text-align: center;
+  background: #000;
+  background: rgba(0,0,0, .8);
+  color: #fff;
+  margin: 0 !important;
+}
+
+@media screen and (max-width: 600px) {
+  .github {
+    display: none;
+  }
+}
+
+
+/*!
+Pure v0.5.0
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+https://github.com/yui/pure/blob/master/LICENSE.md
+*/
+
+.adverts-form .adverts-form-required {
+
+    font-weight: bold;
+    color: #e9322d;
+}
+
+.adverts-form .adverts-field-error {
+    border-top: 1px solid #e9322d;
+    border-bottom: 1px solid #e9322d;
+    background-color: peachpuff;
+}
+
+.adverts-form .adverts-field-error-list {
+    list-style-type: circle !important;
+    margin: 0 0 0 31% !important;
+    padding: 0 !important;
+    clear: both;
+    overflow: hidden;
+}
+
+.adverts-form .adverts-field-error-list > li {
+    color: #b34040;
+    margin: 0 0 0 36px !important;
+    padding: 0 !important;
+}
+
+.adverts-form.adverts-form-aligned .adverts-control-group {
+    clear: both;
+    overflow: hidden;
+}
+
+.adverts-form.adverts-form-aligned .wp-editor-wrap { 
+    width:60%;
+    display: inline-block;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding: 0 0 0 0.3em;
+}
+.adverts-form.adverts-form-aligned .wp-editor-wrap .wp-editor-container { 
+    border: 1px solid #e5e5e5;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+.adverts-form.adverts-form-aligned .adverts-control-group label {
+    float: left;
+}
+
+.adverts-form.adverts-form-aligned .adverts-control-group > div {
+    width: 65%;
+    float: left;
+    padding: 0 0 0 0.3em;
+}
+
+.adverts-form.adverts-form-aligned .adverts-control-group.adverts-field-text label,
+.adverts-form.adverts-form-aligned .adverts-control-group.adverts-field-select label,
+.adverts-form.adverts-form-aligned .adverts-control-group[class*='adverts-field-text-'] label,
+.adverts-form.adverts-form-aligned .adverts-control-group[class*='adverts-field-select-'] label {
+    float: none;
+}
+
+.adverts-form.adverts-form-aligned .adverts-control-group > div.adverts-autocomplete-holder,
+.adverts-form.adverts-form-aligned .adverts-control-group > div.adverts-multiselect-holder {
+    float: none;
+    display: inline-block;
+    padding: 0;
+}
+
+.adverts-form.adverts-form-aligned .adverts-control-group.adverts-field-checkbox div > label {
+    width: 100%;
+    display: inline;
+}
+
+.adverts-form input[type="text"],
+.adverts-form input[type="password"],
+.adverts-form input[type="email"],
+.adverts-form input[type="url"],
+.adverts-form input[type="date"],
+.adverts-form input[type="month"],
+.adverts-form input[type="time"],
+.adverts-form input[type="datetime"],
+.adverts-form input[type="datetime-local"],
+.adverts-form input[type="week"],
+.adverts-form input[type="number"],
+.adverts-form input[type="search"],
+.adverts-form input[type="tel"],
+.adverts-form input[type="color"],
+.adverts-form select,
+.adverts-form textarea {
+    padding: 0.5em 0.6em;
+    display: inline-block;
+    /*
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 3px #ddd;
+    border-radius: 4px;
+
+    */
+    width:60%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/*
+Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*/
+.adverts-form input:not([type]) {
+    padding: 0.5em 0.6em;
+    display: inline-block;
+    /*
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 3px #ddd;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    */
+}
+
+
+/* Chrome (as of v.32/34 on OS X) needs additional room for color to display. */
+/* May be able to remove this tweak as color inputs become more standardized across browsers. */
+.adverts-form input[type="color"] {
+    padding: 0.2em 0.5em;
+}
+
+
+.adverts-form input[type="text"]:focus,
+.adverts-form input[type="password"]:focus,
+.adverts-form input[type="email"]:focus,
+.adverts-form input[type="url"]:focus,
+.adverts-form input[type="date"]:focus,
+.adverts-form input[type="month"]:focus,
+.adverts-form input[type="time"]:focus,
+.adverts-form input[type="datetime"]:focus,
+.adverts-form input[type="datetime-local"]:focus,
+.adverts-form input[type="week"]:focus,
+.adverts-form input[type="number"]:focus,
+.adverts-form input[type="search"]:focus,
+.adverts-form input[type="tel"]:focus,
+.adverts-form input[type="color"]:focus,
+.adverts-form select:focus,
+.adverts-form textarea:focus {
+    outline: 0;
+    outline: thin dotted \9; /* IE6-9 */
+    border-color: #129FEA;
+}
+
+/*
+Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*/
+.adverts-form input:not([type]):focus {
+    outline: 0;
+    outline: thin dotted \9; /* IE6-9 */
+    border-color: #129FEA;
+}
+
+.adverts-form input[type="file"]:focus,
+.adverts-form input[type="radio"]:focus,
+.adverts-form input[type="checkbox"]:focus {
+    outline: thin dotted #333;
+    outline: 1px auto #129FEA;
+}
+.adverts-form .adverts-checkbox,
+.adverts-form .adverts-radio {
+    margin: 0.5em 0;
+    display: block;
+}
+
+.adverts-form input[type="text"][disabled],
+.adverts-form input[type="password"][disabled],
+.adverts-form input[type="email"][disabled],
+.adverts-form input[type="url"][disabled],
+.adverts-form input[type="date"][disabled],
+.adverts-form input[type="month"][disabled],
+.adverts-form input[type="time"][disabled],
+.adverts-form input[type="datetime"][disabled],
+.adverts-form input[type="datetime-local"][disabled],
+.adverts-form input[type="week"][disabled],
+.adverts-form input[type="number"][disabled],
+.adverts-form input[type="search"][disabled],
+.adverts-form input[type="tel"][disabled],
+.adverts-form input[type="color"][disabled],
+.adverts-form select[disabled],
+.adverts-form textarea[disabled] {
+    cursor: not-allowed;
+    /*background-color: #eaeded;*/
+    /*color: #cad2d3;*/
+}
+
+/*
+Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*/
+.adverts-form input:not([type])[disabled] {
+    cursor: not-allowed;
+    background-color: #eaeded;
+    color: #cad2d3;
+}
+.adverts-form input[readonly],
+.adverts-form select[readonly],
+.adverts-form textarea[readonly] {
+    background: #eee; /* menu hover bg color */
+    color: #777; /* menu text color */
+    border-color: #ccc;
+}
+
+.adverts-form input:focus:invalid,
+.adverts-form textarea:focus:invalid,
+.adverts-form select:focus:invalid {
+    color: #b94a48;
+    border-color: #ee5f5b;
+}
+.adverts-form input:focus:invalid:focus,
+.adverts-form textarea:focus:invalid:focus,
+.adverts-form select:focus:invalid:focus {
+    border-color: #e9322d;
+}
+.adverts-form input[type="file"]:focus:invalid:focus,
+.adverts-form input[type="radio"]:focus:invalid:focus,
+.adverts-form input[type="checkbox"]:focus:invalid:focus {
+    outline-color: #e9322d;
+}
+.adverts-form select {
+    border: 1px solid #ccc;
+    background-color: white;
+}
+.adverts-form select[multiple] {
+    height: auto;
+}
+.adverts-form label {
+    margin: 0.5em 0 0.2em;
+}
+.adverts-form fieldset {
+    margin: 0;
+    padding: 0.35em 0 0.75em;
+    border: 0;
+}
+.adverts-form legend {
+    display: block;
+    width: 100%;
+    padding: 0.3em 0;
+    margin-bottom: 0.3em;
+    color: #333;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.adverts-form-stacked input[type="text"],
+.adverts-form-stacked input[type="password"],
+.adverts-form-stacked input[type="email"],
+.adverts-form-stacked input[type="url"],
+.adverts-form-stacked input[type="date"],
+.adverts-form-stacked input[type="month"],
+.adverts-form-stacked input[type="time"],
+.adverts-form-stacked input[type="datetime"],
+.adverts-form-stacked input[type="datetime-local"],
+.adverts-form-stacked input[type="week"],
+.adverts-form-stacked input[type="number"],
+.adverts-form-stacked input[type="search"],
+.adverts-form-stacked input[type="tel"],
+.adverts-form-stacked input[type="color"],
+.adverts-form-stacked select,
+.adverts-form-stacked label,
+.adverts-form-stacked textarea {
+    display: block;
+    margin: 0.25em 0;
+}
+
+/*
+Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*/
+.adverts-form-stacked input:not([type]) {
+    display: block;
+    margin: 0.25em 0;
+}
+.adverts-form-aligned input,
+.adverts-form-aligned textarea,
+.adverts-form-aligned select,
+/* NOTE: pure-help-inline is deprecated. Use .adverts-form-message-inline instead. */
+.adverts-form-aligned .adverts-help-inline,
+.adverts-form-message-inline {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    vertical-align: middle;
+}
+.adverts-form-aligned textarea {
+    vertical-align: top;
+}
+
+/* Aligned Forms */
+.adverts-form-aligned .adverts-control-group {
+    margin-bottom: 0.5em;
+}
+.adverts-form-aligned .adverts-control-group > label {
+    /*text-align: right;*/
+    display: inline-block;
+    vertical-align: middle;
+    width: 30%;
+    margin: 0 1em 0 0;
+}
+.adverts-form-aligned .adverts-controls {
+    margin: 1.5em 0 0 10em;
+}
+
+/* Rounded Inputs */
+.adverts-form input.adverts-input-rounded,
+.adverts-form .adverts-input-rounded {
+    border-radius: 2em;
+    padding: 0.5em 1em;
+}
+
+/* Grouped Inputs */
+.adverts-form .adverts-group fieldset {
+    margin-bottom: 10px;
+}
+.adverts-form .adverts-group input {
+    display: block;
+    padding: 10px;
+    margin: 0;
+    border-radius: 0;
+    position: relative;
+    top: -1px;
+}
+.adverts-form .adverts-group input:focus {
+    z-index: 2;
+}
+.adverts-form .adverts-group input:first-child {
+    top: 1px;
+    border-radius: 4px 4px 0 0;
+}
+.adverts-form .adverts-group input:last-child {
+    top: -2px;
+    border-radius: 0 0 4px 4px;
+}
+.adverts-form .adverts-group button {
+    margin: 0.35em 0;
+}
+
+.adverts-form .adverts-input-1 {
+    width: 100%;
+}
+.adverts-form .adverts-input-2-3 {
+    width: 66%;
+}
+.adverts-form .adverts-input-1-2 {
+    width: 50%;
+}
+.adverts-form .adverts-input-1-3 {
+    width: 33%;
+}
+.adverts-form .adverts-input-1-4 {
+    width: 25%;
+}
+
+/* Inline help for forms */
+/* NOTE: pure-help-inline is deprecated. Use .adverts-form-message-inline instead. */
+.adverts-form .adverts-help-inline,
+.adverts-form-message-inline {
+    display: inline-block;
+    padding-left: 0.3em;
+    color: #666;
+    vertical-align: middle;
+    font-size: 0.875em;
+}
+
+/* Block help for forms */
+.adverts-form-message {
+    display: block;
+    color: #666;
+    font-size: 0.875em;
+}
+
+.adverts-form .adverts-form-input-group label {
+    margin: 0;
+}
+
+@media only screen and (max-width : 480px) {
+    .adverts-form button[type="submit"] {
+        margin: 0.7em 0 0;
+    }
+
+    .adverts-form input:not([type]),
+    .adverts-form input[type="text"],
+    .adverts-form input[type="password"],
+    .adverts-form input[type="email"],
+    .adverts-form input[type="url"],
+    .adverts-form input[type="date"],
+    .adverts-form input[type="month"],
+    .adverts-form input[type="time"],
+    .adverts-form input[type="datetime"],
+    .adverts-form input[type="datetime-local"],
+    .adverts-form input[type="week"],
+    .adverts-form input[type="number"],
+    .adverts-form input[type="search"],
+    .adverts-form input[type="tel"],
+    .adverts-form input[type="color"],
+    .adverts-form label {
+        margin-bottom: 0.3em;
+        display: block;
+    }
+
+    .adverts-group input:not([type]),
+    .adverts-group input[type="text"],
+    .adverts-group input[type="password"],
+    .adverts-group input[type="email"],
+    .adverts-group input[type="url"],
+    .adverts-group input[type="date"],
+    .adverts-group input[type="month"],
+    .adverts-group input[type="time"],
+    .adverts-group input[type="datetime"],
+    .adverts-group input[type="datetime-local"],
+    .adverts-group input[type="week"],
+    .adverts-group input[type="number"],
+    .adverts-group input[type="search"],
+    .adverts-group input[type="tel"],
+    .adverts-group input[type="color"] {
+        margin-bottom: 0;
+    }
+
+    .adverts-form-aligned .adverts-control-group label {
+        margin-bottom: 0.3em;
+        text-align: left;
+        display: block;
+        width: 100%;
+    }
+
+    .adverts-form-aligned .adverts-controls {
+        margin: 1.5em 0 0 0;
+    }
+
+    /* NOTE: pure-help-inline is deprecated. Use .adverts-form-message-inline instead. */
+    .adverts-form .adverts-help-inline,
+    .adverts-form-message-inline,
+    .adverts-form-message {
+        display: block;
+        font-size: 0.75em;
+        /* Increased bottom padding to make it group with its related input element. */
+        padding: 0.2em 0 0.8em;
+    }
+}
+
+
+/* ADVERTS GALLERY */
+.adverts-form-aligned #adverts-plupload-upload-ui {
+    width:60%;
+    float:left;
+}
+
+.adverts-gallery {
+    width:100%;
+    height:130px;
+    border:1px solid whitesmoke; 
+    background-color: #fcfcfc;
+    padding: 0px 0 20px 0;
+    opacity: 0.7;
+    z-index: 0;
+    text-align: center;
+    line-height: 100%;
+    font-weight: bold;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+.drag-over .adverts-gallery {
+    opacity: 0.7;
+    border:1px solid silver
+}
+
+.drag-over #adverts-drag-drop-area  {
+    position: absolute !important;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 130px;
+    opacity: 1;
+    z-index: 5;
+    box-sizing: border-box;
+    
+}
+
+.adverts-gallery > p {
+    font-size: 1.3em;
+    margin: 0 0 24px;
+    padding: 10px 0 0 0;
+    color: gray;
+}
+
+.adverts-gallery-uploads {
+    overflow: hidden;
+    padding: 0 3px 3px 3px !important;
+}
+
+.adverts-gallery-uploads .adverts-gallery-upload-item {
+    background-color: #fff;
+    width: 150px;
+    height: 105px;
+    -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0 0 3px rgba(0,0,0,0.15);
+    box-shadow: 0 0 3px rgba(0,0,0,0.15);
+    -webkit-transition: height 0.1s ease-in-out,margin 0.1s ease-in-out;
+    -moz-transition: height 0.1s ease-in-out,margin 0.1s ease-in-out;
+    -o-transition: height 0.1s ease-in-out,margin 0.1s ease-in-out;
+    transition: height 0.1s ease-in-out,margin 0.1s ease-in-out;
+    position: relative;
+    float:left;
+    margin: 1em 1em 0 0;
+    overflow: hidden;
+}
+
+.adverts-gallery-uploads .adverts-gallery-upload-item a {
+    display: inline-block;
+    overflow: hidden;
+    padding: 0px;
+    margin: 0 0 0 2px;
+    width: 30px;
+    height: 28px;
+}
+
+.adverts-gallery-uploads .adverts-gallery-upload-item .adverts-gallery-item-featured {
+    position: absolute;
+    display: none;
+    top: 4px;
+    right: 0;
+    font-size: 0.7em;
+    line-height: 0.8em;
+    background: wheat;
+    padding: 4px 4px;
+}
+
+.adverts-gallery-upload-actions {
+    position: absolute;
+    display: none;
+    margin: 0;
+    padding: 0;
+    height: 35px;
+    bottom: 5px;
+    right: 10px;
+}
+
+.adverts-gallery-upload-actions .adverts-icon-spinner {
+  vertical-align: top;
+}
+
+.adverts-gallery-upload-update  {
+    width: 100%;
+    height: 105px;
+    text-align: center;
+}
+
+.adverts-gallery-upload-update.adverts-icon-spinner {
+    font-size: 64px;
+    line-height: 105px;
+}
+
+.adverts-gallery-upload-failed {
+    font-family: Arial;
+    font-size: 10px;
+    line-height: 12px;
+    overflow: hidden;
+    display: inline-block;
+    padding: 0 2px 0 2px;
+}
+
+.adverts-gallery-uploads .adverts-gallery-upload-item:hover .adverts-gallery-upload-actions {
+    display: block;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.adverts-gallery-upload-item-img {
+    width: 150px;
+    border-radius: 0px !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.adverts-gallery-upload-item .adverts-icon-attention:before { 
+    display:block;
+    font-size: 42px;
+    color: red;
+    margin: 10px auto 0;
+}
+
+.adverts-modal {
+     display: none;
+     position: absolute;
+     left: 0px;
+     top: 0px;
+     width:100%;
+     height:100%;
+     z-index: 10000;
+     background-color: rgba(255, 255, 255, 0.5);
+}
+
+.wpjb.wpjb-overlay.show {
+    display:block;
+}
+
+.wpjb.wpjb-overlay h2 {
+    font-size: 22px;
+}
+
+.wpjb.wpjb-overlay p {
+    margin: 5px 0 25px 0;
+}
+
+.adverts-modal .adverts-modal-inner {
+     min-width:550px;
+     /* height: 400px; */
+     margin: 0;
+     background-color: #fff;
+     border:1px solid silver;
+     padding:15px 15px 15px 15px;
+    -moz-box-shadow: 0 0 5px 5px #888;
+    -webkit-box-shadow: 0 0 5px 5px #888;
+     box-shadow: 0 0 5px 5px whitesmoke;
+}
+
+/* MULTISELECT */
+
+.adverts-form.adverts-form-aligned .adverts-control-group > div.adverts-multiselect-holder {
+    width: 60%;
+}
+
+.adverts-form.adverts-form-aligned .adverts-multiselect-options label {
+    float: initial;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+input[type=text].adverts-multiselect-input {
+    cursor:pointer;
+    margin-bottom: 0px;
+    z-index: 100;
+    background-image: url("../images/icon-arrow-down.png");
+    background-repeat: no-repeat;
+    background-position: 98% 50%;
+    width:100%;
+}
+
+input[type=text].adverts-multiselect-input.adverts-multiselect-open {
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+    
+.adverts-multiselect-options {
+    min-height: 50px;
+    max-height: 250px;
+    min-width: 200px;
+    overflow-y: scroll;
+    border: 1px solid silver;
+    border-top: 0px solid transparent;
+    border-right: 0px solid transparent;
+    display: none;
+    width:100%;
+    z-index:10000;
+    position: absolute;
+    background-color: white;
+    -moz-box-shadow:    0 4px 3px -3px  whitesmoke;
+    -webkit-box-shadow: 0 4px 3px -3px  whitesmoke;
+    box-shadow:         0 4px 3px -3px whitesmoke;
+}
+    
+.adverts-multiselect-options > label {
+    display: block;
+    padding: 2px 6px 2px 6px;
+    margin: 0px;
+    color: black;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.adverts-multiselect-options > label:hover {
+    background-color: whitesmoke;
+}
+
+.adverts-multiselect-options > label > input {
+    display: inline;
+    width: auto;
+    vertical-align: text-top;
+}
+
+/* AUTOCOMPLETE */
+
+.adverts-form.adverts-form-aligned .adverts-control-group > div.adverts-autocomplete-holder {
+    width: 60%;
+}
+
+.adverts-form .adverts-autocomplete-holder > input {
+    width: 100%;
+}
+
+.adverts-autocomplete-options {
+    min-height: 25px;
+    max-height: 250px;
+    min-width: 200px;
+    border: 1px solid silver;
+    border-top: 0px solid transparent;
+    border-right: 1px solid silver;
+    display: none;
+    width:100%;
+    z-index:10000;
+    position: absolute;
+    background-color: white;
+    -moz-box-shadow:    0 4px 3px -3px  whitesmoke;
+    -webkit-box-shadow: 0 4px 3px -3px  whitesmoke;
+    box-shadow:         0 4px 3px -3px whitesmoke;
+}
+
+
+.adverts-autocomplete-options > .adverts-autocomplete-item {
+    padding: 2px 8px 2px 8px;
+    cursor: pointer;
+    height: 24px;
+    line-height: 24px;
+}
+
+.adverts-autocomplete-options > .adverts-autocomplete-item:hover {
+    background-color: whitesmoke;
+}
+
+.adverts-autocomplete-options > .adverts-autocomplete-none {
+    padding: 2px 8px 2px 8px;
+    font-style: italic;
+}
+
+ul.adverts-tabs {
+    margin: 0px;
+    padding: 0 10px 0;
+    list-style: none;
+    border-bottom: 1px solid whitesmoke;
+}
+
+ul.adverts-tabs li.current {
+    color: #222;
+    border: 1px solid whitesmoke;
+    border-bottom: 1px solid white;
+    top: 0px;
+    
+}
+ul.adverts-tabs li {
+    background: none;
+    border: 1px solid transparent;
+    color: #222;
+    display: inline-block;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin: 0 0 -1px 0;
+}
+
+.adverts-tab-content {
+    border:1px solid whitesmoke;
+    border-top: 0;
+    padding: 1em;
+}
+
+.advert-img {
+    background: -moz-linear-gradient(-45deg,  rgba(247,247,247,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(247,247,247,1)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(-45deg,  rgba(247,247,247,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(-45deg,  rgba(247,247,247,1) 0%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(-45deg,  rgba(247,247,247,1) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
+    background: linear-gradient(135deg,  rgba(247,247,247,1) 0%,rgba(255,255,255,0) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+}
+
+.adverts-grid-with-icons .adverts-grid-col {
+    line-height: 34px;
+}
+.adverts-round-icon {
+    display: inline-block;
+    border: 0px solid transparent;
+    background: #f5f5f5 !important;
+    color: #999;
+    border-radius: 999px;
+    width: 32px !important;
+    height: 32px !important;
+    line-height: 32px !important;
+    left: -32px;
+    text-align: center;
+    top: -8px;
+    font-size: 17px;
+    cursor: default !important;
+}
+
+/* MANAGE */
+
+.adverts-manage-grid .adverts-manage-title,
+.adverts-manage-grid .adverts-manage-date {
+    font-size: 15px;
+    display: inline-block;
+    line-height: 18px;
+    padding: 10px 0 0px 0;
+}
+
+.adverts-manage-grid .adverts-col-actions {
+    height: 30px;
+}
+
+/* CATEGORIES */
+
+.adverts-flexbox {
+    display: block;                 /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;              /* OLD - Firefox 19- (doesn't work very well) */
+    display: -ms-flexbox;           /* TWEENER - IE 10 */
+    display: -webkit-flex;          /* NEW - Chrome */
+    display: flex;  
+  
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    
+    -webkit-flex-flow: row wrap;
+    
+    flex-flow: row wrap;
+  
+  /* Then we define how is distributed the remaining space */
+
+}
+
+.adverts-flexbox-item {
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+  border: 0;
+  padding: 0;
+  text-align: center;
+  background: rgba(0,0,0,0.02);
+  float: left;
+  position: relative;
+  box-sizing: content-box;
+  
+  -webkit-flex-align: flex-start;
+  -ms-flex-align: flex-start;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+  
+  display: -webkit-flexbox;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.adverts-flexbox-columns-1 {
+    width: 100%;
+}
+
+.adverts-flexbox-columns-2 {
+    width: 48%;
+    margin: 0% 1% 2% 1%;
+}
+
+.adverts-flexbox-columns-3 {
+    width: 31%;
+    margin: 0% 1% 2% 1%;
+}
+
+.adverts-flexbox-columns-4 {
+    width: 23%;
+    margin: 0% 1% 2% 1%;
+}
+
+.adverts-flexbox-columns-5 {
+    width: 18%;
+    margin: 0% 1% 2% 1%;
+}
+
+.adverts-flexbox-wrap {
+      width: 100%;
+}
+.adverts-flexbox-icon {
+    display: block;
+    font-size: 64px;
+    color: #DF3539;
+    height: 80px;
+    line-height: 80px;
+}
+
+.adverts-flexbox-title {
+    text-decoration: none;
+    color: black;
+    display: inline-block;
+    font-weight: bold;
+    padding: 0.5em 0 0.5em 0;
+}
+
+.adverts-flexbox-list {
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style-type: none;
+    
+}
+
+.adverts-flexbox-list > li {
+    margin: 0 !important;
+    list-style-type: none;
+    list-style-position: inside;
+    padding: 0 0 4px 2px;
+}
+
+.adverts-flexbox-wrap a {
+    text-decoration: none;
+}
+
+.adverts-category-link {
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
+
+.adverts-category-link:hover {
+    background-color: rgba(192,192,192,0.05);
+}
+
+.adverts-categories-all .adverts-flexbox-item {
+    text-align: left;
+    padding: 4px;
+    box-sizing: border-box;
+}
+
+.adverts-category-all-main {
+    font-weight: bold; 
+    padding: 4px 0 8px 0;
+    display:inline-block;
+}
+
+.adverts-category-all-main > span:before {
+    font-size: 22px;
+    color: gray;
+}
+
+/* WIDGETS */
+
+.adverts-widget-categories .adverts-widget-grid-link:before {
+    opacity: 0.7;
+}
+
+@media all and (min-width: 760px) {
+    
+}
+
+@media all and (min-width: 0px) and (max-width: 760px) {
+    
+    .adverts-search .advert-input.advert-input-type-half:nth-of-type(2n+1),
+    .adverts-search .advert-input.advert-input-type-half:nth-of-type(2n+2) {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
+    
+    .adverts-form-filters {
+        margin-bottom: 1em;
+    }
+    
+    .adverts-switch-view {
+        display: none;
+    }
+    
+    body .adverts-options-right {
+        width: 100%;
+    }
+    body .adverts-button-small {
+        width: 100%;
+        box-sizing: border-box;
+        height: 36px;
+        line-height: 36px;
+    }
+    
+    .advert-item.advert-item-col-3,
+    .advert-item.advert-item-col-2,
+    .advert-item {
+        width: 100%;
+        margin: 0 0 1em 0;
+    }
+    
+    .adverts-single-author {
+        width: 100%
+    }
+    
+    .adverts-row-title {
+        display: none;
+    }
+
+    .adverts-single-grid-details .adverts-col-30 {
+        width: auto;
+    }
+    
+    .adverts-single-price {
+        float: left;
+    }
+    
+    .adverts-form input[type="text"],
+    .adverts-form-aligned #adverts-plupload-upload-ui,
+    .adverts-form.adverts-form-aligned .adverts-control-group > div.adverts-multiselect-holder,
+    .adverts-form.adverts-form-aligned .adverts-control-group > div.adverts-autocomplete-holder,
+    .adverts-form.adverts-form-aligned .adverts-control-group > div {
+        width: 100%;
+    }
+    
+    .adverts-form.adverts-form-aligned .adverts-control-group > div { 
+        padding: 0;
+    }
+    
+    .adverts-manage-grid .adverts-col-title {
+        width: 100%;
+    }
+    
+    .adverts-manage-grid .adverts-col-date {
+        width: 50%;
+    }
+    
+    .adverts-manage-grid .adverts-col-actions {
+        width: 50%;
+        float: right;
+    }
+    
+    .adverts-categories-top .adverts-flexbox-columns-3,
+    .adverts-categories-top .adverts-flexbox-columns-4,
+    .adverts-categories-top .adverts-flexbox-columns-5 {
+        width: 48%;
+        margin: 0% 1% 2% 1%;  
+    }
+    
+    .adverts-categories-all .adverts-flexbox-columns-2,
+    .adverts-categories-all .adverts-flexbox-columns-3,
+    .adverts-categories-all .adverts-flexbox-columns-4,
+    .adverts-categories-all .adverts-flexbox-columns-5 {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+@media all and (max-width: 240px) {
+    .adverts-categories-top .adverts-flexbox-columns-3,
+    .adverts-categories-top .adverts-flexbox-columns-4,
+    .adverts-categories-top .adverts-flexbox-columns-5 {
+        width: 100%;
+        margin: 0 0 1em 0;  
+    }
+    
+}
+
+.adverts-field-radio .adverts-form-input-group > div {
+    /* display: block; */
+    clear: both;
+}

@@ -1,0 +1,1380 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Adverts\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: Wed Dec 23 2015 20:28:54 GMT-0800 (Pacific Standard Time)\n"
+"PO-Revision-Date: Wed Dec 23 2015 20:33:27 GMT-0800 (Pacific Standard Time)\n"
+"Last-Translator: Mick Levin <mikhaillevin@hotmail.com>\n"
+"Language-Team: \n"
+"Language: Russian\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Generator: Loco - https://localise.biz/\n"
+"X-Loco-Target-Locale: ru_RU"
+
+#: ../addons/featured/featured.php:67
+msgid "Display this listing as featured."
+msgstr "Особый показ этого объявление."
+
+#: ../addons/featured/featured.php:157
+msgid "Feature this ad - it will be styled differently and sticky"
+msgstr ""
+"Сделать это объявление особым - оно будет отличаться от остальных внешне, и "
+"будет всегда показываться вверху списка"
+
+#: ../addons/featured/admin/options.php:22
+msgid "http://wpadverts.com/documentation/featured-ads/"
+msgstr "http://wpadverts.com/documentation/featured-ads/"
+
+#: ../addons/featured/admin/options.php:22
+msgid "View Documentation"
+msgstr "Открыть документацию"
+
+#. Name of the plugin
+msgid "WP Adverts"
+msgstr "WP Adverts"
+
+#. URI of the plugin
+msgid "http://wpadverts.com"
+msgstr "http://wpadverts.com"
+
+#. Description of the plugin
+msgid "The lightweight WordPress classifieds plugin done right."
+msgstr "Лёгкий плагин объявлений для WordPress, сделан как надо."
+
+#. Author of the plugin
+msgid "Greg Winiarski"
+msgstr "Грег Винярский"
+
+#: ../wpadverts.php:73
+msgctxt "post"
+msgid "Expired"
+msgstr "Истекло"
+
+#: ../wpadverts.php:76
+#, php-format
+msgid "Expired <span class=\"count\">(%s)</span>"
+msgid_plural "Expired <span class=\"count\">(%s)</span>"
+msgstr[0] "Истекло <span class=\"count\">(%s)</span>"
+msgstr[1] "Истекли <span class=\"count\">(%s)</span>"
+
+#: ../wpadverts.php:80
+msgctxt "post"
+msgid "Temporary"
+msgstr "Временное"
+
+#: ../wpadverts.php:83
+#, php-format
+msgid "Temporary <span class=\"count\">(%s)</span>"
+msgid_plural "Temporary <span class=\"count\">(%s)</span>"
+msgstr[0] "Временное <span class=\"count\">(%s)</span>"
+msgstr[1] "Временные <span class=\"count\">(%s)</span>"
+
+#: ../wpadverts.php:87
+msgctxt "post type general name"
+msgid "Classifieds"
+msgstr "Объявления"
+
+#: ../wpadverts.php:88
+msgctxt "post type singular name"
+msgid "Classified"
+msgstr "Объявление"
+
+#: ../wpadverts.php:89
+msgctxt "classified"
+msgid "Add New"
+msgstr "Добавить"
+
+#: ../wpadverts.php:90
+msgid "Add New Classified"
+msgstr "Добавить новое объявление"
+
+#: ../wpadverts.php:91
+msgid "Edit Classified"
+msgstr "Изменить объявление"
+
+#: ../wpadverts.php:92
+msgid "New Classified"
+msgstr "Новое объявление"
+
+#: ../wpadverts.php:93
+msgid "All Classifieds"
+msgstr "Все объявления"
+
+#: ../wpadverts.php:94
+msgid "View Classified"
+msgstr "Посмотреть объявление"
+
+#: ../wpadverts.php:95
+msgid "Search Classifieds"
+msgstr "Искать объявления"
+
+#: ../wpadverts.php:96
+msgid "No Classifieds found"
+msgstr "Объявления не найдены"
+
+#: ../wpadverts.php:97
+msgid "No Classifieds found in the Trash"
+msgstr "В корзине объявления не найдены"
+
+#: ../wpadverts.php:99
+msgid "Classifieds"
+msgstr "Объявления"
+
+#: ../wpadverts.php:148
+msgid "Select options ..."
+msgstr "Выберите настройки ..."
+
+#: ../wpadverts.php:152 ../includes/gallery.php:78
+msgid "Edit Image"
+msgstr "Изменить изображение"
+
+#: ../wpadverts.php:153
+msgid "Delete Image"
+msgstr "Удалить изображение"
+
+#: ../wpadverts.php:154
+msgid "View Full Image"
+msgstr "Посмотреть полное изображение"
+
+#: ../wpadverts.php:155
+msgid "Main"
+msgstr "Главное"
+
+#: ../wpadverts.php:325
+msgid "Module activated successfully."
+msgstr "Модуль успешно активирован."
+
+#: ../templates/add-save.php:5
+msgid "Your ad has been put into moderation, please wait for admin to approve it."
+msgstr ""
+"Ваше объявление отправлено на рассмотрение; ждите когда администрация его "
+"утвердит."
+
+#: ../templates/add-save.php:7
+#, php-format
+msgid "Your ad has been published. You can view it here \"<a href=\"%1$s\">%2$s</a>\"."
+msgstr "Ваше объявление было опубликовано по адресу \"<a href=\"%1$s\">%2$s</a>\"."
+
+#: ../templates/manage-edit.php:2
+msgid "Go Back"
+msgstr "Назад"
+
+#: ../templates/manage-edit.php:3 ../templates/manage.php:32
+msgid "View Ad"
+msgstr "Посмотреть объявление"
+
+#: ../templates/manage-edit.php:47 ../addons/payments/includes/admin-pages.php:
+#: 532 ../includes/class-updates-manager.php:332
+msgid "Update"
+msgstr "Сохранить"
+
+#: ../templates/categories-top.php:23 ../templates/categories-all.php:51 ..
+#: includes/class-widget-categories.php:232
+msgid "No categories found."
+msgstr "Рубрики не найдены."
+
+#: ../templates/form.php:51 ../templates/add.php:42
+msgid "Preview"
+msgstr "Предпросмотр"
+
+#: ../templates/single.php:41
+#, php-format
+msgid "by <strong>%s</strong>"
+msgstr "(%s)"
+
+#: ../templates/single.php:42
+#, php-format
+msgid "Published: %1$s (%2$s ago)"
+msgstr "Опубликовано: %1$s (%2$s назад)"
+
+#: ../templates/single.php:59 ../includes/defaults.php:104
+msgid "Category"
+msgstr "Рубрика"
+
+#: ../templates/single.php:74 ../includes/defaults.php:142
+msgid "Location"
+msgstr "Местоположение"
+
+#: ../templates/single.php:91
+msgid "Show Contact Information"
+msgstr "Показать контактную информацию"
+
+#: ../templates/single.php:100
+msgid "Phone"
+msgstr "Телефон"
+
+#: ../templates/single.php:105 ../addons/payments/admin/payment-history-list.php:
+#: 68 ../addons/payments/includes/admin-pages.php:567 ../addons/bank-
+#: transfer/bank-transfer.php:72 ../includes/defaults.php:66 ../includes/defaults.
+#: php:256
+msgid "Email"
+msgstr "Электронная почта"
+
+#: ../templates/add-preview.php:8
+msgid "Edit Listing"
+msgstr "Изменить объявление"
+
+#: ../templates/add-preview.php:14
+msgid "Publish Listing"
+msgstr "Опубликовать объявление"
+
+#: ../templates/list.php:16
+msgid "Keyword ..."
+msgstr "Ключевое слово ..."
+
+#: ../templates/list.php:20
+msgid "Location ..."
+msgstr "Местоположение ..."
+
+#: ../templates/list.php:28 ../addons/payments/admin/payment-history-list.php:69 .
+#: ./includes/admin-post-type.php:523
+msgid "Date"
+msgstr "Дата"
+
+#: ../templates/list.php:32
+msgid "Filters ..."
+msgstr "Фильтры ..."
+
+#: ../templates/list.php:33
+msgid "SEARCH"
+msgstr "ПОИСК"
+
+#: ../templates/list.php:37
+msgid "Filter Results"
+msgstr "Результаты фильтра"
+
+#: ../templates/list.php:48
+msgid "There are no ads matching your search criteria."
+msgstr "Не найдено объявлений, соответствующих критерию поиска."
+
+#: ../templates/categories-all.php:39
+msgid "<em>View All &raquo;</em>"
+msgstr "<em>Показать все &raquo;</em>"
+
+#: ../templates/manage.php:14
+msgid "This Ad is in moderation."
+msgstr "Это объявление на рассмотрении."
+
+#: ../templates/manage.php:18
+msgid "This Ad expired."
+msgstr "Это объявление истекло."
+
+#: ../templates/manage.php:33 ../addons/payments/admin/pricing-list.php:66 ..
+#: addons/payments/admin/pricing-list.php:68 ../addons/payments/admin/pricing-
+#: list.php:68 ../includes/admin-post-type.php:348
+msgid "Edit"
+msgstr "Изменить"
+
+#: ../templates/manage.php:34 ../addons/payments/admin/payment-history-list.php:
+#: 40 ../addons/payments/admin/payment-history-list.php:87 ..
+#: addons/payments/admin/payment-history-list.php:87 ..
+#: addons/payments/admin/payment-history-list.php:135 ..
+#: addons/payments/admin/pricing-list.php:37 ../addons/payments/admin/pricing-
+#: list.php:69 ../addons/payments/admin/pricing-list.php:69 ..
+#: addons/payments/admin/pricing-list.php:110
+msgid "Delete"
+msgstr "Удалить"
+
+#: ../templates/manage.php:40
+msgid "You do not have any Ads posted yet."
+msgstr "Вы еще не опубликовали ни одного объявления."
+
+#: ../admin/options.php:26
+msgid "Cannot be disabled"
+msgstr "Основной модуль"
+
+#: ../admin/options.php:27 ../admin/options.php:35 ../admin/options.php:49
+msgid "Settings"
+msgstr "Настройки"
+
+#: ../admin/options.php:34
+msgid "Addon Uploaded and Activated"
+msgstr "Модуль загружен и активирован"
+
+#: ../admin/options.php:37
+msgid "Addon Uploaded but Inactive"
+msgstr "Модуль загружен, но не активирован"
+
+#: ../admin/options.php:38 ../includes/class-updates-manager.php:317
+msgid "Activate"
+msgstr "Активировать"
+
+#: ../admin/options.php:41
+msgid "Get This Addon"
+msgstr "Купить этот модуль"
+
+#: ../admin/options.php:50
+msgid "Disable"
+msgstr "Отключить"
+
+#: ../admin/options.php:52
+msgid "Enable"
+msgstr "Включить"
+
+#: ../addons/payments/payments.php:60
+msgctxt "completed status payment"
+msgid "Completed"
+msgstr "Завершено"
+
+#: ../addons/payments/payments.php:65
+#, php-format
+msgid "Unread <span class=\"count\">(%s)</span>"
+msgid_plural "Unread <span class=\"count\">(%s)</span>"
+msgstr[0] "Не прочитано <span class=\"count\">(%s)</span>"
+msgstr[1] "Не прочитаны <span class=\"count\">(%s)</span>"
+
+#: ../addons/payments/payments.php:69
+msgctxt "failed status payment"
+msgid "Failed"
+msgstr "Не удачно"
+
+#: ../addons/payments/payments.php:74
+#, php-format
+msgid "Failed <span class=\"count\">(%s)</span>"
+msgid_plural "Failed <span class=\"count\">(%s)</span>"
+msgstr[0] "Не удачно <span class=\"count\">(%s)</span>"
+msgstr[1] "Не удачны <span class=\"count\">(%s)</span>"
+
+#: ../addons/payments/payments.php:78
+msgctxt "pending status payment"
+msgid "Pending"
+msgstr "На рассмотрении"
+
+#: ../addons/payments/payments.php:83 ../addons/payments/payments.php:98
+#, php-format
+msgid "Pending <span class=\"count\">(%s)</span>"
+msgid_plural "Pending <span class=\"count\">(%s)</span>"
+msgstr[0] "На рассмотрении <span class=\"count\">(%s)</span>"
+msgstr[1] "На рассмотрении <span class=\"count\">(%s)</span>"
+
+#: ../addons/payments/payments.php:87
+msgctxt "refunded status payment"
+msgid "Refunded"
+msgstr "Деньги возвращены"
+
+#: ../addons/payments/payments.php:92
+#, php-format
+msgid "Refunded <span class=\"count\">(%s)</span>"
+msgid_plural "Refunded <span class=\"count\">(%s)</span>"
+msgstr[0] "Деньги возвращены <span class=\"count\">(%s)</span>"
+msgstr[1] "Деньги возвращены <span class=\"count\">(%s)</span>"
+
+#: ../addons/payments/payments.php:96
+msgctxt "post"
+msgid "Pending"
+msgstr "На рассмотрении"
+
+#: ../addons/payments/payments.php:259
+msgid "Listing Information"
+msgstr "Информация об объявлении"
+
+#: ../addons/payments/payments.php:279 ../addons/payments/admin/pricing-list.php:78
+msgid "Free"
+msgstr "Бесплатное"
+
+#: ../addons/payments/payments.php:283
+#, php-format
+msgid "<b>%1$s</b> - %2$s for %3$d days.%4$s"
+msgstr "<b>%1$s</b> - %2$s на %3$d дней.%4$s"
+
+#: ../addons/payments/payments.php:295
+msgid "Listing"
+msgstr "Объявление"
+
+#: ../addons/payments/payments.php:340 ../includes/shortcodes.php:234
+msgid "Thank you for submitting your ad!"
+msgstr "Спасибо за размещение Вашего объявления!"
+
+#: ../addons/payments/payments.php:394
+msgid "Adverts Payment History"
+msgstr "История платежей за объявления"
+
+#: ../addons/payments/payments.php:395 ../addons/payments/admin/payment-history-
+#: list.php:16
+msgid "Payment History"
+msgstr "История платежей"
+
+#: ../addons/payments/templates/add-payment.php:15
+msgid "Total"
+msgstr "Итого"
+
+#: ../addons/payments/templates/add-payment.php:27
+msgid "No Payment Gateways Enabled!"
+msgstr "Шлюзы платёжных систем не включены!"
+
+#: ../addons/payments/templates/add-payment.php:44
+msgid "Place Order"
+msgstr "Разместить заказ"
+
+#: ../addons/payments/admin/options.php:15 ../addons/payments/admin/pricing-edit.
+#: php:16 ../addons/payments/admin/pricing-list.php:16 ../includes/admin-pages.
+#: php:38
+msgid "Options"
+msgstr "Настройки"
+
+#: ../addons/payments/admin/options.php:16 ../addons/payments/admin/pricing-edit.
+#: php:18 ../addons/payments/admin/pricing-list.php:18
+msgid "Pricing"
+msgstr "Тарифы"
+
+#: ../addons/payments/admin/pricing-edit.php:19 ../addons/payments/admin/pricing-
+#: list.php:19
+msgid "Add New"
+msgstr "Добавить"
+
+#: ../addons/payments/admin/payment-history-list.php:23
+msgid "All"
+msgstr "Все"
+
+#: ../addons/payments/admin/payment-history-list.php:36 ..
+#: addons/payments/admin/payment-history-list.php:131 ..
+#: addons/payments/admin/pricing-list.php:36 ../addons/payments/admin/pricing-
+#: list.php:109
+msgid "Bulk Actions"
+msgstr "Действия"
+
+#: ../addons/payments/admin/payment-history-list.php:43 ..
+#: addons/payments/admin/payment-history-list.php:137 ..
+#: addons/payments/admin/pricing-list.php:40 ../addons/payments/admin/pricing-
+#: list.php:112
+msgid "Apply"
+msgstr "Применить"
+
+#: ../addons/payments/admin/payment-history-list.php:49
+msgid "All dates"
+msgstr "Все даты"
+
+#: ../addons/payments/admin/payment-history-list.php:50
+msgid "This month"
+msgstr "В этом месяце"
+
+#: ../addons/payments/admin/payment-history-list.php:51
+msgid "Last month"
+msgstr "В прошлом месяце"
+
+#: ../addons/payments/admin/payment-history-list.php:56
+msgid "Filter"
+msgstr "Фильтровать"
+
+#: ../addons/payments/admin/payment-history-list.php:66
+msgid "ID"
+msgstr "№"
+
+#: ../addons/payments/admin/payment-history-list.php:67
+msgid "User"
+msgstr "Пользователь"
+
+#: ../addons/payments/admin/payment-history-list.php:70
+msgid "Amount"
+msgstr "Цена"
+
+#: ../addons/payments/admin/payment-history-list.php:71 ..
+#: addons/payments/admin/payment-history-edit.php:60
+msgid "Status"
+msgstr "Статус"
+
+#: ../addons/payments/admin/payment-history-list.php:84 ..
+#: addons/payments/admin/payment-history-list.php:86
+msgid "View Order"
+msgstr "Посмотреть заказ"
+
+#: ../addons/payments/admin/payment-history-list.php:120 ..
+#: addons/payments/admin/pricing-list.php:98
+msgid "&laquo;"
+msgstr "&laquo;"
+
+#: ../addons/payments/admin/payment-history-list.php:121 ..
+#: addons/payments/admin/pricing-list.php:99
+msgid "&raquo;"
+msgstr "&raquo;"
+
+#: ../addons/payments/admin/payment-history-edit.php:16
+msgid "Payment History Edit"
+msgstr "Изменить историю платежей"
+
+#: ../addons/payments/admin/payment-history-edit.php:28
+msgid "Payment"
+msgstr "Платёж"
+
+#: ../addons/payments/admin/payment-history-edit.php:33
+msgid "Gateway"
+msgstr "Шлюз"
+
+#: ../addons/payments/admin/payment-history-edit.php:44
+msgid "Created"
+msgstr "Создано"
+
+#: ../addons/payments/admin/payment-history-edit.php:51
+msgid "User IP"
+msgstr "Адрес IP пользователя"
+
+#: ../addons/payments/admin/payment-history-edit.php:72
+msgid "To Pay"
+msgstr "К оплате"
+
+#: ../addons/payments/admin/payment-history-edit.php:79
+msgid "Paid"
+msgstr "Оплачено"
+
+#: ../addons/payments/admin/payment-history-edit.php:90
+msgid "Update Payment"
+msgstr "Сохранить платёж"
+
+#: ../addons/payments/admin/payment-history-edit.php:105
+msgid "Purchase Details"
+msgstr "Детали покупки"
+
+#: ../addons/payments/admin/payment-history-edit.php:110
+msgid "Purchase Type"
+msgstr "Тип покупки"
+
+#: ../addons/payments/admin/payment-history-edit.php:111
+msgid "Listing Publication"
+msgstr "Публикация объявления"
+
+#: ../addons/payments/admin/payment-history-edit.php:115
+msgid "Listing Type"
+msgstr "Тип объявления"
+
+#: ../addons/payments/admin/payment-history-edit.php:129
+msgid "Purchased Item"
+msgstr "Купленный пункт"
+
+#: ../addons/payments/admin/payment-history-edit.php:147
+msgid "Customer Details"
+msgstr "Информация о покупателе"
+
+#: ../addons/payments/admin/payment-history-edit.php:165
+msgid "Payment Log"
+msgstr "Протокол платежа"
+
+#: ../addons/payments/admin/pricing-list.php:26
+msgid "listing"
+msgstr "объявление"
+
+#: ../addons/payments/admin/pricing-list.php:51 ../addons/payments/includes/admin-
+#: pages.php:635 ../includes/admin-post-type.php:519 ../includes/gallery.php:95 ..
+#: includes/gallery.php:211 ../includes/defaults.php:95 ../includes/class-widget-
+#: categories.php:74
+msgid "Title"
+msgstr "Название"
+
+#: ../addons/payments/admin/pricing-list.php:52 ../addons/payments/includes/admin-
+#: pages.php:650 ../includes/admin-post-type.php:520 ../includes/defaults.php:129
+msgid "Price"
+msgstr "Цена"
+
+#: ../addons/payments/admin/pricing-list.php:53 ../addons/payments/includes/admin-
+#: pages.php:659
+msgid "Visible"
+msgstr "Срок показа"
+
+#: ../addons/payments/admin/pricing-list.php:83
+#, php-format
+msgid "1 day"
+msgid_plural "%s days"
+msgstr[0] "1 день"
+msgstr[1] "%s дней(я)"
+
+#: ../addons/payments/includes/admin-pages.php:35 ../addons/core/includes/admin-
+#: pages.php:26 ../addons/bank-transfer/includes/admin-pages.php:32
+msgid "Update Options"
+msgstr "Сохранить настройки"
+
+#: ../addons/payments/includes/admin-pages.php:43 ../addons/core/includes/admin-
+#: pages.php:45 ../addons/bank-transfer/includes/admin-pages.php:41
+msgid "Settings updated."
+msgstr "Настройки сохранены."
+
+#: ../addons/payments/includes/admin-pages.php:45 ..
+#: addons/payments/includes/admin-pages.php:152 ..
+#: addons/payments/includes/admin-pages.php:188 ..
+#: addons/payments/includes/admin-pages.php:303 ../addons/core/includes/admin-
+#: pages.php:47 ../addons/bank-transfer/includes/admin-pages.php:43
+msgid "There are errors in your form."
+msgstr "В форме обнаружены ошибки."
+
+#: ../addons/payments/includes/admin-pages.php:75
+#, php-format
+msgid ""
+"Enable at least one <a href='%s'>Payment Gateway</a> before selecting "
+"default."
+msgstr "Включите хотя бы один <a href='%s'>шлюз платежных систем</a>."
+
+#: ../addons/payments/includes/admin-pages.php:88
+#, php-format
+msgid "Create at least one <a href='%s'>Pricing</a> before selecting default."
+msgstr "Создайте хотя бы один тарифный план."
+
+#: ../addons/payments/includes/admin-pages.php:127 ..
+#: addons/payments/includes/admin-pages.php:128
+msgid "Add Pricing"
+msgstr "Добавить"
+
+#: ../addons/payments/includes/admin-pages.php:144 ..
+#: addons/payments/includes/admin-pages.php:183 ..
+#: addons/payments/includes/admin-pages.php:298
+msgid "There was an error while saving pricing in database."
+msgstr "Произошла ошибка при сохранении тарифа в базу данных."
+
+#: ../addons/payments/includes/admin-pages.php:148
+msgid "New pricing has been added."
+msgstr "Новый тариф сохранён в базе данных."
+
+#: ../addons/payments/includes/admin-pages.php:162
+msgid "Edit Pricing"
+msgstr "Изменить тариф"
+
+#: ../addons/payments/includes/admin-pages.php:163
+msgid "Update Pricing"
+msgstr "Сохранить тариф"
+
+#: ../addons/payments/includes/admin-pages.php:185
+msgid "Pricing updated."
+msgstr "Тариф сохранён."
+
+#: ../addons/payments/includes/admin-pages.php:198
+msgid "Adverts Pricing with given ID does not exist."
+msgstr "Тариф с таким номером не существует."
+
+#: ../addons/payments/includes/admin-pages.php:205
+msgid "Pricing deleted."
+msgstr "Тариф удалён."
+
+#: ../addons/payments/includes/admin-pages.php:225
+#, php-format
+msgid "1 Pricing deleted."
+msgid_plural "%s Pricings deleted."
+msgstr[0] "1 тариф удалён."
+msgstr[1] "%s тарифов(а) удалены."
+
+#: ../addons/payments/includes/admin-pages.php:271
+#, php-format
+msgid "Payment Method [%s] assigned to this Payment does not exist or was disabled."
+msgstr "Метод оплаты [%s], назначенный этому тарифу, не существует или отключен."
+
+#: ../addons/payments/includes/admin-pages.php:288
+#, php-format
+msgid "<strong>%1$s</strong> changed payment status to <strong>%2$s</strong>"
+msgstr "<strong>%1$s</strong> изменил состояние платежа на <strong>%2$s</strong>"
+
+#: ../addons/payments/includes/admin-pages.php:300
+msgid "Payment updated."
+msgstr "Платёж сохранён."
+
+#: ../addons/payments/includes/admin-pages.php:314
+msgid "Adverts Payment with given ID does not exist."
+msgstr "Платёж с таким номером не существует."
+
+#: ../addons/payments/includes/admin-pages.php:322
+#, php-format
+msgid "1 Payment deleted."
+msgid_plural "%s Payments deleted."
+msgstr[0] "1 платёж удалён."
+msgstr[1] "%s платежей(а) удалены."
+
+#: ../addons/payments/includes/admin-pages.php:352
+msgid "Payments deleted."
+msgstr "Платёж удалён."
+
+#: ../addons/payments/includes/admin-pages.php:365
+#, php-format
+msgid "Status for selected Payments was changed to: %s"
+msgstr "состояние выбранных платежей изменено на: %s"
+
+#: ../addons/payments/includes/admin-pages.php:391
+#, php-format
+msgid "%1$s %2$d"
+msgstr "%1$s %2$d"
+
+#: ../addons/payments/includes/admin-pages.php:483
+msgid "View order"
+msgstr "Посмотреть заказ"
+
+#: ../addons/payments/includes/admin-pages.php:488
+msgid "Abandoned"
+msgstr "Заброшен"
+
+#: ../addons/payments/includes/admin-pages.php:496 ..
+#: addons/payments/includes/admin-pages.php:528
+msgid "Pending Payment"
+msgstr "Ожидается платёж"
+
+#: ../addons/payments/includes/admin-pages.php:551
+msgid "User ID"
+msgstr "№ пользователя"
+
+#: ../addons/payments/includes/admin-pages.php:557 ../addons/bank-transfer/bank-
+#: transfer.php:62 ../includes/defaults.php:56
+msgid "Contact Person"
+msgstr "Контактные данные"
+
+#: ../addons/payments/includes/admin-pages.php:610
+msgid "Default Payment Gateway"
+msgstr "Шлюз платёжной системы по-умолчанию"
+
+#: ../addons/payments/includes/admin-pages.php:619
+msgid "Default Pricing"
+msgstr "Тариф по-умолчанию"
+
+#: ../addons/payments/includes/admin-pages.php:644 ../includes/gallery.php:110 ..
+#: includes/gallery.php:222 ../includes/defaults.php:119
+msgid "Description"
+msgstr "Описание"
+
+#: ../addons/payments/includes/admin-pages.php:660
+msgid "Number of days the Ad will be visible."
+msgstr "Количество дней, в течение которых объявление будет показываться."
+
+#: ../addons/core/includes/admin-pages.php:25
+msgid "Core Options"
+msgstr "Основные настройки"
+
+#: ../addons/core/includes/admin-pages.php:120 ../addons/core/includes/admin-
+#: pages.php:121
+msgid "Common Settings"
+msgstr "Общие настройки"
+
+#: ../addons/core/includes/admin-pages.php:127
+msgid "Default Ads List Page"
+msgstr "Страница объявлений по-умолчанию"
+
+#: ../addons/core/includes/admin-pages.php:128
+msgid "Select page on which the main [adverts_list] shortcode is being used."
+msgstr "Выберите страницу, на которой будет размещён главный шорткод  [adverts_list]."
+
+#: ../addons/core/includes/admin-pages.php:134
+msgid "Default Visibility"
+msgstr "Видимость по-умолчанию"
+
+#: ../addons/core/includes/admin-pages.php:135
+msgid "Number of days Ad will be visible by default."
+msgstr "Количество дней по-умолчанию для показа объявления"
+
+#: ../addons/core/includes/admin-pages.php:145 ../addons/core/includes/admin-
+#: pages.php:146
+msgid "Currency Settings"
+msgstr "Настройки валюты"
+
+#: ../addons/core/includes/admin-pages.php:152
+msgid "Currency"
+msgstr "Валюта"
+
+#: ../addons/core/includes/admin-pages.php:159
+msgid "Currency Position"
+msgstr "Позиция знака валюты"
+
+#: ../addons/core/includes/admin-pages.php:161
+msgid "Prefix - $10"
+msgstr "Префикс ($10)"
+
+#: ../addons/core/includes/admin-pages.php:162
+msgid "Suffix - 10$"
+msgstr "Суффикс (10$)"
+
+#: ../addons/core/includes/admin-pages.php:169
+msgid "Decimal Places"
+msgstr "Количество цифр в дробной части"
+
+#: ../addons/core/includes/admin-pages.php:179
+msgid "Decimal Separator"
+msgstr "Разделитель целой и дробной частей"
+
+#: ../addons/core/includes/admin-pages.php:185
+msgid "Thousands Separator"
+msgstr "Разделитель тысяч"
+
+#: ../addons/bank-transfer/bank-transfer.php:42 ../includes/admin-pages.php:125
+msgid "Bank Transfer"
+msgstr "Альтернативные платежи"
+
+#: ../addons/bank-transfer/admin/options.php:15
+msgid "Payment Gateway / Bank Transfer"
+msgstr "Альтернативный метод оплаты"
+
+#: ../addons/bank-transfer/includes/admin-pages.php:60
+msgid "Payment Name"
+msgstr "Имя тарифа"
+
+#: ../addons/bank-transfer/includes/admin-pages.php:61
+msgid "Payment gateway name visible in the frontend when making a payment."
+msgstr ""
+"Имя шлюза платёжной системы, как оно будет видно посетителям при размещении "
+"платежа."
+
+#: ../addons/bank-transfer/includes/admin-pages.php:70
+msgid "Message"
+msgstr "Сообщение"
+
+#: ../addons/bank-transfer/includes/admin-pages.php:73
+msgid ""
+"User will see this message when asked to make payment, make sure that "
+"instructions here will make it as easy as possible to make a payment."
+"<br/>Allowed variables:<br/>- {total} - total amount to pay (for example $10."
+"00)<br/>- {order_number} - unique order number<br/>To revert to default "
+"message remove whole text from editor and save the form."
+msgstr ""
+"Пользователь увидит этот текст когда будет выбран этот метод оплаты. "
+"Убедитесь в том, что этот текст содержит простую инструкцию о том, как "
+"совершить платёж.<br/><br/>Возможные служебные слова:<br/><br/>- {total} - "
+"сумма итого для оплаты (например $10)<br/>- {order_number} - уникальный "
+"номер заказа<br/><br/>Чтобы вернуть текст по-умолчанию, удалите весь текст "
+"из поля и сохраните форму."
+
+#: ../addons/featured/featured.php:231 ../includes/gallery.php:101 ..
+#: includes/gallery.php:216
+msgid "Featured"
+msgstr "Особые"
+
+#: ../addons/featured/admin/options.php:15 ../includes/admin-pages.php:107
+msgid "Featured Ads"
+msgstr "Особые объявления"
+
+#: ../includes/admin-post-type.php:93
+msgid "Whoops, the provided date is invalid."
+msgstr "Ой, введенные данные не корректны."
+
+#: ../includes/admin-post-type.php:180
+msgid ""
+"Post updated, but <strong>cannot be published</strong> since some required "
+"data is not filled properly."
+msgstr ""
+"Данные сохранены, но <strong>не могут быть опубликованы</strong>, так как "
+"некоторые обязательные данные не были корректно введены."
+
+#. translators: 1: month number (01, 02, etc.), 2: month abbreviation
+#: ../includes/admin-post-type.php:252
+#, php-format
+msgid "%1$s-%2$s"
+msgstr "%1$s-%2$s"
+
+#: ../includes/admin-post-type.php:264
+#, php-format
+msgid "%1$s %2$s, %3$s @ %4$s : %5$s"
+msgstr "%1$s %2$s, %3$s @ %4$s : %5$s"
+
+#: ../includes/admin-post-type.php:269 ../includes/admin-post-type.php:321
+msgid "Never Expires"
+msgstr "Никогда не истекает"
+
+#: ../includes/admin-post-type.php:287
+msgid "OK"
+msgstr "Да"
+
+#: ../includes/admin-post-type.php:288 ../includes/class-updates-manager.php:333 .
+#: ./includes/gallery.php:130 ../includes/gallery.php:230
+msgid "Cancel"
+msgstr "Отменить"
+
+#: ../includes/admin-post-type.php:309
+msgid "M j, Y @ G:i"
+msgstr "j M Y, g:i A"
+
+#: ../includes/admin-post-type.php:335
+#, php-format
+msgid "Expired: <b>%s</b>"
+msgstr "Истекло: <b>%s</b>"
+
+#: ../includes/admin-post-type.php:337
+#, php-format
+msgid "Expires: <b>%s</b>"
+msgstr "Истекает: <b>%s</b>"
+
+#: ../includes/admin-post-type.php:348
+msgid "Edit date and time"
+msgstr "Изменить дату и время"
+
+#: ../includes/admin-post-type.php:450 ../includes/admin-post-type.php:690
+msgid "Expired"
+msgstr "Истекло"
+
+#: ../includes/admin-post-type.php:482
+msgid "Additional Information"
+msgstr "Дополнительная информация"
+
+#: ../includes/admin-post-type.php:499 ../includes/defaults.php:113
+msgid "Gallery"
+msgstr "Галерея"
+
+#: ../includes/admin-post-type.php:521
+msgid "Author"
+msgstr "Автор"
+
+#: ../includes/admin-post-type.php:522
+msgid "Expires"
+msgstr "Истекает"
+
+#: ../includes/admin-post-type.php:550
+msgid "Never"
+msgstr "Никогда"
+
+#: ../includes/admin-post-type.php:555
+msgid "Y/m/d g:i:s A"
+msgstr "d/m/Y, h:i:s A"
+
+#: ../includes/admin-post-type.php:563
+msgid "Y/m/d"
+msgstr "d/m/Y"
+
+#: ../includes/admin-post-type.php:566
+#, php-format
+msgid "in %s"
+msgstr "через %s"
+
+#: ../includes/admin-post-type.php:568
+#, php-format
+msgid "%s ago"
+msgstr "%s назад"
+
+#: ../includes/admin-post-type.php:583
+msgid "None"
+msgstr "Нет"
+
+#: ../includes/admin-post-type.php:691
+msgid "Expires:"
+msgstr "Истекает:"
+
+#: ../includes/admin-post-type.php:692
+msgid "Expired:"
+msgstr "Истекло:"
+
+#: ../includes/admin-post-type.php:693
+msgid "Start typing user name, email or login below, some suggestions will appear."
+msgstr ""
+"Начните вводить имя пользователя, или электронный адрес, или имя учётной "
+"записи; возможные варианты появятся в качестве подсказки.<br /><br />"
+
+#: ../includes/admin-pages.php:37
+msgid "Adverts Options"
+msgstr "Настройки Объявлений"
+
+#: ../includes/admin-pages.php:80
+msgid "Modules"
+msgstr "Модули"
+
+#: ../includes/admin-pages.php:83
+msgid "Core"
+msgstr "Основное"
+
+#: ../includes/admin-pages.php:84
+msgid "Here you can configure most basic Adverts options, applicable on any site."
+msgstr "Самые основные настройки плагина, применимые ко всем сайтам."
+
+#: ../includes/admin-pages.php:89
+msgid "Payments"
+msgstr "Платежи"
+
+#: ../includes/admin-pages.php:90
+msgid "Charge users for posting classified ads on your site."
+msgstr "Принимать оплату за размещение объявлений на Вашем сайте."
+
+#: ../includes/admin-pages.php:95
+msgid "WooCommerce Payments"
+msgstr "Оплата через WooCommerce"
+
+#: ../includes/admin-pages.php:96
+msgid "Use WooCommerce to charge users for posting classifieds."
+msgstr "Позволяет принимать оплату за объявления через плагин WooCommerce."
+
+#: ../includes/admin-pages.php:104
+msgid "Features"
+msgstr "Функции"
+
+#: ../includes/admin-pages.php:108
+msgid "Allow users to post Ads displayed always at the top of the list."
+msgstr ""
+"Позволяет пользователям размещать объявления, которые всегда будут "
+"размещаться на самом верху списка."
+
+#: ../includes/admin-pages.php:113
+msgid "Maps And Locations"
+msgstr "Карты и Местоположения"
+
+#: ../includes/admin-pages.php:114
+msgid "Locations Taxonomy, Google Maps integration and more."
+msgstr "Географическая таксономия, интеграция с картами Google и другое."
+
+#: ../includes/admin-pages.php:122
+msgid "Payment Gateways"
+msgstr "Шлюзы платёжных систем"
+
+#: ../includes/admin-pages.php:126
+msgid ""
+"Allow users to pay for ad posting using direct bank transfer or cash "
+"payments."
+msgstr ""
+"Позволяет пользователям оплачивать объявления следуя специальной инструкции, "
+"например, как сделать банковский перевод или где оплата принимается "
+"наличными."
+
+#: ../includes/admin-pages.php:131
+msgid "PayPal Standard"
+msgstr "PayPal Standard"
+
+#: ../includes/admin-pages.php:132
+msgid "PayPal Payments Standard, allow users to pay for ads via PayPal."
+msgstr "Позволяет пользователям оплачивать объявления через PayPal."
+
+#: ../includes/admin-pages.php:274
+msgid "Category Icon"
+msgstr "Иконка рубрики"
+
+#: ../includes/admin-pages.php:277
+msgid "Filter Icons ..."
+msgstr "Фильтр иконок ..."
+
+#: ../includes/class-updates-manager.php:116
+msgid "License"
+msgstr "Лицензия"
+
+#: ../includes/class-updates-manager.php:150
+msgid "Cannot connect to remote server. Please try again later."
+msgstr "Не удается подключиться к серверу. Пожалуйста попробуйте позже."
+
+#: ../includes/class-updates-manager.php:316
+msgid "License ..."
+msgstr "Лицензия ..."
+
+#: ../includes/class-updates-manager.php:320
+msgid "Activate your License in order to enable automatic updates."
+msgstr "Активируйте вашу лицензию, чтобы включить автоматическое обновление."
+
+#: ../includes/events.php:58
+msgid "Every 5 minutes"
+msgstr "Каждые 5 минут"
+
+#: ../includes/shortcodes.php:215
+msgid "There are errors in your form. Please correct them before proceeding."
+msgstr "В форме обнаружены ошибки. Пожалуйста исправьте их."
+
+#: ../includes/shortcodes.php:267
+#, php-format
+msgid ""
+"Only logged in users can access this page. <a href=\"%1$s\">Login</a> or <a "
+"href=\"%2$s\">Register</a>."
+msgstr ""
+"Только зарегистрированные пользователи могут открыть эту страницу. <a "
+"href=\"%1$s\">Войдите в сайт</a> или <a href=\"%2$s\">Зарегистрируйтесь</a>."
+
+#: ../includes/shortcodes.php:358
+msgid "Ad does not exist."
+msgstr "Объявление не существует."
+
+#: ../includes/shortcodes.php:364
+msgid "You do not own this Ad."
+msgstr "Вы не владеете этим объявлением."
+
+#: ../includes/shortcodes.php:372
+#, php-format
+msgid "Incorrect post status [%s]."
+msgstr "Некорректное состояние данных [%s]."
+
+#: ../includes/shortcodes.php:409
+msgid "Post has been updated."
+msgstr "Данные были сохранены."
+
+#: ../includes/shortcodes.php:413
+msgid "Cannot update. There are errors in your form."
+msgstr "Не удалось сохранить. В форме были обнаружены ошибки."
+
+#: ../includes/gallery.php:44
+msgid "Allowed Files"
+msgstr "Разрешенные файлы"
+
+#: ../includes/gallery.php:62 ../includes/gallery.php:149
+msgid "Drop Images Here"
+msgstr "Перетащите изображение сюда"
+
+#: ../includes/gallery.php:63 ../includes/gallery.php:150
+msgid "browse files ..."
+msgstr "Выбрать файлы ..."
+
+#: ../includes/gallery.php:74
+msgid "Close"
+msgstr "Закрыть"
+
+#: ../includes/gallery.php:82 ../includes/gallery.php:205
+msgid "Image Properties"
+msgstr "Параметры изображения"
+
+#: ../includes/gallery.php:105 ../includes/gallery.php:218
+msgid "Use this image as main image"
+msgstr "Сделать это изображение главным."
+
+#: ../includes/gallery.php:131 ../includes/gallery.php:231
+msgid "Update and Close"
+msgstr "Сохранить и закрыть"
+
+#: ../includes/defaults.php:44
+msgid "Contact Information"
+msgstr "Контактная информация"
+
+#: ../includes/defaults.php:50
+msgid "Account"
+msgstr "Учётная запись"
+
+#: ../includes/defaults.php:77
+msgid "Phone Number"
+msgstr "Номер телефона"
+
+#: ../includes/defaults.php:89
+msgid "Item Information"
+msgstr "Информация"
+
+#: ../includes/defaults.php:245
+msgid "Is Required"
+msgstr "Обязательно"
+
+#: ../includes/defaults.php:247
+msgid "Field cannot be empty."
+msgstr "Поле обязательно для заполнения."
+
+#: ../includes/defaults.php:258
+msgid "Provided email address is invalid."
+msgstr "Указанный электронный адрес не корректен."
+
+#: ../includes/defaults.php:266
+msgid "Is Integer"
+msgstr "Целочисленное"
+
+#: ../includes/defaults.php:268
+msgid "Provided value is not an integer."
+msgstr "Указанное число - не целочисленное."
+
+#: ../includes/defaults.php:276
+msgid "String Length"
+msgstr "Длина строки"
+
+#: ../includes/defaults.php:278
+msgid "Incorrect string length."
+msgstr "Некорректная длина строки."
+
+#: ../includes/defaults.php:280
+#, php-format
+msgid "Text needs to be at least %min% characters long."
+msgstr "Текст должен быть не короче %min% символов."
+
+#: ../includes/defaults.php:281
+#, php-format
+msgid "Text cannot be longer than %max% characters."
+msgstr "Текст не может быть длиннее %max% символов."
+
+#: ../includes/functions.php:268
+msgid "Uploaded file is NOT an image"
+msgstr "Загруженный файл - НЕ изображение"
+
+#: ../includes/functions.php:377
+#, php-format
+msgid "Category: %s"
+msgstr "Рубрика: %s"
+
+#: ../includes/functions.php:985
+#, php-format
+msgid ""
+"You are posting as <strong>%1$s</strong>. <br/>If you want to use a "
+"different account, please <a href=\"%2$s\">logout</a>."
+msgstr ""
+"Вы размещаете объявление от лица пользователя <strong>%1$s</strong>. "
+"<br/>Если Вы хотите использовать другую учётную запись, то сначала <a "
+"href=\"%2$s\">выйдите из сайта</a>."
+
+#: ../includes/functions.php:990
+#, php-format
+msgid ""
+"Create an account for me so i can manage all my ads from one place (password "
+"will be emailed to you) or <a href=\"%s\">Sign In</a>"
+msgstr ""
+"<a href=\"%s\">Войдите в сайт</a>, или зарегистрируйте учётную запись для "
+"редактирования Ваших объявлений в будущем (пароль будет прислан по "
+"электронной почте)."
+
+#: ../includes/functions.php:1205
+msgid "Redirecting"
+msgstr "Перенаправление"
+
+#: ../includes/functions.php:1206
+#, php-format
+msgid ""
+"Your are being redirected to Edit page. <a href=\"%s\">Click here</a> if it is "
+"taking to long. "
+msgstr ""
+"Вы перенаправляетесь на страницу Редактирования. <a href=\"%s\">Нажмите "
+"сюда</a> если это занимает слишком много времени. "
+
+#: ../includes/functions.php:1371
+msgid "US Dollars"
+msgstr "Доллары США"
+
+#: ../includes/functions.php:1372
+msgid "Euros"
+msgstr "Евро"
+
+#: ../includes/functions.php:1373
+msgid "Pounds Sterling"
+msgstr "Фунты Стерлингов"
+
+#: ../includes/functions.php:1374
+msgid "Australian Dollars"
+msgstr "Австралийские Доллары"
+
+#: ../includes/functions.php:1375
+msgid "Brazilian Real"
+msgstr "Бразильские Реалы"
+
+#: ../includes/functions.php:1376
+msgid "Canadian Dollars"
+msgstr "Канадские Доллары"
+
+#: ../includes/functions.php:1377
+msgid "Czech Koruna"
+msgstr "Чешские Кроны"
+
+#: ../includes/functions.php:1378
+msgid "Danish Krone"
+msgstr "Датские Кроны"
+
+#: ../includes/functions.php:1379
+msgid "Hong Kong Dollar"
+msgstr "Гонконгские Доллары"
+
+#: ../includes/functions.php:1380
+msgid "Hungarian Forint"
+msgstr "Венгерские Форинты"
+
+#: ../includes/functions.php:1381
+msgid "Israeli Shekel"
+msgstr "Израильские Шекели"
+
+#: ../includes/functions.php:1382
+msgid "Japanese Yen"
+msgstr "Японские Йены"
+
+#: ../includes/functions.php:1383
+msgid "Malaysian Ringgits"
+msgstr "Малазийские Ринггитсы"
+
+#: ../includes/functions.php:1384
+msgid "Mexican Peso"
+msgstr "Мексиканские Песо"
+
+#: ../includes/functions.php:1385
+msgid "New Zealand Dollar"
+msgstr "Ново-Зеландские Доллары"
+
+#: ../includes/functions.php:1386
+msgid "Norwegian Krone"
+msgstr "Норвежские Кроны"
+
+#: ../includes/functions.php:1387
+msgid "Philippine Pesos"
+msgstr "Филиппинские Песо"
+
+#: ../includes/functions.php:1388
+msgid "Polish Zloty"
+msgstr "Польские Злоты"
+
+#: ../includes/functions.php:1389
+msgid "Singapore Dollar"
+msgstr "Сингапурские Доллары"
+
+#: ../includes/functions.php:1390
+msgid "Swedish Krona"
+msgstr "Шведские Кроны"
+
+#: ../includes/functions.php:1391
+msgid "Swiss Franc"
+msgstr "Швейцарские Франки"
+
+#: ../includes/functions.php:1392
+msgid "Taiwan New Dollars"
+msgstr "Тайваньские Новые Доллары"
+
+#: ../includes/functions.php:1393
+msgid "Thai Baht"
+msgstr "Тайские Баты"
+
+#: ../includes/functions.php:1394
+msgid "Indian Rupee"
+msgstr "Индийские Рупии"
+
+#: ../includes/functions.php:1395
+msgid "Turkish Lira"
+msgstr "Турецкие Лиры"
+
+#: ../includes/functions.php:1396
+msgid "Iranian Rial"
+msgstr "Иранские Риалы"
+
+#: ../includes/functions.php:1397
+msgid "Russian Rubles"
+msgstr "Русские Рубли"
+
+#: ../includes/functions.php:1398
+msgid "Suth African Rand"
+msgstr "Южно-Африканские Ранды"
+
+#: ../includes/class-form.php:169
+msgid "Invalid value."
+msgstr "Некорректное значение."
+
+#: ../includes/class-widget-categories.php:30 ../includes/class-widget-categories.
+#: php:39
+msgid "Advert Categories"
+msgstr "Рубрики Объявлений"
+
+#: ../includes/class-widget-categories.php:41
+msgid "Displays list of available categories."
+msgstr "Показывает список доступных рубрик."
+
+#: ../includes/class-widget-categories.php:90
+msgid "Hide empty"
+msgstr "Скрыть пустые рубрики"
+
+#: ../includes/class-widget-categories.php:104
+msgid "Show post counts"
+msgstr "Показать количество объявлений в рубрике"
+
+#: ../includes/class-widget-categories.php:118
+msgid "Show top categories only"
+msgstr "Показать только рубрики верхнего уровня"
+
+#: ../includes/class-widget-categories.php:180
+#, php-format
+msgid "Go Up (%s)"
+msgstr "Вверх (%s)"
+
+#: ../includes/class-widget-categories.php:182
+msgid "Go Up (Home)"
+msgstr "Вверх (Домой)"
+
+#: ../includes/ajax.php:62 ../includes/ajax.php:144 ../includes/ajax.php:192
+msgid "Invalid Session. Please refresh the page and try again."
+msgstr "Некорректная сессия. Пожалуйста обновите страницу и попробуйте ещё раз."
+
+#: ../includes/ajax.php:202
+msgid "Attachment does not exist."
+msgstr "Присоединение не существует."
+
+#: ../includes/ajax.php:204
+msgid "Incorrect attachment ID."
+msgstr "Неправильный номер присоединения."
+
+#: ../includes/ajax.php:208
+msgid "File could not be deleted."
+msgstr "Не удалось удалить файл."
+
+#: ../includes/ajax.php:235 ../includes/ajax.php:270
+msgid "Post with given ID does not exist."
+msgstr "Запись с таким номером не существует."

@@ -1,0 +1,431 @@
+.adverts {
+
+}
+
+#timestamp_expire:before {
+    content: '\f145';
+    top: -1px;
+    font: 400 20px/1 dashicons;
+    speak: none;
+    display: inline-block;
+    padding: 0 2px 0 0;
+    top: 0;
+    left: -1px;
+    position: relative;
+    vertical-align: top;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-decoration: none!important;
+    color: #888;
+}
+
+#timestamp-expire-div {
+    padding-top: 5px;
+    line-height: 23px;
+}
+
+#timestamp-expire-div input {
+    border-width: 1px;
+    border-style: solid;
+}
+
+#timestamp-expire-div select {
+    height: 21px;
+    line-height: 14px;
+    padding: 0;
+    vertical-align: top;
+    font-size: 12px;
+}
+
+#timestamp-expire-div p {
+    margin: 8px 0 6px;
+}
+
+#adverts-hh, #adverts-jj, #adverts-mn {
+    width: 2em;
+}
+
+#adverts-aa, #adverts-hh, #adverts-jj, #adverts-mn {
+padding: 1px;
+font-size: 12px;
+}
+
+.adverts_ac_results {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    position: absolute;
+    z-index: 10000;
+    display: none;
+    border: 1px solid #e5e5e5;
+    background-color: #fff;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    min-width: 200px;
+}
+
+.adverts_ac_results > li {
+    padding: 2px 6px 4px 6px;
+    margin: 0;
+}
+
+.adverts_ac_results > li.ac_over {
+    background-color: #2ea2cc;
+}
+
+.adverts_ac_results > li img {
+    vertical-align: middle;
+}
+
+.adverts_ac_results .adverts-ac-result {
+    clear:both; 
+    overflow:hidden;
+    padding: 2px 0 2px 0;
+}
+
+.adverts_ac_results .adverts-ac-result .adverts-ac-result-img {
+    display:block; 
+    float:left
+}
+
+.adverts_ac_results .adverts-ac-result .adverts-ac-result-text {
+    display:block; 
+    float:left; 
+    padding: 0 0 0 4px; 
+    line-height:16px; 
+    font-size: 12px;
+}
+
+#never_expires {
+    margin-left: 1px;
+}
+
+.adverts-timestamp-wrap {
+    position: relative;
+    padding: 4px 0 4px 0;
+}
+
+.adverts-timestamp-disabler {
+    display:none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: silver;
+    opacity: 0.2;
+}
+
+.adverts-spinner {
+    float: left;
+    display:inline-block;
+}
+
+.adverts-loader {
+    display: none;
+    border: none !important;
+    box-shadow: none !important;
+    font-size: 20px;
+    line-height:64px;
+}
+
+.adverts-loader.animate-spin {
+    display: none;
+}
+
+
+.adverts-modal {
+    display: none;
+}
+
+.adverts-gallery {
+    width:100%;
+    height:130px;
+    border:2px dashed silver; 
+    background-color: whitesmoke;
+    padding: 0px 0 20px 0;
+    opacity: 0.7;
+    z-index: 1000;
+    text-align: center;
+    line-height: 100%;
+    font-weight: bold;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+.drag-over .adverts-gallery  {
+    opacity: 1;
+}
+
+.drag-over #adverts-drag-drop-area  {
+    position: absolute !important;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 130px;
+    opacity: 1;
+    z-index: 5;
+    box-sizing: border-box;
+    
+}
+
+.adverts-gallery > p {
+    font-size: 1.6em;
+}
+
+.adverts-gallery-uploads {
+
+}
+
+.adverts-gallery-uploads .adverts-gallery-upload-item {
+    background-color: #fff;
+    width: 150px;
+    height: 105px;
+    -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0 0 3px rgba(0,0,0,0.15);
+    box-shadow: 0 0 3px rgba(0,0,0,0.15);
+    -webkit-transition: height 0.1s ease-in-out,margin 0.1s ease-in-out;
+    -moz-transition: height 0.1s ease-in-out,margin 0.1s ease-in-out;
+    -o-transition: height 0.1s ease-in-out,margin 0.1s ease-in-out;
+    transition: height 0.1s ease-in-out,margin 0.1s ease-in-out;
+    position: relative;
+    float:left;
+    margin: 1em 1em 0 0;
+    overflow: hidden;
+}
+
+.adverts-gallery-uploads .adverts-gallery-upload-item a {
+    display: inline-block;
+    overflow: hidden;
+    padding: 0px;
+    margin: 0 0 0 2px;
+    width: 30px;
+}
+
+.adverts-gallery-uploads .adverts-gallery-upload-item .adverts-gallery-item-featured {
+    position: absolute;
+    display: none;
+    top: 4px;
+    right: 0;
+    font-size: 0.7em;
+    line-height: 0.8em;
+    background: wheat;
+    padding: 4px 4px;
+}
+
+.adverts-gallery-upload-actions {
+    position: absolute;
+    display: none;
+    margin: 0;
+    padding: 0;
+    height: 35px;
+    bottom: 5px;
+    right: 10px;
+}
+
+.adverts-gallery-upload-actions .adverts-icon-spinner {
+  vertical-align: top;
+  line-height: 30px;
+}
+
+.adverts-gallery-upload-update  {
+    width: 100%;
+    height: 105px;
+    text-align: center;
+}
+
+.adverts-gallery-upload-update.adverts-icon-spinner {
+    font-size: 64px;
+    line-height: 105px;
+}
+
+.adverts-gallery-upload-failed {
+    font-family: Arial;
+    font-size: 10px;
+    line-height: 12px;
+    overflow: hidden;
+    display: inline-block;
+    padding: 0 2px 0 2px;
+}
+
+.adverts-gallery-uploads .adverts-gallery-upload-item:hover .adverts-gallery-upload-actions {
+    display: block;
+}
+
+.adverts-gallery-upload-item-img {
+    width: 150px;
+}
+
+.adverts-gallery-upload-item .adverts-icon-attention:before { 
+    display:block;
+    font-size: 42px;
+    color: red;
+    margin: 10px auto 0;
+}
+
+.column-expires,
+.column-price {
+    width: 10%;
+}
+
+.button-secondary.adverts-button-icon {
+    display: inline-block;
+    overflow: hidden;
+    padding: 0px;
+    margin: 0 0 0 2px;
+    width: 30px;
+    height: 28px;
+    font-size:18px;
+    text-align: center;
+}
+
+.button-secondary.adverts-button-icon:before {
+    vertical-align: top;
+    line-height: 28px;
+}
+
+.adverts-options {
+    max-width: 1200px;
+    margin: 1em 0 0 0;
+    clear: both;
+    overflow: hidden;
+}
+
+.adverts-options-wrap {
+    float: left;
+    width: 310px;
+    border: 1px solid #dae0e2;
+    background: #fff;
+    -webkit-box-shadow: 0 0 0 rgba(0,0,0,0.03);
+    box-shadow: 0 0 0 rgba(0,0,0,0.03);
+    transition: opacity 2s ease-in;
+    margin: 8px 6px 0 0;
+}
+
+.adverts-options-item {
+    display: block;
+    text-align: left;
+    
+    /*
+    margin: 0 5px 10px 5px;
+    padding: 0.71429em 1.07143em 1em 1.07143em;
+    */
+
+    margin: 0 0 0 0;
+    padding: 0.71429em 1.07143em 0 1.07143em;
+    
+}
+
+.adverts-options-item h3 {
+    margin: 0.5em 0;
+}
+
+.adverts-options-actions {
+    border-top: 1px solid #dae0e2;
+    clear:both;
+    overflow:hidden;
+    
+    margin: 10px 0px 0 0px;
+    padding: 0.71429em 1.07143em 1em 1.07143em;
+}
+
+.adverts-options-actions > em {
+    line-height: 28px;
+    float: left;
+}
+
+.adverts-options-actions > a {
+    float: right;
+}
+
+.adverts-delete {
+    color: #e9322d;
+}
+
+.adverts-red {
+    color: #e9322d;
+    font-weight: bold;
+}
+
+.adverts-form tr {
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+}
+
+.adverts-form tr.adverts-field-error {
+    border: 1px solid #ee5f5b
+}
+
+.adverts-error-list {
+    color: #e9322d;
+}
+
+.adverts-form-required {
+    color: crimson;
+}
+
+tr.adverts-field-error {
+    background-color: peachpuff;
+}
+
+.adverts-ph-edit-sidebar span.label {
+    display: inline-block;
+    width: 25%;
+}
+
+#adverts-category-icon-filter {
+    width: 605px;
+}
+.adverts-image-icon-picker {
+    width: 605px;
+    height: 200px;
+    overflow-y:scroll;
+    padding: 1em;
+    margin: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.07);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.07);
+    background-color: #fff;
+    color: #333;
+}
+
+.adverts-image-icon-picker > li {
+    display: block;
+    margin: 0 1em 1em 0;
+    padding: 0;
+    height: 30px;
+    width: 35px;
+
+    float: left;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.adverts-image-icon-picker > li > a {
+    width: 43px;
+}
+
+.adverts-image-icon-picker > li > a > span {
+    font-size: 16px;
+    line-height: 30px;
+    color: #333;
+    text-align: center;
+}
+
+.adverts-image-icon-picker > li > a > span:before {
+    padding-top: 6px;
+    vertical-align: top;
+}
+
+.adverts-image-icon-picker > li > a.button-primary > span:before {
+    color: white;
+}
+
+.adverts-payment-price {
+    width: 70%;
+}
+
+.adverts-payment-price[name=_adverts_payment_paid] {
+    color: green;
+}

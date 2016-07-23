@@ -30,7 +30,7 @@
         
         <div class="adverts-grid-col adverts-col-actions adverts-col-25 adverts-grid-col-right">
             <a href="<?php esc_attr_e(get_the_permalink()) ?>" title="<?php _e("View Ad", "adverts") ?>" class="adverts-button adverts-button-icon adverts-icon-eye"></a>
-            <a href="<?php esc_attr_e($baseurl . str_replace("%#%", get_the_ID(), $edit_format)) ?>" title="<?php _e("Edit", "adverts") ?>"class="adverts-button adverts-button-icon adverts-icon-pencil">&nbsp;</a>
+            <a href="<?php esc_attr_e($baseurl . str_replace("%#%", get_the_ID(), $edit_format)) ?>" title="<?php _e("Edit", "adverts") ?>" class="adverts-button adverts-button-icon adverts-icon-pencil">&nbsp;</a>
             <a href="<?php esc_attr_e(admin_url("admin-ajax.php")) ?>?action=adverts_delete&id=<?php echo get_the_ID() ?>&redirect_to=<?php esc_attr_e( urlencode( $baseurl ) ) ?>" title="<?php _e("Delete", "adverts") ?>" class="adverts-button adverts-button-icon adverts-icon-trash-1">&nbsp;</a></div>
     </div>
     <?php endwhile; ?>

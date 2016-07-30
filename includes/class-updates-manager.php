@@ -320,7 +320,7 @@ class Adverts_Updates_Manager
                     <span><em><?php _e("Activate your License in order to enable automatic updates.", "adverts") ?></em></span>
                 </div>
             </td>
-        </td>
+        </tr>
         
         <?php else: ?>
 

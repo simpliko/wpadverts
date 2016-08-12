@@ -3,7 +3,7 @@ Plugin URI: http://wpadverts.com/
 Contributors: gwin
 Tags: classifieds, classified, classified ads, classified script, classifieds script, wp classified, wp classifieds
 Requires at least: 4.0
-Tested up to: 4.5.3
+Tested up to: 4.6.0
 Stable tag: 1.0.8
 License: GNU Version 2 or Any Later Version
 
@@ -19,10 +19,10 @@ is NOT a demo, this is a fully functional classifieds software with most crucial
 
 **Links**
 
-* [WordPress Classifieds Plugin](http://wpadverts.com/) - official site.
-* [View User Demo](http://demo.wpadverts.com/) - see plugin frontend.
-* [View Admin Demo](http://demo.wpadverts.com/wp-admin/) - see wp-admin panel.
-* [Documentation](http://wpadverts.com/documentation/) - mainly for users.
+* [WordPress Classifieds Plugin](https://wpadverts.com/) - official site.
+* [View User Demo](https://demo.wpadverts.com/) - see plugin frontend.
+* [View Admin Demo](https://demo.wpadverts.com/wp-admin/) - see wp-admin panel.
+* [Documentation](https://wpadverts.com/documentation/) - mainly for users.
 * [Code Snippets](https://github.com/simpliko/wpadverts-snippets) - for programmers and developers.
 
 **Noatble Features**
@@ -43,13 +43,13 @@ See [Screenshots](https://wordpress.org/plugins/wpadverts/screenshots/) tab for 
 
 WPAdverts plugin can be extended with premium add-ons. Currently we have a couple of modules available:
 
-* [WooCommerce Integration](http://wpadverts.com/extensions/woocommerce-integration/)
-* [BuddyPress Integration](http://wpadverts.com/extensions/buddypress-integration/)
-* [Maps and Locations](http://wpadverts.com/extensions/maps-and-locations/)
-* [PayPal Payments Standard](http://wpadverts.com/extensions/paypal-payments-standard/)
-* [Restricted Categories](http://wpadverts.com/extensions/restricted-categories/)
+* [WooCommerce Integration](https://wpadverts.com/extensions/woocommerce-integration/)
+* [BuddyPress Integration](https://wpadverts.com/extensions/buddypress-integration/)
+* [Maps and Locations](https://wpadverts.com/extensions/maps-and-locations/)
+* [PayPal Payments Standard](https://wpadverts.com/extensions/paypal-payments-standard/)
+* [Restricted Categories](https://wpadverts.com/extensions/restricted-categories/)
 
-See all http://wpadverts.com/extensions/
+See all https://wpadverts.com/extensions/
 
 **Available Translations**
 
@@ -70,7 +70,7 @@ See all http://wpadverts.com/extensions/
 1. Activate the plugin
 2. On activation plugin will create two Pages (in wp-admin / Pages panel)  with [adverts_list] and [adverts_add] shortcodes .
 3. Go to Classifieds / Options panel and configure the options.
-3. For more detailed instructions visit plugin [documentation](http://wpadverts.com/documentation/)
+3. For more detailed instructions visit plugin [documentation](https://wpadverts.com/documentation/)
 
 == Frequently Asked Questions ==
 
@@ -84,6 +84,16 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.0.9 - 2016-08-14 = 
+
+* NEW: Customizable "Recents Ads" widget.
+* FEATURE: Administrator can save Advert from wp-admin panel even if required fields are not filled (he will saw notification though).
+* FEATURE: Featured image will always be displayed as first one in the gallery.
+* FEATURE: Communication with WPAdverts updates server (for premium addons) will be handled via secure SSL connection only.
+* FEATURE: JavaScript and CSS files are now versioned, so always newest version will be loaded.
+* FIXED: Images in Gallery are resized to completely fit inside the gallery box (previously if image was vertical a part of it was not displayed).
+* FIXED: Clicking on multiselect dropdown will hide options (if the options are currently displayed).
 
 = 1.0.8 - 2016-07-04 =
 
@@ -99,7 +109,7 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 * API: adverts_tpl_single_top and adverts_tpl_single_bottom filters on Ad details pages (allow to replace "show contact information" and default gallery)
 * FEATURE: Advanced Search button on [adverts_list] (will show when some hidden fields are added to search form, see http://wpadverts.com/documentation/custom-fields-search-form/)
-* FEATURE: [adverts_list] has two new params redirect_to and show_results (see http://wpadverts.com/documentation/creating-ads-list-adverts_list/)
+* FEATURE: [adverts_list] has two new params redirect_to and show_results (see https://wpadverts.com/documentation/creating-ads-list-adverts_list/)
 * FIXED: Allow to disable money filter for Price field
 * FIXED: Allow to set custom empty text for each multiselect field.
 * FIXED: "Sign In" redirects user back to [adverts_add] instead of wp-admin

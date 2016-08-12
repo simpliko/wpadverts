@@ -1694,12 +1694,22 @@ function adverts_css_classes( $classes, $post_id ) {
  */
 function adverts_single_rslides( $post_id ) {
     
-    $images = get_children(array('post_parent'=>$post_id));
-    wp_enqueue_script( 'responsive-slides' );
+    $children = get_children( array( 'post_parent' => $post_id ) );
+    $thumb_id = get_post_thumbnail_id( $post_id );
+    $images = array();
     
-    if( empty( $images ) ) {
+    if( empty( $children ) ) {
         return;
     }
+    
+    if( isset( $children[$thumb_id] ) ) {
+        $images[$thumb_id] = $children [$thumb_id];
+        unset($children[$thumb_id]);
+    }
+    
+    $images += $children;
+    
+    wp_enqueue_script( 'responsive-slides' );
     
     ?>
     <div class="rslides_container">

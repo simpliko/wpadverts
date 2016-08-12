@@ -122,6 +122,10 @@ function adverts_save_post($ID = false, $post = false) {
 /**
  * Makes sure that all required data is entered before publshing Advert.
  * 
+ * This function is executed by 'save_post' filter.
+ * 
+ * @see save_post filter
+ * 
  * @global wpdb $wpdb
  * @param int $ID
  * @param WP_Post $post
@@ -158,9 +162,6 @@ function adverts_save_post_validator( $ID, $post ) {
         //  don't allow publishing while any of these are incomplete
         
         if ( !$valid ) {
-            global $wpdb;
-            $wpdb->update( $wpdb->posts, array( 'post_status' => 'draft' ), array( 'ID' => $ID ) );
-            
             // filter the query URL to change the published message
             add_filter( 'redirect_post_location', create_function( '$location','return add_query_arg("message", "21", $location);' ) );
         } 
@@ -177,7 +178,7 @@ function adverts_save_post_validator( $ID, $post ) {
  * @return array
  */
 function adverts_post_updated_messages( $messages ) {
-    $messages["advert"][21] = __( "Post updated, but <strong>cannot be published</strong> since some required data is not filled properly.", "adverts" );
+    $messages["advert"][21] = __( "Post updated, but some required data is not filled properly.", "adverts" );
 
     return $messages;
 }

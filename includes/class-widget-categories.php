@@ -132,7 +132,7 @@ class Adverts_Widget_Categories extends WP_Widget
      * @since 0.3
      * @return array
      */
-    function update($new_instance, $old_instance)
+    public function update($new_instance, $old_instance)
     {
         $instance = $old_instance;
         $instance['title'] = $new_instance['title'];
@@ -150,7 +150,7 @@ class Adverts_Widget_Categories extends WP_Widget
      * @param array $args     Widget arguments.
      * @param array $instance Saved values from database.
      */
-    function widget($args, $instance)
+    public function widget($args, $instance)
     {
         global $term;
         

@@ -22,20 +22,21 @@ jQuery(function($) {
       input.attr("placeholder", text);
       input.attr("autocomplete", "off");
       input.addClass("adverts-multiselect-input");
-      input.focus(function(e) {
-            $(this).blur();
+      input.on("focus", function(e) {
+          
+          $(this).blur();
+          e.stopPropagation();
+          
+          if($(this).hasClass("adverts-multiselect-open")) {
+            $(this).removeClass("adverts-multiselect-open");
+            $(this).parent().find(".adverts-multiselect-options").hide();
+          } else {
             $(this).addClass("adverts-multiselect-open");
             $(this).parent().find(".adverts-multiselect-options").css("width", $(this).outerWidth()-1);
             $(this).parent().find(".adverts-multiselect-options").show();
-            e.stopPropagation();
-      });      
-      input.click(function(e) {
-            $(this).blur();
-            $(this).addClass("adverts-multiselect-open");
-            $(this).parent().find(".adverts-multiselect-options").css("width", $(this).outerWidth()-1);
-            $(this).parent().find(".adverts-multiselect-options").show();
-            e.stopPropagation();
+          }
       });
+
 
       var options = $("<div></div>");
       options.addClass("adverts-multiselect-options");
@@ -89,6 +90,10 @@ jQuery(function($) {
 
   $(document).mouseup(function(e) {
         var container = $(".adverts-multiselect-options");
+
+        if ($(e.target).hasClass("adverts-multiselect-input")) {
+            return;
+        }
 
         if (!container.is(e.target) && container.has(e.target).length === 0) {
             container.hide();

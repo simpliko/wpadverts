@@ -19,7 +19,7 @@ class Adverts_Updates_Manager
      *
      * @var string
      */
-    public static $url = "http://wpadverts.com/api";
+    public static $url = "https://wpadverts.com/api";
     
     /**
      * Installed addon version

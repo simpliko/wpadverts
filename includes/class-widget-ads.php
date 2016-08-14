@@ -452,61 +452,6 @@ class Adverts_Widget_Ads extends WP_Widget
         // WIDGET CODE GOES HERE
         ?>
 
-
-<style type="text/css">
-    .adverts-widget-recent {
-        clear: both;
-        overflow: hidden;
-        padding: 10px 0 15px 0;
-        
-        border-bottom: 1px solid #e5e5e5;
-    }
-    
-    .adverts-widget-recent:hover {
-        background: #f9f9f9;
-    }
-    
-    .adverts-widget-recent .advert-widget-recent-item {
-        display: block;
-        margin: 0 0 0.5rem 0;
-        
-        font-weight: 700;
-        font-size: 1.05rem;
-        line-height: 1.3rem;
-    }
-    
-    .adverts-widget-recent .adverts-widget-recent-title {
-        display: inline-block;
-        
-    }
-    
-    .adverts-widget-recent .adverts-widget-recent-title a,
-    .adverts-widget-recent .adverts-widget-recent-title a:visited {
-        color: #21759b;
-        text-decoration: none;
-    }
-    
-    .adverts-widget-recent .adverts-widget-recent-location {
-        display: inline-block;
-        float: left;
-        width: 75%;
-        
-        color: #666;
-    }
-    
-    .adverts-widget-recent .adverts-widget-recent-location .adverts-icon-location:before {
-        margin-left: 0;
-    }
-    
-    .adverts-widget-recent .advert-widget-recent-price {
-        display: inline-block;
-        float: right;
-        
-        color: #b34040;
-        font-weight: bold;
-    }
-</style>
-
         <div class="wpjb adverts-widget adverts-widget-categories">
             <div class="adverts-grid adverts-grid-compact">
             <?php if( $loop->have_posts() ): ?>

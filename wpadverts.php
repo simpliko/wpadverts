@@ -1,11 +1,11 @@
 <?php
 /*
  * Plugin Name: WP Adverts
- * Plugin URI: http://wpadverts.com/
+ * Plugin URI: https://wpadverts.com/
  * Description: The lightweight WordPress classifieds plugin done right.
  * Author: Greg Winiarski
  * Text Domain: adverts
- * Version: 1.0.8
+ * Version: 1.0.9
  * 
  * Adverts is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

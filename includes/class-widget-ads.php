@@ -120,7 +120,7 @@ class Adverts_Widget_Ads extends WP_Widget
                     array(
                         "value" => "published",
                         "depth" => 0,
-                        "text" => __( "Publish Date", "wpadverts" )
+                        "text" => __( "Publish Date", "adverts" )
                     ),
                     array(
                         "value" => "title",
@@ -130,7 +130,7 @@ class Adverts_Widget_Ads extends WP_Widget
                     array(
                         "value" => "price",
                         "depth" => 0,
-                        "text" => __( "Price", "wpadverts" )
+                        "text" => __( "Price", "adverts" )
                     ),
                 )
             ),

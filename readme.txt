@@ -4,7 +4,7 @@ Contributors: gwin
 Tags: classifieds, classified, classified ads, classified script, classifieds script, wp classified, wp classifieds
 Requires at least: 4.0
 Tested up to: 4.6.0
-Stable tag: 1.0.8
+Stable tag: 1.0.9
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.

@@ -108,6 +108,13 @@ jQuery(function($) {
 
     });
     
+    if($(".adverts-show-contact-form").length > 0) {
+        $(".adverts-show-contact-form").click(function(e) {
+            e.preventDefault();
+            $('.adverts-contact-box').slideToggle("fast");
+        });
+    }
+    
     if($(".adverts-filter-money").length > 0) {
         $(".adverts-filter-money").autoNumeric('init', adverts_currency);
     }

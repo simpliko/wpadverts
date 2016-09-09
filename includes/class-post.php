@@ -50,7 +50,11 @@ class Adverts_Post {
         $meta = get_post_meta( $post->ID, '', true );
 
         foreach( $meta as $k => $v ) {
-            $result[$k] = $v[0];
+            if( count( $v ) == 1 ) {
+                $result[$k] = $v[0];
+            } else {
+                $result[$k] = $v;
+            }
         }
         
         return $result;

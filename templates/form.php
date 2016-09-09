@@ -29,9 +29,7 @@
                 <?php if(adverts_field_has_validator($field, "is_required")): ?>
                 <span class="adverts-form-required">*</span>
                 <?php endif; ?>
-            </label>
-            
-            <?php call_user_func( adverts_field_get_renderer($field), $field) ?>
+            </label><?php call_user_func( adverts_field_get_renderer($field), $field) ?>
 
             <?php endif; ?>
             
@@ -46,10 +44,14 @@
         </div>
         <?php endforeach; ?>
         
-        <div  style="border-top:2px solid silver; padding: 1em 0 1em 0; display: none">
-
-            <input type="submit" name="submit" value="<?php _e("Preview", "adverts") ?>" style="font-size:1.2em" class="adverts-cancel-unload" />
+        <?php if( isset($buttons) && is_array($buttons) ): ?>
+        <div  style="">
+            <?php include_once ADVERTS_PATH . "/includes/class-html.php"; ?>
+            <?php foreach($buttons as $button): ?>
+            <?php echo Adverts_Html::build($button["tag"], array_replace($button, array("tag"=>null, "html"=>null)), $button["html"]) ?>
+            <?php endforeach; ?>
         </div>
+        <?php endif; ?>
         
     </fieldset>
 </form>

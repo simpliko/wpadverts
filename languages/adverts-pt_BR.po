@@ -1,0 +1,1456 @@
+# Copyright (C) 2016 Greg Winiarski
+# This file is distributed under the same license as the WP Adverts package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Adverts 1.0.9\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wpadverts\n"
+"POT-Creation-Date: 2016-08-22 15:47-0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-08-22 17:59-0300\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.8\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
+"_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
+"esc_html_x:1,2c\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ..\n"
+"X-Textdomain-Support: yes\n"
+"Last-Translator: \n"
+"Language: pt_BR\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: addons/bank-transfer/admin/options.php:15
+msgid "Payment Gateway / Bank Transfer"
+msgstr "Gateway de Pagamento / Transferência Bancária"
+
+#: addons/bank-transfer/bank-transfer.php:42 includes/admin-pages.php:132
+msgid "Bank Transfer"
+msgstr "Transferência Bancária"
+
+#: addons/bank-transfer/bank-transfer.php:62
+#: addons/payments/includes/admin-pages.php:560 includes/defaults.php:56
+msgid "Contact Person"
+msgstr "Contato"
+
+#: addons/bank-transfer/bank-transfer.php:72
+#: addons/payments/admin/payment-history-list.php:68
+#: addons/payments/includes/admin-pages.php:570 includes/defaults.php:66
+#: includes/defaults.php:291 includes/defaults.php:301
+#: includes/functions.php:1767
+msgid "Email"
+msgstr "Email"
+
+#: addons/bank-transfer/includes/admin-pages.php:32
+#: addons/core/includes/admin-pages.php:26
+#: addons/payments/includes/admin-pages.php:35
+msgid "Update Options"
+msgstr "Opções de Alteração"
+
+#: addons/bank-transfer/includes/admin-pages.php:41
+#: addons/core/includes/admin-pages.php:45
+#: addons/payments/includes/admin-pages.php:43
+msgid "Settings updated."
+msgstr "Configurações atualizada."
+
+#: addons/bank-transfer/includes/admin-pages.php:43
+#: addons/core/includes/admin-pages.php:47
+#: addons/payments/includes/admin-pages.php:45
+#: addons/payments/includes/admin-pages.php:152
+#: addons/payments/includes/admin-pages.php:188
+#: addons/payments/includes/admin-pages.php:303
+msgid "There are errors in your form."
+msgstr "Há erros no seu formulário."
+
+#: addons/bank-transfer/includes/admin-pages.php:60
+msgid "Payment Name"
+msgstr "Nome de pagamento"
+
+#: addons/bank-transfer/includes/admin-pages.php:61
+msgid "Payment gateway name visible in the frontend when making a payment."
+msgstr ""
+"Nome do gateway de pagamento visíveis na extremidade dianteira ao fazer um "
+"pagamento."
+
+#: addons/bank-transfer/includes/admin-pages.php:70
+msgid "Message"
+msgstr "Mensagem"
+
+#: addons/bank-transfer/includes/admin-pages.php:73
+msgid ""
+"User will see this message when asked to make payment, make sure that "
+"instructions here will make it as easy as possible to make a payment.<br/"
+">Allowed variables:<br/>- {total} - total amount to pay (for example "
+"$10.00)<br/>- {order_number} - unique order number<br/>To revert to default "
+"message remove whole text from editor and save the form."
+msgstr ""
+"Usuário verá esta mensagem quando solicitado a fazer o pagamento, certifique-"
+"se de que as instruções aqui vai torná-lo tão fácil quanto possível para "
+"fazer um pagamento <br/> variáveis permitidos:. <br/> - {Total de} - "
+"montante total a pagar (por exemplo, $ 10.00) <br/> - {} order_number - "
+"número de ordem único <br/> para reverter para o padrão mensagem de remover "
+"o texto inteiro de editor e salve o formulário."
+
+#: addons/core/includes/admin-pages.php:25
+msgid "Core Options"
+msgstr "Opções principais"
+
+#: addons/core/includes/admin-pages.php:120
+#: addons/core/includes/admin-pages.php:121
+msgid "Common Settings"
+msgstr "Configurações padrão"
+
+#: addons/core/includes/admin-pages.php:127
+msgid "Default Ads List Page"
+msgstr " Lista padrão de anúncios de página"
+
+#: addons/core/includes/admin-pages.php:128
+msgid "Select page on which the main [adverts_list] shortcode is being used."
+msgstr ""
+"Selecione a página em que o principal [events_list] shortcode está sendo "
+"usado."
+
+#: addons/core/includes/admin-pages.php:134
+msgid "Default Visibility"
+msgstr "Visibilidade padrão"
+
+#: addons/core/includes/admin-pages.php:135
+msgid "Number of days Ad will be visible by default."
+msgstr "Número padrão de dias que o anúncio estará visível."
+
+#: addons/core/includes/admin-pages.php:145
+#: addons/core/includes/admin-pages.php:146
+msgid "Currency Settings"
+msgstr "Configurações de moeda"
+
+#: addons/core/includes/admin-pages.php:152
+msgid "Currency"
+msgstr "Moeda"
+
+#: addons/core/includes/admin-pages.php:159
+msgid "Currency Position"
+msgstr "Posição da moeda"
+
+#: addons/core/includes/admin-pages.php:161
+msgid "Prefix - $10"
+msgstr "Prefixo - R$10"
+
+#: addons/core/includes/admin-pages.php:162
+msgid "Suffix - 10$"
+msgstr "Sufixo - 10R$"
+
+#: addons/core/includes/admin-pages.php:169
+msgid "Decimal Places"
+msgstr "Casas decimais"
+
+#: addons/core/includes/admin-pages.php:179
+msgid "Decimal Separator"
+msgstr "Separador decimal"
+
+#: addons/core/includes/admin-pages.php:185
+msgid "Thousands Separator"
+msgstr "Separado de milhares"
+
+#: addons/featured/admin/options.php:15 includes/admin-pages.php:114
+msgid "Featured Ads"
+msgstr "Anúncios em destaque"
+
+#: addons/featured/admin/options.php:22
+msgid "http://wpadverts.com/documentation/featured-ads/"
+msgstr "http://wpadverts.com/documentation/featured-ads/"
+
+#: addons/featured/admin/options.php:22
+msgid "View Documentation"
+msgstr "Visualizar documentação"
+
+#: addons/featured/featured.php:68
+msgid "Display this listing as featured."
+msgstr "Mostrar esta lista como destaque."
+
+#: addons/featured/featured.php:158
+msgid "Feature this ad - it will be styled differently and sticky"
+msgstr "apresentam este e - vai ser denominado de forma diferente e fixa"
+
+#: addons/featured/featured.php:232 addons/featured/featured.php:268
+#: includes/gallery.php:104 includes/gallery.php:217
+msgid "Featured"
+msgstr "Destaque"
+
+#: addons/payments/admin/options.php:15
+#: addons/payments/admin/pricing-edit.php:16
+#: addons/payments/admin/pricing-list.php:16 includes/admin-pages.php:38
+msgid "Options"
+msgstr "Opções"
+
+#: addons/payments/admin/options.php:16
+#: addons/payments/admin/pricing-edit.php:18
+#: addons/payments/admin/pricing-list.php:18
+msgid "Pricing"
+msgstr "Preço"
+
+#: addons/payments/admin/payment-history-edit.php:16
+msgid "Payment History Edit"
+msgstr "Editar histórico de pagamento"
+
+#: addons/payments/admin/payment-history-edit.php:28
+msgid "Payment"
+msgstr "Pagamento"
+
+#: addons/payments/admin/payment-history-edit.php:33
+msgid "Gateway"
+msgstr "Gateway"
+
+#: addons/payments/admin/payment-history-edit.php:44
+msgid "Created"
+msgstr "Criado"
+
+#: addons/payments/admin/payment-history-edit.php:51
+msgid "User IP"
+msgstr "Ip do Usuário"
+
+#: addons/payments/admin/payment-history-edit.php:60
+#: addons/payments/admin/payment-history-list.php:71
+msgid "Status"
+msgstr "Status"
+
+#: addons/payments/admin/payment-history-edit.php:72
+msgid "To Pay"
+msgstr "Pagar"
+
+#: addons/payments/admin/payment-history-edit.php:79
+msgid "Paid"
+msgstr "Pago"
+
+#: addons/payments/admin/payment-history-edit.php:90
+msgid "Update Payment"
+msgstr "Atualização de pagamento"
+
+#: addons/payments/admin/payment-history-edit.php:105
+msgid "Purchase Details"
+msgstr "Detalhes da compra"
+
+#: addons/payments/admin/payment-history-edit.php:110
+msgid "Purchase Type"
+msgstr "Tipo de compra"
+
+#: addons/payments/admin/payment-history-edit.php:111
+msgid "Listing Publication"
+msgstr "Listagem de publicação"
+
+#: addons/payments/admin/payment-history-edit.php:115
+msgid "Listing Type"
+msgstr "Tipo de listagem"
+
+#: addons/payments/admin/payment-history-edit.php:129
+msgid "Purchased Item"
+msgstr "Item comprado"
+
+#: addons/payments/admin/payment-history-edit.php:147
+msgid "Customer Details"
+msgstr "Detalhes do cliente"
+
+#: addons/payments/admin/payment-history-edit.php:165
+msgid "Payment Log"
+msgstr "Log de pagamento"
+
+#: addons/payments/admin/payment-history-list.php:16
+#: addons/payments/payments.php:494
+msgid "Payment History"
+msgstr "Histórico de pagamento"
+
+#: addons/payments/admin/payment-history-list.php:23
+msgid "All"
+msgstr "Tudo"
+
+#: addons/payments/admin/payment-history-list.php:36
+#: addons/payments/admin/payment-history-list.php:131
+#: addons/payments/admin/pricing-list.php:36
+#: addons/payments/admin/pricing-list.php:109
+msgid "Bulk Actions"
+msgstr "Ações em massa"
+
+#: addons/payments/admin/payment-history-list.php:40
+#: addons/payments/admin/payment-history-list.php:87
+#: addons/payments/admin/payment-history-list.php:135
+#: addons/payments/admin/pricing-list.php:37
+#: addons/payments/admin/pricing-list.php:69
+#: addons/payments/admin/pricing-list.php:110 templates/manage.php:34
+msgid "Delete"
+msgstr "Apagar"
+
+#: addons/payments/admin/payment-history-list.php:43
+#: addons/payments/admin/payment-history-list.php:137
+#: addons/payments/admin/pricing-list.php:40
+#: addons/payments/admin/pricing-list.php:112
+msgid "Apply"
+msgstr "Aplicar"
+
+#: addons/payments/admin/payment-history-list.php:49
+msgid "All dates"
+msgstr "Todas as datas"
+
+#: addons/payments/admin/payment-history-list.php:50
+msgid "This month"
+msgstr "Este mês"
+
+#: addons/payments/admin/payment-history-list.php:51
+msgid "Last month"
+msgstr "Mês passado"
+
+#: addons/payments/admin/payment-history-list.php:56
+msgid "Filter"
+msgstr "Filtro"
+
+#: addons/payments/admin/payment-history-list.php:66
+msgid "ID"
+msgstr "ID"
+
+#: addons/payments/admin/payment-history-list.php:67
+msgid "User"
+msgstr "Usuário"
+
+#: addons/payments/admin/payment-history-list.php:69
+#: includes/admin-post-type.php:534 templates/list.php:46
+msgid "Date"
+msgstr "Data"
+
+#: addons/payments/admin/payment-history-list.php:70
+msgid "Amount"
+msgstr "Quantidade"
+
+#: addons/payments/admin/payment-history-list.php:84
+#: addons/payments/admin/payment-history-list.php:86
+msgid "View Order"
+msgstr "Ver encomenda"
+
+#: addons/payments/admin/payment-history-list.php:120
+#: addons/payments/admin/pricing-list.php:98
+msgid "&laquo;"
+msgstr "&laquo;"
+
+#: addons/payments/admin/payment-history-list.php:121
+#: addons/payments/admin/pricing-list.php:99
+msgid "&raquo;"
+msgstr "&raquo;"
+
+#: addons/payments/admin/pricing-edit.php:19
+#: addons/payments/admin/pricing-list.php:19
+msgid "Add New"
+msgstr "Adicionar novo"
+
+#: addons/payments/admin/pricing-list.php:26
+msgid "listing"
+msgstr "Listagem"
+
+#: addons/payments/admin/pricing-list.php:51
+#: addons/payments/includes/admin-pages.php:638
+#: includes/admin-post-type.php:530 includes/class-widget-ads.php:77
+#: includes/class-widget-ads.php:128 includes/class-widget-categories.php:74
+#: includes/defaults.php:96 includes/gallery.php:98 includes/gallery.php:212
+msgid "Title"
+msgstr "Título"
+
+#: addons/payments/admin/pricing-list.php:52
+#: addons/payments/includes/admin-pages.php:653
+#: includes/admin-post-type.php:531 includes/class-widget-ads.php:133
+#: includes/defaults.php:130
+msgid "Price"
+msgstr "Preço"
+
+#: addons/payments/admin/pricing-list.php:53
+#: addons/payments/includes/admin-pages.php:662
+msgid "Visible"
+msgstr "Visível"
+
+#: addons/payments/admin/pricing-list.php:66
+#: addons/payments/admin/pricing-list.php:68 includes/admin-post-type.php:349
+#: templates/manage.php:33
+msgid "Edit"
+msgstr "Editar"
+
+#: addons/payments/admin/pricing-list.php:78 addons/payments/payments.php:296
+#: addons/payments/payments.php:354
+msgid "Free"
+msgstr "Livre"
+
+#: addons/payments/admin/pricing-list.php:83
+msgid "1 day"
+msgid_plural "%s days"
+msgstr[0] "1 dia"
+msgstr[1] "%s dias"
+
+#: addons/payments/includes/admin-pages.php:75
+msgid ""
+"Enable at least one <a href='%s'>Payment Gateway</a> before selecting "
+"default."
+msgstr ""
+"Ative pelo menos uma <a href='%s'> Gateway de Pagamento </a> antes de "
+"selecionar padrão."
+
+#: addons/payments/includes/admin-pages.php:88
+msgid "Create at least one <a href='%s'>Pricing</a> before selecting default."
+msgstr ""
+"Criar pelo menos um <a href='%s'> Preço </a> antes de selecionar padrão."
+
+#: addons/payments/includes/admin-pages.php:127
+#: addons/payments/includes/admin-pages.php:128
+msgid "Add Pricing"
+msgstr "Adicionar preço"
+
+#: addons/payments/includes/admin-pages.php:144
+#: addons/payments/includes/admin-pages.php:183
+#: addons/payments/includes/admin-pages.php:298
+msgid "There was an error while saving pricing in database."
+msgstr "Houve um erro ao salvar preços na base de dados."
+
+#: addons/payments/includes/admin-pages.php:148
+msgid "New pricing has been added."
+msgstr "Novo preço foi adicionado."
+
+#: addons/payments/includes/admin-pages.php:162
+msgid "Edit Pricing"
+msgstr "Editar preço"
+
+#: addons/payments/includes/admin-pages.php:163
+msgid "Update Pricing"
+msgstr "Atualização de Preços"
+
+#: addons/payments/includes/admin-pages.php:185
+msgid "Pricing updated."
+msgstr "Atualização de preços."
+
+#: addons/payments/includes/admin-pages.php:198
+msgid "Adverts Pricing with given ID does not exist."
+msgstr "Anúncios de Preços com o ID determinadao não existe."
+
+#: addons/payments/includes/admin-pages.php:205
+msgid "Pricing deleted."
+msgstr "Preço apagado."
+
+#: addons/payments/includes/admin-pages.php:225
+msgid "1 Pricing deleted."
+msgid_plural "%s Pricings deleted."
+msgstr[0] "1 preço foi apagado."
+msgstr[1] "%s preços foram apagados"
+
+#: addons/payments/includes/admin-pages.php:271
+msgid ""
+"Payment Method [%s] assigned to this Payment does not exist or was disabled."
+msgstr ""
+"O método de pagamento [%s] atribuído a este pagamento não existe ou foi "
+"desativado."
+
+#: addons/payments/includes/admin-pages.php:288
+msgid "<strong>%1$s</strong> changed payment status to <strong>%2$s</strong>"
+msgstr ""
+"<strong>%1$s</strong> mudança de status de pagamento para <strong>%2$s</"
+"strong>"
+
+#: addons/payments/includes/admin-pages.php:300
+msgid "Payment updated."
+msgstr "Pagamento alterado."
+
+#: addons/payments/includes/admin-pages.php:314
+msgid "Adverts Payment with given ID does not exist."
+msgstr "Anúncios de pagamento com ID determinada  não existe."
+
+#: addons/payments/includes/admin-pages.php:321
+#: addons/payments/includes/admin-pages.php:353
+msgid "1 Payment deleted."
+msgid_plural "%s Payments deleted."
+msgstr[0] "1 pagamento excluído."
+msgstr[1] "%s pagamentos excluídos."
+
+#: addons/payments/includes/admin-pages.php:369
+msgid "Status for selected Payments was changed to: %s"
+msgstr "Os status para pagamentos selecionados foi alterado para: %s"
+
+#: addons/payments/includes/admin-pages.php:394
+msgid "%1$s %2$d"
+msgstr "%1$s %2$d"
+
+#: addons/payments/includes/admin-pages.php:486
+msgid "View order"
+msgstr "Ver ordem"
+
+#: addons/payments/includes/admin-pages.php:491
+msgid "Abandoned"
+msgstr "Abandonado"
+
+#: addons/payments/includes/admin-pages.php:499
+#: addons/payments/includes/admin-pages.php:531
+msgid "Pending Payment"
+msgstr "Pagamento pendente"
+
+#: addons/payments/includes/admin-pages.php:535
+#: includes/class-updates-manager.php:332 templates/manage-edit.php:47
+msgid "Update"
+msgstr "Alterar"
+
+#: addons/payments/includes/admin-pages.php:554
+msgid "User ID"
+msgstr "ID do Usuário"
+
+#: addons/payments/includes/admin-pages.php:613
+msgid "Default Payment Gateway"
+msgstr "Gateway de pagamento padrão"
+
+#: addons/payments/includes/admin-pages.php:622
+msgid "Default Pricing"
+msgstr "Preço padrão"
+
+#: addons/payments/includes/admin-pages.php:647 includes/defaults.php:120
+#: includes/gallery.php:113 includes/gallery.php:223
+msgid "Description"
+msgstr "Descrição"
+
+#: addons/payments/includes/admin-pages.php:663
+msgid "Number of days the Ad will be visible."
+msgstr "Número de dias que o anúncio ficará visível."
+
+#: addons/payments/payments.php:65
+msgid "Unread <span class=\"count\">(%s)</span>"
+msgid_plural "Unread <span class=\"count\">(%s)</span>"
+msgstr[0] "Não lido <span class=\"count\">(%s)</span>"
+msgstr[1] "Não lidos <span class=\"count\">(%s)</span>"
+
+#: addons/payments/payments.php:74
+msgid "Failed <span class=\"count\">(%s)</span>"
+msgid_plural "Failed <span class=\"count\">(%s)</span>"
+msgstr[0] "Falhado <span class=\"count\">(%s)</span>"
+msgstr[1] "Failhados <span class=\"count\">(%s)</span>"
+
+#: addons/payments/payments.php:83 addons/payments/payments.php:98
+msgid "Pending <span class=\"count\">(%s)</span>"
+msgid_plural "Pending <span class=\"count\">(%s)</span>"
+msgstr[0] "Pendente <span class=\"count\">(%s)</span>"
+msgstr[1] "Pendentes <span class=\"count\">(%s)</span>"
+
+#: addons/payments/payments.php:92
+msgid "Refunded <span class=\"count\">(%s)</span>"
+msgid_plural "Refunded <span class=\"count\">(%s)</span>"
+msgstr[0] "Reembolsado <span class=\"count\">(%s)</span>"
+msgstr[1] "Reembolsados <span class=\"count\">(%s)</span>"
+
+#: addons/payments/payments.php:270
+msgid "Listing Information"
+msgstr "Informações e Anúncios"
+
+#: addons/payments/payments.php:300
+msgid "<b>%1$s</b> - %2$s for %3$d days.%4$s"
+msgstr "<b>%1$s</b> - %2$s para %3$d dias.%4$s"
+
+#: addons/payments/payments.php:314
+msgid "Listing"
+msgstr "Listagem"
+
+#: addons/payments/payments.php:381
+msgid "Visible 1 day"
+msgid_plural "Visible %d days"
+msgstr[0] "Visível 1 dia"
+msgstr[1] "Visível %d dias"
+
+#: addons/payments/payments.php:439 includes/shortcodes.php:283
+msgid "Thank you for submitting your ad!"
+msgstr "Obrigado por enviar o seu anúncio!"
+
+#: addons/payments/payments.php:493
+msgid "Adverts Payment History"
+msgstr "Infomar histórico de pagamentos"
+
+#: addons/payments/templates/add-payment.php:15
+msgid "Total"
+msgstr "Total"
+
+#: addons/payments/templates/add-payment.php:27
+msgid "No Payment Gateways Enabled!"
+msgstr "Não existem Gateways de pagamentos ativo!"
+
+#: addons/payments/templates/add-payment.php:44
+msgid "Place Order"
+msgstr "Faça uma pedido"
+
+#: admin/options.php:26
+msgid "Cannot be disabled"
+msgstr "Não pode ser desativado"
+
+#: admin/options.php:27 admin/options.php:35 admin/options.php:49
+msgid "Settings"
+msgstr "Configurações"
+
+#: admin/options.php:34
+msgid "Addon Uploaded and Activated"
+msgstr "Addon carregado e ativo"
+
+#: admin/options.php:37
+msgid "Addon Uploaded but Inactive"
+msgstr "Addon carregado mas inativo"
+
+#: admin/options.php:38 includes/class-updates-manager.php:317
+msgid "Activate"
+msgstr "Ativar"
+
+#: admin/options.php:41
+msgid "Get This Addon"
+msgstr "Obter este Addon"
+
+#: admin/options.php:50
+msgid "Disable"
+msgstr "Desabilitar"
+
+#: admin/options.php:52
+msgid "Enable"
+msgstr "Habilitar"
+
+#: includes/admin-pages.php:37
+msgid "Adverts Options"
+msgstr "Opções de anúncios"
+
+#: includes/admin-pages.php:80
+msgid "Modules"
+msgstr "Módulos"
+
+#: includes/admin-pages.php:83
+msgid "Core"
+msgstr "Principal"
+
+#: includes/admin-pages.php:84
+msgid ""
+"Here you can configure most basic Adverts options, applicable on any site."
+msgstr ""
+"Aqui você pode configurar a maioria das opções de Anúncios básicos, "
+"aplicáveis em qualquer parte do site."
+
+#: includes/admin-pages.php:89
+msgid "Payments"
+msgstr "Pagamentos"
+
+#: includes/admin-pages.php:90
+msgid "Charge users for posting classified ads on your site."
+msgstr "Cobrar dos usuários para postar anúncios classificados em seu site."
+
+#: includes/admin-pages.php:95
+msgid "WooCommerce Payments"
+msgstr "WooCommerce pagamentos"
+
+#: includes/admin-pages.php:96
+msgid "Use WooCommerce to charge users for posting classifieds."
+msgstr "Use WooCommerce para cobrar os usuários para postar classificados."
+
+#: includes/admin-pages.php:102
+msgid "BuddyPress Integration"
+msgstr "Integração BuddyPress"
+
+#: includes/admin-pages.php:103
+msgid ""
+"Integrate user Ads with BuddyPress profiles, registration and private "
+"messages."
+msgstr ""
+"Integrar os anúncios do usuário com perfis BuddyPress, registro e mensagens "
+"privadas."
+
+#: includes/admin-pages.php:111
+msgid "Features"
+msgstr "Características"
+
+#: includes/admin-pages.php:115
+msgid "Allow users to post Ads displayed always at the top of the list."
+msgstr ""
+"Permitir aos usuários publicar anúncios exibidos sempre no topo da lista."
+
+#: includes/admin-pages.php:120
+msgid "Maps And Locations"
+msgstr "Mapas e Localizações"
+
+#: includes/admin-pages.php:121
+msgid "Locations Taxonomy, Google Maps integration and more."
+msgstr "Locais de taxonomia, de integração do Google Maps e muito mais."
+
+#: includes/admin-pages.php:129
+msgid "Payment Gateways"
+msgstr "Gateways de pagamento"
+
+#: includes/admin-pages.php:133
+msgid ""
+"Allow users to pay for ad posting using direct bank transfer or cash "
+"payments."
+msgstr ""
+"Permitir que os usuários a paguem por postagens de anúncios através de "
+"transferência bancária ou dinheiro pagamentos directos."
+
+#: includes/admin-pages.php:138
+msgid "PayPal Standard"
+msgstr "PayPal como Padrão"
+
+#: includes/admin-pages.php:139
+msgid "PayPal Payments Standard, allow users to pay for ads via PayPal."
+msgstr ""
+"PayPal como pagamento padrão, permite aos usuários pagar por anúncios via "
+"PayPal."
+
+#: includes/admin-pages.php:281
+msgid "Category Icon"
+msgstr "Ícone da categoria"
+
+#: includes/admin-pages.php:284
+msgid "Filter Icons ..."
+msgstr "Filtrar Icones ..."
+
+#: includes/admin-post-type.php:93
+msgid "Whoops, the provided date is invalid."
+msgstr "Ops, a data prevista é inválida."
+
+#: includes/admin-post-type.php:181
+msgid "Post updated, but some required data is not filled properly."
+msgstr ""
+"Post atualizado, mas alguns dados necessários não foi preenchido "
+"corretamente."
+
+#. translators: 1: month number (01, 02, etc.), 2: month abbreviation
+#: includes/admin-post-type.php:253
+msgid "%1$s-%2$s"
+msgstr "%1$s-%2$s"
+
+#: includes/admin-post-type.php:265
+msgid "%1$s %2$s, %3$s @ %4$s : %5$s"
+msgstr "%1$s %2$s, %3$s @ %4$s : %5$s"
+
+#: includes/admin-post-type.php:270 includes/admin-post-type.php:322
+msgid "Never Expires"
+msgstr "Nunca expira"
+
+#: includes/admin-post-type.php:288
+msgid "OK"
+msgstr "OK"
+
+#: includes/admin-post-type.php:289 includes/class-updates-manager.php:333
+#: includes/gallery.php:133 includes/gallery.php:231
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: includes/admin-post-type.php:310
+msgid "M j, Y @ G:i"
+msgstr "M j, Y @ G:i"
+
+#: includes/admin-post-type.php:336
+msgid "Expired: <b>%s</b>"
+msgstr "Expirado: <b>%s</b>"
+
+#: includes/admin-post-type.php:338
+msgid "Expires: <b>%s</b>"
+msgstr "Expira: <b>%s</b>"
+
+#: includes/admin-post-type.php:349
+msgid "Edit date and time"
+msgstr "Editar data e hora"
+
+#: includes/admin-post-type.php:424
+msgid "(required)"
+msgstr "(Obrigatório)"
+
+#: includes/admin-post-type.php:461 includes/admin-post-type.php:701
+msgid "Expired"
+msgstr "Expirado"
+
+#: includes/admin-post-type.php:493
+msgid "Additional Information"
+msgstr "Informações adicionais"
+
+#: includes/admin-post-type.php:510 includes/defaults.php:114
+msgid "Gallery"
+msgstr "Galeria"
+
+#: includes/admin-post-type.php:532
+msgid "Author"
+msgstr "Autor"
+
+#: includes/admin-post-type.php:533
+msgid "Expires"
+msgstr "Expira"
+
+#: includes/admin-post-type.php:561
+msgid "Never"
+msgstr "Nunca"
+
+#: includes/admin-post-type.php:566
+msgid "Y/m/d g:i:s A"
+msgstr "Y/m/d g:i:s A"
+
+#: includes/admin-post-type.php:574
+msgid "Y/m/d"
+msgstr "Y/m/d"
+
+#: includes/admin-post-type.php:577
+msgid "in %s"
+msgstr "em %s"
+
+#: includes/admin-post-type.php:579
+msgid "%s ago"
+msgstr "%s atrás"
+
+#: includes/admin-post-type.php:594
+msgid "None"
+msgstr "Nenhum"
+
+#: includes/admin-post-type.php:702
+msgid "Expires:"
+msgstr "Expira:"
+
+#: includes/admin-post-type.php:703
+msgid "Expired:"
+msgstr "Expirado:"
+
+#: includes/admin-post-type.php:704
+msgid ""
+"Start typing user name, email or login below, some suggestions will appear."
+msgstr ""
+"Comece a digitar o nome de usuário, e-mail ou seu login abaixo, e algumas "
+"sugestões irá aparecer."
+
+#: includes/ajax.php:62 includes/ajax.php:144 includes/ajax.php:192
+msgid "Invalid Session. Please refresh the page and try again."
+msgstr "Sessão inválida. Por favor, atualize a página e tente novamente."
+
+#: includes/ajax.php:202
+msgid "Attachment does not exist."
+msgstr "O Anexo não existe."
+
+#: includes/ajax.php:204
+msgid "Incorrect attachment ID."
+msgstr "ID anexado incorreto."
+
+#: includes/ajax.php:208
+msgid "File could not be deleted."
+msgstr "O Arquivo não pôde ser excluído."
+
+#: includes/ajax.php:235 includes/ajax.php:270
+msgid "Post with given ID does not exist."
+msgstr "O Post com o ID infromado não existe."
+
+#: includes/class-form.php:169
+msgid "Invalid value."
+msgstr "Valor inválido."
+
+#: includes/class-updates-manager.php:116
+msgid "License"
+msgstr "Licença"
+
+#: includes/class-updates-manager.php:150
+msgid "Cannot connect to remote server. Please try again later."
+msgstr ""
+"Não é possível conectar ao servidor remoto. Por favor, tente novamente mais "
+"tarde."
+
+#: includes/class-updates-manager.php:316
+msgid "License ..."
+msgstr "Licença"
+
+#: includes/class-updates-manager.php:320
+msgid "Activate your License in order to enable automatic updates."
+msgstr "Ativar sua licença para permitir atualizações automáticas."
+
+#: includes/class-widget-ads.php:35 includes/class-widget-ads.php:50
+msgid "WPAdverts Ads"
+msgstr "WPAdverts Ads"
+
+#: includes/class-widget-ads.php:52
+msgid "Displays list of recent ads."
+msgstr "Mostrar a lista de anúncios recentes."
+
+#: includes/class-widget-ads.php:82
+msgid "Count"
+msgstr ""
+
+#: includes/class-widget-ads.php:88
+msgid "Keyword"
+msgstr "Palavra"
+
+#: includes/class-widget-ads.php:93 includes/defaults.php:144
+#: templates/single.php:52
+msgid "Location"
+msgstr "Localização"
+
+#: includes/class-widget-ads.php:98 includes/defaults.php:105
+#: templates/single.php:37
+msgid "Category"
+msgstr "Categoria"
+
+#: includes/class-widget-ads.php:105
+msgid "Price Min."
+msgstr "Preço Min."
+
+#: includes/class-widget-ads.php:111
+msgid "Price Max."
+msgstr "Preço Max."
+
+#: includes/class-widget-ads.php:117
+msgid "Sort By"
+msgstr "Organizar por"
+
+#: includes/class-widget-ads.php:123
+msgid "Publish Date"
+msgstr "Data da publicação"
+
+#: includes/class-widget-ads.php:139
+msgid "Order"
+msgstr "Ordem"
+
+#: includes/class-widget-ads.php:145
+msgid "Descending"
+msgstr "Descendente"
+
+#: includes/class-widget-ads.php:150
+msgid "Ascending"
+msgstr "Ascendente"
+
+#: includes/class-widget-ads.php:161
+msgid "Show featured Ads only."
+msgstr "Mostrar somente anúncios em destaque"
+
+#: includes/class-widget-ads.php:484 templates/list.php:70
+msgid "There are no ads matching your search criteria."
+msgstr "Não há anúncios que correspondam aos seus critérios de pesquisa."
+
+#: includes/class-widget-categories.php:30
+#: includes/class-widget-categories.php:39
+msgid "Advert Categories"
+msgstr "Categorias de Anúncio "
+
+#: includes/class-widget-categories.php:41
+msgid "Displays list of available categories."
+msgstr "Mostrar a lista de categorias disponíveis"
+
+#: includes/class-widget-categories.php:90
+msgid "Hide empty"
+msgstr "Esconder o que estiver vazio"
+
+#: includes/class-widget-categories.php:104
+msgid "Show post counts"
+msgstr "Mostrar contador de posts"
+
+#: includes/class-widget-categories.php:118
+msgid "Show top categories only"
+msgstr "Mostrar somente categorias superiores"
+
+#: includes/class-widget-categories.php:180
+msgid "Go Up (%s)"
+msgstr "Ir para (%s)"
+
+#: includes/class-widget-categories.php:182
+msgid "Go Up (Home)"
+msgstr "Ir para (Home)"
+
+#: includes/class-widget-categories.php:232 templates/categories-all.php:51
+#: templates/categories-top.php:23
+msgid "No categories found."
+msgstr "Nenhuma categoria encontrada."
+
+#: includes/defaults.php:44
+msgid "Contact Information"
+msgstr "Informações de contato"
+
+#: includes/defaults.php:50
+msgid "Account"
+msgstr "Conta"
+
+#: includes/defaults.php:78
+msgid "Phone Number"
+msgstr "Número do Telefone"
+
+#: includes/defaults.php:90
+msgid "Item Information"
+msgstr "Informações sobre o item"
+
+#: includes/defaults.php:159
+msgid "Keyword ..."
+msgstr "Palavra"
+
+#: includes/defaults.php:172
+msgid "Location ..."
+msgstr "Localização"
+
+#: includes/defaults.php:280
+msgid "Is Required"
+msgstr "É obrigatório"
+
+#: includes/defaults.php:282
+msgid "Field cannot be empty."
+msgstr "O campo não pode estar vazio."
+
+#: includes/defaults.php:293
+msgid "Provided email address is invalid."
+msgstr "O endereço de e-mail fornecido é inválido."
+
+#: includes/defaults.php:303
+msgid "Cannot create account. User with this email address already exists."
+msgstr ""
+"Não é possível criar sua conta. Já existe um cadastro com esse endereço de e-"
+"mail."
+
+#: includes/defaults.php:311
+msgid "Is Integer"
+msgstr "É inteiro"
+
+#: includes/defaults.php:313
+msgid "Provided value is not an integer."
+msgstr "O valor fornecido não é um número inteiro."
+
+#: includes/defaults.php:321
+msgid "String Length"
+msgstr "Tamanho do texto"
+
+#: includes/defaults.php:323
+msgid "Incorrect string length."
+msgstr "Tamanho do texto incorreto."
+
+#: includes/defaults.php:325
+msgid "Text needs to be at least %min% characters long."
+msgstr "O Texto precisa ter pelo menos  %min%  caracteres."
+
+#: includes/defaults.php:326
+msgid "Text cannot be longer than %max% characters."
+msgstr "O texto não pode ser maior do que %max% caracteres."
+
+#: includes/events.php:58
+msgid "Every 5 minutes"
+msgstr "A cada 5 minutos"
+
+#: includes/functions.php:268
+msgid "Uploaded file is NOT an image"
+msgstr "O arquivo enviado NÂO é uma imagem"
+
+#: includes/functions.php:378
+msgid "Category: %s"
+msgstr "Categoria: %s"
+
+#: includes/functions.php:1028
+msgid ""
+"You are posting as <strong>%1$s</strong>. <br/>If you want to use a "
+"different account, please <a href=\"%2$s\">logout</a>."
+msgstr ""
+"Você está postando como <strong>%1$s</ strong>. <br/> Se você quiser usar "
+"uma conta diferente, por favor <a href=\"%2s\"> sair </a>."
+
+#: includes/functions.php:1033
+msgid ""
+"Create an account for me so i can manage all my ads from one place (password "
+"will be emailed to you) or <a href=\"%s\">Sign In</a>"
+msgstr ""
+"Criar uma conta para mim para que eu possa gerenciar todos os meus anúncios "
+"(a senha será enviada para você) ou <a href=\"%s\"> Entrar </a>"
+
+#: includes/functions.php:1248
+msgid "Redirecting"
+msgstr "Redirecionando"
+
+#: includes/functions.php:1249
+msgid ""
+"Your are being redirected to Edit page. <a href=\"%s\">Click here</a> if it "
+"is taking to long. "
+msgstr ""
+"Você está sendo redirecionado para página de edição. <a href=\"%s\"> Clique "
+"aqui </a> se estiver demorando muito."
+
+#: includes/functions.php:1418
+msgid "US Dollars"
+msgstr "Dolares Americanos"
+
+#: includes/functions.php:1419
+msgid "Euros"
+msgstr "Euros"
+
+#: includes/functions.php:1420
+msgid "Pounds Sterling"
+msgstr "Libras Esterlinas"
+
+#: includes/functions.php:1421
+msgid "Australian Dollars"
+msgstr "Doláres Australianos"
+
+#: includes/functions.php:1422
+msgid "Brazilian Real"
+msgstr "Real Brasileiro"
+
+#: includes/functions.php:1423
+msgid "Canadian Dollars"
+msgstr "Dólares Canadenses"
+
+#: includes/functions.php:1424
+msgid "Czech Koruna"
+msgstr "Coroa checa"
+
+#: includes/functions.php:1425
+msgid "Danish Krone"
+msgstr "Coroa dinamarquesa"
+
+#: includes/functions.php:1426
+msgid "Hong Kong Dollar"
+msgstr "Dólar de Hong Kong"
+
+#: includes/functions.php:1427
+msgid "Hungarian Forint"
+msgstr "Forint húngaro"
+
+#: includes/functions.php:1428
+msgid "Israeli Shekel"
+msgstr "Shekel de Israel"
+
+#: includes/functions.php:1429
+msgid "Japanese Yen"
+msgstr "Yen japonês"
+
+#: includes/functions.php:1430
+msgid "Malaysian Ringgits"
+msgstr "Ringgits da Malásia"
+
+#: includes/functions.php:1431
+msgid "Mexican Peso"
+msgstr "Peso Mexicano"
+
+#: includes/functions.php:1432
+msgid "New Zealand Dollar"
+msgstr "Dólar da Nova Zelândia"
+
+#: includes/functions.php:1433
+msgid "Norwegian Krone"
+msgstr "Coroa norueguesa"
+
+#: includes/functions.php:1434
+msgid "Philippine Pesos"
+msgstr "Pesos das Filipinas"
+
+#: includes/functions.php:1435
+msgid "Polish Zloty"
+msgstr "Zloty Polonês"
+
+#: includes/functions.php:1436
+msgid "Singapore Dollar"
+msgstr "Dólar de Singapura"
+
+#: includes/functions.php:1437
+msgid "Swedish Krona"
+msgstr "Coroa sueca"
+
+#: includes/functions.php:1438
+msgid "Swiss Franc"
+msgstr "Franco suíço"
+
+#: includes/functions.php:1439
+msgid "Taiwan New Dollars"
+msgstr "Novos Dólares de Taiwan"
+
+#: includes/functions.php:1440
+msgid "Thai Baht"
+msgstr "Baht Tailandês"
+
+#: includes/functions.php:1441
+msgid "Indian Rupee"
+msgstr "Rúpia Indiana"
+
+#: includes/functions.php:1442
+msgid "Turkish Lira"
+msgstr "Lira Turca"
+
+#: includes/functions.php:1443
+msgid "Iranian Rial"
+msgstr "Rial Iraniano"
+
+#: includes/functions.php:1444
+msgid "Russian Rubles"
+msgstr "Russia Rubles"
+
+#: includes/functions.php:1445
+msgid "South African Rand"
+msgstr "Africa do Sul Rand"
+
+#: includes/functions.php:1754
+msgid "Show Contact Information"
+msgstr "Mostrar Informações de Contato"
+
+#: includes/functions.php:1762
+msgid "Phone"
+msgstr "Telefone"
+
+#: includes/gallery.php:44
+msgid "Allowed Files"
+msgstr "Arquivos permitido"
+
+#: includes/gallery.php:65 includes/gallery.php:150
+msgid "Drop Images Here"
+msgstr "Deixar as imagens aqui."
+
+#: includes/gallery.php:66 includes/gallery.php:151
+msgid "browse files ..."
+msgstr "procurar arquivos ..."
+
+#: includes/gallery.php:77
+msgid "Close"
+msgstr "Fechar"
+
+#: includes/gallery.php:81 wpadverts.php:160
+msgid "Edit Image"
+msgstr "Editar imagem"
+
+#: includes/gallery.php:85 includes/gallery.php:206
+msgid "Image Properties"
+msgstr "Propriedades da imagem"
+
+#: includes/gallery.php:108 includes/gallery.php:219
+msgid "Use this image as main image"
+msgstr "Use esta imagem como imagem principal"
+
+#: includes/gallery.php:134 includes/gallery.php:232
+msgid "Update and Close"
+msgstr "Alterar e fechar"
+
+#: includes/shortcodes.php:264
+msgid "There are errors in your form. Please correct them before proceeding."
+msgstr "Há erros no seu formulário. Por favor, corrija antes de prosseguir."
+
+#: includes/shortcodes.php:316
+msgid ""
+"Only logged in users can access this page. <a href=\"%1$s\">Login</a> or <a "
+"href=\"%2$s\">Register</a>."
+msgstr ""
+"Somente usuários registrados podem acessar esta página. <a href=\"%1$s\"> "
+"Entre </a> ou <a href=\"%2$s\"> Registo </a>."
+
+#: includes/shortcodes.php:411
+msgid "Ad does not exist."
+msgstr "Classificado não existe."
+
+#: includes/shortcodes.php:417
+msgid "You do not own this Ad."
+msgstr "Você não é dono deste anúncio."
+
+#: includes/shortcodes.php:425
+msgid "Incorrect post status [%s]."
+msgstr "Status incorreto do post [%s]."
+
+#: includes/shortcodes.php:462
+msgid "Post has been updated."
+msgstr "O Post foi atualizado."
+
+#: includes/shortcodes.php:466
+msgid "Cannot update. There are errors in your form."
+msgstr "Não é possível atualizar. Há erros no seu formulário."
+
+#: templates/add-preview.php:8
+msgid "Edit Listing"
+msgstr "Editar lista"
+
+#: templates/add-preview.php:14
+msgid "Publish Listing"
+msgstr "Liste de publicados."
+
+#: templates/add-save.php:5
+msgid ""
+"Your ad has been put into moderation, please wait for admin to approve it."
+msgstr ""
+"O seu anúncio foi colocado em moderação, aguarde o administrador para aprová-"
+"lo."
+
+#: templates/add-save.php:7
+msgid ""
+"Your ad has been published. You can view it here \"<a href=\"%1$s\">%2$s</a>"
+"\"."
+msgstr ""
+"O seu anúncio foi publicado. Você pode vê-lo aqui \"<a href=\"%1$s\">%2$s</a>"
+"\"."
+
+#: templates/add.php:42 templates/form.php:51
+msgid "Preview"
+msgstr "Visualização"
+
+#: templates/categories-all.php:39
+msgid "<em>View All &raquo;</em>"
+msgstr "<em>Ver tudo &raquo;</em>"
+
+#: templates/list.php:42
+msgid "Grid"
+msgstr "Grid"
+
+#: templates/list.php:43
+msgid "List"
+msgstr "Lista"
+
+#: templates/list.php:51
+msgid "Advanced Search"
+msgstr "Busca Avançada"
+
+#: templates/list.php:53
+msgid "SEARCH"
+msgstr "PESQUISAR"
+
+#: templates/list.php:57
+msgid "Filter Results"
+msgstr "Filtrar resultados"
+
+#: templates/manage-edit.php:2
+msgid "Go Back"
+msgstr "Voltar"
+
+#: templates/manage-edit.php:3 templates/manage.php:32
+msgid "View Ad"
+msgstr "Ver anúncio"
+
+#: templates/manage.php:14
+msgid "This Ad is in moderation."
+msgstr "Este anúncio está em moderação."
+
+#: templates/manage.php:18
+msgid "This Ad expired."
+msgstr "Este anúncio expirou."
+
+#: templates/manage.php:40
+msgid "You do not have any Ads posted yet."
+msgstr "Você ainda não tem nenhum anúncio publicado."
+
+#: templates/single.php:19
+msgid "by <strong>%s</strong>"
+msgstr "de <strong>%s</strong>"
+
+#: templates/single.php:20
+msgid "Published: %1$s (%2$s ago)"
+msgstr "Publicado: %1$s (%2$s atrás)"
+
+#: wpadverts.php:76
+msgid "Expired <span class=\"count\">(%s)</span>"
+msgid_plural "Expired <span class=\"count\">(%s)</span>"
+msgstr[0] "Expirado <span class=\"count\">(%s)</span>"
+msgstr[1] "Expirado <span class=\"count\">(%s)</span>"
+
+#: wpadverts.php:84
+msgid "Temporary <span class=\"count\">(%s)</span>"
+msgid_plural "Temporary <span class=\"count\">(%s)</span>"
+msgstr[0] "Temporário <span class=\"count\">(%s)</span>"
+msgstr[1] "Temporário <span class=\"count\">(%s)</span>"
+
+#: wpadverts.php:91
+msgid "Add New Classified"
+msgstr "Adicionar novo classificado"
+
+#: wpadverts.php:92
+msgid "Edit Classified"
+msgstr "Editar classificado"
+
+#: wpadverts.php:93
+msgid "New Classified"
+msgstr "Novo classificado"
+
+#: wpadverts.php:94
+msgid "All Classifieds"
+msgstr "Todos os classificados"
+
+#: wpadverts.php:95
+msgid "View Classified"
+msgstr "Visualizar classificado"
+
+#: wpadverts.php:96
+msgid "Search Classifieds"
+msgstr "Pesquisa de classificados"
+
+#: wpadverts.php:97
+msgid "No Classifieds found"
+msgstr "Nenhum anúncio foi encontrado."
+
+#: wpadverts.php:98
+msgid "No Classifieds found in the Trash"
+msgstr "Não foram encontrados anúncios na lixeira"
+
+#: wpadverts.php:100
+msgid "Classifieds"
+msgstr "Classificados"
+
+#: wpadverts.php:150
+msgid "Select options ..."
+msgstr "Selecione as opções ..."
+
+#: wpadverts.php:155
+msgid "No results found."
+msgstr "Nenhum resultado foi encontrado."
+
+#: wpadverts.php:161
+msgid "Delete Image"
+msgstr "Apagar imagem"
+
+#: wpadverts.php:162
+msgid "View Full Image"
+msgstr "Ver a imagem completa"
+
+#: wpadverts.php:163
+msgid "Main"
+msgstr "Principal"
+
+#: wpadverts.php:340
+msgid "Module activated successfully."
+msgstr "Módulo ativado com sucesso."
+
+#. Plugin Name of the plugin/theme
+msgid "WP Adverts"
+msgstr "WP Adverts"
+
+#. Plugin URI of the plugin/theme
+msgid "https://wpadverts.com/"
+msgstr "https://wpadverts.com/"
+
+#. Description of the plugin/theme
+msgid "The lightweight WordPress classifieds plugin done right."
+msgstr "O plugin Wordpress lightweight de classificados está correto."
+
+#. Author of the plugin/theme
+msgid "Greg Winiarski"
+msgstr "Greg Winiarski"
+
+#: addons/payments/payments.php:60
+msgctxt "completed status payment"
+msgid "Completed"
+msgstr "Completo"
+
+#: addons/payments/payments.php:69
+msgctxt "failed status payment"
+msgid "Failed"
+msgstr "Falhou"
+
+#: addons/payments/payments.php:78
+msgctxt "pending status payment"
+msgid "Pending"
+msgstr "Pendente"
+
+#: addons/payments/payments.php:87
+msgctxt "refunded status payment"
+msgid "Refunded"
+msgstr "Devolvido"
+
+#: addons/payments/payments.php:96
+msgctxt "post"
+msgid "Pending"
+msgstr "Pendente"
+
+#: wpadverts.php:73
+msgctxt "post"
+msgid "Expired"
+msgstr "Expirado"
+
+#: wpadverts.php:80
+msgctxt "post"
+msgid "Temporary"
+msgstr "Temporário"
+
+#: wpadverts.php:88
+msgctxt "post type general name"
+msgid "Classifieds"
+msgstr "Classificados"
+
+#: wpadverts.php:89
+msgctxt "post type singular name"
+msgid "Classified"
+msgstr "Classificado"
+
+#: wpadverts.php:90
+msgctxt "classified"
+msgid "Add New"
+msgstr "Adicionar Novo"
+

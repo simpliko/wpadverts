@@ -35,7 +35,7 @@
                     <a href="<?php esc_attr_e( add_query_arg( array( 'module'=>$key ) ) ) ?>" class="button-primary"><?php _e("Settings") ?></a>
                 <?php elseif( adverts_plugin_uploaded( $data["plugin"] ) ): ?>
                     <em><?php _e( "Addon Uploaded but Inactive", "adverts") ?></em>
-                    <a href="<?php esc_attr_e( admin_url( 'plugins.php?plugin_status=inactive' ) ) ?>" class="button-primary"><?php _e("Activate") ?></a>
+                    <a href="<?php esc_attr_e( admin_url( 'plugins.php?s=' . urldecode( $data["title"] ) ) ) ?>" class="button-primary"><?php _e("Activate") ?></a>
                 <?php else: ?>
                     <a href="<?php esc_attr_e( $data["purchase_url"]) ?>" class="button-secondary">
                         <strong><?php _e("Get This Addon", "adverts") ?></strong>

@@ -364,6 +364,10 @@ font-size: 12px;
     color: crimson;
 }
 
+.adverts-form .adverts-form-input-group > div {
+    padding: 2px 0 2px 0;
+}
+
 tr.adverts-field-error {
     background-color: peachpuff;
 }

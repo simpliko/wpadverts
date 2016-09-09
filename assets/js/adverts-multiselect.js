@@ -82,10 +82,14 @@ jQuery(function($) {
       holder.append(input).append(options);
 
       $this.replaceWith(holder);
-      //$this.remove();
-      //$parent.append(holder)
 
-      options.find("input[type=checkbox]").change();
+      var checked = [];
+      options.find("input[type=checkbox]").each(function(j, c) {
+          if($(c).is(":checked")) {
+              checked.push($(c).parent().text().trim());
+          }
+      });
+      input.attr("value", checked.join(", "));
   });
 
   $(document).mouseup(function(e) {

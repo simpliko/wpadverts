@@ -284,26 +284,13 @@ function adext_payments_form_load( $form ) {
     
     foreach($pricings->posts as $data) {
         
-        if($data->post_content) {
-            $post_content = '<br/><small style="padding-left:25px">'.$data->post_content.'</small>' ;
-        } else {
-            $post_content = '';
-        }
-        
         if( get_post_meta( $data->ID, 'adverts_price', true ) ) {
             $adverts_price = adverts_price( get_post_meta( $data->ID, 'adverts_price', true ) );
         } else {
             $adverts_price = __("Free", "adverts");
         }
         
-        $text = sprintf(
-            __('<b>%1$s</b> - %2$s for %3$d days.%4$s', 'adverts'), 
-            $data->post_title, 
-            $adverts_price, 
-            get_post_meta( $data->ID, 'adverts_visible', true ),
-            $post_content
-        );
-        $opts[] = array("value"=>$data->ID, "text"=>  $text);
+        $opts[] = array( "value"=>$data->ID, "text"=> $data->post_content );
     }
 
     wp_enqueue_style( 'adverts-payments-frontend' );
@@ -315,7 +302,10 @@ function adext_payments_form_load( $form ) {
         "order" => 50,
         "empty_option" => true,
         "options" => $opts,
-        "value" => ""
+        "value" => "",
+        "validator" => array(
+            array( "name" => "is_required" )
+        )
     );
     
     add_filter("adverts_form_bind", "adext_payments_form_bind");
@@ -340,7 +330,7 @@ function adverts_payments_field_payment($field) {
     
     ob_start();
     
-    echo '<div>';
+    echo '<div class="adverts-pricings-list">';
     
     foreach( $field["options"] as $option ) {
     

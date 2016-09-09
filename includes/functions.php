@@ -932,18 +932,27 @@ function adverts_field_checkbox( $field ) {
         $value = $field["value"];
     }
     
-    foreach($field["options"] as $opt) {
+    if(isset($field["options_callback"])) {
+        $opt = call_user_func( $field["options_callback"] );
+    } elseif(isset($field["options"])) {
+        $opt = $field["options"];
+    } else {
+        trigger_error("You need to specify options source for field [{$field['name']}].", E_USER_ERROR);
+        $opt = array();
+    }
+
+    foreach($opt as $v) {
         $checkbox = new Adverts_Html("input", array(
             "type" => "checkbox",
             "name" => $field["name"].'[]',
             "id" => $field["name"].'_'.$i,
-            "value" => $opt["value"],
-            "checked" => in_array($opt["value"], $value) ? "checked" : null
+            "value" => $v["value"],
+            "checked" => in_array($v["value"], $value) ? "checked" : null
         ));
 
         $label = new Adverts_Html("label", array(
             "for" => $field["name"].'_'.$i
-        ), $checkbox->render() . ' ' . $opt["text"]);
+        ), $checkbox->render() . ' ' . $v["text"]);
         
         if( isset( $field["class"] ) ) {
             $class = $field["class"];
@@ -951,16 +960,24 @@ function adverts_field_checkbox( $field ) {
             $class = null;
         }
         
+        if( isset( $v["depth"] ) ) {
+            $depth = $v["depth"];
+        } else {
+            $depth = 0;
+        }
+
+        $padding = str_repeat("&nbsp; &nbsp;", $depth * 2);
+        
         $wrap = new Adverts_Html("div", array(
-            "class" => $class
-        ), $label->render() );
+            "class" => $class,
+        ), $padding . $label->render() );
         
         $opts .= $wrap->render();
         
         $i++;
     }
     
-    echo Adverts_Html::build("div", array("class"=>"adverts-form-input-group"), $opts);
+    echo Adverts_Html::build("div", array("class"=>"adverts-form-input-group adverts-form-input-group-checkbox"), $opts);
 }
 
 /**
@@ -1006,7 +1023,7 @@ function adverts_field_radio( $field ) {
         $i++;
     }
     
-    echo Adverts_Html::build("div", array("class"=>"adverts-form-input-group"), $opts);
+    echo Adverts_Html::build("div", array("class"=>"adverts-form-input-group adverts-form-input-group-radio"), $opts);
 }
 
 /**
@@ -1850,4 +1867,26 @@ function adverts_remove_account_field( $form ) {
     }
     
     return $form;
+}
+
+/**
+ * Replaces 'advert' class with 'classified' class.
+ * 
+ * This function prevents hiding Ad detail pages by AdBlock or other ad blocking
+ * browser plugins
+ * 
+ * This function is applied using 'post_class' filter.
+ * 
+ * @since 1.0.10
+ * @param array $classes List of classes
+ * @return array
+ */
+function adverts_post_class( $classes ) {
+    foreach( $classes as $key => $cl ) {
+        if( $cl == "advert" ) {
+            $classes[$key] = "classified";
+            break;
+        }
+    }
+    return $classes;
 }

@@ -22,10 +22,6 @@
     
 <?php adverts_admin_flash() ?>
     
-<script type="text/javascript">
-    Wpjb.DeleteType = "<?php _e("listing", "adverts") ?>";
-</script>
-
 <form method="post" action="<?php esc_attr_e( add_query_arg( array( 'noheader'=>1, 'pg'=>null ) ) ) ?>" id="posts-filter">
 <input type="hidden" name="noheader" value="1" />
 

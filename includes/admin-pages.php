@@ -96,14 +96,14 @@ function adverts_admin_page_extensions() {
                     "text" => __("Use WooCommerce to charge users for posting classifieds.", "adverts"),
                     "type" => "",
                     "plugin" => "wpadverts-wc/wpadverts-wc.php",
-                    "purchase_url" => "http://wpadverts.com/extensions/woocommerce-integration/"
+                    "purchase_url" => "https://wpadverts.com/extensions/woocommerce-integration/"
                 ),
                 "buddypress" => array(
                     "title" => __("BuddyPress Integration", "adverts"),
                     "text" => __("Integrate user Ads with BuddyPress profiles, registration and private messages.", "adverts"),
                     "type" => "",
                     "plugin" => "wpadverts-bp/wpadverts-bp.php",
-                    "purchase_url" => "http://wpadverts.com/extensions/buddypress-integration/"
+                    "purchase_url" => "https://wpadverts.com/extensions/buddypress-integration/"
                 )
             )
         ),
@@ -116,12 +116,25 @@ function adverts_admin_page_extensions() {
                     "type" => "",
                     "plugin" => null
                 ),
+                "contact-form" => array(
+                    "title" => __( "Contact Form", "adverts" ),
+                    "text" => __( "Display contact form on Ad details pages instead of just the contact information.", "adverts" ),
+                    "type" => "",
+                    "plugin" => null
+                ),
                 "wpadverts-mal" => array(
                     "title" => __( "Maps And Locations", "adverts" ),
                     "text" => __( "Locations Taxonomy, Google Maps integration and more.", "adverts" ),
                     "type" => "",
                     "plugin" => "wpadverts-mal/wpadverts-mal.php",
-                    "purchase_url" => "http://wpadverts.com/extensions/maps-and-locations/"
+                    "purchase_url" => "https://wpadverts.com/extensions/maps-and-locations/"
+                ),
+                "wpadverts-fee-per-category" => array(
+                    "title" => __( "Fee Per Category", "adverts" ),
+                    "text" => __( "Set fee for Ads posting per category or allow to post for free in some categories.", "adverts" ),
+                    "type" => "",
+                    "plugin" => "wpadverts-fee-per-category/wpadverts-fee-per-category.php",
+                    "purchase_url" => "https://wpadverts.com/extensions/fee-per-category/"
                 ),
             )
         ),
@@ -139,7 +152,7 @@ function adverts_admin_page_extensions() {
                     "text" => __("PayPal Payments Standard, allow users to pay for ads via PayPal.", "adverts"),
                     "type" => "",
                     "plugin" => "wpadverts-paypal-standard/wpadverts-paypal-standard.php",
-                    "purchase_url" => "http://wpadverts.com/extensions/paypal-payments-standard/"
+                    "purchase_url" => "https://wpadverts.com/extensions/paypal-payments-standard/"
                 ),
             )
         )

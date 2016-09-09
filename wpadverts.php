@@ -32,6 +32,9 @@ if( !defined("ADVERTS_FILE") ) {
     define( "ADVERTS_URL", plugins_url() . "/" . basename(ADVERTS_PATH) );
 }
 
+// init global variables
+global $adverts_config, $adverts_namespace;
+
 // define global $adverts_config variable
 $adverts_config = null;
 
@@ -136,7 +139,7 @@ function adverts_init() {
     
     wp_register_script( 'adverts-auto-numeric', ADVERTS_URL  .'/assets/js/auto-numeric.js', array( 'jquery' ), "1", true);
     wp_register_script( 'adverts-autocomplete', ADVERTS_URL . '/assets/js/adverts-autocomplete.js', array( 'jquery' ), "1", true);
-    wp_register_script( 'adverts-multiselect', ADVERTS_URL . '/assets/js/adverts-multiselect.js', array( 'jquery' ), "1", true);
+    wp_register_script( 'adverts-multiselect', ADVERTS_URL . '/assets/js/adverts-multiselect.js', array( 'jquery' ), "2", true);
     wp_register_script( 'adverts-gallery', ADVERTS_URL . '/assets/js/adverts-gallery.js', array( 'jquery', 'plupload-all' ), "1", true);
     
     wp_localize_script( 'adverts-auto-numeric', 'adverts_currency', array(
@@ -197,9 +200,9 @@ function adverts_init() {
  */
 function adverts_init_frontend() {
     
-    wp_register_style( 'adverts-frontend', ADVERTS_URL . '/assets/css/adverts-frontend.css', array(), "1" );
+    wp_register_style( 'adverts-frontend', ADVERTS_URL . '/assets/css/adverts-frontend.css', array(), "2" );
     
-    wp_register_script('adverts-frontend', ADVERTS_URL . '/assets/js/adverts-frontend.js', array( 'jquery' ), "1" );
+    wp_register_script('adverts-frontend', ADVERTS_URL . '/assets/js/adverts-frontend.js', array( 'jquery' ), "2" );
     wp_register_script('adverts-frontend-add', ADVERTS_URL . '/assets/js/adverts-frontend-add.js', array( 'jquery'), "1" );
     wp_register_script('responsive-slides', ADVERTS_URL . '/assets/js/responsive-slides.js', array('jquery'), "1" );
     
@@ -213,6 +216,7 @@ function adverts_init_frontend() {
     add_filter('post_thumbnail_html', 'adverts_post_thumbnail_html');
     add_action('template_redirect', 'adverts_disable_default_archive');
     add_action('adverts_new_user_notification', 'wp_new_user_notification', 10, 3 );
+    add_filter('post_class', 'adverts_post_class' );
     
     add_action('adverts_tpl_single_top', 'adverts_single_rslides');
     add_action('adverts_tpl_single_bottom', 'adverts_single_contact_information');

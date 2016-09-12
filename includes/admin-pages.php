@@ -136,6 +136,13 @@ function adverts_admin_page_extensions() {
                     "plugin" => "wpadverts-fee-per-category/wpadverts-fee-per-category.php",
                     "purchase_url" => "https://wpadverts.com/extensions/fee-per-category/"
                 ),
+                "wpadverts-recaptcha" => array(
+                    "title" => __( "reCAPTCHA", "adverts" ),
+                    "text" => __( "Protect your forms from SPAM using easy easy for humans and hard for bots captcha.", "adverts" ),
+                    "type" => "",
+                    "plugin" => "wpadverts-recaptcha/wpadverts-recaptcha.php",
+                    "purchase_url" => "https://wpadverts.com/extensions/recaptcha/"
+                ),
             )
         ),
         array(

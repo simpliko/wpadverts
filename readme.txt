@@ -1,10 +1,10 @@
 === WPAdverts - Classifieds Plugin ===
-Plugin URI: http://wpadverts.com/
+Plugin URI: https://wpadverts.com/
 Contributors: gwin
 Tags: classifieds, classified, classified ads, classified script, classifieds script, wp classified, wp classifieds
 Requires at least: 4.0
-Tested up to: 4.6.0
-Stable tag: 1.0.9
+Tested up to: 4.6.1
+Stable tag: 1.0.10
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -48,6 +48,8 @@ WPAdverts plugin can be extended with premium add-ons. Currently we have a coupl
 * [Maps and Locations](https://wpadverts.com/extensions/maps-and-locations/)
 * [PayPal Payments Standard](https://wpadverts.com/extensions/paypal-payments-standard/)
 * [Restricted Categories](https://wpadverts.com/extensions/restricted-categories/)
+* [Fee Per Category](https://wpadverts.com/extensions/fee-per-category/)
+* [reCAPTCHA Integration](https://wpadverts.com/extensions/recaptcha/)
 
 See all https://wpadverts.com/extensions/
 
@@ -55,6 +57,7 @@ See all https://wpadverts.com/extensions/
 
 * French
 * German
+* Portugese
 * Russian
 * Slovenian
 
@@ -63,7 +66,7 @@ See all https://wpadverts.com/extensions/
 * Wording - I am not English native speaker, if you find any typo, grammer mistake or etc. please report it on support forum.
 * Translation - If you translated Adverts to your language feel free to submit translation.
 * Rate Adverts - If you find this plugin useful please leave [positive review](https://wordpress.org/support/view/plugin-reviews/wpadverts).
-* Submit a Bug - If you find some issue please [submit a bug](https://github.com/gwin/wpadverts/issues/new) on GitHub.
+* Submit a Bug - If you find some issue please [submit a bug](https://github.com/simpliko/wpadverts/issues/new) on GitHub.
 
 == Installation ==
 
@@ -84,6 +87,14 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.0.10 - 2016-09-12 =
+
+* TRANSLATION: Portugese
+* NEW: Contact Form Module (you can enable it from wp-admin / Classifieds / Options)
+* FIXED: adverts_config() causing a fatal error in WP-CLI
+* FIXED: JavaScript error on Pricings list
+* FIXED: 'advert' class replaced with 'classified' on Advert details pages (to avoid AdBlockers)
 
 = 1.0.9 - 2016-08-14 = 
 

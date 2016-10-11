@@ -52,6 +52,11 @@ $adverts_namespace = array( 'config' => array(
         'currency_char_thousand' => ',',
         'visibility' => 30,
         'ads_list_id' => null,
+        'ads_list_default__search_bar' => 'enabled',
+        'ads_list_default__columns' => 2,
+        'ads_list_default__display' => 'grid',
+        'ads_list_default__switch_views' => 0,
+        'ads_list_default__posts_per_page' => 20,
     )
 ) );
 

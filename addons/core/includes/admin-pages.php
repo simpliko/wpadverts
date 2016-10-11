@@ -139,6 +139,63 @@ Adverts::instance()->set("form_core_config", array(
             )
         ),
         array(
+            "name" => "_defaults_adverts_list",
+            "type" => "adverts_field_header",
+            "order" => 10,
+            "label" => __( 'Defaults Values For [adverts_list]', 'adverts' ),
+            "title" => __( 'Defaults Values For [adverts_list]', 'adverts' )
+        ),
+        array(
+            "name" => "ads_list_default__search_bar",
+            "type" => "adverts_field_select",
+            "label" => __( "Search Bar", "adverts" ),
+            "order" => 10,
+            "options" => array(
+                array( "value" => "enabled", "text" => __( "Enabled", "adverts" ) ),
+                array( "value" => "disabled", "text" => __( "Disabled", "adverts" ) )
+            )
+        ),
+        array(
+            "name" => "ads_list_default__display",
+            "type" => "adverts_field_select",
+            "label" => __( "Display Ads As", "adverts" ),
+            "order" => 10,
+            "options" => array(
+                array( "value" => "grid", "text" => __( "Grid (2 or more columns)", "adverts" ) ),
+                array( "value" => "list", "text" => __( "List (1 column)", "adverts" ) )
+            )
+        ),
+        array(
+            "name" => "ads_list_default__columns",
+            "type" => "adverts_field_select",
+            "order" => 10,
+            "label" => __( "Columns", "adverts" ),
+            "options" => array(
+                array( "value" => 2, "text" => "2" ),
+                array( "value" => 3, "text" => "3" ),
+                array( "value" => 4, "text" => "4" ),
+            )
+        ),
+        array(
+            "name" => "ads_list_default__posts_per_page",
+            "type" => "adverts_field_text",
+            "order" => 10,
+            "label" => __( "Posts Per Page", "adverts" ),
+            "validator" => array(
+                array("name"=>"is_required"),
+                array("name"=>"is_integer")
+            )
+        ),
+        array(
+            "name" => "ads_list_default__switch_views",
+            "type" => "adverts_field_checkbox",
+            "label" => __( "Switch Views", "adverts" ),
+            "order" => 10,
+            "options" => array(
+                array( "value" => "grid", "text" => __( "Allow users to switch between grid and list view.", "adverts" ) ),
+            )
+        ),
+        array(
             "name" => "_currency_settings",
             "type" => "adverts_field_header",
             "order" => 10,

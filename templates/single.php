@@ -23,7 +23,7 @@
     
     <?php if( get_post_meta( $post_id, "adverts_price", true) ): ?>
     <div class="adverts-single-price" style="">
-        <span class="adverts-price-box"><?php echo adverts_price( get_post_meta( $post_id, "adverts_price", true) ) ?></span>
+        <span class="adverts-price-box"><?php echo esc_html( adverts_get_the_price( $post_id ) ) ?></span>
     </div>
     <?php endif; ?>
 </div>

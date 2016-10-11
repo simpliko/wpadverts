@@ -155,9 +155,7 @@ Adverts::instance()->set("form_search", array(
             "name" => "query",
             "type" => "adverts_field_text",
             "order" => 10,
-            "attr" => array(
-                "placeholder" => __("Keyword ...", "adverts")
-            ),
+            "placeholder" => __("Keyword ...", "adverts"),
             "meta" => array(
                 "search_group" => "visible",
                 "search_type" => "half" 
@@ -168,9 +166,7 @@ Adverts::instance()->set("form_search", array(
             "name" => "location",
             "type" => "adverts_field_text",
             "order" => 10,
-            "attr" => array(
-                "placeholder" => __("Location ...", "adverts")
-            ),
+            "placeholder" => __("Location ...", "adverts"),
             "meta" => array(
                 "search_group" => "visible",
                 "search_type" => "half"

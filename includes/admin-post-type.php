@@ -593,7 +593,7 @@ function adverts_manage_post_columns( $column, $post_id ) {
             if ( empty( $price ) ) {
                 echo __( 'None', 'adverts' );
             } else {
-                echo adverts_price($price);
+                echo adverts_get_the_price( $post_id, $price);
             }
 
             break;

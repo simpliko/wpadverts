@@ -104,6 +104,13 @@ function adverts_admin_page_extensions() {
                     "type" => "",
                     "plugin" => "wpadverts-bp/wpadverts-bp.php",
                     "purchase_url" => "https://wpadverts.com/extensions/buddypress-integration/"
+                ),
+                "custom-fields" => array(
+                    "title" => __("Custom Fields", "adverts"),
+                    "text" => __("Allow users to edit: Add, Search and Contact forms using easy to use drag and drop editor.", "adverts"),
+                    "type" => "",
+                    "plugin" => "wpadverts-custom-fields/wpadverts-custom-fields.php",
+                    "purchase_url" => "https://wpadverts.com/extensions/custom-fields/"
                 )
             )
         ),

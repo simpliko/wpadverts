@@ -98,7 +98,7 @@ function adverts_event_gc() {
             } 
 
             // permanently delete the post
-            wp_delete_post( $post->ID, true );
+            wp_delete_post( $post->ID, adverts_skip_trash() );
         }
     }
     

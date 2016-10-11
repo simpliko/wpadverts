@@ -303,6 +303,25 @@ function adverts_price( $price ) {
 }
 
 /**
+ * 
+ * @param float $price  Price to format
+ * @param int $post_id
+ * @return string       Formatted Price
+ */
+function adverts_get_the_price( $post_id = null, $price = null ) {
+    
+    if( $post_id === null ) {
+        $post_id = get_the_ID();
+    }
+    
+    if( $price === null ) {
+        $price = get_post_meta( $post_id, "adverts_price", true);
+    }
+    
+    return apply_filters( "adverts_get_the_price", adverts_price( $price ), $price, $post_id );
+}
+
+/**
  * Returns image that will be displayed on adverts list.
  * 
  * Function returns either the main image or first image on the list if the main
@@ -1889,4 +1908,20 @@ function adverts_post_class( $classes ) {
         }
     }
     return $classes;
+}
+
+/**
+ * Skip trash when deleting and Advert in the frontend.
+ * 
+ * This function allows to determine if Advert should be Trashed or Deleted when
+ * deleting an Advert in the frontend.
+ * 
+ * @uses adverts_skip_trash filter
+ * 
+ * @access public
+ * @since 1.0.11
+ * @return boolean  True if Adverts should be deleted False if Advert should be trashed.
+ */
+function adverts_skip_trash() {
+    return apply_filters( "adverts_skip_trash", true );
 }

@@ -456,7 +456,7 @@ class Adverts_Widget_Ads extends WP_Widget
             <div class="adverts-grid adverts-grid-compact">
             <?php if( $loop->have_posts() ): ?>
                 <?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
-                <?php $price = adverts_price( get_post_meta( get_the_ID(), "adverts_price", true ) ) ?>
+                <?php $price = adverts_get_the_price( get_the_ID() ) ?>
                 <?php $location = esc_html( get_post_meta( get_the_ID(), "adverts_location", true ) ) ?>
                 <div class="<?php echo adverts_css_classes( 'adverts-widget-recent', get_the_ID() ) ?>">
                     
@@ -475,7 +475,7 @@ class Adverts_Widget_Ads extends WP_Widget
                     <?php endif; ?>
                     
                     <?php if( $price ): ?>
-                    <span class="advert-widget-recent-price"><?php esc_html_e( $price ) ?></span>
+                    <span class="advert-widget-recent-price"><?php echo esc_html( $price ) ?></span>
                     <?php endif; ?>
                     
                 </div>

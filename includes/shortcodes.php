@@ -33,19 +33,21 @@ function shortcode_adverts_list( $atts ) {
 
     wp_enqueue_script( 'adverts-frontend' );
 
-    extract(shortcode_atts(array(
+    $params = shortcode_atts(array(
         'name' => 'default',
         'author' => null,
         'redirect_to' => '',
-        'search_bar' => 'enabled',
+        'search_bar' => adverts_config( 'config.ads_list_default__search_bar' ),
         'show_results' => true,
         'category' => null,
-        'columns' => 2,
-        'display' => 'grid',
-        'switch_views' => 0,
+        'columns' => adverts_config( 'config.ads_list_default__columns' ),
+        'display' => adverts_config( 'config.ads_list_default__display' ),
+        'switch_views' => adverts_config( 'config.ads_list_default__switch_views' ),
         'paged' => adverts_request("pg", 1),
-        'posts_per_page' => 20,
-    ), $atts));
+        'posts_per_page' => adverts_config( 'config.ads_list_default__posts_per_page' ),
+    ), $atts);
+    
+    extract( $params );
     
     if( is_numeric( $redirect_to ) ) {
         $action = get_permalink( $redirect_to );
@@ -438,10 +440,13 @@ function _adverts_manage_edit( $atts ) {
     $bind["post_content"] = $post->post_content;
     $bind["advert_category"] = array();
 
-    $terms = get_the_terms( $post_id, 'advert_category' );
-    if( is_array( $terms ) ) {
-        foreach( $terms as $term ) {
-            $bind["advert_category"][] = $term->term_id;
+    $taxonomy_objects = get_object_taxonomies( 'advert', 'objects' );
+    foreach( $taxonomy_objects as $taxonomy_key => $taxonomy ) {
+        $terms = get_the_terms( $post_id, $taxonomy_key );
+        if( is_array( $terms ) ) {
+            foreach( $terms as $term ) {
+                $bind[$taxonomy_key][] = $term->term_id;
+            }
         }
     }
     

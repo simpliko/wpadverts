@@ -281,7 +281,7 @@ function adverts_delete_tmp() {
         }
     } 
     
-    wp_delete_post( $id, true );
+    wp_delete_post( $id, adverts_skip_trash() );
     
     echo json_encode( array(
         'result' => 1
@@ -334,7 +334,7 @@ function adverts_delete() {
         }
     } 
     
-    wp_delete_post( $id, true );
+    wp_delete_post( $id, adverts_skip_trash() );
     
     if(adverts_request("redirect_to") ) {
         wp_redirect( adverts_request( "redirect_to" ) );

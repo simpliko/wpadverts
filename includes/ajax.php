@@ -277,11 +277,11 @@ function adverts_delete_tmp() {
     
     if( is_array( $children ) ) {
         foreach( $children as $attch) {
-            wp_delete_attachment( $attch->ID, true );
+            adverts_delete_post( $attch->ID );
         }
     } 
     
-    wp_delete_post( $id, adverts_skip_trash() );
+    adverts_delete_post( $id );
     
     echo json_encode( array(
         'result' => 1
@@ -330,11 +330,11 @@ function adverts_delete() {
     // also delete all uploaded files
     if( is_array( $children ) ) {
         foreach( $children as $attch) {
-            wp_delete_attachment( $attch->ID, true );
+            adverts_delete_post( $attch->ID);
         }
     } 
     
-    wp_delete_post( $id, adverts_skip_trash() );
+    adverts_delete_post( $id );
     
     if(adverts_request("redirect_to") ) {
         wp_redirect( adverts_request( "redirect_to" ) );

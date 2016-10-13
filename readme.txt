@@ -4,7 +4,7 @@ Contributors: gwin
 Tags: classifieds, classified, classified ads, classified script, classifieds script, wp classified, wp classifieds
 Requires at least: 4.0
 Tested up to: 4.6.1
-Stable tag: 1.0.10
+Stable tag: 1.0.11
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -87,6 +87,18 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.0.11 - 2016-10-13 =
+
+* NEW: Defaut values for [adverts_list]
+* NEW: Custom Fields module link in wp-admin / Options
+* NEW: 3 new code snippets in Snippets Library https://github.com/simpliko/wpadverts-snippets
+* FIXED: Using `esc_html_e()` instead of `echo esc_html()`
+* FIXED: Handle multiple taxonomies (if needed) in [adverts_manage].
+* API: Alternative category browsing URLs (easy fix for categories if they are not compatible with your theme).
+* API: Ability to Trash posts instead of deleting them in the frontend (to enable this feature add this line to your theme functions.php `add_filter("adverts_skip_trash", "__return_false");`)
+* API: Saving Custom Fields as Taxonomies instead of Meta (go to Snippets library to see an example code)
+* API: Allow to custom format the Advert price displayed in [adverts_list] and in Ad details.
 
 = 1.0.10 - 2016-09-12 =
 

@@ -1911,17 +1911,30 @@ function adverts_post_class( $classes ) {
 }
 
 /**
- * Skip trash when deleting and Advert in the frontend.
+ * Delete Permanently or Tash Post
  * 
- * This function allows to determine if Advert should be Trashed or Deleted when
+ * This function allows to determine if posts should be Trashed or Deleted when
  * deleting an Advert in the frontend.
+ * 
+ * The $skip_trash variable can be overwritten using adverts_skip_trash filter.
  * 
  * @uses adverts_skip_trash filter
  * 
  * @access public
  * @since 1.0.11
- * @return boolean  True if Adverts should be deleted False if Advert should be trashed.
+ * @param int $post_id          ID of a post to delete
+ * @param boolean $skip_trash   True if items should be deleted permanently, false if item should go to trash
+ * @return mixed                Information about deleted (or not) object.
  */
-function adverts_skip_trash() {
-    return apply_filters( "adverts_skip_trash", true );
+function adverts_delete_post( $post_id, $skip_trash = true ) {
+    
+    $skip_trash = apply_filters( "adverts_skip_trash", $skip_trash, $post_id );
+    
+    if( $skip_trash ) {
+        $result = wp_delete_post( $post_id );
+    } else {
+        $result = wp_trash_post( $post_id );
+    }
+    
+    return $result;
 }

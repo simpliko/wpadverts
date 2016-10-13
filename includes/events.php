@@ -93,12 +93,12 @@ function adverts_event_gc() {
 
             if( is_array( $children ) ) {
                 foreach( $children as $attch) {
-                    wp_delete_attachment( $attch->ID, true );
+                    adverts_delete_post( $attch->ID );
                 }
             } 
 
-            // permanently delete the post
-            wp_delete_post( $post->ID, adverts_skip_trash() );
+            // delete or trash the post
+            adverts_delete_post( $post->ID );
         }
     }
     

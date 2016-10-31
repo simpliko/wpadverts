@@ -421,12 +421,12 @@ display: inline-block;
     border: 1px solid #ccc;
 }
 
-.adverts-search .advert-input.advert-input-type-half:nth-of-type(2n+1) {
+.adverts-search .advert-input.advert-input-type-half.advert-input-type-half-left {
     width: 49%;
     margin: 0 1% 1em 0%;
 }
 
-.adverts-search .advert-input.advert-input-type-half:nth-of-type(2n+2) {
+.adverts-search .advert-input.advert-input-type-half.advert-input-type-half-right {
     width: 49%;
     margin: 0 0% 1em 1%;
 }
@@ -1220,6 +1220,35 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 
 .adverts-form .adverts-form-input-group label {
     margin: 0;
+}
+
+.adverts-form-input-group-checkbox {
+    clear: both;
+    overflow: hidden;
+}
+
+.adverts-field-rows-0 > div {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.adverts-field-rows-1 > div {
+    
+}
+
+.adverts-field-rows-2 > div {
+    width: 50%; 
+    float: left;
+}
+
+.adverts-field-rows-3 > div {
+    width: 33%; 
+    float: left;
+}
+
+.adverts-field-rows-4 > div {
+    width: 25%; 
+    float: left;
 }
 
 @media only screen and (max-width : 480px) {

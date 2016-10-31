@@ -2,6 +2,20 @@
 
 }
 
+.dashicons.adverts-spin {
+   animation: adverts-spin 1s infinite;
+   animation-timing-function: linear;
+}
+
+@keyframes adverts-spin {
+   0% {
+      transform: rotate( 0deg );
+   }
+   100% {
+      transform: rotate( 360deg );
+   }
+}
+
 #timestamp_expire:before {
     content: '\f145';
     top: -1px;

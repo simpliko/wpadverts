@@ -943,6 +943,10 @@ function adverts_field_checkbox( $field ) {
     $opts = "";
     $i = 1;
     
+    if( !isset( $field["rows"] ) ) {
+        $field["rows"] = 1;
+    }
+    
     if( !isset( $field["value"] ) ) {
         $value = array();
     } elseif( !is_array( $field["value"] ) ) {
@@ -985,7 +989,11 @@ function adverts_field_checkbox( $field ) {
             $depth = 0;
         }
 
-        $padding = str_repeat("&nbsp; &nbsp;", $depth * 2);
+        if( $field["rows"] == 1 ) {
+            $padding = str_repeat("&nbsp; &nbsp;", $depth * 2);
+        } else {
+            $padding = "";
+        }
         
         $wrap = new Adverts_Html("div", array(
             "class" => $class,
@@ -996,7 +1004,13 @@ function adverts_field_checkbox( $field ) {
         $i++;
     }
     
-    echo Adverts_Html::build("div", array("class"=>"adverts-form-input-group adverts-form-input-group-checkbox"), $opts);
+    $wrap_classes = array(
+        "adverts-form-input-group",
+        "adverts-form-input-group-checkbox",
+        "adverts-field-rows-" . absint( $field["rows"] )
+    );
+    
+    echo Adverts_Html::build("div", array("class"=> join( " ", $wrap_classes ) ), $opts);
 }
 
 /**

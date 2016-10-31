@@ -20,7 +20,7 @@
         <?php if( !empty( $fields_visible ) ): ?>
         <div class="adverts-search">
             <?php foreach( $fields_visible as $field ): ?>
-            <div class="advert-input <?php esc_attr_e( 'advert-input-type-' . $field['meta']['search_type'] ) ?>">
+            <div class="advert-input <?php echo esc_attr( $field['adverts_list_classes'] ) ?>">
                 <?php call_user_func( adverts_field_get_renderer($field), $field) ?>
             </div>
             <?php endforeach; ?>
@@ -30,7 +30,7 @@
         <?php if( !empty( $fields_hidden ) ): ?>
         <div class="adverts-search adverts-search-hidden">
             <?php foreach( $fields_hidden as $field ): ?>
-            <div class="advert-input <?php esc_attr_e( 'advert-input-type-' . $field['meta']['search_type'] ) ?>">
+            <div class="advert-input <?php echo esc_attr( $field['adverts_list_classes'] ) ?>">
                 <?php call_user_func( adverts_field_get_renderer($field), $field) ?>
             </div>
             <?php endforeach; ?>

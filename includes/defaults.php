@@ -28,31 +28,31 @@ Adverts::instance()->set("form", array(
         array(
             "name" => "_post_id",
             "type" => "adverts_field_hidden",
-            "order" => 10,
+            "order" => 0,
             "label" => ""
         ),
         array(
             "name" => "_adverts_action",
             "type" => "adverts_field_hidden",
-            "order" => 10,
+            "order" => 0,
             "label" => ""
         ),
         array(
             "name" => "_contact_information",
             "type" => "adverts_field_header",
-            "order" => 10,
+            "order" => 1,
             "label" => __( 'Contact Information', 'adverts' )
         ),
         array(
             "name" => "_adverts_account",
             "type" => "adverts_field_account",
-            "order" => 10,
+            "order" => 2,
             "label" => __( "Account", "adverts" ),
         ),
         array(
             "name" => "adverts_person",
             "type" => "adverts_field_text",
-            "order" => 10,
+            "order" => 3,
             "label" => __( "Contact Person", "adverts" ),
             "is_required" => true,
             "validator" => array( 
@@ -62,7 +62,7 @@ Adverts::instance()->set("form", array(
         array(
             "name" => "adverts_email",
             "type" => "adverts_field_text",
-            "order" => 10,
+            "order" => 4,
             "label" => __( "Email", "adverts" ),
             "is_required" => true,
             "validator" => array( 
@@ -74,7 +74,7 @@ Adverts::instance()->set("form", array(
         array(
             "name" => "adverts_phone",
             "type" => "adverts_field_text",
-            "order" => 10,
+            "order" => 5,
             "label" => __( "Phone Number", "adverts"),
             "validator" => array(
                 array(
@@ -86,13 +86,13 @@ Adverts::instance()->set("form", array(
         array(
             "name" => "_item_information",
             "type" => "adverts_field_header",
-            "order" => 20,
+            "order" => 6,
             "label" => __( 'Item Information', 'adverts' )
         ),
         array(
             "name" => "post_title",
             "type" => "adverts_field_text",
-            "order" => 20,
+            "order" => 7,
             "label" => __( "Title", "adverts" ),
             "validator" => array(
                 array( "name"=> "is_required" )
@@ -101,7 +101,7 @@ Adverts::instance()->set("form", array(
         array(
             "name" => "advert_category",
             "type" => "adverts_field_select",
-            "order" => 20,
+            "order" => 8,
             "label" => __("Category", "adverts"),
             "max_choices" => 10,
             "options" => array(),
@@ -110,13 +110,13 @@ Adverts::instance()->set("form", array(
         array(
             "name" => "gallery",
             "type" => "adverts_field_gallery",
-            "order" => 20,
+            "order" => 9,
             "label" => __( "Gallery", "adverts" )
         ),
         array(
             "name" => "post_content",
             "type" => "adverts_field_textarea",
-            "order" => 20,
+            "order" => 10,
             "label" => __( "Description", "adverts" ),
             "validator" => array(
                 array( "name"=> "is_required" )
@@ -126,13 +126,11 @@ Adverts::instance()->set("form", array(
         array(
             "name" => "adverts_price",
             "type" => "adverts_field_text",
-            "order" => 20,
+            "order" => 11,
             "label" => __("Price", "adverts"),
             "class" => "adverts-filter-money",
             "description" => "",
-            "attr" => array(
-                "key" => "value"
-            ),
+            "attr" => array( ),
             "filter" => array(
                 array( "name" => "money" )
             ),
@@ -140,7 +138,7 @@ Adverts::instance()->set("form", array(
         array(
             "name" => "adverts_location",
             "type" => "adverts_field_text",
-            "order" => 20,
+            "order" => 12,
             "label" => __( "Location", "adverts" ),
         ),
     )
@@ -154,6 +152,7 @@ Adverts::instance()->set("form_search", array(
         array(
             "name" => "query",
             "type" => "adverts_field_text",
+            "label" => "",
             "order" => 10,
             "placeholder" => __("Keyword ...", "adverts"),
             "meta" => array(
@@ -165,6 +164,7 @@ Adverts::instance()->set("form_search", array(
         array(
             "name" => "location",
             "type" => "adverts_field_text",
+            "label" => "",
             "order" => 10,
             "placeholder" => __("Location ...", "adverts"),
             "meta" => array(
@@ -264,7 +264,29 @@ adverts_form_add_field("adverts_field_account", array(
 // Register money filter (text input with currency validation)
 /** @see adverts_filter_money() */
 adverts_form_add_filter("money", array(
+    "description" => __( "Money - converts string formatted as price to float.", "adverts" ),
     "callback" => "adverts_filter_money"
+));
+
+// Register money filter (text input with currency validation)
+/** @see adverts_filter_money() */
+adverts_form_add_filter("url", array(
+    "description" => __( "URL - converts string to a valid URL (if possible).", "adverts" ),
+    "callback" => "adverts_filter_url"
+));
+
+// Register URL filter (text input with URL validation)
+/** @see adverts_filter_money() */
+adverts_form_add_filter("int", array(
+    "description" => __( "Integer - converts string to absolute integer.", "adverts" ),
+    "callback" => "adverts_filter_int"
+));
+
+// Register number filter
+/** @see adverts_filter_money() */
+adverts_form_add_filter("number", array(
+    "description" => __( "Number - converts string to a number.", "adverts" ),
+    "callback" => "adverts_filter_number"
 ));
 
 /* REGISTER FORM VALIDATORS */
@@ -300,6 +322,16 @@ adverts_form_add_validator("is_email_registered", array(
     "validate_empty" => false
 ));
 
+// Register "is url" validator
+/** @see adverts_is_email() */
+adverts_form_add_validator("is_url", array(
+    "callback" => "adverts_is_url",
+    "label" => __( "URL", "adverts" ),
+    "params" => array(),
+    "default_error" => __( "Provided URL is invalid.", "adverts" ),
+    "validate_empty" => false
+));
+
 // Register "is integer" validator
 /** @see adverts_is_integer() */
 adverts_form_add_validator("is_integer", array(
@@ -307,6 +339,16 @@ adverts_form_add_validator("is_integer", array(
     "label" => __( "Is Integer", "adverts" ),
     "params" => array(),
     "default_error" => __( "Provided value is not an integer.", "adverts" ),
+    "validate_empty" => false
+));
+
+// Register "is integer" validator
+/** @see adverts_is_integer() */
+adverts_form_add_validator("is_numberr", array(
+    "callback" => "adverts_is_number",
+    "label" => __( "Is Number", "adverts" ),
+    "params" => array(),
+    "default_error" => __( "Provided value is not a number.", "adverts" ),
     "validate_empty" => false
 ));
 

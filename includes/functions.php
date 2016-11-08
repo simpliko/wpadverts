@@ -590,6 +590,24 @@ function adverts_is_email( $email ) {
 }
 
 /**
+ * Is URL VALIDATOR
+ * 
+ * Checks if $url is valid URL
+ * 
+ * @since 1.0.12
+ * @uses is_email()
+ * @param string $url
+ * @return boolean|string
+ */
+function adverts_is_url( $url ) {
+    if( preg_match( "#^(http|https)://[A-z0-9\-\_\./\?&;=,\#\!\%\+]+$#i" , $url ) ) {
+        return true;
+    } else {
+        return "invalid";
+    }
+}
+
+/**
  * Is Email Registered VALIDATOR
  * 
  * Checks if $email is already being used by registered user. That is validator
@@ -626,6 +644,24 @@ function adverts_is_email_registered( $email ) {
 function adverts_is_integer( $value ) {
     
     if( filter_var( $value, FILTER_VALIDATE_INT ) !== false ) {
+        return true;
+    } else {
+        return "invalid";
+    }
+}
+
+/**
+ * Is Number VALIDATOR
+ * 
+ * Checks if $value is a number.
+ * 
+ * @param string $value
+ * @since 1.0.12
+ * @return boolean|string
+ */
+function adverts_is_number( $value ) {
+    
+    if( filter_var( $value, FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION ) !== false ) {
         return true;
     } else {
         return "invalid";
@@ -673,7 +709,45 @@ function adverts_filter_money( $data ) {
     $removedThousendSeparator = preg_replace('/(\.|,)(?=[0-9]{3,}$)/', '',  $stringWithCommaOrDot);
 
     return (float) str_replace(',', '.', $removedThousendSeparator);
+}
 
+/**
+ * URL FILTER
+ * 
+ * Makes sure the provided $data is a valid URL (if possible)
+ * 
+ * @param string $data
+ * @since 1.0.12
+ * @return string
+ */
+function adverts_filter_url( $data ) {
+    return esc_url_raw( $data );
+}
+
+/**
+ * Integer FILTER
+ * 
+ * Makes sure the provided $data is an absolute integer.
+ * 
+ * @param string $data
+ * @since 1.0.12
+ * @return string
+ */
+function adverts_filter_int( $data ) {
+    return absint( $data );
+}
+
+/**
+ * Integer FILTER
+ * 
+ * Makes sure the provided $data is a floating point number.
+ * 
+ * @param string $data
+ * @since 1.0.12
+ * @return float
+ */
+function adverts_filter_float( $data ) {
+    return filter_var( $data, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION );
 }
 
 /**

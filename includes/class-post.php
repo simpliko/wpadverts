@@ -150,6 +150,8 @@ class Adverts_Post {
             remove_filter("post_guid", array(__CLASS__, "tmp_guid"));
         }
 
+        do_action( "adverts_post_save", $form, $post_id );
+        
         return $post_id;
     }
 }

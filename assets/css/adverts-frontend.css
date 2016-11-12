@@ -14,6 +14,10 @@
     display: none;
 }
 
+.adverts-icon-none:before { 
+    content: ''; 
+}
+
 .advert-item span.advert-link {
     color: #21759b;
     font-size: 1.2em;
@@ -1222,10 +1226,12 @@ since IE8 won't execute CSS that contains a CSS3 selector.
     margin: 0;
 }
 
+/*
 .adverts-form-input-group-checkbox {
     clear: both;
     overflow: hidden;
 }
+*/
 
 .adverts-field-rows-0 > div {
     display: inline-block;

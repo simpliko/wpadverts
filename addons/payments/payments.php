@@ -266,7 +266,7 @@ function adext_payments_form_load( $form ) {
     $form["field"][] = array(
         "name" => "_listing_information",
         "type" => "adverts_field_header",
-        "order" => 100,
+        "order" => 1000,
         "label" => __( 'Listing Information', 'adverts' )
     );
     
@@ -299,7 +299,7 @@ function adext_payments_form_load( $form ) {
         "name" => "payments_listing_type",
         "type" => "adverts_payments_field_payment",
         "label" => __("Listing", "adverts"),
-        "order" => 50,
+        "order" => 1001,
         "empty_option" => true,
         "options" => $opts,
         "value" => "",

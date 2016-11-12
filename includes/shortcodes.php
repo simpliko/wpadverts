@@ -45,7 +45,7 @@ function shortcode_adverts_list( $atts ) {
         'switch_views' => adverts_config( 'config.ads_list_default__switch_views' ),
         'paged' => adverts_request("pg", 1),
         'posts_per_page' => adverts_config( 'config.ads_list_default__posts_per_page' ),
-    ), $atts);
+    ), $atts, 'adverts_list' );
     
     extract( $params );
     
@@ -113,7 +113,9 @@ function shortcode_adverts_list( $atts ) {
         add_filter( "adverts_form_load", "adverts_form_search_reveal_hidden" );
     }
     
-    $form = new Adverts_Form(Adverts::instance()->get("form_search"));
+    $form_scheme = apply_filters( "adverts_form_scheme", Adverts::instance()->get("form_search"), $params );
+    
+    $form = new Adverts_Form( $form_scheme );
     $form->bind( stripslashes_deep( $_GET ) );
     
     $fields_hidden = array();
@@ -177,15 +179,19 @@ function shortcode_adverts_add( $atts ) {
     wp_enqueue_script( 'adverts-frontend' );
     wp_enqueue_script( 'adverts-auto-numeric' );
     
-    extract(shortcode_atts(array(
+    $params = shortcode_atts(array(
         'name' => 'default',
         'moderate' => false
-    ), $atts));
+    ), $atts, 'adverts_add');
+    
+    extract( $params );
     
     include_once ADVERTS_PATH . 'includes/class-html.php';
     include_once ADVERTS_PATH . 'includes/class-form.php';
 
-    $form = new Adverts_Form(Adverts::instance()->get("form"));
+    $form_scheme = apply_filters( "adverts_form_scheme", Adverts::instance()->get("form"), $params );
+    
+    $form = new Adverts_Form( $form_scheme );
     $valid = null;
     $error = array();
     $info = array();

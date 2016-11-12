@@ -590,24 +590,6 @@ function adverts_is_email( $email ) {
 }
 
 /**
- * Is URL VALIDATOR
- * 
- * Checks if $url is valid URL
- * 
- * @since 1.0.12
- * @uses is_email()
- * @param string $url
- * @return boolean|string
- */
-function adverts_is_url( $url ) {
-    if( preg_match( "#^(http|https)://[A-z0-9\-\_\./\?&;=,\#\!\%\+]+$#i" , $url ) ) {
-        return true;
-    } else {
-        return "invalid";
-    }
-}
-
-/**
  * Is Email Registered VALIDATOR
  * 
  * Checks if $email is already being used by registered user. That is validator
@@ -626,6 +608,24 @@ function adverts_is_email_registered( $email ) {
     }
     
     if( get_user_by( "email", $email ) === false ) {
+        return true;
+    } else {
+        return "invalid";
+    }
+}
+
+/**
+ * Is URL VALIDATOR
+ * 
+ * Checks if $url is valid URL
+ * 
+ * @since 1.0.12
+ * @uses is_email()
+ * @param string $url
+ * @return boolean|string
+ */
+function adverts_is_url( $url ) {
+    if( preg_match( "#^(http|https)://[A-z0-9\-\_\./\?&;=,\#\!\%\+]+$#i" , $url ) ) {
         return true;
     } else {
         return "invalid";

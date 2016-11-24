@@ -1,28 +1,53 @@
-# Copyright (C) 2016 Greg Winiarski
-# This file is distributed under the same license as the WP Adverts package.
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Adverts 1.0.11\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wpadverts\n"
-"POT-Creation-Date: 2016-11-22 18:52+0100\n"
+"POT-Creation-Date: 2016-11-23 15:35+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-11-22 22:14+0100\n"
-"Language-Team: \n"
-"X-Generator: Poedit 1.8.11\n"
+"PO-Revision-Date: 2016-11-23 15:51+0000\n"
+"Language-Team: Polish\n"
+"X-Generator: Loco - https://localise.biz/\n"
 "X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
 "_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
 "esc_html_x:1,2c\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10 >= 2 && n%10<=4 "
+"&&(n%100<10||n%100 >= 20)? 1 : 2)\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: ..\n"
 "X-Textdomain-Support: yes\n"
-"Last-Translator: S1awek\n"
-"Language: pl_PL\n"
+"Last-Translator: Sławek <elvizky@gmail.com>\n"
+"Language: pl-PL\n"
 "X-Poedit-Bookmarks: -1,-1,171,-1,-1,-1,-1,-1,-1,-1\n"
-"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-0: ."
+
+#: addons/payments/admin/payment-history-list.php:51
+#, fuzzy
+msgid "Last month"
+msgstr "W ostatnim miesiącu"
+
+#: addons/payments/admin/pricing-list.php:79
+#, fuzzy
+msgid "1 day"
+msgid_plural "%s days"
+msgstr[0] "1 dzień"
+msgstr[1] "%s dni"
+msgstr[2] "%s dni"
+
+#: includes/class-widget-ads.php:82
+#, fuzzy
+msgid "Count"
+msgstr "Suma:"
+
+#: includes/defaults.php:319
+#, fuzzy
+msgid "Incorrect string length."
+msgstr "Nieprawidłowa długość tekstu"
+
+#: templates/add-preview.php:8
+msgid "Edit Listing"
+msgstr "Edytuj Ogłoszenie"
 
 #: addons/bank-transfer/admin/options.php:15
 msgid "Payment Gateway / Bank Transfer"
@@ -87,15 +112,15 @@ msgstr "Wiadomość"
 #: addons/bank-transfer/includes/admin-pages.php:73
 msgid ""
 "User will see this message when asked to make payment, make sure that "
-"instructions here will make it as easy as possible to make a payment.<br/"
-">Allowed variables:<br/>- {total} - total amount to pay (for example "
-"$10.00)<br/>- {order_number} - unique order number<br/>To revert to default "
-"message remove whole text from editor and save the form."
+"instructions here will make it as easy as possible to make a payment.<br/>"
+"Allowed variables:<br/>- {total} - total amount to pay (for example $10.00)"
+"<br/>- {order_number} - unique order number<br/>To revert to default message "
+"remove whole text from editor and save the form."
 msgstr ""
 "Użytkownik zobaczy tą wiadomość kiedy będzie pytany o płatność. Upewnij się "
 "że instrukcje tu zawarte są możliwie łatwe do zrozumienia.<br/>Dozwolone "
-"wartości:<br/>- {total} - całkowita kwota do zapłaty (na przykład 10,00 "
-"zł)<br/>- {order_number} - unikalny numer zamówienia<br/>"
+"wartości:<br/>- {total} - całkowita kwota do zapłaty (na przykład 10,00 zł)"
+"<br/>- {order_number} - unikalny numer zamówienia<br/>"
 
 #: addons/contact-form/admin/options.php:15 includes/admin-pages.php:127
 msgid "Contact Form"
@@ -328,14 +353,12 @@ msgid "Purchase Type"
 msgstr "Rodzaj Zakupu"
 
 #: addons/payments/admin/payment-history-edit.php:111
-#, fuzzy
 msgid "Listing Publication"
-msgstr "Listing Publication"
+msgstr "Publikacja Ogłoszenia"
 
 #: addons/payments/admin/payment-history-edit.php:115
-#, fuzzy
 msgid "Listing Type"
-msgstr "Listing Type"
+msgstr "Typ Ogłoszenia"
 
 #: addons/payments/admin/payment-history-edit.php:129
 msgid "Purchased Item"
@@ -388,11 +411,6 @@ msgstr "Wszystkie daty"
 #: addons/payments/admin/payment-history-list.php:50
 msgid "This month"
 msgstr "Ten miesiąc"
-
-#: addons/payments/admin/payment-history-list.php:51
-#, fuzzy
-msgid "Last month"
-msgstr "W ostatnim miesiącu"
 
 #: addons/payments/admin/payment-history-list.php:56
 msgid "Filter"
@@ -465,14 +483,6 @@ msgstr "Edytuj"
 #: addons/payments/payments.php:344
 msgid "Free"
 msgstr "Darmowe"
-
-#: addons/payments/admin/pricing-list.php:79
-#, fuzzy
-msgid "1 day"
-msgid_plural "%s days"
-msgstr[0] "1 dzień"
-msgstr[1] "%s dni"
-msgstr[2] "%s dni"
 
 #: addons/payments/includes/admin-pages.php:75
 msgid ""
@@ -634,14 +644,12 @@ msgstr[1] "Zwrócone <span class=\"count\">(%s)</span>"
 msgstr[2] ""
 
 #: addons/payments/payments.php:270
-#, fuzzy
 msgid "Listing Information"
-msgstr "Listing Information"
+msgstr "Dane Ogłoszenia"
 
 #: addons/payments/payments.php:301
-#, fuzzy
 msgid "Listing"
-msgstr "Lista ogłoszeń"
+msgstr "Ogłoszenie"
 
 #: addons/payments/payments.php:371
 msgid "Visible 1 day"
@@ -1001,11 +1009,6 @@ msgstr "WPAdverts Ogłoszenia"
 msgid "Displays list of recent ads."
 msgstr "Wyświetla listę najnowszych ogłoszeń."
 
-#: includes/class-widget-ads.php:82
-#, fuzzy
-msgid "Count"
-msgstr "Suma:"
-
 #: includes/class-widget-ads.php:88
 msgid "Keyword"
 msgstr "Słowo Kluczowe"
@@ -1139,11 +1142,6 @@ msgstr "Podana wartość nie jest liczbą całkowitą."
 msgid "String Length"
 msgstr "Długość Wyrazu"
 
-#: includes/defaults.php:319
-#, fuzzy
-msgid "Incorrect string length."
-msgstr "Nieprawidłowa długość tekstu"
-
 #: includes/defaults.php:321
 msgid "Text needs to be at least %min% characters long."
 msgstr "Tekst musi być co najmniej %min% znaków."
@@ -1189,8 +1187,8 @@ msgid ""
 "Your are being redirected to Edit page. <a href=\"%s\">Click here</a> if it "
 "is taking to long. "
 msgstr ""
-"Zostaniesz przekierowany do strony Edycji. Jeśli trwa to zbyt długo <a href="
-"\"%s\">Kliknij tutaj</a>."
+"Zostaniesz przekierowany do strony Edycji. Jeśli trwa to zbyt długo <a "
+"href=\"%s\">Kliknij tutaj</a>."
 
 #: includes/functions.php:1454
 msgid "US Dollars"
@@ -1349,8 +1347,8 @@ msgid ""
 "Only logged in users can access this page. <a href=\"%1$s\">Login</a> or <a "
 "href=\"%2$s\">Register</a>."
 msgstr ""
-"Tylko zalogowani użytkownicy mają dostęp do tej strony. <a href=\"%1$s"
-"\">Zaloguj się</a> lub <a href=\"%2$s\">Zarejestuj</a>"
+"Tylko zalogowani użytkownicy mają dostęp do tej strony. <a href=\"%1$s\">"
+"Zaloguj się</a> lub <a href=\"%2$s\">Zarejestuj</a>"
 
 #: includes/shortcodes.php:413
 msgid "Ad does not exist."
@@ -1372,15 +1370,9 @@ msgstr "Ogłoszenie zostało zaktualizowane."
 msgid "Cannot update. There are errors in your form."
 msgstr "Nie można zaktualizować. W formularzu występują błędy."
 
-#: templates/add-preview.php:8
-#, fuzzy
-msgid "Edit Listing"
-msgstr "Edytuj Listę"
-
 #: templates/add-preview.php:14
-#, fuzzy
 msgid "Publish Listing"
-msgstr "Publish Listing"
+msgstr "Opublikuj Ogłoszenie"
 
 #: templates/add-save.php:5
 msgid ""
@@ -1394,8 +1386,8 @@ msgid ""
 "Your ad has been published. You can view it here \"<a href=\"%1$s\">%2$s</a>"
 "\"."
 msgstr ""
-"Twoje ogłoszenie została opublikowane. Możesz zobaczyć je tutaj \"<a href="
-"\"%1$s\">%2$s</a>\"."
+"Twoje ogłoszenie została opublikowane. Możesz zobaczyć je tutaj \"<a "
+"href=\"%1$s\">%2$s</a>\"."
 
 #: templates/add.php:42
 msgid "Preview"

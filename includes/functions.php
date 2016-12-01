@@ -738,7 +738,7 @@ function adverts_filter_int( $data ) {
 }
 
 /**
- * Integer FILTER
+ * Float FILTER
  * 
  * Makes sure the provided $data is a floating point number.
  * 

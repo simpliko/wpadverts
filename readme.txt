@@ -94,8 +94,12 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 * FIXED: Displaying multiselect values in forms
 * FIXED: Using `esc_html_e()` instead of `echo esc_html()`
+* FIXED: Aligning fields in [adverts_list] search form
+* FIXED: Unique order number for each field in [adverts_add] form
 * NEW: Support for "description" in adverts_field_header
 * API: Added "adverts_form_scheme" filter
+* API: New field filters: Integer, Number, URL
+* API: New field validators: Is URL, Is Number
 
 = 1.0.11 - 2016-10-13 =
 

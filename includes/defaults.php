@@ -323,7 +323,7 @@ adverts_form_add_validator("is_email_registered", array(
 ));
 
 // Register "is url" validator
-/** @see adverts_is_email() */
+/** @see adverts_is_url() */
 adverts_form_add_validator("is_url", array(
     "callback" => "adverts_is_url",
     "label" => __( "URL", "adverts" ),
@@ -343,8 +343,8 @@ adverts_form_add_validator("is_integer", array(
 ));
 
 // Register "is integer" validator
-/** @see adverts_is_integer() */
-adverts_form_add_validator("is_numberr", array(
+/** @see adverts_is_number() */
+adverts_form_add_validator("is_number", array(
     "callback" => "adverts_is_number",
     "label" => __( "Is Number", "adverts" ),
     "params" => array(),

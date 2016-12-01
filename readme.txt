@@ -4,7 +4,7 @@ Contributors: gwin
 Tags: classifieds, classified, classified ads, classified script, classifieds script, wp classified, wp classifieds
 Requires at least: 4.0
 Tested up to: 4.6.1
-Stable tag: 1.0.11
+Stable tag: 1.0.12
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -43,6 +43,7 @@ See [Screenshots](https://wordpress.org/plugins/wpadverts/screenshots/) tab for 
 
 WPAdverts plugin can be extended with premium add-ons. Currently we have a couple of modules available:
 
+* [Custom Fields](https://wpadverts.com/extensions/custom-fields/)
 * [WooCommerce Integration](https://wpadverts.com/extensions/woocommerce-integration/)
 * [BuddyPress Integration](https://wpadverts.com/extensions/buddypress-integration/)
 * [Maps and Locations](https://wpadverts.com/extensions/maps-and-locations/)
@@ -57,6 +58,7 @@ See all https://wpadverts.com/extensions/
 
 * French
 * German
+* Polish
 * Portugese
 * Russian
 * Slovenian
@@ -87,6 +89,13 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.0.12 - 2016-12-01 =
+
+* FIXED: Displaying multiselect values in forms
+* FIXED: Using `esc_html_e()` instead of `echo esc_html()`
+* NEW: Support for "description" in adverts_field_header
+* API: Added "adverts_form_scheme" filter
 
 = 1.0.11 - 2016-10-13 =
 

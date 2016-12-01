@@ -99,23 +99,42 @@ function adverts_save_post($ID = false, $post = false) {
         
     }
     
+    // Load form data
+    $form_scheme = apply_filters( "adverts_form_scheme", Adverts::instance()->get("form"), array() );
+
     $form = new Adverts_Form();
-    $form->load(Adverts::instance()->get("form"));
+    $form->load( $form_scheme );
     $form->bind( stripslashes_deep( $_POST ) );
     
+    $meta = array();
+    
+    // Find meta fields in the form
     foreach($form->get_fields() as $field) {
-        if(isset($field["value"])) {
-            
-            $meta_old = get_post_meta( $ID, $field["name"] );
-            
-            if( $field["value"] == '' ) {
-                delete_post_meta( $ID, $field["name"] );
-            } else {
-                update_post_meta( $ID, $field["name"], $field["value"] );
-            }
-        }
         
+        $c1 = ! property_exists("WP_Post", $field["name"]);
+        $c2 = ! taxonomy_exists($field["name"]);
+        $c3 = isset( $field["value"] );
+        
+        if( $c1 && $c2 && $c3 ) {
+            $meta[$field["name"]] = array("field"=>$field, "value"=>$field["value"]);
+        }
+    }  
+    
+    // Save meta data values
+    $fields = Adverts::instance()->get("form_field");
+    foreach($meta as $key => $data) {
+
+        $field = $data["field"];
+        $field_type = $field["type"];
+        $value = $data["value"];
+
+        $callback_save = $fields[$field_type]["callback_save"];
+
+        if( is_callable( $callback_save ) ) {
+            call_user_func( $callback_save, $ID, $key, $value );
+        }
     }
+    
     
 }
 
@@ -150,9 +169,11 @@ function adverts_save_post_validator( $ID, $post ) {
         return $ID;
     }
 
-    // Init completion marker
+    // Load form data
+    $form_scheme = apply_filters( "adverts_form_scheme", Adverts::instance()->get("form"), array() );
+
     $form = new Adverts_Form();
-    $form->load(Adverts::instance()->get("form"));
+    $form->load( $form_scheme );
     $form->bind( stripslashes_deep( $_POST ) );
     
     $valid = $form->validate();
@@ -364,62 +385,59 @@ function adverts_expiry_meta_box() {
  * @return void
  */
 function adverts_data_box_content( $post ) {
-  wp_nonce_field( plugin_basename( __FILE__ ), 'product_price_box_content_nonce' );
-  
-  $exclude = array("_adverts_account", "advert_category", "post_title", "gallery", "post_content");
-  
-  // Load form data
-  $form = new Adverts_Form();
-  $form->load(Adverts::instance()->get("form"));
-  
-  // Get list of fields from post meta table
-  $bind = array();
-  foreach( $form->get_fields( array( "exclude"=>$exclude ) ) as $f ) {
-      $bind[$f["name"]] = get_post_meta( $post->ID, $f["name"], true );
-  }
-  
-  // Bind data
-  $form->bind( $bind );
-  
+    wp_nonce_field( plugin_basename( __FILE__ ), 'product_price_box_content_nonce' );
 
-  // Validate if message 21 will be displayed, that is if form already failed 
-  // validation in adverts_save_post_validator() function
-  if( isset($_GET['message']) && $_GET['message'] == 21 ) {
-      $form->validate();
-  }
+    $exclude = array("_adverts_account", "advert_category", "post_title", "gallery", "post_content");
+
+    // Load form data
+    $form_scheme = apply_filters( "adverts_form_scheme", Adverts::instance()->get("form"), array() );
+
+    $form = new Adverts_Form();
+    $form->load( $form_scheme );
+
+    // Get list of fields from post meta table
+    $bind = array();
+    foreach( $form->get_fields( array( "exclude"=>$exclude ) ) as $f ) {
+        $bind[$f["name"]] = get_post_meta( $post->ID, $f["name"], true );
+    }
+  
+    foreach( $form->get_fields( array( "exclude"=>$exclude ) ) as $f ) {
+        $value = get_post_meta( $post->ID, $f["name"], false );
+        if( empty( $value ) ) {
+            $bind[$f["name"]] = "";
+        } else if( count( $value) == 1 ) {
+            $bind[$f["name"]] = $value[0];
+        } else {
+            $bind[$f["name"]] = $value;
+        }
+    }
+  
+    // Bind data
+    $form->bind( $bind );
+  
+    // Validate if message 21 will be displayed, that is if form already failed 
+    // validation in adverts_save_post_validator() function
+    if( isset($_GET['message']) && $_GET['message'] == 21 ) {
+        $form->validate();
+    }
 
   ?>
 
-    <style type="text/css">
-        .adverts-data-table th.adverts-data-header {
-            font-size:1.4em; 
-            font-weight: normal; 
-            font-variant: small-caps; 
-            padding: 20px 10px 0px 0px
-        }
-        
-        .adverts-data-table input[type="text"],
-        .adverts-data-table textarea {
-            width: 99%;
-        }
-        .adverts-data-table td,  
-        .adverts-data-table th {
-            border-bottom: 2px solid white;
-        }
-    </style>
-    
     <table class="form-table adverts-data-table">
 	<tbody>
         <?php foreach($form->get_fields( array( "exclude"=>$exclude ) ) as $field): ?>
             <tr class="<?php if(adverts_field_has_errors($field)): ?>adverts-field-error<?php endif; ?>">
             <?php if($field["type"] == "adverts_field_header"): ?>
                 <th scope="row" colspan="2" class="adverts-data-header">
-                    <?php esc_html_e($field["label"]) ?>
+                    <span class="adverts-data-header-title"><?php echo esc_html($field["label"]) ?></span>
+                    <?php if( isset( $field["description"] ) && ! empty( $field["description"] ) ): ?>
+                    <span class="adverts-data-header-description"><?php echo esc_html( $field["description"] ) ?></span>
+                    <?php endif; ?>
                 </th>
             <?php else: ?>
                 <th scope="row">
                     <label for="<?php esc_attr_e($field["name"]) ?>">
-                        <?php esc_html_e($field["label"]) ?>
+                        <?php echo esc_html($field["label"]) ?>
                         <?php if( adverts_field_has_validator( $field, "is_required" ) ): ?>
                         <span class="adverts-form-required"><?php _e( "(required)", "adverts" ) ?></span>
                         <?php endif; ?>
@@ -430,7 +448,7 @@ function adverts_data_box_content( $post ) {
                     <?php if( isset($field["error"]) && !empty($field["error"])): ?>
                     <ul class="adverts-error-list">
                         <?php foreach($field["error"] as $error): ?>
-                        <li><?php esc_html_e($error) ?></li>
+                        <li><?php echo esc_html($error) ?></li>
                         <?php endforeach; ?>
                     </ul>
                     <?php endif; ?>

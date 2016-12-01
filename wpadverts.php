@@ -5,7 +5,7 @@
  * Description: The lightweight WordPress classifieds plugin done right.
  * Author: Greg Winiarski
  * Text Domain: adverts
- * Version: 1.0.11
+ * Version: 1.0.12
  * 
  * Adverts is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -208,7 +208,7 @@ function adverts_init_frontend() {
     wp_register_style( 'adverts-frontend', ADVERTS_URL . '/assets/css/adverts-frontend.css', array(), "2" );
     
     wp_register_script('adverts-frontend', ADVERTS_URL . '/assets/js/adverts-frontend.js', array( 'jquery' ), "2" );
-    wp_register_script('adverts-frontend-add', ADVERTS_URL . '/assets/js/adverts-frontend-add.js', array( 'jquery'), "1" );
+    wp_register_script('adverts-frontend-add', ADVERTS_URL . '/assets/js/adverts-frontend-add.js', array( 'jquery'), "2" );
     wp_register_script('responsive-slides', ADVERTS_URL . '/assets/js/responsive-slides.js', array('jquery'), "1" );
     
     include_once ADVERTS_PATH . 'includes/functions.php';
@@ -259,7 +259,7 @@ function adverts_init_admin() {
     add_action( 'add_meta_boxes', 'adverts_box_gallery' );
     
     wp_register_script('adverts-admin', ADVERTS_URL . '/assets/js/adverts-admin.js', array( 'jquery' ), false, true);
-    wp_register_style('adverts-admin', ADVERTS_URL . '/assets/css/adverts-admin.css');
+    wp_register_style('adverts-admin', ADVERTS_URL . '/assets/css/adverts-admin.css', array(), "2" );
     
     wp_register_script( 'adverts-admin-updates', ADVERTS_URL . '/assets/js/adverts-admin-updates.js', array( 'jquery' ), false, true );
     wp_register_style( 'adverts-admin-updates', ADVERTS_URL . '/assets/css/adverts-admin-updates.css');

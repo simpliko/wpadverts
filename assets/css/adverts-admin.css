@@ -382,6 +382,61 @@ font-size: 12px;
     padding: 2px 0 2px 0;
 }
 
+.adverts-field-rows-0 > div {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.adverts-field-rows-1 > div {
+    
+}
+
+.adverts-field-rows-2 > div {
+    width: 50%; 
+    float: left;
+}
+
+.adverts-field-rows-3 > div {
+    width: 33%; 
+    float: left;
+}
+
+.adverts-field-rows-4 > div {
+    width: 25%; 
+    float: left;
+}
+
+.adverts-data-table th > label {
+    font-weight: normal;
+}
+
+.adverts-data-table th.adverts-data-header {
+    padding: 10px 10px 10px 0px;
+}
+
+.adverts-data-table th.adverts-data-header .adverts-data-header-title {
+    font-size:1.3em; 
+    font-weight: normal; 
+    display: block;
+}
+
+.adverts-data-table th.adverts-data-header .adverts-data-header-description {
+    font-weight: normal; 
+    display: block;
+    color: #666;
+}
+
+
+
+.adverts-data-table input[type="text"],
+.adverts-data-table textarea {
+    width: 99%;
+}
+.adverts-data-table td,  
+.adverts-data-table th {
+    border-bottom: 2px solid white;
+}
+        
 tr.adverts-field-error {
     background-color: peachpuff;
 }

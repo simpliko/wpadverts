@@ -660,6 +660,44 @@ div.wpjb-flash-small {
     display: inline-block;
 }
 
+/* START Single Advert - data table styling */
+
+/* One item per line */
+
+.adverts-row-values-block .adverts-row-value {
+    display: block;
+    width: 100%;
+    margin: 0 0 0.5em 0;
+    line-height: normal;
+}
+
+.adverts-row-values-block .adverts-row-value:first-child {
+    margin: 0.5em 0 0.5em 0;
+}
+
+.adverts-row-values-block .adverts-row-value:last-child {
+    margin: 0;
+}
+
+/* Separate items by coma */
+
+.adverts-row-values-inline-coma .adverts-row-value:after {
+    content: ", ";
+}
+
+.adverts-row-values-inline-coma .adverts-row-value:last-child:after {
+    content: "";
+}
+
+/* Separate items with margin */
+
+.adverts-row-values-inline-none .adverts-row-value {
+    padding: 0 1em 0 0;
+    
+}
+
+/* END Single Advert - data table styling */
+
 .adverts-contact-box {
     border:1px solid whitesmoke; 
     background-color: #fcfcfc; 
@@ -898,6 +936,21 @@ https://github.com/yui/pure/blob/master/LICENSE.md
     width: 65%;
     float: left;
     padding: 0 0 0 0.3em;
+}
+
+.adverts-form .adverts-control-group > div.adverts-field-header {
+    width: 100%;
+    border-bottom: 2px solid silver;
+    padding: 0 0 5px 0;
+    margin: 5px 0 10px 0;
+}
+
+.adverts-form .adverts-control-group > div.adverts-field-header > .adverts-field-header-title {
+    display: inline-block;
+    width: 100%;
+    font-size: 1.3rem;
+    line-height:1.3rem;
+    font-weight: bold;
 }
 
 .adverts-form.adverts-form-aligned .adverts-control-group.adverts-field-text label,

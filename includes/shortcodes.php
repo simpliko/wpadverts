@@ -419,17 +419,22 @@ function _adverts_manage_edit( $atts ) {
     wp_enqueue_script( 'adverts-auto-numeric' );
     
 
-    extract(shortcode_atts(array(
+    $params = shortcode_atts(array(
         'name' => 'default',
         'moderate' => false
-    ), $atts));
+    ), $atts, "adverts_manage");
+    
+    extract( $params );
     
     include_once ADVERTS_PATH . 'includes/class-html.php';
     include_once ADVERTS_PATH . 'includes/class-form.php';
 
+    
+    
     add_filter( 'adverts_form_load', 'adverts_remove_account_field' );
     
-    $form = new Adverts_Form(Adverts::instance()->get("form"));
+    $form_scheme = apply_filters( "adverts_form_scheme", Adverts::instance()->get("form"), $params );
+    $form = new Adverts_Form( $form_scheme );
     $valid = null;
     $error = array();
     $info = array();
@@ -465,7 +470,14 @@ function _adverts_manage_edit( $atts ) {
     }
     
     foreach( $form->get_fields() as $f ) {
-        $bind[$f["name"]] = get_post_meta( $post_id, $f["name"], true );
+        $value = get_post_meta( $post_id, $f["name"], false );
+        if( empty( $value ) ) {
+            $bind[$f["name"]] = "";
+        } else if( count( $value) == 1 ) {
+            $bind[$f["name"]] = $value[0];
+        } else {
+            $bind[$f["name"]] = $value;
+        }
     }
     
     $bind["_adverts_action"] = "update";

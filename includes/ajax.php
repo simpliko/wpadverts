@@ -176,6 +176,48 @@ function adverts_gallery_update() {
     exit;
 }
 
+
+/**
+ * Updates order of attachments (as JSON) in wp_postmeta table
+ * under the key 'adverts_attachments_order'.
+ *
+ * This function is executed when user changes the order of
+ * images in the gallery using drag and drop, or an image is
+ * added/deleted.
+ *
+ * Action: adverts_gallery_update_order
+ *
+ * @see assets/js/adverts-gallery.js
+ * @since 1.0.13
+ */
+function adverts_gallery_update_order() {
+    if (!check_ajax_referer('adverts-gallery', '_ajax_nonce', false)) {
+        echo json_encode(array(
+            "result" => 0,
+            "error" => __("Invalid Session. Please refresh the page and try again.", "adverts")
+        ));
+
+        exit;
+    }
+
+    $post_id = intval($_POST["post_id"]);
+
+    $dirty_ordered_keys = json_decode(stripslashes($_POST["ordered_keys"]));
+    $length = sizeof($dirty_ordered_keys);
+    $clean_ordered_keys = array();
+
+    for ( $i = 0; $i < $length; $i++ ) {
+        $clean_ordered_keys[$i] = intval($dirty_ordered_keys[$i]);
+    }
+
+    $clean_ordered_keys_json = json_encode($clean_ordered_keys);
+
+    update_post_meta($post_id, 'adverts_attachments_order', $clean_ordered_keys_json);
+
+    echo json_encode( array( "result" => 1 ) );
+    exit;
+}
+
 /**
  * Deletes one gallery attachmenent (image)
  * 

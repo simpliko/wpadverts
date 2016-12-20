@@ -145,8 +145,8 @@ function adverts_init() {
     wp_register_script( 'adverts-auto-numeric', ADVERTS_URL  .'/assets/js/auto-numeric.js', array( 'jquery' ), "1", true);
     wp_register_script( 'adverts-autocomplete', ADVERTS_URL . '/assets/js/adverts-autocomplete.js', array( 'jquery' ), "1", true);
     wp_register_script( 'adverts-multiselect', ADVERTS_URL . '/assets/js/adverts-multiselect.js', array( 'jquery' ), "2", true);
-    wp_register_script( 'adverts-gallery', ADVERTS_URL . '/assets/js/adverts-gallery.js', array( 'jquery', 'plupload-all' ), "1", true);
-    
+    wp_register_script( 'adverts-gallery', ADVERTS_URL . '/assets/js/adverts-gallery.js', array( 'jquery', 'plupload-all' ), "2", true);
+
     wp_localize_script( 'adverts-auto-numeric', 'adverts_currency', array(
         "aSign" => $currency["sign"], 
         "pSign" => $currency["sign_type"],
@@ -292,6 +292,7 @@ function adverts_init_admin() {
     add_action('wp_ajax_adverts_author_suggest', 'adverts_author_suggest');
     add_action('wp_ajax_adverts_gallery_upload', 'adverts_gallery_upload');
     add_action('wp_ajax_adverts_gallery_update', 'adverts_gallery_update');
+    add_action('wp_ajax_adverts_gallery_update_order', 'adverts_gallery_update_order');
     add_action('wp_ajax_adverts_gallery_delete', 'adverts_gallery_delete');
     add_action('wp_ajax_adverts_show_contact', 'adverts_show_contact');
     add_action('wp_ajax_adverts_delete_tmp', 'adverts_delete_tmp');
@@ -299,6 +300,7 @@ function adverts_init_admin() {
     
     add_action('wp_ajax_nopriv_adverts_gallery_upload', 'adverts_gallery_upload');
     add_action('wp_ajax_nopriv_adverts_gallery_update', 'adverts_gallery_update');
+    add_action('wp_ajax_nopriv_adverts_gallery_update_order', 'adverts_gallery_update_order');
     add_action('wp_ajax_nopriv_adverts_gallery_delete', 'adverts_gallery_delete');
     
     add_action('wp_ajax_nopriv_adverts_show_contact', 'adverts_show_contact');

@@ -711,6 +711,7 @@ function adverts_admin_script() {
     wp_enqueue_style( 'adverts-icons-animate' );
     wp_enqueue_script( 'adverts-admin' );
     wp_enqueue_script( 'adverts-gallery' );
+    wp_enqueue_script( 'jquery-ui-sortable' );
     wp_enqueue_script( 'adverts-auto-numeric' );
     wp_enqueue_script( 'plupload-all' );
     wp_enqueue_script( 'suggest' );

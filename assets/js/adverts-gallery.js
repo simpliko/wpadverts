@@ -1,17 +1,50 @@
 jQuery(function($) {
 
+    var spinner_large = $("<div></div>").addClass("adverts-gallery-upload-update adverts-icon-spinner animate-spin");
+    $(spinner_large).css("position", "absolute").hide();
+
+    // order images using drag and drop
+    $(".adverts-gallery-uploads").sortable({
+        update: function() {
+            var ordered_keys = $("div.adverts-gallery-uploads").sortable("toArray", {attribute: 'attachment-key'});
+
+            $(this).find(".adverts-gallery-upload-update.adverts-icon-spinner.animate-spin").fadeIn();
+
+            $.ajax({
+                url: adverts_gallery_lang.ajaxurl,
+                context: this,
+                type: "post",
+                dataType: "json",
+                data: {
+                    action: "adverts_gallery_update_order",
+                    _ajax_nonce: ADVERTS_PLUPLOAD_INIT.multipart_params._ajax_nonce,
+                    post_id: $(ADVERTS_PLUPLOAD_CONF.post_id_input).val(),
+                    ordered_keys: JSON.stringify(ordered_keys)
+                },
+                success: function (response) {
+                    if (response.result == 1) {
+                        $(this).find(".adverts-gallery-upload-update.adverts-icon-spinner.animate-spin").fadeOut();
+                    } else {
+                        alert(response.error);
+                    }
+                }
+            });
+        }
+    });
+
     function adverts_upload_files_added(container, file) {
-        var ag_ui = $("<div></div>").addClass("adverts-gallery-upload-item").attr("id", file.id);
-        var ag_up = $("<div></div>").addClass("adverts-gallery-upload-update adverts-icon-spinner animate-spin");
-            
-        ag_ui.append(ag_up);
-            
-        jQuery("#"+container+" .adverts-gallery-uploads").append(ag_ui);
+        var ag_ui = $("<div></div>").addClass("adverts-gallery-upload-item").attr("id", file.id).attr("attachment-key", file.attachment_key);
+
+        $(spinner_large).show();
+        $(spinner_large).clone().prependTo(ag_ui);
+
+        $("#"+container+" .adverts-gallery-uploads").append(ag_ui);
     }
-    
-    function adverts_upload_file_uploaded(file, result) {
-        // this is your ajax response, update the DOM with it or something...
-        
+
+    // this is your ajax response, update the DOM with it or something...
+    function adverts_upload_file_uploaded(file, result, trigger_order_update) {
+        $("#" + file.id).attr('attachment-key', result.attach_id);
+
         if(result.error) {
             var m = $("#"+file.id+" .adverts-gallery-upload-update");
             m.removeClass("adverts-icon-spinner animate-spin");
@@ -19,7 +52,7 @@ jQuery(function($) {
             m.html($("<span></span>").addClass("adverts-gallery-upload-failed").html(result.error));
             return;
         } else {
-            $("#"+file.id+" .adverts-gallery-upload-update").remove();
+            $("#"+file.id+" .adverts-gallery-upload-update").hide();
         }
         
         var ag_ui = $("#"+file.id);
@@ -71,8 +104,8 @@ jQuery(function($) {
                success: function(response) {
                    if(response.result == 1) {
                        $(this).closest(".adverts-gallery-upload-item").fadeOut(function() {
-                           var $this = jQuery(this);
-                           $this.remove();
+                           $(this).remove();
+                           $(".adverts-gallery-uploads").sortable("option", "update")();
                        });
                    } else {
                         $(this).parent().find(".adverts-loader.animate-spin").hide();
@@ -163,8 +196,6 @@ jQuery(function($) {
                     if(featured) {
                         button.closest(".adverts-gallery-upload-item").find(".adverts-gallery-item-featured").show();
                     }
-                    
-                    var x = 0;
                 } else {
                     alert(response.error);
                 }  
@@ -235,13 +266,15 @@ jQuery(function($) {
         if( post_id == "" ) {
             $( ADVERTS_PLUPLOAD_CONF.post_id_input ).val( result.post_id );
         }
-        
-        
+
         adverts_upload_file_uploaded(file, result);
+
+        // just added a new file, so send its order to the server
+        $(".adverts-gallery-uploads").sortable("option", "update")();
       });
       
     $.each(ADVERTS_PLUPLOAD_DATA, function(index, result) {
-        var file = { id: "adverts-file-"+result.attach_id };
+        var file = { id: "adverts-file-" + result.attach_id, attachment_key: result.attach_id };
         adverts_upload_files_added(ADVERTS_PLUPLOAD_INIT.container, file);
         adverts_upload_file_uploaded(file, result);
     });

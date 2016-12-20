@@ -212,7 +212,14 @@ function shortcode_adverts_add( $atts ) {
         
         // bind data by field name
         foreach( $form->get_fields() as $f ) {
-            $bind[$f["name"]] = get_post_meta( $post_id, $f["name"], true );
+            $value = get_post_meta( $post_id, $f["name"], false );
+            if( empty( $value ) ) {
+                $bind[$f["name"]] = "";
+            } else if( count( $value ) == 1 ) {
+                $bind[$f["name"]] = $value[0];
+            } else {
+                $bind[$f["name"]] = $value;
+            }
         }
         
         $bind["post_title"] = $post->post_title;
@@ -345,21 +352,35 @@ function shortcode_adverts_add( $atts ) {
  */
 function shortcode_adverts_manage( $atts ) {
     
-    ob_start();
     if(!get_current_user_id()) {
         wp_enqueue_style( 'adverts-frontend' );
         wp_enqueue_style( 'adverts-icons' );
+        
+        ob_start();
         $permalink = get_permalink();
         $message = __('Only logged in users can access this page. <a href="%1$s">Login</a> or <a href="%2$s">Register</a>.', "adverts");
         $parsed = sprintf($message, wp_login_url( $permalink ), wp_registration_url( $permalink ) );
         adverts_flash( array( "error" => array( $parsed ) ) );
-    } elseif(adverts_request("advert_id") == null) {
-        _adverts_manage_list( $atts );
-    } else {
-        _adverts_manage_edit( $atts );
+        $content = ob_get_clean();
     }
     
-    return ob_get_clean();
+    if( adverts_request("advert_id") ) {
+        $action = "edit";
+    } else {
+        $action = "";
+    }
+    
+    $action = apply_filters( "adverts_manage_action", $action );
+    
+    ob_start();
+    if( $action == "" ) {
+        $content = _adverts_manage_list( $atts );
+    } else if( $action == "edit" ) {
+        $content = _adverts_manage_edit( $atts );
+    } 
+    $content = ob_get_clean();
+    
+    return apply_filters("adverts_manage_action_$action", $content, $atts);
 }
 
 /**
@@ -374,8 +395,10 @@ function _adverts_manage_list( $atts ) {
     
     wp_enqueue_style( 'adverts-frontend' );
     wp_enqueue_style( 'adverts-icons' );
+    wp_enqueue_style( 'adverts-icons-animate' );
 
     wp_enqueue_script( 'adverts-frontend' );
+    wp_enqueue_script( 'adverts-frontend-manage' );
 
     extract(shortcode_atts(array(
         'name' => 'default',
@@ -386,7 +409,7 @@ function _adverts_manage_list( $atts ) {
     // Load ONLY current user data
     $loop = new WP_Query( array( 
         'post_type' => 'advert', 
-        'post_status' => apply_filters("adverts_sh_manage_list_statuses", array('publish', 'pending', 'expired') ),
+        'post_status' => apply_filters("adverts_sh_manage_list_statuses", array('publish', 'advert-pending', 'expired') ),
         'posts_per_page' => $posts_per_page, 
         'paged' => $paged,
         'author' => get_current_user_id()
@@ -461,7 +484,7 @@ function _adverts_manage_edit( $atts ) {
         return;
     }
     
-    $slist = apply_filters("adverts_sh_manage_list_statuses", array( 'publish', 'expired', 'pending', 'draft') );
+    $slist = apply_filters("adverts_sh_manage_list_statuses", array( 'publish', 'expired', 'advert-pending', 'draft') );
     
     if( !in_array( $post->post_status, $slist ) ) {
         $error[] = sprintf( __( "Incorrect post status [%s].", "adverts" ), $post->post_status );

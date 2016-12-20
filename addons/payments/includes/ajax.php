@@ -68,6 +68,7 @@ function adext_payments_ajax_render() {
             update_post_meta( $payment_id, '_adverts_user_id', wp_get_current_user()->ID );
             update_post_meta( $payment_id, '_adverts_object_id', $data["object_id"] );
             update_post_meta( $payment_id, '_adverts_pricing_id', $data["listing_id"] );
+            update_post_meta( $payment_id, '_adverts_payment_type', $pricing->post_type );
             update_post_meta( $payment_id, '_adverts_payment_gateway', $data["gateway_name"] );
             update_post_meta( $payment_id, '_adverts_payment_for', $data["payment_for"] );
             update_post_meta( $payment_id, '_adverts_payment_paid', "0" );

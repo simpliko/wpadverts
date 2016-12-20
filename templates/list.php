@@ -21,6 +21,9 @@
         <div class="adverts-search">
             <?php foreach( $fields_visible as $field ): ?>
             <div class="advert-input <?php echo esc_attr( $field['adverts_list_classes'] ) ?>">
+                <?php if( isset( $field["label"] ) && ! empty( $field["label"] ) ): ?>
+                <span class="adverts-search-input-label"><?php echo esc_html( $field["label"] ) ?></span>
+                <?php endif; ?>
                 <?php call_user_func( adverts_field_get_renderer($field), $field) ?>
             </div>
             <?php endforeach; ?>
@@ -31,6 +34,9 @@
         <div class="adverts-search adverts-search-hidden">
             <?php foreach( $fields_hidden as $field ): ?>
             <div class="advert-input <?php echo esc_attr( $field['adverts_list_classes'] ) ?>">
+                <?php if( isset( $field["label"] ) && ! empty( $field["label"] ) ): ?>
+                <span class="adverts-search-input-label"><?php echo esc_html( $field["label"] ) ?></span>
+                <?php endif; ?>
                 <?php call_user_func( adverts_field_get_renderer($field), $field) ?>
             </div>
             <?php endforeach; ?>
@@ -61,7 +67,7 @@
 <?php endif; ?>
 
 <?php if( $show_results ): ?>
-<div class="adverts-list">
+<div class="adverts-list adverts-bg-hover">
     <?php if( $loop->have_posts() ): ?>
     <?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
     <?php include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/list-item.php' ) ?>

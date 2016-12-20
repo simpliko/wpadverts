@@ -502,3 +502,59 @@ tr.adverts-field-error {
 .adverts-payment-price[name=_adverts_payment_paid] {
     color: green;
 }
+
+/* MULTISELECT */
+
+.adverts-data-table .adverts-multiselect-options label {
+    float: initial;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+input[type=text].adverts-multiselect-input {
+    cursor:pointer;
+    margin-bottom: 0px;
+    z-index: 100;
+    background-image: url("../images/icon-arrow-down.png");
+    background-repeat: no-repeat;
+    background-position: 98% 50%;
+    width:100%;
+}
+
+input[type=text].adverts-multiselect-input.adverts-multiselect-open {
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+    
+.adverts-multiselect-options {
+    min-height: 50px;
+    max-height: 250px;
+    min-width: 200px;
+    overflow-y: scroll;
+    border: 1px solid silver;
+    border-top: 0px solid transparent;
+    border-right: 0px solid transparent;
+    display: none;
+    width:100%;
+    z-index:10000;
+    position: absolute;
+    background-color: white;
+    -moz-box-shadow:    0 4px 3px -3px  whitesmoke;
+    -webkit-box-shadow: 0 4px 3px -3px  whitesmoke;
+    box-shadow:         0 4px 3px -3px whitesmoke;
+}
+    
+.adverts-multiselect-options > label {
+    display: block;
+    padding: 2px 6px 2px 6px;
+    margin: 0px;
+    color: black;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.adverts-multiselect-options > label:hover {
+    background-color: whitesmoke;
+}

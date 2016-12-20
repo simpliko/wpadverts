@@ -46,6 +46,8 @@ function adext_payments_init() {
   
     register_post_type( 'adverts-pricing', apply_filters( 'adverts_post_type', $args, 'adverts-pricing') ); 
     
+    register_post_type( 'adverts-renewal', apply_filters( 'adverts_post_type', $args, 'adverts-renewal') ); 
+    
     $args = array(
         'labels'        => array(),
         'public'        => false,
@@ -160,6 +162,13 @@ function adext_payments_init_frontend() {
     add_filter("adverts_action", "adext_payments_add_action_notify");
     
     add_filter("adverts_action_payment", "adext_payments_action_payment", 10, 2);
+    
+    add_action( "adverts_sh_manage_actions_more", "adext_payments_action_renew" );
+    
+    add_filter( "adverts_manage_action", "adext_payments_manage_action" );
+    add_filter( "adverts_manage_action_renew", "adext_payments_manage_action_renew" );
+    
+    add_action( "adverts_sh_manage_list_status", 'adext_payments_manage_list_status' );
 }
 
 /**
@@ -252,7 +261,7 @@ function adext_payments_add_action_notify( $action ) {
  */
 function adext_payments_form_load( $form ) {
     
-    if($form["name"] != 'advert' || is_admin()) {
+    if($form["name"] != 'advert' || is_admin() || adverts_request( "advert_id" ) ) {
         return $form;
     }
     
@@ -456,6 +465,216 @@ function adext_payments_action_payment($content, Adverts_Form $form ) {
 }
 
 /**
+ * Switch shortcode_adverts_manage action to "renew"
+ * 
+ * Function checks if $_GET param advert_renew is set and if it is an ID
+ * of existing Advert owned by current user, if it is then action "renew"
+ * is enqueued.
+ * 
+ * @see shortcode_adverts_manage()
+ * @since 1.1.0
+ * 
+ * @param   string  $action     Current action to execute
+ * @return  string
+ */
+function adext_payments_manage_action( $action ) {
+    if( ! adverts_request( "advert_renew" ) ) {
+        return $action;
+    }
+    
+    $advert = get_post( adverts_request( "advert_renew" ) );
+    
+    if( ! $advert instanceof WP_Post ) {
+        return $action;
+    }
+    
+    if( $advert->post_type != "advert" ) {
+        return $action;
+    }
+    
+    if( $advert->post_author != get_current_user_id() ) {
+        return $action;
+    }
+    
+    $action = "renew";
+    
+    return $action;
+}
+
+/**
+ * Displays "Renew Ad" button in [adverts_manage].
+ * 
+ * This function is executed by adverts_sh_manage_actions_more filter, so
+ * it will be displayed after clicking "More".
+ * 
+ * @see adverts_sh_manage_actions_more
+ * 
+ * @since 1.1.0
+ * @param   int     $post_id    Post ID
+ * @return  void
+ */
+function adext_payments_action_renew( $post_id ) {
+    
+    $post = get_post( $post_id );
+    
+    if( ! in_array( $post->post_status, array( 'publish', 'expired' ) ) ) {
+        // do not allow renewing pending Ads
+        return;
+    }
+    
+    $renewals = get_posts( array( 
+        'post_type' => 'adverts-renewal', 
+        'post_status' => 'any',
+        'posts_per_page' => 1, 
+    ) );
+    
+    $renewals = apply_filters( "wpadverts_filter_renewals", $renewals, $post_id );
+    
+    if( empty( $renewals ) ) {
+        return;
+    }
+    
+    include_once ADVERTS_PATH . "/includes/class-html.php";
+    
+    $span = '<span class="adverts-icon-arrows-cw"></span>';
+    $a = new Adverts_Html("a", array(
+        "href" => add_query_arg( "advert_renew", $post_id ),
+        "class" => "adverts-manage-action",
+    ), $span . " " . __("Renew Ad", "adverts") );
+    
+    echo $a->render();
+}
+
+/**
+ * Renders a form which allows to renew an Advert
+ * 
+ * This function is executed using adverts_manage_action_renew filter.
+ * 
+ * @see     adverts_manage_action_renew
+ * @since   1.1.0
+ * 
+ * @param   string    $content  Content generated form [adverts_manage]
+ * @param   array     $atts     [adverts_manage] params
+ * @return  string              HTML for form which will allow to renew an Ad
+ */
+function adext_payments_manage_action_renew( $content, $atts = array() ) {
+
+    $error = null;
+    $info = null;
+    
+    $baseurl = apply_filters( "adverts_manage_baseurl", get_the_permalink() );
+    
+    wp_enqueue_style( 'adverts-payments-frontend' );
+    
+    $adverts_flash = array( "error" => array(), "info" => array() );
+    $post = get_post( adverts_request( "advert_renew" ) );
+    
+    $form["field"][] = array(
+        "name" => "_listing_information",
+        "type" => "adverts_field_header",
+        "order" => 1000,
+        "label" => __( 'Listing Information', 'adverts' )
+    );
+    
+    $opts = array();
+    $pricings = new WP_Query( array( 
+        'post_type' => 'adverts-renewal',
+        'post_status' => 'draft'
+    ) );
+    
+    $pricings = apply_filters( "wpadverts_filter_renewals", $pricings, $post->ID );
+    
+    adverts_form_add_field("adverts_payments_field_payment", array(
+        "renderer" => "adverts_payments_field_payment",
+        "callback_save" => "adverts_save_single",
+        "callback_bind" => "adverts_bind_single",
+    ) );
+    
+    foreach($pricings->posts as $data) {
+        
+        if( get_post_meta( $data->ID, 'adverts_price', true ) ) {
+            $adverts_price = adverts_price( get_post_meta( $data->ID, 'adverts_price', true ) );
+        } else {
+            $adverts_price = __("Free", "adverts");
+        }
+        
+        $opts[] = array( "value"=>$data->ID, "text"=> $data->post_content );
+    }
+
+    $form = array(
+        "name" => "advert-renew",
+        "field" => array(
+            array(
+                "name" => "_adverts_renew",
+                "type" => "adverts_field_hidden",
+                "value" => "1",
+                "order" => 1000
+            ),
+            array(
+                "name" => "payments_listing_type",
+                "type" => "adverts_payments_field_payment",
+                "label" => null,
+                "order" => 1001,
+                "empty_option" => true,
+                "options" => $opts,
+                "value" => "",
+                "validator" => array(
+                    array( "name" => "is_required" )
+                )
+            )
+        )
+    );
+    
+    include_once ADVERTS_PATH . 'includes/class-html.php';
+    include_once ADVERTS_PATH . 'includes/class-form.php';
+    
+    $form_scheme = apply_filters( "adverts_form_scheme", $form, null );
+    $form = new Adverts_Form( $form_scheme );
+    $form_label_placement = "adverts-form-stacked";
+    $buttons = array(
+        array(
+            "html" => "",
+            "tag" => "input",
+            "type" => "submit",
+            "value" => __( "Renew", "Adverts" ),
+            "style" => "font-size:1.2em"
+        )
+    );
+    
+    if( isset( $_POST ) && ! empty( $_POST ) ) {
+        $form->bind( stripslashes_deep( $_POST ) );
+        $valid = $form->validate();
+        
+        if( $valid ) {
+            
+            
+            wp_enqueue_script( 'adext-payments' );
+            wp_enqueue_script( 'adverts-frontend' );
+            
+            $listing = get_post( $form->get_value( "payments_listing_type" ) );
+            $price = get_post_meta( $listing->ID, 'adverts_price', true );
+            
+            $m = __( 'Renew <strong>%s</strong> or <a href="%s">cancel and go back</a>.', 'adverts');
+            $adverts_flash["info"][] = sprintf( $m, $post->post_title, $baseurl );
+    
+            ob_start();
+            // adverts/addons/payments/templates/add-payment.php
+            include ADVERTS_PATH . 'addons/payments/templates/add-payment.php';
+            return ob_get_clean();
+        }
+    } 
+    
+    $m1 = __( 'Renew <strong>%s</strong> or <a href="%s">cancel and go back</a>.', 'adverts');
+    $m2 = __( 'Select renewal option and click "Renew" button.', 'adverts');
+    $adverts_flash["info"][] = sprintf( $m1, $post->post_title, $baseurl ) . "<br/>" . sprintf( $m2, $baseurl );
+    
+    ob_start();
+    // adverts/templates/form.php
+    include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/form.php' );
+    return ob_get_clean();
+}
+
+/**
  * Function initiates Payments module in wp-admin
  * 
  * @since 1.0
@@ -512,6 +731,7 @@ function adext_payments_core_init() {
     include_once ADVERTS_PATH . 'addons/payments/includes/payment-actions.php';
     
     add_action("adverts_payment_completed", "adext_payment_completed_publish");
+    add_action("adverts_payment_completed", "adext_payment_completed_renew");
     add_action("adverts_payment_completed", "adext_payment_completed_notify_user");
     add_action("adverts_payment_completed", "adext_payment_completed_notify_admin");
     
@@ -584,4 +804,25 @@ function adext_payments_log( $payment_id, $message ) {
         "ID" => $payment_id,
         "post_content" => $payment->post_content . "\r\n" . $log
     ));
+}
+
+/**
+ * Display locked flag in [adverts_manage] shortcode
+ * 
+ * This function is being executed by adverts_sh_manage_list_status action, in
+ * wpadverts/templates/manage.php
+ * 
+ * @since   1.1.0
+ * @param   WP_Post     $post   Post for which we want to check the stataus
+ * @return  void
+ */
+function adext_payments_manage_list_status( $post ) {
+
+    if( $post->post_status != "advert-pending" ) {
+        return;
+    }
+    
+    ?>
+    <span class="adverts-inline-icon adverts-inline-icon-warn adverts-icon-credit-card" title="<?php _e("Waiting for payment.", "adverts") ?>"></span>
+    <?php 
 }

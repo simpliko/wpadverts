@@ -32,6 +32,7 @@ if(is_admin()) {
 } else {
     add_filter( 'adverts_css_classes', 'adext_adverts_css_classes', 10, 2 );
     add_filter( 'adverts_payments_features', 'adext_featured_payment' );
+    add_action( 'adverts_sh_manage_list_status', 'adext_featured_manage_list_status' );
 }
 
 add_filter("adverts_payments_order_create", "adext_featured_order_create");
@@ -269,4 +270,25 @@ function adext_featured_payment( $post_id ) {
     </span>
 
     <?php
+}
+
+/**
+ * Display Featured flag in [adverts_manage] shortcode
+ * 
+ * This function is being executed by adverts_sh_manage_list_status action, in
+ * wpadverts/templates/manage.php
+ * 
+ * @since   1.1.0
+ * @param   WP_Post     $post   Post for which we want to check the stataus
+ * @return  void
+ */
+function adext_featured_manage_list_status( $post ) {
+
+    if( $post->menu_order < 1 ) {
+        return;
+    }
+    
+    ?>
+    <span class="adverts-inline-icon adverts-inline-icon-info adverts-icon-flag" title="<?php _e("Featured", "adverts") ?>"></span>
+    <?php 
 }

@@ -3,7 +3,7 @@
 <div class="adverts-grid adverts-grid-closed-top">
     <div class="adverts-grid-row">
         <div class="adverts-grid-col adverts-col-65">
-            <?php esc_html_e($listing->post_title) ?>
+            <?php echo esc_html($listing->post_title) ?>
         </div>
         <div class="adverts-grid-col adverts-col-35">
             <?php echo adverts_price($price) ?>

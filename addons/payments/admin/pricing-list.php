@@ -45,6 +45,7 @@
         <tr>
             <td style="" class="manage-column column-cb check-column" scope="col"><input type="checkbox"/></td>
             <th style="" class="" scope="col"><?php _e("Title", "adverts") ?></th>
+            <th style="" class="" scope="col"><?php _e("Type", "adverts") ?></th>
             <th style="" class="" scope="col"><?php _e("Price", "adverts") ?></th>
             <th style="" class="" scope="col"><?php _e("Visible", "adverts") ?></th>
             <?php do_action('adext_pricing_list_thead') ?>
@@ -67,6 +68,14 @@
             </td>
             
             <td class="">
+                <?php if( $item->post_type == "adverts-pricing" ): ?>
+                <?php _e( "New Post", "adverts" ) ?>
+                <?php elseif( $item->post_type == "adverts-renewal" ): ?>
+                <?php _e( "Renewal", "adverts" ) ?>
+                <?php endif; ?>
+            </td>
+            
+            <td class="">
                 <?php $price = get_post_meta( $item->ID, 'adverts_price', true ) ?>
                 <?php if($price): ?> 
                 <?php echo adverts_price( $price ) ?>
@@ -74,6 +83,7 @@
                 <?php _e("Free", "adverts") ?>
                 <?php endif; ?>
             </td>
+
             <td class="">
                 <?php $visible = get_post_meta( $item->ID, 'adverts_visible', true ) ?>
                 <?php printf( _n( '1 day', '%s days', $visible, 'adverts' ), $visible ) ?>

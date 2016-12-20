@@ -179,7 +179,7 @@ class Adverts_Widget_Categories extends WP_Widget
             $link = get_term_link( $parent );
             $home_url = Adverts_Html::build("a", array("href"=>$link, 'title'=>$parent->name), sprintf(__("Go Up (%s)", "adverts"), $parent->name));
         } else if ( $current !== false ) {
-            $home_url = Adverts_Html::build("a", array("href"=>site_url()), __("Go Up (Home)", "adverts"));
+            $home_url = Adverts_Html::build("a", array("href"=>get_permalink( adverts_config( "ads_list_id" ) ) ), __("Go Up (Home)", "adverts"));
         }
         
         extract($args, EXTR_SKIP);

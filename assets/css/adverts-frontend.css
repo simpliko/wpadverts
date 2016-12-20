@@ -105,9 +105,17 @@ input.adverts-submit[type=submit] {
 }
 
 .adverts-inline-icon:before {
-    vertical-align: middle;
-    font-size: 16px;
+    vertical-align: baseline;
+    font-size: 15px;
     color: gray;
+}
+
+.adverts-inline-icon.adverts-inline-icon-info:before {
+    color: #21759b;
+}
+
+.adverts-inline-icon.adverts-inline-icon-warn:before {
+    color: #b34040;
 }
 
 .adverts-button.adverts-button-icon {
@@ -136,6 +144,118 @@ a.adverts-button:hover,
 
 a.adverts-button:hover {
     border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.adverts-manage-price {
+    color: #b34040;
+    font-weight: bold;
+    margin: 0 0 0 0.5em;
+}
+
+.adverts-manage-info {
+    float: right;
+    line-height: 26px;
+}
+
+.adverts-manage-link a {
+    text-decoration: none;
+}
+
+.adverts-manage-actions-wrap {
+    overflow: hidden;
+    clear: both;
+}
+
+.adverts-manage-actions-more {
+    clear: both;
+    overflow: hidden;
+    display: none;
+}
+
+.adverts-manage-actions-left {
+    float: left;
+}
+
+.adverts-manage-actions-right {
+    float: right;
+}
+
+.adverts-manage-action,
+a.adverts-manage-action {
+    display: inline-block;
+    overflow: hidden;
+    
+    padding: 0 10px 0 5px;
+    height: 28px;
+    line-height: 26px;
+    font-size: 12px;
+    text-decoration: none;
+    color: #666;
+    border: 1px solid silver;
+    border-radius: 3px;
+}
+
+.adverts-manage-action,
+a.adverts-manage-action {
+    
+}
+
+.adverts-manage-actions-left a.adverts-manage-action {
+    margin: 5px 5px 0 0;
+}
+
+.adverts-manage-actions-right a.adverts-manage-action {
+    margin: 5px 0 0 5px;
+}
+
+a.adverts-manage-action:hover {
+    background-color: whitesmoke;
+    color: #666;
+    border-color: gray;
+}
+
+.adverts-manage-action:visited,
+a.adverts-manage-action:visited {
+    color: #666;
+}
+
+.adverts-manage-action > span {
+    font-size: 16px;
+}
+
+.adverts-manage-delete-confirm {
+    display: none
+}
+
+.adverts-manage-delete-text {
+    
+}
+
+.advert-link-wraps, 
+.advert-link-wraps:visited
+.entry-content .advert-link-wraps, 
+.entry-content .advert-link-wraps:visited {
+    font-size: 15px;
+    color: #21759b;
+    text-decoration: none;
+}
+
+@media (min-width: 760px) {
+    .advert-manage-item.advert-item-col-1 .advert-img {
+        top: 0;
+        margin-top: 15px;
+    }  
+}
+
+
+.advert-manage-item.advert-manage-deleted {
+    background-color: whitesmoke;
+    padding: 1em;
+    font-size: 14px;
+}
+
+.advert-manage-deleted:before {
+    font-size: 18px;
 }
 
 .adverts-loader {
@@ -253,7 +373,7 @@ a.adverts-button:hover {
     border: 0;
     border-bottom: 1px solid #e5e5e5;
 }    
-.advert-item-col-1:hover {
+.adverts-bg-hover .advert-item-col-1:hover {
     background: whitesmoke;
 }
 
@@ -386,6 +506,11 @@ display: inline-block;
     padding: 0;
 }
 
+.adverts-search .adverts-search-input-label {
+    margin-left: 2px;
+    font-weight: bold;
+}
+
 .adverts-search .advert-input {
     width:48%;
     margin: 1.5% 1% 1.5% 1%;
@@ -452,7 +577,7 @@ display: inline-block;
     clear: both;
     border: 1px solid #e5e5e5;
     border-bottom: 2px solid #e5e5e5;
-    padding: 0em 0.5em 0em 0.5em;
+    padding: 0em 1em 0em 1em;
     background-color: #fbfbfb;
 
 }
@@ -671,12 +796,12 @@ div.wpjb-flash-small {
     line-height: normal;
 }
 
-.adverts-row-values-block .adverts-row-value:first-child {
-    margin: 0.5em 0 0.5em 0;
-}
-
 .adverts-row-values-block .adverts-row-value:last-child {
     margin: 0;
+}
+
+.adverts-row-values-block .adverts-row-value:first-child {
+    margin: 0.5em 0 0.5em 0;
 }
 
 /* Separate items by coma */
@@ -2018,6 +2143,20 @@ ul.adverts-tabs li {
         width: 100%;
         margin-left: 0;
         margin-right: 0;
+    }
+    
+    .adverts-manage-info {
+        float: left;
+        display: block;
+        width: 100%;
+    }
+    
+    .adverts-manage-actions-right {
+        float: left;
+    }
+    
+    .adverts-manage-actions-right a.adverts-manage-action {
+        margin: 5px 5px 0 0;
     }
 }
 

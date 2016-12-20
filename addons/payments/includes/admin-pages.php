@@ -116,7 +116,7 @@ function adext_payments_page_pricing() {
     $flash = Adverts_Flash::instance();
     $error = array();
     $init = array(
-        "post" => array( 'post_type'=>'adverts-pricing' ),
+        "post" => array( 'post_type'=> null ),
         "meta" => array( )
     );
     
@@ -136,7 +136,12 @@ function adext_payments_page_pricing() {
 
             if($valid) {
   
+                $init["post"]["post_type"] = $form->get_value( "_post_type" );
+                $form->set_value( "_post_type", null );
+                
                 $post_id = Adverts_Post::save($form, null, $init);
+                
+                $form->set_value( "_post_type", $init["post"]["post_type"] );
 
                 if(is_wp_error($post_id)) {
                     $flash->add_error( $post_id->get_error_message() );
@@ -163,9 +168,11 @@ function adext_payments_page_pricing() {
         $button_text = __("Update Pricing", "adverts");
         
         $post = get_post( adverts_request("edit") );
+        $bind = Adverts_Post::to_array( $post );
+        $bind["_post_type"] = $bind["post_type"];
         
         $form = new Adverts_Form(Adverts::instance()->get("form_payments"));
-        $form->bind( Adverts_Post::to_array( $post ) );
+        $form->bind( $bind );
         
         if(isset($_POST) && !empty($_POST)) {
             
@@ -175,8 +182,13 @@ function adext_payments_page_pricing() {
 
             if($valid) {
   
+                $init["post"]["post_type"] = $form->get_value( "_post_type" );
+                $form->set_value( "_post_type", null );
+                
                 $post_id = Adverts_Post::save($form, $post, $init);
 
+                $form->set_value( "_post_type", $init["post"]["post_type"] );
+                
                 if(is_wp_error($post_id)) {
                     $flash->add_error( $post_id->get_error_message() );
                 } elseif($post_id === 0 ) {
@@ -229,7 +241,7 @@ function adext_payments_page_pricing() {
     } else {
         // List pricings
         $loop = new WP_Query( array( 
-            'post_type' => 'adverts-pricing',
+            'post_type' => array( 'adverts-pricing', 'adverts-renewal' ),
             'posts_per_page' => 20, 
             'paged' => adverts_request( 'pg', 1 ),
         ) );
@@ -632,6 +644,21 @@ Adverts::instance()->set("form_payments", array(
     "name" => "payment",
     "action" => "",
     "field" => array(
+        array(
+            "name" => "_post_type",
+            "type" => "adverts_field_select",
+            "label" => __( "Pricing Type", "adverts" ),
+            "order" => 10,
+            "empty_option" => true,
+            "options" => array(
+                array( "value" => "adverts-pricing", "text" => __( "New Advert Posting", "adverts" ) ),
+                array( "value" => "adverts-renewal", "text" => __( "Advert Renewal", "adverts" ) )
+            ),
+            "validator" => array(
+                array( "name" => "is_required" )
+            ),
+            "value" => ""
+        ),
         array(
             "name" => "post_title",
             "type" => "adverts_field_text",

@@ -1154,7 +1154,7 @@ function adverts_field_account( $field ) {
         
     } else {
         
-        $text = __('Create an account for me so i can manage all my ads from one place (password will be emailed to you) or <a href="%s">Sign In</a>', 'adverts');
+        $text = __('Create an account for me so I can manage all my ads from one place (password will be emailed to you) or <a href="%s">Sign In</a>', 'adverts');
         $text = sprintf( $text, wp_login_url( get_permalink() ) );
         
         $fa["options"] = array(

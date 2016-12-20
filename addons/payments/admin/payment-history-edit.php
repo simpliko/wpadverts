@@ -97,6 +97,9 @@
         </div><!-- /#side-sortables -->
     </div>
         
+    <?php $listing_id = get_post_meta( $payment->ID, "_adverts_pricing_id", true ); ?>
+    <?php $listing = get_post( $listing_id ) ?>
+
     <div id="postbox-container-2" class="postbox-container">
     
 
@@ -108,13 +111,19 @@
                 
                 <div class="column" style="width:33%; float:left">
                     <strong><?php _e("Purchase Type", "adverts") ?></strong><br/>
-                    <span><?php _e("Listing Publication", "adverts") ?></span>
+                    <span>
+                        <?php if( $listing->post_type == "adverts-pricing" ): ?>
+                        <?php _e( "Posting", "adverts" ) ?>
+                        <?php elseif( $listing->post_type == "adverts-renewal" ): ?>
+                        <?php _e( "Renewal", "adverts" ) ?>
+                        <?php else: ?>
+                        -
+                        <?php endif; ?>
+                    </span>
                 </div>
                 
                 <div class="column" style="width:33%; float: left">
                     <strong><?php _e("Listing Type", "adverts") ?></strong><br/>
-                    <?php $listing_id = get_post_meta( $payment->ID, "_adverts_pricing_id", true ); ?>
-                    <?php $listing = get_post( $listing_id ) ?>
                     <?php if($listing): ?>
                     <span>
                         <a href="<?php echo admin_url('edit.php?post_type=advert&page=adverts-extensions&module=payments&adaction=list&edit='.$listing->ID) ?>"><?php esc_html_e($listing->post_title) ?></a> 

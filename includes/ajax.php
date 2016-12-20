@@ -299,45 +299,76 @@ function adverts_delete_tmp() {
  * Action: adverts_delete
  * 
  * @since 0.1
+ * @since 1.1.0     Support dor deleting Ads using JavaScript
  * @return void
  */
 function adverts_delete() {
     
     $id = adverts_request("id");
+    $is_ajax = adverts_request( "ajax", false );
     $post = get_post($id);
+    $result = null;
+    
+    // Check AJAX referer
+    if( ! check_ajax_referer( 'adverts-delete', '_ajax_nonce', false ) ) {
+        $result = array( 
+            "result" => 0, 
+            "error" => __( "Invalid Session. Please refresh the page and try again.", "adverts" ) 
+        );
+    }
     
     // check if post exists
     if( !$post ) {
-        echo 1;
-        exit;
+        $result = array( 
+            "result" => -1, 
+            "error" => __( "Post you are trying to delete does not exist.", "adverts" ) 
+        );
     }
     
     // check if current user is post author
     if( $post->post_author != get_current_user_id() ) {
-        echo 2;
-        exit;
+        $result = array( 
+            "result" => -2, 
+            "error" => __( "Post you are trying to delete does not belong to you.", "adverts" ) 
+        );
     }
     
     // check if post is an advert
     if( $post->post_type != 'advert') {
-        echo 3;
-        exit;
+        $result = array( 
+            "result" => -3, 
+            "error" => __( "This post is not an Advert.", "adverts" ) 
+        );
     }
     
+    if( ! $result === null ) {
+        if( $is_ajax ) {
+            echo json_encode( $result );
+        } else {
+            wp_die( $result["error"] );
+        }
+    }
+    
+    $post_title = $post->post_title;
     $param = array( 'post_parent' => $id, 'post_type' => 'attachment' );
     $children = get_posts( $param );
     
     // also delete all uploaded files
     if( is_array( $children ) ) {
         foreach( $children as $attch) {
-            adverts_delete_post( $attch->ID);
+            //adverts_delete_post( $attch->ID);
         }
     } 
     
-    adverts_delete_post( $id );
+    //adverts_delete_post( $id );
     
     if(adverts_request("redirect_to") ) {
         wp_redirect( adverts_request( "redirect_to" ) );
+    } else if( $is_ajax ) {
+        echo json_encode( array( 
+            "result" => 1, 
+            "message" => sprintf( __( "Advert <strong>%s</strong> deleted.", "adverts" ), $post_title )
+        ) );
     }
     
     exit;

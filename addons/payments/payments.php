@@ -823,6 +823,6 @@ function adext_payments_manage_list_status( $post ) {
     }
     
     ?>
-    <span class="adverts-inline-icon adverts-inline-icon-warn adverts-icon-credit-card" title="<?php _e("Waiting for payment.", "adverts") ?>"></span>
+    <span class="adverts-inline-icon adverts-inline-icon-warn adverts-icon-credit-card" title="<?php _e("Inactive — Waiting for payment.", "adverts") ?>"></span>
     <?php 
 }

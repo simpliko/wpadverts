@@ -192,6 +192,15 @@ function adext_featured_completed_publish( WP_Post $payment ) {
     ));
 }
 
+/**
+ * Sets meta information for the order
+ * 
+ * Adds information about "is_featured" flag for the purchased item.
+ * 
+ * @since   1.0.3
+ * @param   array $data   Information about the payment
+ * @return  array $data
+ */
 function adext_featured_order_create( $data ) {
     
     $is_featured = intval( get_post_meta( $data["listing_id"], "is_featured", true ) );
@@ -204,10 +213,16 @@ function adext_featured_order_create( $data ) {
     $meta["is_featured"] = 1;
     
     update_post_meta( $data["payment_id"], "_adverts_payment_meta", $meta);
-    wp_update_post(array(
-        "ID" => $data["object_id"],
-        "menu_order" => 1
-    ));
+    
+    $post = get_post( $data["object_id"] );
+    
+    if(in_array( $post->post_status, array( "draft", "pending" ) ) ) {
+        // set is_featured flag for newly posted ads only
+        wp_update_post(array(
+            "ID" => $data["object_id"],
+            "menu_order" => 1
+        ));
+    }
     
     return $data;
 }

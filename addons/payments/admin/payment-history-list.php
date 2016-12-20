@@ -68,6 +68,7 @@
             <th style="" class="" scope="col"><?php _e("Email", "adverts") ?></th>
             <th style="" class="" scope="col"><?php _e("Date", "adverts") ?></th>
             <th style="" class="" scope="col"><?php _e("Amount", "adverts") ?></th>
+            <th style="" class="" scope="col"><?php _e("Type", "adverts") ?></th>
             <th style="" class="" scope="col"><?php _e("Status", "adverts") ?></th>
             <?php do_action('adext_payment_list_thead') ?>
         </tr>
@@ -91,14 +92,30 @@
             <td class="">
                 <?php esc_html_e($item->post_title) ?>
             </td>
+            
             <td class="">
                 <?php esc_html_e( get_post_meta( $item->ID, 'adverts_email', true ) ) ?>
             </td>
+            
             <td>
                 <?php echo date_i18n( get_option( 'date_format' ), get_post_time( 'U', false, $item->ID ) )  ?>
             </td>
+            
             <td class="">
                 <?php echo adverts_price( get_post_meta( $item->ID, '_adverts_payment_total', true ) ) ?>
+            </td>  
+            
+            <td class="">
+                <?php $listing_id = get_post_meta( $item->ID, "_adverts_pricing_id", true ); ?>
+                <?php $listing = get_post( $listing_id ) ?>
+                
+                <?php if( $listing->post_type == "adverts-pricing" ): ?>
+                <?php _e( "Posting", "adverts" ) ?>
+                <?php elseif( $listing->post_type == "adverts-renewal" ): ?>
+                <?php _e( "Renewal", "adverts" ) ?>
+                <?php else: ?>
+                —
+                <?php endif; ?>
             </td>  
 
             <td>

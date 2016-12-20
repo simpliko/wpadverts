@@ -14,12 +14,12 @@
         </div>
      
         <div class="advert-post-title">
-            <span title="<?php echo esc_attr( get_the_title() ) ?>" class="adverts-manage-link">
+            <span class="adverts-manage-link">
                 
                 <a href="<?php the_permalink() ?>" title="<?php echo esc_attr( get_the_title() ) ?>" class="advert-link-wraps"><strong><?php the_title() ?></strong></a>
 
                 <?php if($post->post_status == "pending"): ?>
-                <span class="adverts-inline-icon adverts-inline-icon-info adverts-icon-lock" title="<?php _e("This Ad is in moderation.", "adverts") ?>"></span>
+                <span class="adverts-inline-icon adverts-inline-icon-warn adverts-icon-lock" title="<?php _e("This Ad is in moderation.", "adverts") ?>"></span>
                 <?php endif; ?>
 
                 <?php if($post->post_status == "expired"): ?>
@@ -29,20 +29,17 @@
                 <?php do_action("adverts_sh_manage_list_status", $post) ?>
                 
                 <span class="adverts-manage-info">
-                    <span class="adverts-manage-date">
-                        <span class="adverts-icon-history" title="<?php _e( "Expiration Date", "adverts" ) ?>"></span>
-                        <?php $expires = get_post_meta( $post->ID, "_expiration_date", true ) ?>
-                        <?php if( $expires ): ?>
-                        <?php echo esc_html( date_i18n( get_option("date_format"), $expires ) ) ?>
-                        <?php else: ?>
-                        <?php _e( "Never Expires", "adverts" ) ?>
-                        <?php endif; ?>
-                    </span>
-                    
                     <?php $price = get_post_meta( get_the_ID(), "adverts_price", true ) ?>
                     <?php if( $price ): ?>
                         <span class="adverts-manage-price"><?php echo adverts_price( $price ) ?></span>
                     <?php endif; ?>
+                    
+                    <?php $expires = get_post_meta( $post->ID, "_expiration_date", true ) ?>
+                    <?php if( $expires ): ?>
+                    <span class="adverts-manage-date adverts-icon-history"><abbr title="<?php echo esc_html( sprintf( __( "Expires %s", "adverts" ), date_i18n( get_option("date_format"), $expires ) ) ) ?>"><?php echo esc_html( apply_filters( 'adverts_sh_manage_date', mysql2date( __( 'Y/m/d' ), $expires ), $post ) ) ?></abbr></span>
+                    <?php endif; ?>
+                    
+
                 </span>
                 
             </span>

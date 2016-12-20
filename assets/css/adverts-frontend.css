@@ -147,9 +147,8 @@ a.adverts-button:hover {
 }
 
 .adverts-manage-price {
-    color: #b34040;
     font-weight: bold;
-    margin: 0 0 0 0.5em;
+    margin: 0 0.5em 0 0.5em;
 }
 
 .adverts-manage-info {

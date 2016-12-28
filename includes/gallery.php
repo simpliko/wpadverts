@@ -173,8 +173,9 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
                 'post_status' => 'inherit' 
             ) );
 
-            require_once("functions.php"); // sort_images() is defined in functions.php
-            $children = sort_images($children, $post->ID);
+            // adverts_sort_images() is defined in functions.php
+            require_once ADVERTS_PATH . "/includes/functions.php"; 
+            $children = adverts_sort_images($children, $post->ID);
 
             foreach($children as $child) {
                 $data[] = adverts_upload_item_data( $child->ID );

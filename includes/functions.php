@@ -1182,9 +1182,6 @@ function adverts_field_gallery($field) {
     include_once ADVERTS_PATH . "includes/gallery.php";
     
     wp_enqueue_script( 'adverts-gallery' );
-    wp_enqueue_script( 'jquery-ui-sortable' );
-    wp_enqueue_script( 'jquery-effects-core' );
-    wp_enqueue_script( 'jquery-effects-fade' );
     
     $post_id = adverts_request("_post_id", adverts_request("advert_id"));
     $post = $post_id>0 ? get_post( $post_id ) : null;
@@ -1812,7 +1809,7 @@ function adverts_css_classes( $classes, $post_id ) {
  * user has 'drag and dropped' images into a custom order previously).
  *
  * Checks wp_postmeta for the customised order of images, which is stored as a JSON
- * string under the meta_key 'adverts_attachments_order'.
+ * string under the meta_key '_adverts_attachments_order'.
  *
  * If there is no custom order recorded against this post, then this function just
  * returns the unsorted array of $images, which will remain in the order given by
@@ -1820,14 +1817,14 @@ function adverts_css_classes( $classes, $post_id ) {
  *
  * @see functions.php/adverts_single_rslides() & gallery.php/adverts_gallery_content()
  *
- * @since 1.0.13
+ * @since 1.1.0
  *
  * @param images[] $images  Unsorted array of images (technically an associative array of posts)
  * @param integer $post_id  WP_Post ID
  * @return images[]         Sorted array of images (or default order if none defined)
  */
-function sort_images($images, $post_id) {
-    $images_order = json_decode(get_post_meta($post_id, 'adverts_attachments_order', true));
+function adverts_sort_images($images, $post_id) {
+    $images_order = json_decode(get_post_meta($post_id, '_adverts_attachments_order', true));
 
     if ( !is_null($images_order) )
     {
@@ -1882,7 +1879,7 @@ function adverts_single_rslides( $post_id ) {
     }
     
     $images += $children;
-    $images = sort_images($images, $post_id);
+    $images = adverts_sort_images($images, $post_id);
 
     wp_enqueue_script( 'responsive-slides' );
     

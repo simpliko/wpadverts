@@ -160,7 +160,7 @@ function adext_payments_init_frontend() {
     
     add_filter("adverts_action", "adext_payments_add_action_payment");
     add_filter("adverts_action", "adext_payments_add_action_notify");
-    
+
     add_filter("adverts_action_payment", "adext_payments_action_payment", 10, 2);
     
     add_action( "adverts_sh_manage_actions_more", "adext_payments_action_renew" );
@@ -496,6 +496,22 @@ function adext_payments_manage_action( $action ) {
         return $action;
     }
     
+    // maybe render payment success
+    
+    if( adverts_request( "adverts-notify-id" ) ) {
+        $payment = get_post( adverts_request( "adverts-notify-id" ) );
+    }
+    
+    if( isset( $payment ) ) {
+        $payment_gateway = get_post_meta( $payment->ID, "_adverts_payment_gateway", true );
+    }
+    
+    if( isset( $payment_gateway ) && ! empty( $payment_gateway ) ) {
+        return $payment_gateway;
+    }
+    
+    // nope, render renew form only
+    
     $action = "renew";
     
     return $action;
@@ -514,13 +530,6 @@ function adext_payments_manage_action( $action ) {
  * @return  void
  */
 function adext_payments_action_renew( $post_id ) {
-    
-    $post = get_post( $post_id );
-    
-    if( ! in_array( $post->post_status, array( 'publish', 'expired' ) ) ) {
-        // do not allow renewing pending Ads
-        return;
-    }
     
     $renewals = get_posts( array( 
         'post_type' => 'adverts-renewal', 
@@ -568,6 +577,14 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
     
     $adverts_flash = array( "error" => array(), "info" => array() );
     $post = get_post( adverts_request( "advert_renew" ) );
+    
+    if( ! in_array( $post->post_status, array( 'publish', 'expired' ) ) ) {
+        $format = __( 'Cannot renew Ads with status \'pending\', <a href="%s">cancel and go back</a>.', "adverts" );
+        $adverts_flash["error"][] = sprintf( $format, $baseurl );
+        ob_start();
+        adverts_flash( $adverts_flash );
+        return ob_get_clean();
+    }
     
     $form["field"][] = array(
         "name" => "_listing_information",
@@ -654,13 +671,35 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
             $listing = get_post( $form->get_value( "payments_listing_type" ) );
             $price = get_post_meta( $listing->ID, 'adverts_price', true );
             
-            $m = __( 'Renew <strong>%s</strong> or <a href="%s">cancel and go back</a>.', 'adverts');
-            $adverts_flash["info"][] = sprintf( $m, $post->post_title, $baseurl );
-    
-            ob_start();
-            // adverts/addons/payments/templates/add-payment.php
-            include ADVERTS_PATH . 'addons/payments/templates/add-payment.php';
-            return ob_get_clean();
+            if( $price > 0 ) {
+                $m = __( 'Renew <strong>%s</strong> or <a href="%s">cancel and go back</a>.', 'adverts');
+                $adverts_flash["info"][] = sprintf( $m, $post->post_title, $baseurl );
+                
+                ob_start();
+                // wpadverts/addons/payments/templates/add-payment.php
+                include ADVERTS_PATH . 'addons/payments/templates/add-payment.php';
+                return ob_get_clean();
+            } else {
+                $m = __( 'Ad <strong>%s</strong> renewed. <a href="%s">Go back to Ads list</a>.', 'adverts');
+                $adverts_flash["info"][] = sprintf( $m, $post->post_title, $baseurl );
+                
+                $post_id = $post->ID;
+                $moderate = apply_filters( "adverts_manage_moderate", false );
+                
+                $post_id = wp_update_post( array(
+                    "ID" => $post_id,
+                    "post_status" => $moderate == "1" ? 'pending' : 'publish',
+                ));
+
+                $v = get_post_meta( $listing->ID, "adverts_visible", true );
+                $time = strtotime( current_time('mysql') . " +" . $v . " DAYS" );
+                update_post_meta( $post_id, "_expiration_date", $time );
+                
+                ob_start();
+                // wpadverts/templates/add-payment.php
+                include ADVERTS_PATH . '/templates/add-save.php';
+                return ob_get_clean();
+            }
         }
     } 
     

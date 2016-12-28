@@ -142,10 +142,37 @@ function adverts_init() {
     
     $currency = Adverts::instance()->get("currency");
     
-    wp_register_script( 'adverts-auto-numeric', ADVERTS_URL  .'/assets/js/auto-numeric.js', array( 'jquery' ), "1", true);
-    wp_register_script( 'adverts-autocomplete', ADVERTS_URL . '/assets/js/adverts-autocomplete.js', array( 'jquery' ), "1", true);
-    wp_register_script( 'adverts-multiselect', ADVERTS_URL . '/assets/js/adverts-multiselect.js', array( 'jquery' ), "2", true);
-    wp_register_script( 'adverts-gallery', ADVERTS_URL . '/assets/js/adverts-gallery.js', array( 'jquery', 'plupload-all' ), "2", true);
+    wp_register_script( 
+        'adverts-auto-numeric', 
+        ADVERTS_URL  .'/assets/js/auto-numeric.js', 
+        array( 'jquery' ), 
+        "1", 
+        true
+    );
+    
+    wp_register_script( 
+        'adverts-autocomplete', 
+        ADVERTS_URL . '/assets/js/adverts-autocomplete.js', 
+        array( 'jquery' ), 
+        "1", 
+        true
+    );
+    
+    wp_register_script( 
+        'adverts-multiselect', 
+        ADVERTS_URL . '/assets/js/adverts-multiselect.js', 
+        array( 'jquery' ), 
+        "2", 
+        true
+    );
+    
+    wp_register_script( 
+        'adverts-gallery', 
+        ADVERTS_URL . '/assets/js/adverts-gallery.js', 
+        array( 'jquery', 'plupload-all', 'jquery-ui-sortable', 'jquery-effects-core', 'jquery-effects-fade'  ), 
+        "2", 
+        true
+    );
 
     wp_localize_script( 'adverts-auto-numeric', 'adverts_currency', array(
         "aSign" => $currency["sign"], 

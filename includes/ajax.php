@@ -179,7 +179,7 @@ function adverts_gallery_update() {
 
 /**
  * Updates order of attachments (as JSON) in wp_postmeta table
- * under the key 'adverts_attachments_order'.
+ * under the key '_adverts_attachments_order'.
  *
  * This function is executed when user changes the order of
  * images in the gallery using drag and drop, or an image is
@@ -212,7 +212,7 @@ function adverts_gallery_update_order() {
 
     $clean_ordered_keys_json = json_encode($clean_ordered_keys);
 
-    update_post_meta($post_id, 'adverts_attachments_order', $clean_ordered_keys_json);
+    update_post_meta($post_id, '_adverts_attachments_order', $clean_ordered_keys_json);
 
     echo json_encode( array( "result" => 1 ) );
     exit;

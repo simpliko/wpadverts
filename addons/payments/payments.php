@@ -478,6 +478,22 @@ function adext_payments_action_payment($content, Adverts_Form $form ) {
  * @return  string
  */
 function adext_payments_manage_action( $action ) {
+    
+    // maybe render payment success
+    if( adverts_request( "adverts-notify-id" ) ) {
+        $payment = get_post( adverts_request( "adverts-notify-id" ) );
+        
+        if( $payment && $payment->post_type = "adverts-payment" ) {
+        
+            $payment_gateway = get_post_meta( $payment->ID, "_adverts_payment_gateway", true );
+
+            if( $payment->post_author == get_current_user_id()  && ! empty( $payment_gateway ) ) {
+                return $payment_gateway;
+            }
+        }
+    }
+    
+    // continue if there is advert_renew param
     if( ! adverts_request( "advert_renew" ) ) {
         return $action;
     }
@@ -495,22 +511,6 @@ function adext_payments_manage_action( $action ) {
     if( $advert->post_author != get_current_user_id() ) {
         return $action;
     }
-    
-    // maybe render payment success
-    
-    if( adverts_request( "adverts-notify-id" ) ) {
-        $payment = get_post( adverts_request( "adverts-notify-id" ) );
-    }
-    
-    if( isset( $payment ) ) {
-        $payment_gateway = get_post_meta( $payment->ID, "_adverts_payment_gateway", true );
-    }
-    
-    if( isset( $payment_gateway ) && ! empty( $payment_gateway ) ) {
-        return $payment_gateway;
-    }
-    
-    // nope, render renew form only
     
     $action = "renew";
     

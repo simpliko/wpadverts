@@ -3,8 +3,8 @@ Plugin URI: https://wpadverts.com/
 Contributors: gwin
 Tags: classifieds, classified, classified ads, classified script, classifieds script, wp classified, wp classifieds
 Requires at least: 4.0
-Tested up to: 4.6.1
-Stable tag: 1.0.12
+Tested up to: 4.7.0
+Stable tag: 1.1.0
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -28,11 +28,14 @@ is NOT a demo, this is a fully functional classifieds software with most crucial
 **Noatble Features**
 
 * Modern, responsive design.
-* Intuitive ads browsing and searching.
-* Display categories grid.
-* Allow (registered and/or anonymous) users to post Ads.
+* Intuitive classified Ads browsing and searching ([adverts_list] shortcode).
+* Display classifieds categories grid ([adverts_categories] shortcode).
+* Allow (registered and/or anonymous) users to post classifieds ([adverts_add] shortcode).
+* Allow users to browse, edit and delete their ads ([adverts_manage] shortcode).
 * Payments Module to track user payments and transactions logs.
 * Bank Transfer payment gateway included.
+* Charge users for posting classifieds ads
+* Charge users for renewing expired ads
 * Easy to use drag and drop image upload.
 * Ads will automatically expire after set number of days.
 * Detailed user and developer documenation.
@@ -41,7 +44,7 @@ See [Screenshots](https://wordpress.org/plugins/wpadverts/screenshots/) tab for 
 
 **Extensions**
 
-WPAdverts plugin can be extended with premium add-ons. Currently we have a couple of modules available:
+WPAdverts plugin can be extended with premium add-ons. You can get [<strong>ALL EXTENSIONS</strong>](https://wpadverts.com/extensions/all-extensions-bundle/) for a <strong>single price</strong> with <strong>huge discount</strong> or purchase modules individually:
 
 * [Custom Fields](https://wpadverts.com/extensions/custom-fields/)
 * [WooCommerce Integration](https://wpadverts.com/extensions/woocommerce-integration/)
@@ -89,6 +92,14 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.1.0  - 2016-12-30 =
+
+* NEW: Redesigned [adverts_manage] layour
+* NEW: "Are you sure?" question before deleting an Ad in [adverts_manage]
+* NEW: Drag and drop image sorting in the gallery
+* NEW: Renew ads from [adverts_manage]
+* API: Ability to extend [adverts_manage] with additional buttons
 
 = 1.0.12 - 2016-12-01 =
 

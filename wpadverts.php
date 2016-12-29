@@ -232,7 +232,7 @@ function adverts_init() {
  */
 function adverts_init_frontend() {
     
-    wp_register_style( 'adverts-frontend', ADVERTS_URL . '/assets/css/adverts-frontend.css', array(), "2.1" );
+    wp_register_style( 'adverts-frontend', ADVERTS_URL . '/assets/css/adverts-frontend.css', array(), "3" );
     
     wp_register_script('adverts-frontend', ADVERTS_URL . '/assets/js/adverts-frontend.js', array( 'jquery' ), "2" );
     wp_register_script('adverts-frontend-add', ADVERTS_URL . '/assets/js/adverts-frontend-add.js', array( 'jquery'), "2" );

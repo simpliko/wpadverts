@@ -206,7 +206,7 @@ function adext_payments_page_pricing() {
         // Delete Pricing
         $post = get_post( adverts_request( 'delete' ) );
 
-        if( !$post || $post->post_type != 'adverts-pricing' ) {
+        if( ! $post || ! in_array( $post->post_type, array( 'adverts-pricing', 'adverts-renewal' ) ) ) {
             wp_die(__('Adverts Pricing with given ID does not exist.', 'adverts'));
         }
         

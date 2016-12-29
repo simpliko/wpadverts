@@ -100,6 +100,9 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 * NEW: Drag and drop image sorting in the gallery
 * NEW: Renew ads from [adverts_manage]
 * API: Ability to extend [adverts_manage] with additional buttons
+* FIXED: Do not display Listing Type field in [adverts_manage]
+* FIXED: Displaying meta data in [adverts_add]
+* FIXED: Allow editing pending ads from [adverts_manage] panel.
 
 = 1.0.12 - 2016-12-01 =
 

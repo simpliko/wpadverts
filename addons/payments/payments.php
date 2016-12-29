@@ -653,7 +653,7 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
             "html" => "",
             "tag" => "input",
             "type" => "submit",
-            "value" => __( "Renew", "Adverts" ),
+            "value" => __( "Renew", "adverts" ),
             "style" => "font-size:1.2em"
         )
     );

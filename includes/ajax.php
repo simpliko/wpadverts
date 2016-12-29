@@ -398,11 +398,11 @@ function adverts_delete() {
     // also delete all uploaded files
     if( is_array( $children ) ) {
         foreach( $children as $attch) {
-            //adverts_delete_post( $attch->ID);
+            adverts_delete_post( $attch->ID);
         }
     } 
     
-    //adverts_delete_post( $id );
+    adverts_delete_post( $id );
     
     if(adverts_request("redirect_to") ) {
         wp_redirect( adverts_request( "redirect_to" ) );

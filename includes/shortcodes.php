@@ -362,6 +362,7 @@ function shortcode_adverts_manage( $atts ) {
         $parsed = sprintf($message, wp_login_url( $permalink ), wp_registration_url( $permalink ) );
         adverts_flash( array( "error" => array( $parsed ) ) );
         $content = ob_get_clean();
+        return $content;
     }
     
     if( adverts_request("advert_id") ) {

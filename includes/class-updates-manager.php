@@ -328,7 +328,7 @@ class Adverts_Updates_Manager
             <td class="plugin-update" colspan="3">
                 <div class="adverts-update-notice adverts-update-registered">
                     <span class="adverts-inline-edit">
-                        <input type="text" name="license" placeholder="License ..." value="<?php esc_attr_e($this->license) ?>" data-value="<?php esc_attr_e($this->license) ?>" /> 
+                        <input type="text" name="license" placeholder="<?php _e("License ...", "adverts") ?>" value="<?php echo esc_attr($this->license) ?>" data-value="<?php echo esc_attr($this->license) ?>" /> 
                         <a href="#" class="button-secondary adverts-update-activate-button"><?php _e("Update") ?></a>
                         <a href="#" class="button-secondary adverts-update-button-cancel"><?php _e("Cancel") ?></a>
                         <img src="<?php echo admin_url() ?>/images/wpspin_light-2x.gif" alt="" class="adverts-update-loader adverts-off" />

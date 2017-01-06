@@ -1304,7 +1304,7 @@ function adverts_bind_multi($field, $value) {
     $filters = Adverts::instance()->get("field_filter", array());
     $key = $field["name"];
     
-    if( $value === NULL ) {
+    if( $value === NULL || empty( $value ) ) {
         $value = array();
     } elseif( ! is_array( $value ) ) {
         $value = array( $value );

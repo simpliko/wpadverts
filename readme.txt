@@ -4,7 +4,7 @@ Contributors: gwin
 Tags: classifieds, classified, classified ads, classified script, classifieds script, wp classified, wp classifieds
 Requires at least: 4.0
 Tested up to: 4.7.0
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -93,9 +93,16 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
-= 1.1.0  - 2016-12-30 =
+= 1.1.1 - 2017-01-06 =
 
-* NEW: Redesigned [adverts_manage] layour
+* FIXED: Not displaying warning in [adverts_manage] for unregistered users.
+* FIXED: Clearing list saved licenses when saving Core settings.
+* FIXED: Typo in plugins list HTML (wp-admin / Plugins)
+* FIXED: (API) Binding data to multiselect fields.
+
+= 1.1.0 - 2016-12-30 =
+
+* NEW: Redesigned [adverts_manage] layout
 * NEW: "Are you sure?" question before deleting an Ad in [adverts_manage]
 * NEW: Drag and drop image sorting in the gallery
 * NEW: Renew ads from [adverts_manage]

@@ -40,6 +40,7 @@ function adext_core_page_options() {
             
             $data = $form->get_values();
             $data["module"] = adverts_config( 'config.module' );
+            $data["license"] = adverts_config( 'config.license' );
             
             update_option("adverts_config", $data );
             $flash->add_info( __("Settings updated.", "adverts") );

@@ -57,6 +57,8 @@ jQuery(function($) {
             
         if( $("#post_author").val() != "0" ) {
             paoText.val($("#post_author_override option:selected").text());
+        } else if( $("#post_author").val() == "0" ) {
+            $("#post_author").val("0+");
         }
             
         var paoId = $('<input type="hidden" />')

@@ -706,7 +706,7 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
     $m1 = __( 'Renew <strong>%s</strong> or <a href="%s">cancel and go back</a>.', 'adverts');
     $m2 = __( 'Select renewal option and click "Renew" button.', 'adverts');
     $adverts_flash["info"][] = sprintf( $m1, $post->post_title, $baseurl ) . "<br/>" . sprintf( $m2, $baseurl );
-    
+
     ob_start();
     // adverts/templates/form.php
     include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/form.php' );

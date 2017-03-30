@@ -78,6 +78,7 @@
     <?php wp_reset_query(); ?>
 </div>
 
+<?php if( $show_pagination ): ?>
 <div class="adverts-pagination">
     <?php echo paginate_links( array(
         'base' => $paginate_base,
@@ -87,4 +88,6 @@
         'prev_next' => false
     ) ); ?>
 </div>
+<?php endif; ?>
+
 <?php endif; ?>

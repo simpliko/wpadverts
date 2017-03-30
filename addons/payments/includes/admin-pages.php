@@ -64,7 +64,8 @@ function adext_payments_load( $form ) {
     
     $gateways = adext_payment_gateway_get();
     $pricings = new WP_Query( array( 
-            'post_type' => 'adverts-pricing',
+        'post_type' => 'adverts-pricing',
+        'posts_per_page' => -1    
     ) );
 
     foreach($form["field"] as $key => $field) {

@@ -3,8 +3,8 @@ Plugin URI: https://wpadverts.com/
 Contributors: gwin
 Tags: classifieds, classified, classified ads, classified script, classifieds script, wp classified, wp classifieds
 Requires at least: 4.0
-Tested up to: 4.7.0
-Stable tag: 1.1.1
+Tested up to: 4.7.3
+Stable tag: 1.1.2
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -60,11 +60,13 @@ See all https://wpadverts.com/extensions/
 **Available Translations**
 
 * French
+* Dutch
 * German
 * Polish
 * Portugese
 * Russian
 * Slovenian
+* Spanish
 
 **Get Involved**
 
@@ -92,6 +94,19 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.1.2 - 2017-03-30 =
+
+* TRANSLATION: Spanish
+* TRANSLATION: Dutch
+* API: adverts_data_box_content_exclude filter added
+* API: max_choices validator for dropdown and checkbox fields.
+* API: show_pagination param added to [adverts_list].
+* FIXED: Payments Module not showing all available pricings.
+* FIXED: Replaced annonymous sorting function with a static function (to make WPAdverts compatible with PHP 5.2 again).
+* FIXED: Adverts are being assigned to user who is editing the Ad from wp-admin.
+* FIXED: Incorrect textarea width in the frontend forms.
+* FIXED: adverts_price() throwing a warning when price is incorrectly formatted.
 
 = 1.1.1 - 2017-01-06 =
 

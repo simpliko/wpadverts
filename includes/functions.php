@@ -286,7 +286,7 @@ function adverts_price( $price ) {
     }
     
     $c = Adverts::instance()->get("currency");
-    $number = number_format( $price, $c['decimals'], $c['char_decimal'], $c['char_thousand']);
+    $number = number_format( (float)$price, $c['decimals'], $c['char_decimal'], $c['char_thousand']);
     
     if( empty($c['sign'] ) ) {
         $sign = $c['code'];
@@ -690,6 +690,24 @@ function adverts_string_length( $data, $params = null ) {
 }
 
 /**
+ * Max choices VALIDATOR
+ * 
+ * This validator is applicable only to dropdown and checkbox fields.
+ * 
+ * @param mixed $data
+ * @param array $params Validation parameters (min and max length values)
+ * @since 1.1.2
+ * @return string|boolean
+ */
+function adverts_max_choices( $data, $params = null ) {
+    if( count( $data ) > $params["max_choices"] ) {
+        return "invalid";
+    } else {
+        return true;
+    }
+}
+
+/**
  * Money To Float FILTER
  * 
  * Filters currency and returns it as a float
@@ -969,6 +987,7 @@ function adverts_field_textarea( $field ) {
             "rows" => 10,
             "cols" => 50,
             "placeholder" => isset($field["placeholder"]) ? $field["placeholder"] : null,
+            "class" => isset($field["class"]) ? $field["class"] : null,
         ), $value);
         $html->forceLongClosing();
         
@@ -1479,10 +1498,10 @@ function adverts_walk_category_dropdown_tree() {
  * @since 0.1
  * @return array
  */
-function adverts_taxonomies() {
+function adverts_taxonomies( $taxonomy = 'advert_category' ) {
     
     $args = array(
-        'taxonomy'     => 'advert_category',
+        'taxonomy'     => $taxonomy,
         'hierarchical' => true,
         'orderby'       => 'name',
         'order'         => 'ASC',
@@ -1497,7 +1516,7 @@ function adverts_taxonomies() {
     
     $walker = new Adverts_Walker_Category_Options;
     $params = array(
-        get_terms( 'advert_category', $args ),
+        get_terms( $taxonomy, $args ),
         0,
         $args
     );
@@ -1701,7 +1720,8 @@ function adverts_disable_default_archive() {
  * 
  */
 function adverts_plugin_uploaded( $basename ) {
-    return is_file( dirname( ADVERTS_PATH ) . "/" . ltrim( $basename, "/") );
+    $is_uploaded = is_file( dirname( ADVERTS_PATH ) . "/" . ltrim( $basename, "/") );
+    return apply_filters( "adverts_plugin_uploaded", $is_uploaded, $basename );
 }
 
 /**
@@ -1826,26 +1846,9 @@ function adverts_css_classes( $classes, $post_id ) {
 function adverts_sort_images($images, $post_id) {
     $images_order = json_decode(get_post_meta($post_id, '_adverts_attachments_order', true));
 
-    if ( !is_null($images_order) )
-    {
-        // Sort the $images array by keys (i.e. post IDs) by comparing to $images_order.
-        // Solution courtesy: Nico & SquareCat: http://stackoverflow.com/a/22290151
-        uksort($images, function($img_a, $img_b) use ($images_order) {
-            if (in_array($img_a, $images_order)) {
-                if (in_array($img_b, $images_order)) {
-                    return array_search($img_a, $images_order) - array_search($img_b, $images_order);
-                }
-                else {
-                    return -1;
-                }
-            }
-            else if (in_array($img_b, $images_order)) {
-                return 1;
-            }
-            else {
-                return 0;
-            }
-        });
+    if ( !is_null($images_order) ) {
+        include_once ADVERTS_PATH . 'includes/class-sort-images.php';
+        uksort( $images, array( new Adverts_Sort_Images( $images_order ), "sort" ) );
     }
 
     return $images;

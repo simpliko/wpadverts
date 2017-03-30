@@ -105,7 +105,13 @@ Adverts::instance()->set("form", array(
             "label" => __("Category", "adverts"),
             "max_choices" => 10,
             "options" => array(),
-            "options_callback" => "adverts_taxonomies"
+            "options_callback" => "adverts_taxonomies",
+            "validator" => array(
+                array( 
+                    "name" => "max_choices",
+                    "params" => array( "max_choices" => 10 )
+                )
+            )
         ),
         array(
             "name" => "gallery",
@@ -363,6 +369,17 @@ adverts_form_add_validator("string_length", array(
         "to_short" => __( "Text needs to be at least %min% characters long.", "adverts" ),
         "to_long" => __( "Text cannot be longer than %max% characters.", "adverts")
     ),
+    "validate_empty" => false
+));
+
+// Register "max_choices" validator
+/** @see adverts_max_choices() */
+adverts_form_add_validator("max_choices", array(
+    "callback" => "adverts_max_choices",
+    "label" => __( "Max Choices", "adverts" ),
+    "params" => array(),
+    "default_error" => __( "You cannot select more than %max_choices% items.", "adverts" ),
+    "message" => array(),
     "validate_empty" => false
 ));
 

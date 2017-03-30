@@ -387,7 +387,7 @@ function adverts_expiry_meta_box() {
 function adverts_data_box_content( $post ) {
     wp_nonce_field( plugin_basename( __FILE__ ), 'product_price_box_content_nonce' );
 
-    $exclude = array("_adverts_account", "advert_category", "post_title", "gallery", "post_content");
+    $exclude = apply_filters( "adverts_data_box_content_exclude", array("_adverts_account", "advert_category", "post_title", "gallery", "post_content") );
 
     // Load form data
     $form_scheme = apply_filters( "adverts_form_scheme", Adverts::instance()->get("form"), array() );

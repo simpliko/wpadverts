@@ -2105,6 +2105,7 @@ ul.adverts-tabs li {
     }
     
     .adverts-form input[type="text"],
+    .adverts-form textarea,
     .adverts-form-aligned #adverts-plupload-upload-ui,
     .adverts-form.adverts-form-aligned .adverts-control-group > div.adverts-multiselect-holder,
     .adverts-form.adverts-form-aligned .adverts-control-group > div.adverts-autocomplete-holder,

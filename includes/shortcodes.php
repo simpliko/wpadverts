@@ -45,6 +45,7 @@ function shortcode_adverts_list( $atts ) {
         'switch_views' => adverts_config( 'config.ads_list_default__switch_views' ),
         'paged' => adverts_request("pg", 1),
         'posts_per_page' => adverts_config( 'config.ads_list_default__posts_per_page' ),
+        'show_pagination' => true
     ), $atts, 'adverts_list' );
     
     extract( $params );

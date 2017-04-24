@@ -1,3 +1,40 @@
+var WPADVERTS = WPADVERTS || {};
+
+WPADVERTS.ListSort = function() {
+    this.element = { };
+    this.element.button = jQuery(".adverts-list-sort-button");
+    this.element.input = jQuery(".adverts-list-sort-input");
+    this.element.option = jQuery(".adverts-list-sort-option");
+    this.element.options = jQuery(".adverts-list-sort-options");
+    
+    this.element.button.on("click", jQuery.proxy(this.button_clicked, this));
+    this.element.option.on("click", jQuery.proxy(this.option_clicked, this));
+};
+
+WPADVERTS.ListSort.prototype.button_clicked = function(e) {
+    if( typeof e !== 'undefined' ) {
+        e.preventDefault();
+    }
+    this.element.options.slideToggle("slow");
+};
+
+WPADVERTS.ListSort.prototype.option_clicked = function(e) {
+    if( typeof e !== 'undefined' ) {
+        e.preventDefault();
+    }
+    
+    var clicked = jQuery(e.target);
+    
+    this.element.input.val(clicked.data("sort"));
+    this.element.options.hide();
+};
+
+jQuery(function($) {
+    if($(".adverts-list-sort-button").length > 0) {
+        new WPADVERTS.ListSort();
+    }
+});
+
 jQuery(function($) {
     var currentTallest = 0,
         currentRowStart = 0,

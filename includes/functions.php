@@ -371,9 +371,11 @@ function adverts_the_content($content) {
         include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/single.php' );
         $content = ob_get_clean();
     } elseif( is_tax( 'advert_category' ) && in_the_loop() ) {
+        add_action( 'adverts_sh_list_before', 'adverts_list_show_term_description' );
         $content = shortcode_adverts_list(array(
             "category" => $wp_query->get_queried_object_id()
         ));
+        remove_action( 'adverts_sh_list_before', 'adverts_list_show_term_description' );
     }
 
     return $content;
@@ -431,6 +433,30 @@ function adverts_template_include( $template ) {
     
     return $template;
 }
+
+/**
+ * Shows Term description in [adverts_list] if not empty.
+ * 
+ * This function is executed using adverts_sh_list_before action in
+ * /wpadverts/templates/index.php file.
+ * 
+ * @since 1.1.3
+ * @global WP_Query $wp_query   Main WP Query
+ * @param array $params         [adverts_list] shortcode params.
+ * @return void
+ */
+function adverts_list_show_term_description( $params ) {
+    global $wp_query;
+    
+    $term = $wp_query->get_queried_object();
+    
+    if( ! $term instanceof WP_Term ) {
+        return;
+    }
+    
+    echo term_description($term, $term->taxonomy);
+}
+
 
 /**
  * Remove post thumbnail for Adverts
@@ -766,6 +792,21 @@ function adverts_filter_int( $data ) {
  */
 function adverts_filter_float( $data ) {
     return filter_var( $data, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION );
+}
+
+/**
+ * Float FILTER
+ * 
+ * Alias of adverts_filter_float() function
+ * 
+ * @see adverts_filter_float()
+ * 
+ * @param string $data
+ * @since 1.1.3
+ * @return float
+ */
+function adverts_filter_number( $data ) {
+    return adverts_filter_float( $data );
 }
 
 /**

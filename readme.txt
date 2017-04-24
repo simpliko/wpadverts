@@ -95,6 +95,17 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
+= 1.1.3 - 2017-04-26 =
+
+* FEATURE: Display [adverts_list] in list mode on mobile (if selected).
+* FEATURE: Removed images from [adverts_manage] on mobile devices.
+* FEATURE: Free Ads renewals cannot be used more than once a week.
+* FEATURE: Display category description above [adverts_list] when browsing Ads by category.
+* FEATURE: Allow sorting Ads in the [adverts_list] (by default disabled)
+* API: adverts_renewal_time_min filter allows to set how often free renewals can be used.
+* FIXED:  Renewing updates post publication date (basically renewing bumps Ad to the top)
+* FIXED: Missing adverts_filter_number function
+
 = 1.1.2 - 2017-03-30 =
 
 * TRANSLATION: Spanish

@@ -148,7 +148,7 @@ a.adverts-button:hover {
 
 .adverts-manage-price {
     font-weight: bold;
-    margin: 0 0.5em 0 0.5em;
+    margin: 0 0.5em 0 0;
 }
 
 .adverts-manage-info {
@@ -354,7 +354,7 @@ a.adverts-manage-action:visited {
     width: 32%;
     margin: 1% 0% 1% 1%;
 }
-@media all and (min-width: 760px) {
+/*@media all and (min-width: 760px) {*/
     
     
 .advert-item-col-1 .advert-item-col-1-only {
@@ -424,7 +424,29 @@ a.adverts-manage-action:visited {
     min-width: 20%;
 }
 
+/*}*/
+
+@media all and (max-width: 760px) {
+    .advert-item-col-1 .advert-date {
+        display: none;
+    }
+    .advert-item-col-1 .advert-location {
+        width: auto;
+    }
+    .advert-item-col-1 .advert-location:before {
+        content: none;
+    }
+    
+    .advert-manage-item  .advert-img {
+        display: none;
+    }
+    
+    .advert-manage-item.advert-item-col-1 .advert-post-title, 
+    .advert-manage-item.advert-item-col-1 .advert-published {
+        margin-left: 0;
+    }
 }
+
 .advert-img {
     background-position: center center !important;
     background-repeat: no-repeat !important;
@@ -1089,6 +1111,24 @@ https://github.com/yui/pure/blob/master/LICENSE.md
     float: none;
     display: inline-block;
     padding: 0;
+}
+
+.adverts-list-sort-options.adverts-multiselect-options {
+    width:auto;
+    border: 1px solid silver;
+    overflow-y: hidden;
+}
+
+.adverts-list-sort-options.adverts-multiselect-options > span {
+    display: inline-block;
+    width: 100%;
+    font-size: 13px;
+
+}
+
+.adverts-list-sort-options.adverts-multiselect-options > span:hover {
+    cursor: pointer;
+    background-color: whitesmoke;
 }
 
 .adverts-form.adverts-form-aligned .adverts-control-group.adverts-field-checkbox div > label {

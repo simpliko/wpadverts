@@ -202,10 +202,11 @@ function adext_payments_add_action_payment( $action ) {
         
         $publish = current_time('mysql');
         $visible = get_post_meta( $listing_type, "adverts_visible", true );
-
+        $post_id = absint( adverts_request("_post_id", null) );
+        
         if( $visible > 0 ) {
             $expiry = strtotime( $publish . " +$visible DAYS" );
-            update_post_meta( adverts_request("_post_id", null), "_expiration_date", $expiry );
+            update_post_meta( $post_id, "_expiration_date", $expiry );
         }
         
         return $action;
@@ -573,6 +574,7 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
     
     $baseurl = apply_filters( "adverts_manage_baseurl", get_the_permalink() );
     
+    wp_enqueue_style( 'adverts-frontend' );
     wp_enqueue_style( 'adverts-payments-frontend' );
     
     $adverts_flash = array( "error" => array(), "info" => array() );
@@ -671,6 +673,10 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
             $listing = get_post( $form->get_value( "payments_listing_type" ) );
             $price = get_post_meta( $listing->ID, 'adverts_price', true );
             
+            $renewal_diff = current_time( 'timestamp' ) - strtotime( $post->post_date );
+            $renewal_diff_min_days = apply_filters( "adverts_renewal_time_min", 7 );
+            $renewal_diff_min = 3600 * 24 * $renewal_diff_min_days;
+            
             if( $price > 0 ) {
                 $m = __( 'Renew <strong>%s</strong> or <a href="%s">cancel and go back</a>.', 'adverts');
                 $adverts_flash["info"][] = sprintf( $m, $post->post_title, $baseurl );
@@ -679,6 +685,9 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
                 // wpadverts/addons/payments/templates/add-payment.php
                 include ADVERTS_PATH . 'addons/payments/templates/add-payment.php';
                 return ob_get_clean();
+            } else if( $price == 0 && $renewal_diff < $renewal_diff_min ) {
+                $m = __( 'Free Renewals cannot be used more than once every %d days.', 'adverts');
+                $adverts_flash["error"][] = sprintf( $m, $renewal_diff_min_days );
             } else {
                 $m = __( 'Ad <strong>%s</strong> renewed. <a href="%s">Go back to Ads list</a>.', 'adverts');
                 $adverts_flash["info"][] = sprintf( $m, $post->post_title, $baseurl );
@@ -689,6 +698,8 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
                 $post_id = wp_update_post( array(
                     "ID" => $post_id,
                     "post_status" => $moderate == "1" ? 'pending' : 'publish',
+                    'post_date'     => current_time('mysql'),
+                    'post_date_gmt' => current_time('mysql', 1)
                 ));
 
                 $v = get_post_meta( $listing->ID, "adverts_visible", true );

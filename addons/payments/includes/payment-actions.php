@@ -64,8 +64,8 @@ function adext_payment_completed_renew( WP_Post $payment ) {
 
     $object_id = get_post_meta( $payment->ID, "_adverts_object_id", true );
     
-    $publish = current_time('mysql');
-    $publish_gmt = current_time('mysql', 1);
+    $post_date = current_time('mysql');
+    $post_date_gmt = current_time('mysql', 1);
     
     $meta = maybe_unserialize( get_post_meta( $payment->ID, "_adverts_payment_meta", true ) );
     
@@ -82,6 +82,8 @@ function adext_payment_completed_renew( WP_Post $payment ) {
         // Udpdate expiration date if the Ad expires
         if( $expires > current_time('timestamp') ) {
             $publish = date( "Y-m-d H:i:s", $expires );
+        } else {
+            $publish = $post_date;
         }
 
         if( $visible > 0) {
@@ -92,9 +94,13 @@ function adext_payment_completed_renew( WP_Post $payment ) {
         }
     }
     
+    /* @todo add activity log */
+    
     wp_update_post( array(
         "ID" => $object_id,
-        "post_status" => "publish"
+        "post_status" => "publish",
+        'post_date'     => $post_date,
+        'post_date_gmt' => $post_date_gmt
     ) );
 }
 

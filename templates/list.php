@@ -9,6 +9,8 @@
  */
 ?>
 
+<?php do_action( "adverts_sh_list_before", $params ) ?>
+
 <?php if( $search_bar == "enabled" ): ?>
 <div class="adverts-options">
     <form action="<?php echo esc_attr( $action ) ?>" class="adverts-search-form" method="get">
@@ -49,7 +51,23 @@
             <a href="<?php echo esc_html( add_query_arg( "display", "list" ) ) ?>" class="adverts-button-small adverts-switch-view" title="<?php esc_attr_e("List", "adverts") ?>"><span class="adverts-square-icon adverts-icon-th-list"></span></a>
             <?php endif; ?>
             
-            <!--a href="#" class="adverts-button-small adverts-filter-date"><?php _e("Date") ?> <span class="adverts-icon-sort"></span></a-->
+            <a href="#" class="adverts-button-small adverts-list-sort-button"><?php _e("Date") ?> <span class="adverts-icon-sort"></span></a>
+            <input type="hidden" name="adverts_sort" class="adverts-list-sort-input" value="<?php echo esc_attr( $adverts_sort ) ?>" />
+            <div id="adverts-list-sort-options-wrap" class="adverts-multiselect-holder">
+                <div class="adverts-multiselect-options adverts-list-sort-options">
+                    <span class="adverts-list-sort-option" data-sort="publish-asc">
+                        Publish Date 
+                        <span class="adverts-icon-down-big"></span>
+                        <span class="adverts-icon-up-big" style="opacity:0.5"></span>
+                            
+                    </span>
+                    <span class="adverts-list-sort-option" data-sort="publish-desc">Publish Date (Old First)</span>
+                    <span class="adverts-list-sort-option" data-sort="title-asc">Title (A-Z)</span>
+                    <span class="adverts-list-sort-option" data-sort="title-desc">Title (Z-A)</span>
+                    <span class="adverts-list-sort-option" data-sort="price-asc">Title (A-Z)</span>
+                    <span class="adverts-list-sort-option" data-sort="price-desc">Title (Z-A)</span>
+                </div>
+            </div>
         </div>
 
         <div class="adverts-options-right adverts-js">

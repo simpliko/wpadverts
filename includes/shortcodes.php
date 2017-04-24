@@ -43,6 +43,7 @@ function shortcode_adverts_list( $atts ) {
         'columns' => adverts_config( 'config.ads_list_default__columns' ),
         'display' => adverts_config( 'config.ads_list_default__display' ),
         'switch_views' => adverts_config( 'config.ads_list_default__switch_views' ),
+        'allow_sorting' => null,
         'paged' => adverts_request("pg", 1),
         'posts_per_page' => adverts_config( 'config.ads_list_default__posts_per_page' ),
         'show_pagination' => true
@@ -58,6 +59,7 @@ function shortcode_adverts_list( $atts ) {
     
     $taxonomy = null;
     $meta = array();
+    $orderby = array('menu_order'=>'DESC');
     
     $query = adverts_request("query");
     $location = adverts_request("location");
@@ -76,6 +78,39 @@ function shortcode_adverts_list( $atts ) {
 	);
     }
 
+    if($allow_sorting) {
+        $adverts_sort = adverts_request("adverts_sort");
+    } else {
+        $adverts_sort = "date-desc";
+    }
+    
+    // options: title, post_date, adverts_price
+    list($sort, $sort_dir) = explode("-", $adverts_sort);
+
+    if($sort_dir == "asc") {
+        $sort_dir = "ASC";
+    } else {
+        $sort_dir = "DESC";
+    }
+
+    if($sort == "title") {
+        $orderby["title"] = $sort_dir;
+    } elseif($sort == "date") {
+        $orderby["date"] = $sort_dir;
+    } elseif($sort == "price") {
+        $orderby["adverts_price__orderby"] = $sort_dir;
+        $meta["adverts_price__orderby"] = array(
+            'key' => 'adverts_price',
+            'compare' => 'NUMERIC',
+        );
+    } else {
+        //
+    }
+        
+    
+    
+
+    
     $args = apply_filters( "adverts_list_query", array( 
         'author' => $author,
         'post_type' => 'advert', 
@@ -85,7 +120,7 @@ function shortcode_adverts_list( $atts ) {
         's' => $query,
         'meta_query' => $meta,
         'tax_query' => $taxonomy,
-        'orderby' => array( 'menu_order' => 'DESC', 'date' => 'DESC' )
+        'orderby' => $orderby
     ));
     
     if( $category && is_tax( 'advert_category' ) ) {

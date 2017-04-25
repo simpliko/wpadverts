@@ -43,7 +43,8 @@ function shortcode_adverts_list( $atts ) {
         'columns' => adverts_config( 'config.ads_list_default__columns' ),
         'display' => adverts_config( 'config.ads_list_default__display' ),
         'switch_views' => adverts_config( 'config.ads_list_default__switch_views' ),
-        'allow_sorting' => null,
+        'allow_sorting' => 0,
+        'order_by' => 'date-desc',
         'paged' => adverts_request("pg", 1),
         'posts_per_page' => adverts_config( 'config.ads_list_default__posts_per_page' ),
         'show_pagination' => true
@@ -78,37 +79,73 @@ function shortcode_adverts_list( $atts ) {
 	);
     }
 
-    if($allow_sorting) {
+    if($allow_sorting && adverts_request("adverts_sort")) {
         $adverts_sort = adverts_request("adverts_sort");
     } else {
-        $adverts_sort = "date-desc";
+        $adverts_sort = $order_by;
     }
     
     // options: title, post_date, adverts_price
-    list($sort, $sort_dir) = explode("-", $adverts_sort);
-
-    if($sort_dir == "asc") {
-        $sort_dir = "ASC";
-    } else {
-        $sort_dir = "DESC";
-    }
-
-    if($sort == "title") {
-        $orderby["title"] = $sort_dir;
-    } elseif($sort == "date") {
-        $orderby["date"] = $sort_dir;
-    } elseif($sort == "price") {
-        $orderby["adverts_price__orderby"] = $sort_dir;
-        $meta["adverts_price__orderby"] = array(
-            'key' => 'adverts_price',
-            'compare' => 'NUMERIC',
-        );
-    } else {
-        //
-    }
-        
+    $sort_options = apply_filters( "adverts_list_sort_options", array(
+        "date" => array(
+            "label" => __("Publish Date", "adverts"),
+            "items" => array(
+                "date-desc" => __("Newest First", "adverts"),
+                "date-asc" => __("Oldest First", "adverts")
+            )
+        ),
+        "price" => array(
+            "label" => __("Price", "adverts"),
+            "items" => array(
+                "price-asc" => __("Cheapest First", "adverts"),
+                "price-desc" => __("Most Expensive First", "adverts")
+            )
+        ),
+        "title" => array(
+            "label" => __("Title", "adverts"),
+            "items" => array(
+                "title-asc" => __("From A to Z", "adverts"),
+                "title-desc" => __("From Z to A", "adverts")
+            )
+        )
+    ) );
     
+    $sarr = explode("-", $adverts_sort);
+    $sort_current_text = __("Publish Date", "adverts");
+    $sort_current_title = sprintf( __( "Sort By: %s - %s", "adverts"), __("Publish Date", "adverts"), __("Newest First", "adverts") );
     
+    if( isset( $sarr[1] ) && isset( $sort_options[$sarr[0]]["items"][$adverts_sort] ) ) {
+
+        $sort_key = $sarr[0];
+        $sort_dir = $sarr[1];
+
+        if($sort_dir == "asc") {
+            $sort_dir = "ASC";
+        } else {
+            $sort_dir = "DESC";
+        }
+
+        if($sort_key == "title") {
+            $orderby["title"] = $sort_dir;
+        } elseif($sort_key == "date") {
+            $orderby["date"] = $sort_dir;
+        } elseif($sort_key == "price") {
+            $orderby["adverts_price__orderby"] = $sort_dir;
+            $meta["adverts_price__orderby"] = array(
+                'key' => 'adverts_price',
+                'compare' => 'NUMERIC',
+            );
+        } else {
+            // apply sorting using adverts_list_query filter.
+        }
+
+        $sort_current_text = $sort_options[$sort_key]["label"] ;
+        $s_descr = $sort_options[$sort_key]["items"][$adverts_sort];
+        $sort_current_title = sprintf( __( "Sort By: %s - %s", "adverts"), $sort_current_text, $s_descr );
+    } else {
+        $adverts_sort = $order_by;
+        $orderby["date"] = "desc"; 
+    }
 
     
     $args = apply_filters( "adverts_list_query", array( 

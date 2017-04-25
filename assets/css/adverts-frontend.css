@@ -1119,14 +1119,35 @@ https://github.com/yui/pure/blob/master/LICENSE.md
     overflow-y: hidden;
 }
 
-.adverts-list-sort-options.adverts-multiselect-options > span {
+.adverts-list-sort-label {
+    min-width: 100px;
     display: inline-block;
+}
+
+.adverts-list-sort-wrap {
+    display: inline-block;
+}
+
+.adverts-list-sort-options.adverts-multiselect-options > .adverts-list-sort-option,
+.adverts-list-sort-options.adverts-multiselect-options > span {
+    display: block;
     width: 100%;
     font-size: 13px;
+    box-sizing: border-box;
+    padding: 0 5px 0 5px;
+    height: 24px;
+    line-height: 24px;
+    text-decoration: none;
+    border: 0;
+    color: #444;
 
 }
 
-.adverts-list-sort-options.adverts-multiselect-options > span:hover {
+.adverts-list-sort-options.adverts-multiselect-options > .adverts-list-sort-option {
+    padding-left: 15px;
+}
+
+.adverts-list-sort-options.adverts-multiselect-options > .adverts-list-sort-option:hover {
     cursor: pointer;
     background-color: whitesmoke;
 }

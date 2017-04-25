@@ -15,7 +15,11 @@
         <div class="advert-published ">
             
             <span class="advert-date"><?php echo date_i18n( get_option( 'date_format' ), get_post_time( 'U', false, get_the_ID() ) ) ?></span>
-            <span class="advert-item-col-1-only advert-location adverts-icon-location"><?php echo get_post_meta( get_the_ID(), "adverts_location", true ) ?></span>
+            
+            <?php $location = get_post_meta( get_the_ID(), "adverts_location", true ) ?>
+            <?php if( ! empty( $location ) ): ?>
+            <span class="advert-item-col-1-only advert-location adverts-icon-location"><?php echo esc_html( $location ) ?></span>
+            <?php endif; ?>
             
             <?php $price = get_post_meta( get_the_ID(), "adverts_price", true ) ?>
             <?php if( $price ): ?>

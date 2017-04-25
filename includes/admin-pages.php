@@ -150,6 +150,13 @@ function adverts_admin_page_extensions() {
                     "plugin" => "wpadverts-recaptcha/wpadverts-recaptcha.php",
                     "purchase_url" => "https://wpadverts.com/extensions/recaptcha/"
                 ),
+                "wpadverts-google-analytics" => array(
+                    "title" => __( "Analytics", "adverts" ),
+                    "text" => __( "Google Analytics integration, allows users to view their Ads stats in past 30 days.", "adverts" ),
+                    "type" => "",
+                    "plugin" => "wpadverts-google-analytics/wpadverts-google-analytics.php",
+                    "purchase_url" => "https://wpadverts.com/extensions/google-analytics/"
+                ),
             )
         ),
         array(

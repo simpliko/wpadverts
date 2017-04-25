@@ -51,23 +51,33 @@
             <a href="<?php echo esc_html( add_query_arg( "display", "list" ) ) ?>" class="adverts-button-small adverts-switch-view" title="<?php esc_attr_e("List", "adverts") ?>"><span class="adverts-square-icon adverts-icon-th-list"></span></a>
             <?php endif; ?>
             
-            <a href="#" class="adverts-button-small adverts-list-sort-button"><?php _e("Date") ?> <span class="adverts-icon-sort"></span></a>
-            <input type="hidden" name="adverts_sort" class="adverts-list-sort-input" value="<?php echo esc_attr( $adverts_sort ) ?>" />
-            <div id="adverts-list-sort-options-wrap" class="adverts-multiselect-holder">
-                <div class="adverts-multiselect-options adverts-list-sort-options">
-                    <span class="adverts-list-sort-option" data-sort="publish-asc">
-                        Publish Date 
-                        <span class="adverts-icon-down-big"></span>
-                        <span class="adverts-icon-up-big" style="opacity:0.5"></span>
-                            
-                    </span>
-                    <span class="adverts-list-sort-option" data-sort="publish-desc">Publish Date (Old First)</span>
-                    <span class="adverts-list-sort-option" data-sort="title-asc">Title (A-Z)</span>
-                    <span class="adverts-list-sort-option" data-sort="title-desc">Title (Z-A)</span>
-                    <span class="adverts-list-sort-option" data-sort="price-asc">Title (A-Z)</span>
-                    <span class="adverts-list-sort-option" data-sort="price-desc">Title (Z-A)</span>
+            <?php if($allow_sorting): ?>
+            <span class="adverts-list-sort-wrap">
+                <a href="#" class="adverts-button-small adverts-list-sort-button" title="<?php echo esc_attr( $sort_current_title ) ?>">
+                    <span class="adverts-list-sort-label"><?php echo esc_html( $sort_current_text ) ?></span> 
+                    <span class="adverts-icon-sort"></span>
+                </a>
+
+                <div id="adverts-list-sort-options-wrap" class="adverts-multiselect-holder">
+                    <div class="adverts-multiselect-options adverts-list-sort-options">
+
+                        <?php foreach( $sort_options as $sort_group): ?>
+                            <span class="adverts-list-sort-option-header">
+                                <strong><?php echo esc_html( $sort_group["label"] ) ?></strong>
+                            </span>
+                            <?php foreach( $sort_group["items"] as $sort_item_key => $sort_item): ?>
+                                <a href="<?php echo esc_html( add_query_arg( "adverts_sort", $sort_item_key ) ) ?>" class="adverts-list-sort-option">
+                                    <?php echo esc_html( $sort_item ) ?>
+                                    <?php if($adverts_sort==$sort_item_key): ?><span class="adverts-icon-asterisk" style="opacity:0.5"></span><?php endif; ?>
+                                </a>
+                            <?php endforeach; ?>
+                        <?php endforeach; ?>
+   
+
+                    </div>
                 </div>
-            </div>
+            </span>
+            <?php endif; ?>
         </div>
 
         <div class="adverts-options-right adverts-js">

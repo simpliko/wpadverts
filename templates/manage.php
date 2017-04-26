@@ -78,6 +78,8 @@
             </div>
         </div>
         
+        <?php do_action( "adverts_sh_manage_actions_after", $post->ID ) ?>
+        
     </div>
     
     <?php endwhile; ?>

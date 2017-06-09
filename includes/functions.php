@@ -367,7 +367,11 @@ function adverts_the_content($content) {
     if (is_singular('advert') && in_the_loop() ) {
         ob_start();
         $post_id = get_the_ID();
-        $post_content = $content;
+        
+        $post_content = get_post( $post_id )->post_content;
+        $post_content = wp_kses($post_content, wp_kses_allowed_html( 'post' ) );
+        $post_content = apply_filters( "adverts_the_content", $post_content );
+        
         include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/single.php' );
         $content = ob_get_clean();
     } elseif( is_tax( 'advert_category' ) && in_the_loop() ) {
@@ -963,6 +967,10 @@ function adverts_field_select( $field ) {
         $opt = $field["options"];
     } else {
         trigger_error("You need to specify options source for field [{$field['name']}].", E_USER_ERROR);
+        $opt = array();
+    }
+    
+    if(!is_array($opt)) {
         $opt = array();
     }
     
@@ -1695,7 +1703,7 @@ function advert_category_path( $term ) {
 }
 
 /**
- * Returns number of categories in this categor and all sub categories.
+ * Returns number of items in this category and all sub categories.
  * 
  * @param stdClass $term Term object
  * @since 0.3

@@ -3,8 +3,8 @@ Plugin URI: https://wpadverts.com/
 Contributors: gwin
 Tags: classifieds, classified, classified ads, classified script, classifieds script, wp classified, wp classifieds
 Requires at least: 4.0
-Tested up to: 4.7.3
-Stable tag: 1.1.2
+Tested up to: 4.8.0
+Stable tag: 1.1.4
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -40,12 +40,11 @@ is NOT a demo, this is a fully functional classifieds software with most crucial
 * Ads will automatically expire after set number of days.
 * Detailed user and developer documenation.
 
-See [Screenshots](https://wordpress.org/plugins/wpadverts/screenshots/) tab for full, visual features list.
-
 **Extensions**
 
-WPAdverts plugin can be extended with premium add-ons. You can get [<strong>ALL EXTENSIONS</strong>](https://wpadverts.com/extensions/all-extensions-bundle/) for a <strong>single price</strong> with <strong>huge discount</strong> or purchase modules individually:
+WPAdverts plugin can be extended with premium add-ons.
 
+* [<strong>ALL EXTENSIONS BUNDLE</strong>](https://wpadverts.com/extensions/all-extensions-bundle/) <strong>one price, huge discount</strong>
 * [Custom Fields](https://wpadverts.com/extensions/custom-fields/)
 * [WooCommerce Integration](https://wpadverts.com/extensions/woocommerce-integration/)
 * [BuddyPress Integration](https://wpadverts.com/extensions/buddypress-integration/)
@@ -59,6 +58,7 @@ See all https://wpadverts.com/extensions/
 
 **Available Translations**
 
+* Croatian
 * French
 * Dutch
 * German
@@ -95,16 +95,33 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
+= 1.1.4 - 2017-06-09 =
+
+* TRANSLATION: Croatian
+* FEATURE: Beautiful Advert edit forms in wp-admin / Classifieds panel.
+* FEATURE: Do not show Contact Form on Ad details page if user did not enter contact email in [adverts_add].
+* FEATURE: Display full category tree in Adverts Categories widget.
+* FEATURE: CSS class for current category in Adverts Categories widget.
+* FEATURE: Small update to Gallery upload layout.
+* FIXED: Warning message when displaying drop down field with no options.
+* FIXED: Disallow shortcodes and some HTML tags in the Advert content
+* API: 2nd param in adverts_list_query filter
+
 = 1.1.3 - 2017-04-26 =
 
+* FEATURE: Google Analytics integration box in wp-admin / Classifieds / Options.
 * FEATURE: Display [adverts_list] in list mode on mobile (if selected).
 * FEATURE: Removed images from [adverts_manage] on mobile devices.
 * FEATURE: Free Ads renewals cannot be used more than once a week.
 * FEATURE: Display category description above [adverts_list] when browsing Ads by category.
-* FEATURE: Allow sorting Ads in the [adverts_list] (by default disabled)
+* FEATURE: Allow sorting Ads in the [adverts_list] (by default disabled).
+* API: allow_sorting and order_by params in [adverts_list].
 * API: adverts_renewal_time_min filter allows to set how often free renewals can be used.
-* FIXED:  Renewing updates post publication date (basically renewing bumps Ad to the top)
-* FIXED: Missing adverts_filter_number function
+* API: adverts_sh_manage_actions_after filter.
+* FIXED: Renewing updates post publication date (basically renewing bumps Ad to the top).
+* FIXED: Missing adverts_filter_number function.
+* FIXED: Do not display location icon on [adverts_list] if location was not provided.
+* FIXED: Advert renewal page in [adverts_manage] does not load required assets.
 
 = 1.1.2 - 2017-03-30 =
 

@@ -167,6 +167,19 @@ font-size: 12px;
     box-sizing: border-box;
 }
 
+.adverts-gallery p.adverts-gallery-invite {
+    margin: 0;
+    padding: 0;
+    line-height: 80px;
+    font-size: 22px;
+    font-weight: 300;
+    opacity: 0.6;        
+}
+
+.adverts-gallery p.adverts-gallery-invite > strong {
+    font-weight: 500;
+}
+
 .drag-over .adverts-gallery  {
     opacity: 1;
 }
@@ -183,12 +196,13 @@ font-size: 12px;
     
 }
 
-.adverts-gallery > p {
-    font-size: 1.6em;
+.adverts-gallery .adverts-gallery-button-wrap {
+    margin-top: 0px;
 }
 
 .adverts-gallery-uploads {
-
+    overflow: hidden;
+    clear: both;
 }
 
 .adverts-gallery-uploads .adverts-gallery-upload-item {
@@ -407,18 +421,25 @@ font-size: 12px;
     float: left;
 }
 
-.adverts-data-table th > label {
-    font-weight: normal;
+#adverts_data_box .inside {
+    margin: 0px 0 0;
+    padding: 0 0 0 0; /* 0 12px 12px */
+}
+
+.adverts-data-table.form-table {
+    margin-top: 0;
 }
 
 .adverts-data-table th.adverts-data-header {
     padding: 10px 10px 10px 0px;
+    border-bottom: 1px solid #f5f5f5
 }
 
 .adverts-data-table th.adverts-data-header .adverts-data-header-title {
     font-size:1.3em; 
     font-weight: normal; 
     display: block;
+    padding: 0 12px 0 12px;
 }
 
 .adverts-data-table th.adverts-data-header .adverts-data-header-description {
@@ -427,15 +448,23 @@ font-size: 12px;
     color: #666;
 }
 
+.adverts-data-table th.adverts-data-field-header {
+    background: #F9F9F9;
+    width: 24%;
+    padding-left: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    border-right: 1px solid #E1E1E1;
+    font-size: 13px;
+    color: #333;
+}
 
+.adverts-data-table td {
+    border-bottom: 1px solid #f5f5f5;
+}
 
 .adverts-data-table input[type="text"],
 .adverts-data-table textarea {
     width: 99%;
-}
-.adverts-data-table td,  
-.adverts-data-table th {
-    border-bottom: 2px solid white;
 }
         
 tr.adverts-field-error {

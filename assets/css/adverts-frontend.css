@@ -354,6 +354,31 @@ a.adverts-manage-action:visited {
     width: 32%;
     margin: 1% 0% 1% 1%;
 }
+
+.advert-item-col-4 {
+    width: 23%;
+    margin: 1%;
+}
+
+.advert-item-col-4:nth-child(3n+1) {
+    width: 23.5%;
+    margin: 1% 1% 1% 0%;
+}
+
+.advert-item-col-4:nth-child(3n+2) {
+    width: 23.5%;
+    margin: 1% 1% 1% 1%;
+}
+
+.advert-item-col-4:nth-child(3n+3) {
+    width: 23.5%;
+    margin: 1% 1% 1% 1%;
+}
+
+.advert-item-col-4:nth-child(3n+4) {
+    width: 23.5%;
+    margin: 1% 0% 1% 1%;
+}
 /*@media all and (min-width: 760px) {*/
     
     
@@ -749,6 +774,30 @@ display: inline-block;
 .adverts-grid .adverts-col-65 { width: 65%; }
 .adverts-grid .adverts-col-70 { width: 70%; }
 .adverts-grid .adverts-col-80 { width: 80%; }
+
+.adverts-multi-level.adverts-multi-level-0 .adverts-widget-grid-link {
+    padding-left: 15px;
+}
+
+.adverts-multi-level.adverts-multi-level-1 .adverts-widget-grid-link {
+    padding-left: 30px;
+}
+
+.adverts-multi-level.adverts-multi-level-2 .adverts-widget-grid-link {
+    padding-left: 45px;
+}
+
+.adverts-multi-level.adverts-multi-level-3 .adverts-widget-grid-link {
+    padding-left: 60px;
+}
+
+.adverts-multi-level.adverts-multi-level-4 .adverts-widget-grid-link {
+    padding-left: 75px;
+}
+
+.adverts-multi-level.adverts-multi-level-5 .adverts-widget-grid-link {
+    padding-left: 90px;
+}
 
 /* FLASH MESSAGES */
 
@@ -1570,7 +1619,7 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 .adverts-gallery {
     width:100%;
     height:130px;
-    border:1px solid whitesmoke; 
+    border:1px solid #e5e5e5; 
     background-color: #fcfcfc;
     padding: 0px 0 20px 0;
     opacity: 0.7;
@@ -1601,9 +1650,11 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 
 .adverts-gallery > p {
     font-size: 1.3em;
-    margin: 0 0 24px;
-    padding: 10px 0 0 0;
+    font-weight: normal;
+    margin: 20px 0 20px;
+    padding: 0;
     color: gray;
+    box-sizing: border-box;
 }
 
 .adverts-gallery-uploads {
@@ -2059,6 +2110,10 @@ ul.adverts-tabs li {
     opacity: 0.7;
 }
 
+.adverts-widget-categories .adverts-widget-category-current a {
+    font-weight: bold;
+}
+
 .adverts-widget-recent {
     clear: both;
     overflow: hidden;
@@ -2142,6 +2197,7 @@ ul.adverts-tabs li {
         line-height: 36px;
     }
     
+    .advert-item.advert-item-col-4,
     .advert-item.advert-item-col-3,
     .advert-item.advert-item-col-2,
     .advert-item {

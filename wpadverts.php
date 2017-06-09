@@ -5,7 +5,7 @@
  * Description: The lightweight WordPress classifieds plugin done right.
  * Author: Greg Winiarski
  * Text Domain: adverts
- * Version: 1.1.2
+ * Version: 1.1.4
  * 
  * Adverts is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -66,12 +66,19 @@ $adverts_namespace = array( 'config' => array(
  * Registers: custom post types, additional post statuses, taxonomies, image sizes
  * and Adverts scripts.
  * 
+ * @global WP_Embed $wp_embed
  * @global WP_Rewrite $wp_rewrite
  * @since 0.1
  * @return void
  */
 function adverts_init() {
-
+    global $wp_embed;
+    
+    add_filter( 'adverts_the_content', array( $wp_embed, 'autoembed' ), 8 );
+    add_filter( 'adverts_the_content', 'wptexturize' );
+    add_filter( 'adverts_the_content', 'convert_chars' );
+    add_filter( 'adverts_the_content', 'wpautop' );
+    
     wp_register_style( 'adverts-icons', ADVERTS_URL . '/assets/css/adverts-glyphs.css', array(), "1" );
     wp_register_style( 'adverts-icons-animate', ADVERTS_URL . '/assets/css/animation.css', array(), "1" );
     
@@ -162,7 +169,7 @@ function adverts_init() {
         'adverts-multiselect', 
         ADVERTS_URL . '/assets/js/adverts-multiselect.js', 
         array( 'jquery' ), 
-        "2", 
+        "3", 
         true
     );
     
@@ -232,9 +239,9 @@ function adverts_init() {
  */
 function adverts_init_frontend() {
     
-    wp_register_style( 'adverts-frontend', ADVERTS_URL . '/assets/css/adverts-frontend.css', array(), "3" );
+    wp_register_style( 'adverts-frontend', ADVERTS_URL . '/assets/css/adverts-frontend.css', array(), "5" );
     
-    wp_register_script('adverts-frontend', ADVERTS_URL . '/assets/js/adverts-frontend.js', array( 'jquery' ), "2" );
+    wp_register_script('adverts-frontend', ADVERTS_URL . '/assets/js/adverts-frontend.js', array( 'jquery' ), "3" );
     wp_register_script('adverts-frontend-add', ADVERTS_URL . '/assets/js/adverts-frontend-add.js', array( 'jquery'), "2" );
     wp_register_script('adverts-frontend-manage', ADVERTS_URL . '/assets/js/adverts-frontend-manage.js', array( 'jquery'), "1" );
     wp_register_script('responsive-slides', ADVERTS_URL . '/assets/js/responsive-slides.js', array('jquery'), "1" );
@@ -243,7 +250,7 @@ function adverts_init_frontend() {
     include_once ADVERTS_PATH . 'includes/gallery.php';
     include_once ADVERTS_PATH . 'includes/shortcodes.php';
     
-    add_filter('the_content', 'adverts_the_content');
+    add_filter('the_content', 'adverts_the_content', 9999 );
     add_filter('posts_results', 'adverts_posts_results', 10, 2 );
     add_filter('template_include', 'adverts_template_include');
     add_filter('post_thumbnail_html', 'adverts_post_thumbnail_html');
@@ -292,7 +299,7 @@ function adverts_init_admin() {
     add_action( 'add_meta_boxes', 'adverts_box_gallery' );
     
     wp_register_script('adverts-admin', ADVERTS_URL . '/assets/js/adverts-admin.js', array( 'jquery' ), "2", true);
-    wp_register_style('adverts-admin', ADVERTS_URL . '/assets/css/adverts-admin.css', array(), "2" );
+    wp_register_style('adverts-admin', ADVERTS_URL . '/assets/css/adverts-admin.css', array(), "3" );
     
     wp_register_script( 'adverts-admin-updates', ADVERTS_URL . '/assets/js/adverts-admin-updates.js', array( 'jquery' ), false, true );
     wp_register_style( 'adverts-admin-updates', ADVERTS_URL . '/assets/css/adverts-admin-updates.css');

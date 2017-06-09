@@ -62,13 +62,12 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
         
         </div>
         <div class="adverts-gallery">
-            <p><?php _e( "Drop Images Here", "adverts" ) ?></p>
-            <p><a href="#" id="adverts-plupload-browse-button" class="button-secondary"><?php _e( "browse files ...", "adverts" ) ?></a></p>
+            <p class="adverts-gallery-invite"><?php _e( "Drop <strong>images</strong> here to add them.", "adverts" ) ?></p>
+            <p class="adverts-gallery-button-wrap"><a href="#" id="adverts-plupload-browse-button" class="button-secondary"><?php _e( "browse files ...", "adverts" ) ?></a></p>
         </div>
         <div class="adverts-gallery-uploads">
 
         </div>
-        <br class="clear" />
     </div>
     
     
@@ -147,7 +146,7 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
         
         </div>
         <div class="adverts-gallery">
-            <p><?php _e( "Drop Images Here", "adverts" ) ?></p>
+            <p><?php _e( "Drop <strong>images</strong> here to add them.", "adverts" ) ?></p>
             <p><a href="#" id="adverts-plupload-browse-button" class="adverts-button"><?php _e( "browse files ...", "adverts" ) ?></a></p>
         </div>
         <div class="adverts-gallery-uploads">

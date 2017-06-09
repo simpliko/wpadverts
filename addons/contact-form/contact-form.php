@@ -48,6 +48,7 @@ function adext_contact_form( $post_id ) {
     
     $show_form = false;
     $flash = null;
+    $email = get_post_meta( $post_id, "adverts_email", true );
     $phone = get_post_meta( $post_id, "adverts_phone", true );
     $message = null;
     $form = new Adverts_Form( Adverts::instance()->get( "form_contact_form" ) );
@@ -114,10 +115,12 @@ function adext_contact_form( $post_id ) {
     <?php echo $flash ?>
 
     <div class="adverts-single-actions">
+        <?php if( ! empty( $email ) ): ?>
         <a href="#" class="adverts-button adverts-show-contact-form">
             <?php esc_html_e("Send Message", "adverts") ?>
             <span class="adverts-icon-down-open"></span>
         </a>
+        <?php endif; ?>
         
         <?php if( adverts_config( "contact_form.show_phone") == "1" && ! empty( $phone ) ): ?>
         <span class="adverts-button" style="background-color: transparent; cursor: auto">
@@ -128,9 +131,11 @@ function adext_contact_form( $post_id ) {
         <?php endif; ?>
     </div>
 
+    <?php if( ! empty( $email ) ): ?>
     <div class="adverts-contact-box" <?php if($show_form): ?>style="display: block"<?php endif ?>>
         <?php include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/form.php' ) ?>
     </div>
+    <?php endif; ?>
 
     <?php
 }

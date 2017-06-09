@@ -2,6 +2,7 @@
 
 /**
  * Adverts Categories Widget
+ * (this is a modified class-widget-categories.php from WPAdverts)
  * 
  * Display list of categories in the sidebar. The widget is content aware,
  * that is it will show a list of top categories, unless user is already browsing
@@ -16,6 +17,7 @@
 class Adverts_Widget_Categories extends WP_Widget
 {
     public $defaults = array();
+    private $instance = array();
     
     /**
      * Registers widget with WordPress
@@ -31,6 +33,7 @@ class Adverts_Widget_Categories extends WP_Widget
             'show_count' => 1,
             'hide_empty' => 1,
             'top_only' => 0,
+            'multi_level' => 0,
         );
         
         
@@ -58,7 +61,7 @@ class Adverts_Widget_Categories extends WP_Widget
      */
     public function form( $instance ) {
         
-        $instance = wp_parse_args( (array) $instance, $this->defaults );
+        $instance = wp_parse_args( (array)$instance, $this->defaults );
 
         $params = array(
             "type" => "text",
@@ -119,6 +122,20 @@ class Adverts_Widget_Categories extends WP_Widget
         
         $buffer .= $label . '<br/>';
         
+        $params = array(
+            "type" => "checkbox",
+            "class" => "", 
+            "id" => $this->get_field_id('multi_level'), 
+            "name" => $this->get_field_name('multi_level'),
+            "checked" => $instance['multi_level'] ? 'checked' : null,
+            "value" => 1
+        );
+        
+        $input = Adverts_Html::build("input", $params);
+        $label = Adverts_Html::build("label", array("for" => $this->get_field_id('multi_level')), $input . ' ' . __( "Show multiple category levels", "adverts" ) );
+        
+        $buffer .= $label . '<br/>';
+        
         echo Adverts_Html::build("p", array(), $buffer);
     }
 
@@ -139,6 +156,10 @@ class Adverts_Widget_Categories extends WP_Widget
         $instance['hide_empty'] = intval($new_instance['hide_empty']);
         $instance['show_count'] = intval($new_instance['show_count']);
         $instance['top_only'] = intval($new_instance['top_only']);
+        $instance['multi_level'] = intval($new_instance['multi_level']);
+        if ( $instance['multi_level'] ) {
+            $instance['top_only'] = 0;
+        }
         return $instance;
     }
     
@@ -152,9 +173,55 @@ class Adverts_Widget_Categories extends WP_Widget
      */
     public function widget($args, $instance)
     {
+        $instance = wp_parse_args( (array)$instance, $this->defaults );
+
+        if ( isset( $instance['multi_level'] ) && $instance['multi_level'] ) {
+            return $this->widget_multi_level( $args, $instance );
+        } else {
+            return $this->widget_single_level( $args, $instance );
+        }
+    }
+    
+    /**
+     * Display additional CSS class for 'current' category
+     * 
+     * This function checks if user is currently at /advert-category/(.?*)/ page
+     * and if he is then it adds an additional CSS class to the current category link.
+     * 
+     * @since 1.1.3
+     * 
+     * @param int       $term_id    Taxonomy Term ID
+     * @param string    $class      CSS class name to add
+     * @param boolean   $echo       True if you want to echo the data false to return as string
+     * @return string               Class name or null
+     */
+    public function is_term($term_id, $class = "adverts-widget-category-current", $echo = true) {
+        if(is_tax( 'advert_category' ) && get_queried_object()->term_id == $term_id) {
+            if($echo) {
+                echo $class;
+            } else {
+                return $class;
+            }
+        }
+    }
+    
+    /**
+     * Front-end display of widget.
+     * 
+     * This function is executed when widget is displayed in single-level mode.
+     *
+     * @since 1.1.4
+     * 
+     * @see WP_Widget::widget()
+     *
+     * @param array $args     Widget arguments.
+     * @param array $instance Saved values from database.
+     */
+    public function widget_single_level($args, $instance)  
+    {
         global $term;
         
-        $instance = wp_parse_args( (array) $instance, $this->defaults );
+        $instance = wp_parse_args( (array)$instance, $this->defaults );
         
         $home_url = null;
         $child_of = 0;
@@ -169,7 +236,6 @@ class Adverts_Widget_Categories extends WP_Widget
         if( $current !== false ) {
             $child_of = $current->term_id;
             $parent_id = $current->parent;
-    
         }
 
         include_once ADVERTS_PATH . '/includes/class-html.php';
@@ -188,15 +254,15 @@ class Adverts_Widget_Categories extends WP_Widget
             'hide_empty' => (int)$instance['hide_empty'], 
             'parent' => $child_of 
         ) );
-        
+
         wp_enqueue_style( 'adverts-frontend' );
         wp_enqueue_style( 'adverts-icons' );
-        
+
         echo $before_widget;
         $title = empty($instance['title']) ? ' ' : apply_filters('widget_title', $instance['title']);
 
         if (!empty($title))
-          echo $before_title . $title . $after_title;;
+          echo $before_title . $title . $after_title;
 
         // WIDGET CODE GOES HERE
         ?>
@@ -217,7 +283,7 @@ class Adverts_Widget_Categories extends WP_Widget
                 <?php $icon = adverts_taxonomy_get("advert_category", $term_item->term_id, "advert_category_icon", "folder") ?>
                 <div class="adverts-grid-row">
                     <div class="adverts-col-100">
-                        <span class="adverts-widget-grid-link <?php echo "adverts-icon-".$icon ?>">
+                        <span class="adverts-widget-grid-link <?php echo "adverts-icon-".$icon ?> <?php $this->is_term($term_item->term_id) ?>">
                             <a href="<?php esc_attr_e(get_term_link($term_item)) ?>"><?php esc_html_e($term_item->name) ?></a>
                             <?php if($instance['show_count']): ?>
                             (<?php echo adverts_category_post_count( $term_item ) ?>)
@@ -240,5 +306,125 @@ class Adverts_Widget_Categories extends WP_Widget
         
         echo $after_widget;
     }
- 
+    
+    /**
+     * Front-end display of widget alternate view showing multiple category levels.
+     *
+     * This based on the widget() function and will be called when multi_level is set.
+     *
+     * @since 1.1.4
+     * 
+     * @see WP_Widget::widget()
+     *
+     * @param array $args     Widget arguments.
+     * @param array $instance Saved values from database.
+     */
+    public function widget_multi_level( $args, $instance )
+    {
+        global $term;
+
+        $instance = wp_parse_args( (array) $instance, $this->defaults );
+
+        $current = get_term_by( 'slug', $term, 'advert_category' );
+        
+        if( $current !== false ) {
+            $current_id = $current->term_id;
+        } else {
+            $current_id = false;
+        }
+
+        include_once ADVERTS_PATH . '/includes/class-html.php';
+
+        extract( $args, EXTR_SKIP );
+
+        $terms = get_terms( 'advert_category', array( 
+            'hide_empty' => (int)$instance['hide_empty'],
+            'parent' => 0,
+        ) );
+
+        wp_enqueue_style( 'adverts-frontend' );
+        wp_enqueue_style( 'adverts-icons' );
+
+        echo $before_widget;
+        $title = empty($instance['title']) ? ' ' : apply_filters('widget_title', $instance['title']);
+
+        if ( ! empty( $title ) ) {
+          echo $before_title . $title . $after_title;
+        }
+
+        ?>
+        <div class="wpjb adverts-widget adverts-widget-categories adverts-widget-multi-level-categories">
+            <div class="adverts-grid adverts-grid-compact">
+                <?php
+                    if ( ! empty( $terms ) && ! is_wp_error( $terms ) ):
+                        $this->print_terms_multi_level( $terms, $current_id, $instance, 0 );
+                    else:
+                ?>
+                <div class="adverts-grid-row">
+                    <div class="adverts-col-100">
+                        <span><?php _e("No categories found.", "adverts") ?></span>
+                    </div>
+                </div>
+                <?php endif; ?> 
+            </div>
+        </div>
+        <?php
+        
+        
+        echo $after_widget;
+    }
+
+    /**
+     * Prints multi level categories
+     * 
+     * This function is run by self::widget_multi_level()
+     * 
+     * @see self::widget_multi_level()
+     * 
+     * @param array $terms          Terms to display
+     * @param int   $current_id     Current term ID
+     * @param array $instance       Widget settings
+     * @param int   $level          Category depth
+     */
+    protected function print_terms_multi_level( $terms, $current_id = false, $instance, $level = 0 )
+    {
+
+        foreach ( $terms as $term_item ):
+            $default_icon = "folder";
+            if ( $current_id && $current_id == $term_item->term_id ) {
+                $default_icon = "folder-open";
+            }
+            $icon = adverts_taxonomy_get( "advert_category", $term_item->term_id, "advert_category_icon", $default_icon );
+            if ( $icon == "" ) {
+                $icon = $default_icon;
+            }
+
+            ?>
+            <div class="adverts-grid-row">
+                <div class="adverts-col-100">
+                    <span class="adverts-widget-grid-link <?php echo "adverts-icon-".$icon ?> <?php $this->is_term($term_item->term_id) ?>">
+                        <a href="<?php echo esc_attr(get_term_link($term_item)) ?>"><?php esc_html_e($term_item->name) ?></a>
+                        <?php if( $instance['show_count'] ): ?>
+                        (<?php echo adverts_category_post_count( $term_item ) ?>)
+                        <?php endif; ?>
+                    </span>
+                </div>
+            </div>
+            <?php
+
+            $child_terms = get_terms( 'advert_category', array(
+                'hide_empty' => $instance['hide_empty'],
+                'parent' => (int)$term_item->term_id,
+            ) );
+
+            if ( ! empty( $child_terms ) && ! is_wp_error( $child_terms ) ):
+                ?>
+                <div class="adverts-multi-level <?php echo 'adverts-multi-level-'.$level ?>">
+                <?php $this->print_terms_multi_level( $child_terms, $current_id, $instance, $level+1 ); ?>
+                </div>
+                <?php
+            endif;
+
+        endforeach;
+     }
 }

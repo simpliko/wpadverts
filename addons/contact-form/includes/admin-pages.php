@@ -41,8 +41,12 @@ function adext_contact_form_page_options() {
         $valid = $form->validate();
 
         if($valid) {
-
-            update_option("adext_contact_form_config", $form->get_values());
+            $form_data = $form->get_values();
+            if(!isset($form_data['show_phone'])) {
+                $form_data['show_phone'] = 0;
+            }
+            
+            update_option("adext_contact_form_config", $form_data);
             $flash->add_info( __("Settings updated.", "adverts") );
         } else {
             $flash->add_error( __("There are errors in your form.", "adverts") );

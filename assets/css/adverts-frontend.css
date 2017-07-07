@@ -801,20 +801,62 @@ display: inline-block;
 
 /* FLASH MESSAGES */
 
-div.adverts-flash-error {
-    border: 1px solid #DE5400;
-    background-color: #FFE87C;
-    padding: 5px 15px;
-    margin: 20px 0px 10px 0px;
-    line-height: 2em;
+div.adverts-flash-messages {
+    clear: both;
+    overflow: hidden;
+    padding: 10px 10px;
+    margin: 0 0 10px 0;
+    line-height: 14px;
+    color: white;
 }
 
-div.adverts-flash-info {
-    padding: 5px 15px;
-    margin: 20px 0px 10px 0px;
-    border: 1px solid #E6DB55;
-    background-color: #FFFBCC;
-    line-height: 2em;
+div.adverts-flash-messages.adverts-flash-error {
+    background-color: #d9675d;
+}
+
+div.adverts-flash-messages.adverts-flash-info {
+    background-color: #5bc3a2;
+}
+
+div.adverts-flash-single {
+    position: relative;
+    clear: both;
+}
+
+div.adverts-flash-messages a:hover,
+div.adverts-flash-messages a:visited,
+div.adverts-flash-messages a {
+    color: white;
+    text-decoration: underline;
+}
+
+div.adverts-flash-messages .adverts-flash-message-icon {
+    width:32px;
+    height:32px;
+    position: absolute;
+    top: 50%;
+    margin: -16px 0 0 0; 
+}
+
+div.adverts-flash-messages .adverts-flash-message-icon:before {
+    vertical-align: top;
+    color: rgba(255,255,255,0.75);
+    font-size: 32px;
+    padding: 0;
+    margin: 0;
+    line-height: 32px;
+}
+div.adverts-flash-messages .adverts-flash-message-text {
+    font-size: 13px;
+    line-height: 18px;
+    padding: 5px;
+    display: block;
+}
+
+div.adverts-flash-messages .adverts-flash-message-text.adverts-flash-padding {
+    margin-left: 40px;
+    padding-left: 10px;
+    border-left: 1px solid rgba(255,255,255,0.25);
 }
 
 div.wpjb-flash-small {

@@ -36,7 +36,7 @@ function adverts_add_options_link() {
         "parent_slug" => "edit.php?post_type=advert",
         "page_title" => __( 'Adverts Options', 'adverts' ),
         "menu_title" => __( 'Options', 'adverts' ),
-        "capability" => "install_plugins",
+        "capability" => "manage_options",
         "menu_slug" => "adverts-extensions",
         "function" => "adverts_admin_page_extensions"
     ));

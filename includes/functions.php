@@ -2126,3 +2126,38 @@ function adverts_delete_post( $post_id, $skip_trash = true ) {
     
     return $result;
 }
+
+/**
+ * Adds number of pending Ads next to Classifieds link
+ * 
+ * This function is executed using add_menu_classes filter, it adds amount
+ * of Ads with "pending" status next to the Classifieds menu in wp-admin
+ * left sidebar.
+ * 
+ * @see add_menu_classes
+ * 
+ * @since 1.1.5
+ * 
+ * @param array $menu   wp-admin left menu
+ * @return array        Updated menu items
+ */
+function adverts_add_menu_classes( $menu ) {
+
+    $pending = wp_count_posts( 'advert' )->pending;
+    
+    if($pending < 1) {
+        return $menu;
+    }
+    
+    $wrap = " <span class=\"awaiting-mod count-$pending\" title=\"%s\"><span class=\"pending-count\">$pending</span></span>";
+    
+    foreach(array_keys($menu) as $key) {
+        if(isset($menu[$key][5]) && $menu[$key][5] == "menu-posts-advert") {
+            $menu[$key][0] .= sprintf( $wrap, __( "Pending Ads", "adverts" ) );
+            break;
+        }
+    }
+    
+    
+    return $menu;
+}

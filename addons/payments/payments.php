@@ -751,7 +751,7 @@ function adext_payments_add_history_link() {
         "parent_slug" => "edit.php?post_type=advert",
         "page_title" => __( 'Adverts Payment History', 'adverts' ),
         "menu_title" => __( 'Payment History', 'adverts' ),
-        "capability" => "install_plugins",
+        "capability" => "manage_options",
         "menu_slug" => 'adext-payment-history',
         "function" => "adext_payments_page_history"
     ));

@@ -185,7 +185,8 @@ function adverts_init() {
         "aSign" => $currency["sign"], 
         "pSign" => $currency["sign_type"],
         "aSep" => $currency["char_thousand"], 
-        "aDec" => $currency["char_decimal"]
+        "aDec" => $currency["char_decimal"],
+        "mDec" => $currency["decimals"]
     ));
     
     wp_localize_script( 'adverts-multiselect', 'adverts_multiselect_lang', array(
@@ -317,6 +318,8 @@ function adverts_init_admin() {
     add_action( 'save_post', 'adverts_save_post_validator', 10, 2 );
     
     add_filter( 'post_updated_messages', 'adverts_post_updated_messages');
+    
+    add_filter( 'add_menu_classes', 'adverts_add_menu_classes' );
     
     // Adverts category meta handlers
     add_action( 'edited_advert_category', 'adverts_save_category', 10, 2);

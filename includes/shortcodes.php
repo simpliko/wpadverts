@@ -238,10 +238,13 @@ function shortcode_adverts_list( $atts ) {
 }
 
 /**
+ * 
  * Generates HTML for [adverts_add] shortcode
  * 
- * @param array $atts Shortcode attributes
  * @since 0.1
+ * @since 1.1.5 'requires' and 'requires_error' params
+ * 
+ * @param array $atts Shortcode attributes
  * @return string Fully formatted HTML for "post ad" form.
  */
 function shortcode_adverts_add( $atts ) {
@@ -254,8 +257,36 @@ function shortcode_adverts_add( $atts ) {
     
     $params = shortcode_atts(array(
         'name' => 'default',
-        'moderate' => false
+        'moderate' => false,
+        'requires' => "",
+        'requires_error' => ""
     ), $atts, 'adverts_add');
+    
+    if( ! empty( $params["requires"] ) && ! current_user_can( $params["requires"] ) ) {
+        
+
+        if( !empty( $params["requires_error"] ) ) {
+            $parsed = $params["requires_error"];
+        } else {
+            $permalink = get_permalink();
+            $message = __('Only logged in users can access this page. <a href="%1$s">Login</a> or <a href="%2$s">Register</a>.', "adverts");
+            $parsed = sprintf($message, wp_login_url( $permalink ), wp_registration_url( $permalink ) );
+
+        }
+        
+        $adverts_flash = array(
+            "error" => array(
+                array( 
+                    "message" => $parsed,
+                    "icon" => "adverts-icon-lock"
+                )
+            ),
+            "info" => array()
+        );
+        ob_start();
+        adverts_flash($adverts_flash);
+        return ob_get_clean();
+    }
     
     extract( $params );
     
@@ -378,7 +409,10 @@ function shortcode_adverts_add( $atts ) {
             $content = ob_get_clean();
             
         } else {
-            $error[] = __("There are errors in your form. Please correct them before proceeding.", "adverts");
+            $error[] = array(
+                "message" => __("There are errors in your form. Please correct them before proceeding.", "adverts"),
+                "icon" => "adverts-icon-attention-alt"
+            );
             
             $adverts_flash = array( "error" => $error, "info" => $info );
             
@@ -433,7 +467,12 @@ function shortcode_adverts_manage( $atts ) {
         $permalink = get_permalink();
         $message = __('Only logged in users can access this page. <a href="%1$s">Login</a> or <a href="%2$s">Register</a>.', "adverts");
         $parsed = sprintf($message, wp_login_url( $permalink ), wp_registration_url( $permalink ) );
-        adverts_flash( array( "error" => array( $parsed ) ) );
+        adverts_flash( array( 
+            "error" => array( 
+                array( "message" => $parsed, "icon" => "adverts-icon-lock" ),  
+            ),
+            "info" => array() 
+        ) );
         $content = ob_get_clean();
         return $content;
     }
@@ -589,6 +628,9 @@ function _adverts_manage_edit( $atts ) {
         $terms = get_the_terms( $post_id, $taxonomy_key );
         if( is_array( $terms ) ) {
             foreach( $terms as $term ) {
+                if(!isset($bind[$taxonomy_key]) || !is_array($bind[$taxonomy_key])) {
+                    $bind[$taxonomy_key] = array();
+                }
                 $bind[$taxonomy_key][] = $term->term_id;
             }
         }
@@ -672,21 +714,26 @@ function adverts_flash( $data ) {
 
     ?>
 
-    <?php if(isset($data["error"]) && is_array($data["error"]) && !empty($data["error"])): ?>
-    <div class="adverts-flash-error">
-    <?php foreach( $data["error"] as $key => $error): ?>
-        <span><?php echo $error ?></span>
+    <?php foreach(array_keys($data) as $key): ?>
+    <?php if(isset($data[$key]) && is_array($data[$key]) && !empty($data[$key])): ?>
+    <div class="adverts-flash-messages adverts-flash-<?php echo esc_attr($key) ?>">
+    <?php foreach( $data[$key] as $key => $info): ?>
+        <?php if(is_string($info)) {
+            $info = array( "message" => $info, "icon" => "");
+        } ?>
+        
+        <div class="adverts-flash-single">
+            <?php if($info["icon"]): ?>
+            <span class="adverts-flash-message-icon <?php echo esc_html($info["icon"]) ?>"></span>
+            <span class="adverts-flash-message-text adverts-flash-padding"><?php echo $info["message"] ?></span>
+            <?php else: ?>
+            <span class="adverts-flash-message-text"><?php echo $info["message"] ?></span>
+            <?php endif; ?>
+        </div>
     <?php endforeach; ?>
     </div>
     <?php endif; ?>
-
-    <?php if(isset($data["info"]) && is_array($data["info"]) && !empty($data["info"])): ?>
-    <div class="adverts-flash-info">
-    <?php foreach( $data["info"] as $key => $info): ?>
-        <span><?php echo $info ?></span>
     <?php endforeach; ?>
-    </div>
-    <?php endif; ?>
 
     <?php
 }

@@ -2143,7 +2143,13 @@ function adverts_delete_post( $post_id, $skip_trash = true ) {
  */
 function adverts_add_menu_classes( $menu ) {
 
-    $pending = wp_count_posts( 'advert' )->pending;
+    $adverts = wp_count_posts( 'advert' );
+
+    if(!is_object($adverts) || !isset($adverts->pending)) {
+        return $menu;
+    }
+    
+    $pending = $adverts->pending;
     
     if($pending < 1) {
         return $menu;

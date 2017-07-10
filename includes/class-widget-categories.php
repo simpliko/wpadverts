@@ -2,7 +2,6 @@
 
 /**
  * Adverts Categories Widget
- * (this is a modified class-widget-categories.php from WPAdverts)
  * 
  * Display list of categories in the sidebar. The widget is content aware,
  * that is it will show a list of top categories, unless user is already browsing
@@ -185,8 +184,9 @@ class Adverts_Widget_Categories extends WP_Widget
     /**
      * Display additional CSS class for 'current' category
      * 
-     * This function checks if user is currently at /advert-category/(.?*)/ page
-     * and if he is then it adds an additional CSS class to the current category link.
+     * This function checks if user is currently at /advert-category/(.?*)/ page,
+     * or on a single advert page set to only the queried category,
+     * and if so then it adds an additional CSS class to the current category link.
      * 
      * @since 1.1.3
      * 
@@ -195,14 +195,41 @@ class Adverts_Widget_Categories extends WP_Widget
      * @param boolean   $echo       True if you want to echo the data false to return as string
      * @return string               Class name or null
      */
-    public function is_term($term_id, $class = "adverts-widget-category-current", $echo = true) {
-        if(is_tax( 'advert_category' ) && get_queried_object()->term_id == $term_id) {
-            if($echo) {
+    public function is_term( $term_id, $class = "adverts-widget-category-current", $echo = true ) {
+        if( ( is_tax( 'advert_category' ) && get_queried_object()->term_id == $term_id ) ||
+            ( $this->has_term( $term_id, true ) ) )
+        {
+            if( $echo ) {
                 echo $class;
             } else {
                 return $class;
             }
         }
+    }
+
+    /**
+     * Check if a term is set for the current post.
+     * 
+     * This function checks if the current post has the queried term set,
+     * as the first (or only) term if $single_category is true.
+     * 
+     * @since 1.2.1
+     * 
+     * @param int       $term_id    Taxonomy Term ID
+     * @param boolean   $single_category    True if the term must be the first term returned
+     * @return boolean              Class name or null
+     */
+    public function has_term( $term_id, $single_category = false ) {
+        if( is_singular( 'advert' ) && has_term( $term_id, 'advert_category' ) ) {
+            if ( $single_category == false ) {
+                return true;
+            }
+            $terms = wp_get_post_terms( get_the_ID(), 'advert_category' );
+            if( is_array( $terms ) && count( $terms ) > 0 && $terms[0]->term_id == $term_id ) {
+                return true;
+            }
+        }
+        return false;
     }
     
     /**
@@ -388,10 +415,9 @@ class Adverts_Widget_Categories extends WP_Widget
      */
     protected function print_terms_multi_level( $terms, $current_id = false, $instance, $level = 0 )
     {
-
         foreach ( $terms as $term_item ):
             $default_icon = "folder";
-            if ( $current_id && $current_id == $term_item->term_id ) {
+            if ( $current_id && $current_id == $term_item->term_id || $this->has_term( $term_item->term_id, true ) ) {
                 $default_icon = "folder-open";
             }
             $icon = adverts_taxonomy_get( "advert_category", $term_item->term_id, "advert_category_icon", $default_icon );

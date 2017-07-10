@@ -4,7 +4,7 @@ Contributors: gwin
 Tags: classifieds, classified, classified ads, classified script, classifieds script, wp classified, wp classifieds
 Requires at least: 4.0
 Tested up to: 4.8.0
-Stable tag: 1.1.4
+Stable tag: 1.1.5
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -94,6 +94,17 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.1.5 - 2017-07-10 =
+
+* FEATURE: Updated design for flash (error and info) messages.
+* FEATURE: In wp-admin left menu the Classifieds menu has a red icon with number of pending Ads
+* FEATURE: [adverts_add] has now a "requires" param which allows to show the shortcode only to users with specific capability
+* FEATURE: When on Ad detail page, the Ad catregory has an additional CSS class in the Adverts Categories widget
+* FIXED: Access to Adverts options requires now manage_options capability instead of install_plugins
+* FIXED: Fatal Error in [adverts_manage] (occurs on some installations with BuddyPress enabled)
+* FIXED: Impossible to uncheck the "Show Phone" option in Contact Form configuration
+* FIXED: Changing number of dcimal places in configuration applies this change to Price field in [adverts_add]
 
 = 1.1.4 - 2017-06-09 =
 

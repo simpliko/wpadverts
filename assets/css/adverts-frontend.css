@@ -360,22 +360,22 @@ a.adverts-manage-action:visited {
     margin: 1%;
 }
 
-.advert-item-col-4:nth-child(3n+1) {
+.advert-item-col-4:nth-child(4n+1) {
     width: 23.5%;
     margin: 1% 1% 1% 0%;
 }
 
-.advert-item-col-4:nth-child(3n+2) {
+.advert-item-col-4:nth-child(4n+2) {
     width: 23.5%;
     margin: 1% 1% 1% 1%;
 }
 
-.advert-item-col-4:nth-child(3n+3) {
+.advert-item-col-4:nth-child(4n+3) {
     width: 23.5%;
     margin: 1% 1% 1% 1%;
 }
 
-.advert-item-col-4:nth-child(3n+4) {
+.advert-item-col-4:nth-child(4n+4) {
     width: 23.5%;
     margin: 1% 0% 1% 1%;
 }

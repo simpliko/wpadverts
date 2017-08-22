@@ -6,7 +6,8 @@
     <div class="adverts-flexbox-item <?php echo $columns ?> <?php echo "adverts-category-slug-".$term->slug ?>">
         <span class="adverts-flexbox-wrap">
             <span class="adverts-category-all-main">
-                <span class="adverts-icon-<?php esc_html_e($icon) ?>"></span>
+                <span class="<?php echo apply_filters("adverts_category_font_icon", "adverts-icon-".$icon, $term, "small") ?>"></span>
+                <?php do_action( "adverts_category_pre_title", $term, "small") ?>
                 <a class="" href="<?php esc_attr_e(get_term_link($term)) ?>">
                     <?php esc_html_e($term->name) ?>
                     <?php if($show_count): ?>

@@ -24,7 +24,7 @@
 <?php $gateways = adext_payment_gateway_get() ?>
 <?php if(empty($gateways)): ?>
 <div class="adverts-flash-error">
-    <span><?php _e("No Payment Gateways Enabled!", "adverts") ?></span>
+    <span><?php _e("No Payment Gateway Enabled!", "adverts") ?></span>
 </div>
 <?php else: ?>
 

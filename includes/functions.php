@@ -1705,8 +1705,10 @@ function advert_category_path( $term ) {
 /**
  * Returns number of items in this category and all sub categories.
  * 
- * @param stdClass $term Term object
+ * @since 1.1.6     adverts_category_post_count filter
  * @since 0.3
+ * 
+ * @param stdClass $term Term object
  * @return int Number of posts in this cantegory and sub-categories
  */
 function adverts_category_post_count( $term ) {
@@ -1720,7 +1722,8 @@ function adverts_category_post_count( $term ) {
     foreach ($tax_terms as $tax_term) {
         $count +=$tax_term->count;
     }
-    return $count;
+    
+    return apply_filters( "adverts_category_post_count", $count, $term );
 }
 
 /**

@@ -47,7 +47,7 @@ function adext_contact_form( $post_id ) {
     include_once ADVERTS_PATH . 'includes/class-html.php';
     
     $show_form = false;
-    $flash = null;
+    $flash = array( "error" => array(), "info" => array());;
     $email = get_post_meta( $post_id, "adverts_email", true );
     $phone = get_post_meta( $post_id, "adverts_phone", true );
     $message = null;
@@ -99,11 +99,15 @@ function adext_contact_form( $post_id ) {
             
             $form->bind( array() );
             
-            $message = __( "Your message has been sent.", "adverts" );
-            $flash = new Adverts_Html( "div", array( "class" => "adverts-flash-info" ), "<span>" . $message . "</span>" );
+            $flash["info"][] = array(
+                "message" => __( "Your message has been sent.", "adverts" ),
+                "icon" => "adverts-icon-ok"
+            );
         } else {
-            $message = __( "There are errors in your form.", "adverts" );
-            $flash = new Adverts_Html( "div", array( "class" => "adverts-flash-error" ), "<span>" . $message . "</span>" );
+            $flash["error"][] = array(
+                "message" => __( "There are errors in your form.", "adverts" ),
+                "icon" => "adverts-icon-attention-alt"
+            );
             $show_form = true; 
         }
     }
@@ -112,12 +116,12 @@ function adext_contact_form( $post_id ) {
 
     <div id="adverts-contact-form-scroll"></div>
 
-    <?php echo $flash ?>
+    <?php adverts_flash( $flash ) ?>
 
     <div class="adverts-single-actions">
         <?php if( ! empty( $email ) ): ?>
         <a href="#" class="adverts-button adverts-show-contact-form">
-            <?php esc_html_e("Send Message", "adverts") ?>
+            <?php echo esc_html("Send Message", "adverts") ?>
             <span class="adverts-icon-down-open"></span>
         </a>
         <?php endif; ?>

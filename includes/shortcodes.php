@@ -431,7 +431,10 @@ function shortcode_adverts_add( $atts ) {
             "post_status" => $moderate == "1" ? 'pending' : 'publish',
         ));
         
-        $info[] = __("Thank you for submitting your ad!", "adverts");
+        $info[] = array(
+            "message" => __("Thank you for submitting your ad!", "adverts"),
+            "icon" => "adverts-icon-ok"
+        );
         
         $adverts_flash = array( "error" => $error, "info" => $info );
 
@@ -575,6 +578,7 @@ function _adverts_manage_edit( $atts ) {
     $error = array();
     $info = array();
     $bind = array();
+    $flash = array( "error" => array(), "info" => array() );
     
     remove_filter( 'adverts_form_load', 'adverts_remove_account_field' );
     
@@ -586,23 +590,35 @@ function _adverts_manage_edit( $atts ) {
     $post = get_post( $post_id );
     
     if( $post === null) {
-        $error[] = __("Ad does not exist.", "adverts");
-        adverts_flash( array("error"=>$error) );
-        return;
+        $flash["error"][] = array(
+            "message" =>  __("Ad does not exist.", "adverts"),
+            "icon" => "adverts-icon-attention-alt"
+        );
+        ob_start();
+        adverts_flash( $flash );
+        return ob_get_clean();
     }
     
     if( $post->post_author != get_current_user_id() ) {
-        $error[] = __("You do not own this Ad.", "adverts");
-        adverts_flash( array("error"=>$error) );
-        return;
+        $flash["error"][] = array(
+            "message" =>  __("You do not own this Ad.", "adverts"),
+            "icon" => "adverts-icon-attention-alt"
+        );
+        ob_start();
+        adverts_flash( $flash );
+        return ob_get_clean();
     }
     
     $slist = apply_filters("adverts_sh_manage_list_statuses", array( 'publish', 'expired', 'advert-pending', 'draft') );
     
     if( !in_array( $post->post_status, $slist ) ) {
-        $error[] = sprintf( __( "Incorrect post status [%s].", "adverts" ), $post->post_status );
-        adverts_flash( array("error"=>$error) );
-        return;
+        $flash["error"][] = array(
+            "message" =>  sprintf( __( "Incorrect post status [%s].", "adverts" ), $post->post_status ),
+            "icon" => "adverts-icon-attention-alt"
+        );
+        ob_start();
+        adverts_flash( $flash );
+        return ob_get_clean();
     }
     
     foreach( $form->get_fields() as $f ) {
@@ -648,13 +664,22 @@ function _adverts_manage_edit( $atts ) {
             $post_id = Adverts_Post::save( $form, $post_id );
 
             if(is_wp_error($post_id)) {
-                $error[] = $post_id->get_error_message();
+                $error[] = array(
+                    "message" => $post_id->get_error_message(),
+                    "icon" => "adverts-icon-attention-alt"
+                );
             } else {
-                $info[] = __("Post has been updated.", "adverts");
+                $info[] = array(
+                    "message" => __("Post has been updated.", "adverts"),
+                    "icon" => "adverts-icon-ok"
+                );
             }
             
         } else {
-            $error[] = __("Cannot update. There are errors in your form.", "adverts");
+            $error[] = array(
+                "message" => __("Cannot update. There are errors in your form.", "adverts"),
+                "icon" => "adverts-icon-attention-alt"
+            );
         }
     }
     

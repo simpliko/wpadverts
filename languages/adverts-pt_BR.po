@@ -1030,7 +1030,7 @@ msgid ""
 "You are posting as <strong>%1$s</strong>. <br/>If you want to use a "
 "different account, please <a href=\"%2$s\">logout</a>."
 msgstr ""
-"Você está postando como <strong>%1$s</ strong>. <br/> Se você quiser usar "
+"Você está postando como <strong>%1$s</strong>. <br/> Se você quiser usar "
 "uma conta diferente, por favor <a href=\"%2s\"> sair </a>."
 
 #: includes/functions.php:1033

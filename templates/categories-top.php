@@ -7,8 +7,8 @@
             <span class="adverts-flexbox-icon <?php echo apply_filters("adverts_category_font_icon", "adverts-icon-".$icon, $term, "big") ?>"></span>
             <?php do_action( "adverts_category_pre_title", $term, "big") ?>
             <span class="adverts-flexbox-title">
-                <a class="adverts-category-link" href="<?php esc_attr_e(get_term_link($term)) ?>"></a>
-                <?php esc_html_e($term->name) ?>
+                <a class="adverts-category-link" href="<?php echo esc_attr(get_term_link($term)) ?>"></a>
+                <?php echo esc_html($term->name) ?>
                 <?php if($show_count): ?>
                 (<?php echo adverts_category_post_count( $term ) ?>)
                 <?php endif; ?>

@@ -20,8 +20,8 @@
             </div>
             <?php else: ?>
             
-            <label for="<?php esc_attr_e($field["name"]) ?>">
-                <?php esc_html_e($field["label"]) ?>
+            <label for="<?php echo esc_attr($field["name"]) ?>">
+                <?php echo esc_html($field["label"]) ?>
                 <?php if(adverts_field_has_validator($field, "is_required")): ?>
                 <span class="adverts-form-required">*</span>
                 <?php endif; ?>

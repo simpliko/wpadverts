@@ -1,6 +1,6 @@
 <p>
-    <a href="<?php esc_attr_e($baseurl) ?>" class="adverts-button"><?php _e("Go Back", "adverts") ?></a>
-    <a href="<?php esc_attr_e(get_post_permalink( $post_id )) ?>" class="adverts-button"><?php _e("View Ad", "adverts") ?></a>
+    <a href="<?php echo esc_attr($baseurl) ?>" class="adverts-button"><?php _e("Go Back", "adverts") ?></a>
+    <a href="<?php echo esc_attr(get_post_permalink( $post_id )) ?>" class="adverts-button"><?php _e("View Ad", "adverts") ?></a>
 </p>
 
 <?php adverts_flash( $adverts_flash ) ?>
@@ -14,10 +14,10 @@
         
         <?php foreach($form->get_fields( array( "exclude" => array( "account" ) ) ) as $field): ?>
         
-        <div class="adverts-control-group <?php esc_attr_e( str_replace("_", "-", $field["type"] ) . " adverts-field-name-" . $field["name"] ) ?> <?php if(adverts_field_has_errors($field)): ?>adverts-field-error<?php endif; ?>">
+        <div class="adverts-control-group <?php echo esc_attr( str_replace("_", "-", $field["type"] ) . " adverts-field-name-" . $field["name"] ) ?> <?php if(adverts_field_has_errors($field)): ?>adverts-field-error<?php endif; ?>">
             
             <?php if($field["type"] == "adverts_field_header"): ?>
-            <h3 style="border-bottom:2px solid silver"><?php esc_html_e($field["label"]) ?></h3>
+            <h3 style="border-bottom:2px solid silver"><?php echo esc_html($field["label"]) ?></h3>
             <?php else: ?>
             
             <label for="<?php esc_attr_e($field["name"]) ?>">
@@ -34,7 +34,7 @@
             <?php if(adverts_field_has_errors($field)): ?>
             <ul class="adverts-field-error-list">
                 <?php foreach($field["error"] as $k => $v): ?>
-                <li><?php esc_html_e($v) ?></li>
+                <li><?php echo esc_html($v) ?></li>
                 <?php endforeach; ?>
             </ul>
             <?php endif; ?>

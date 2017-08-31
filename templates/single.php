@@ -38,7 +38,7 @@
         </div>
         <div class="adverts-grid-col adverts-col-65">
             <?php foreach($advert_category as $c): ?> 
-            <a href="<?php esc_attr_e( get_term_link( $c ) ) ?>"><?php echo join( " / ", advert_category_path( $c ) ) ?></a><br/>
+            <a href="<?php echo esc_attr( get_term_link( $c ) ) ?>"><?php echo join( " / ", advert_category_path( $c ) ) ?></a><br/>
             <?php endforeach; ?>
         </div>
     </div>        

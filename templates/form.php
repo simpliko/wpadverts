@@ -38,7 +38,7 @@ if( ! isset( $form_label_placement ) ) {
             </div>
             <?php else: ?>
             
-            <label for="<?php esc_attr_e($field["name"]) ?>">
+            <label for="<?php echo esc_attr($field["name"]) ?>">
                 <?php if( isset( $field["label"] ) && ! empty( $field["label"] ) ): ?>
                     <?php echo esc_html($field["label"]) ?>
                     <?php if(adverts_field_has_validator($field, "is_required")): ?>

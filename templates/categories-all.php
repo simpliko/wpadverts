@@ -8,8 +8,8 @@
             <span class="adverts-category-all-main">
                 <span class="<?php echo apply_filters("adverts_category_font_icon", "adverts-icon-".$icon, $term, "small") ?>"></span>
                 <?php do_action( "adverts_category_pre_title", $term, "small") ?>
-                <a class="" href="<?php esc_attr_e(get_term_link($term)) ?>">
-                    <?php esc_html_e($term->name) ?>
+                <a class="" href="<?php echo esc_attr(get_term_link($term)) ?>">
+                    <?php echo esc_html($term->name) ?>
                     <?php if($show_count): ?>
                     (<?php echo $count ?>)
                     <?php endif; ?>
@@ -27,8 +27,8 @@
             
                 <?php foreach($subs as $sub): ?>
                 <li>
-                    <a href="<?php esc_attr_e(get_term_link($sub)) ?>">
-                        <?php esc_html_e($sub->name) ?>
+                    <a href="<?php echo esc_attr(get_term_link($sub)) ?>">
+                        <?php echo esc_html($sub->name) ?>
                         <?php if($show_count): ?>
                         (<?php echo $sub->count ?>)
                         <?php endif; ?>
@@ -36,7 +36,7 @@
                 </li>
                 <?php endforeach; ?>
                 <li>
-                    <a href="<?php esc_attr_e(get_term_link($term)) ?>">
+                    <a href="<?php echo esc_attr(get_term_link($term)) ?>">
                         <?php _e("<em>View All &raquo;</em>", "adverts") ?>
                     </a>
                 </li>

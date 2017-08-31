@@ -3,8 +3,8 @@ Plugin URI: https://wpadverts.com/
 Contributors: gwin
 Tags: classifieds, classified, classified ads, classified script, classifieds script, wp classified, wp classifieds
 Requires at least: 4.0
-Tested up to: 4.8.0
-Stable tag: 1.1.5
+Tested up to: 4.8.1
+Stable tag: 1.1.6
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -58,6 +58,8 @@ See all https://wpadverts.com/extensions/
 
 **Available Translations**
 
+* Brazilian
+* British (UK)
 * Croatian
 * French
 * Dutch
@@ -95,12 +97,25 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
+= 1.1.6 - 2017-09-04 =
+
+* TRANSLATION: British
+* FEATURE: Updated [adverts_list] search form CSS
+* FEATURE: Added Required PHP version (for infomational purposes only)
+* FEATURE: Ability to display Adverts Categories Widget as a categories tree
+* FIXED: Display properly [adverts_list] with 4 columns
+* FIXED: Use esc_attr() and esc_html() function when needed (for better WP compatibility)
+* FIXED: Some flash messages displayed in an old mode
+* FIXED: Incorrect tag closing in pt_BR translation
+* API: Actions and filters for replacing default icons with custom images
+* API: adverts_category_post_count filter allows to recalculate number of Ads in a category
+
 = 1.1.5 - 2017-07-10 =
 
 * FEATURE: Updated design for flash (error and info) messages.
 * FEATURE: In wp-admin left menu the Classifieds menu has a red icon with number of pending Ads
 * FEATURE: [adverts_add] has now a "requires" param which allows to show the shortcode only to users with specific capability
-* FEATURE: When on Ad detail page, the Ad catregory has an additional CSS class in the Adverts Categories widget
+* FEATURE: When on Ad detail page, the Ad category has an additional CSS class in the Adverts Categories widget
 * FIXED: Access to Adverts options requires now manage_options capability instead of install_plugins
 * FIXED: Fatal Error in [adverts_manage] (occurs on some installations with BuddyPress enabled)
 * FIXED: Impossible to uncheck the "Show Phone" option in Contact Form configuration

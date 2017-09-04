@@ -157,6 +157,13 @@ function adverts_admin_page_extensions() {
                     "plugin" => "wpadverts-google-analytics/wpadverts-google-analytics.php",
                     "purchase_url" => "https://wpadverts.com/extensions/google-analytics/"
                 ),
+                "wpadverts-category-icons" => array(
+                    "title" => __( "Category Icons", "adverts" ),
+                    "text" => __( "Set custom icons (small and big) for each category.", "adverts" ),
+                    "type" => "",
+                    "plugin" => "wpadverts-category-icons/wpadverts-category-icons.php",
+                    "purchase_url" => "https://wpadverts.com/extensions/wpadverts-category-icons/"
+                ),
             )
         ),
         array(

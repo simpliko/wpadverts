@@ -50,6 +50,11 @@ jQuery(function($) {
             m.removeClass("adverts-icon-spinner animate-spin");
             m.addClass("adverts-icon-attention");
             m.html($("<span></span>").addClass("adverts-gallery-upload-failed").html(result.error));
+            m.click(function() {
+                $(this).parent().fadeOut("fast", function() {
+                    $(this).remove();
+                })
+            });
             return;
         } else {
             $("#"+file.id+" .adverts-gallery-upload-update").hide();

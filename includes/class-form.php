@@ -136,11 +136,16 @@ class Adverts_Form
                 
                 $v = array_merge($this->get_validator( $v["name"] ), $v);
                 
-                if(empty($this->_form[$name]["value"]) && $v["validate_empty"] === false ) {
+                if(isset($this->_form[$name]["value"])) {
+                    $value = $this->_form[$name]["value"];
+                } else {
+                    $value = null;
+                }
+                
+                if(empty($value) && $v["validate_empty"] === false ) {
                     continue;
                 } 
                 
-                $value = $this->_form[$name]["value"];
                 $result = call_user_func( $v["callback"], $value, $v["params"] );
                 
                 if( $result === true || $result === 1) {

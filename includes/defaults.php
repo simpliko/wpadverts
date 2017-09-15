@@ -117,7 +117,13 @@ Adverts::instance()->set("form", array(
             "name" => "gallery",
             "type" => "adverts_field_gallery",
             "order" => 9,
-            "label" => __( "Gallery", "adverts" )
+            "label" => __( "Gallery", "adverts" ),
+            "validator" => array(
+                array(
+                    "name" => "upload_type",
+                    "params" => array( "allowed" => array( "image", "video", "audio" ) )
+                )
+            )
         ),
         array(
             "name" => "post_content",
@@ -383,3 +389,59 @@ adverts_form_add_validator("max_choices", array(
     "validate_empty" => false
 ));
 
+// Register "upload_limit" validator
+/** @see adverts_validate_upload_limit() */
+adverts_form_add_validator("upload_limit", array(
+    "callback" => "adverts_validate_upload_limit",
+    "label" => __( "Upload Limit", "adverts" ),
+    "params" => array(),
+    "default_error" => "",
+    "message" => array(
+        "max_limit" => __( "You cannot upload more than %max% files.", "adverts" ),
+        "min_limit" => __( "You need to upload at least %min% files.", "adverts" )
+    ),
+    "validate_empty" => true
+));
+
+
+// Register "upload_size" validator
+/** @see adverts_validate_upload_size() */
+adverts_form_add_validator("upload_size", array(
+    "callback" => "adverts_validate_upload_size",
+    "label" => __( "Upload Type", "adverts" ),
+    "params" => array(),
+    "default_error" => "",
+    "message" => array(
+        "too_big" => __( "The max. allowed file size is %max_size%.", "adverts" ),
+        "too_small" => __( "The min. allowed file size is %min_size%.", "adverts" )
+    ),
+    "validate_empty" => false
+));
+
+// Register "upload_type" validator
+/** @see adverts_validate_upload_type() */
+adverts_form_add_validator("upload_type", array(
+    "callback" => "adverts_validate_upload_type",
+    "label" => __( "Upload Type", "adverts" ),
+    "params" => array(),
+    "default_error" => __( "This file type is not allowed.", "adverts" ),
+    "message" => array(),
+    "validate_empty" => false
+));
+
+// Register "upload_dimensions" validator
+/** @see adverts_validate_upload_dimensions() */
+adverts_form_add_validator("upload_dimensions", array(
+    "callback" => "adverts_validate_upload_dimensions",
+    "label" => __( "Upload Dimensions", "adverts" ),
+    "params" => array(),
+    "default_error" => __( "This file type is not allowed.", "adverts" ),
+    "message" => array(
+        "cannot_check" => __( "Cannot validate uploaded image width and height.", "adverts" ),
+        "incorrect_min_width" => __( "The image min. width should be %min_width%.", "adverts" ),
+        "incorrect_max_width" => __( "The image max. width should be %max_width%.", "adverts" ),
+        "incorrect_min_height" => __( "The image min. height should be %min_height%.", "adverts" ),
+        "incorrect_max_height" => __( "The image min. height should be %max_height%.", "adverts" ),
+    ),
+    "validate_empty" => false
+));

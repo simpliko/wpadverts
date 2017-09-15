@@ -121,7 +121,7 @@ function adext_contact_form( $post_id ) {
     <div class="adverts-single-actions">
         <?php if( ! empty( $email ) ): ?>
         <a href="#" class="adverts-button adverts-show-contact-form">
-            <?php echo esc_html("Send Message", "adverts") ?>
+            <?php esc_html_e("Send Message", "adverts") ?>
             <span class="adverts-icon-down-open"></span>
         </a>
         <?php endif; ?>

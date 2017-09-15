@@ -40,7 +40,9 @@ global $adverts_config, $adverts_namespace;
 $adverts_config = null;
 
 // define global $adverts_namespace variable
-$adverts_namespace = array( 'config' => array(
+$adverts_namespace = array();
+
+$adverts_namespace['config'] = array(
     'option_name' => 'adverts_config',
     'default' => array(
         'module' => array(),
@@ -57,9 +59,32 @@ $adverts_namespace = array( 'config' => array(
         'ads_list_default__columns' => 2,
         'ads_list_default__display' => 'grid',
         'ads_list_default__switch_views' => 0,
-        'ads_list_default__posts_per_page' => 20,
+        'ads_list_default__posts_per_page' => 20
     )
-) );
+);
+
+$adverts_namespace['gallery'] = array(
+    'option_name' => 'adverts_gallery',
+    'default' => array(
+        'allowed' => array( 'images', 'video', 'audio' ),
+        'ui' => 'paginator', // either paginator or thumbnails
+        'thumbs_count' => 4,
+        'thumbs_slide' => 2,
+        'image_sizes' => array(
+            // supported sizes: adverts-upload-thumbnail, adverts-list, adverts-gallery
+            "adverts-upload-thumbnail" => array( 'enabled' => 1, 'width' => 150, 'height' => 105, 'crop' => true ),
+            "adverts-list" => array( 'enabled' => 1, 'width' => 310, 'height' => 190, 'crop' => true ),
+            "adverts-gallery" => array( 'enabled' => 0, 'width' => 650, 'height' => 350, 'crop' => true ),
+            "adverts-gallery-thumbnail"
+        ),
+        'upload_items_max' => 10,
+        'upload_item_max_size' => '2MB',
+        'image_max_width' => null,
+        'image_max_height' => null,
+        'image_min_width' => null,
+        'image_min_width' => null
+    )
+);
 
 /**
  * Main Adverts Init Function

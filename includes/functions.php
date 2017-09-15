@@ -523,6 +523,34 @@ function adverts_field_has_validator( $field, $validator ) {
 }
 
 /**
+ * Checks if Adverts_Form field is required
+ * 
+ * The required field is a field with "is_required" or "upload_limit:min>0" 
+ * validator.
+ * 
+ * @param array $field
+ * @param string $validator
+ * @since 0.1
+ * @return boolean
+ */
+function adverts_field_is_required( $field ) {
+    
+    if( adverts_field_has_validator( $field, "is_required") ) {
+        return true;
+    }
+    
+    if( adverts_field_has_validator( $field, "upload_limit" ) ) {
+        foreach($field["validator"] as $v) {
+            if($v["name"] == "upload_limit" && isset( $v["params"]["min"] ) && $v["params"]["min"] > 0 ) {
+                return true;
+            }
+        }
+    }
+    
+    return false;
+}
+
+/**
  * Returns form field rendering function
  * 
  * This function is mainly used in templates when generating form layout.
@@ -735,6 +763,208 @@ function adverts_max_choices( $data, $params = null ) {
     } else {
         return true;
     }
+}
+
+/**
+ * Upload Limit VALIDATOR
+ * 
+ * This validator checks if user have reached maximum files upload limit.
+ * 
+ * @param array $file       An item from $_FILES array
+ * @param array $params     Validation parameters (integer files)
+ * @since 1.2.0
+ * @return string|boolean
+ */
+function adverts_validate_upload_limit( $file, $params = null ) {
+   
+    $post_id = intval( adverts_request( "post_id" ) );
+    
+    if( $post_id === 0 ) {
+        $post_id = intval( adverts_request( "_post_id" ) );
+    } 
+    
+    if( $post_id === 0 ) {
+        $post_id = intval( adverts_request( "advert_id" ) );
+    }
+
+    if( $post_id < 1 ) {
+        // first image upload.
+        return true;
+    }
+    
+    $attachments = get_children( array( 'post_parent' => $post_id ) );
+    $images = count( $attachments );
+    
+    if( $file === null ) {
+        $i = 0;
+    } else {
+        $i = 1;
+    }
+    
+    if( isset( $params["max"] ) && $images + $i > $params["max"] ) {
+        return "max_limit";
+    }
+    
+    if( $file === null && isset( $params["min"] ) && $images < $params["min"] ) {
+        return "min_limit";
+    }
+    
+    return true;
+}
+
+/**
+ * File Size Upload VALIDATOR
+ * 
+ * Checks if uploaded file size is allowed
+ * 
+ * @param array $file       An item from $_FILES array
+ * @param array $params     Validation parameters (integer files)
+ * @since 1.2.0
+ * @return string|boolean
+ */
+function adverts_validate_upload_size( $file, $params = null ) {
+    
+    if ( !isset($file["name"]) || !isset($file["size"]) ) {
+        return true;
+    }
+    
+    $arr = array( "too_big" => "max_size", "too_small" => "min_size" );
+    
+    foreach( $arr as $err => $prop ) {
+        
+        if( ! isset( $params[$prop] ) || empty( $params[$prop] ) ) {
+            continue;
+        }
+        
+        $size = str_replace( array( " " ), array( "" ), $params[$prop] );
+        $size = trim( $size );
+
+        $number = substr( $size, 0, -2 );
+
+        switch( strtoupper( substr( $size, -2 ) ) ) {
+            case "KB":
+                $fsize = $number*1024;
+            case "MB":
+                $fsize = $number*pow(1024,2);
+            case "GB":
+                $fsize = $number*pow(1024,3);
+            case "TB":
+                $fsize = $number*pow(1024,4);
+            case "PB":
+                $fsize = $number*pow(1024,5);
+            default:
+                $fsize = $size;
+        }
+
+        if( $prop == "max_size" && $file["size"] > $fsize ) {
+            return $err;
+        }
+        if( $prop == "min_size" && $file["size"] < $fsize ) {
+            return $err;
+        }
+    }
+    
+    return true;
+    
+
+}
+
+/**
+ * File Type Upload VALIDATOR
+ * 
+ * Checks if uploaded file extensions is allowed in the configuration
+ * 
+ * @param array $file       An item from $_FILES array
+ * @param array $params     Validation parameters (integer files)
+ * @since 1.2.0
+ * @return string|boolean
+ */
+function adverts_validate_upload_type( $file, $params = null ) {
+    
+    if ( !isset($file["name"]) || !isset($file["type"]) ) {
+        return true;
+    }
+    
+    if( isset( $params["allowed"] ) ) {
+        $a = $params["allowed"];
+    } else {
+        $a = array();
+    }
+    
+    $ext = strtolower( pathinfo($file["name"], PATHINFO_EXTENSION) );
+    $type = strtolower( $file["type"] );
+
+    if( isset( $params["extensions"] ) && is_array( $params["extensions"] ) ) {
+        $allowed_ext = array_map( "trim", $params["extensions"] );
+    } else {
+        $allowed_ext = array();
+    }
+    
+    if( isset( $params["types"] ) && is_array( $params["types"] ) ) {
+        $allowed_types = array_map( "trim", $params["types"] );
+    } else {
+        $allowed_types = array();
+    }
+    
+    if( in_array( "video", $a ) ) {
+        $allowed_types = array_merge( $allowed_types, array( "video/webm", "video/mp4", "video/ogv" ) );
+        $allowed_ext = array_merge( $allowed_ext, array( "webm", "mp4", "ogv" ) );
+    }
+    
+    if( in_array( "audio", $a ) ) {
+        $allowed_types = array_merge( $allowed_types, array( "audio/webm", "audio/mp4", "audio/ogv") );
+        $allowed_ext = array_merge( $allowed_ext, array( "webm", "mp4", "ogv" ) );
+    }
+    
+    if( in_array( "image", $a ) ) {
+        $allowed_types = array_merge( $allowed_types, array( "image/jpeg", "image/jpe", "image/jpg", "image/gif", "image/png" ) );
+        $allowed_ext = array_merge( $allowed_ext, array( "jpeg", "jpe", "jpg", "gif", "png" ) );
+    }
+
+    if( in_array( $ext, $allowed_ext) && ( in_array( $type, $allowed_types ) || empty( $allowed_types ) ) ) {
+        return true;
+    } else {
+        return "invalid";
+    }
+}
+
+function adverts_validate_upload_dimensions( $file, $params = null ) {
+    if( ! isset( $file["type"]) || stripos( $file["type"], "image/" ) !== 0 ) {
+        // this validator is applied to images only for other files it returns true
+        return true;
+    } 
+    
+    $imagesize = getimagesize( $file["tmp_name"] );
+    
+    if( $imagesize === false ) {
+        // cannot check image size, if size check is required return error
+        // otherwise accept the uploaded image
+        if( isset( $params["strict"] ) && $params["strict"] ) {
+            return "cannot_check";
+        } else {
+            return true;
+        }
+    }
+    
+    list( $width, $height ) = $imagesize;
+    
+    if( isset( $params["min_width"] ) && $params["min_width"] && $width < $params["min_width"] ) {
+        return "incorrect_min_width";
+    }
+    
+    if( isset( $params["max_width"] ) && $params["max_width"] && $width > $params["max_width"] ) {
+        return "incorrect_min_width";
+    }
+    
+    if( isset( $params["min_height"] ) && $params["min_height"] && $height < $params["min_height"] ) {
+        return "incorrect_min_height";
+    }
+    
+    if( isset( $params["max_height"] ) && $params["max_height"] && $height > $params["max_height"] ) {
+        return "incorrect_min_height";
+    }
+    
+    return true;
 }
 
 /**
@@ -1481,7 +1711,7 @@ function adverts_form_layout_config(Adverts_Form $form, $options = array()) {
             <th scope="row">
                 <label <?php if(!in_array($field['type'], $a)): ?>for="<?php esc_attr_e($field["name"]) ?>"<?php endif; ?>>
                     <?php esc_html_e($field["label"]) ?>
-                    <?php if(adverts_field_has_validator($field, "is_required")): ?><span class="adverts-red">&nbsp;*</span><?php endif; ?>
+                    <?php if(adverts_field_is_required($field)): ?><span class="adverts-red">&nbsp;*</span><?php endif; ?>
                 </label>
             </th>
             <td class="">
@@ -1936,28 +2166,112 @@ function adverts_single_rslides( $post_id ) {
     $images += $children;
     $images = adverts_sort_images($images, $post_id);
 
-    wp_enqueue_script( 'responsive-slides' );
-    
-    ?>
-    <div class="rslides_container">
-        <ul id="slides1" class="rslides rslides1">
-            <?php foreach($images as $tmp_post): ?>
-                <?php $image = wp_get_attachment_image_src( $tmp_post->ID, 'large' ) ?>
-                <?php if(isset($image[0])): ?>
-                <li>
-                    <img src="<?php esc_attr_e($image[0]) ?>" alt="">
 
-                    <?php if($tmp_post->post_excerpt || $tmp_post->post_content): ?>
-                    <p class="caption">
-                        <strong><?php esc_html_e($tmp_post->post_excerpt) ?></strong>
-                        <?php esc_html_e($tmp_post->post_content) ?>
-                    </p>
-                    <?php endif; ?>
+    wp_enqueue_script( 'responsive-slides' );
+    // https://gist.github.com/adamjimenez/5917897
+    ?>
+
+        <script type="text/javascript" src="http://localhost/wpadverts/wp-content/plugins/wpadverts/assets/js/jquery.als-1.7.min.js" ></script>
+    <div class="wpadverts-slides wpadverts-slides-with-thumbnail">
+        <div class="rslides_container ">
+            <ul id="slides1" class="rslides rslides1">
+                <?php foreach($images as $tmp_post): ?>
+
+                    <?php if($tmp_post->post_mime_type == "video/mp4"): ?>
+                <li>
+                    <?php 
+    #echo wp_video_shortcode(array("src"=>$tmp_post->guid, "width"=>"626", "height"=>"359")) 
+                    $file = get_post_meta( $tmp_post->ID, '_wp_attached_file', true );
+                    include_once ABSPATH . '/wp-admin/includes/media.php';
+                    $meta = (wp_read_video_metadata( ABSPATH."/wp-content/uploads/$file" ));
+
+                    ?>
+                    <video id="video-<?php echo $tmp_post->ID ?>" class="create-draw-thumb" style="object-fit: cover;  position: relative;
+      top: 50%;
+      transform: translateY(-50%);" controls>
+                        <source src="<?php echo $tmp_post->guid ?>" type="<?php echo $tmp_post->post_mime_type ?>">
+                    </video>
                 </li>
-                <?php endif; ?>
-            <?php endforeach; ?>
+                    <?php else : ?>
+                    <?php $image = wp_get_attachment_image_src( $tmp_post->ID, 'large' ) ?>
+                    <?php if(isset($image[0])): ?>
+                    <li>
+
+
+                        <img src="<?php esc_attr_e($image[0]) ?>" alt="">
+
+                        <?php if($tmp_post->post_excerpt || $tmp_post->post_content): ?>
+                        <p class="caption">
+                            <strong><?php esc_html_e($tmp_post->post_excerpt) ?></strong>
+                            <?php esc_html_e($tmp_post->post_content) ?>
+                        </p>
+
+                        <?php endif; ?>
+                        <?php endif; ?>
+                    </li>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </ul>
+
+
+
+            <!--div>
+                <a href="#" class="wpadverts-rsliders-options-slide-left"><span class="adverts-icon-left-open"></span></a>
+                <ul id="wpadverts-rsliders-controls" style="">
+                    <?php foreach($images as $tmp_post): ?>
+                        <?php $image = wp_get_attachment_image_src( $tmp_post->ID, 'adverts-upload-thumbnail' ) ?>  
+                        <?php //var_dump($image) ?>
+                        <?php if($image[0]): ?>
+                        <li><a href="<?php echo $image[0] ?>"><img src="<?php echo $image[0] ?>" /></a></li>
+                        <?php else: ?>
+                        <li><a href="#"><span class="adverts-icon-play-circled2" style="
+            font-size: 58px;
+            line-height: 64px;
+            height: 60px;
+            display: block;
+        "></span></a></li>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </ul>
+                <a href="#" class="wpadverts-rsliders-options-slide-right"><span class="adverts-icon-right-open"></span></a>
+            </div-->
+            
+
+            
+        </div>   
+            <div class="wpadverts-als-container als-container">
+                <div href="#" class="als-prev"><span class="adverts-icon-left-open"></span></div>
+                <div class="wpadverts-als-viewport als-viewport">
+                    <ul id="wpadverts-rsliders-controls" class="wpadverts-als-wrapper als-wrapper" style="">
+                        <?php foreach($images as $tmp_post): ?>
+                            <?php $image = wp_get_attachment_image_src( $tmp_post->ID, 'adverts-upload-thumbnail' ) ?>  
+                            <?php //var_dump($image) ?>
+                            <?php if($image[0]): ?>
+                            <li class="wpadverts-als-item als-item"><a href="<?php echo $image[0] ?>"><img src="<?php echo $image[0] ?>" /></a></li>
+                            <?php else: ?>
+                            <li class="wpadverts-als-item als-item">
+                                <!--a href="#">
+                                    <span class="adverts-icon-play-circled2" style="font-size: 58px;line-height: 64px;height: 60px;display: block;"></span>
+                                </a-->
+                                <a href="#">
+                                <canvas class="canvas-for-video-<?php echo $tmp_post->ID ?>" style="width:82px; height: 62px;"></canvas>
+                                </a>
+                            </li>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+                <div href="#" class="als-next"><span class="adverts-icon-right-open"></span></div>
+            </div>
+        
+        <ul id="wpadverts-rsliders-options">
+            <li><a href="#" class="wpadverts-rsliders-options-th"><span class="adverts-icon-th"></span></a></li>
+            <li><a href="#" class="wpadverts-rsliders-options-prev"><span class="adverts-icon-left-open"></span></a></li>
+            <li><a href="#" class="prev"><span class="wpadverts-rsliders-options-current">1</span> / <?php echo count($images) ?></a></li>
+            <li><a href="#" class="rslides1_nav next"><span class="adverts-icon-right-open"></span></a></li>
         </ul>
-    </div>   
+    </div>
+        
     <?php    
 }
 

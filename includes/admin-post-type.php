@@ -438,7 +438,7 @@ function adverts_data_box_content( $post ) {
                 <th scope="row" class="adverts-data-field-header">
                     <label for="<?php esc_attr_e($field["name"]) ?>">
                         <?php echo esc_html($field["label"]) ?>
-                        <?php if( adverts_field_has_validator( $field, "is_required" ) ): ?>
+                        <?php if(adverts_field_is_required( $field ) ): ?>
                         <span class="adverts-form-required"><?php _e( "(required)", "adverts" ) ?></span>
                         <?php endif; ?>
                     </label>

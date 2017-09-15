@@ -85,6 +85,12 @@ function adverts_admin_page_extensions() {
                     "type" => "static",
                     "plugin" => null,
                 ),
+                "gallery" => array(
+                    "title" => __("Gallery", "adverts"),
+                    "text" => __("Configure allowed media types, sizes and gallery user interface.", "adverts"),
+                    "type" => "static",
+                    "plugin" => null,
+                ),
                 "payments" => array(
                     "title" => __("Payments", "adverts"),
                     "text" => __("Charge users for posting classified ads on your site.", "adverts"),

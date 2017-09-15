@@ -65,7 +65,26 @@ function adverts_gallery_upload() {
         exit;
     }
     
-    add_filter( "adverts_gallery_upload_prefilter", "adverts_file_is_image");
+    include_once ADVERTS_PATH . '/includes/class-upload-helper.php';
+    $v = new Adverts_Upload_Helper;
+    $field_name = adverts_request( "field_name" );
+    $form_params = array(
+        "form_scheme" => adverts_request( "form_scheme" ),
+    );
+    $form_scheme = apply_filters( "adverts_form_scheme", Adverts::instance()->get("form"), $form_params );
+    
+    foreach($form_scheme["field"] as $key => $field) {
+        if($field["name"] == $field_name ) {
+            if(isset($field["validator"]) && is_array($field["validator"])) {
+                foreach($field["validator"] as $vcallback) {
+                    $v->add_validator($vcallback);
+                }
+            }
+            
+        }
+    }
+    
+    add_filter( "adverts_gallery_upload_prefilter", array( $v, "check" ) );
 
     // you can use WP's wp_handle_upload() function:
     $status = wp_handle_upload($_FILES['async-upload'], array('test_form'=>true, 'action' => 'adverts_gallery_upload'));

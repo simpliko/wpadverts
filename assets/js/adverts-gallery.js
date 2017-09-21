@@ -1,287 +1,483 @@
-jQuery(function($) {
+// Init global namespace
+var WPADVERTS = WPADVERTS || {};
 
-    var spinner_large = $("<div></div>").addClass("adverts-gallery-upload-update adverts-icon-spinner animate-spin");
-    $(spinner_large).css("position", "absolute").hide();
+WPADVERTS.File = {
+    Registered: [],
+    RemoveItem: function(id) {
+        jQuery.each(WPADVERTS.File.Registered, function(i, item) {
+            if(typeof item.Item[id] !== "undefined") {
+                delete item.Item[id];
+                item.SortableUpdate();
+            }
+        });
+    }
+};
 
-    // order images using drag and drop
-    $(".adverts-gallery-uploads").sortable({
-        update: function() {
-            var ordered_keys = $("div.adverts-gallery-uploads").sortable("toArray", {attribute: 'attachment-key'});
-
-            $(this).find(".adverts-gallery-upload-update.adverts-icon-spinner.animate-spin").fadeIn();
-
-            $.ajax({
-                url: adverts_gallery_lang.ajaxurl,
-                context: this,
-                type: "post",
-                dataType: "json",
-                data: {
-                    action: "adverts_gallery_update_order",
-                    _ajax_nonce: ADVERTS_PLUPLOAD_INIT.multipart_params._ajax_nonce,
-                    post_id: $(ADVERTS_PLUPLOAD_CONF.post_id_input).val(),
-                    ordered_keys: JSON.stringify(ordered_keys)
-                },
-                success: function (response) {
-                    if (response.result == 1) {
-                        $(this).find(".adverts-gallery-upload-update.adverts-icon-spinner.animate-spin").fadeOut();
-                    } else {
-                        alert(response.error);
-                    }
-                }
-            });
-        }
+WPADVERTS.File.Uploader = function(setup) {
+    var $ = jQuery;
+    
+    this.PostID = null;
+    
+    if($(setup.conf.post_id_input).val()) {
+        this.PostID = $(setup.conf.post_id_input).val();
+    }
+    
+    this.Item = {};
+    this.Browser = new WPADVERTS.File.Browser(this);
+    //this.Browser.browser.find(".wpadverts-file-pagi-next").on("click", jQuery.proxy(this.Browser.NextClicked, this));
+    
+    
+    
+    this.setup = setup;
+    this.ui = $("#"+setup.init.container);
+    this.sortable = this.ui.find(".adverts-gallery-uploads");
+    this.engine = new WPADVERTS.File.Uploader.Plupload();
+    
+    var $this = this;
+    jQuery.each(setup.data, function(index, result) {
+        var file = { id: "adverts-file-" + result.attach_id };
+        $this.FileAdded(null, file);
+        $this.FileUploaded(file, result);
+        var x = 0;
     });
+    
+    this.sortable.sortable({
+        update: jQuery.proxy(this.SortableUpdate, this)
+    });
+    
+    this.Plupload(setup.init);
+    
+};
 
-    function adverts_upload_files_added(container, file) {
-        var ag_ui = $("<div></div>").addClass("adverts-gallery-upload-item").attr("id", file.id).attr("attachment-key", file.attachment_key);
+WPADVERTS.File.Uploader.prototype.GetKeys = function() {
+    var keys = [];
+    keys.fill(0, 0, this.Item.length);
+    
+    jQuery.each(this.Item, function(index, item) {
+        keys[item.container.index()] = item.result.attach_id;
+    });
+    
+    return keys;
+};
 
-        $(spinner_large).show();
-        $(spinner_large).clone().prependTo(ag_ui);
+WPADVERTS.File.Uploader.prototype.SortableUpdate = function(e) {
+    var keys = this.GetKeys();
 
-        $("#"+container+" .adverts-gallery-uploads").append(ag_ui);
+    if(typeof e !== "undefined") {
+        this.ui.find(".adverts-gallery-upload-update.adverts-icon-spinner.animate-spin").fadeIn();
     }
 
-    // this is your ajax response, update the DOM with it or something...
-    function adverts_upload_file_uploaded(file, result, trigger_order_update) {
-        $("#" + file.id).attr('attachment-key', result.attach_id);
+    jQuery.ajax({
+        url: adverts_gallery_lang.ajaxurl,
+        context: this,
+        type: "post",
+        dataType: "json",
+        data: {
+            action: "adverts_gallery_update_order",
+            _ajax_nonce: this.setup.init.multipart_params._ajax_nonce,
+            post_id: this.PostID,
+            ordered_keys: JSON.stringify(keys)
+        },
+        success: jQuery.proxy(this.SortableUpdateSuccess, this)
+    });
+};
 
-        if(result.error) {
-            var m = $("#"+file.id+" .adverts-gallery-upload-update");
-            m.removeClass("adverts-icon-spinner animate-spin");
-            m.addClass("adverts-icon-attention");
-            m.html($("<span></span>").addClass("adverts-gallery-upload-failed").html(result.error));
-            m.click(function() {
-                $(this).parent().fadeOut("fast", function() {
-                    $(this).remove();
-                })
-            });
-            return;
+WPADVERTS.File.Uploader.prototype.SortableUpdateSuccess = function(response) {
+    if (response.result == 1) {
+        this.ui.find(".adverts-gallery-upload-update.adverts-icon-spinner.animate-spin").fadeOut();
+    } else {
+        alert(response.error);
+    }
+};
+
+WPADVERTS.File.Uploader.prototype.FileAdded = function(container, file) {
+    var c = jQuery("<div></div>").addClass("adverts-gallery-upload-item").attr("id", file.id);
+    var init = {
+        _ajax_nonce: this.setup.init.multipart_params._ajax_nonce
+    };
+    
+    this.Item[file.id] = new WPADVERTS.File.Singular(file, c, init);
+    this.Item[file.id].SetBrowser(this.Browser);
+    this.Item[file.id].render();
+    
+    this.ui.find(".adverts-gallery-uploads").append(c);
+};
+
+WPADVERTS.File.Uploader.prototype.FileUploaded = function(file, result) {
+    this.Item[file.id].setResult(result);
+    
+    this.Item[file.id].render();
+};
+
+WPADVERTS.File.Uploader.prototype.Plupload = function(init) {
+    // create the uploader and pass the config from above
+    this.uploader = new plupload.Uploader(init);
+
+    // checks if browser supports drag and drop upload, makes some css adjustments if necessary
+    this.uploader.bind('Init', jQuery.proxy(this.engine.Init, this));
+    this.uploader.init();
+    this.uploader.bind("BeforeUpload", jQuery.proxy(this.engine.BeforeUpload, this));
+    this.uploader.bind('FilesAdded', jQuery.proxy(this.engine.FilesAdded, this));
+    this.uploader.bind('FileUploaded', jQuery.proxy(this.engine.FileUploaded, this));
+};
+
+WPADVERTS.File.Uploader.Plupload = function(init) {
+    // do nothing ...
+};
+
+WPADVERTS.File.Uploader.Plupload.prototype.getUploader = function() {
+    return this.uploader;
+};
+
+WPADVERTS.File.Uploader.Plupload.prototype.Init = function(up) {
+    if(up.features.dragdrop) {
+        this.ui.addClass('drag-drop');
+        this.ui.find('.adverts-gallery').bind('dragover.wp-uploader', function(){ 
+            this.ui.addClass('drag-over'); 
+        });
+        this.ui.find('.adverts-drag-drop-area').bind('dragleave.wp-uploader, drop.wp-uploader', function(){
+            this.ui.removeClass('drag-over'); 
+        });
+    }else{
+        this.ui.removeClass('drag-drop');
+        this.ui.find('.adverts-drag-drop-area').unbind('.wp-uploader');
+    }
+};
+
+WPADVERTS.File.Uploader.Plupload.prototype.BeforeUpload = function(up,file) {
+    up.settings.multipart_params.post_id = this.PostID;
+};
+
+WPADVERTS.File.Uploader.Plupload.prototype.FilesAdded = function(up, files){
+    jQuery.each(files, jQuery.proxy(this.engine.FileAdded, this), up);
+
+    up.refresh();
+    up.start();
+};
+
+WPADVERTS.File.Uploader.Plupload.prototype.FileAdded = function(index, file) {
+    var hundredmb = 100 * 1024 * 1024;
+    var up = this.uploader;
+    var max = parseInt(up.settings.max_file_size, 10);
+    
+    if (max > hundredmb && file.size > hundredmb && up.runtime != 'html5'){
+        // file size error?
+    } else {
+        // a file was added, you may want to update your DOM here...
+        //adverts_upload_files_added(up.settings.container, file);
+        this.FileAdded(up.settings.container, file);
+    }
+};
+
+WPADVERTS.File.Uploader.Plupload.prototype.FileUploaded = function(up, file, response) {
+    var result = jQuery.parseJSON(response.response);
+
+    if( this.PostID === null ) {
+        this.PostID = result.post_id;
+    }
+
+    this.FileUploaded(file, result);
+    this.SortableUpdate();
+};
+
+WPADVERTS.File.Singular = function(file, container, init) {
+    this.file = file;
+    this.container = container;
+    this.init = init;
+    this.browser = null;
+    
+    this.result = null;
+    this.spinner = null;
+
+    this.button = {
+        edit: null,
+        remove: null,
+    };
+};
+
+WPADVERTS.File.Singular.prototype.SetBrowser = function(browser) {
+    this.browser = browser;
+};
+
+WPADVERTS.File.Singular.prototype.render = function() {
+    var template = wp.template( "wpadverts-uploaded-file" );
+    var $ = jQuery;
+    var data = {
+        file: this.file,
+        result: this.result
+    };
+    
+    var tpl = template(data);
+    var html = $(tpl);
+    
+    this.container.html(html)
+    
+    if(this.result) {
+        if(typeof this.result.error !== "undefined") {
+            this.container.on("click", jQuery.proxy(this.Dispose, this));
         } else {
-            $("#"+file.id+" .adverts-gallery-upload-update").hide();
-        }
-        
-        var ag_ui = $("#"+file.id);
-        var ag_img = $("<img />").attr("src", result.sizes.adverts_upload_thumbnail.url).attr("alt", "").addClass("adverts-gallery-upload-item-img");
-        var ag_feat = $("<span></span>").addClass("adverts-gallery-item-featured").html(adverts_gallery_lang.featured);
-        var ag_p = $("<p></p>").addClass("adverts-gallery-upload-actions");
-        var ag_spin = $("<span></span>").addClass("adverts-loader adverts-icon-spinner animate-spin");
-        var ag_aview = $("<a></a>")
-            .attr("href", result.sizes.normal.url)
-            .attr("class", ADVERTS_PLUPLOAD_CONF.button_class + " adverts-button-icon adverts-icon-eye")
-            .attr("title", adverts_gallery_lang.view_image)
-            .attr("target", "_blank");
-        var ag_aedit = $("<a></a>")
-            .attr("href", "#")
-            .attr("id", "adverts-upload-button-edit-"+result.attach_id)
-            .attr("class", ADVERTS_PLUPLOAD_CONF.button_class + " adverts-button-icon adverts-icon-pencil")
-            .attr("title", adverts_gallery_lang.edit_image)
-            .data("attach-id", result.attach_id);
-        var ag_adel = $("<a></a>")
-            .attr("href", "#")
-            .attr("class", ADVERTS_PLUPLOAD_CONF.button_class + " adverts-button-icon adverts-icon-trash-1")
-            .attr("title", adverts_gallery_lang.delete_image)
-            .data("attach-id", result.attach_id);
-            
-        ag_aedit.data("caption", result.caption);
-        ag_aedit.data("featured", result.featured);
-        ag_aedit.data("content", result.content);
-            
-        if( result.featured ) {
-            ag_feat.show();
-        }        
-            
-        ag_adel.click(function(e) {
-            e.preventDefault();
-            var attach_id = $(this).data("attach-id");
-            $(this).parent().find(".adverts-loader.animate-spin").css("display", "inline-block");
-            
-           jQuery.ajax({
-               url: adverts_gallery_lang.ajaxurl,
-               context: this,
-               type: "post",
-               dataType: "json",
-               data: {
-                   action: "adverts_gallery_delete",
-                   _ajax_nonce: ADVERTS_PLUPLOAD_INIT.multipart_params._ajax_nonce,
-                   post_id: $(ADVERTS_PLUPLOAD_CONF.post_id_input).val(),
-                   attach_id: attach_id
-               },
-               success: function(response) {
-                   if(response.result == 1) {
-                       $(this).closest(".adverts-gallery-upload-item").fadeOut(function() {
-                           $(this).remove();
-                           $(".adverts-gallery-uploads").sortable("option", "update")();
-                       });
-                   } else {
-                        $(this).parent().find(".adverts-loader.animate-spin").hide();
-                       alert(response.error);
-                   }
-               }
-            });            
-            
-        });
-            
-        ag_aedit.click(function(e) {
-            e.preventDefault();
-            
-            var $this = $(this);
-            var $modal = $("#adverts-modal-gallery");
-            
-            $modal.show();
-            $modal.find("#adverts_caption").val($this.data("caption"));
-            $modal.find("#adverts_content").val($this.data("content"));
-            $modal.find(".adverts-upload-modal-update").data("attach-id", $this.data("attach-id"));
-            
-            if($this.data("featured")) {
-                $modal.find("#adverts_featured").prop("checked", true);
-            } else {
-                $modal.find("#adverts_featured").prop("checked", false);
-            }
-            
-            if( !$modal.hasClass("adverts-modal-reposition") ) {
-                return;
-            }
-            
-            $modal.css("height", $(document).height());
-            $modal.css("width", $(document).width());
+            this.button.edit = this.container.find(".adverts-button-edit");
+            this.button.remove = this.container.find(".adverts-button-remove");
 
-            var c = $modal.find(".adverts-modal-inner");
-            c.css("position","absolute");
-            c.css("top", Math.max(0, (($(window).height() - c.outerHeight()) / 2) + $(window).scrollTop()) + "px");
-            c.css("left", Math.max(0, (($(window).width() - c.outerWidth()) / 2) +  $(window).scrollLeft()) + "px");
+            this.spinner = this.container.find(".adverts-loader");
+            this.spinner.hide();
             
-        });
-            
-        ag_p.append(ag_spin).append(ag_aview).append(ag_aedit).append(ag_adel);
-        ag_ui.append(ag_img).append(ag_feat).append(ag_p);
+            this.button.edit.on("click", jQuery.proxy(this.EditClicked, this));
+            this.button.remove.on("click", jQuery.proxy(this.RemoveClicked, this));
+        }
+    } 
+};
+
+WPADVERTS.File.Singular.prototype.Dispose = function(e) {
+    if(typeof e !== "undefined") {
+        e.preventDefault();
+    }
+    
+    var fileId = this.file.id;
+    
+    this.container.fadeOut("fast", function() {
+        jQuery(this).remove();
+        WPADVERTS.File.RemoveItem(fileId);
+    });
+};
+
+WPADVERTS.File.Singular.prototype.EditClicked = function(e) {
+    if(typeof e !== "undefined") {
+        e.preventDefault();
     }
 
-    
+    this.browser.Open();
+    this.browser.Render(this.result);
+    this.browser.UpdateNavigation();
+};
 
-    $(".adverts-modal .adverts-upload-modal-close").click(function(e) {
+WPADVERTS.File.Singular.prototype.RemoveClicked = function(e) {
+    if(typeof e !== "undefined") {
         e.preventDefault();
-        $(".adverts-modal").hide();
-    });
+    }
+    
+    this.spinner.css("display", "block");
 
-    $(".adverts-modal .adverts-upload-modal-update").click(function(e) {
+    jQuery.ajax({
+        url: adverts_gallery_lang.ajaxurl,
+        context: this,
+        type: "post",
+        dataType: "json",
+        data: {
+            action: "adverts_gallery_delete",
+            _ajax_nonce: this.init._ajax_nonce,
+            post_id: this.result.post_id,
+            attach_id: this.result.attach_id
+        },
+        success: jQuery.proxy(this.RemoveClickedSuccess, this)
+    });            
+};
+
+WPADVERTS.File.Singular.prototype.RemoveClickedSuccess = function(response) {
+    if(response.result == 1) {
+        this.Dispose();
+    } else {
+        this.spinner.hide();
+        alert(response.error);
+    }
+};
+
+WPADVERTS.File.Singular.prototype.setResult = function(result) {
+    this.result = result;
+};
+
+WPADVERTS.File.Singular.prototype.Uploaded = function() {
+    
+};
+
+WPADVERTS.File.Browser = function(uploader) {
+    this.file = null;
+    this.uploader = uploader;
+    
+    var template = wp.template( "wpadverts-browser" );
+    var compiled = template({modal_id:"xxx"});
+    var html = jQuery(compiled);
+    
+    html.find(".wpadverts-overlay-close").on("click", jQuery.proxy(this.Close, this));
+    html.find(".wpadverts-file-pagi-prev").on("click", jQuery.proxy(this.PrevClicked, this))
+    html.find(".wpadverts-file-pagi-next").on("click", jQuery.proxy(this.NextClicked, this))
+    
+    this.browser = html;
+    this.browser.hide();
+
+    jQuery("body").append(this.browser);
+};
+
+WPADVERTS.File.Browser.prototype.SetFile = function(file) {
+    this.file = file;
+};
+
+WPADVERTS.File.Browser.prototype.UpdateNavigation = function() {
+    var keys = this.uploader.GetKeys();
+    var index = keys.indexOf(this.file.attach_id);
+    
+    var prev_id = false;
+    var next_id = false;
+    
+    if(index > 0) {
+        prev_id = keys[index-1];
+        this.browser.find(".wpadverts-file-pagi-prev").removeClass("wpadverts-navi-disabled");
+    } else {
+        this.browser.find(".wpadverts-file-pagi-prev").addClass("wpadverts-navi-disabled");
+    }
+    
+    if(index+1 < keys.length) {
+        next_id = keys[index+1];
+        this.browser.find(".wpadverts-file-pagi-next").removeClass("wpadverts-navi-disabled");
+    } else {
+        this.browser.find(".wpadverts-file-pagi-next").addClass("wpadverts-navi-disabled");
+    }
+    
+    return {
+        prev_id: prev_id,
+        next_id: next_id
+    };
+};
+
+WPADVERTS.File.Browser.prototype.Open = function(e) {
+    if(typeof e !== "undefined") {
         e.preventDefault();
-        $(".adverts-loader.animate-spin").show();
+    }
         
-        var featured = $(".adverts-modal #adverts_featured").prop("checked") ? 1 : 0;
-        
-        jQuery.ajax({
-            url: adverts_gallery_lang.ajaxurl,
-            context: this,
-            type: "post",
-            dataType: "json",
-            data: {
-                action: "adverts_gallery_update",
-                _ajax_nonce: ADVERTS_PLUPLOAD_INIT.multipart_params._ajax_nonce,
-                post_id: $(ADVERTS_PLUPLOAD_CONF.post_id_input).val(),
-                attach_id: $(this).data("attach-id"),
-                caption: $(".adverts-modal #adverts_caption").val(),
-                content: $(".adverts-modal #adverts_content").val(),
-                featured: featured
-            },
-            success: function(response) {
-                $(".adverts-loader.animate-spin").hide();
-                
-                if(response.result == 1) {
-                    $(".adverts-modal .adverts-upload-modal-close").click();
-                    var attach_id = $(this).data("attach-id");
-                    var button = $("#adverts-upload-button-edit-"+attach_id);
-                    var featured = $(".adverts-modal #adverts_featured").prop("checked") ? 1 : 0;
-                    
-                    button.data("caption", $(".adverts-modal #adverts_caption").val());
-                    button.data("content", $(".adverts-modal #adverts_content").val());
-                    button.data("featured", featured);
-                    
-                    $(".adverts-gallery-item-featured").hide();
-                    
-                    if(featured) {
-                        button.closest(".adverts-gallery-upload-item").find(".adverts-gallery-item-featured").show();
-                    }
-                } else {
-                    alert(response.error);
-                }  
-            } // end success
-        }); // end jQuery.ajax 
-        
-    });
     
+    this.browser.show();
+};
+
+WPADVERTS.File.Browser.prototype.Close = function(e) {
+    if(typeof e !== "undefined") {
+        e.preventDefault();
+    }
+    this.browser.hide();
+};
+
+WPADVERTS.File.Browser.prototype.NextClicked = function(e) {
+    if(typeof e !== "undefined") {
+        e.preventDefault();
+    }
+
+    var navi = this.UpdateNavigation();
+    var next = null;
     
-    if (typeof ADVERTS_PLUPLOAD_INIT === 'undefined') {
+    if(navi.next_id === false) {
         return;
     }
     
-      // create the uploader and pass the config from above
-      var uploader = new plupload.Uploader(ADVERTS_PLUPLOAD_INIT);
-      
-      // checks if browser supports drag and drop upload, makes some css adjustments if necessary
-      uploader.bind('Init', function(up){
-        var uploaddiv = $('#adverts-plupload-upload-ui');
-
-        if(up.features.dragdrop) {
-            uploaddiv.addClass('drag-drop');
-            uploaddiv.find('.adverts-gallery').bind('dragover.wp-uploader', function(){ 
-                uploaddiv.addClass('drag-over'); 
-            });
-            uploaddiv.find('#adverts-drag-drop-area').bind('dragleave.wp-uploader, drop.wp-uploader', function(){
-                uploaddiv.removeClass('drag-over'); 
-                
-            });
-        }else{
-          uploaddiv.removeClass('drag-drop');
-          $('#adverts-drag-drop-area').unbind('.wp-uploader');
+    jQuery.each(this.uploader.Item, function(i, item) {
+        if(item.result.attach_id == navi.next_id) {
+            next = i;
         }
+    });
+
+    this.Render(this.uploader.Item[next].result);
+};
+
+WPADVERTS.File.Browser.prototype.PrevClicked = function(e) {
+    if(typeof e !== "undefined") {
+        e.preventDefault();
+    }
+
+    var navi = this.UpdateNavigation();
+    var prev = null;
+    
+    if(navi.prev_id === false) {
+        return;
+    }
+    
+    jQuery.each(this.uploader.Item, function(i, item) {
+        if(item.result.attach_id == navi.prev_id) {
+            prev = i;
+        }
+    });
+
+    this.Render(this.uploader.Item[prev].result);
+};
+
+WPADVERTS.File.Browser.prototype.Render = function(result) {
+    this.SetFile(result);
+    
+    var template = wp.template( "wpadverts-browser-attachment-view" );
+    var $ = jQuery;
+    var data = {
+        file: this.file
+    };
+    
+    var tpl = template(data);
+    var html = $(tpl);
+    
+    html.find(".adverts-upload-modal-update").on("click", jQuery.proxy(this.UpdateDescription, this));
+    
+    this.element = {
+        spinner: html.find(".adverts-loader.animate-spin"),
+        input: {
+            featured: html.find("input[name='adverts_featured']"),
+            caption: html.find("input[name='adverts_caption']"),
+            content: html.find("textarea[name='adverts_content']")
+        }
+    }
+    
+    this.browser.find(".wpadverts-attachment-details").html(html);
+
+};
+
+WPADVERTS.File.Browser.prototype.UpdateDescription = function(e) {
+    if(typeof e !== "undefined") {
+        e.preventDefault();
+    }
+    
+    this.element.spinner.show();
+
+    var featured = this.element.input.featured.prop("checked") ? 1 : 0;
+
+    jQuery.ajax({
+        url: adverts_gallery_lang.ajaxurl,
+        context: this,
+        type: "post",
+        dataType: "json",
+        data: {
+            action: "adverts_gallery_update",
+            _ajax_nonce: this.uploader.setup.init.multipart_params._ajax_nonce,
+            post_id: this.uploader.PostID,
+            attach_id: this.file.attach_id,
+            caption: this.element.input.caption.val(),
+            content: this.element.input.content.val(),
+            featured: featured
+        },
+        success: jQuery.proxy(this.UpdateDescriptionSuccess, this)
+    }); // end jQuery.ajax 
+};
+
+WPADVERTS.File.Browser.prototype.UpdateDescriptionSuccess = function(response) {
+    this.element.spinner.hide();
+
+    if(response.result == 1) {
         
-      });
-
-      uploader.init();
-
-      uploader.bind("BeforeUpload", function(up,file) {
-          uploader.settings.multipart_params.post_id = $(ADVERTS_PLUPLOAD_CONF.post_id_input).val();
-      });
-      
-      // a file was added in the queue
-      uploader.bind('FilesAdded', function(up, files){
-        var hundredmb = 100 * 1024 * 1024, max = parseInt(up.settings.max_file_size, 10);
-
-        plupload.each(files, function(file){
-          if (max > hundredmb && file.size > hundredmb && up.runtime != 'html5'){
-            // file size error?
-
-          }else{
-
-            // a file was added, you may want to update your DOM here...
-            adverts_upload_files_added(up.settings.container, file);
-            
-          }
+        var featured = this.element.input.featured.prop("checked") ? 1 : 0;
+        var br = this;
+        
+        jQuery.each(this.uploader.Item, function(index, item) {
+            if(item.result.attach_id == br.file.attach_id) {
+                item.result.response.file
+                item.render();
+                
+                br.file.response.file
+            } else if(featured) {
+                item.result.featured = 0;
+                item.render();
+            }
         });
 
-        up.refresh();
-        up.start();
-      });
+    } else {
+        alert(response.error);
+    }  
+};
 
-      // a file was uploaded 
-      uploader.bind('FileUploaded', function(up, file, response) {
-        var result = $.parseJSON(response.response);
-        var post_id = $( ADVERTS_PLUPLOAD_CONF.post_id_input ).val();
-        
-        if( post_id == "" ) {
-            $( ADVERTS_PLUPLOAD_CONF.post_id_input ).val( result.post_id );
-        }
-
-        adverts_upload_file_uploaded(file, result);
-
-        // just added a new file, so send its order to the server
-        $(".adverts-gallery-uploads").sortable("option", "update")();
-      });
-      
-    $.each(ADVERTS_PLUPLOAD_DATA, function(index, result) {
-        var file = { id: "adverts-file-" + result.attach_id, attachment_key: result.attach_id };
-        adverts_upload_files_added(ADVERTS_PLUPLOAD_INIT.container, file);
-        adverts_upload_file_uploaded(file, result);
+jQuery(function($) {
+    $.each(ADVERTS_PLUPLOAD_DATA, function(index, item) {
+        WPADVERTS.File.Registered.push(new WPADVERTS.File.Uploader(item));
     });
-    
 });

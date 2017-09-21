@@ -191,7 +191,7 @@ function adverts_gallery_update() {
         delete_post_meta( $post_id, '_thumbnail_id' );
     }
     
-    echo json_encode( array( "result" => 1 ) );
+    echo json_encode( array( "result" => 1, "file" => adverts_upload_item_data( $attach_id ) ) );
     exit;
 }
 

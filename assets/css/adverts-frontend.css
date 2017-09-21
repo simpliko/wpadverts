@@ -1784,7 +1784,7 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 
 
 /* ADVERTS GALLERY */
-.adverts-form-aligned #adverts-plupload-upload-ui {
+.adverts-form-aligned .adverts-plupload-upload-ui {
     width:60%;
     float:left;
 }
@@ -1809,7 +1809,7 @@ since IE8 won't execute CSS that contains a CSS3 selector.
     border:1px solid silver
 }
 
-.drag-over #adverts-drag-drop-area  {
+.drag-over .adverts-drag-drop-area  {
     position: absolute !important;
     left: 0px;
     top: 0px;

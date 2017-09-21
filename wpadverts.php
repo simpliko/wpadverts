@@ -202,8 +202,8 @@ function adverts_init() {
     wp_register_script( 
         'adverts-gallery', 
         ADVERTS_URL . '/assets/js/adverts-gallery.js', 
-        array( 'jquery', 'plupload-all', 'jquery-ui-sortable', 'jquery-effects-core', 'jquery-effects-fade'  ), 
-        "2", 
+        array( 'jquery', 'plupload-all', 'jquery-ui-sortable', 'jquery-effects-core', 'jquery-effects-fade', 'wp-util'  ), 
+        "3", 
         true
     );
 
@@ -267,6 +267,7 @@ function adverts_init() {
 function adverts_init_frontend() {
     
     wp_register_style( 'adverts-frontend', ADVERTS_URL . '/assets/css/adverts-frontend.css', array(), "7" );
+    wp_register_style( 'adverts-upload', ADVERTS_URL . '/assets/css/adverts-upload.css', array(), "1" );
     
     wp_register_script('adverts-frontend', ADVERTS_URL . '/assets/js/adverts-frontend.js', array( 'jquery' ), "3" );
     wp_register_script('adverts-frontend-add', ADVERTS_URL . '/assets/js/adverts-frontend-add.js', array( 'jquery'), "2" );

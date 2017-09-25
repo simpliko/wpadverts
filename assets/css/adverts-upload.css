@@ -160,4 +160,7 @@
 .wpadverts-attachment-image {
     padding: 25px;
     text-align: center;
+    overflow: scroll;
+    position: relative;
+    height: inherit;
 }

@@ -272,6 +272,48 @@ function adverts_gallery_delete() {
     exit;
 }
 
+function adverts_gallery_image_stream() {
+    
+    $attach_id = adverts_request( "attach_id" );
+    $history_encoded = adverts_request( "history" );
+    $size = null;
+    
+    $history = json_decode( $history_encoded );
+    
+    if( ! is_array( $history ) ) {
+        $history = array();
+    }
+
+    $attached_file = get_attached_file( $attach_id );
+    $image = wp_get_image_editor( $attached_file );
+ 
+
+    foreach( $history as $c ) {
+        if( ! isset( $c->a ) ) {
+            continue;
+        }
+        
+        if( $c->a == "c" ) {
+            $image->crop($c->x, $c->y, $c->w, $c->h);
+        } else if( $c->a == "ro" ) {
+            $image->rotate($c->v);
+        } else if( $c->a == "re" ) {
+            // resize
+            $image->resize($c->w, $c->h);
+        } else if( $c->a == "f" ) {
+            $image->flip($c->h, $c->v);
+        }
+    }
+    
+    //exit;
+     
+    
+    
+    $image->stream();
+    
+    exit;
+}
+
 /**
  * Returns ad contact information (email and phone)
  * 

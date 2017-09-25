@@ -105,6 +105,7 @@ function adverts_init() {
     add_filter( 'adverts_the_content', 'convert_chars' );
     add_filter( 'adverts_the_content', 'wpautop' );
     
+    wp_register_style( 'adverts-upload', ADVERTS_URL . '/assets/css/adverts-upload.css', array(), "1" );
     wp_register_style( 'adverts-icons', ADVERTS_URL . '/assets/css/adverts-glyphs.css', array(), "1" );
     wp_register_style( 'adverts-icons-animate', ADVERTS_URL . '/assets/css/animation.css', array(), "1" );
     
@@ -202,7 +203,7 @@ function adverts_init() {
     wp_register_script( 
         'adverts-gallery', 
         ADVERTS_URL . '/assets/js/adverts-gallery.js', 
-        array( 'jquery', 'plupload-all', 'jquery-ui-sortable', 'jquery-effects-core', 'jquery-effects-fade', 'wp-util'  ), 
+        array( 'jquery', 'plupload-all', 'jquery-ui-sortable', 'jquery-effects-core', 'jquery-effects-fade', 'wp-util', 'jcrop'  ), 
         "3", 
         true
     );
@@ -267,7 +268,6 @@ function adverts_init() {
 function adverts_init_frontend() {
     
     wp_register_style( 'adverts-frontend', ADVERTS_URL . '/assets/css/adverts-frontend.css', array(), "7" );
-    wp_register_style( 'adverts-upload', ADVERTS_URL . '/assets/css/adverts-upload.css', array(), "1" );
     
     wp_register_script('adverts-frontend', ADVERTS_URL . '/assets/js/adverts-frontend.js', array( 'jquery' ), "3" );
     wp_register_script('adverts-frontend-add', ADVERTS_URL . '/assets/js/adverts-frontend-add.js', array( 'jquery'), "2" );
@@ -358,6 +358,7 @@ function adverts_init_admin() {
     add_action('wp_ajax_adverts_gallery_update', 'adverts_gallery_update');
     add_action('wp_ajax_adverts_gallery_update_order', 'adverts_gallery_update_order');
     add_action('wp_ajax_adverts_gallery_delete', 'adverts_gallery_delete');
+    add_action('wp_ajax_adverts_gallery_image_stream', 'adverts_gallery_image_stream');
     add_action('wp_ajax_adverts_show_contact', 'adverts_show_contact');
     add_action('wp_ajax_adverts_delete_tmp', 'adverts_delete_tmp');
     add_action('wp_ajax_adverts_delete', 'adverts_delete');
@@ -366,6 +367,7 @@ function adverts_init_admin() {
     add_action('wp_ajax_nopriv_adverts_gallery_update', 'adverts_gallery_update');
     add_action('wp_ajax_nopriv_adverts_gallery_update_order', 'adverts_gallery_update_order');
     add_action('wp_ajax_nopriv_adverts_gallery_delete', 'adverts_gallery_delete');
+    add_action('wp_ajax_nopriv_adverts_gallery_image_stream', 'adverts_gallery_image_stream');
     
     add_action('wp_ajax_nopriv_adverts_show_contact', 'adverts_show_contact');
     add_action('wp_ajax_nopriv_adverts_delete_tmp', 'adverts_delete_tmp');

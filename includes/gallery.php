@@ -57,95 +57,12 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
           
         ),
     );
-    
+    wp_enqueue_script( 'image-edit' );
     wp_enqueue_style( 'adverts-upload' );
     
     ?>
 
-    <?php if( is_admin() ): ?>
-    <div id="<?php echo esc_html("adverts-plupload-upload-ui-".$field_name) ?>">
-        <div id="<?php echo esc_html("adverts-drag-drop-area-".$field_name) ?>" id="adverts-drag-drop-area">
-        
-        </div>
-        <div class="adverts-gallery">
-            <p class="adverts-gallery-invite"><?php _e( "Drop <strong>images</strong> here to add them.", "adverts" ) ?></p>
-            <p class="adverts-gallery-button-wrap"><a href="#" id="<?php echo esc_html("adverts-plupload-browse-button-".$field_name) ?>" class="button-secondary"><?php _e( "browse files ...", "adverts" ) ?></a></p>
-        </div>
-        <div class="adverts-gallery-uploads">
 
-        </div>
-    </div>
-    
-    
-    <div id="adverts-modal-gallery" class="adverts-modal">
-        <div class="media-modal wp-core-ui">
-            <a class="media-modal-close adverts-upload-modal-close" href="#" title="<?php _e( "Close", "adverts" ) ?>"><span class="media-modal-icon"></span></a>
-            <div class="media-modal-content">
-                <div class="media-frame wp-core-ui2 hide-menu">
-
-                    <div class="media-frame-title"><h1><?php _e( "Edit Image", "adverts" ) ?></h1></div>
-                    
-                    <div class="media-frame-router">
-                        <div class="media-router">
-                            <a href="#" class="media-menu-item active"><?php _e( "Image Properties", "adverts" ) ?></a>
-                        </div>
-                    </div>
-
-                    <div class="media-frame-content"> 
-
-                        <div class="wrap" style="padding:0px 20px">
-
-                            <form method="post" action="">
-
-                                <table class="form-table">
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row"><label for="adverts_caption"><?php _e( "Title", "adverts" ) ?></label></th>
-                                            <td>
-                                                <input name="adverts_caption" type="text" id="adverts_caption" value="" class="regular-text" />
-                                            </td>
-                                        </tr>               
-                                        <tr>
-                                            <th scope="row"><label for="adverts_featured"><?php _e( "Featured", "adverts" ) ?></label></th>
-                                            <td>
-                                                <label for="adverts_featured">
-                                                    <input name="adverts_featured" type="checkbox" id="adverts_featured" value="1" />
-                                                    <?php esc_attr_e( "Use this image as main image", "adverts") ?>
-                                                </label>
-                                            </td>
-                                        </tr>                
-                                        <tr>
-                                            <th scope="row"><label for="adverts_content"><?php _e( "Description", "adverts" ) ?></label></th>
-                                            <td>
-                                                <textarea name="adverts_content" rows="10" cols="50" id="adverts_content" class="large-text code"></textarea>
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-
-                            </form>
-
-                        </div>
-                    
-                    </div>
-                    
-                    <div class="media-frame-toolbar">
-                        <div class="media-toolbar">
-                            <div class="media-toolbar-secondary"></div>
-                            <div class="media-toolbar-primary">
-                                <span class="adverts-spinner adverts-loader adverts-icon-spinner animate-spin"></span>
-                                <a href="#" class="button media-button button-secondary button-large media-button-select adverts-upload-modal-close"><?php _e( "Cancel", "adverts" ) ?></a>
-                                <a href="#" class="button media-button button-primary button-large media-button-select adverts-upload-modal-update"><?php _e( "Update and Close", "adverts" ) ?></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="media-modal-backdrop"></div>
-    </div><!-- .adverts-modal -->
-    <?php else: ?>
 
     <div id="<?php echo esc_html("adverts-plupload-upload-ui-".$field_name) ?>" class="adverts-plupload-upload-ui">
         <div id="<?php echo esc_html("adverts-drag-drop-area-".$field_name) ?>"class="adverts-drag-drop-area">
@@ -162,9 +79,7 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
     </div>
     
     <?php add_action("wp_footer", "adverts_gallery_modal") ?>
-    <?php endif; ?>
-    
-    
+    <?php add_action("admin_footer", "adverts_gallery_modal") ?>
     
     <?php
         // Get data for uploaded items and format it as JSON.
@@ -277,8 +192,19 @@ function adverts_gallery_modal() {
             </div>
             <# } else { #>
             <div class="wpadverts-attachment-image">
-                <img src="{{ data.file.sizes.normal.url }}" alt="" style="max-width: 100%; max-height: 100%;">
-                <div style="margin-top: 12px"><a href="#" class="adverts-button">Edit Image</a></div>
+                <# for(var size in data.file.sizes) { #>
+                <img src="{{ data.file.sizes[size].url }}" alt="" style="max-width: 100%; max-height: 100%;">
+                <# } #>
+                <div style="margin-top: 12px; margin-bottom: 12px">
+                    <span>Image Size</span>
+                    <select class="wpadverts-image-sizes" style="background: white;border: 1px solid silver;height: 37px;line-height: 37px;width: 150px;">
+                        <option value="normal">Normal</option>
+                        <option value="adverts-upload-thumbnail" data-width="150" data-height="105" data-ratio="<?php echo round(150/105,2) ?>">Thumbnail</option>
+                        <option value="adverts-list" data-width="310" data-height="190" data-ratio="<?php echo round(310/190,2) ?>">List</option>
+                        <option selected="selected" value="adverts-single" data-width="650" data-height="350" data-ratio="<?php echo round(650/350,2) ?>">Single</option>
+                    </select>
+                    <a href="#" class="adverts-button wpadverts-attachment-edit-image">Edit Image</a>
+                </div>
             </div>
             <# } #>
         </div>
@@ -322,6 +248,43 @@ function adverts_gallery_modal() {
         </div>
     </script>
     
+    <script type="text/html" id="tmpl-wpadverts-browser-attachment-image">
+        <div class="wpadverts-attachment-media-view wpadverts-overlay-content">
+            
+            <div class="wpadverts-attachment-image-toolbar" style="margin:12px 12px 12px 12px">
+                
+                <a href="#" class="adverts-image-action-crop adverts-button adverts-button-small"><span class="adverts-icon-crop"></span></a>
+                <a href="#" class="adverts-image-action-rotate-cw adverts-button adverts-button-small"><span class="adverts-icon-cw"></span></a>
+                <a href="#" class="adverts-image-action-rotate-ccw adverts-button adverts-button-small"><span class="adverts-icon-ccw"></span></a>
+                <a href="#" class="adverts-image-action-flip-h adverts-button adverts-button-small"><span class="adverts-icon-resize-vertical"></span></a>
+                <a href="#" class="adverts-image-action-flip-v adverts-button adverts-button-small"><span class="adverts-icon-resize-horizontal"></span></a>
+                <a href="#" class="adverts-image-action-undo adverts-button adverts-button-small"><span class="adverts-icon-history"></span></a>
+                
+                <span style="margin: 0 1em 0 1em">
+                    Dimensions 
+                    <input type="number" class="adverts-image-scale-width" name="" value="{{ data.file.dimensions.width }}" max="{{ data.file.dimensions.width }}" step="1" style="width: 70px;height: 30px;box-sizing: border-box;border-radius: 1px;" />
+                    x
+                    <input type="number" class="adverts-image-scale-height" name=""  value="{{ data.file.dimensions.height }}" max="{{ data.file.dimensions.height }}" step="1" style="width: 70px;height: 30px;box-sizing: border-box;border-radius: 1px;" />
+                    <a href="#" class="adverts-image-action-scale adverts-button adverts-button-small">Scale</a>
+                </span>
+                
+                
+                <span style="margin: 0 1em 0 1em">
+                    <a href="#" class="adverts-button adverts-button-small">Save</a>
+                </span>
+            </div>
+
+            <div class="wpadverts-attachment-image">
+                <img src="<?php echo admin_url('admin-ajax.php') ?>?action=adverts_gallery_image_stream&attach_id={{ data.file.attach_id }}&history={{ data.history }}" id="wpadverts-image-crop" alt="" style="max-width: 100%; max-height: 100%;">
+            </div>
+            
+        </div>
+
+        <div class="wpadverts-attachment-info">
+
+        </div>
+    </script>
+    <link rel="stylesheet" href="http://localhost/wpadverts/wp-includes/js/jcrop/jquery.Jcrop.min.css" type="text/css">
     <?php
 }
 
@@ -340,6 +303,7 @@ function adverts_upload_item_data( $attach_id, $is_new = false ) {
     // Generate the metadata for the attachment, and update the database record.
 
     $thumb = wp_get_attachment_image_src( $attach_id, "adverts-upload-thumbnail");
+    $thumb_list = wp_get_attachment_image_src( $attach_id, "adverts-list");
     
     $featured = 0;
     $caption = "";
@@ -372,6 +336,9 @@ function adverts_upload_item_data( $attach_id, $is_new = false ) {
             ),
             "adverts_upload_thumbnail" => array(
                 "url" => $thumb[0]
+            ),
+            "adverts_list" => array(
+                "url" => $thumb_list[0]
             )
         ),
         "readable" => array(
@@ -388,6 +355,7 @@ function adverts_upload_item_data( $attach_id, $is_new = false ) {
     
     if( isset( $meta["width"] ) && isset( $meta["height"] ) ) {
         $data["readable"]["dimensions"] = sprintf( "%d x %d", $meta["width"], $meta["height"] );
+        $data["dimensions"] = $meta;
     }
     if( isset( $meta["length_formatted"] ) ) {
         $data["readable"]["length"] = $meta["length_formatted"];

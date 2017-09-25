@@ -420,8 +420,186 @@ WPADVERTS.File.Browser.prototype.Render = function(result) {
         }
     }
     
+    if(html.find(".wpadverts-attachment-edit-image").length > 0) {
+        this.element.input.edit = html.find(".wpadverts-attachment-edit-image");
+        this.element.input.edit.on("click", jQuery.proxy(this.EditImage, this));
+    }
+    
     this.browser.find(".wpadverts-attachment-details").html(html);
 
+};
+
+WPADVERTS.File.Browser.prototype.EditImage = function(e) {
+    if(typeof e !== "undefined") {
+        e.preventDefault();
+    }
+    
+    this.history = [];
+    this.ImageLoad();
+};
+
+WPADVERTS.File.Browser.prototype.ImageLoad = function() {
+    
+    this.jcrop = null;
+    this.crop = null;
+    this.input = {
+        
+    };
+    
+    var template = wp.template( "wpadverts-browser-attachment-image" );
+    var $ = jQuery;
+    var data = {
+        file: this.file,
+        history: JSON.stringify(this.history)
+    };
+    
+    var tpl = template(data);
+    var html = $(tpl);
+    
+    var jcrop = html.find(".wpadverts-image-sizes option:selected");
+    var jopt = {
+        aspectRatio: jcrop.data("ratio"),
+        //minSize: [jcrop.data("width"), jcrop.data("height")],
+        //maxSize: [jcrop.data("width"), jcrop.data("height")],
+        //setSelect: [0, 0, jcrop.data("width"), jcrop.data("height")],
+        onSelect: jQuery.proxy(this.CropSelected, this),
+        onChange: jQuery.proxy(this.CropSelected, this),
+        onRelease: jQuery.proxy(this.CropReleased, this)
+    };
+    
+    this.image = html.find("#wpadverts-image-crop");
+    this.jcrop = this.image.Jcrop(jopt);
+    
+    
+    html.find(".adverts-image-action-crop").on("click", jQuery.proxy(this.ImageCrop, this));
+    html.find(".adverts-image-action-rotate-ccw").on("click", jQuery.proxy(this.RotateCCW, this));
+    html.find(".adverts-image-action-rotate-cw").on("click", jQuery.proxy(this.RotateCW, this));
+    html.find(".adverts-image-action-flip-h").on("click", jQuery.proxy(this.ImageFlipH, this));
+    html.find(".adverts-image-action-flip-v").on("click", jQuery.proxy(this.ImageFlipV, this));
+    html.find(".adverts-image-action-undo").on("click", jQuery.proxy(this.ImageUndo, this));
+    
+    html.find(".adverts-image-scale-width").on("keyup", jQuery.proxy(this.KeyWidth, this));
+    html.find(".adverts-image-scale-height").on("keyup", jQuery.proxy(this.KeyHeight, this));
+    html.find(".adverts-image-action-scale").on("click", jQuery.proxy(this.ImageScale, this));
+    
+    this.input.width = html.find(".adverts-image-scale-width");
+    this.input.height = html.find(".adverts-image-scale-height");
+    
+    if(this.history.length == 0) {
+        html.find(".adverts-image-action-undo").css("opacity", "0.5");
+    }
+    
+    html.find(".adverts-image-action-crop").css("opacity", "0.5");
+    
+    this.browser.find(".wpadverts-attachment-details").html(html);
+};
+
+WPADVERTS.File.Browser.prototype.CropSelected = function(e) {
+    this.browser.find(".wpadverts-attachment-details").find(".adverts-image-action-crop").css("opacity", "1");
+    this.crop = e;
+};
+
+WPADVERTS.File.Browser.prototype.CropReleased = function(e) {
+    this.browser.find(".wpadverts-attachment-details").find(".adverts-image-action-crop").css("opacity", "0.5");
+    this.crop = null;
+};
+
+WPADVERTS.File.Browser.prototype.ImageCrop = function(e) {
+    if(typeof e !== "undefined") {
+        e.preventDefault();
+    }
+    if(this.crop === null) {
+        return;
+    }
+    
+    var crop = this.crop;
+    crop.a = "c";
+
+    this.history.push(crop);
+    this.crop = null;
+    
+    this.ImageLoad();
+};
+
+WPADVERTS.File.Browser.prototype.RotateCW = function(e) {
+    if(typeof e !== "undefined") {
+        e.preventDefault();
+    }
+
+    this.history.push({a: "ro", v: "90"});
+    this.ImageLoad();
+};
+
+WPADVERTS.File.Browser.prototype.RotateCCW = function(e) {
+    if(typeof e !== "undefined") {
+        e.preventDefault();
+    }
+
+    this.history.push({a: "ro", v: "-90"});
+    this.ImageLoad();
+};
+
+WPADVERTS.File.Browser.prototype.ImageFlipH = function(e) {
+    if(typeof e !== "undefined") {
+        e.preventDefault();
+    }
+
+    this.history.push({a: "f", h: true, v: false});
+    this.ImageLoad();
+};
+
+WPADVERTS.File.Browser.prototype.ImageFlipV = function(e) {
+    if(typeof e !== "undefined") {
+        e.preventDefault();
+    }
+
+    this.history.push({a: "f", h: false, v: true});
+    this.ImageLoad();
+};
+
+WPADVERTS.File.Browser.prototype.KeyWidth = function(e) {
+
+    // calculate height
+    var width = parseInt(this.input.width.val());
+    var max_width = parseInt(this.input.width.attr("max"));
+    var max_height = parseInt(this.input.height.attr("max"));
+    
+    var scale = width * ( max_height / max_width );
+    
+    this.input.height.val(Math.round(scale).toString());
+};
+
+WPADVERTS.File.Browser.prototype.KeyHeight = function(e) {
+
+    // calculate width
+    var height = parseInt(this.input.width.val());
+    var max_width = parseInt(this.input.width.attr("max"));
+    var max_height = parseInt(this.input.height.attr("max"));
+    
+    var scale = height * ( max_width / max_height );
+    
+    this.input.width.val(Math.round(scale).toString());
+};
+
+WPADVERTS.File.Browser.prototype.ImageScale = function(e) {
+    if(typeof e !== "undefined") {
+        e.preventDefault();
+    }
+    
+    this.history.push({a:"re", w:this.input.width.val(), h:this.input.height.val()});
+    this.ImageLoad();
+};
+
+WPADVERTS.File.Browser.prototype.ImageUndo = function(e) {
+    if(typeof e !== "undefined") {
+        e.preventDefault();
+    }
+    if(this.history.length === 0) {
+        return;
+    }
+    
+    this.history.pop();
+    this.ImageLoad();
 };
 
 WPADVERTS.File.Browser.prototype.UpdateDescription = function(e) {

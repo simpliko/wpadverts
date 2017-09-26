@@ -66,23 +66,16 @@ $adverts_namespace['config'] = array(
 $adverts_namespace['gallery'] = array(
     'option_name' => 'adverts_gallery',
     'default' => array(
-        'allowed' => array( 'images', 'video', 'audio' ),
         'ui' => 'paginator', // either paginator or thumbnails
         'thumbs_count' => 4,
         'thumbs_slide' => 2,
         'image_sizes' => array(
             // supported sizes: adverts-upload-thumbnail, adverts-list, adverts-gallery
-            "adverts-upload-thumbnail" => array( 'enabled' => 1, 'width' => 150, 'height' => 105, 'crop' => true ),
+            "adverts-gallery" => array( 'enabled' => 1, 'width' => 650, 'height' => 350, 'crop' => true ),
             "adverts-list" => array( 'enabled' => 1, 'width' => 310, 'height' => 190, 'crop' => true ),
-            "adverts-gallery" => array( 'enabled' => 0, 'width' => 650, 'height' => 350, 'crop' => true ),
-            "adverts-gallery-thumbnail"
+            "adverts-upload-thumbnail" => array( 'enabled' => 1, 'width' => 150, 'height' => 105, 'crop' => true ),
+            //"adverts-gallery-thumbnail"
         ),
-        'upload_items_max' => 10,
-        'upload_item_max_size' => '2MB',
-        'image_max_width' => null,
-        'image_max_height' => null,
-        'image_min_width' => null,
-        'image_min_width' => null
     )
 );
 
@@ -162,9 +155,6 @@ function adverts_init() {
     );
     
     register_taxonomy( 'advert_category', 'advert', apply_filters('adverts_register_taxonomy', $args, 'advert_category') );
-
-    add_image_size( "adverts-upload-thumbnail", 150, 105, true );
-    add_image_size( "adverts-list", 310, 190, true);
     
     include_once ADVERTS_PATH . 'includes/class-adverts.php';
     include_once ADVERTS_PATH . 'includes/class-flash.php';
@@ -173,6 +163,14 @@ function adverts_init() {
     include_once ADVERTS_PATH . 'includes/functions.php';
     
     include_once ADVERTS_PATH . 'includes/defaults.php';
+    
+    foreach( adverts_config( "gallery.image_sizes" ) as $image_key => $image_size ) {
+        if( $image_size["enabled"] ) {
+            add_image_size( $image_key, $image_size["width"], $image_size["width"], $image_size["crop"] );
+        }
+    }
+    //add_image_size( "adverts-upload-thumbnail", 150, 105, true );
+    //add_image_size( "adverts-list", 310, 190, true);
     
     $currency = Adverts::instance()->get("currency");
     

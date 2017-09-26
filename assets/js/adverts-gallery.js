@@ -409,6 +409,7 @@ WPADVERTS.File.Browser.prototype.Render = function(result) {
     var tpl = template(data);
     var html = $(tpl);
     
+    html.find(".wpadverts-image-sizes").on("change", jQuery.proxy(this.ImageSizeChanged, this));
     html.find(".adverts-upload-modal-update").on("click", jQuery.proxy(this.UpdateDescription, this));
     
     this.element = {
@@ -418,14 +419,20 @@ WPADVERTS.File.Browser.prototype.Render = function(result) {
             caption: html.find("input[name='adverts_caption']"),
             content: html.find("textarea[name='adverts_content']")
         }
-    }
+    };
     
     if(html.find(".wpadverts-attachment-edit-image").length > 0) {
         this.element.input.edit = html.find(".wpadverts-attachment-edit-image");
         this.element.input.edit.on("click", jQuery.proxy(this.EditImage, this));
     }
     
+    if(html.find(".wpadverts-attachment-create-image").length > 0) {
+        this.element.input.edit = html.find(".wpadverts-attachment-create-image");
+        this.element.input.edit.on("click", jQuery.proxy(this.CreateImage, this));
+    }
+    
     this.browser.find(".wpadverts-attachment-details").html(html);
+    this.browser.find(".wpadverts-attachment-details").find(".wpadverts-image-sizes").change();
 
 };
 
@@ -433,6 +440,20 @@ WPADVERTS.File.Browser.prototype.EditImage = function(e) {
     if(typeof e !== "undefined") {
         e.preventDefault();
     }
+    
+    this.imageSize = this.browser.find(".wpadverts-image-sizes option:selected").val();
+    
+    this.history = [];
+    this.ImageLoad();
+};
+
+WPADVERTS.File.Browser.prototype.CreateImage = function(e) {
+    if(typeof e !== "undefined") {
+        e.preventDefault();
+    }
+    
+    this.browser.find(".wpadverts-image-sizes option:selected").prop("selected", false);
+    this.imageSize = null;
     
     this.history = [];
     this.ImageLoad();
@@ -450,6 +471,7 @@ WPADVERTS.File.Browser.prototype.ImageLoad = function() {
     var $ = jQuery;
     var data = {
         file: this.file,
+        size: this.imageSize,
         history: JSON.stringify(this.history)
     };
     
@@ -470,7 +492,7 @@ WPADVERTS.File.Browser.prototype.ImageLoad = function() {
     this.image = html.find("#wpadverts-image-crop");
     this.jcrop = this.image.Jcrop(jopt);
     
-    
+
     html.find(".adverts-image-action-crop").on("click", jQuery.proxy(this.ImageCrop, this));
     html.find(".adverts-image-action-rotate-ccw").on("click", jQuery.proxy(this.RotateCCW, this));
     html.find(".adverts-image-action-rotate-cw").on("click", jQuery.proxy(this.RotateCW, this));
@@ -492,6 +514,15 @@ WPADVERTS.File.Browser.prototype.ImageLoad = function() {
     html.find(".adverts-image-action-crop").css("opacity", "0.5");
     
     this.browser.find(".wpadverts-attachment-details").html(html);
+};
+
+WPADVERTS.File.Browser.prototype.ImageSizeChanged = function(e) {
+    var s = this.browser.find(".wpadverts-image-sizes option:selected");
+
+    this.browser.find(".adverts-image-preview").hide();
+    this.browser.find(".adverts-image-preview.adverts-image-preview-"+s.val()).fadeIn("fast");
+    this.browser.find(".adverts-icon-size-explain-desc").text(s.data("explain"));
+    
 };
 
 WPADVERTS.File.Browser.prototype.CropSelected = function(e) {

@@ -276,17 +276,22 @@ function adverts_gallery_image_stream() {
     
     $attach_id = adverts_request( "attach_id" );
     $history_encoded = adverts_request( "history" );
-    $size = null;
+    $size = adverts_request( "size" );
     
     $history = json_decode( $history_encoded );
     
     if( ! is_array( $history ) ) {
         $history = array();
     }
-
+    
     $attached_file = get_attached_file( $attach_id );
+    
+    if( $size ) {
+        $upload = adverts_upload_item_data( $attach_id );
+        $attached_file = dirname( $attached_file ) . "/" . basename( $upload["sizes"][$size]["url"] );
+    }
+
     $image = wp_get_image_editor( $attached_file );
- 
 
     foreach( $history as $c ) {
         if( ! isset( $c->a ) ) {

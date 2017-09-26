@@ -100,6 +100,13 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
             foreach($children as $child) {
                 $data[] = adverts_upload_item_data( $child->ID );
             }
+            
+            echo "<pre>";
+            //wp_delete_attachment($post_id);
+            //print_r(get_attached_file( $child->ID )).PHP_EOL."\r\n";
+            //print_r(get_attached_file($child->ID)).PHP_EOL;
+;            print_r(wp_get_attachment_metadata( 167 ));
+            echo "</pre>";
         }
 
         $upload_conf = array(
@@ -107,6 +114,10 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
             "data" => $data,
             "conf" => $conf
         );
+        
+        
+        
+        
         
     ?>
     
@@ -187,24 +198,16 @@ function adverts_gallery_modal() {
         <div class="wpadverts-attachment-media-view wpadverts-overlay-content">
             <# if( data.file.mime_type == "video/mp4" ) { #>
             <div class="wpadverts-attachment-image">
-                <video src="{{ data.file.sizes.normal.url }}" controls="controls"></video>
+                <video src="{{ data.file.sizes.large.url }}" controls="controls"></video>
                 <div style="margin-top: 12px"><a href="#" class="adverts-button">Select Thumbnail</a></div>
             </div>
             <# } else { #>
+
             <div class="wpadverts-attachment-image">
                 <# for(var size in data.file.sizes) { #>
-                <img src="{{ data.file.sizes[size].url }}" alt="" style="max-width: 100%; max-height: 100%;">
+                <img src="{{ data.file.sizes[size].url }}" class="adverts-image-preview adverts-image-preview-{{ size }}" alt="" style="max-width: 100%; max-height: 100%;">
                 <# } #>
-                <div style="margin-top: 12px; margin-bottom: 12px">
-                    <span>Image Size</span>
-                    <select class="wpadverts-image-sizes" style="background: white;border: 1px solid silver;height: 37px;line-height: 37px;width: 150px;">
-                        <option value="normal">Normal</option>
-                        <option value="adverts-upload-thumbnail" data-width="150" data-height="105" data-ratio="<?php echo round(150/105,2) ?>">Thumbnail</option>
-                        <option value="adverts-list" data-width="310" data-height="190" data-ratio="<?php echo round(310/190,2) ?>">List</option>
-                        <option selected="selected" value="adverts-single" data-width="650" data-height="350" data-ratio="<?php echo round(650/350,2) ?>">Single</option>
-                    </select>
-                    <a href="#" class="adverts-button wpadverts-attachment-edit-image">Edit Image</a>
-                </div>
+
             </div>
             <# } #>
         </div>
@@ -236,6 +239,30 @@ function adverts_gallery_modal() {
                 <span class="adverts-loader adverts-icon-spinner animate-spin"></span>
             </div>
 
+            <div style="margin-top: 15px;padding-top: 15px;border-top: 1px solid #ddd;clear:both;overflow:hidden">
+                <form action="" method="post" class="adverts-form adverts-form-aligned">
+                    <fieldset>
+                        <div class="adverts-control-group">
+                            <label>Preview Image</label>
+                            <select class="wpadverts-image-sizes" style="background: white;border: 1px solid silver;width: 100%;">
+                                <?php foreach( adverts_gallery_explain_size() as $key => $size): ?>
+                                <option value="<?php echo esc_html(str_replace("-", "_", $key)) ?>" data-explain="<?php echo esc_attr($size["desc"]) ?>"><?php echo esc_html($size["title"]) ?></option>
+                                <?php endforeach; ?>
+                                <!--option selected="selected" value="adverts-single" data-width="650" data-height="350" data-ratio="<?php echo round(650/350,2) ?>">Single</option-->
+                            </select>
+                        </div>
+                        <div class="adverts-control-group" style="font-size: 12px; max-width: 100%; line-height: 18px; color: #666;">
+                            <span class="adverts-icon-info-circled"></span>
+                            <span class="adverts-icon-size-explain-desc">-</span>
+                        </div>
+                        <div class="adverts-control-group">
+                            <a href="#" class="adverts-button wpadverts-attachment-edit-image">Edit Image</a>
+                            <a href="#" class="adverts-button wpadverts-attachment-create-image">Create Image</a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            
             <div class="details">
                 <div class="filename"><strong>File name:</strong> {{ data.file.readable.name }}</div>
                 <div class="filename"><strong>File type:</strong> {{ data.file.readable.type }}</div>
@@ -275,7 +302,7 @@ function adverts_gallery_modal() {
             </div>
 
             <div class="wpadverts-attachment-image">
-                <img src="<?php echo admin_url('admin-ajax.php') ?>?action=adverts_gallery_image_stream&attach_id={{ data.file.attach_id }}&history={{ data.history }}" id="wpadverts-image-crop" alt="" style="max-width: 100%; max-height: 100%;">
+                <img src="<?php echo admin_url('admin-ajax.php') ?>?action=adverts_gallery_image_stream&attach_id={{ data.file.attach_id }}&size={{ data.size }}&history={{ data.history }}" id="wpadverts-image-crop" alt="" style="max-width: 100%; max-height: 100%;">
             </div>
             
         </div>
@@ -301,10 +328,36 @@ function adverts_upload_item_data( $attach_id, $is_new = false ) {
     require_once( ABSPATH . 'wp-admin/includes/image.php' );
 
     // Generate the metadata for the attachment, and update the database record.
+    $sizes = array();
+    $image_keys = array( "url", "width", "height", "is_intermidiate" );
+    $image_defaults = array( 
+        "large" => array_combine( $image_keys, wp_get_attachment_image_src( $attach_id, "large" ) )
+    );
+    $image_sizes = array_merge( $image_defaults, adverts_config( "gallery.image_sizes" ) );
 
-    $thumb = wp_get_attachment_image_src( $attach_id, "adverts-upload-thumbnail");
-    $thumb_list = wp_get_attachment_image_src( $attach_id, "adverts-list");
+    foreach( $image_sizes as $image_key => $image_size ) {
+        if( ! has_image_size( $image_key ) ) {
+            continue;
+        }
+        
+        $src = wp_get_attachment_image_src( $attach_id, $image_key );
+        
+        if( $src === false ) {
+            $src = array( 
+                "url" => null, 
+                "width" => $image_size["width"],
+                "height" => $image_size["height"],
+                "is_intermidiate" => true
+            );
+        } else {
+            $src = array_combine( $image_keys, $src );
+        }
+        
+        $sizes[ str_replace( "-", "_", $image_key ) ] = $src;
+    }
     
+    $sizes = array_merge( $image_defaults, $sizes );
+
     $featured = 0;
     $caption = "";
     $content = "";
@@ -330,17 +383,7 @@ function adverts_upload_item_data( $attach_id, $is_new = false ) {
         "featured" => $featured,
         "caption" => $caption,
         "content" => $content,
-        "sizes" => array(
-            "normal" => array(
-                "url" => wp_get_attachment_url( $attach_id )
-            ),
-            "adverts_upload_thumbnail" => array(
-                "url" => $thumb[0]
-            ),
-            "adverts_list" => array(
-                "url" => $thumb_list[0]
-            )
-        ),
+        "sizes" => $sizes,
         "readable" => array(
             "name" => basename( $post->guid ),
             "type" => $post->post_mime_type,
@@ -362,4 +405,34 @@ function adverts_upload_item_data( $attach_id, $is_new = false ) {
     }
     
     return $data;
+}
+
+function adverts_gallery_explain_size( $size = null ) {
+    
+    $e = apply_filters( "adverts_gallery_explain", array( 
+        "large" => array(
+            "title" => __( "Gallery - Large", "adverts" ),
+            "desc" => __( "Image in original size - used on classified details page in the gallery.", "adverts" )
+        ),
+        "adverts-gallery" => array(
+            "title" => __( "Gallery - Slider", "adverts" ),
+            "desc" => __( "Image resized to %d x %d - used in the images slider on classified details page.", "adverts" )
+        ),
+        "adverts-list" => array(
+            "title" => __( "Classifieds List", "adverts" ),
+            "desc" => __( "Image resized to %d x %d - used on the classifieds list.", "adverts" )
+        ),
+        "adverts-upload-thumbnail" => array(
+            "title" => __( "Thumbnail", "adverts" ),
+            "desc" => __( "Image resized to %d x %d - the image visible in upload preview.", "adverts" )
+        ),
+    ), $size );
+    
+    if( $size === null ) {
+        return $e;
+    }
+
+    if( isset( $e["size"] ) ) {
+        return $e["size"];
+    }
 }

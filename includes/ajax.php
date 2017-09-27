@@ -272,6 +272,16 @@ function adverts_gallery_delete() {
     exit;
 }
 
+/**
+ * Generates image preview
+ * 
+ * This function is executed by the Gallery, it displays resized and cropped image.
+ * 
+ * Action: adverts_gallery_image_stream
+ * 
+ * @since 1.2
+ * @return void
+ */
 function adverts_gallery_image_stream() {
     
     $attach_id = adverts_request( "attach_id" );
@@ -310,14 +320,133 @@ function adverts_gallery_image_stream() {
         }
     }
     
-    //exit;
-     
-    
-    
     $image->stream();
     
     exit;
 }
+
+function adverts_gallery_image_save() {
+    
+    $attach_id = adverts_request( "attach_id" );
+    $action_type = adverts_request( "action_type" );
+    $history_encoded = adverts_request( "history" );
+    
+    $size_dash = adverts_request( "size" );
+    $size = str_replace("_", "-", adverts_request( "size" ));
+    
+    $history = json_decode( $history_encoded );
+    
+    if( ! is_array( $history ) ) {
+        $history = array();
+    }
+    
+    $attached_file = get_attached_file( $attach_id );
+    
+    if( $size && $action_type == "edit" ) {
+        $upload = adverts_upload_item_data( $attach_id );
+        $attached_file = dirname( $attached_file ) . "/" . basename( $upload["sizes"][$size_dash]["url"] );
+    }
+
+    $image = wp_get_image_editor( $attached_file );
+
+    foreach( $history as $c ) {
+        if( ! isset( $c->a ) ) {
+            continue;
+        }
+        
+        if( $c->a == "c" ) {
+            $image->crop($c->x, $c->y, $c->w, $c->h);
+        } else if( $c->a == "ro" ) {
+            $image->rotate($c->v);
+        } else if( $c->a == "re" ) {
+            // resize
+            $image->resize($c->w, $c->h);
+        } else if( $c->a == "f" ) {
+            $image->flip($c->h, $c->v);
+        }
+    }
+    
+    $return = new stdClass();
+    
+    $backup_sizes = get_post_meta( $attach_id, '_wp_attachment_backup_sizes', true );
+    $meta = wp_get_attachment_metadata( $attach_id );
+    
+    $basename = pathinfo( $attached_file, PATHINFO_BASENAME );
+    $dirname = pathinfo( $attached_file, PATHINFO_DIRNAME );
+    $ext = pathinfo( $attached_file, PATHINFO_EXTENSION );
+    $filename = pathinfo( $attached_file, PATHINFO_FILENAME );
+    $suffix = time() . rand(100, 999);
+    
+    $is_resized = preg_match( '/-e([0-9]+)$/', $filename );
+    
+    while ( true ) {
+        $filename = preg_replace( '/-e([0-9]+)$/', '', $filename );
+        $filename .= "-e{$suffix}";
+        $new_filename = "{$filename}.{$ext}";
+        $new_path = "{$dirname}/$new_filename";
+        if ( file_exists($new_path) ) {
+                $suffix++;
+        } else {
+                break;
+        }
+    }
+    
+    //print_r($image);
+    //print_r($meta);
+    //print_r($backup_sizes);
+    
+
+    $saved = $image->save( $new_path );
+    
+    // Save the full-size file, also needed to create sub-sizes.
+    //$saved = wp_save_image_file( $new_path, $image, $attachment->post_mime_type, $attach_id );
+    //print_r($saved);
+        //$return->error = esc_js( __('Unable to save the image.') );
+        //echo json_encode($return);
+        //exit;
+    print_r($saved);
+    
+    if( $is_resized ) {
+        // working on already resized file, just delete the old file and set
+        // new file name in meta $size
+
+        $s = $meta["sizes"][$size];
+
+        if ( ! empty( $s['file'] ) && preg_match( '/-e[0-9]{13}-/', $s['file'] ) ) {
+            
+            // delete old resized file
+            $delete_file = path_join( $dirname, $s['file'] );
+            wp_delete_file( $delete_file );
+
+            // set meta to file name to newly generated file
+            $meta["sizes"][$size]["file"] = $new_filename;
+
+            echo $delete_file."<br/>";
+        }
+        
+    } else {
+        // working on new image, save the new file name in meta and set backup size
+        
+        $tag = "$size-orig";
+        $backup_sizes[$tag] = $meta['sizes'][$size];
+        
+        $meta["sizes"][$size]["file"] = $new_filename;
+        
+    }
+
+ print_r($meta);
+ print_r($backup_sizes);
+    
+    wp_update_attachment_metadata( $attach_id, $meta );
+    update_post_meta( $attach_id, '_wp_attachment_backup_sizes', $backup_sizes);
+    
+    exit;
+    
+
+    
+    
+}
+
 
 /**
  * Returns ad contact information (email and phone)

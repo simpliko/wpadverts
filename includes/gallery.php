@@ -243,12 +243,11 @@ function adverts_gallery_modal() {
                 <form action="" method="post" class="adverts-form adverts-form-aligned">
                     <fieldset>
                         <div class="adverts-control-group">
-                            <label>Preview Image</label>
+                            <label><?php _e("Preview Image", "adverts") ?></label>
                             <select class="wpadverts-image-sizes" style="background: white;border: 1px solid silver;width: 100%;">
                                 <?php foreach( adverts_gallery_explain_size() as $key => $size): ?>
                                 <option value="<?php echo esc_html(str_replace("-", "_", $key)) ?>" data-explain="<?php echo esc_attr($size["desc"]) ?>"><?php echo esc_html($size["title"]) ?></option>
                                 <?php endforeach; ?>
-                                <!--option selected="selected" value="adverts-single" data-width="650" data-height="350" data-ratio="<?php echo round(650/350,2) ?>">Single</option-->
                             </select>
                         </div>
                         <div class="adverts-control-group" style="font-size: 12px; max-width: 100%; line-height: 18px; color: #666;">
@@ -256,20 +255,38 @@ function adverts_gallery_modal() {
                             <span class="adverts-icon-size-explain-desc">-</span>
                         </div>
                         <div class="adverts-control-group">
-                            <a href="#" class="adverts-button wpadverts-attachment-edit-image">Edit Image</a>
-                            <a href="#" class="adverts-button wpadverts-attachment-create-image">Create Image</a>
+                            <a href="#" class="adverts-button wpadverts-attachment-edit-image"><?php _e("Edit Image", "adverts") ?></a>
+                            <a href="#" class="adverts-button wpadverts-attachment-create-image"><?php _e("Create Image", "adverts") ?></a>
                         </div>
                     </fieldset>
                 </form>
             </div>
             
             <div class="details">
-                <div class="filename"><strong>File name:</strong> {{ data.file.readable.name }}</div>
-                <div class="filename"><strong>File type:</strong> {{ data.file.readable.type }}</div>
-                <div class="uploaded"><strong>Uploaded on:</strong> {{ data.file.readable.uploaded }}</div>
-                <div class="file-size"><strong>File size:</strong> {{ data.file.readable.size }}</div>
-                <div class="dimensions"><strong>Dimensions:</strong> {{ data.file.readable.dimensions }}</div>
-                <div class="formatted-length"><strong>Length:</strong> {{ data.file.readable.length }}</div>
+                <# if( data.file.readable.name ) { #>
+                <div class="filename"><strong><?php _e("File name:") ?></strong> {{ data.file.readable.name }}</div>
+                <# } #>
+                
+                <# if( data.file.readable.type ) { #>
+                <div class="filename"><strong><?php _e("File type:") ?></strong> {{ data.file.readable.type }}</div>
+                <# } #>
+                
+                <# if( data.file.readable.uploaded ) { #>
+                <div class="uploaded"><strong><?php _e("Uploaded on:") ?></strong> {{ data.file.readable.uploaded }}</div>
+                <# } #>
+                
+                <# if( data.file.readable.size ) { #>
+                <div class="file-size"><strong><?php _e("File size:") ?></strong> {{ data.file.readable.size }}</div>
+                <# } #>
+                
+                <# if( data.file.readable.dimensions ) { #>
+                <div class="dimensions"><strong><?php _e("Dimensions:") ?></strong> {{ data.file.readable.dimensions }}</div>
+                <# } #>
+                
+                <# if( data.file.readable.length ) { #>
+                <div class="formatted-length"><strong><?php _e("Length:") ?></strong> {{ data.file.readable.length }}</div>
+                <# } #>
+                
                 <div class="compat-meta"></div>
             </div>
         </div>
@@ -292,12 +309,15 @@ function adverts_gallery_modal() {
                     <input type="number" class="adverts-image-scale-width" name="" value="{{ data.file.dimensions.width }}" max="{{ data.file.dimensions.width }}" step="1" style="width: 70px;height: 30px;box-sizing: border-box;border-radius: 1px;" />
                     x
                     <input type="number" class="adverts-image-scale-height" name=""  value="{{ data.file.dimensions.height }}" max="{{ data.file.dimensions.height }}" step="1" style="width: 70px;height: 30px;box-sizing: border-box;border-radius: 1px;" />
-                    <a href="#" class="adverts-image-action-scale adverts-button adverts-button-small">Scale</a>
+                    <a href="#" class="adverts-image-action-scale adverts-button adverts-button-small"><?php _e("Scale", "adverts") ?></a>
                 </span>
                 
                 
                 <span style="margin: 0 1em 0 1em">
-                    <a href="#" class="adverts-button adverts-button-small">Save</a>
+                    <a href="#" class="adverts-image-action-restore adverts-button adverts-button-small"><?php _e("Restore", "adverts") ?></a>
+                    
+                    <a href="#" class="adverts-image-action-cancel adverts-button adverts-button-small"><?php _e("Cancel", "adverts") ?></a>
+                    <a href="#" class="adverts-image-action-save adverts-button adverts-button-small"><?php _e("Save", "adverts") ?></a>
                 </span>
             </div>
 

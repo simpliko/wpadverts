@@ -312,7 +312,7 @@ WPADVERTS.File.Browser.prototype.SetFile = function(file) {
     this.file = file;
 };
 
-WPADVERTS.File.Browser.prototype.UpdateNavigation = function() {
+WPADVERTS.File.Browser.prototype.GetNavigation = function() {
     var keys = this.uploader.GetKeys();
     var index = keys.indexOf(this.file.attach_id);
     
@@ -321,22 +321,32 @@ WPADVERTS.File.Browser.prototype.UpdateNavigation = function() {
     
     if(index > 0) {
         prev_id = keys[index-1];
-        this.browser.find(".wpadverts-file-pagi-prev").removeClass("wpadverts-navi-disabled");
-    } else {
-        this.browser.find(".wpadverts-file-pagi-prev").addClass("wpadverts-navi-disabled");
-    }
+    } 
     
     if(index+1 < keys.length) {
         next_id = keys[index+1];
-        this.browser.find(".wpadverts-file-pagi-next").removeClass("wpadverts-navi-disabled");
-    } else {
-        this.browser.find(".wpadverts-file-pagi-next").addClass("wpadverts-navi-disabled");
-    }
+    } 
     
     return {
         prev_id: prev_id,
         next_id: next_id
     };
+}
+
+WPADVERTS.File.Browser.prototype.UpdateNavigation = function() {
+    var navi = this.GetNavigation();
+
+    if(navi.prev_id) {
+        this.browser.find(".wpadverts-file-pagi-prev").removeClass("wpadverts-navi-disabled");
+    } else {
+        this.browser.find(".wpadverts-file-pagi-prev").addClass("wpadverts-navi-disabled");
+    }
+    
+    if(navi.next_id) {
+        this.browser.find(".wpadverts-file-pagi-next").removeClass("wpadverts-navi-disabled");
+    } else {
+        this.browser.find(".wpadverts-file-pagi-next").addClass("wpadverts-navi-disabled");
+    }
 };
 
 WPADVERTS.File.Browser.prototype.Open = function(e) {
@@ -360,7 +370,7 @@ WPADVERTS.File.Browser.prototype.NextClicked = function(e) {
         e.preventDefault();
     }
 
-    var navi = this.UpdateNavigation();
+    var navi = this.GetNavigation();
     var next = null;
     
     if(navi.next_id === false) {
@@ -374,6 +384,7 @@ WPADVERTS.File.Browser.prototype.NextClicked = function(e) {
     });
 
     this.Render(this.uploader.Item[next].result);
+    this.UpdateNavigation();
 };
 
 WPADVERTS.File.Browser.prototype.PrevClicked = function(e) {
@@ -381,7 +392,7 @@ WPADVERTS.File.Browser.prototype.PrevClicked = function(e) {
         e.preventDefault();
     }
 
-    var navi = this.UpdateNavigation();
+    var navi = this.GetNavigation();
     var prev = null;
     
     if(navi.prev_id === false) {
@@ -395,6 +406,7 @@ WPADVERTS.File.Browser.prototype.PrevClicked = function(e) {
     });
 
     this.Render(this.uploader.Item[prev].result);
+    this.UpdateNavigation();
 };
 
 WPADVERTS.File.Browser.prototype.Render = function(result) {
@@ -433,6 +445,13 @@ WPADVERTS.File.Browser.prototype.Render = function(result) {
     
     this.browser.find(".wpadverts-attachment-details").html(html);
     this.browser.find(".wpadverts-attachment-details").find(".wpadverts-image-sizes").change();
+    
+    if(this.imageSize) {
+        this.browser.find(".wpadverts-image-sizes option[value='"+this.imageSize+"']").prop("selected", true);
+        this.browser.find(".wpadverts-image-sizes").change();
+    }
+    
+    this.imageSize = null;
 
 };
 
@@ -442,6 +461,7 @@ WPADVERTS.File.Browser.prototype.EditImage = function(e) {
     }
     
     this.imageSize = this.browser.find(".wpadverts-image-sizes option:selected").val();
+    this.actionType = "edit";
     
     this.history = [];
     this.ImageLoad();
@@ -452,8 +472,8 @@ WPADVERTS.File.Browser.prototype.CreateImage = function(e) {
         e.preventDefault();
     }
     
-    this.browser.find(".wpadverts-image-sizes option:selected").prop("selected", false);
-    this.imageSize = null;
+    this.imageSize = this.browser.find(".wpadverts-image-sizes option:selected").val();
+    this.actionType = "create";
     
     this.history = [];
     this.ImageLoad();
@@ -467,11 +487,16 @@ WPADVERTS.File.Browser.prototype.ImageLoad = function() {
         
     };
     
+    var imageSize = this.imageSize;
+    if(this.actionType === "create") {
+        imageSize = null;
+    }
+    
     var template = wp.template( "wpadverts-browser-attachment-image" );
     var $ = jQuery;
     var data = {
         file: this.file,
-        size: this.imageSize,
+        size: imageSize,
         history: JSON.stringify(this.history)
     };
     
@@ -499,6 +524,9 @@ WPADVERTS.File.Browser.prototype.ImageLoad = function() {
     html.find(".adverts-image-action-flip-h").on("click", jQuery.proxy(this.ImageFlipH, this));
     html.find(".adverts-image-action-flip-v").on("click", jQuery.proxy(this.ImageFlipV, this));
     html.find(".adverts-image-action-undo").on("click", jQuery.proxy(this.ImageUndo, this));
+    html.find(".adverts-image-action-save").on("click", jQuery.proxy(this.ImageSave, this));
+    html.find(".adverts-image-action-cancel").on("click", jQuery.proxy(this.ImageCancel, this));
+    html.find(".adverts-image-action-restore").on("click", jQuery.proxy(this.ImageRestore, this));
     
     html.find(".adverts-image-scale-width").on("keyup", jQuery.proxy(this.KeyWidth, this));
     html.find(".adverts-image-scale-height").on("keyup", jQuery.proxy(this.KeyHeight, this));
@@ -633,6 +661,51 @@ WPADVERTS.File.Browser.prototype.ImageUndo = function(e) {
     this.ImageLoad();
 };
 
+WPADVERTS.File.Browser.prototype.ImageSave = function(e) {
+    if(typeof e !== "undefined") {
+        e.preventDefault();
+    }
+    
+    var data = {
+        action: "adverts_gallery_image_save",
+        history: JSON.stringify(this.history),
+        size: this.imageSize,
+        attach_id: this.file.attach_id,
+        action_type: this.actionType,
+        apply_to: this.imageSize
+    };
+    
+    jQuery.ajax({
+        url: adverts_gallery_lang.ajaxurl,
+        context: this,
+        type: "post",
+        dataType: "json",
+        data: data,
+        success: jQuery.proxy(this.ImageSaveSuccess, this)
+    });
+};
+
+WPADVERTS.File.Browser.prototype.ImageCancel = function(e) {
+    if(typeof e !== "undefined") {
+        e.preventDefault();
+    }
+    
+    this.Render(this.file);
+};
+
+WPADVERTS.File.Browser.prototype.ImageRestore = function(e) {
+    if(typeof e !== "undefined") {
+        e.preventDefault();
+    }
+    
+    this.history = [];
+    this.ImageLoad();
+};
+
+WPADVERTS.File.Browser.prototype.ImageSaveSuccess = function(response) {
+    var x = 0;
+};
+
 WPADVERTS.File.Browser.prototype.UpdateDescription = function(e) {
     if(typeof e !== "undefined") {
         e.preventDefault();
@@ -660,20 +733,21 @@ WPADVERTS.File.Browser.prototype.UpdateDescription = function(e) {
     }); // end jQuery.ajax 
 };
 
-WPADVERTS.File.Browser.prototype.UpdateDescriptionSuccess = function(response) {
+WPADVERTS.File.Browser.prototype.UpdateDescriptionSuccess = function(r) {
     this.element.spinner.hide();
 
-    if(response.result == 1) {
+    if(r.result == 1) {
         
         var featured = this.element.input.featured.prop("checked") ? 1 : 0;
         var br = this;
+        var response = r;
         
         jQuery.each(this.uploader.Item, function(index, item) {
             if(item.result.attach_id == br.file.attach_id) {
-                item.result.response.file
+                item.result = response.file;
                 item.render();
                 
-                br.file.response.file
+                br.file = response.file;
             } else if(featured) {
                 item.result.featured = 0;
                 item.render();
@@ -681,7 +755,7 @@ WPADVERTS.File.Browser.prototype.UpdateDescriptionSuccess = function(response) {
         });
 
     } else {
-        alert(response.error);
+        alert(r.error);
     }  
 };
 

@@ -132,16 +132,20 @@ WPADVERTS.File.Uploader.Plupload.prototype.getUploader = function() {
 WPADVERTS.File.Uploader.Plupload.prototype.Init = function(up) {
     if(up.features.dragdrop) {
         this.ui.addClass('drag-drop');
-        this.ui.find('.adverts-gallery').bind('dragover.wp-uploader', function(){ 
-            this.ui.addClass('drag-over'); 
-        });
-        this.ui.find('.adverts-drag-drop-area').bind('dragleave.wp-uploader, drop.wp-uploader', function(){
-            this.ui.removeClass('drag-over'); 
-        });
+        this.ui.find('.adverts-gallery').bind('dragover.wp-uploader', jQuery.proxy(this.engine.InitDragOver, this));
+        this.ui.find('.adverts-drag-drop-area').bind('dragleave.wp-uploader, drop.wp-uploader', jQuery.proxy(this.engine.InitDragLeave, this));
     }else{
         this.ui.removeClass('drag-drop');
         this.ui.find('.adverts-drag-drop-area').unbind('.wp-uploader');
     }
+};
+
+WPADVERTS.File.Uploader.Plupload.prototype.InitDragOver = function() {
+    this.ui.addClass('drag-over'); 
+};
+
+WPADVERTS.File.Uploader.Plupload.prototype.InitDragLeave = function() {
+    this.ui.removeClass('drag-over'); 
 };
 
 WPADVERTS.File.Uploader.Plupload.prototype.BeforeUpload = function(up,file) {
@@ -462,6 +466,9 @@ WPADVERTS.File.Browser.prototype.EditImage = function(e) {
     
     this.imageSize = this.browser.find(".wpadverts-image-sizes option:selected").val();
     this.actionType = "edit";
+    this.dim = [this.file.sizes[this.imageSize].width, this.file.sizes[this.imageSize].height];
+    this.dimHistory = [];
+    this.dimHistory.push(this.dim);
     
     this.history = [];
     this.ImageLoad();
@@ -474,6 +481,10 @@ WPADVERTS.File.Browser.prototype.CreateImage = function(e) {
     
     this.imageSize = this.browser.find(".wpadverts-image-sizes option:selected").val();
     this.actionType = "create";
+    
+    this.dim = [this.file.sizes.full.width, this.file.sizes.full.height];
+    this.dimHistory = [];
+    this.dimHistory.push(this.dim);
     
     this.history = [];
     this.ImageLoad();
@@ -492,32 +503,25 @@ WPADVERTS.File.Browser.prototype.ImageLoad = function() {
         imageSize = null;
     }
     
+    var recommended = null;
+    if(this.imageSize !== "full") {
+        recommended = ADVERTS_IMAGE_SIZES[this.imageSize]
+    }
+    
     var template = wp.template( "wpadverts-browser-attachment-image" );
     var $ = jQuery;
     var data = {
         file: this.file,
         size: imageSize,
+        dim: this.dim,
+        recommended: recommended,
+        rand: Math.floor(Math.random() * 10000),
         history: JSON.stringify(this.history)
     };
     
     var tpl = template(data);
     var html = $(tpl);
     
-    var jcrop = html.find(".wpadverts-image-sizes option:selected");
-    var jopt = {
-        aspectRatio: jcrop.data("ratio"),
-        //minSize: [jcrop.data("width"), jcrop.data("height")],
-        //maxSize: [jcrop.data("width"), jcrop.data("height")],
-        //setSelect: [0, 0, jcrop.data("width"), jcrop.data("height")],
-        onSelect: jQuery.proxy(this.CropSelected, this),
-        onChange: jQuery.proxy(this.CropSelected, this),
-        onRelease: jQuery.proxy(this.CropReleased, this)
-    };
-    
-    this.image = html.find("#wpadverts-image-crop");
-    this.jcrop = this.image.Jcrop(jopt);
-    
-
     html.find(".adverts-image-action-crop").on("click", jQuery.proxy(this.ImageCrop, this));
     html.find(".adverts-image-action-rotate-ccw").on("click", jQuery.proxy(this.RotateCCW, this));
     html.find(".adverts-image-action-rotate-cw").on("click", jQuery.proxy(this.RotateCW, this));
@@ -537,11 +541,61 @@ WPADVERTS.File.Browser.prototype.ImageLoad = function() {
     
     if(this.history.length == 0) {
         html.find(".adverts-image-action-undo").css("opacity", "0.5");
+        html.find(".adverts-image-action-save").css("opacity", "0.5");
     }
     
     html.find(".adverts-image-action-crop").css("opacity", "0.5");
     
     this.browser.find(".wpadverts-attachment-details").html(html);
+    
+    var icrop = this.browser.find("#wpadverts-image-crop");
+    icrop.load(jQuery.proxy(this.ImageCropLoaded, this));
+    icrop.attr('src', icrop.data("src"));
+};
+
+WPADVERTS.File.Browser.prototype.ImageCropLoaded = function(e) {
+    
+    var jopt = {
+        onSelect: jQuery.proxy(this.CropSelected, this),
+        onChange: jQuery.proxy(this.CropSelected, this),
+        onRelease: jQuery.proxy(this.CropReleased, this)
+    };
+    
+    if(this.imageSize != "full") {    
+        var size = ADVERTS_IMAGE_SIZES[this.imageSize];
+        //jopt.aspectRatio = Math.round(size.width/size.height);
+        //jopt.minSize = [size.width, size.height];
+        //jopt.maxSize = [size.width, size.height];
+    } else {
+        jopt.trueSize = [this.dim[0], this.dim[1]];
+    }
+    
+    if(this.actionType == "create" && this.imageSize != "full") {
+        jopt.trueSize = [this.dim[0], this.dim[1]];
+        
+        //var x1 = this.file.sizes.full.width / 2 - jopt.minSize[0] / 2;
+        //var x2 = this.file.sizes.full.width / 2 + jopt.minSize[0] / 2;
+        
+        //var y1 = this.file.sizes.full.height / 2 - jopt.minSize[1] / 2;
+        //var y2 = this.file.sizes.full.height / 2 + jopt.minSize[1] / 2;
+        
+        //jopt.setSelect = [x1,y1,x2,y2];
+    } 
+
+    
+    this.image = this.browser.find("#wpadverts-image-crop");
+    this.jcrop = this.image.Jcrop(jopt);
+    
+    var s = this.dimHistory[0];
+    var d = this.image.parent().width()/this.dim[0];
+    
+    if(d>1) {
+        d = 1;
+    }
+
+    this.browser.find(".adverts-image-prop-original-size").text(s[0].toString() + " x " + s[1].toString());
+    this.browser.find(".adverts-image-prop-current-size").text(this.dim[0].toString() + " x " + this.dim[1].toString());
+    this.browser.find(".adverts-image-prop-zoom").text(Math.round(d*100, 2).toString()+"%");
 };
 
 WPADVERTS.File.Browser.prototype.ImageSizeChanged = function(e) {
@@ -553,9 +607,10 @@ WPADVERTS.File.Browser.prototype.ImageSizeChanged = function(e) {
     
 };
 
-WPADVERTS.File.Browser.prototype.CropSelected = function(e) {
+WPADVERTS.File.Browser.prototype.CropSelected = function(c) {
     this.browser.find(".wpadverts-attachment-details").find(".adverts-image-action-crop").css("opacity", "1");
-    this.crop = e;
+    this.browser.find(".adverts-image-prop-selection").text( Math.round(c.w) + " x " + Math.round(c.h) );
+    this.crop = c;
 };
 
 WPADVERTS.File.Browser.prototype.CropReleased = function(e) {
@@ -573,10 +628,15 @@ WPADVERTS.File.Browser.prototype.ImageCrop = function(e) {
     
     var crop = this.crop;
     crop.a = "c";
-
+    crop.w = Math.round(crop.w);
+    crop.h = Math.round(crop.h);
+    
+    this.dimHistory.push(this.dim);
+    this.dim = [crop.w, crop.h];
+    
     this.history.push(crop);
     this.crop = null;
-    
+
     this.ImageLoad();
 };
 
@@ -585,6 +645,9 @@ WPADVERTS.File.Browser.prototype.RotateCW = function(e) {
         e.preventDefault();
     }
 
+    this.dimHistory.push(this.dim);
+    this.dim = [this.dim[1], this.dim[0]];
+    
     this.history.push({a: "ro", v: "90"});
     this.ImageLoad();
 };
@@ -594,6 +657,9 @@ WPADVERTS.File.Browser.prototype.RotateCCW = function(e) {
         e.preventDefault();
     }
 
+    this.dimHistory.push(this.dim);
+    this.dim = [this.dim[1], this.dim[0]];
+    
     this.history.push({a: "ro", v: "-90"});
     this.ImageLoad();
 };
@@ -645,6 +711,9 @@ WPADVERTS.File.Browser.prototype.ImageScale = function(e) {
         e.preventDefault();
     }
     
+    this.dimHistory.push(this.dim);
+    this.dim = [this.input.width.val(), this.input.height.val()];
+    
     this.history.push({a:"re", w:this.input.width.val(), h:this.input.height.val()});
     this.ImageLoad();
 };
@@ -657,6 +726,7 @@ WPADVERTS.File.Browser.prototype.ImageUndo = function(e) {
         return;
     }
     
+    this.dim = this.dimHistory.pop();
     this.history.pop();
     this.ImageLoad();
 };
@@ -703,7 +773,15 @@ WPADVERTS.File.Browser.prototype.ImageRestore = function(e) {
 };
 
 WPADVERTS.File.Browser.prototype.ImageSaveSuccess = function(response) {
-    var x = 0;
+    var br = this;
+    jQuery.each(this.uploader.Item, function(index, item) {
+        if(item.result.attach_id == br.file.attach_id) {
+            item.result = response.file;
+            br.file = response.file;
+            br.Render(response.file)
+        } 
+    });
+
 };
 
 WPADVERTS.File.Browser.prototype.UpdateDescription = function(e) {

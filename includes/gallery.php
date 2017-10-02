@@ -101,18 +101,24 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
                 $data[] = adverts_upload_item_data( $child->ID );
             }
             
-            echo "<pre>";
+            //echo "<pre>";
             //wp_delete_attachment($post_id);
             //print_r(get_attached_file( $child->ID )).PHP_EOL."\r\n";
             //print_r(get_attached_file($child->ID)).PHP_EOL;
-;            print_r(wp_get_attachment_metadata( 167 ));
-            echo "</pre>";
+;            //print_r($data);
+            //echo "</pre>";
         }
 
+        $sizes = array();
+        foreach( adverts_config( "gallery.image_sizes" ) as $size_key => $size ) {
+            $sizes[ str_replace( "-", "_", $size_key ) ] = $size;
+        }
+        
         $upload_conf = array(
             "init" => $init,
             "data" => $data,
-            "conf" => $conf
+            "conf" => $conf,
+            "sizes" => $sizes
         );
         
         
@@ -128,6 +134,9 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
     }
     ADVERTS_PLUPLOAD_DATA.push(<?php echo json_encode($upload_conf) ?>);
     
+    if(typeof ADVERTS_IMAGE_SIZES === "undefined") {
+        var ADVERTS_IMAGE_SIZES = <?php echo json_encode($sizes) ?>;
+    }
     </script>
     <?php
 }
@@ -198,7 +207,9 @@ function adverts_gallery_modal() {
         <div class="wpadverts-attachment-media-view wpadverts-overlay-content">
             <# if( data.file.mime_type == "video/mp4" ) { #>
             <div class="wpadverts-attachment-image">
-                <video src="{{ data.file.sizes.large.url }}" controls="controls"></video>
+                <video src="{{ data.file.video_url }}" controls style="object-fit: meet">
+                        <source src="{{ data.file.video_url }}">
+                    </video>
                 <div style="margin-top: 12px"><a href="#" class="adverts-button">Select Thumbnail</a></div>
             </div>
             <# } else { #>
@@ -294,41 +305,64 @@ function adverts_gallery_modal() {
     
     <script type="text/html" id="tmpl-wpadverts-browser-attachment-image">
         <div class="wpadverts-attachment-media-view wpadverts-overlay-content">
-            
-            <div class="wpadverts-attachment-image-toolbar" style="margin:12px 12px 12px 12px">
-                
-                <a href="#" class="adverts-image-action-crop adverts-button adverts-button-small"><span class="adverts-icon-crop"></span></a>
-                <a href="#" class="adverts-image-action-rotate-cw adverts-button adverts-button-small"><span class="adverts-icon-cw"></span></a>
-                <a href="#" class="adverts-image-action-rotate-ccw adverts-button adverts-button-small"><span class="adverts-icon-ccw"></span></a>
-                <a href="#" class="adverts-image-action-flip-h adverts-button adverts-button-small"><span class="adverts-icon-resize-vertical"></span></a>
-                <a href="#" class="adverts-image-action-flip-v adverts-button adverts-button-small"><span class="adverts-icon-resize-horizontal"></span></a>
-                <a href="#" class="adverts-image-action-undo adverts-button adverts-button-small"><span class="adverts-icon-history"></span></a>
-                
-                <span style="margin: 0 1em 0 1em">
-                    Dimensions 
-                    <input type="number" class="adverts-image-scale-width" name="" value="{{ data.file.dimensions.width }}" max="{{ data.file.dimensions.width }}" step="1" style="width: 70px;height: 30px;box-sizing: border-box;border-radius: 1px;" />
-                    x
-                    <input type="number" class="adverts-image-scale-height" name=""  value="{{ data.file.dimensions.height }}" max="{{ data.file.dimensions.height }}" step="1" style="width: 70px;height: 30px;box-sizing: border-box;border-radius: 1px;" />
-                    <a href="#" class="adverts-image-action-scale adverts-button adverts-button-small"><?php _e("Scale", "adverts") ?></a>
-                </span>
-                
-                
-                <span style="margin: 0 1em 0 1em">
-                    <a href="#" class="adverts-image-action-restore adverts-button adverts-button-small"><?php _e("Restore", "adverts") ?></a>
-                    
-                    <a href="#" class="adverts-image-action-cancel adverts-button adverts-button-small"><?php _e("Cancel", "adverts") ?></a>
-                    <a href="#" class="adverts-image-action-save adverts-button adverts-button-small"><?php _e("Save", "adverts") ?></a>
-                </span>
-            </div>
-
             <div class="wpadverts-attachment-image">
-                <img src="<?php echo admin_url('admin-ajax.php') ?>?action=adverts_gallery_image_stream&attach_id={{ data.file.attach_id }}&size={{ data.size }}&history={{ data.history }}" id="wpadverts-image-crop" alt="" style="max-width: 100%; max-height: 100%;">
+                <img src="#" data-src="<?php echo admin_url('admin-ajax.php') ?>?action=adverts_gallery_image_stream&attach_id={{ data.file.attach_id }}&size={{ data.size }}&history={{ data.history }}&rand={{ data.rand }}" id="wpadverts-image-crop" alt="" style="max-width: 100%; max-height: 100%;">
             </div>
-            
         </div>
 
         <div class="wpadverts-attachment-info">
+            
+            <form action="" method="post" class="adverts-form adverts-form-aligned">
+                <fieldset>
+                    <div class="adverts-control-group">
+                        <label for="adverts_featured" style="float:none"><?php _e("Image Manipulation", "adverts") ?></label>
+                        <a href="#" class="adverts-image-action-crop adverts-button adverts-button-small"><span class="adverts-icon-crop"></span></a>
+                        <a href="#" class="adverts-image-action-rotate-cw adverts-button adverts-button-small"><span class="adverts-icon-cw"></span></a>
+                        <a href="#" class="adverts-image-action-rotate-ccw adverts-button adverts-button-small"><span class="adverts-icon-ccw"></span></a>
+                        <a href="#" class="adverts-image-action-flip-h adverts-button adverts-button-small"><span class="adverts-icon-resize-vertical"></span></a>
+                        <a href="#" class="adverts-image-action-flip-v adverts-button adverts-button-small"><span class="adverts-icon-resize-horizontal"></span></a>
+                        <a href="#" class="adverts-image-action-undo adverts-button adverts-button-small"><span class="adverts-icon-history"></span></a>
 
+                    </div>
+
+                    <div class="adverts-control-group">
+                        <label for="adverts_caption" style="float:none"><?php _e("Image Size", "adverts") ?></label>
+                        <input type="number" class="adverts-image-scale-width" name="" value="{{ data.dim[0] }}" max="{{ data.dim[0] }}" step="1" style="width: 70px;height: 30px;box-sizing: border-box;border-radius: 1px;" />
+                        x
+                        <input type="number" class="adverts-image-scale-height" name=""  value="{{ data.dim[1] }}" max="{{ data.dim[1] }}" step="1" style="width: 70px;height: 30px;box-sizing: border-box;border-radius: 1px;" />
+                        <a href="#" class="adverts-image-action-scale adverts-button adverts-button-small"><?php _e("Scale", "adverts") ?></a>
+                    </div>
+
+                    <div class="adverts-control-group">
+                        <label for="adverts_content" style="float:none"><?php _e("Save", "adverts") ?></label>
+                    
+                        <a href="#" class="adverts-image-action-save adverts-button adverts-button-small"><?php _e("Save", "adverts") ?></a>
+                        <a href="#" class="adverts-image-action-cancel adverts-button adverts-button-small"><?php _e("Cancel", "adverts") ?></a>
+                        |
+                        <a href="#" class="adverts-image-action-restore adverts-button adverts-button-small"><?php _e("Restore", "adverts") ?></a>
+
+                        <div>
+                            <input type="checkbox" />
+                            <?php _e( "Apply changes to all image sizes", "adverts") ?>
+
+                        </div>
+                    </div>
+                    
+
+                </fieldset>
+            </form>
+            
+            <div class="details">
+    
+                <div class="filename"><strong><?php _e("Original size:") ?></strong> <span class="adverts-image-prop-original-size">-</span></div>
+                <div class="filename"><strong><?php _e("Current size:") ?></strong> <span class="adverts-image-prop-current-size">-</span></div>
+                <# if(data.recommended !== null ) { #>
+                <div class="filename"><strong><?php _e("Recommended size:") ?></strong> <span class="adverts-image-prop-recommended-size"> {{ data.recommended.width }} x {{ data.recommended.height }}</span></div>
+                <# } #>
+                <div class="filename"><strong><?php _e("Zoom:") ?></strong> <span class="adverts-image-prop-zoom">100%</span></div>
+                <div class="wpadverts-image-selection"><strong><?php _e("Selection:") ?></strong> <span class="adverts-image-prop-selection">-</span></div>
+                
+            </div>
         </div>
     </script>
     <link rel="stylesheet" href="http://localhost/wpadverts/wp-includes/js/jcrop/jquery.Jcrop.min.css" type="text/css">
@@ -350,9 +384,18 @@ function adverts_upload_item_data( $attach_id, $is_new = false ) {
     // Generate the metadata for the attachment, and update the database record.
     $sizes = array();
     $image_keys = array( "url", "width", "height", "is_intermidiate" );
+    
+    $image_src_full = wp_get_attachment_image_src( $attach_id, "full" );
+    if(is_array( $image_src_full ) ) {
+        $image_full_keys = array_combine( $image_keys, $image_src_full );
+    } else {
+        $image_full_keys = $image_keys;
+    }
+    
     $image_defaults = array( 
-        "large" => array_combine( $image_keys, wp_get_attachment_image_src( $attach_id, "large" ) )
+        "full" => $image_full_keys
     );
+
     $image_sizes = array_merge( $image_defaults, adverts_config( "gallery.image_sizes" ) );
 
     foreach( $image_sizes as $image_key => $image_size ) {
@@ -409,10 +452,14 @@ function adverts_upload_item_data( $attach_id, $is_new = false ) {
             "type" => $post->post_mime_type,
             "uploaded" => date_i18n( get_option( "date_format"), strtotime( $post->post_date_gmt ) ),
             "size" => size_format( filesize( get_attached_file( $attach_id ) ) ),
-            "length" => null,
-            "dimensions" => null
+            "length" => null
         )
     );
+    
+    
+    if($post && $post->post_mime_type == "video/mp4") {
+        $data["video_url"] = $post->guid;
+    }
     
     $meta = wp_get_attachment_metadata( $attach_id );
     
@@ -430,8 +477,8 @@ function adverts_upload_item_data( $attach_id, $is_new = false ) {
 function adverts_gallery_explain_size( $size = null ) {
     
     $e = apply_filters( "adverts_gallery_explain", array( 
-        "large" => array(
-            "title" => __( "Gallery - Large", "adverts" ),
+        "full" => array(
+            "title" => __( "Gallery - Full Size", "adverts" ),
             "desc" => __( "Image in original size - used on classified details page in the gallery.", "adverts" )
         ),
         "adverts-gallery" => array(

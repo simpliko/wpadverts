@@ -379,6 +379,11 @@ function adverts_gallery_image_save() {
     
     $is_resized = preg_match( '/-e([0-9]+)$/', $filename );
     
+    if( $action_type == "create" && $size != "full" ) {
+        $sizes = adverts_config( "gallery.image_sizes" );
+        $filename = sprintf("%s-%dx%d", $filename, $sizes[$size]["width"], $sizes[$size]["height"] );
+    }
+    
     while ( true ) {
         $filename = preg_replace( '/-e([0-9]+)$/', '', $filename );
         $filename .= "-e{$suffix}";
@@ -390,29 +395,20 @@ function adverts_gallery_image_save() {
                 break;
         }
     }
-    
-    //print_r($image);
-    //print_r($meta);
-    //print_r($backup_sizes);
-    
 
     $saved = $image->save( $new_path );
     
-    // Save the full-size file, also needed to create sub-sizes.
-    //$saved = wp_save_image_file( $new_path, $image, $attachment->post_mime_type, $attach_id );
-    //print_r($saved);
-        //$return->error = esc_js( __('Unable to save the image.') );
-        //echo json_encode($return);
-        //exit;
-    print_r($saved);
-    
+    if(!$saved) {
+        exit;
+    }
+
     if( $is_resized ) {
         // working on already resized file, just delete the old file and set
         // new file name in meta $size
 
         $s = $meta["sizes"][$size];
-
-        if ( ! empty( $s['file'] ) && preg_match( '/-e[0-9]{13}-/', $s['file'] ) ) {
+        
+        if ( ! empty( $s['file'] ) ) {
             
             // delete old resized file
             $delete_file = path_join( $dirname, $s['file'] );
@@ -421,7 +417,6 @@ function adverts_gallery_image_save() {
             // set meta to file name to newly generated file
             $meta["sizes"][$size]["file"] = $new_filename;
 
-            echo $delete_file."<br/>";
         }
         
     } else {
@@ -434,17 +429,16 @@ function adverts_gallery_image_save() {
         
     }
 
- print_r($meta);
- print_r($backup_sizes);
+ //print_r($meta);
+ //print_r($backup_sizes);
     
     wp_update_attachment_metadata( $attach_id, $meta );
     update_post_meta( $attach_id, '_wp_attachment_backup_sizes', $backup_sizes);
     
+    $return->file = adverts_upload_item_data( $attach_id );
+    echo json_encode( $return );
+            
     exit;
-    
-
-    
-    
 }
 
 

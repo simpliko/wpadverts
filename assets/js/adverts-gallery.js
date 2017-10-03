@@ -358,7 +358,6 @@ WPADVERTS.File.Browser.prototype.Open = function(e) {
         e.preventDefault();
     }
         
-    
     this.browser.show();
 };
 
@@ -366,6 +365,7 @@ WPADVERTS.File.Browser.prototype.Close = function(e) {
     if(typeof e !== "undefined") {
         e.preventDefault();
     }
+    
     this.browser.hide();
 };
 
@@ -416,9 +416,21 @@ WPADVERTS.File.Browser.prototype.PrevClicked = function(e) {
 WPADVERTS.File.Browser.prototype.Render = function(result) {
     this.SetFile(result);
     
+    var mime = "other";
+    var types = {
+        video: [ "video/webm", "video/mp4", "video/ogv" ],
+        image: [ "image/jpeg", "image/jpe", "image/jpg", "image/gif", "image/png" ]
+    };
+    for(var index in types) {
+        if(types[index].indexOf(result.mime_type) !== -1) {
+            mime = index;
+        }
+    }
+    
     var template = wp.template( "wpadverts-browser-attachment-view" );
     var $ = jQuery;
     var data = {
+        mime: mime,
         file: this.file
     };
     
@@ -456,7 +468,18 @@ WPADVERTS.File.Browser.prototype.Render = function(result) {
     }
     
     this.imageSize = null;
+    
+    if(mime == "video") {
+        this.RenderVideo();
+    }
 
+};
+
+WPADVERTS.File.Browser.prototype.RenderVideo = function() {
+    this.video = new WPADVERTS.File.Browser.Video(this.browser);
+    this.video.SetNonce(this.uploader.setup.init.multipart_params._ajax_nonce);
+    this.video.SetAttachId(this.file.attach_id);
+    this.video.buttonThumb.on("click", jQuery.proxy(this.video.CreateThumbnail, this));
 };
 
 WPADVERTS.File.Browser.prototype.EditImage = function(e) {
@@ -600,6 +623,14 @@ WPADVERTS.File.Browser.prototype.ImageCropLoaded = function(e) {
 
 WPADVERTS.File.Browser.prototype.ImageSizeChanged = function(e) {
     var s = this.browser.find(".wpadverts-image-sizes option:selected");
+
+    if( s.val() === "video" ) {
+        this.browser.find(".wpadverts-attachment-image").hide();
+        this.browser.find(".wpadverts-attachment-video").show();
+    } else {
+        this.browser.find(".wpadverts-attachment-image").show();
+        this.browser.find(".wpadverts-attachment-video").hide();
+    }
 
     this.browser.find(".adverts-image-preview").hide();
     this.browser.find(".adverts-image-preview.adverts-image-preview-"+s.val()).fadeIn("fast");
@@ -835,6 +866,126 @@ WPADVERTS.File.Browser.prototype.UpdateDescriptionSuccess = function(r) {
     } else {
         alert(r.error);
     }  
+};
+
+WPADVERTS.File.Browser.Video = function(browser) {
+    this.nonce = null;
+    this.attachId = null;
+    
+    this.player = browser.find(".wpadverts-file-browser-video");
+    this.preview = browser.find(".wpadverts-file-browser-video-preview")
+    this.buttonThumb = browser.find(".wpadverts-file-browser-video-thumbnail");
+    this.buttonSave = browser.find(".wpadverts-file-browser-video-thumbnail-save");
+    this.buttonCancel = browser.find(".wpadverts-file-browser-video-thumbnail-cancel");
+    this.divPlayer = browser.find(".wpadverts-file-browser-video-player");
+    this.divSelect = browser.find(".wpadverts-file-browser-video-select-thumbnail");
+    
+    this.divPlayer.show();
+    this.divSelect.hide();
+    
+    this.buttonSave.on("click", jQuery.proxy(this.SaveClick, this));
+    this.buttonCancel.on("click", jQuery.proxy(this.CancelClick, this));
+    
+    this.canvas = null;
+};
+
+WPADVERTS.File.Browser.Video.prototype.SetNonce = function(nonce) {
+    this.nonce = nonce;
+};
+
+WPADVERTS.File.Browser.Video.prototype.GetNonce = function() {
+    return this.nonce;
+};
+
+WPADVERTS.File.Browser.Video.prototype.SetAttachId = function(attachId) {
+    this.attachId = attachId;
+};
+
+WPADVERTS.File.Browser.Video.prototype.GetAttachId = function() {
+    return this.attachId;
+};
+
+WPADVERTS.File.Browser.Video.prototype.CreateThumbnail = function(e) {
+    if(typeof e !== "undefined") {
+        e.preventDefault();
+    }
+    
+    this.video.canvas = this.video.Capture(this.video.video);
+    
+    this.video.preview.html(this.video.canvas);
+    
+    this.video.divPlayer.hide();
+    this.video.divSelect.fadeIn("fast");
+};
+
+WPADVERTS.File.Browser.Video.prototype.Capture = function(video) {
+    var scaleFactor = 1;
+    var w = this.player.width() * scaleFactor;
+    var h = this.player.height() * scaleFactor;
+    var canvas = document.createElement('canvas');
+    canvas.width  = w;
+    canvas.height = h;
+    canvas.dataset.origWidth = this.player[0].videoWidth;
+    canvas.dataset.origHeight = this.player[0].videoHeight;
+    var ctx = canvas.getContext('2d');
+    ctx.drawImage(this.player[0], 0, 0, w, h);
+    return canvas;
+};
+
+WPADVERTS.File.Browser.Video.prototype.CancelClick = function(e) {
+    if(typeof e !== "undefined") {
+        e.preventDefault();
+    }
+    
+    this.canvas = null;
+    this.preview.html("");
+    this.divSelect.hide();
+    this.divPlayer.fadeIn("fast");
+};
+
+WPADVERTS.File.Browser.Video.prototype.SaveClick = function(e) {
+    if(typeof e !== "undefined") {
+        e.preventDefault();
+    }
+    
+    var data = {
+        action: "adverts_gallery_video_cover",
+        _ajax_nonce: this.GetNonce(),
+        attach_id: this.GetAttachId(),
+        image: this.canvas.toDataURL("image/png"),
+        width: this.canvas.dataset.origWidth,
+        height: this.canvas.dataset.origHeight
+    };
+    
+    jQuery.ajax({
+        url: adverts_gallery_lang.ajaxurl,
+        data: data,
+        dataType: "json",
+        type: "post",
+        success: jQuery.proxy(this.SaveClickSuccess, this)
+    });
+};
+
+WPADVERTS.File.Browser.Video.prototype.SaveClickSuccess = function(r) {
+    if(r.result == 1) {
+        
+        for(var i in WPADVERTS.File.Registered) {
+            for(var j in WPADVERTS.File.Registered[i].Item) {
+                if(WPADVERTS.File.Registered[i].Item.attach_id == r.file.attach_id) {
+                    WPADVERTS.File.Registered[i].Item.result = r.file;
+                    WPADVERTS.File.Registered[i].Item.render();
+                }
+            }
+        }
+    
+
+    } else {
+        alert(r.error);
+    }  
+};
+
+WPADVERTS.File.Browser.Other = function() {
+    
 };
 
 jQuery(function($) {

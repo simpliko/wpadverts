@@ -157,6 +157,8 @@
     color: #666;
 }
 
+.wpadverts-attachment-video,
+.wpadverts-attachment-other,
 .wpadverts-attachment-image {
     padding: 25px;
     text-align: center;

@@ -294,11 +294,18 @@ function adverts_gallery_image_stream() {
         $history = array();
     }
     
-    $attached_file = get_attached_file( $attach_id );
+
+    if( wp_attachment_is_image( $attach_id ) ) {
+        $attached_file = get_attached_file( $attach_id );
+    } else {
+        $attached_file = wp_get_attachment_image_src( $attach_id, "full" );
+        $attached_file = dirname( get_attached_file( $attach_id ) ) . "/" . basename( $attached_file[0] );
+    }
     
     if( $size ) {
         $upload = adverts_upload_item_data( $attach_id );
         $attached_file = dirname( $attached_file ) . "/" . basename( $upload["sizes"][$size]["url"] );
+        
     }
 
     $image = wp_get_image_editor( $attached_file );
@@ -319,7 +326,7 @@ function adverts_gallery_image_stream() {
             $image->flip($c->h, $c->v);
         }
     }
-    
+
     $image->stream();
     
     exit;
@@ -441,6 +448,125 @@ function adverts_gallery_image_save() {
     exit;
 }
 
+function adverts_gallery_video_cover() {
+    if( ! check_ajax_referer( 'adverts-gallery', '_ajax_nonce', false ) ) {
+        echo json_encode( array( 
+            "result" => 0, 
+            "error" => __( "Invalid Session. Please refresh the page and try again.", "adverts" ) 
+        ) );
+        
+        exit;
+    }
+    
+    $attach_id = adverts_request("attach_id");
+    
+    $meta = wp_get_attachment_metadata( $attach_id );
+    
+    if(!is_array($meta)) {
+        $meta = array();
+    }
+    if(!isset($meta["sizes"])) {
+        $meta["sizes"] = array();
+    }
+    
+    $attached_file = get_attached_file( $attach_id );
+    $save_path = pathinfo( $attached_file, PATHINFO_DIRNAME );
+    $file_name = pathinfo( $attached_file, PATHINFO_FILENAME );
+    
+    //print_r($save_path);
+    //print_r($meta);
+    //print_r( wp_get_attachment_metadata( 349 ));
+    
+    $img = adverts_request( "image" );
+    $img = str_replace('data:image/png;base64,', '', $img);
+    $img = str_replace(' ', '+', $img);
+    $bits = base64_decode($img);
+    
+    $new_file_name = $file_name . "-full.png";
+    $new_file = $save_path . "/" . $new_file_name;
+    
+    $ifp = @ fopen( $new_file, 'wb' );
+    if ( ! $ifp ) {
+        echo json_encode( array( 
+            "result" => 0, 
+            "error" => sprintf( __( 'Could not write file %s' ), $new_file_name )
+        ) );
+        
+        exit;
+    }
+
+    @fwrite( $ifp, $bits );
+    fclose( $ifp );
+    clearstatcache();
+
+    // Set correct file permissions
+    $stat = @ stat( dirname( $new_file ) );
+    $perms = $stat['mode'] & 0007777;
+    $perms = $perms & 0000666;
+    @ chmod( $new_file, $perms );
+    clearstatcache();
+    
+    if( isset( $upload["error"] ) ) {
+        echo json_encode( array( 
+            "result" => 0, 
+            "error" => $upload['error']
+        ) );
+        exit;
+    }
+    
+    $meta["sizes"]["full"] = array(
+        "file" => $new_file_name,
+        "width" => intval( adverts_request( "width" ) ),
+        "height" => intval( adverts_request( "height" ) ),
+        "mime-type" => "image/png"
+    );
+    
+    $image = wp_get_image_editor( $new_file );
+    
+    if( is_wp_error( $image ) ) {
+        echo json_encode( array( 
+            "result" => 0, 
+            "error" => $image->get_error_message()
+        ) );
+        exit;
+    }
+    
+    $sizes = adverts_config( "gallery.image_sizes" );
+
+    foreach( $sizes as $size_key => $size ) {
+        $interm_file_name = sprintf( "%s-%dx%d.png", $file_name, $size["width"], $size["height"] );
+
+        $image = wp_get_image_editor( $new_file );
+        $image->resize($size["width"], $size["height"], $size["crop"]);
+        $file = $image->save( dirname( $new_file ) . "/" . $interm_file_name );
+
+        if( is_wp_error( $file ) ) {
+            echo json_encode( array( 
+                "result" => 0, 
+                "error" => $file->get_error_message()
+            ) );
+            exit;
+        }
+        
+        $meta["sizes"][$size_key] = array(
+            "file" => $file["file"],
+            "width" => $file["width"],
+            "height" => $file["height"],
+            "mime-type" => $file["mime-type"]
+        );
+        
+        
+    }
+    
+    wp_update_attachment_metadata( $attach_id, $meta );
+    
+    
+    echo json_encode( array( 
+        "result" => 1, 
+        "file" => adverts_upload_item_data( $attach_id )
+    ) );
+    exit;
+}
 
 /**
  * Returns ad contact information (email and phone)

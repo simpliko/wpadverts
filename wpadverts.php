@@ -358,6 +358,7 @@ function adverts_init_admin() {
     add_action('wp_ajax_adverts_gallery_delete', 'adverts_gallery_delete');
     add_action('wp_ajax_adverts_gallery_image_stream', 'adverts_gallery_image_stream');
     add_action('wp_ajax_adverts_gallery_image_save', 'adverts_gallery_image_save');
+    add_action('wp_ajax_adverts_gallery_video_cover', 'adverts_gallery_video_cover');
     add_action('wp_ajax_adverts_show_contact', 'adverts_show_contact');
     add_action('wp_ajax_adverts_delete_tmp', 'adverts_delete_tmp');
     add_action('wp_ajax_adverts_delete', 'adverts_delete');
@@ -368,6 +369,7 @@ function adverts_init_admin() {
     add_action('wp_ajax_nopriv_adverts_gallery_delete', 'adverts_gallery_delete');
     add_action('wp_ajax_nopriv_adverts_gallery_image_stream', 'adverts_gallery_image_stream');
     add_action('wp_ajax_nopriv_adverts_gallery_image_save', 'adverts_gallery_image_save');
+    add_action('wp_ajax_nopriv_adverts_gallery_video_cover', 'adverts_gallery_video_cover');
     
     add_action('wp_ajax_nopriv_adverts_show_contact', 'adverts_show_contact');
     add_action('wp_ajax_nopriv_adverts_delete_tmp', 'adverts_delete_tmp');

@@ -101,12 +101,14 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
                 $data[] = adverts_upload_item_data( $child->ID );
             }
             
-            //echo "<pre>";
+            echo "<pre>";
+            //print_r(adverts_upload_item_data(349));
+            //print_r(adverts_upload_item_data(351));
             //wp_delete_attachment($post_id);
             //print_r(get_attached_file( $child->ID )).PHP_EOL."\r\n";
             //print_r(get_attached_file($child->ID)).PHP_EOL;
 ;            //print_r($data);
-            //echo "</pre>";
+            echo "</pre>";
         }
 
         $sizes = array();
@@ -179,46 +181,69 @@ function adverts_gallery_modal() {
     
     <script type="text/html" id="tmpl-wpadverts-uploaded-file">
         <# if(data.result === null) { #>
-        <div class="adverts-gallery-upload-update adverts-icon-spinner animate-spin" style="position: absolute;"></div>
+            <div class="adverts-gallery-upload-update adverts-icon-spinner animate-spin" style="position: absolute;"></div>
         <# } else if(typeof data.result.error != "undefined") { #>
-        <div class="adverts-gallery-upload-update adverts-icon-attention">
-            <span class="adverts-gallery-upload-failed">{{ data.result.error }}</span>
-        </div>
+            <div class="adverts-gallery-upload-update adverts-icon-attention">
+                <span class="adverts-gallery-upload-failed">{{ data.result.error }}</span>
+            </div>
         <# } else { #>
-        <div class="adverts-loader adverts-gallery-upload-update adverts-icon-spinner animate-spin" style="position: absolute; display: none"></div>
-        <# if( data.result.mime_type == "video/mp4" ) { #>
-        <span class="adverts-icon adverts-icon-videocam" style="font-size: 80px;line-height: 105px;vertical-align: middle;display: block;width: 150px;height: 150px;text-align: center;opacity: 0.75;"></span>
-        <# } else { #>
-        <img src="{{ data.result.sizes.adverts_upload_thumbnail.url }}" alt="" class="adverts-gallery-upload-item-img" />
-        <# } #>
-        
-        <# if(data.result.featured) { #>
-        <span class="adverts-gallery-item-featured" style="display: block"><?php _e("Main", "adverts") ?></span>
-        <# } #>
+            <div class="adverts-loader adverts-gallery-upload-update adverts-icon-spinner animate-spin" style="position: absolute; display: none"></div>
+            
+            <# if( data.result.mime_type == "video/mp4" ) { #>
+            <span class="" style="">
+                <img src="{{ data.result.sizes.adverts_upload_thumbnail.url }}" alt="" class="adverts-gallery-upload-item-img" />
+                <span class="adverts-icon adverts-icon-videocam" style="font-size: 80px;line-height: 105px;vertical-align: middle;display: block;width: 150px;height: 150px;text-align: center;opacity: 0.75;"></span>
+            </span>
+            <# } else if( ! data.result.sizes.adverts_upload_thumbnail.url ) { #>
+            <span class="adverts-icon adverts-icon-videocam" style="font-size: 80px;line-height: 105px;vertical-align: middle;display: block;width: 150px;height: 150px;text-align: center;opacity: 0.75;"></span>
+            <# } else { #>
+            <img src="{{ data.result.sizes.adverts_upload_thumbnail.url }}" alt="" class="adverts-gallery-upload-item-img" />
+            <# } #>
 
-        <p class="adverts-gallery-upload-actions">
-            <a href="#" class="adverts-button-edit adverts-button adverts-button-icon adverts-icon-pencil" title="<?php _e("Edit File", "adverts") ?>"></a>
-            <a href="#" class="adverts-button-remove adverts-button adverts-button-icon adverts-icon-trash-1" title="<?php _e("Delete File", "adverts") ?>"></a>
-        </p>
+            <# if(data.result.featured) { #>
+            <span class="adverts-gallery-item-featured" style="display: block"><?php _e("Main", "adverts") ?></span>
+            <# } #>
+
+            <p class="adverts-gallery-upload-actions">
+                <a href="#" class="adverts-button-edit adverts-button adverts-button-icon adverts-icon-pencil" title="<?php _e("Edit File", "adverts") ?>"></a>
+                <a href="#" class="adverts-button-remove adverts-button adverts-button-icon adverts-icon-trash-1" title="<?php _e("Delete File", "adverts") ?>"></a>
+            </p>
         <# } #>
     </script>
     
     <script type="text/html" id="tmpl-wpadverts-browser-attachment-view">
         <div class="wpadverts-attachment-media-view wpadverts-overlay-content">
-            <# if( data.file.mime_type == "video/mp4" ) { #>
-            <div class="wpadverts-attachment-image">
-                <video src="{{ data.file.video_url }}" controls style="object-fit: meet">
-                        <source src="{{ data.file.video_url }}">
+            <# if( data.mime == "video" ) { #>
+            <div class="wpadverts-attachment-video">
+                <div class="wpadverts-file-browser-video-player">
+                    <video class="wpadverts-file-browser-video" src="{{ data.file.guid }}" controls style="object-fit: meet">
+                        <source src="{{ data.file.guid }}">
                     </video>
-                <div style="margin-top: 12px"><a href="#" class="adverts-button">Select Thumbnail</a></div>
+                    <div style="margin-top: 12px">
+                        <a href="#" class="wpadverts-file-browser-video-thumbnail adverts-button"><?php _e("Select Thumbnail", "adverts") ?></a>
+                    </div>
+                </div>
+                
+                <div class="wpadverts-file-browser-video-select-thumbnail">
+                    <div class="wpadverts-file-browser-video-preview"></div>
+                    <div style="margin-top: 12px">
+                        <a href="#" class="wpadverts-file-browser-video-thumbnail-save adverts-button"><?php _e("Save Thumbnail", "adverts") ?></a>
+                        <a href="#" class="wpadverts-file-browser-video-thumbnail-cancel adverts-button"><?php _e("Cancel", "adverts") ?></a>
+                    </div>
+                </div>
             </div>
-            <# } else { #>
+            <# } #>
 
+            <# if( data.file.sizes ) { #>
             <div class="wpadverts-attachment-image">
                 <# for(var size in data.file.sizes) { #>
                 <img src="{{ data.file.sizes[size].url }}" class="adverts-image-preview adverts-image-preview-{{ size }}" alt="" style="max-width: 100%; max-height: 100%;">
                 <# } #>
 
+            </div>
+            <# } else { #>
+            <div class="wpadverts-attachment-other">
+                DOWNLOAD FILE
             </div>
             <# } #>
         </div>
@@ -254,8 +279,11 @@ function adverts_gallery_modal() {
                 <form action="" method="post" class="adverts-form adverts-form-aligned">
                     <fieldset>
                         <div class="adverts-control-group">
-                            <label><?php _e("Preview Image", "adverts") ?></label>
+                            <label><?php _e("Preview", "adverts") ?></label>
                             <select class="wpadverts-image-sizes" style="background: white;border: 1px solid silver;width: 100%;">
+                                <# if(data.mime == "video") { #>
+                                <option value="video" data-explain=""><?php echo __("Video", "adverts") ?></option>
+                                <# } #>
                                 <?php foreach( adverts_gallery_explain_size() as $key => $size): ?>
                                 <option value="<?php echo esc_html(str_replace("-", "_", $key)) ?>" data-explain="<?php echo esc_attr($size["desc"]) ?>"><?php echo esc_html($size["title"]) ?></option>
                                 <?php endforeach; ?>
@@ -384,22 +412,21 @@ function adverts_upload_item_data( $attach_id, $is_new = false ) {
     // Generate the metadata for the attachment, and update the database record.
     $sizes = array();
     $image_keys = array( "url", "width", "height", "is_intermidiate" );
-    
-    $image_src_full = wp_get_attachment_image_src( $attach_id, "full" );
-    if(is_array( $image_src_full ) ) {
-        $image_full_keys = array_combine( $image_keys, $image_src_full );
-    } else {
-        $image_full_keys = $image_keys;
-    }
+
     
     $image_defaults = array( 
-        "full" => $image_full_keys
+        "full" => array(
+            "enabled" => 1,
+            "width" => null,
+            "height" => null,
+            "crop" => false
+        )
     );
 
     $image_sizes = array_merge( $image_defaults, adverts_config( "gallery.image_sizes" ) );
 
     foreach( $image_sizes as $image_key => $image_size ) {
-        if( ! has_image_size( $image_key ) ) {
+        if( $image_key !== "full" &&  ! has_image_size( $image_key ) ) {
             continue;
         }
         
@@ -410,7 +437,7 @@ function adverts_upload_item_data( $attach_id, $is_new = false ) {
                 "url" => null, 
                 "width" => $image_size["width"],
                 "height" => $image_size["height"],
-                "is_intermidiate" => true
+                "crop" => $image_size["crop"]
             );
         } else {
             $src = array_combine( $image_keys, $src );
@@ -419,8 +446,6 @@ function adverts_upload_item_data( $attach_id, $is_new = false ) {
         $sizes[ str_replace( "-", "_", $image_key ) ] = $src;
     }
     
-    $sizes = array_merge( $image_defaults, $sizes );
-
     $featured = 0;
     $caption = "";
     $content = "";
@@ -442,6 +467,7 @@ function adverts_upload_item_data( $attach_id, $is_new = false ) {
     $data = array(
         "post_id" => $post->post_parent,
         "attach_id" => $attach_id,
+        "guid" => $post->guid,
         "mime_type" => $post->post_mime_type,
         "featured" => $featured,
         "caption" => $caption,
@@ -455,11 +481,6 @@ function adverts_upload_item_data( $attach_id, $is_new = false ) {
             "length" => null
         )
     );
-    
-    
-    if($post && $post->post_mime_type == "video/mp4") {
-        $data["video_url"] = $post->guid;
-    }
     
     $meta = wp_get_attachment_metadata( $attach_id );
     

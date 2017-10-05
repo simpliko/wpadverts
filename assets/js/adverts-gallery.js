@@ -10,6 +10,50 @@ WPADVERTS.File = {
                 item.SortableUpdate();
             }
         });
+    },
+    GetMime: function(file) {
+        var mime = "other";
+
+        if(file === null) {
+            return mime;
+        }
+
+        if(typeof file.mime_type === "undefined") {
+            return mime;
+        }
+
+        var types = {
+            video: [ "video/webm", "video/mp4", "video/ogv" ],
+            image: [ "image/jpeg", "image/jpe", "image/jpg", "image/gif", "image/png" ]
+        };
+        for(var index in types) {
+            if(types[index].indexOf(file.mime_type) !== -1) {
+                mime = index;
+            }
+        }  
+        return mime;
+    },
+    GetIcon: function(file) {
+
+        if(file === null) {
+            return null;
+        }
+
+        var m = this.GetMime(file);
+
+        if( m === "video" ) {
+            return "adverts-icon-file-video";
+        } else if( m === "image" ) {
+            return "adverts-icon-file-image";
+        }
+        
+        if(["application/x-pdf", "application/pdf"].indexOf(file.mime_type)) {
+            return "adverts-icon-file-pdf";
+        } else if(["application/zip", "application/octet-stream"].indexOf(file.mime_type)) {
+            return "adverts-icon-file-archive";
+        }
+        
+        return "adverts-icon-file";
     }
 };
 
@@ -208,7 +252,9 @@ WPADVERTS.File.Singular.prototype.render = function() {
     var $ = jQuery;
     var data = {
         file: this.file,
-        result: this.result
+        result: this.result,
+        mime: WPADVERTS.File.GetMime(this.result),
+        icon: WPADVERTS.File.GetIcon(this.result)
     };
     
     var tpl = template(data);
@@ -415,23 +461,15 @@ WPADVERTS.File.Browser.prototype.PrevClicked = function(e) {
 
 WPADVERTS.File.Browser.prototype.Render = function(result) {
     this.SetFile(result);
-    
-    var mime = "other";
-    var types = {
-        video: [ "video/webm", "video/mp4", "video/ogv" ],
-        image: [ "image/jpeg", "image/jpe", "image/jpg", "image/gif", "image/png" ]
-    };
-    for(var index in types) {
-        if(types[index].indexOf(result.mime_type) !== -1) {
-            mime = index;
-        }
-    }
-    
+
     var template = wp.template( "wpadverts-browser-attachment-view" );
+    var mime = WPADVERTS.File.GetMime(result);
     var $ = jQuery;
     var data = {
         mime: mime,
+        icon: WPADVERTS.File.GetIcon(this.file),
         file: this.file
+        
     };
     
     var tpl = template(data);

@@ -189,25 +189,35 @@ function adverts_gallery_modal() {
         <# } else { #>
             <div class="adverts-loader adverts-gallery-upload-update adverts-icon-spinner animate-spin" style="position: absolute; display: none"></div>
             
-            <# if( data.result.mime_type == "video/mp4" ) { #>
-            <span class="" style="">
-                <img src="{{ data.result.sizes.adverts_upload_thumbnail.url }}" alt="" class="adverts-gallery-upload-item-img" />
-                <span class="adverts-icon adverts-icon-videocam" style="font-size: 80px;line-height: 105px;vertical-align: middle;display: block;width: 150px;height: 150px;text-align: center;opacity: 0.75;"></span>
-            </span>
-            <# } else if( ! data.result.sizes.adverts_upload_thumbnail.url ) { #>
-            <span class="adverts-icon adverts-icon-videocam" style="font-size: 80px;line-height: 105px;vertical-align: middle;display: block;width: 150px;height: 150px;text-align: center;opacity: 0.75;"></span>
-            <# } else { #>
+            <# if( data.result.sizes.adverts_upload_thumbnail.url ) { #>
             <img src="{{ data.result.sizes.adverts_upload_thumbnail.url }}" alt="" class="adverts-gallery-upload-item-img" />
+            <# } else if( data.mime == "video" ) { #>
+            <span class="">
+                <span class="{{ data.icon }}"></span>
+                <span class="">{{ data.result.filename }}</span>
+            </span>
+            <# } else { #>
+            <span class="adverts-gallery-upload-item-file">
+                <span class="adverts-gallery-upload-item-file-icon {{ data.icon }}"></span>
+                <span class="adverts-gallery-upload-item-file-name">{{ data.result.readable.name }}</span>
+            </span>
             <# } #>
 
-            <# if(data.result.featured) { #>
-            <span class="adverts-gallery-item-featured" style="display: block"><?php _e("Main", "adverts") ?></span>
-            <# } #>
+            <div class="adverts-gallery-item-features">
+                <# if(data.result.featured) { #>
+                <span class="adverts-gallery-item-feature adverts-icon-flag" title="<?php _e( "Featured", "adverts" ) ?>"></span>
+                <# } #>
+                
+                <# if(data.mime == "video") { #>
+                <span class="adverts-gallery-item-feature adverts-icon-videocam" title="<?php _e("Video", "adverts") ?>"></span>
+                <# } #>
+            </div>
 
-            <p class="adverts-gallery-upload-actions">
+
+            <div class="adverts-gallery-upload-actions">
                 <a href="#" class="adverts-button-edit adverts-button adverts-button-icon adverts-icon-pencil" title="<?php _e("Edit File", "adverts") ?>"></a>
                 <a href="#" class="adverts-button-remove adverts-button adverts-button-icon adverts-icon-trash-1" title="<?php _e("Delete File", "adverts") ?>"></a>
-            </p>
+            </div>
         <# } #>
     </script>
     
@@ -219,31 +229,31 @@ function adverts_gallery_modal() {
                     <video class="wpadverts-file-browser-video" src="{{ data.file.guid }}" controls style="object-fit: meet">
                         <source src="{{ data.file.guid }}">
                     </video>
-                    <div style="margin-top: 12px">
-                        <a href="#" class="wpadverts-file-browser-video-thumbnail adverts-button"><?php _e("Select Thumbnail", "adverts") ?></a>
-                    </div>
                 </div>
-                
                 <div class="wpadverts-file-browser-video-select-thumbnail">
                     <div class="wpadverts-file-browser-video-preview"></div>
-                    <div style="margin-top: 12px">
-                        <a href="#" class="wpadverts-file-browser-video-thumbnail-save adverts-button"><?php _e("Save Thumbnail", "adverts") ?></a>
-                        <a href="#" class="wpadverts-file-browser-video-thumbnail-cancel adverts-button"><?php _e("Cancel", "adverts") ?></a>
-                    </div>
                 </div>
             </div>
             <# } #>
 
-            <# if( data.file.sizes ) { #>
+            <# if( data.mime == "video" || data.mime == "image" ) { #>
             <div class="wpadverts-attachment-image">
                 <# for(var size in data.file.sizes) { #>
                 <img src="{{ data.file.sizes[size].url }}" class="adverts-image-preview adverts-image-preview-{{ size }}" alt="" style="max-width: 100%; max-height: 100%;">
                 <# } #>
 
             </div>
-            <# } else { #>
+            <# } #>
+            
+            <# if(data.mime == "other") { #>
             <div class="wpadverts-attachment-other">
-                DOWNLOAD FILE
+                <div class="" style="margin: 0 0 2em 0">
+                    <span class="{{ data.icon }}" style="font-size: 128px; opacity: 0.35;"></span>
+                </div>
+                <div class="" style="margin: 0 0 2em 0">
+                    <span >{{ data.file.readable.name }} </span>
+                </div>
+                <a href="{{ data.file.guid }}" class="adverts-button"><?php _e("Download File", "adverts") ?></a>
             </div>
             <# } #>
         </div>
@@ -251,11 +261,13 @@ function adverts_gallery_modal() {
         <div class="wpadverts-attachment-info">
             <form action="" method="post" class="adverts-form adverts-form-aligned">
                 <fieldset>
+                    <# if( data.mime == "video" || data.mime == "image" ) { #>
                     <div class="adverts-control-group">
                         <label for="adverts_featured" style="float:none"><?php _e("Featured", "adverts") ?></label>
                         <input type="checkbox" id="adverts_featured" name="adverts_featured" value="1" <# if(data.file.featured) { #>checked="checked"<# } #> />
                         <?php esc_html_e( "Use this image as main image", "adverts") ?>
                     </div>
+                    <# } #>
 
                     <div class="adverts-control-group">
                         <label for="adverts_caption" style="float:none"><?php _e("Title", "adverts") ?></label>
@@ -275,6 +287,7 @@ function adverts_gallery_modal() {
                 <span class="adverts-loader adverts-icon-spinner animate-spin"></span>
             </div>
 
+            <# if( data.mime == "image" || data.mime == "video" ) { #>
             <div style="margin-top: 15px;padding-top: 15px;border-top: 1px solid #ddd;clear:both;overflow:hidden">
                 <form action="" method="post" class="adverts-form adverts-form-aligned">
                     <fieldset>
@@ -282,7 +295,7 @@ function adverts_gallery_modal() {
                             <label><?php _e("Preview", "adverts") ?></label>
                             <select class="wpadverts-image-sizes" style="background: white;border: 1px solid silver;width: 100%;">
                                 <# if(data.mime == "video") { #>
-                                <option value="video" data-explain=""><?php echo __("Video", "adverts") ?></option>
+                                <option value="video" data-explain="<?php _e("Scroll the video to a selected place and click 'Capture' button to create video cover.", "adverts") ?>"><?php echo __("Video", "adverts") ?></option>
                                 <# } #>
                                 <?php foreach( adverts_gallery_explain_size() as $key => $size): ?>
                                 <option value="<?php echo esc_html(str_replace("-", "_", $key)) ?>" data-explain="<?php echo esc_attr($size["desc"]) ?>"><?php echo esc_html($size["title"]) ?></option>
@@ -293,13 +306,28 @@ function adverts_gallery_modal() {
                             <span class="adverts-icon-info-circled"></span>
                             <span class="adverts-icon-size-explain-desc">-</span>
                         </div>
+                        <# if(data.mime == "image") { #>
                         <div class="adverts-control-group">
                             <a href="#" class="adverts-button wpadverts-attachment-edit-image"><?php _e("Edit Image", "adverts") ?></a>
                             <a href="#" class="adverts-button wpadverts-attachment-create-image"><?php _e("Create Image", "adverts") ?></a>
                         </div>
+                        <# } else if(data.mime == "video") { #>
+                        <div class="adverts-control-group wpadverts-file-browser-video-actions">
+                            <div class="wpadverts-file-browser-video-player" style="margin-top: 12px">
+                                <a href="#" class="wpadverts-file-browser-video-thumbnail adverts-button"><?php _e("Select Thumbnail", "adverts") ?></a>
+                            </div>
+
+                            <div class="wpadverts-file-browser-video-select-thumbnail">
+                                <a href="#" class="wpadverts-file-browser-video-thumbnail-save adverts-button"><?php _e("Save Thumbnail", "adverts") ?></a>
+                                <a href="#" class="wpadverts-file-browser-video-thumbnail-cancel adverts-button"><?php _e("Cancel", "adverts") ?></a>
+                            </div>
+                        </div>
+                        <# } #>
+                        
                     </fieldset>
                 </form>
             </div>
+            <# } #>
             
             <div class="details">
                 <# if( data.file.readable.name ) { #>

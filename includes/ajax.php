@@ -72,6 +72,7 @@ function adverts_gallery_upload() {
         "form_scheme" => adverts_request( "form_scheme" ),
     );
     $form_scheme = apply_filters( "adverts_form_scheme", Adverts::instance()->get("form"), $form_params );
+    $form_scheme = apply_filters( "adverts_form_load", $form_scheme );
     
     foreach($form_scheme["field"] as $key => $field) {
         if($field["name"] == $field_name ) {

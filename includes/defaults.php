@@ -435,7 +435,7 @@ adverts_form_add_validator("upload_dimensions", array(
     "callback" => "adverts_validate_upload_dimensions",
     "label" => __( "Upload Dimensions", "adverts" ),
     "params" => array(),
-    "default_error" => __( "This file type is not allowed.", "adverts" ),
+    "default_error" => __( "The file size is incorrect.", "adverts" ),
     "message" => array(
         "cannot_check" => __( "Cannot validate uploaded image width and height.", "adverts" ),
         "incorrect_min_width" => __( "The image min. width should be %min_width%.", "adverts" ),

@@ -1861,15 +1861,21 @@ since IE8 won't execute CSS that contains a CSS3 selector.
     height: 28px;
 }
 
-.adverts-gallery-uploads .adverts-gallery-upload-item .adverts-gallery-item-featured {
+.adverts-gallery-uploads .adverts-gallery-upload-item .adverts-gallery-item-features {
     position: absolute;
-    display: none;
-    top: 4px;
-    right: 0;
-    font-size: 0.7em;
-    line-height: 0.8em;
-    background: wheat;
-    padding: 4px 4px;
+    top: 3px;
+    right: 3px;
+    font-size: 14px;
+    line-height: 18px;
+    
+}
+
+.adverts-gallery-item-features .adverts-gallery-item-feature {
+    color: white;
+    padding: 3px 3px;
+    background: rgba(0,0,0, 0.075);
+    display: block;
+    float: left;
 }
 
 .adverts-gallery-upload-actions {
@@ -1877,9 +1883,9 @@ since IE8 won't execute CSS that contains a CSS3 selector.
     display: none;
     margin: 0;
     padding: 0;
-    height: 35px;
-    bottom: 5px;
-    right: 10px;
+    height: 30px;
+    bottom: 3px;
+    right: 3px;
 }
 
 .adverts-gallery-upload-actions .adverts-icon-spinner {

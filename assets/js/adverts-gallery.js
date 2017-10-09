@@ -54,7 +54,46 @@ WPADVERTS.File = {
         }
         
         return "adverts-icon-file";
+    },
+    BrowserError: function(error) {
+        new WPADVERTS.File.Error(error, false);
     }
+};
+
+WPADVERTS.File.Error = function(error, overlay) {
+    var template = wp.template( "wpadverts-browser-error" );
+    var $ = jQuery;
+    var text = "";
+    
+    if(typeof error.responseText !== "undefined") {
+        text = error.responseText;
+    } else if(typeof error.error !== "undefined") {
+        text = error.error;
+    }
+    
+    if(text.length === 0) {
+        return;
+    }
+    
+    var data = {
+        error: text,
+        overlay: overlay
+    };
+    
+    var tpl = template(data);
+    
+    this.html = $(tpl);
+    this.html.find("a.adverts-button").on("click", jQuery.proxy(this.CloseClicked, this));
+    
+    jQuery("body").append(this.html);
+};
+
+WPADVERTS.File.Error.prototype.CloseClicked = function(e) {
+    if(typeof e !== "undefined") {
+        e.preventDefault();
+    }
+    
+    this.html.remove();
 };
 
 WPADVERTS.File.Uploader = function(setup) {
@@ -122,7 +161,8 @@ WPADVERTS.File.Uploader.prototype.SortableUpdate = function(e) {
             post_id: this.PostID,
             ordered_keys: JSON.stringify(keys)
         },
-        success: jQuery.proxy(this.SortableUpdateSuccess, this)
+        success: jQuery.proxy(this.SortableUpdateSuccess, this),
+        error: jQuery.proxy(this.SortableUpdateError, this)
     });
 };
 
@@ -130,8 +170,13 @@ WPADVERTS.File.Uploader.prototype.SortableUpdateSuccess = function(response) {
     if (response.result == 1) {
         this.ui.find(".adverts-gallery-upload-update.adverts-icon-spinner.animate-spin").fadeOut();
     } else {
-        alert(response.error);
+        WPADVERTS.File.BrowserError(response);
     }
+};
+
+WPADVERTS.File.Uploader.prototype.SortableUpdateError = function(response) {
+    this.ui.find(".adverts-gallery-upload-update.adverts-icon-spinner.animate-spin").fadeOut();
+    WPADVERTS.File.BrowserError(response);
 };
 
 WPADVERTS.File.Uploader.prototype.FileAdded = function(container, file) {
@@ -319,7 +364,8 @@ WPADVERTS.File.Singular.prototype.RemoveClicked = function(e) {
             post_id: this.result.post_id,
             attach_id: this.result.attach_id
         },
-        success: jQuery.proxy(this.RemoveClickedSuccess, this)
+        success: jQuery.proxy(this.RemoveClickedSuccess, this),
+        error: jQuery.proxy(this.RemoveClickedError, this)
     });            
 };
 
@@ -328,8 +374,13 @@ WPADVERTS.File.Singular.prototype.RemoveClickedSuccess = function(response) {
         this.Dispose();
     } else {
         this.spinner.hide();
-        alert(response.error);
+        new WPADVERTS.File.Error(response, true);
     }
+};
+
+WPADVERTS.File.Singular.prototype.RemoveClickedError = function(response) {
+    this.spinner.hide();
+    new WPADVERTS.File.Error(response, true);
 };
 
 WPADVERTS.File.Singular.prototype.setResult = function(result) {
@@ -597,6 +648,8 @@ WPADVERTS.File.Browser.prototype.ImageLoad = function() {
     html.find(".adverts-image-scale-height").on("keyup", jQuery.proxy(this.KeyHeight, this));
     html.find(".adverts-image-action-scale").on("click", jQuery.proxy(this.ImageScale, this));
     
+    this.spinner = html.find(".wpadverts-image-edit-spinner");
+
     this.input.width = html.find(".adverts-image-scale-width");
     this.input.height = html.find(".adverts-image-scale-height");
     
@@ -624,23 +677,12 @@ WPADVERTS.File.Browser.prototype.ImageCropLoaded = function(e) {
     
     if(this.imageSize != "full") {    
         var size = ADVERTS_IMAGE_SIZES[this.imageSize];
-        //jopt.aspectRatio = Math.round(size.width/size.height);
-        //jopt.minSize = [size.width, size.height];
-        //jopt.maxSize = [size.width, size.height];
     } else {
         jopt.trueSize = [this.dim[0], this.dim[1]];
     }
     
     if(this.actionType == "create" && this.imageSize != "full") {
         jopt.trueSize = [this.dim[0], this.dim[1]];
-        
-        //var x1 = this.file.sizes.full.width / 2 - jopt.minSize[0] / 2;
-        //var x2 = this.file.sizes.full.width / 2 + jopt.minSize[0] / 2;
-        
-        //var y1 = this.file.sizes.full.height / 2 - jopt.minSize[1] / 2;
-        //var y2 = this.file.sizes.full.height / 2 + jopt.minSize[1] / 2;
-        
-        //jopt.setSelect = [x1,y1,x2,y2];
     } 
 
     
@@ -657,17 +699,31 @@ WPADVERTS.File.Browser.prototype.ImageCropLoaded = function(e) {
     this.browser.find(".adverts-image-prop-original-size").text(s[0].toString() + " x " + s[1].toString());
     this.browser.find(".adverts-image-prop-current-size").text(this.dim[0].toString() + " x " + this.dim[1].toString());
     this.browser.find(".adverts-image-prop-zoom").text(Math.round(d*100, 2).toString()+"%");
+    
+    this.spinner.hide();
 };
 
 WPADVERTS.File.Browser.prototype.ImageSizeChanged = function(e) {
     var s = this.browser.find(".wpadverts-image-sizes option:selected");
 
     if( s.val() === "video" ) {
+        this.browser.find(".wpadverts-file-browser-image-actions").hide();
+        this.browser.find(".wpadverts-file-browser-video-actions").show();
+        
         this.browser.find(".wpadverts-attachment-image").hide();
         this.browser.find(".wpadverts-attachment-video").show();
     } else {
+        this.browser.find(".wpadverts-file-browser-image-actions").show();
+        this.browser.find(".wpadverts-file-browser-video-actions").hide();
+        
         this.browser.find(".wpadverts-attachment-image").show();
         this.browser.find(".wpadverts-attachment-video").hide();
+    }
+    
+    if( s.val() === "full" ) {
+        this.browser.find(".wpadverts-attachment-create-image").hide();
+    } else {
+        this.browser.find(".wpadverts-attachment-create-image").show();
     }
 
     this.browser.find(".adverts-image-preview").hide();
@@ -706,6 +762,7 @@ WPADVERTS.File.Browser.prototype.ImageCrop = function(e) {
     this.history.push(crop);
     this.crop = null;
 
+    this.spinner.show();
     this.ImageLoad();
 };
 
@@ -718,6 +775,8 @@ WPADVERTS.File.Browser.prototype.RotateCW = function(e) {
     this.dim = [this.dim[1], this.dim[0]];
     
     this.history.push({a: "ro", v: "90"});
+    
+    this.spinner.show();
     this.ImageLoad();
 };
 
@@ -730,6 +789,8 @@ WPADVERTS.File.Browser.prototype.RotateCCW = function(e) {
     this.dim = [this.dim[1], this.dim[0]];
     
     this.history.push({a: "ro", v: "-90"});
+    
+    this.spinner.show();
     this.ImageLoad();
 };
 
@@ -739,6 +800,7 @@ WPADVERTS.File.Browser.prototype.ImageFlipH = function(e) {
     }
 
     this.history.push({a: "f", h: true, v: false});
+    this.spinner.show();
     this.ImageLoad();
 };
 
@@ -748,6 +810,7 @@ WPADVERTS.File.Browser.prototype.ImageFlipV = function(e) {
     }
 
     this.history.push({a: "f", h: false, v: true});
+    this.spinner.show();
     this.ImageLoad();
 };
 
@@ -784,6 +847,7 @@ WPADVERTS.File.Browser.prototype.ImageScale = function(e) {
     this.dim = [this.input.width.val(), this.input.height.val()];
     
     this.history.push({a:"re", w:this.input.width.val(), h:this.input.height.val()});
+    this.spinner.show();
     this.ImageLoad();
 };
 
@@ -797,6 +861,7 @@ WPADVERTS.File.Browser.prototype.ImageUndo = function(e) {
     
     this.dim = this.dimHistory.pop();
     this.history.pop();
+    this.spinner.show();
     this.ImageLoad();
 };
 
@@ -804,6 +869,8 @@ WPADVERTS.File.Browser.prototype.ImageSave = function(e) {
     if(typeof e !== "undefined") {
         e.preventDefault();
     }
+    
+    this.spinner.show();
     
     var data = {
         action: "adverts_gallery_image_save",
@@ -820,7 +887,8 @@ WPADVERTS.File.Browser.prototype.ImageSave = function(e) {
         type: "post",
         dataType: "json",
         data: data,
-        success: jQuery.proxy(this.ImageSaveSuccess, this)
+        success: jQuery.proxy(this.ImageSaveSuccess, this),
+        error: jQuery.proxy(this.ImageSaveError, this)
     });
 };
 
@@ -843,6 +911,14 @@ WPADVERTS.File.Browser.prototype.ImageRestore = function(e) {
 
 WPADVERTS.File.Browser.prototype.ImageSaveSuccess = function(response) {
     var br = this;
+    
+    this.spinner.hide();
+    
+    if(response.result != "1") {
+        new WPADVERTS.File.Error(response, false);
+        return;
+    }
+    
     jQuery.each(this.uploader.Item, function(index, item) {
         if(item.result.attach_id == br.file.attach_id) {
             item.result = response.file;
@@ -851,6 +927,11 @@ WPADVERTS.File.Browser.prototype.ImageSaveSuccess = function(response) {
         } 
     });
 
+};
+
+WPADVERTS.File.Browser.prototype.ImageSaveError = function(response) {
+    this.spinner.hide();
+    new WPADVERTS.File.Error(response, false);
 };
 
 WPADVERTS.File.Browser.prototype.UpdateDescription = function(e) {
@@ -876,7 +957,8 @@ WPADVERTS.File.Browser.prototype.UpdateDescription = function(e) {
             content: this.element.input.content.val(),
             featured: featured
         },
-        success: jQuery.proxy(this.UpdateDescriptionSuccess, this)
+        success: jQuery.proxy(this.UpdateDescriptionSuccess, this),
+        error: WPADVERTS.File.BrowserError
     }); // end jQuery.ajax 
 };
 
@@ -1000,7 +1082,8 @@ WPADVERTS.File.Browser.Video.prototype.SaveClick = function(e) {
         data: data,
         dataType: "json",
         type: "post",
-        success: jQuery.proxy(this.SaveClickSuccess, this)
+        success: jQuery.proxy(this.SaveClickSuccess, this),
+        error: jQuery.proxy(this.SaveClickError, this)
     });
 };
 
@@ -1016,10 +1099,13 @@ WPADVERTS.File.Browser.Video.prototype.SaveClickSuccess = function(r) {
             }
         }
     
-
     } else {
-        alert(r.error);
+        WPADVERTS.File.BrowserError(r);
     }  
+};
+
+WPADVERTS.File.Browser.Video.prototype.SaveClickError = function(r) {
+    WPADVERTS.File.BrowserError(r);
 };
 
 WPADVERTS.File.Browser.Other = function() {

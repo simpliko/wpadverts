@@ -844,16 +844,22 @@ function adverts_validate_upload_size( $file, $params = null ) {
         switch( strtoupper( substr( $size, -2 ) ) ) {
             case "KB":
                 $fsize = $number*1024;
+                break;
             case "MB":
                 $fsize = $number*pow(1024,2);
+                break;
             case "GB":
                 $fsize = $number*pow(1024,3);
+                break;
             case "TB":
                 $fsize = $number*pow(1024,4);
+                break;
             case "PB":
                 $fsize = $number*pow(1024,5);
+                break;
             default:
                 $fsize = $size;
+                break;
         }
 
         if( $prop == "max_size" && $file["size"] > $fsize ) {
@@ -902,8 +908,10 @@ function adverts_validate_upload_type( $file, $params = null ) {
     
     if( isset( $params["types"] ) && is_array( $params["types"] ) ) {
         $allowed_types = array_map( "trim", $params["types"] );
+        $has_types = true;
     } else {
         $allowed_types = array();
+        $has_types = false;
     }
     
     if( in_array( "video", $a ) ) {
@@ -912,8 +920,8 @@ function adverts_validate_upload_type( $file, $params = null ) {
     }
     
     if( in_array( "audio", $a ) ) {
-        $allowed_types = array_merge( $allowed_types, array( "audio/webm", "audio/mp4", "audio/ogv") );
-        $allowed_ext = array_merge( $allowed_ext, array( "webm", "mp4", "ogv" ) );
+        $allowed_types = array_merge( $allowed_types, array( "audio/webm", "audio/mp4", "audio/ogg") );
+        $allowed_ext = array_merge( $allowed_ext, array( "webm", "mp4", "ogg" ) );
     }
     
     if( in_array( "image", $a ) ) {
@@ -921,7 +929,7 @@ function adverts_validate_upload_type( $file, $params = null ) {
         $allowed_ext = array_merge( $allowed_ext, array( "jpeg", "jpe", "jpg", "gif", "png" ) );
     }
 
-    if( in_array( $ext, $allowed_ext) && ( in_array( $type, $allowed_types ) || empty( $allowed_types ) ) ) {
+    if( in_array( $ext, $allowed_ext) && ( in_array( $type, $allowed_types ) || ! $has_types ) ) {
         return true;
     } else {
         return "invalid";

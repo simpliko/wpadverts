@@ -166,11 +166,9 @@ function adverts_init() {
     
     foreach( adverts_config( "gallery.image_sizes" ) as $image_key => $image_size ) {
         if( $image_size["enabled"] ) {
-            add_image_size( $image_key, $image_size["width"], $image_size["width"], $image_size["crop"] );
+            add_image_size( $image_key, $image_size["width"], $image_size["height"], $image_size["crop"] );
         }
     }
-    //add_image_size( "adverts-upload-thumbnail", 150, 105, true );
-    //add_image_size( "adverts-list", 310, 190, true);
     
     $currency = Adverts::instance()->get("currency");
     

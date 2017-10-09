@@ -64,7 +64,7 @@ function adverts_gallery_upload() {
         
         exit;
     }
-    
+
     include_once ADVERTS_PATH . '/includes/class-upload-helper.php';
     $v = new Adverts_Upload_Helper;
     $field_name = adverts_request( "field_name" );
@@ -166,7 +166,7 @@ function adverts_gallery_update() {
         
         exit;
     }
-    
+       
     $post_id = intval($_POST["post_id"]);
     $attach_id = intval($_POST["attach_id"]);
     $caption = trim( adverts_request("caption", "" ) );

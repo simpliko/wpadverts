@@ -9,7 +9,7 @@
     bottom: 0; 
     right: 0;
     z-index: 160000;
-    display: none;
+    display: block;
     background-color: rgba(0, 0, 0, 0.7);
 }
 
@@ -157,6 +157,7 @@
     color: #666;
 }
 
+.wpadverts-attachment-audio,
 .wpadverts-attachment-video,
 .wpadverts-attachment-other,
 .wpadverts-attachment-image {
@@ -192,4 +193,95 @@
     text-align: left;
     right: 0;
     padding: 1px 6px;
+}
+
+.adverts-image-preview {
+    padding: 25px;
+}
+   
+.adverts-image-preview > img {
+    max-width: 100%; 
+    max-height: 100%;
+}
+
+.adverts-image-action-scale {
+    vertical-align: middle;
+}
+
+.wpadverts-image-apply-to {
+    padding: 0;
+    margin: 1em 0 0 0;
+}
+
+.wpadverts-image-apply-to > label {
+    float: none !important;
+}
+
+.wpadverts-file-browser-video {
+    object-fit: contain
+}
+
+.wpadverts-attachment-icon-big-wrap {
+    margin: 0 0 2em 0
+}
+
+.wpadverts-attachment-icon-big-wrap .wpadverts-attachment-icon-big {
+    font-size: 128px; 
+    opacity: 0.35;
+}
+
+.wpadverts-file-preview {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
+    clear:both;
+    overflow:hidden
+}
+
+.wpadverts-file-preview .wpadverts-image-sizes {
+    background: white;
+    border: 1px solid silver;
+    width: 100%;
+}
+
+.wpadverts-file-size-explain {
+    font-size: 12px; 
+    max-width: 100%; 
+    line-height: 18px; 
+    color: #666;
+}
+
+.adverts-image-scale-width,
+.adverts-image-scale-height {
+    width: 70px !important;
+    height: 30px;
+    box-sizing: border-box !important;
+    border-radius: 1px;
+}
+
+.wpadverts-file-error {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    right: 30px;
+    bottom: 30px;
+    overflow: hidden;
+    margin: auto;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid silver;
+    padding: 0;
+    z-index: 170000;
+}
+
+.wpadverts-file-error > div {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+}
+
+.wpadverts-image-edit-spinner {
+    font-size: 24px;
+    vertical-align: middle
 }

@@ -243,7 +243,7 @@ function adverts_gallery_modal() {
                             <span><?php _e("In 'Preview' select 'Video' and click 'Capture ...' button to generate thumbnails.", "adverts") ?></strong>
                         </div>
                     <# } else { #>
-                        <img src="{{ data.file.sizes[size].url }}" class="" alt="" />
+                        <img src="{{ data.file.sizes[size].url }}?timestamp={{ data.timestamp }}" class="" alt="" />
                     <# } #>
                     </div>
                 <# } #>
@@ -343,6 +343,8 @@ function adverts_gallery_modal() {
                                 <a href="#" class="wpadverts-file-browser-video-thumbnail-save adverts-button"><?php _e("Save Thumbnail", "adverts") ?></a>
                                 <a href="#" class="wpadverts-file-browser-video-thumbnail-cancel adverts-button"><?php _e("Cancel", "adverts") ?></a>
                             </div>
+                            
+                            <span class="adverts-file-video-spinner adverts-loader adverts-icon-spinner animate-spin"></span>
                         </div>
                         
                     </fieldset>

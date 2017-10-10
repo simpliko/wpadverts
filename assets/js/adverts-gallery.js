@@ -512,15 +512,21 @@ WPADVERTS.File.Browser.prototype.PrevClicked = function(e) {
 
 WPADVERTS.File.Browser.prototype.Render = function(result) {
     this.SetFile(result);
-
+    
+    if (!Date.now) {
+        var timestamp = new Date().getTime();
+    } else {
+        var timestamp = Date.now();
+    }
+    
     var template = wp.template( "wpadverts-browser-attachment-view" );
     var mime = WPADVERTS.File.GetMime(result);
     var $ = jQuery;
     var data = {
         mime: mime,
         icon: WPADVERTS.File.GetIcon(this.file),
-        file: this.file
-        
+        file: this.file,
+        timestamp: timestamp
     };
     
     var tpl = template(data);
@@ -675,9 +681,7 @@ WPADVERTS.File.Browser.prototype.ImageCropLoaded = function(e) {
         onRelease: jQuery.proxy(this.CropReleased, this)
     };
     
-    if(this.imageSize != "full") {    
-        var size = ADVERTS_IMAGE_SIZES[this.imageSize];
-    } else {
+    if(this.imageSize == "full") {    
         jopt.trueSize = [this.dim[0], this.dim[1]];
     }
     
@@ -871,6 +875,11 @@ WPADVERTS.File.Browser.prototype.ImageSave = function(e) {
     }
     
     this.spinner.show();
+    var applyAll = 0;
+    
+    if(this.imageSize == "full" && this.browser.find(".wpadverts-image-action-apply-to").is(":checked")) {
+        applyAll = 1;
+    }
     
     var data = {
         action: "adverts_gallery_image_save",
@@ -878,9 +887,10 @@ WPADVERTS.File.Browser.prototype.ImageSave = function(e) {
         size: this.imageSize,
         attach_id: this.file.attach_id,
         action_type: this.actionType,
-        apply_to: this.imageSize
+        apply_to: this.imageSize,
+        apply_to_all: applyAll
     };
-    
+
     jQuery.ajax({
         url: adverts_gallery_lang.ajaxurl,
         context: this,
@@ -919,13 +929,15 @@ WPADVERTS.File.Browser.prototype.ImageSaveSuccess = function(response) {
         return;
     }
     
-    jQuery.each(this.uploader.Item, function(index, item) {
-        if(item.result.attach_id == br.file.attach_id) {
-            item.result = response.file;
-            br.file = response.file;
-            br.Render(response.file)
-        } 
-    });
+    for(var i in this.uploader.Item) {
+        if(this.uploader.Item[i].result.attach_id == this.file.attach_id) {
+            this.uploader.Item[i].result = response.file;
+            this.file = response.file;
+            this.Render(response.file);
+        }
+    }
+    
+
 
 };
 
@@ -992,6 +1004,7 @@ WPADVERTS.File.Browser.Video = function(browser) {
     this.nonce = null;
     this.attachId = null;
     
+    this.spinner = browser.find(".adverts-file-video-spinner");
     this.player = browser.find(".wpadverts-file-browser-video");
     this.preview = browser.find(".wpadverts-file-browser-video-preview")
     this.buttonThumb = browser.find(".wpadverts-file-browser-video-thumbnail");
@@ -1030,25 +1043,35 @@ WPADVERTS.File.Browser.Video.prototype.CreateThumbnail = function(e) {
         e.preventDefault();
     }
     
-    this.video.canvas = this.video.Capture(this.video.video);
+    this.video.canvasPreview = this.video.Capture(this.video.video, "preview");
+    this.video.canvasOriginal = this.video.Capture(this.video.video, "original");
     
-    this.video.preview.html(this.video.canvas);
+    this.video.preview.html(this.video.canvasPreview);
     
     this.video.divPlayer.hide();
     this.video.divSelect.fadeIn("fast");
 };
 
-WPADVERTS.File.Browser.Video.prototype.Capture = function(video) {
+WPADVERTS.File.Browser.Video.prototype.Capture = function(video, type) {
     var scaleFactor = 1;
-    var w = this.player.width() * scaleFactor;
-    var h = this.player.height() * scaleFactor;
+    var w = 0;
+    var h = 0;
+    
+    if(type == "preview") {
+        w = this.player.width() * scaleFactor;
+        h = this.player.height() * scaleFactor;
+    } else {
+        w = this.player[0].videoWidth;
+        h = this.player[0].videoHeight;
+    }
+
     var canvas = document.createElement('canvas');
     canvas.width  = w;
     canvas.height = h;
-    canvas.dataset.origWidth = this.player[0].videoWidth;
-    canvas.dataset.origHeight = this.player[0].videoHeight;
+    
     var ctx = canvas.getContext('2d');
     ctx.drawImage(this.player[0], 0, 0, w, h);
+    
     return canvas;
 };
 
@@ -1057,7 +1080,9 @@ WPADVERTS.File.Browser.Video.prototype.CancelClick = function(e) {
         e.preventDefault();
     }
     
-    this.canvas = null;
+    this.canvasPreview = null;
+    this.canvasOriginal = null;
+    
     this.preview.html("");
     this.divSelect.hide();
     this.divPlayer.fadeIn("fast");
@@ -1068,13 +1093,15 @@ WPADVERTS.File.Browser.Video.prototype.SaveClick = function(e) {
         e.preventDefault();
     }
     
+    this.spinner.css("display", "inline-block");
+    
     var data = {
         action: "adverts_gallery_video_cover",
         _ajax_nonce: this.GetNonce(),
         attach_id: this.GetAttachId(),
-        image: this.canvas.toDataURL("image/png"),
-        width: this.canvas.dataset.origWidth,
-        height: this.canvas.dataset.origHeight
+        image: this.canvasOriginal.toDataURL("image/png"),
+        width: this.canvasOriginal.width,
+        height: this.canvasOriginal.height
     };
     
     jQuery.ajax({
@@ -1088,23 +1115,28 @@ WPADVERTS.File.Browser.Video.prototype.SaveClick = function(e) {
 };
 
 WPADVERTS.File.Browser.Video.prototype.SaveClickSuccess = function(r) {
-    if(r.result == 1) {
-        
-        for(var i in WPADVERTS.File.Registered) {
-            for(var j in WPADVERTS.File.Registered[i].Item) {
-                if(WPADVERTS.File.Registered[i].Item.attach_id == r.file.attach_id) {
-                    WPADVERTS.File.Registered[i].Item.result = r.file;
-                    WPADVERTS.File.Registered[i].Item.render();
-                }
+    this.spinner.hide();
+    
+    if(r.result != 1) {
+        WPADVERTS.File.BrowserError(r);
+        return;
+    }
+
+    for(var i in WPADVERTS.File.Registered) {
+        for(var j in WPADVERTS.File.Registered[i].Item) {
+            if(WPADVERTS.File.Registered[i].Item[j].result.attach_id == r.file.attach_id) {
+                WPADVERTS.File.Registered[i].Item[j].result.result = r.file;
+                WPADVERTS.File.Registered[i].Item[j].render();
+                WPADVERTS.File.Registered[i].Browser.Render(r.file);
+                WPADVERTS.File.Registered[i].Browser.browser.find(".wpadverts-image-sizes").val("full");
+                WPADVERTS.File.Registered[i].Browser.ImageSizeChanged();
             }
         }
-    
-    } else {
-        WPADVERTS.File.BrowserError(r);
-    }  
+    }
 };
 
 WPADVERTS.File.Browser.Video.prototype.SaveClickError = function(r) {
+    this.spinner.hide();
     WPADVERTS.File.BrowserError(r);
 };
 

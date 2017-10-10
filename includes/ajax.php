@@ -317,7 +317,7 @@ function adverts_gallery_image_stream() {
         }
         
         if( $c->a == "c" ) {
-            $image->crop($c->x, $c->y, $c->w, $c->h);
+            $image->crop(intval($c->x), intval($c->y), $c->w, $c->h);
         } else if( $c->a == "ro" ) {
             $image->rotate($c->v);
         } else if( $c->a == "re" ) {
@@ -342,6 +342,7 @@ function adverts_gallery_image_save() {
     $size_dash = adverts_request( "size" );
     $size = str_replace("_", "-", adverts_request( "size" ));
     
+    $attach = get_post( $attach_id );
     $history = json_decode( $history_encoded );
     
     if( ! is_array( $history ) ) {
@@ -350,13 +351,26 @@ function adverts_gallery_image_save() {
     
     $attached_file = get_attached_file( $attach_id );
     
+    $file_name = pathinfo( $attached_file, PATHINFO_FILENAME );
+    
     if( $size && $action_type == "edit" ) {
         $upload = adverts_upload_item_data( $attach_id );
         $attached_file = dirname( $attached_file ) . "/" . basename( $upload["sizes"][$size_dash]["url"] );
+    } else if($action_type == "create" && ! wp_attachment_is_image( $attach ) ) {
+        $upload = adverts_upload_item_data( $attach_id );
+        $attached_file = dirname( $attached_file ) . "/" . basename( $upload["sizes"]["full"]["url"] );
     }
 
     $image = wp_get_image_editor( $attached_file );
 
+    if( is_wp_error($image) ) {
+        echo json_encode( array(
+            "result" => 0,
+            "error" => $image->get_error_message()
+        ) );
+        exit;
+    }
+    
     foreach( $history as $c ) {
         if( ! isset( $c->a ) ) {
             continue;
@@ -398,18 +412,25 @@ function adverts_gallery_image_save() {
         $new_filename = "{$filename}.{$ext}";
         $new_path = "{$dirname}/$new_filename";
         if ( file_exists($new_path) ) {
-                $suffix++;
+            $suffix++;
         } else {
-                break;
+            break;
         }
     }
 
     $saved = $image->save( $new_path );
     
     if(!$saved) {
+        echo json_encode( array(
+            "result" => 0,
+            "error" => $image->get_error_message()
+        ) );
         exit;
     }
-
+    
+    $meta["sizes"][$size]["width"] = $saved["width"];
+    $meta["sizes"][$size]["height"] = $saved["height"];
+    
     if( $is_resized ) {
         // working on already resized file, just delete the old file and set
         // new file name in meta $size
@@ -434,15 +455,62 @@ function adverts_gallery_image_save() {
         $backup_sizes[$tag] = $meta['sizes'][$size];
         
         $meta["sizes"][$size]["file"] = $new_filename;
+    }
+    
+    
+    if( $size == "full" && adverts_request( "apply_to_all" ) == "1" ) {
+        $save_path = $dirname;
+        $new_file = $new_path;
         
+        // delete all (except full) current images and backups
+        $sizes = adverts_config( "gallery.image_sizes" );
+        $size_keys = array_keys( $sizes );
+
+        foreach( $size_keys as $size_key ) {
+            if( isset( $meta["sizes"][$size_key] ) ) {
+                wp_delete_file( $save_path . "/" . $meta["sizes"][$size_key]["file"] );
+                unset( $meta["sizes"][$size_key] );
+            }
+
+            if( isset( $backup_sizes[$size_key] ) ) {
+                wp_delete_file( $save_path . "/" . $backup_sizes[$size_key]["file"] );
+                unset( $backup_sizes[$size_key] );
+            }
+        }
+
+        if( is_array( $backup_sizes ) ) {
+            update_post_meta( $attach_id, '_wp_attachment_backup_sizes', $backup_sizes);
+        }
+        
+        // regenerate all thumbnails
+        foreach( $sizes as $size_key => $size ) {
+            $interm_file_name = sprintf( "%s-%dx%d.png", $file_name, $size["width"], $size["height"] );
+
+            $image = wp_get_image_editor( $new_file );
+            $image->resize($size["width"], $size["height"], $size["crop"]);
+            $file = $image->save( dirname( $new_file ) . "/" . $interm_file_name );
+
+            if( is_wp_error( $file ) ) {
+                echo json_encode( array( 
+                    "result" => 0, 
+                    "error" => $file->get_error_message()
+                ) );
+                exit;
+            }
+
+            $meta["sizes"][$size_key] = array(
+                "file" => $file["file"],
+                "width" => $file["width"],
+                "height" => $file["height"],
+                "mime-type" => $file["mime-type"]
+            );
+        }
     }
 
- //print_r($meta);
- //print_r($backup_sizes);
-    
     wp_update_attachment_metadata( $attach_id, $meta );
     update_post_meta( $attach_id, '_wp_attachment_backup_sizes', $backup_sizes);
     
+    $return->result = 1;
     $return->file = adverts_upload_item_data( $attach_id );
     echo json_encode( $return );
             
@@ -450,6 +518,7 @@ function adverts_gallery_image_save() {
 }
 
 function adverts_gallery_video_cover() {
+    
     if( ! check_ajax_referer( 'adverts-gallery', '_ajax_nonce', false ) ) {
         echo json_encode( array( 
             "result" => 0, 
@@ -460,7 +529,6 @@ function adverts_gallery_video_cover() {
     }
     
     $attach_id = adverts_request("attach_id");
-    
     $meta = wp_get_attachment_metadata( $attach_id );
     
     if(!is_array($meta)) {
@@ -473,10 +541,6 @@ function adverts_gallery_video_cover() {
     $attached_file = get_attached_file( $attach_id );
     $save_path = pathinfo( $attached_file, PATHINFO_DIRNAME );
     $file_name = pathinfo( $attached_file, PATHINFO_FILENAME );
-    
-    //print_r($save_path);
-    //print_r($meta);
-    //print_r( wp_get_attachment_metadata( 349 ));
     
     $img = adverts_request( "image" );
     $img = str_replace('data:image/png;base64,', '', $img);
@@ -507,24 +571,12 @@ function adverts_gallery_video_cover() {
     @ chmod( $new_file, $perms );
     clearstatcache();
     
-    if( isset( $upload["error"] ) ) {
-        echo json_encode( array( 
-            "result" => 0, 
-            "error" => $upload['error']
-        ) );
-        exit;
-    }
-    
-    $meta["sizes"]["full"] = array(
-        "file" => $new_file_name,
-        "width" => intval( adverts_request( "width" ) ),
-        "height" => intval( adverts_request( "height" ) ),
-        "mime-type" => "image/png"
-    );
-    
     $image = wp_get_image_editor( $new_file );
     
     if( is_wp_error( $image ) ) {
+        // file not readable, delete it
+        wp_delete_file( $new_file );
+        
         echo json_encode( array( 
             "result" => 0, 
             "error" => $image->get_error_message()
@@ -532,7 +584,37 @@ function adverts_gallery_video_cover() {
         exit;
     }
     
+    // Ok, file saved and readable by image editor
+    // now delete current sizes and backups
     $sizes = adverts_config( "gallery.image_sizes" );
+    $size_keys = array_keys( $sizes );
+    $backup_sizes = get_post_meta( $attach_id, '_wp_attachment_backup_sizes', true );
+    
+
+    foreach( $size_keys as $size_key ) {
+        if( isset( $meta["sizes"][$size_key] ) ) {
+            //echo "[".$save_path . "/" . $meta["sizes"][$size_key]["file"]."]";
+            wp_delete_file( $save_path . "/" . $meta["sizes"][$size_key]["file"] );
+            unset( $meta["sizes"][$size_key] );
+        }
+        
+        if( isset( $backup_sizes[$size_key] ) ) {
+            wp_delete_file( $save_path . "/" . $backup_sizes[$size_key]["file"] );
+            unset( $backup_sizes[$size_key] );
+        }
+    }
+
+    if( is_array( $backup_sizes ) ) {
+        update_post_meta( $attach_id, '_wp_attachment_backup_sizes', $backup_sizes);
+    }
+    
+    // Register new full size image
+    $meta["sizes"]["full"] = array(
+        "file" => $new_file_name,
+        "width" => intval( adverts_request( "width" ) ),
+        "height" => intval( adverts_request( "height" ) ),
+        "mime-type" => "image/png"
+    );
 
     foreach( $sizes as $size_key => $size ) {
         $interm_file_name = sprintf( "%s-%dx%d.png", $file_name, $size["width"], $size["height"] );
@@ -555,12 +637,9 @@ function adverts_gallery_video_cover() {
             "height" => $file["height"],
             "mime-type" => $file["mime-type"]
         );
-        
-        
     }
     
     wp_update_attachment_metadata( $attach_id, $meta );
-    
     
     echo json_encode( array( 
         "result" => 1, 

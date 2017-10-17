@@ -333,6 +333,43 @@ function adverts_gallery_image_stream() {
     exit;
 }
 
+function adverts_gallery_image_restore() {
+    
+    $size = adverts_request( "size" );
+    $attach_id = adverts_request( "attach_id" );
+    
+    if( $size === "full" ) {
+        // restore all
+        $keys = array_keys( adverts_config( "gallery.image_sizes" ) );
+        $restore = array_merge( array( "full" ),  $keys );
+    } else {
+        $restore = array( str_replace( "_", "-", $size ) );
+    }
+    
+    $meta = wp_get_attachment_metadata( $attach_id );
+    $backup_sizes = get_post_meta( $attach_id, '_wp_attachment_backup_sizes', true );
+
+    foreach( $restore as $r ) {
+        if( isset( $backup_sizes[$r . '-orig'] ) ) {
+            wp_delete_file( $meta["sizes"][$r]["file"] );
+            $meta["sizes"][$r]["file"] = $backup_sizes[$r . '-orig']["file"];
+            unset( $backup_sizes[$r . '-orig'] );
+        }
+    }
+    
+    wp_update_attachment_metadata( $attach_id, $meta );
+    update_post_meta( $attach_id, '_wp_attachment_backup_sizes', $backup_sizes );
+    
+    $result = new stdClass();
+    $result->result = 1;
+    $result->file = adverts_upload_item_data( $attach_id );
+    
+    echo json_encode( $result );
+    exit;
+
+    exit;
+}
+
 function adverts_gallery_image_save() {
     
     $attach_id = adverts_request( "attach_id" );
@@ -428,13 +465,9 @@ function adverts_gallery_image_save() {
         exit;
     }
     
-    $meta["sizes"][$size]["width"] = $saved["width"];
-    $meta["sizes"][$size]["height"] = $saved["height"];
-    
     if( $is_resized ) {
         // working on already resized file, just delete the old file and set
         // new file name in meta $size
-
         $s = $meta["sizes"][$size];
         
         if ( ! empty( $s['file'] ) ) {
@@ -443,61 +476,60 @@ function adverts_gallery_image_save() {
             $delete_file = path_join( $dirname, $s['file'] );
             wp_delete_file( $delete_file );
 
-            // set meta to file name to newly generated file
-            $meta["sizes"][$size]["file"] = $new_filename;
-
         }
         
     } else {
         // working on new image, save the new file name in meta and set backup size
-        
         $tag = "$size-orig";
-        $backup_sizes[$tag] = $meta['sizes'][$size];
         
-        $meta["sizes"][$size]["file"] = $new_filename;
+        if( ! isset( $meta['sizes'][$size] ) ) {
+            $backup_sizes[$tag] = array(
+                "file" => basename( $meta["file"] ),
+                "width" => $meta["width"],
+                "height" => $meta["height"]
+            );
+        } else {
+            $backup_sizes[$tag] = $meta['sizes'][$size];
+        }
     }
+    
+    $meta["sizes"][$size] = array(
+        "file" => $new_filename,
+        "width" => $saved["width"],
+        "height" => $saved["height"]
+    );
     
     
     if( $size == "full" && adverts_request( "apply_to_all" ) == "1" ) {
         $save_path = $dirname;
         $new_file = $new_path;
         
-        // delete all (except full) current images and backups
         $sizes = adverts_config( "gallery.image_sizes" );
         $size_keys = array_keys( $sizes );
 
         foreach( $size_keys as $size_key ) {
+            
+            // 1. IF exists delete backup file
+            // 2. MOVE size to backup_size
+            // 3. generate new size
+            // 4. save new size
+            
+            if( ! isset( $backup_sizes[$size_key . '-orig'] ) ) {
+                $backup_sizes[$size_key . '-orig'] = $meta["sizes"][$size_key] ;
+            }
+            
             if( isset( $meta["sizes"][$size_key] ) ) {
-                wp_delete_file( $save_path . "/" . $meta["sizes"][$size_key]["file"] );
-                unset( $meta["sizes"][$size_key] );
+                wp_delete_file( $meta["sizes"][$size_key]["file"]);
             }
-
-            if( isset( $backup_sizes[$size_key] ) ) {
-                wp_delete_file( $save_path . "/" . $backup_sizes[$size_key]["file"] );
-                unset( $backup_sizes[$size_key] );
-            }
-        }
-
-        if( is_array( $backup_sizes ) ) {
-            update_post_meta( $attach_id, '_wp_attachment_backup_sizes', $backup_sizes);
-        }
-        
-        // regenerate all thumbnails
-        foreach( $sizes as $size_key => $size ) {
-            $interm_file_name = sprintf( "%s-%dx%d.png", $file_name, $size["width"], $size["height"] );
+            
+            $cs = $sizes[$size_key];
+            $interm_file_name = sprintf( "%s-%dx%d-e%s.png", $file_name, $cs["width"], $cs["height"], $suffix );
 
             $image = wp_get_image_editor( $new_file );
-            $image->resize($size["width"], $size["height"], $size["crop"]);
+            $image->resize($cs["width"], $cs["height"], $cs["crop"]);
+            
             $file = $image->save( dirname( $new_file ) . "/" . $interm_file_name );
-
-            if( is_wp_error( $file ) ) {
-                echo json_encode( array( 
-                    "result" => 0, 
-                    "error" => $file->get_error_message()
-                ) );
-                exit;
-            }
-
+            
             $meta["sizes"][$size_key] = array(
                 "file" => $file["file"],
                 "width" => $file["width"],
@@ -505,6 +537,7 @@ function adverts_gallery_image_save() {
                 "mime-type" => $file["mime-type"]
             );
         }
+
     }
 
     wp_update_attachment_metadata( $attach_id, $meta );

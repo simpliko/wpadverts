@@ -53,7 +53,7 @@ WPADVERTS.File = {
             return "adverts-icon-file-archive";
         }
         
-        return "adverts-icon-file";
+        return "adverts-icon-doc-inv";
     },
     BrowserError: function(error) {
         new WPADVERTS.File.Error(error, false);
@@ -915,8 +915,50 @@ WPADVERTS.File.Browser.prototype.ImageRestore = function(e) {
         e.preventDefault();
     }
     
+    var data = {
+        action: "adverts_gallery_image_restore",
+        size: this.imageSize,
+        attach_id: this.file.attach_id,
+        action_type: this.actionType,
+        apply_to: this.imageSize
+    };
+    
+    jQuery.ajax({
+        url: adverts_gallery_lang.ajaxurl,
+        context: this,
+        type: "post",
+        dataType: "json",
+        data: data,
+        success: jQuery.proxy(this.ImageRestoreSuccess, this),
+        error: jQuery.proxy(this.ImageRestoreError, this)
+    });
+    
     this.history = [];
     this.ImageLoad();
+};
+
+WPADVERTS.File.Browser.prototype.ImageRestoreSuccess = function(response) {
+
+    this.spinner.hide();
+    
+    if(response.result != "1") {
+        new WPADVERTS.File.Error(response, false);
+        return;
+    }
+    
+    for(var i in this.uploader.Item) {
+        if(this.uploader.Item[i].result.attach_id == this.file.attach_id) {
+            this.uploader.Item[i].result = response.file;
+            this.file = response.file;
+            this.Render(response.file);
+        }
+    }
+
+};
+
+WPADVERTS.File.Browser.prototype.ImageRestoreError = function(response) {
+    this.spinner.hide();
+    new WPADVERTS.File.Error(response, false);
 };
 
 WPADVERTS.File.Browser.prototype.ImageSaveSuccess = function(response) {

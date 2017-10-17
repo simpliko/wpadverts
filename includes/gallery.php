@@ -26,6 +26,11 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
     wp_nonce_field( plugin_basename( __FILE__ ), 'adverts_gallery_content_nonce' ); 
     
     $field_name = "gallery";
+    $button = "adverts-button";
+    
+    if(is_admin()) {
+        $button = "button";
+    }
     
     $conf = shortcode_atts( array(
         "button_class" => "button-secondary",
@@ -66,13 +71,13 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
 
 
 
-    <div id="<?php echo esc_html("adverts-plupload-upload-ui-".$field_name) ?>" class="adverts-plupload-upload-ui">
+    <div id="<?php echo esc_html("adverts-plupload-upload-ui-".$field_name) ?>" class="adverts-plupload-upload-ui <?php echo is_admin() ? "wpadverts-browser-admin" : "adverts-browser-frontend" ?>">
         <div id="<?php echo esc_html("adverts-drag-drop-area-".$field_name) ?>"class="adverts-drag-drop-area">
         
         </div>
         <div class="adverts-gallery">
             <p><?php _e( "Drop files here to add them.", "adverts" ) ?></p>
-            <p><a href="#" id="<?php echo esc_html("adverts-plupload-browse-button-".$field_name) ?>" class="adverts-plupload-browse-button adverts-button"><?php _e( "browse files ...", "adverts" ) ?></a></p>
+            <p><a href="#" id="<?php echo esc_html("adverts-plupload-browse-button-".$field_name) ?>" class="adverts-plupload-browse-button <?php echo $button ?>"><?php _e( "browse files ...", "adverts" ) ?></a></p>
         </div>
         <div class="adverts-gallery-uploads">
 
@@ -147,6 +152,13 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
  * @return void
  */
 function adverts_gallery_modal() {
+    
+    $button = "adverts-button";
+    
+    if(is_admin()) {
+        $button = "button";
+    }
+    
     ?>
     
     <script type="text/html" id="tmpl-wpadverts-uploaded-file">
@@ -185,14 +197,14 @@ function adverts_gallery_modal() {
 
 
             <div class="adverts-gallery-upload-actions">
-                <a href="#" class="adverts-button-edit adverts-button adverts-button-icon adverts-icon-pencil" title="<?php _e("Edit File", "adverts") ?>"></a>
-                <a href="#" class="adverts-button-remove adverts-button adverts-button-icon adverts-icon-trash-1" title="<?php _e("Delete File", "adverts") ?>"></a>
+                <a href="#" class="adverts-button-edit <?php echo $button ?> adverts-button-icon adverts-icon-pencil" title="<?php _e("Edit File", "adverts") ?>"></a>
+                <a href="#" class="adverts-button-remove <?php echo $button ?> adverts-button-icon adverts-icon-trash-1" title="<?php _e("Delete File", "adverts") ?>"></a>
             </div>
         <# } #>
     </script>
     
     <script type="text/html" id="tmpl-wpadverts-browser">
-    <div class="wpadverts-overlay wpadverts-overlay-dark">
+    <div class="wpadverts-overlay wpadverts-overlay-dark <?php echo is_admin() ? "wpadverts-browser-admin" : "adverts-browser-frontend" ?>">
 
         <div class="wpadverts-overlay-body">
              
@@ -252,7 +264,7 @@ function adverts_gallery_modal() {
             <# } else if( data.mime == "image" ) { #>
                 <# for(var size in data.file.sizes) { #>
                 <div class="adverts-image-preview adverts-image-preview-{{ size }}"> 
-                    <img src="{{ data.file.sizes[size].url }}" class="" alt="" />
+                    <img src="{{ data.file.sizes[size].url }}?timestamp={{ data.timestamp }}" class="" alt="" />
                 </div>
                 <# } #>
             <# } else if( data.mime == "audio" ) { #>
@@ -273,7 +285,7 @@ function adverts_gallery_modal() {
                 <div class="wpadverts-attachment-icon-big-wrap">
                     <span >{{ data.file.readable.name }} </span>
                 </div>
-                <a href="{{ data.file.guid }}" class="adverts-button"><?php _e("Download File", "adverts") ?></a>
+                <a href="{{ data.file.guid }}" class="<?php echo $button ?>"><?php _e("Download File", "adverts") ?></a>
             </div>
             <# } #>
         </div>
@@ -303,7 +315,7 @@ function adverts_gallery_modal() {
             </form>
 
             <div>
-                <a href="#" class="adverts-button adverts-upload-modal-update"><?php _e( "Update Description", "adverts" ) ?></a>
+                <a href="#" class="<?php echo $button ?> adverts-upload-modal-update"><?php _e( "Update Description", "adverts" ) ?></a>
                 <span class="adverts-loader adverts-icon-spinner animate-spin"></span>
             </div>
 
@@ -330,18 +342,18 @@ function adverts_gallery_modal() {
                         </div>
                         
                         <div class="adverts-control-group wpadverts-file-browser-image-actions">
-                            <a href="#" class="adverts-button wpadverts-attachment-edit-image"><?php _e("Edit Image", "adverts") ?></a>
-                            <a href="#" class="adverts-button wpadverts-attachment-create-image" title="<?php _e("Create thumbnail from full size image.", "adverts") ?>"><?php _e("Create Image", "adverts") ?></a>
+                            <a href="#" class="<?php echo $button ?> wpadverts-attachment-edit-image"><?php _e("Edit Image", "adverts") ?></a>
+                            <a href="#" class="<?php echo $button ?> wpadverts-attachment-create-image" title="<?php _e("Create thumbnail from full size image.", "adverts") ?>"><?php _e("Create Image", "adverts") ?></a>
                         </div>
                         
                         <div class="adverts-control-group wpadverts-file-browser-video-actions">
                             <div class="wpadverts-file-browser-video-player">
-                                <a href="#" class="wpadverts-file-browser-video-thumbnail adverts-button"><?php _e("Capture ...", "adverts") ?></a>
+                                <a href="#" class="wpadverts-file-browser-video-thumbnail <?php echo $button ?>"><?php _e("Capture ...", "adverts") ?></a>
                             </div>
 
                             <div class="wpadverts-file-browser-video-select-thumbnail">
-                                <a href="#" class="wpadverts-file-browser-video-thumbnail-save adverts-button"><?php _e("Save Thumbnail", "adverts") ?></a>
-                                <a href="#" class="wpadverts-file-browser-video-thumbnail-cancel adverts-button"><?php _e("Cancel", "adverts") ?></a>
+                                <a href="#" class="wpadverts-file-browser-video-thumbnail-save <?php echo $button ?>"><?php _e("Save Thumbnail", "adverts") ?></a>
+                                <a href="#" class="wpadverts-file-browser-video-thumbnail-cancel <?php echo $button ?>"><?php _e("Cancel", "adverts") ?></a>
                             </div>
                             
                             <span class="adverts-file-video-spinner adverts-loader adverts-icon-spinner animate-spin"></span>
@@ -383,7 +395,7 @@ function adverts_gallery_modal() {
     </script>
     
     <script type="text/html" id="tmpl-wpadverts-browser-attachment-image">
-        <div class="wpadverts-attachment-media-view wpadverts-overlay-content">
+        <div class="wpadverts-attachment-media-view wpadverts-overlay-content wpadverts-attachment-media-image-editor">
             <div class="wpadverts-attachment-image">
                 <img src="#" data-src="<?php echo admin_url('admin-ajax.php') ?>?action=adverts_gallery_image_stream&attach_id={{ data.file.attach_id }}&size={{ data.size }}&history={{ data.history }}&rand={{ data.rand }}" id="wpadverts-image-crop" alt="" style="max-width: 100%; max-height: 100%;">
             </div>
@@ -395,12 +407,12 @@ function adverts_gallery_modal() {
                 <fieldset>
                     <div class="adverts-control-group">
                         <label for="adverts_featured"><?php _e("Image Manipulation", "adverts") ?></label>
-                        <a href="#" class="adverts-image-action-crop adverts-button adverts-button-small" title="<?php _e("Crop", "adverts") ?>"><span class="adverts-icon-crop"></span></a>
-                        <a href="#" class="adverts-image-action-rotate-cw adverts-button adverts-button-small" title="<?php _e("Rotate 90 degrees", "adverts") ?>"><span class="adverts-icon-cw"></span></a>
-                        <a href="#" class="adverts-image-action-rotate-ccw adverts-button adverts-button-small" title="<?php _e("Rotate -90 degrees", "adverts") ?>"><span class="adverts-icon-ccw"></span></a>
-                        <a href="#" class="adverts-image-action-flip-h adverts-button adverts-button-small" title="<?php _e("Flip Vertically", "adverts") ?>"><span class="adverts-icon-resize-vertical"></span></a>
-                        <a href="#" class="adverts-image-action-flip-v adverts-button adverts-button-small" title="<?php _e("Flip Horizontally", "adverts") ?>"><span class="adverts-icon-resize-horizontal"></span></a>
-                        <a href="#" class="adverts-image-action-undo adverts-button adverts-button-small" title="<?php _e("Undo", "adverts") ?>"><span class="adverts-icon-history"></span></a>
+                        <a href="#" class="adverts-image-action-crop <?php echo $button ?> adverts-button-small" title="<?php _e("Crop", "adverts") ?>"><span class="adverts-icon-crop"></span></a>
+                        <a href="#" class="adverts-image-action-rotate-cw <?php echo $button ?> adverts-button-small" title="<?php _e("Rotate 90 degrees", "adverts") ?>"><span class="adverts-icon-cw"></span></a>
+                        <a href="#" class="adverts-image-action-rotate-ccw <?php echo $button ?> adverts-button-small" title="<?php _e("Rotate -90 degrees", "adverts") ?>"><span class="adverts-icon-ccw"></span></a>
+                        <a href="#" class="adverts-image-action-flip-h <?php echo $button ?> adverts-button-small" title="<?php _e("Flip Vertically", "adverts") ?>"><span class="adverts-icon-resize-vertical"></span></a>
+                        <a href="#" class="adverts-image-action-flip-v <?php echo $button ?> adverts-button-small" title="<?php _e("Flip Horizontally", "adverts") ?>"><span class="adverts-icon-resize-horizontal"></span></a>
+                        <a href="#" class="adverts-image-action-undo <?php echo $button ?> adverts-button-small" title="<?php _e("Undo", "adverts") ?>"><span class="adverts-icon-history"></span></a>
 
                     </div>
 
@@ -409,16 +421,16 @@ function adverts_gallery_modal() {
                         <input type="number" class="adverts-image-scale-width" name="d_width" value="{{ data.dim[0] }}" max="{{ data.dim[0] }}" step="1" />
                         x
                         <input type="number" class="adverts-image-scale-height" name="d_height"  value="{{ data.dim[1] }}" max="{{ data.dim[1] }}" step="1" />
-                        <a href="#" class="adverts-image-action-scale adverts-button adverts-button-small"><?php _e("Scale", "adverts") ?></a>
+                        <a href="#" class="adverts-image-action-scale <?php echo $button ?> adverts-button-small"><?php _e("Scale", "adverts") ?></a>
                     </div>
 
                     <div class="adverts-control-group">
                         <label for="adverts_content"><?php _e("Actions", "adverts") ?></label>
                     
-                        <a href="#" class="adverts-image-action-save adverts-button adverts-button-small" title="<?php _e("Save Image", "adverts") ?>"><?php _e("Save", "adverts") ?></a>
-                        <a href="#" class="adverts-image-action-cancel adverts-button adverts-button-small" title="<?php _e("Cancel") ?>"><?php _e("Cancel", "adverts") ?></a>
-                        |
-                        <a href="#" class="adverts-image-action-restore adverts-button adverts-button-small" title="<?php _e("Restore original image", "adverts") ?>"><?php _e("Restore", "adverts") ?></a>
+                        <a href="#" class="adverts-image-action-save <?php echo $button ?> adverts-button-small" title="<?php _e("Save Image", "adverts") ?>"><?php _e("Save", "adverts") ?></a>
+                        <a href="#" class="adverts-image-action-cancel <?php echo $button ?> adverts-button-small" title="<?php _e("Cancel") ?>"><?php _e("Cancel", "adverts") ?></a>
+                        &nbsp;
+                        <a href="#" class="adverts-image-action-restore <?php echo $button ?> adverts-button-small" title="<?php _e("Restore original image", "adverts") ?>"><?php _e("Restore", "adverts") ?></a>
 
                         &nbsp;
                         
@@ -467,7 +479,7 @@ function adverts_gallery_modal() {
                         <strong>{{ data.error }}</strong>
                     </span>
                 </div>
-                <a href="#" class="adverts-button"><?php _e("Close") ?></a>
+                <a href="#" class="<?php echo $button ?>"><?php _e("Close") ?></a>
             </div>
         </div>
     <# if(data.overlay === true) { #>

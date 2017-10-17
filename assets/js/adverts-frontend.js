@@ -74,6 +74,7 @@ jQuery(function($) {
    
    
    if( $(".rslides").length > 0 ) {
+       
        $(".rslides").responsiveSlides({
         auto: false,
         pagination: true,
@@ -100,28 +101,10 @@ jQuery(function($) {
       });
       
       $(".wpadverts-als-container").als({
-          visible_items: 5,
+          visible_items: 3,
           circular: "yes"
       });
       
-      $(".create-draw-thumb").each(function(index, item) {
-            var cl = ".canvas-for-" + $(item).attr("id");
-            var c = $(cl);
-          
-            var ctx = c[0].getContext("2d");
-            //var img = document.getElementById("scream");
-            var img = $(item)[0];
-            ctx.drawImage(img, 0, 0, 82, 62);
-      });
-      $(".canvas-for-video-171").click(function() {
-            var cl = ".canvas-for-video-171";
-            var c = $(cl);
-          
-            var ctx = c[0].getContext("2d");
-            //var img = document.getElementById("scream");
-            var img = $("#video-171")[0];
-            ctx.drawImage(img, 0, 0, 82, 62);
-      });
    }
    
    

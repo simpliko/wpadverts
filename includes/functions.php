@@ -936,6 +936,24 @@ function adverts_validate_upload_type( $file, $params = null ) {
     }
 }
 
+/**
+ * File (image) Dimensions VALIDATOR
+ * 
+ * Checks if uploaded image size (as in width and height) is within allowed
+ * image dimensions
+ * 
+ * $params
+ * - strict (boolean) - if true the validation will fail if image size cannot be checked
+ * - min_width (int) - minimum image width
+ * - min_height (int) - minimum image height
+ * - max_width (int) - maximum image width
+ * - max_height (int) - maximum image height
+ * 
+ * @param array $file       An item from $_FILES array
+ * @param array $params     Validation parameters (integer files)
+ * @since 1.2.0
+ * @return string|boolean
+ */
 function adverts_validate_upload_dimensions( $file, $params = null ) {
     if( ! isset( $file["type"]) || stripos( $file["type"], "image/" ) !== 0 ) {
         // this validator is applied to images only for other files it returns true
@@ -2289,6 +2307,9 @@ function adverts_single_rslides( $post_id ) {
     if( adverts_config( 'gallery.lightbox' ) == "1" ) {
         wp_enqueue_script( 'adverts-swipebox' );
         wp_enqueue_style( 'adverts-swipebox' );
+        $lightbox_enabled = true;
+    } else {
+        $lightbox_enabled = false;
     }
     
     ?>
@@ -2299,9 +2320,14 @@ function adverts_single_rslides( $post_id ) {
                 <?php $upload = adverts_upload_item_data( $attach->ID ); ?>
                 <?php if( adverts_get_attachment_mime( $attach ) == "image" ): ?>
                     <div class="wpadverts-slide" id="<?php echo "wpadverts-slide-".$attach->ID ?>">
+                        <?php if( adverts_config( 'gallery.lightbox' ) == "1"): ?>
                         <a class="wpadverts-swipe" href="#<?php echo "wpadverts-slide-full-".$attach->ID ?>">
                             <img src="<?php echo adverts_get_post_img( $attach, array( "adverts_gallery", "full" ) ); ?>" alt="<?php echo esc_html( $attach->post_excerpt ) ?>" />
                         </a>
+                        <?php else: ?>
+                            <img src="<?php echo adverts_get_post_img( $attach, array( "adverts_gallery", "full" ) ); ?>" alt="<?php echo esc_html( $attach->post_excerpt ) ?>" />
+                        <?php endif; ?>
+                        
                         <?php if( strlen( trim( $attach->post_excerpt . $attach->post_content ) ) > 0 ): ?>
                         <p class="wpadverts-slide-caption">
                             <strong><?php echo esc_html($attach->post_excerpt) ?></strong>
@@ -2342,7 +2368,7 @@ function adverts_single_rslides( $post_id ) {
                 <?php endif; ?>
             <?php endforeach; ?>
         </div>
-        
+
         <div class="wpadverts-als-container als-container">
             
             <div class="als-nav-wrap als-nav-wrap-left">
@@ -2351,8 +2377,8 @@ function adverts_single_rslides( $post_id ) {
                 
             </div>
             
-            <div class="wpadverts-als-viewport als-viewport">
-                <ul id="wpadverts-rsliders-controls" class="wpadverts-als-wrapper als-wrapper" style="">
+            <div class="wpadverts-als-viewport als-viewport" style="">
+                <ul id="wpadverts-rsliders-controls" class="wpadverts-als-wrapper als-wrapper" >
                     <?php foreach($attachments as $attach): ?>
                     <?php $upload = adverts_upload_item_data( $attach->ID ) ?>
                     <?php $media_desc = trim( $attach->post_excerpt . " - " . $attach->post_content, " -") ?>
@@ -2386,6 +2412,7 @@ function adverts_single_rslides( $post_id ) {
             
         </div>
 
+        <?php if( adverts_config( 'gallery.lightbox' ) == "1"): ?>
         <div style="display: none">
             <?php foreach($attachments as $img): ?>
                 <?php $upload = adverts_upload_item_data( $img->ID ); ?>
@@ -2433,6 +2460,7 @@ function adverts_single_rslides( $post_id ) {
             <?php endforeach; ?>
             
         </div>
+        <?php endif; ?>
         
     </div>
     
@@ -2647,4 +2675,23 @@ function adverts_add_menu_classes( $menu ) {
     
     
     return $menu;
+}
+
+/**
+ * Checks if current user can edit images in gallery
+ * 
+ * Returns true if current user has the capability set in wp-admin / Classifieds 
+ * / Options / Core / Gallery panel.
+ * 
+ * @since 1.2
+ * @return boolean
+ */
+function adverts_user_can_edit_image( ) {
+    $cap = adverts_config( "gallery.image_edit_cap" );
+    
+    if( empty( $cap ) ) {
+        return true;
+    }
+    
+    return current_user_can( $cap );
 }

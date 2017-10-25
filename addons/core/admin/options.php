@@ -11,8 +11,9 @@
  */
 ?>
 <div class="wrap">
-    <h2 class="">
-        <?php esc_html_e($page_title) ?>
+    <h2 class="nav-tab-wrapper">
+        <a href="<?php esc_attr_e( remove_query_arg( array( 'adaction' ) ) ) ?>" class="nav-tab nav-tab-active"><?php _e("Core Options", "adverts") ?></a>
+        <a href="<?php esc_attr_e( add_query_arg( array('adaction' => 'gallery') ) ) ?>" class="nav-tab "><?php _e("Gallery", "adverts") ?></a>
     </h2>
 
     <?php adverts_admin_flash() ?>

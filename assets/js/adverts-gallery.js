@@ -107,9 +107,6 @@ WPADVERTS.File.Uploader = function(setup) {
     
     this.Item = {};
     this.Browser = new WPADVERTS.File.Browser(this);
-    //this.Browser.browser.find(".wpadverts-file-pagi-next").on("click", jQuery.proxy(this.Browser.NextClicked, this));
-    
-    
     
     this.setup = setup;
     this.ui = $("#"+setup.init.container);
@@ -194,8 +191,15 @@ WPADVERTS.File.Uploader.prototype.FileAdded = function(container, file) {
 
 WPADVERTS.File.Uploader.prototype.FileUploaded = function(file, result) {
     this.Item[file.id].setResult(result);
-    
     this.Item[file.id].render();
+    
+    if( this.PostID === null ) {
+        this.PostID = result.post_id
+    }
+    
+    if( jQuery( this.setup.conf.post_id_input ).val().length === 0 ) {
+        jQuery( this.setup.conf.post_id_input ).val( this.PostID );
+    }
 };
 
 WPADVERTS.File.Uploader.prototype.Plupload = function(init) {
@@ -572,6 +576,7 @@ WPADVERTS.File.Browser.prototype.Render = function(result) {
 
 WPADVERTS.File.Browser.prototype.RenderVideo = function() {
     this.video = new WPADVERTS.File.Browser.Video(this.browser);
+    this.video.SetPostId(this.uploader.PostID);
     this.video.SetNonce(this.uploader.setup.init.multipart_params._ajax_nonce);
     this.video.SetAttachId(this.file.attach_id);
     this.video.buttonThumb.on("click", jQuery.proxy(this.video.CreateThumbnail, this));
@@ -634,7 +639,8 @@ WPADVERTS.File.Browser.prototype.ImageLoad = function() {
         dim: this.dim,
         recommended: recommended,
         rand: Math.floor(Math.random() * 10000),
-        history: JSON.stringify(this.history)
+        history: JSON.stringify(this.history),
+        nonce: this.uploader.setup.init.multipart_params._ajax_nonce
     };
     
     var tpl = template(data);
@@ -883,6 +889,8 @@ WPADVERTS.File.Browser.prototype.ImageSave = function(e) {
     
     var data = {
         action: "adverts_gallery_image_save",
+        _ajax_nonce: this.uploader.setup.init.multipart_params._ajax_nonce,
+        post_id: this.uploader.PostID,
         history: JSON.stringify(this.history),
         size: this.imageSize,
         attach_id: this.file.attach_id,
@@ -917,6 +925,8 @@ WPADVERTS.File.Browser.prototype.ImageRestore = function(e) {
     
     var data = {
         action: "adverts_gallery_image_restore",
+        _ajax_nonce: this.uploader.setup.init.multipart_params._ajax_nonce,
+        post_id: this.uploader.PostID,
         size: this.imageSize,
         attach_id: this.file.attach_id,
         action_type: this.actionType,
@@ -1045,6 +1055,7 @@ WPADVERTS.File.Browser.prototype.UpdateDescriptionSuccess = function(r) {
 WPADVERTS.File.Browser.Video = function(browser) {
     this.nonce = null;
     this.attachId = null;
+    this.PostId = null;
     
     this.spinner = browser.find(".adverts-file-video-spinner");
     this.player = browser.find(".wpadverts-file-browser-video");
@@ -1070,6 +1081,14 @@ WPADVERTS.File.Browser.Video.prototype.SetNonce = function(nonce) {
 
 WPADVERTS.File.Browser.Video.prototype.GetNonce = function() {
     return this.nonce;
+};
+
+WPADVERTS.File.Browser.Video.prototype.SetPostId = function(PostId) {
+    this.PostId = PostId;
+};
+
+WPADVERTS.File.Browser.Video.prototype.GetPostId = function() {
+    return this.PostId;
 };
 
 WPADVERTS.File.Browser.Video.prototype.SetAttachId = function(attachId) {
@@ -1141,6 +1160,7 @@ WPADVERTS.File.Browser.Video.prototype.SaveClick = function(e) {
         action: "adverts_gallery_video_cover",
         _ajax_nonce: this.GetNonce(),
         attach_id: this.GetAttachId(),
+        post_id: this.GetPostId(),
         image: this.canvasOriginal.toDataURL("image/png"),
         width: this.canvasOriginal.width,
         height: this.canvasOriginal.height
@@ -1187,6 +1207,10 @@ WPADVERTS.File.Browser.Other = function() {
 };
 
 jQuery(function($) {
+    if(typeof ADVERTS_PLUPLOAD_DATA === "undefined") {
+        return;
+    }
+    
     $.each(ADVERTS_PLUPLOAD_DATA, function(index, item) {
         WPADVERTS.File.Registered.push(new WPADVERTS.File.Uploader(item));
     });

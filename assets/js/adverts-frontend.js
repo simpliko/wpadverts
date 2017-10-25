@@ -72,7 +72,6 @@ jQuery(function($) {
    
    }); 
    
-   
    if( $(".wpadverts-slides").length > 0 ) {
 
         $(".wpadverts-als-item").on("click", function(e) {
@@ -85,12 +84,19 @@ jQuery(function($) {
         });
         $(".wpadverts-als-item:first-child").click();
 
+        var visible_items = parseInt(adverts_frontend_lang.als_visible_items);
+        
+        if(visible_items > $("#wpadverts-rsliders-controls li").length) {
+            visible_items = $("#wpadverts-rsliders-controls li").length;
+        }
+        
         $(".wpadverts-als-container").als({
-            visible_items: adverts_frontend_lang.als_visible_items,
-            scrolling_items: adverts_frontend_lang.als_scrolling_items,
+            visible_items: visible_items,
+            scrolling_items: parseInt(adverts_frontend_lang.als_scrolling_items),
             circular: "no"
         });
-
+        
+       
         if(adverts_frontend_lang.lightbox === "1") {
             $( '.wpadverts-swipe' ).swipebox();
         }

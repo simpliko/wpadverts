@@ -121,10 +121,7 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
             "conf" => $conf,
             "sizes" => $sizes
         );
-        
-        
-        
-        
+
         
     ?>
     
@@ -319,6 +316,7 @@ function adverts_gallery_modal() {
                 <span class="adverts-loader adverts-icon-spinner animate-spin"></span>
             </div>
 
+            
             <# if( data.mime == "image" || data.mime == "video" ) { #>
             <div class="wpadverts-file-preview">
                 <form action="" method="post" class="adverts-form adverts-form-aligned">
@@ -341,6 +339,7 @@ function adverts_gallery_modal() {
                             <span class="adverts-icon-size-explain-desc">-</span>
                         </div>
                         
+                        <?php if( adverts_user_can_edit_image() ): ?>
                         <div class="adverts-control-group wpadverts-file-browser-image-actions">
                             <a href="#" class="<?php echo $button ?> wpadverts-attachment-edit-image"><?php _e("Edit Image", "adverts") ?></a>
                             <a href="#" class="<?php echo $button ?> wpadverts-attachment-create-image" title="<?php _e("Create thumbnail from full size image.", "adverts") ?>"><?php _e("Create Image", "adverts") ?></a>
@@ -358,6 +357,7 @@ function adverts_gallery_modal() {
                             
                             <span class="adverts-file-video-spinner adverts-loader adverts-icon-spinner animate-spin"></span>
                         </div>
+                        <?php endif; ?>
                         
                     </fieldset>
                 </form>
@@ -394,10 +394,11 @@ function adverts_gallery_modal() {
         </div>
     </script>
     
+    <?php if( adverts_user_can_edit_image() ): ?>
     <script type="text/html" id="tmpl-wpadverts-browser-attachment-image">
         <div class="wpadverts-attachment-media-view wpadverts-overlay-content wpadverts-attachment-media-image-editor">
             <div class="wpadverts-attachment-image">
-                <img src="#" data-src="<?php echo admin_url('admin-ajax.php') ?>?action=adverts_gallery_image_stream&attach_id={{ data.file.attach_id }}&size={{ data.size }}&history={{ data.history }}&rand={{ data.rand }}" id="wpadverts-image-crop" alt="" style="max-width: 100%; max-height: 100%;">
+                <img src="#" data-src="<?php echo admin_url('admin-ajax.php') ?>?action=adverts_gallery_image_stream&post_id={{ data.file.post_id }}&attach_id={{ data.file.attach_id }}&size={{ data.size }}&history={{ data.history }}&rand={{ data.rand }}&_ajax_nonce={{ data.nonce }}" id="wpadverts-image-crop" alt="" style="max-width: 100%; max-height: 100%;">
             </div>
         </div>
 
@@ -463,6 +464,7 @@ function adverts_gallery_modal() {
             </div>
         </div>
     </script>
+    <?php endif; ?>
 
     <script type="text/html" id="tmpl-wpadverts-browser-error">
     <# if(data.overlay === true) { #>
@@ -588,7 +590,19 @@ function adverts_upload_item_data( $attach_id, $is_new = false ) {
     return $data;
 }
 
-function adverts_gallery_explain_size( $size = null, $placeholders = false ) {
+/**
+ * Returns explainer texts for image sizes
+ * 
+ * This explainers do explain where the images are being used. This function 
+ * is being used only in adverts_gallery_modal()
+ * 
+ * @see adverts_gallery_modal()
+ * 
+ * @since 1.2
+ * @param string    $size           Size for which explainers should be returned
+ * @return mixed                    Array if $size is not provided or string
+ */
+function adverts_gallery_explain_size( $size = null ) {
     
     $e = apply_filters( "adverts_gallery_explain", array( 
         "full" => array(
@@ -624,12 +638,6 @@ function adverts_gallery_explain_size( $size = null, $placeholders = false ) {
     
     if( $size === null ) {
         return $e;
-    }
-    
-
-    
-    if( $placeholders ) {
-        
     }
 
     if( isset( $e["size"] ) ) {

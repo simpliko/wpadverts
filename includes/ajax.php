@@ -163,7 +163,6 @@ function adverts_gallery_update() {
             "result" => 0, 
             "error" => __( "Invalid Session. Please refresh the page and try again.", "adverts" ) 
         ) );
-        
         exit;
     }
        
@@ -172,6 +171,16 @@ function adverts_gallery_update() {
     $caption = trim( adverts_request("caption", "" ) );
     $content = trim( adverts_request("content", "" ) );
     $featured = intval($_POST["featured"]);
+    
+    $attach = get_post( $attach_id );
+    
+    if( $attach->post_parent != $post_id ) {
+        echo json_encode( array( 
+            "result" => 0, 
+            "error" => __( "Incorrect Post or Attachment ID.", "adverts" ) 
+        ) );
+        exit;
+    }
     
     $result = wp_update_post(array(
         "ID" => $attach_id,
@@ -211,6 +220,7 @@ function adverts_gallery_update() {
  * @since 1.0.13
  */
 function adverts_gallery_update_order() {
+    
     if (!check_ajax_referer('adverts-gallery', '_ajax_nonce', false)) {
         echo json_encode(array(
             "result" => 0,
@@ -220,19 +230,19 @@ function adverts_gallery_update_order() {
         exit;
     }
 
-    $post_id = intval($_POST["post_id"]);
+    $post_id = intval( adverts_request( "post_id" ) );
 
-    $dirty_ordered_keys = json_decode(stripslashes($_POST["ordered_keys"]));
-    $length = sizeof($dirty_ordered_keys);
+    $dirty_ordered_keys = json_decode( stripslashes( adverts_request( "ordered_keys" ) ) );
+    $length = sizeof( $dirty_ordered_keys );
     $clean_ordered_keys = array();
 
     for ( $i = 0; $i < $length; $i++ ) {
-        $clean_ordered_keys[$i] = intval($dirty_ordered_keys[$i]);
+        $clean_ordered_keys[$i] = intval( $dirty_ordered_keys[$i] );
     }
 
-    $clean_ordered_keys_json = json_encode($clean_ordered_keys);
+    $clean_ordered_keys_json = json_encode( $clean_ordered_keys );
 
-    update_post_meta($post_id, '_adverts_attachments_order', $clean_ordered_keys_json);
+    update_post_meta( $post_id, '_adverts_attachments_order', $clean_ordered_keys_json );
 
     echo json_encode( array( "result" => 1 ) );
     exit;
@@ -285,9 +295,36 @@ function adverts_gallery_delete() {
  */
 function adverts_gallery_image_stream() {
     
+    if( ! check_ajax_referer( 'adverts-gallery', '_ajax_nonce', false ) ) {
+        echo json_encode( array( 
+            "result" => 0, 
+            "error" => __( "Invalid Session. Please refresh the page and try again.", "adverts" ) 
+        ) );
+        exit;
+    }
+    
+    if( ! adverts_user_can_edit_image() ) {
+        echo json_encode( array( 
+            "result" => 0, 
+            "error" => __( "You cannot edit images.", "adverts" ) 
+        ) );
+        exit;
+    }
+    
     $attach_id = adverts_request( "attach_id" );
     $history_encoded = adverts_request( "history" );
     $size = adverts_request( "size" );
+    $post_id = intval( adverts_request( "post_id" ) );
+    
+    $attach = get_post( $attach_id );
+    
+    if( $attach->post_parent != $post_id ) {
+        echo json_encode( array( 
+            "result" => 0, 
+            "error" => __( "Incorrect Post or Attachment ID.", "adverts" ) 
+        ) );
+        exit;
+    }
     
     $history = json_decode( $history_encoded );
     
@@ -333,10 +370,48 @@ function adverts_gallery_image_stream() {
     exit;
 }
 
+/**
+ * Restores default image(s)
+ * 
+ * This function is executed by the Gallery, it restores original image sizes.
+ * 
+ * Action: adverts_gallery_image_stream
+ * 
+ * @since 1.2
+ * @return void
+ */
 function adverts_gallery_image_restore() {
+    
+    if( ! check_ajax_referer( 'adverts-gallery', '_ajax_nonce', false ) ) {
+        echo json_encode( array( 
+            "result" => 0, 
+            "error" => __( "Invalid Session. Please refresh the page and try again.", "adverts" ) 
+        ) );
+        
+        exit;
+    }
+    
+    if( ! adverts_user_can_edit_image() ) {
+        echo json_encode( array( 
+            "result" => 0, 
+            "error" => __( "You cannot edit images.", "adverts" ) 
+        ) );
+        exit;
+    }
     
     $size = adverts_request( "size" );
     $attach_id = adverts_request( "attach_id" );
+    $post_id = intval( adverts_request( "post_id" ) );
+    
+    $attach = get_post( $attach_id );
+    
+    if( $attach->post_parent != $post_id ) {
+        echo json_encode( array( 
+            "result" => 0, 
+            "error" => __( "Incorrect Post or Attachment ID.", "adverts" ) 
+        ) );
+        exit;
+    }
     
     if( $size === "full" ) {
         // restore all
@@ -366,21 +441,58 @@ function adverts_gallery_image_restore() {
     
     echo json_encode( $result );
     exit;
-
-    exit;
 }
 
+/**
+ * Saves Image
+ * 
+ * This function is executed by the Gallery, after clicking "Save" image in 
+ * the image edition panel.
+ * 
+ * When saving an image the default images are saved as backup and the resized 
+ * images are used as current images.
+ * 
+ * @since 1.2
+ * @return void
+ */
 function adverts_gallery_image_save() {
+    
+    if( ! check_ajax_referer( 'adverts-gallery', '_ajax_nonce', false ) ) {
+        echo json_encode( array( 
+            "result" => 0, 
+            "error" => __( "Invalid Session. Please refresh the page and try again.", "adverts" ) 
+        ) );
+        
+        exit;
+    }
+    
+    if( ! adverts_user_can_edit_image() ) {
+        echo json_encode( array( 
+            "result" => 0, 
+            "error" => __( "You cannot edit images.", "adverts" ) 
+        ) );
+        exit;
+    }
     
     $attach_id = adverts_request( "attach_id" );
     $action_type = adverts_request( "action_type" );
     $history_encoded = adverts_request( "history" );
+    $post_id = adverts_request( "post_id" );
     
     $size_dash = adverts_request( "size" );
     $size = str_replace("_", "-", adverts_request( "size" ));
     
     $attach = get_post( $attach_id );
     $history = json_decode( $history_encoded );
+    
+
+    if( $attach->post_parent != $post_id ) {
+        echo json_encode( array( 
+            "result" => 0, 
+            "error" => __( "Incorrect Post or Attachment ID.", "adverts" ) 
+        ) );
+        exit;
+    }
     
     if( ! is_array( $history ) ) {
         $history = array();
@@ -550,6 +662,19 @@ function adverts_gallery_image_save() {
     exit;
 }
 
+/**
+ * Saves video cover
+ * 
+ * This function is executed by the Gallery, after clicking "Capture ..." and
+ * then "Save Thumbnail" button.
+ * 
+ * The function expects following params
+ * - attach_id - ID of the (video) attachment for which the cover will be generated
+ * - image - base64 encoded image data
+ * 
+ * @since 1.2
+ * @return void
+ */
 function adverts_gallery_video_cover() {
     
     if( ! check_ajax_referer( 'adverts-gallery', '_ajax_nonce', false ) ) {
@@ -561,7 +686,26 @@ function adverts_gallery_video_cover() {
         exit;
     }
     
+    if( ! adverts_user_can_edit_image() ) {
+        echo json_encode( array( 
+            "result" => 0, 
+            "error" => __( "You cannot edit images.", "adverts" ) 
+        ) );
+        exit;
+    }
+    
     $attach_id = adverts_request("attach_id");
+    $post_id = intval( adverts_request( "post_id" ) );
+    $attach = get_post( $attach_id );
+    
+    if( $attach->post_parent != $post_id ) {
+        echo json_encode( array( 
+            "result" => 0, 
+            "error" => __( "Incorrect Post or Attachment ID.", "adverts" ) 
+        ) );
+        exit;
+    }
+    
     $meta = wp_get_attachment_metadata( $attach_id );
     
     if(!is_array($meta)) {

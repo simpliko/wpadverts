@@ -189,7 +189,7 @@ jQuery(function($) {
         
     }
     
-    $("#adverts_price").autoNumeric('init', adverts_currency);
+    $(".adverts-filter-money").autoNumeric('init', adverts_currency);
     
     $("select#post_status").append($("<option></option>")
         .attr("id", "adverts-post-status-option")

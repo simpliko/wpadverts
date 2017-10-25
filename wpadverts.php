@@ -66,10 +66,11 @@ $adverts_namespace['config'] = array(
 $adverts_namespace['gallery'] = array(
     'option_name' => 'adverts_gallery',
     'default' => array(
-        'ui' => 'paginator', // either paginator or thumbnails
-        'visible_items' => 4,
-        'scrolling_items' => 2,
+        'ui' => 'thumbnails', // either paginator or thumbnails
+        'visible_items' => 5,
+        'scrolling_items' => 1,
         'lightbox' => 1,
+        'image_edit_cap' => 'read',
         'image_sizes' => array(
             // supported sizes: adverts-upload-thumbnail, adverts-list, adverts-gallery
             "adverts-gallery" => array( 'enabled' => 1, 'width' => 650, 'height' => 350, 'crop' => true ),

@@ -2367,6 +2367,22 @@ function adverts_single_rslides( $post_id ) {
                     </div>
                 <?php endif; ?>
             <?php endforeach; ?>
+            
+            <div style="background: rgba(0,0,0,0.5); position: absolute; top: 3px; right: 3px; color: white; padding: 3px 6px">
+                <span class="adverts-icon-th"></span>
+                &nbsp;
+                &nbsp;
+                <strong>1 / <?php echo count( $attachments ) ?></strong>
+                <span class="adverts-icon-camera"></span>
+            </div>
+            
+            <div style="background: rgba(0,0,0,0.5); position: absolute; left: 0; top: calc( 50% - 40px ); height:80px">
+                <span class="adverts-icon-left-open" style="font-size:26px; color: white; line-height: 80px"></span>
+            </div>
+            
+            <div style="background: rgba(0,0,0,0.5); position: absolute; right: 0; top: calc( 50% - 40px ); height:80px">
+                <span class="adverts-icon-right-open" style="font-size:26px; color: white; line-height: 80px"></span>
+            </div>
         </div>
 
         <div class="wpadverts-als-container als-container">

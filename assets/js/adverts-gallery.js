@@ -309,7 +309,7 @@ WPADVERTS.File.Singular.prototype.render = function() {
     var tpl = template(data);
     var html = $(tpl);
     
-    this.container.html(html)
+    this.container.html(html);
     
     if(this.result) {
         if(typeof this.result.error !== "undefined") {
@@ -981,15 +981,15 @@ WPADVERTS.File.Browser.prototype.ImageSaveSuccess = function(response) {
         return;
     }
     
-    for(var i in this.uploader.Item) {
-        if(this.uploader.Item[i].result.attach_id == this.file.attach_id) {
-            this.uploader.Item[i].result = response.file;
-            this.file = response.file;
-            this.Render(response.file);
+    for(var i in WPADVERTS.File.Registered) {
+        for(var j in WPADVERTS.File.Registered[i].Item) {
+            if(WPADVERTS.File.Registered[i].Item[j].result.attach_id == response.file.attach_id) {
+                WPADVERTS.File.Registered[i].Item[j].result = response.file;
+                WPADVERTS.File.Registered[i].Item[j].render();
+                WPADVERTS.File.Registered[i].Browser.Render(response.file);
+            }
         }
     }
-    
-
 
 };
 
@@ -1187,7 +1187,7 @@ WPADVERTS.File.Browser.Video.prototype.SaveClickSuccess = function(r) {
     for(var i in WPADVERTS.File.Registered) {
         for(var j in WPADVERTS.File.Registered[i].Item) {
             if(WPADVERTS.File.Registered[i].Item[j].result.attach_id == r.file.attach_id) {
-                WPADVERTS.File.Registered[i].Item[j].result.result = r.file;
+                WPADVERTS.File.Registered[i].Item[j].result = r.file;
                 WPADVERTS.File.Registered[i].Item[j].render();
                 WPADVERTS.File.Registered[i].Browser.Render(r.file);
                 WPADVERTS.File.Registered[i].Browser.browser.find(".wpadverts-image-sizes").val("full");

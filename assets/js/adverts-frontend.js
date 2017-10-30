@@ -73,7 +73,7 @@ jQuery(function($) {
    }); 
    
    if( $(".wpadverts-slides").length > 0 ) {
-
+        /*
         $(".wpadverts-als-item").on("click", function(e) {
             e.preventDefault();
 
@@ -95,7 +95,7 @@ jQuery(function($) {
             scrolling_items: parseInt(adverts_frontend_lang.als_scrolling_items),
             circular: "no"
         });
-        
+       */ 
        
         if(adverts_frontend_lang.lightbox === "1") {
             $( '.wpadverts-swipe' ).swipebox();

@@ -1048,12 +1048,142 @@ body .wpadverts-slide .wpadverts-slide-description.wpadverts-slide-desc {
     padding: 0 !important;
     height: 350px;
     overflow: hidden; 
-    background-color: rgba(0,0,0,0.1);
+    
     border: 0px solid transparent;
     text-align: center;
     vertical-align: middle;
     position: relative;
     display: none;
+    
+    background-color: white;
+    
+}
+
+.wpadverts-slide-nav-interface {
+    position: absolute; 
+    top: 0px; 
+    right: 0px; 
+    color: white; 
+    padding: 3px 6px;
+    text-align: right;
+}
+
+.wpadverts-slide-nav-paginate {
+    background: rgba(0,0,0,0.1); 
+    position: absolute; 
+    border-radius: 50%;
+    top: calc( 50% - 20px ); 
+    height:40px;
+    width:40px;
+    text-align: center;
+}
+
+.wpadverts-slide-nav-paginate.wpadverts-slide-nav-paginate-left {
+    left: 6px; 
+}
+
+.wpadverts-slide-nav-paginate.wpadverts-slide-nav-paginate-right {
+    right: 6px;
+}
+
+.wpadverts-slide-nav-paginate > span {
+    font-size:26px; 
+    color: white; 
+    line-height: 40px
+}
+
+.wpadverts-slide-nav-paginate,
+.wpadverts-slide-nav-interface {
+    z-index: 250;
+}
+
+.wpadverts-slide-nav-interface .adverts-icon-th,
+.wpadverts-slide-nav-interface .adverts-icon-camera {
+    font-size: 18px;
+}
+
+.wpadverts-slide-nav-interface .wpadverts-slide-nav-counter {
+    height: 25px;
+    display: inline-block;
+    line-height: 25px;
+    vertical-align: baseline;
+    letter-spacing: 1px;
+}
+
+.wpadverts-slide-decoration {
+    position: absolute; 
+    top: 0px; 
+    right: 0px; 
+    left: 0px;
+    bottom: 0px;
+}
+
+.wpadverts-slide-with-shadow {
+    position: absolute; 
+    top: 0px; 
+    right: 0px; 
+    left: 0px;
+    bottom: 0px;
+    
+    background: 
+        linear-gradient(to top, rgba(0,0,0,0.18) 0%,rgba(0,0,0,0.0) 150px),
+        linear-gradient(to bottom, rgba(0,0,0,0.18) 0%,rgba(0,0,0,0.0) 150px)
+}
+
+.wpadverts-slide-player {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 3px 6px;
+    color: white;
+}
+
+.wpadverts-slide-player .wpadverts-slide-player-item {
+    font-size: 20px;
+    height: 35px;
+    flex: 0 0 25px;
+}
+
+.wpadverts-slide-player .wpadverts-slide-player-item span:before {
+    margin: 0;
+    padding: 0;
+}
+
+.wpadverts-slide-player .wpadverts-slide-player-item-progress {
+    flex: 1 0 0;
+}
+
+.wpadverts-slide-player .wpadverts-slide-player-item-progress .wpadverts-slide-player-item-progress-bar {
+    display: inline-block; 
+    width:100%; 
+    background:rgba(0,0,0,0.5); 
+    height:18px;
+    vertical-align: middle;
+}
+
+.wpadverts-slide-player .wpadverts-slide-player-item-progress .wpadverts-slide-player-item-progress-text {
+    font-size: 10px;
+    text-align: right;
+    line-height: 18px;
+    margin: 0 6px 0 0;
+    padding: 0;
+    float: right;
+    font-weight: bold;
+}
+
+.wpadverts-slide-nav-thumbnails-list {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.75);
+    z-index: 1000;
 }
 
 .wpadverts-slides-list {
@@ -1203,15 +1333,22 @@ body .wpadverts-slide .wpadverts-slide-description.wpadverts-slide-desc {
 .wpadverts-slide-caption {
   position: absolute;
   display: block;
-  bottom: 6px;
+  top: 0px;
   left: 0px;
-  right: 0px;
-  padding: 6px;
+  padding: 3px 6px;
   text-align: left;
-  background: #000;
-  background: rgba(0,0,0, .25);
   color: #fff;
   margin: 0 !important;
+  z-index: 200;
+  font-size: 13px;
+  line-height: 18px !important;
+  font-weight: bold;
+}
+
+.wpadverts-slide-caption .wpadverts-slide-caption-desc {
+    font-size: 12px;
+    line-height: 16px !important;
+    font-weight: normal;
 }
 
 .wpadverts-als-icon-video {

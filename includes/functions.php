@@ -2302,6 +2302,7 @@ function adverts_single_rslides( $post_id ) {
         return;
     }
     
+    wp_enqueue_script( 'adverts-single' );
     wp_enqueue_script( 'adverts-als' );
     
     if( adverts_config( 'gallery.lightbox' ) == "1" ) {
@@ -2320,24 +2321,72 @@ function adverts_single_rslides( $post_id ) {
                 <?php $upload = adverts_upload_item_data( $attach->ID ); ?>
                 <?php if( adverts_get_attachment_mime( $attach ) == "image" ): ?>
                     <div class="wpadverts-slide" id="<?php echo "wpadverts-slide-".$attach->ID ?>">
-                        <?php if( adverts_config( 'gallery.lightbox' ) == "1"): ?>
-                        <a class="wpadverts-swipe" href="#<?php echo "wpadverts-slide-full-".$attach->ID ?>">
-                            <img src="<?php echo adverts_get_post_img( $attach, array( "adverts_gallery", "full" ) ); ?>" alt="<?php echo esc_html( $attach->post_excerpt ) ?>" />
-                        </a>
-                        <?php else: ?>
-                            <img src="<?php echo adverts_get_post_img( $attach, array( "adverts_gallery", "full" ) ); ?>" alt="<?php echo esc_html( $attach->post_excerpt ) ?>" />
-                        <?php endif; ?>
                         
-                        <?php if( strlen( trim( $attach->post_excerpt . $attach->post_content ) ) > 0 ): ?>
-                        <p class="wpadverts-slide-caption">
-                            <strong><?php echo esc_html($attach->post_excerpt) ?></strong>
-                            <?php echo esc_html($attach->post_content) ?>
-                        </p>
-                        <?php endif; ?>
+                        <div class="wpadverts-slide-decoration">
+                            <?php if( adverts_config( 'gallery.lightbox' ) == "1"): ?>
+                            <a class="wpadverts-swipe" href="#<?php echo "wpadverts-slide-full-".$attach->ID ?>">
+                                <img src="<?php echo adverts_get_post_img( $attach, array( "adverts_gallery", "full" ) ); ?>" alt="<?php echo esc_html( $attach->post_excerpt ) ?>" />
+                                <div class="wpadverts-slide-with-shadow"></div>
+                            </a>
+                            <?php else: ?>
+                                <img src="<?php echo adverts_get_post_img( $attach, array( "adverts_gallery", "full" ) ); ?>" alt="<?php echo esc_html( $attach->post_excerpt ) ?>" />
+                                <div class="wpadverts-slide-with-shadow"></div>
+                            <?php endif; ?>
+                        </div>
+                        
+                        <div class="wpadverts-slide-caption">
+                            <?php if($attach->post_excerpt): ?>
+                            <span><?php echo esc_html($attach->post_excerpt) ?></span>
+                            <?php endif; ?>
+                            <?php if($attach->post_content): ?>
+                            <span class="wpadverts-slide-caption-desc">
+                                <br/>
+                                <?php echo esc_html($attach->post_content) ?>
+                            </span>
+                            <?php endif; ?>
+                        </div>
+                        
                     </div>
                 <?php elseif( adverts_get_attachment_mime( $attach ) == "video" ): ?>
                     <div class="wpadverts-slide" id="<?php echo "wpadverts-slide-".$attach->ID ?>">
-                        <?php echo wp_video_shortcode( array ( "src" => $attach->guid, "poster" => adverts_get_post_img( $attach, array( 'adverts_gallery' ) ) ) )  ?>
+
+                        <div class="wpadverts-video-player">
+                            <video src="<?php echo $attach->guid ?>" poster="<?php echo adverts_get_post_img( $attach, array( 'adverts_gallery' ) ) ?>"></video>
+                            <div class="wpadverts-slide-with-shadow"></div>
+
+                            <div class="wpadverts-slide-player">
+                                <div class="wpadverts-slide-player-item wpadverts-slide-player-item-play-pause">
+                                    <span class="adverts-icon-play"></span>
+                                </div>
+                                <div class="wpadverts-slide-player-item wpadverts-slide-player-item-progress">
+                                    <span class="wpadverts-slide-player-item-progress-bar" style="">
+                                        <span class="wpadverts-slide-player-item-progress-text">1:35</span>
+                                    </span>
+                                </div>
+                                <div class="wpadverts-slide-player-item wpadverts-slide-player-item-volume-down">
+                                    <span class="adverts-icon-volume-down"></span>
+                                </div>
+                                <div class="wpadverts-slide-player-item wpadverts-slide-player-item-volume-up">
+                                    <span class="adverts-icon-volume-up"></span>
+                                </div>
+                                <div class="wpadverts-slide-player-item wpadverts-slide-player-item-fullscreen">
+                                    <span class="adverts-icon-resize-full-alt"></span>
+                                </div>
+                            </div>
+
+                            <div class="wpadverts-slide-caption">
+                                <?php if($attach->post_excerpt): ?>
+                                <span><?php echo esc_html($attach->post_excerpt) ?></span>
+                                <?php endif; ?>
+                                <?php if($attach->post_content): ?>
+                                <span class="wpadverts-slide-caption-desc">
+                                    <br/>
+                                    <?php echo esc_html($attach->post_content) ?>
+                                </span>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        
                         <a class="wpadverts-swipe" href="#<?php echo "wpadverts-slide-full-".$attach->ID ?>" style="display:none"></a>
                     </div>
                 <?php else: ?>
@@ -2368,24 +2417,57 @@ function adverts_single_rslides( $post_id ) {
                 <?php endif; ?>
             <?php endforeach; ?>
             
-            <div style="background: rgba(0,0,0,0.5); position: absolute; top: 3px; right: 3px; color: white; padding: 3px 6px">
-                <span class="adverts-icon-th"></span>
-                &nbsp;
-                &nbsp;
-                <strong>1 / <?php echo count( $attachments ) ?></strong>
-                <span class="adverts-icon-camera"></span>
+            <div class="wpadverts-slide-nav" style="">
+                <div class="wpadverts-slide-nav-interface">
+                    <span class="wpadverts-slide-nav-thumbnails adverts-icon-th"></span>
+                    &nbsp;
+                    <strong class="wpadverts-slide-nav-counter">
+                        <span class="wpadverts-slide-nav-current">1</span>/<?php echo count( $attachments ) ?></strong>
+                    <span class="adverts-icon-camera"></span>
+                </div>
+                
+                <div class="wpadverts-slide-nav-paginate wpadverts-slide-nav-paginate-left" style="">
+                    <span class="adverts-icon-left-open" style=""></span>
+                </div>
+
+                <div class="wpadverts-slide-nav-paginate wpadverts-slide-nav-paginate-right">
+                    <span class="adverts-icon-right-open"></span>
+                </div>
+                
+                <div class="wpadverts-slide-nav-thumbnails-list" style="display: none">
+                    <ul id="wpadverts-rsliders-controls" class="wpadverts-als-wrapper als-wrapper" >
+                        <?php foreach($attachments as $attach): ?>
+                        <?php $upload = adverts_upload_item_data( $attach->ID ) ?>
+                        <?php $media_desc = trim( $attach->post_excerpt . " - " . $attach->post_content, " -") ?>
+
+                        <?php if( adverts_get_post_img( $attach, array( "adverts_upload_thumbnail" ) ) ): ?>
+                            <?php $thumb = adverts_get_post_img( $attach, array( "adverts_upload_thumbnail" ) ) ?>
+                            <li class="wpadverts-als-item als-item" data-slide="<?php echo "wpadverts-slide-".$attach->ID ?>">
+                                <a href="<?php echo esc_attr($attach->guid) ?>" title="<?php echo esc_attr( $attach->post_excerpt ) ?>" >
+                                    <img class="wpadverts-als-img" src="<?php echo $thumb ?>" alt="<?php echo esc_attr( $media_desc ) ?>" />
+                                </a>
+                                <?php if(adverts_get_attachment_mime( $attach ) == "video"): ?>
+                                <span class="wpadverts-als-icon-video adverts-icon-play-circled2"></span>
+                                <?php endif; ?>
+                            </li>
+                        <?php else: ?>
+                            <li class="wpadverts-als-item als-item wpadverts-als-item-icon" data-slide="<?php echo "wpadverts-slide-".$attach->ID ?>">
+                                <a href="<?php echo esc_attr($attach->guid) ?>" title="<?php echo esc_attr( $attach->post_excerpt ) ?>">
+                                    <span class="<?php echo adverts_get_attachment_icon( $attach ) ?>" title="<?php echo esc_attr( $attach->post_excerpt ) ?>"></span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+                
             </div>
             
-            <div style="background: rgba(0,0,0,0.5); position: absolute; left: 0; top: calc( 50% - 40px ); height:80px">
-                <span class="adverts-icon-left-open" style="font-size:26px; color: white; line-height: 80px"></span>
-            </div>
-            
-            <div style="background: rgba(0,0,0,0.5); position: absolute; right: 0; top: calc( 50% - 40px ); height:80px">
-                <span class="adverts-icon-right-open" style="font-size:26px; color: white; line-height: 80px"></span>
-            </div>
+
         </div>
 
-        <div class="wpadverts-als-container als-container">
+        <!--div class="wpadverts-als-container als-container">
             
             <div class="als-nav-wrap als-nav-wrap-left">
                 <div class="als-nav-fake"><span class="adverts-icon-left-open"></span></div>
@@ -2426,7 +2508,7 @@ function adverts_single_rslides( $post_id ) {
                 <div href="#" class="als-next" title="<?php _e( "Next", "adverts" ) ?>"><span class="adverts-icon-right-open"></span></div>
             </div>
             
-        </div>
+        </div-->
 
         <?php if( adverts_config( 'gallery.lightbox' ) == "1"): ?>
         <div style="display: none">

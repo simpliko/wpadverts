@@ -367,8 +367,10 @@ Adverts::instance()->set("form_gallery_config", array(
             "order" => 10,
             "label" => __("Gallery Pagination", "adverts"),
             "options" => array(
-                array( "value" => "thumbnails", "text" => __( "Thumbnails", "adverts" ) )
-            )
+                array( "value" => "pagination", "text" => __( "Next and Previous Buttons", "adverts" ) ),
+                array( "value" => "thumbnails", "text" => __( "Thumbnails Slider", "adverts" ) )
+            ),
+            "rows" => 1
         ),
         array(
             "name" => "visible_items",

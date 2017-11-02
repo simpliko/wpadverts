@@ -98,7 +98,18 @@ jQuery(function($) {
        */ 
        
         if(adverts_frontend_lang.lightbox === "1") {
-            $( '.wpadverts-swipe' ).swipebox();
+            $( '.wpadverts-swipe' ).swipebox({
+                afterMedia: function() {
+                    $( '#swipebox-container .wpadverts-video-player' ).each(function(index, item) {
+                        var $this = jQuery(item);
+                        
+                        if($this.data("wpadverts-single-player") != "1") {
+                            new WPADVERTS.Single.Player($this);
+                            $this.data("wpadverts-single-player", "1");
+                        }
+                    });
+                }
+            });
         }
    }
    

@@ -1039,14 +1039,24 @@ body .wpadverts-slide .wpadverts-slide-description.wpadverts-slide-desc {
     left: -9999px;
     right: -9999px;
     margin: auto;
+    
+    object-fit: cover;
+    width: 100%;
+    height: 350px;
+}
+
+.wpadverts-slide video {
+    object-fit: cover;
+    width: 100%;
+    height: 350px;
 }
 
 .wpadverts-slide {
     list-style-type: none !important;
-    width: 100%;
+    
     margin: 0 !important;
     padding: 0 !important;
-    height: 350px;
+    
     overflow: hidden; 
     
     border: 0px solid transparent;
@@ -1055,8 +1065,55 @@ body .wpadverts-slide .wpadverts-slide-description.wpadverts-slide-desc {
     position: relative;
     display: none;
     
-    background-color: white;
+    width: 100%;
+    height: 350px;
     
+    background-color: white;
+}
+
+@media all and (min-width:0px) and (max-width:320px) {
+    .wpadverts-slide video,
+    .wpadverts-slide img,
+    .wpadverts-slide {
+        height: 160px;
+    }
+}
+
+@media all and (min-width:321px) and (max-width:375px) {
+    .wpadverts-slide video,
+    .wpadverts-slide img,
+    .wpadverts-slide {
+        height: 180px;
+    }
+}
+
+@media all and (min-width:376px) and (max-width:425px) {
+    .wpadverts-slide video,
+    .wpadverts-slide img,
+    .wpadverts-slide {
+        height: 220px;
+    }
+}
+
+@media all and (min-width:426px) and (max-width:768px) {
+    .wpadverts-slide video,
+    .wpadverts-slide img,
+    .wpadverts-slide {
+        height: 300px;
+    }
+}
+
+@media all and (min-width:0px) and (max-width:768px) {
+    .wpadverts-als-container {
+        height: 160px;
+    }
+    
+    .als-nav-wrap-left,
+    .als-nav-wrap-right {
+        top: 80px !important;
+        background: whitesmoke;
+        width: 49% !important;
+    }
 }
 
 .wpadverts-slide-nav .wpadverts-slide-nav-action,
@@ -1281,6 +1338,7 @@ body .wpadverts-slide .wpadverts-slide-description.wpadverts-slide-desc {
     bottom: 0;
     background-color: rgba(255,255,255,0.75);
     z-index: 1000;
+    overflow-y: scroll;
 }
 
 .wpadverts-slides-list {
@@ -1388,10 +1446,10 @@ body .wpadverts-slide .wpadverts-slide-description.wpadverts-slide-desc {
 .als-prev {
     position: absolute;
     font-size: 48px;
-    width:48px;
+    width:36px;
     clear: both;
     height: 74px;
-    top: 0px;
+    top: 0;
     z-index: 2000;
 }
 
@@ -1405,10 +1463,22 @@ body .wpadverts-slide .wpadverts-slide-description.wpadverts-slide-desc {
     right: 0;
 }
 
+.als-nav-wrap-left span:before {
+    text-align: left;
+    width: 36px;
+}
+
+.als-nav-wrap-right span:before {
+    text-align: right;
+    width: 36px;
+}
+
+.als-nav-wrap-left .als-nav-fake,
 .als-prev {
     left: 0px;
 }
 
+.als-nav-wrap-right .als-nav-fake,
 .als-next {
     right: 0px;
 }

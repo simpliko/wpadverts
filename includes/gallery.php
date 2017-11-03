@@ -328,7 +328,7 @@ function adverts_gallery_modal() {
                                 <option value="video" data-explain="<?php _e("Scroll the video to a selected place and click 'Capture' button to create video cover.", "adverts") ?>"><?php echo __("Video", "adverts") ?></option>
                                 <# } #>
                                 <?php foreach( adverts_gallery_explain_size() as $key => $size): ?>
-                                <?php if($size["enabled"] == "1"): ?>
+                                <?php if($size["enabled"] == "1" && ( $key == "full" || has_image_size( $key ))): ?>
                                 <option value="<?php echo esc_html(str_replace("-", "_", $key)) ?>" data-explain="<?php echo esc_attr( isset($size["desc_parsed"]) ? $size["desc_parsed"] : $size["desc"]) ?>"><?php echo esc_html($size["title"]) ?></option>
                                 <?php endif; ?>
                                 <?php endforeach; ?>
@@ -526,6 +526,11 @@ function adverts_upload_item_data( $attach_id, $is_new = false ) {
         }
         
         $src = wp_get_attachment_image_src( $attach_id, $image_key );
+        
+        if( $image_key !== "full" && isset( $src[3] ) && $src[3] === false ) {
+            $src[1] = $sizes["full"]["width"];
+            $src[2] = $sizes["full"]["height"];
+        }
         
         if( $src === false ) {
             $src = array( 

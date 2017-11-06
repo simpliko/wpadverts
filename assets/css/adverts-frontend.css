@@ -987,7 +987,7 @@ div.wpjb-flash-small {
 }
 
 .wpadverts-slide-icon:before {
-    font-size: 128px;
+    font-size: 96px;
     margin: 25px;
     padding: 25px 0 0 0;
 }
@@ -995,6 +995,27 @@ div.wpjb-flash-small {
 body .wpadverts-slide-description {
     padding: 0;
     margin: 0 0 15px 0;
+}
+
+body .swipebox-inline-container .wpadverts-slide-icon {
+    color: white;
+    opacity: 0.75;
+}
+
+body .swipebox-inline-container .wpadverts-slide-description {
+    color: white;
+    margin: 25px;
+}
+
+@media all and (max-width: 425px) and (min-width: 0px) {
+    body .wpadverts-slide.wpadverts-slide-other .wpadverts-slide-icon:before {
+        font-size: 48px;
+        margin: 25px;
+        padding: 0;
+    }
+    body .wpadverts-slide.wpadverts-slide-other .wpadverts-slide-description.wpadverts-slide-desc {
+        display: none;
+    }
 }
 
 body .wpadverts-slide .wpadverts-slide-description.wpadverts-slide-desc {

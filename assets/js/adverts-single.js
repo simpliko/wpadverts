@@ -172,17 +172,23 @@ WPADVERTS.Single.Player = function(player) {
     this.Nav.Pause.hide();
     this.Nav.Replay.hide();
     
-    this.Nav.Play.on("click", jQuery.proxy(this.PlayPause, this));
-    this.Nav.Pause.on("click", jQuery.proxy(this.PlayPause, this));
-    this.Nav.Replay.on("click", jQuery.proxy(this.PlayPause, this));
+    var clickEvent = "click";
     
-    this.Nav.VolumeDown.on("click", jQuery.proxy(this.VolumeDown, this));
-    this.Nav.VolumeUp.on("click", jQuery.proxy(this.VolumeUp, this));
+    if(this.IsTouchDevice()) {
+        clickEvent = "touchstart";
+    }
+
+    this.Nav.Play.on(clickEvent, jQuery.proxy(this.PlayPause, this));
+    this.Nav.Pause.on(clickEvent, jQuery.proxy(this.PlayPause, this));
+    this.Nav.Replay.on(clickEvent, jQuery.proxy(this.PlayPause, this));
     
-    this.Nav.ProgressBar.on("click", jQuery.proxy(this.Seek, this));
+    this.Nav.VolumeDown.on(clickEvent, jQuery.proxy(this.VolumeDown, this));
+    this.Nav.VolumeUp.on(clickEvent, jQuery.proxy(this.VolumeUp, this));
     
-    this.Nav.Video.on("click", jQuery.proxy(this.PlayPause, this));
+    this.Nav.ProgressBar.on(clickEvent, jQuery.proxy(this.Seek, this));
     
+    this.Nav.Video.on(clickEvent, jQuery.proxy(this.PlayPause, this));
+
     this.video.addEventListener("timeupdate", jQuery.proxy(this.TimeUpdate, this));
     this.video.addEventListener("ended", jQuery.proxy(this.Ended, this));
     this.video.addEventListener("loadedmetadata", jQuery.proxy(this.LoadedMetaData, this));
@@ -193,6 +199,11 @@ WPADVERTS.Single.Player = function(player) {
     if(this.Nav.Swipe.length > 0) {
         this.Nav.FullScreen.on("click", jQuery.proxy(this.FullScreen, this));
     }
+};
+
+WPADVERTS.Single.Player.prototype.IsTouchDevice = function() {
+  return 'ontouchstart' in window        // works on most browsers 
+      || navigator.maxTouchPoints;       // works on IE10/11 and Surface
 };
 
 WPADVERTS.Single.Player.prototype.PlayPause = function() {
@@ -239,7 +250,15 @@ WPADVERTS.Single.Player.prototype.VolumeUp = function() {
 
 WPADVERTS.Single.Player.prototype.Seek = function(e) {
     var offset = this.Nav.ProgressBar.offset();
-    var pos = (e.pageX  - offset.left) / this.Nav.ProgressBar[0].offsetWidth;
+    var clickPos = offset.left;
+    
+    if(typeof e.pageX !== "undefined") {
+        clickPos = e.pageX;
+    } else if( typeof e.originalEvent.touches[0].pageX !== undefined ) {
+        clickPos = e.originalEvent.touches[0].pageX;
+    }
+    
+    var pos = (clickPos  - offset.left) / this.Nav.ProgressBar[0].offsetWidth;
     this.video.currentTime = pos * this.video.duration;
     
     if(this.video.paused) {

@@ -2334,12 +2334,12 @@ function adverts_single_rslides( $post_id ) {
                         
                         <div class="wpadverts-slide-decoration">
                             <?php if( adverts_config( 'gallery.lightbox' ) == "1"): ?>
-                            <a class="wpadverts-swipe" href="#<?php echo "wpadverts-slide-full-".$attach->ID ?>">
-                                <img src="<?php echo adverts_get_post_img( $attach, array( "adverts_gallery", "full" ) ); ?>" alt="<?php echo esc_html( $attach->post_excerpt ) ?>" />
+                            <a class="wpadverts-swipe" href="<?php echo adverts_get_post_img( $attach, array( "full" ) ); ?>" title="<?php echo esc_html(trim($attach->post_excerpt . " - " . $attach->post_content, " -")) ?>">
+                                <img src="<?php echo adverts_get_post_img( $attach, array( "adverts_gallery", "full" ) ); ?>" title="<?php echo esc_html($attach->post_excerpt) ?>" alt="<?php echo esc_html($attach->post_content) ?>" />
                                 <div class="wpadverts-slide-with-shadow"></div>
                             </a>
                             <?php else: ?>
-                                <img src="<?php echo adverts_get_post_img( $attach, array( "adverts_gallery", "full" ) ); ?>" alt="<?php echo esc_html( $attach->post_excerpt ) ?>" />
+                                <img src="<?php echo adverts_get_post_img( $attach, array( "adverts_gallery", "full" ) ); ?>" title="<?php echo esc_html($attach->post_excerpt) ?>" alt="<?php echo esc_html($attach->post_content) ?>" />
                                 <div class="wpadverts-slide-with-shadow"></div>
                             <?php endif; ?>
                         </div>
@@ -2523,7 +2523,6 @@ function adverts_single_gallery_nav_thumbnails( $attachments ) {
         <div class="wpadverts-als-viewport als-viewport" style="">
             <ul id="wpadverts-rsliders-controls" class="wpadverts-als-wrapper als-wrapper" >
                 <?php foreach($attachments as $attach): ?>
-                <?php $upload = adverts_upload_item_data( $attach->ID ) ?>
                 <?php $media_desc = trim( $attach->post_excerpt . " - " . $attach->post_content, " -") ?>
 
                 <?php if( adverts_get_post_img( $attach, array( "adverts_upload_thumbnail" ) ) ): ?>
@@ -2568,20 +2567,10 @@ function adverts_single_gallery_lightbox() {
     ?>
     <div style="display: none">
         <?php foreach($attachments as $attach): ?>
-            <?php $upload = adverts_upload_item_data( $attach->ID ); ?>
             <?php if( adverts_get_attachment_mime( $attach ) == "image" ): ?>
-                <div id="<?php echo "wpadverts-slide-full-".$attach->ID ?>">
-                    <img src="<?php echo adverts_get_post_img( $attach, array( "full" ) ); ?>" alt="<?php echo esc_html($attach->post_excerpt . " - " . $attach->post_content) ?>" />
-
-                    <?php if( strlen( trim( $attach->post_excerpt . $attach->post_content ) ) > 0 ): ?>
-                    <p class="wpadverts-slide-caption">
-                        <strong><?php echo esc_html($attach->post_excerpt) ?></strong>
-                        <?php echo esc_html($attach->post_content) ?>
-                    </p>
-                    <?php endif; ?>
-                </div>
+            <?php // do nothing, images are loaded in the gallery ?>
             <?php elseif( adverts_get_attachment_mime( $attach ) == "video" ): ?>
-                <div id="<?php echo "wpadverts-slide-full-".$attach->ID ?>" style="position: relative">
+                <div class="wpadverts-slide-video" id="<?php echo "wpadverts-slide-full-".$attach->ID ?>" style="position: relative">
 
                     <div class="wpadverts-video-player">
                         <video src="<?php echo $attach->guid ?>" preload="metadata" poster="<?php echo adverts_get_post_img( $attach, array( 'adverts_gallery' ) ) ?>">
@@ -2625,7 +2614,7 @@ function adverts_single_gallery_lightbox() {
                     </div>
                 </div>
             <?php else: ?>
-                <div id="<?php echo "wpadverts-slide-full-".$attach->ID ?>">
+                <div class="wpadverts-slide-other" id="<?php echo "wpadverts-slide-full-".$attach->ID ?>">
 
                     <span class="wpadverts-slide-icon <?php echo adverts_get_attachment_icon( $attach ) ?>"></span>
 

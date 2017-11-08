@@ -64,7 +64,7 @@ WPADVERTS.Single.Gallery = {
             e.preventDefault();
         }
 
-        var id = jQuery(this).data("slide");
+        var id = jQuery(this).data("advert-slide");
 
         jQuery(".wpadverts-slides-list .wpadverts-slide").hide();
         jQuery(".wpadverts-slides-list #"+id).fadeIn("fast");
@@ -82,6 +82,7 @@ WPADVERTS.Single.Gallery = {
         this.Items[this.Index].fadeIn("fast");
         
         this.Nav.Current.text((this.Index+1).toString());
+        this.TogglePrevNext();
     },
     
     Next: function(e) {
@@ -96,6 +97,7 @@ WPADVERTS.Single.Gallery = {
         this.Items[this.Index].fadeIn("fast");
         
         this.Nav.Current.text((this.Index+1).toString());
+        this.TogglePrevNext();
     },
     
     GoTo: function(index) {
@@ -106,6 +108,7 @@ WPADVERTS.Single.Gallery = {
         this.Items[this.Index].fadeIn("fast");
         
         this.Nav.Current.text((this.Index+1).toString());
+        this.TogglePrevNext();
     },
     
     ToggleThumbnails: function() {
@@ -134,6 +137,20 @@ WPADVERTS.Single.Gallery = {
     ShowNavigation: function() {
         if(this.Nav.Nav && this.Nav.Nav.length > 0) {
             this.Nav.Nav.show();
+        }
+    },
+    
+    TogglePrevNext: function() {
+        if(this.Index === 0) {
+            this.Nav.Prev.hide();
+        } else {
+            this.Nav.Prev.show();
+        }
+        
+        if(this.Index+1 >= this.Items.length) {
+            this.Nav.Next.hide();
+        } else {
+            this.Nav.Next.show();
         }
     }
 };

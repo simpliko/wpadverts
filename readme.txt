@@ -2,9 +2,10 @@
 Plugin URI: https://wpadverts.com/
 Contributors: gwin
 Tags: classifieds, classified, classified ads, classified script, classifieds script, wp classified, wp classifieds
+Requires PHP: 5.3
 Requires at least: 4.0
-Tested up to: 4.8.1
-Stable tag: 1.1.6
+Tested up to: 4.9
+Stable tag: 1.2.0
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -96,6 +97,11 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.1.7 - 2017-11-08 =
+
+* NOTE: The update 1.2 is coming soon, this one is a quick patch to fix incompatibility with WP 4.9
+* FIXED: Gallery Upload incompatibility with WordPress 4.9
 
 = 1.1.6 - 2017-09-04 =
 

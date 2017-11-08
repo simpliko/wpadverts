@@ -106,8 +106,9 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
 
             foreach($children as $child) {
                 $data[] = adverts_upload_item_data( $child->ID );
+
             }
-            
+
         }
 
         $sizes = array();
@@ -240,16 +241,18 @@ function adverts_gallery_modal() {
                 <# for(var size in data.file.sizes) { #>
                     <div class="adverts-image-preview adverts-image-preview-{{ size }}">
                     <# if(data.file.sizes[size].url === null) { #>
-                        <div class="wpadverts-attachment-icon-big-wrap">
-                            <span class="wpadverts-attachment-icon-big {{ data.icon }}"></span>
-                        </div>
-                        <div class="wpadverts-attachment-icon-big-wrap">
-                            <span>
-                                <strong><?php _e("This video does not have thumbnails yet. ") ?></strong>
-                            </span>
-                        </div>
-                        <div class="wpadverts-attachment-icon-big-wrap">
-                            <span><?php _e("In 'Preview' select 'Video' and click 'Capture ...' button to generate thumbnails.", "adverts") ?></strong>
+                        <div class="adverts-image-missing">
+                            <div class="wpadverts-attachment-icon-big-wrap">
+                                <span class="wpadverts-attachment-icon-big {{ data.icon }}"></span>
+                            </div>
+                            <div class="wpadverts-attachment-icon-big-wrap">
+                                <span>
+                                    <strong><?php _e("This video does not have thumbnails yet. ") ?></strong>
+                                </span>
+                            </div>
+                            <div class="wpadverts-attachment-icon-big-wrap">
+                                <span><?php _e("In 'Preview' select 'Video' and click 'Capture ...' button to generate thumbnails.", "adverts") ?></strong>
+                            </div>
                         </div>
                     <# } else { #>
                         <img src="{{ data.file.sizes[size].url }}?timestamp={{ data.timestamp }}" class="" alt="" />
@@ -314,6 +317,7 @@ function adverts_gallery_modal() {
             <div>
                 <a href="#" class="<?php echo $button ?> adverts-upload-modal-update"><?php _e( "Update Description", "adverts" ) ?></a>
                 <span class="adverts-loader adverts-icon-spinner animate-spin"></span>
+                <span class="adverts-update-description-success adverts-icon-ok"></span>
             </div>
 
             
@@ -353,9 +357,10 @@ function adverts_gallery_modal() {
                             <div class="wpadverts-file-browser-video-select-thumbnail">
                                 <a href="#" class="wpadverts-file-browser-video-thumbnail-save <?php echo $button ?>"><?php _e("Save Thumbnail", "adverts") ?></a>
                                 <a href="#" class="wpadverts-file-browser-video-thumbnail-cancel <?php echo $button ?>"><?php _e("Cancel", "adverts") ?></a>
+                                <span class="adverts-file-video-spinner adverts-loader adverts-icon-spinner animate-spin"></span>
                             </div>
                             
-                            <span class="adverts-file-video-spinner adverts-loader adverts-icon-spinner animate-spin"></span>
+                            
                         </div>
                         <?php endif; ?>
                         

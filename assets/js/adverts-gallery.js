@@ -541,6 +541,7 @@ WPADVERTS.File.Browser.prototype.Render = function(result) {
     
     this.element = {
         spinner: html.find(".adverts-loader.animate-spin"),
+        success: html.find(".adverts-update-description-success"),
         input: {
             featured: html.find("input[name='adverts_featured']"),
             caption: html.find("input[name='adverts_caption']"),
@@ -808,7 +809,10 @@ WPADVERTS.File.Browser.prototype.ImageFlipH = function(e) {
     if(typeof e !== "undefined") {
         e.preventDefault();
     }
-
+    
+    this.dimHistory.push(this.dim);
+    this.dim = [this.dim[0], this.dim[1]];
+    
     this.history.push({a: "f", h: true, v: false});
     this.spinner.show();
     this.ImageLoad();
@@ -818,7 +822,10 @@ WPADVERTS.File.Browser.prototype.ImageFlipV = function(e) {
     if(typeof e !== "undefined") {
         e.preventDefault();
     }
-
+    
+    this.dimHistory.push(this.dim);
+    this.dim = [this.dim[0], this.dim[1]];
+    
     this.history.push({a: "f", h: false, v: true});
     this.spinner.show();
     this.ImageLoad();
@@ -839,7 +846,7 @@ WPADVERTS.File.Browser.prototype.KeyWidth = function(e) {
 WPADVERTS.File.Browser.prototype.KeyHeight = function(e) {
 
     // calculate width
-    var height = parseInt(this.input.width.val());
+    var height = parseInt(this.input.height.val());
     var max_width = parseInt(this.input.width.attr("max"));
     var max_height = parseInt(this.input.height.attr("max"));
     
@@ -878,6 +885,10 @@ WPADVERTS.File.Browser.prototype.ImageUndo = function(e) {
 WPADVERTS.File.Browser.prototype.ImageSave = function(e) {
     if(typeof e !== "undefined") {
         e.preventDefault();
+    }
+    
+    if(this.history.length === 0) {
+        return;
     }
     
     this.spinner.show();
@@ -1003,7 +1014,7 @@ WPADVERTS.File.Browser.prototype.UpdateDescription = function(e) {
         e.preventDefault();
     }
     
-    this.element.spinner.show();
+    this.element.spinner.css("display", "inline-block");
 
     var featured = this.element.input.featured.prop("checked") ? 1 : 0;
 
@@ -1030,6 +1041,10 @@ WPADVERTS.File.Browser.prototype.UpdateDescriptionSuccess = function(r) {
     this.element.spinner.hide();
 
     if(r.result == 1) {
+        
+        this.element.success.fadeIn("fast", function() {
+           jQuery(this).delay(500).fadeOut("slow"); 
+        });
         
         var featured = this.element.input.featured.prop("checked") ? 1 : 0;
         var br = this;

@@ -2264,6 +2264,45 @@ function adverts_get_post_attachments( $post_id ) {
 }
 
 /**
+ * Returns an image with selected size
+ * 
+ * The size can be an array then the function will iterate over the array and
+ * will return an URL to the first existing image
+ * 
+ * Allowed sizes are: full, adverts_gallery, adverts_upload_thumbnail
+ * 
+ * @since   1.2.0
+ * @param   WP_Post|int     $post_id    Advert object or Advert ID
+ * @param   array           $sizes      List of sizes to check
+ * @return  array                       Keys [width, height, is_intermidiate, orient]
+ */
+function adverts_get_post_img( $post_id, $sizes ) {
+    if( $post_id instanceof WP_Post ) {
+        $post_id = $post_id->ID;
+    }
+    
+    $upload = adverts_upload_item_data( $post_id );
+    
+    foreach( $sizes as $size ) {
+        if( isset( $upload["sizes"][$size] ) ) {
+            $img = $upload["sizes"][$size];
+            
+            if($img["width"] == $img["height"]) {
+                $img["orient"] = "square";
+            } else if($img["width"] > $img["height"] ) {
+                $img["orient"] = "landscape";
+            } else {
+                $img["orient"] = "portrait";
+            }
+            
+            return $img;
+        }
+    }
+    
+    return null;
+}
+
+/**
  * Return an URL to image with selected size
  * 
  * The size can be an array then the function will iterate over the array and
@@ -2276,20 +2315,14 @@ function adverts_get_post_attachments( $post_id ) {
  * @param   array           $sizes      List of sizes to check
  * @return  string                      URL to the image
  */
-function adverts_get_post_img( $post_id, $sizes ) {
-    if( $post_id instanceof WP_Post ) {
-        $post_id = $post_id->ID;
+function adverts_get_post_img_url( $post_id, $sizes ) {
+    $img = adverts_get_post_img( $post_id, $sizes );
+    
+    if($img === null) {
+        return null;
+    } else {
+        return $img["url"];
     }
-    
-    $upload = adverts_upload_item_data( $post_id );
-    
-    foreach( $sizes as $size ) {
-        if( isset( $upload["sizes"][$size]["url"] ) ) {
-            return $upload["sizes"][$size]["url"];
-        }
-    }
-    
-    return null;
 }
 
 /**
@@ -2330,16 +2363,17 @@ function adverts_single_rslides( $post_id ) {
         <div class="wpadverts-slides-list">
             <?php foreach($attachments as $attach): ?>
                 <?php if( adverts_get_attachment_mime( $attach ) == "image" ): ?>
+                    <?php $image = adverts_get_post_img( $attach, array( "adverts_gallery", "full" ) ); ?>
                     <div class="wpadverts-slide wpadverts-slide-image" id="<?php echo "wpadverts-slide-".$attach->ID ?>">
                         
                         <div class="wpadverts-slide-decoration">
                             <?php if( adverts_config( 'gallery.lightbox' ) == "1"): ?>
-                            <a class="wpadverts-swipe" href="<?php echo adverts_get_post_img( $attach, array( "full" ) ); ?>" title="<?php echo esc_html(trim($attach->post_excerpt . " - " . $attach->post_content, " -")) ?>">
-                                <img src="<?php echo adverts_get_post_img( $attach, array( "adverts_gallery", "full" ) ); ?>" title="<?php echo esc_html($attach->post_excerpt) ?>" alt="<?php echo esc_html($attach->post_content) ?>" />
+                            <a class="wpadverts-swipe" href="<?php echo adverts_get_post_img_url( $attach, array( "full" ) ); ?>" title="<?php echo esc_html(trim($attach->post_excerpt . " - " . $attach->post_content, " -")) ?>">
+                                <img src="<?php echo esc_attr($image["url"]) ?>" class="<?php echo "wpadverts-slide-img wpadverts-slide-img-".$image["orient"] ?>" title="<?php echo esc_html($attach->post_excerpt) ?>" alt="<?php echo esc_html($attach->post_content) ?>" />
                                 <div class="wpadverts-slide-with-shadow"></div>
                             </a>
                             <?php else: ?>
-                                <img src="<?php echo adverts_get_post_img( $attach, array( "adverts_gallery", "full" ) ); ?>" title="<?php echo esc_html($attach->post_excerpt) ?>" alt="<?php echo esc_html($attach->post_content) ?>" />
+                                <img src="<?php echo esc_attr($image["url"]) ?>" class="<?php echo "wpadverts-slide-img wpadverts-slide-img-".$image["orient"] ?>" title="<?php echo esc_html($attach->post_excerpt) ?>" alt="<?php echo esc_html($attach->post_content) ?>" />
                                 <div class="wpadverts-slide-with-shadow"></div>
                             <?php endif; ?>
                         </div>
@@ -2361,7 +2395,7 @@ function adverts_single_rslides( $post_id ) {
                     <div class="wpadverts-slide wpadverts-slide-video" id="<?php echo "wpadverts-slide-".$attach->ID ?>">
 
                         <div class="wpadverts-video-player">
-                            <video src="<?php echo $attach->guid ?>" preload="metadata" poster="<?php echo adverts_get_post_img( $attach, array( 'adverts_gallery' ) ) ?>">
+                            <video src="<?php echo $attach->guid ?>" preload="metadata" poster="<?php echo adverts_get_post_img_url( $attach, array( 'adverts_gallery' ) ) ?>">
                                 Your browser cannot play this video. 
                                 Please use a different browser or download the video and play on your device.
                                 <a href="<?php echo $attach->guid ?>" class="adverts-button"><?php _e("Download", "adverts") ?></a>
@@ -2481,12 +2515,11 @@ function adverts_single_gallery_nav_pagination( $attachments ) {
         <div class="wpadverts-slide-nav-thumbnails-list" style="display: none">
             <ul id="wpadverts-rsliders-controls" class="wpadverts-als-wrapper als-wrapper" >
                 <?php foreach($attachments as $attach): ?>
-                <?php $upload = adverts_upload_item_data( $attach->ID ) ?>
                 <?php $media_desc = trim( $attach->post_excerpt . " - " . $attach->post_content, " -") ?>
 
-                <?php if( adverts_get_post_img( $attach, array( "adverts_upload_thumbnail" ) ) ): ?>
-                    <?php $thumb = adverts_get_post_img( $attach, array( "adverts_upload_thumbnail" ) ) ?>
-                    <li class="wpadverts-als-item als-item" data-slide="<?php echo "wpadverts-slide-".$attach->ID ?>">
+                <?php if( adverts_get_post_img_url( $attach, array( "adverts_upload_thumbnail" ) ) ): ?>
+                    <?php $thumb = adverts_get_post_img_url( $attach, array( "adverts_upload_thumbnail" ) ) ?>
+                    <li class="wpadverts-als-item als-item" data-advert-slide="<?php echo "wpadverts-slide-".$attach->ID ?>">
                         <a href="<?php echo esc_attr($attach->guid) ?>" title="<?php echo esc_attr( $attach->post_excerpt ) ?>" >
                             <img class="wpadverts-als-img" src="<?php echo $thumb ?>" alt="<?php echo esc_attr( $media_desc ) ?>" />
                         </a>
@@ -2495,7 +2528,7 @@ function adverts_single_gallery_nav_pagination( $attachments ) {
                         <?php endif; ?>
                     </li>
                 <?php else: ?>
-                    <li class="wpadverts-als-item als-item wpadverts-als-item-icon" data-slide="<?php echo "wpadverts-slide-".$attach->ID ?>">
+                    <li class="wpadverts-als-item als-item wpadverts-als-item-icon" data-advert-slide="<?php echo "wpadverts-slide-".$attach->ID ?>">
                         <a href="<?php echo esc_attr($attach->guid) ?>" title="<?php echo esc_attr( $attach->post_excerpt ) ?>">
                             <span class="<?php echo adverts_get_attachment_icon( $attach ) ?>" title="<?php echo esc_attr( $attach->post_excerpt ) ?>"></span>
                         </a>
@@ -2525,10 +2558,10 @@ function adverts_single_gallery_nav_thumbnails( $attachments ) {
                 <?php foreach($attachments as $attach): ?>
                 <?php $media_desc = trim( $attach->post_excerpt . " - " . $attach->post_content, " -") ?>
 
-                <?php if( adverts_get_post_img( $attach, array( "adverts_upload_thumbnail" ) ) ): ?>
-                    <?php $thumb = adverts_get_post_img( $attach, array( "adverts_upload_thumbnail" ) ) ?>
+                <?php if( adverts_get_post_img_url( $attach, array( "adverts_upload_thumbnail" ) ) ): ?>
+                    <?php $thumb = adverts_get_post_img_url( $attach, array( "adverts_upload_thumbnail" ) ) ?>
                     <li class="wpadverts-als-item als-item">
-                        <a href="<?php echo esc_attr($attach->guid) ?>" data-slide="<?php echo "wpadverts-slide-".$attach->ID ?>" title="<?php echo esc_attr( $attach->post_excerpt ) ?>" >
+                        <a href="<?php echo esc_attr($attach->guid) ?>" data-advert-slide="<?php echo "wpadverts-slide-".$attach->ID ?>" title="<?php echo esc_attr( $attach->post_excerpt ) ?>" >
                             <img class="wpadverts-als-img" src="<?php echo $thumb ?>" alt="<?php echo esc_attr( $media_desc ) ?>" />
                         </a>
                         <?php if(adverts_get_attachment_mime( $attach ) == "video"): ?>
@@ -2537,7 +2570,7 @@ function adverts_single_gallery_nav_thumbnails( $attachments ) {
                     </li>
                 <?php else: ?>
                     <li class="wpadverts-als-item als-item wpadverts-als-item-icon">
-                        <a href="<?php echo esc_attr($attach->guid) ?>" data-slide="<?php echo "wpadverts-slide-".$attach->ID ?>" title="<?php echo esc_attr( $attach->post_excerpt ) ?>">
+                        <a href="<?php echo esc_attr($attach->guid) ?>" data-advert-slide="<?php echo "wpadverts-slide-".$attach->ID ?>" title="<?php echo esc_attr( $attach->post_excerpt ) ?>">
                             <span class="<?php echo adverts_get_attachment_icon( $attach ) ?>" title="<?php echo esc_attr( $attach->post_excerpt ) ?>"></span>
                         </a>
                     </li>
@@ -2573,7 +2606,7 @@ function adverts_single_gallery_lightbox() {
                 <div class="wpadverts-slide-video" id="<?php echo "wpadverts-slide-full-".$attach->ID ?>" style="position: relative">
 
                     <div class="wpadverts-video-player">
-                        <video src="<?php echo $attach->guid ?>" preload="metadata" poster="<?php echo adverts_get_post_img( $attach, array( 'adverts_gallery' ) ) ?>">
+                        <video src="<?php echo $attach->guid ?>" preload="metadata" poster="<?php echo adverts_get_post_img_url( $attach, array( 'adverts_gallery' ) ) ?>">
                             Your browser cannot play this video. 
                             Please use a different browser or download the video and play on your device.
                             <a href="<?php echo $attach->guid ?>" class="adverts-button"><?php _e("Download", "adverts") ?></a>

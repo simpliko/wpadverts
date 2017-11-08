@@ -422,12 +422,13 @@ function adverts_gallery_image_restore() {
     }
     
     $meta = wp_get_attachment_metadata( $attach_id );
+    $attachment_dir = dirname( get_attached_file( $attach_id ) );
     $backup_sizes = get_post_meta( $attach_id, '_wp_attachment_backup_sizes', true );
 
     foreach( $restore as $r ) {
         if( isset( $backup_sizes[$r . '-orig'] ) ) {
-            wp_delete_file( $meta["sizes"][$r]["file"] );
-            $meta["sizes"][$r]["file"] = $backup_sizes[$r . '-orig']["file"];
+            wp_delete_file( $attachment_dir . "/" . $meta["sizes"][$r]["file"] );
+            $meta["sizes"][$r] = $backup_sizes[$r . '-orig'];
             unset( $backup_sizes[$r . '-orig'] );
         }
     }

@@ -1217,7 +1217,7 @@ function adverts_field_select( $field ) {
         }
     }
 
-    if(isset($field["options_callback"])) {
+    if(isset($field["options_callback"]) && !empty($field["options_callback"])) {
         $opt = call_user_func( $field["options_callback"] );
     } elseif(isset($field["options"])) {
         $opt = $field["options"];
@@ -1353,7 +1353,7 @@ function adverts_field_checkbox( $field ) {
         $value = $field["value"];
     }
     
-    if(isset($field["options_callback"])) {
+    if(isset($field["options_callback"]) && !empty($field["options_callback"])) {
         $opt = call_user_func( $field["options_callback"] );
     } elseif(isset($field["options"])) {
         $opt = $field["options"];

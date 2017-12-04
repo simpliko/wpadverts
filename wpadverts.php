@@ -65,7 +65,7 @@ $adverts_namespace['config'] = array(
 $adverts_namespace['gallery'] = array(
     'option_name' => 'adverts_gallery',
     'default' => array(
-        'ui' => 'thumbnails', // either paginator or thumbnails
+        'ui' => 'pagination', // either paginator or thumbnails
         'visible_items' => 5,
         'scrolling_items' => 1,
         'lightbox' => 1,
@@ -201,7 +201,7 @@ function adverts_init() {
         'adverts-gallery', 
         ADVERTS_URL . '/assets/js/adverts-gallery.js', 
         array( 'jquery', 'plupload-all', 'jquery-ui-sortable', 'jquery-effects-core', 'jquery-effects-fade', 'wp-util', 'jcrop'  ), 
-        "3", 
+        "4", 
         true
     );
     
@@ -209,7 +209,7 @@ function adverts_init() {
         'adverts-als',
         ADVERTS_URL . '/assets/js/jquery.als-1.7.min.js',
         array( 'jquery' ),
-        "1",
+        "1.7",
         true
     );
 

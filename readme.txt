@@ -98,6 +98,17 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
+= 1.2.0 - 2017-12-05 =
+
+* NEW: Image edition in WPAdverts Gallery (available for logged in users by default).
+* NEW: Video upload, note only web video (mp4, webm and ogg) is accepted.
+* NEW: Redesigned image gallery in the frontend with better optimization for mobile devices.
+* NEW: Additional Gallery options in wp-admin / Classifieds / Options / Core / Gallery.
+* NEW: Ability to display image gallery with thumbnails slider below image.
+* NEW: Lightbox allows displaying images and videos in fullscreen mode on click.
+* FIXED: "Contact Email" phrase marked for translation incorrectly.
+
+
 = 1.1.7 - 2017-11-08 =
 
 * NOTE: The update 1.2 is coming soon, this one is a quick patch to fix incompatibility with WP 4.9

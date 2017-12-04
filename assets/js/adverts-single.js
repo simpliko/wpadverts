@@ -232,13 +232,17 @@ WPADVERTS.Single.Player.prototype.PlayPause = function() {
         this.Nav.Player.addClass("wpadverts-video-is-playing");
         WPADVERTS.Single.Gallery.HideNavigation();
     } else {
-        this.video.pause();
-        this.Nav.Play.show();
-        this.Nav.Pause.hide();
-        this.Nav.Replay.hide();
-        this.Nav.Player.removeClass("wpadverts-video-is-playing");
-        WPADVERTS.Single.Gallery.ShowNavigation();
+        this.Pause();
     }
+};
+
+WPADVERTS.Single.Player.prototype.Pause = function() {
+    this.video.pause();
+    this.Nav.Play.show();
+    this.Nav.Pause.hide();
+    this.Nav.Replay.hide();
+    this.Nav.Player.removeClass("wpadverts-video-is-playing");
+    WPADVERTS.Single.Gallery.ShowNavigation();
 };
 
 WPADVERTS.Single.Player.prototype.Ended = function() {
@@ -290,6 +294,7 @@ WPADVERTS.Single.Player.prototype.Seek = function(e) {
 };
 
 WPADVERTS.Single.Player.prototype.FullScreen = function(e) {
+    this.Pause();
     this.Nav.Swipe.click();
 };
 

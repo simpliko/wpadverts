@@ -343,7 +343,11 @@ function adverts_gallery_image_stream() {
     if( $size ) {
         $upload = adverts_upload_item_data( $attach_id );
         $attached_file = dirname( $attached_file ) . "/" . basename( $upload["sizes"][$size]["url"] );
-        
+    } else {
+        $upload = adverts_upload_item_data( $attach_id );
+        if(isset($upload["sizes"]["full"]["is_intermidiate"]) && $upload["sizes"]["full"]["is_intermidiate"]) {
+            $attached_file = $upload["sizes"]["full"]["url"];
+        }
     }
 
     $image = wp_get_image_editor( $attached_file );
@@ -506,7 +510,7 @@ function adverts_gallery_image_save() {
     if( $size && $action_type == "edit" ) {
         $upload = adverts_upload_item_data( $attach_id );
         $attached_file = dirname( $attached_file ) . "/" . basename( $upload["sizes"][$size_dash]["url"] );
-    } else if($action_type == "create" && ! wp_attachment_is_image( $attach ) ) {
+    } else if($action_type == "create" ) {
         $upload = adverts_upload_item_data( $attach_id );
         $attached_file = dirname( $attached_file ) . "/" . basename( $upload["sizes"]["full"]["url"] );
     }

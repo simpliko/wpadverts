@@ -121,7 +121,7 @@ Adverts::instance()->set("form", array(
             "validator" => array(
                 array(
                     "name" => "upload_type",
-                    "params" => array( "allowed" => array( "image", "video", "audio" ) )
+                    "params" => array( "allowed" => array( "image", "video" ) )
                 )
             )
         ),

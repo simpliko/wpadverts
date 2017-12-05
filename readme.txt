@@ -106,8 +106,12 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 * NEW: Additional Gallery options in wp-admin / Classifieds / Options / Core / Gallery.
 * NEW: Ability to display image gallery with thumbnails slider below image.
 * NEW: Lightbox allows displaying images and videos in fullscreen mode on click.
-* FIXED: "Contact Email" phrase marked for translation incorrectly.
+* API: Added file upload validators
+* FIXED: "Send Message" phrase marked for translation incorrectly.
+* FIXED: It is now possible to disable Money filter in adverts_price field.
+* REMOVED: Responsive Slides jQuery plugin
 
+Read release notes here https://wpadverts.com/blog/video-uploads-and-image-editing-v1-2-0/
 
 = 1.1.7 - 2017-11-08 =
 

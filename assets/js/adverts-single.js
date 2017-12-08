@@ -102,7 +102,9 @@ WPADVERTS.Single.Gallery = {
     
     GoTo: function(index) {
         for(var i in this.Items) {
-            this.Items[i].hide();
+            if(typeof this.Items[parseInt(i)] === "object" && typeof this.Items[parseInt(i)].hide === "function") {
+                this.Items[parseInt(i)].hide();
+            }
         }
         this.Index = index;
         this.Items[this.Index].fadeIn("fast");

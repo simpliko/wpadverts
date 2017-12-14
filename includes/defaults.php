@@ -412,8 +412,8 @@ adverts_form_add_validator("upload_size", array(
     "params" => array(),
     "default_error" => "",
     "message" => array(
-        "too_big" => __( "The max. allowed file size is %max_size%.", "adverts" ),
-        "too_small" => __( "The min. allowed file size is %min_size%.", "adverts" )
+        "too_big" => __( "The max. allowed file size is %max%.", "adverts" ),
+        "too_small" => __( "The min. allowed file size is %min%.", "adverts" )
     ),
     "validate_empty" => false
 ));
@@ -441,7 +441,7 @@ adverts_form_add_validator("upload_dimensions", array(
         "incorrect_min_width" => __( "The image min. width should be %min_width%.", "adverts" ),
         "incorrect_max_width" => __( "The image max. width should be %max_width%.", "adverts" ),
         "incorrect_min_height" => __( "The image min. height should be %min_height%.", "adverts" ),
-        "incorrect_max_height" => __( "The image min. height should be %max_height%.", "adverts" ),
+        "incorrect_max_height" => __( "The image max. height should be %max_height%.", "adverts" ),
     ),
     "validate_empty" => false
 ));

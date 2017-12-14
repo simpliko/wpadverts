@@ -379,4 +379,27 @@ class Adverts_Form
         }
         return $result;
     }
+    
+    /**
+     * Returns Layout Type
+     * 
+     * The forms can use either "stacked" or aligned" layout. This method will
+     * return CSS class identifying the layout.
+     * 
+     * To modify the used class you can use adverts_form_layout filter
+     * 
+     * @uses adverts_form_layout filter
+     * 
+     * @since 1.2.1
+     * @return string       CSS Class name
+     */
+    public function get_layout() {
+        try {
+            $layout = $this->get_scheme( "layout" );
+        } catch (Exception $ex) {
+            $layout = "aligned";
+        }
+        
+        return apply_filters( "adverts_form_layout", "adverts-form-" . $layout, $layout );
+    }
 }

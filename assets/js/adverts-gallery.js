@@ -193,8 +193,8 @@ WPADVERTS.File.Uploader.prototype.FileUploaded = function(file, result) {
     this.Item[file.id].setResult(result);
     this.Item[file.id].render();
     
-    if( this.PostID === null ) {
-        this.PostID = result.post_id
+    if(typeof result.post_id !== "undefined") {
+        this.PostID = result.post_id;
     }
     
     if( jQuery( this.setup.conf.post_id_input ).val().length === 0 ) {
@@ -243,6 +243,14 @@ WPADVERTS.File.Uploader.Plupload.prototype.InitDragLeave = function() {
 
 WPADVERTS.File.Uploader.Plupload.prototype.BeforeUpload = function(up,file) {
     up.settings.multipart_params.post_id = this.PostID;
+    
+    var mp = up.settings.multipart_params;
+    var form = this.ui.closest("form");
+    form.find(".wpadverts-plupload-multipart-default").each(function(index, item) {
+        mp[jQuery(item).attr("name")] = jQuery(item).val();
+    });
+    
+    up.settings.multipart_params = mp;
 };
 
 WPADVERTS.File.Uploader.Plupload.prototype.FilesAdded = function(up, files){

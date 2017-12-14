@@ -57,7 +57,6 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
             '_ajax_nonce' => wp_create_nonce('adverts-gallery'),
             'action'      => 'adverts_gallery_upload',            // the ajax action name
             'form'        => 'adverts_add',
-            'form_scheme' => '',
             'field_name'       => $field_name
           
         ),

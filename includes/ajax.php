@@ -69,11 +69,12 @@ function adverts_gallery_upload() {
     $v = new Adverts_Upload_Helper;
     $field_name = adverts_request( "field_name" );
     $form_params = array(
-        "form_scheme" => adverts_request( "form_scheme" ),
+        "form_scheme" => adverts_request( "_form_scheme" ),
+        "form_scheme_id" => adverts_request( "_form_scheme_id" )
     );
     $form_scheme = apply_filters( "adverts_form_scheme", Adverts::instance()->get("form"), $form_params );
     $form_scheme = apply_filters( "adverts_form_load", $form_scheme );
-    
+
     foreach($form_scheme["field"] as $key => $field) {
         if($field["name"] == $field_name ) {
             if(isset($field["validator"]) && is_array($field["validator"])) {

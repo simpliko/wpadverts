@@ -1916,6 +1916,7 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 .adverts-form-stacked textarea {
     display: block;
     margin: 0.25em 0;
+    width: 100%;
 }
 
 /*
@@ -1926,6 +1927,21 @@ since IE8 won't execute CSS that contains a CSS3 selector.
     display: block;
     margin: 0.25em 0;
 }
+
+.adverts-form-stacked .adverts-control-group {
+    margin-top: 10px;
+}
+
+.adverts-form-stacked .adverts-control-group.adverts-field-header {
+    margin-top: 20px;
+    clear: both;
+    overflow: hidden;
+}
+
+.adverts-form-stacked .adverts-control-group > label {
+    font-weight: bold;
+}
+
 .adverts-form-aligned input,
 .adverts-form-aligned textarea,
 .adverts-form-aligned select,

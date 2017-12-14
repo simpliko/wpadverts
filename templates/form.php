@@ -7,18 +7,13 @@
  * @since 1.0
  * @var $form Adverts_Form
  */
-
-if( ! isset( $form_label_placement ) ) {
-    $form_label_placement = "adverts-form-aligned";
-}
-
 ?>
 
 <?php if( isset( $adverts_flash ) ): ?>
 <?php adverts_flash( $adverts_flash ) ?>
 <?php endif; ?>
 
-<form action="" method="post" class="adverts-form <?php echo esc_html( $form_label_placement ) ?>">
+<form action="" method="post" class="adverts-form <?php echo esc_html( $form->get_layout() ) ?>">
     <fieldset>
         
         <?php foreach($form->get_fields( array( "type" => array( "adverts_field_hidden" ) ) ) as $field): ?>

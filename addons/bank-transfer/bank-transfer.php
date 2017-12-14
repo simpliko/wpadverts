@@ -53,6 +53,7 @@ function adext_bank_transfer_register() {
         "form" => array(
             "payment_form" => array(
                 "name" => "adverts-bank-transfer",
+                "layout" => "aligned",
                 "action" => "",
                 "field" => array(
                     array(

@@ -787,22 +787,31 @@ function adverts_validate_upload_limit( $file, $params = null ) {
         $post_id = intval( adverts_request( "advert_id" ) );
     }
 
-    if( $post_id < 1 ) {
-        // first image upload.
-        return true;
+    if( defined( "DOING_AJAX" ) && DOING_AJAX ) {
+        $ignore_min_limit = true;
+    } else {
+        $ignore_min_limit = false;
     }
     
-    $attachments = get_children( array( 'post_parent' => $post_id ) );
-    $images = count( $attachments );
+    if( $post_id > 0 ) {
+        $attachments = get_children( array( 'post_parent' => $post_id ) );
+        $images = count( $attachments );
+    } else {
+        $images = 0;
+    }
     
     if( $file === null ) {
         $i = 0;
     } else {
         $i = 1;
     }
-    
+
     if( isset( $params["max"] ) && $images + $i > $params["max"] ) {
         return "max_limit";
+    }
+    
+    if( $ignore_min_limit ) {
+        return true;
     }
     
     if( $file === null && isset( $params["min"] ) && $images < $params["min"] ) {
@@ -828,7 +837,7 @@ function adverts_validate_upload_size( $file, $params = null ) {
         return true;
     }
     
-    $arr = array( "too_big" => "max_size", "too_small" => "min_size" );
+    $arr = array( "too_big" => "max", "too_small" => "min" );
     
     foreach( $arr as $err => $prop ) {
         
@@ -862,10 +871,10 @@ function adverts_validate_upload_size( $file, $params = null ) {
                 break;
         }
 
-        if( $prop == "max_size" && $file["size"] > $fsize ) {
+        if( $prop == "max" && $file["size"] > $fsize ) {
             return $err;
         }
-        if( $prop == "min_size" && $file["size"] < $fsize ) {
+        if( $prop == "min" && $file["size"] < $fsize ) {
             return $err;
         }
     }
@@ -979,15 +988,15 @@ function adverts_validate_upload_dimensions( $file, $params = null ) {
     }
     
     if( isset( $params["max_width"] ) && $params["max_width"] && $width > $params["max_width"] ) {
-        return "incorrect_min_width";
+        return "incorrect_max_width";
     }
-    
+
     if( isset( $params["min_height"] ) && $params["min_height"] && $height < $params["min_height"] ) {
         return "incorrect_min_height";
     }
     
     if( isset( $params["max_height"] ) && $params["max_height"] && $height > $params["max_height"] ) {
-        return "incorrect_min_height";
+        return "incorrect_max_height";
     }
     
     return true;

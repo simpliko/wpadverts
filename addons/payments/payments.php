@@ -622,6 +622,7 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
 
     $form = array(
         "name" => "advert-renew",
+        "layout" => "stacked",
         "field" => array(
             array(
                 "name" => "_adverts_renew",

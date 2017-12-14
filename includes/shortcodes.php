@@ -294,7 +294,7 @@ function shortcode_adverts_add( $atts ) {
     include_once ADVERTS_PATH . 'includes/class-form.php';
 
     $form_scheme = apply_filters( "adverts_form_scheme", Adverts::instance()->get("form"), $params );
-    
+
     $form = new Adverts_Form( $form_scheme );
     $valid = null;
     $error = array();
@@ -449,7 +449,7 @@ function shortcode_adverts_add( $atts ) {
         $content = ob_get_clean();
         
     }
-    
+
     return apply_filters("adverts_action_$action", $content, $form);
 }
 

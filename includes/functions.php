@@ -1910,6 +1910,7 @@ function adverts_currency_list( $currency = null, $get = null ) {
         array("code"=>"RIAL", "sign"=>"", "label"=>__("Iranian Rial", "adverts")),
         array("code"=>"RUB", "sign"=>"", "label"=>__("Russian Rubles", "adverts")),
         array("code"=>"ZAR", "sign"=>"R", "label"=>__("South African Rand", "adverts")),
+        array("code"=>"LKR", "sign"=>"Rs. ", "label"=>__("Sri Lankan Rupees", "adverts")),
     ));
     
     if( $currency == null ) {

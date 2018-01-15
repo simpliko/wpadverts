@@ -303,10 +303,11 @@ function adverts_price( $price ) {
 }
 
 /**
+ * Returns formatted price.
  * 
- * @param float $price  Price to format
- * @param int $post_id
- * @return string       Formatted Price
+ * @param float     $post_id    Price to format
+ * @param int       price
+ * @return string               Formatted Price
  */
 function adverts_get_the_price( $post_id = null, $price = null ) {
     
@@ -327,28 +328,49 @@ function adverts_get_the_price( $post_id = null, $price = null ) {
  * Function returns either the main image or first image on the list if the main
  * image was not selected.
  * 
- * @param int $id Post ID
  * @since 0.1
- * @return mixed Image URL or NULL
+ * @since 1.2.1 - The main image is a first image on the list if Featured image is not selected.
+ * 
+ * @param   int     $id     Post ID
+ * @return  mixed           Image URL or NULL
  */
 function adverts_get_main_image( $id ) {
     
-    $thumb_id = get_post_thumbnail_id( $id );
+    $thumb_id = get_post_thumbnail_id( $id );   
     
     if($thumb_id) {
         $image = wp_get_attachment_image_src( $thumb_id, 'adverts-list' );
-    } else {
-        foreach(get_children(array('post_parent'=>$id, 'numberposts'=>1)) as $tmp_post) {
-            $image = wp_get_attachment_image_src( $tmp_post->ID , 'adverts-list' ); 
+        
+        if(isset( $image[0] ) ) {
+            return $image[0];
         }
-    }
+    } 
     
-    if(isset($image[0])) {
-        return $image[0];
-    } else {
+    $children = get_children( array( 'post_parent' => $id ) );
+    $attach = array();
+
+    if( empty( $children ) ) {
         return null;
     }
+
+    if( isset( $children[$thumb_id] ) ) {
+        $attach[$thumb_id] = $children[$thumb_id];
+        unset($children[$thumb_id]);
+    }
+
+    $attach += $children;
+    $images = adverts_sort_images($attach, $id);
     
+    foreach($images as $tmp_post) {
+        $image = wp_get_attachment_image_src( $tmp_post->ID , 'adverts-list' ); 
+        
+        if(isset( $image[0] ) ) {
+            return $image[0];
+        }
+        
+    }
+    
+    return null;
 }
 
 /**

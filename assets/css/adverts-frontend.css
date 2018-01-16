@@ -262,6 +262,8 @@ a.adverts-manage-action:visited {
     border: none !important;
     box-shadow: none !important;
     font-size: 20px;
+    height: 28px;
+    line-height: 28px;
 }
 
 .adverts-loader.animate-spin {
@@ -1054,11 +1056,13 @@ body .wpadverts-slide .wpadverts-slide-description.wpadverts-slide-desc {
     max-height: 100%;
     border-radius: 0px !important;
     
+    /*
     position: absolute;
     top: -9999px;
     bottom: -9999px;
     left: -9999px;
     right: -9999px;
+    */
     margin: auto;
     
     width: 100%;

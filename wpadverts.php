@@ -5,7 +5,7 @@
  * Description: The lightweight WordPress classifieds plugin done right.
  * Author: Greg Winiarski
  * Text Domain: adverts
- * Version: 1.2.0
+ * Version: 1.2.1
  * 
  * Adverts is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -201,7 +201,7 @@ function adverts_init() {
         'adverts-gallery', 
         ADVERTS_URL . '/assets/js/adverts-gallery.js', 
         array( 'jquery', 'plupload-all', 'jquery-ui-sortable', 'jquery-effects-core', 'jquery-effects-fade', 'wp-util', 'jcrop'  ), 
-        "4", 
+        "5", 
         true
     );
     
@@ -272,10 +272,10 @@ function adverts_init() {
  */
 function adverts_init_frontend() {
     
-    wp_register_style( 'adverts-frontend', ADVERTS_URL . '/assets/css/adverts-frontend.css', array(), "8" );
+    wp_register_style( 'adverts-frontend', ADVERTS_URL . '/assets/css/adverts-frontend.css', array(), "9" );
     wp_register_style( 'adverts-swipebox', ADVERTS_URL . '/assets/css/swipebox.min.css', array(), "1.4.4" );
     
-    wp_register_script('adverts-single', ADVERTS_URL . '/assets/js/adverts-single.js', array( 'jquery' ), "1" );
+    wp_register_script('adverts-single', ADVERTS_URL . '/assets/js/adverts-single.js', array( 'jquery' ), "2" );
     wp_register_script('adverts-frontend', ADVERTS_URL . '/assets/js/adverts-frontend.js', array( 'jquery' ), "4" );
     wp_register_script('adverts-frontend-add', ADVERTS_URL . '/assets/js/adverts-frontend-add.js', array( 'jquery'), "2" );
     wp_register_script('adverts-frontend-manage', ADVERTS_URL . '/assets/js/adverts-frontend-manage.js', array( 'jquery'), "1" );

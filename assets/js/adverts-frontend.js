@@ -95,7 +95,7 @@ jQuery(function($) {
         
         e.preventDefault();
         
-        $(".adverts-loader").show();
+        $(".adverts-loader").css("display", "inline-block");
         //$(".adverts-loader").addClass("animate-spin");
         
         var data = {

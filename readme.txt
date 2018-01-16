@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classified script, classifieds sc
 Requires PHP: 5.3
 Requires at least: 4.0
 Tested up to: 4.9
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -68,6 +68,7 @@ See all https://wpadverts.com/extensions/
 * Polish
 * Portugese
 * Russian
+* Slovak
 * Slovenian
 * Spanish
 
@@ -97,6 +98,20 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.2.1 - 2018-01-22 =
+
+* TRANSLATION: Slovak
+* FEATURE: The first image in the Gallery will be used in [adverts_list] (unless featured image is selected).
+* FEATURE: [adverts_list] now accepts featured_only param to show only featured Ads.
+* FEATURE: The email and name are prefilled in the Contact Form if logged in user is viewing the page.
+* FEATURE: Sri Lankan Ruppes added to the currencies list.
+* FEATURE: Ability to display forms as either: stacked (input below label) or aligned (input next to label).
+* FIXED: Loading icon not spinning when clicking on "Show contact Information".
+* FIXED: Uploaded files validation not working properly.
+* FIXED: File upload not working with modified jQuery.
+
+Read release notes here https://wpadverts.com/blog/
 
 = 1.2.0 - 2017-12-05 =
 

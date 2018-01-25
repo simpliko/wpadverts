@@ -164,6 +164,13 @@ function adverts_admin_page_extensions() {
                     "plugin" => "wpadverts-category-icons/wpadverts-category-icons.php",
                     "purchase_url" => "https://wpadverts.com/extensions/wpadverts-category-icons/"
                 ),
+                "wpadverts-mark-as-sold" => array(
+                    "title" => __( "Mark As Sold", "adverts" ),
+                    "text" => __( "Allow users and administrators to mark the Ads as sold.", "adverts" ),
+                    "type" => "",
+                    "plugin" => "wpadverts-mark-as-sold/wpadverts-mark-as-sold.php",
+                    "purchase_url" => "https://wpadverts.com/extensions/wpadverts-mark-as-sold/"
+                ),
             )
         ),
         array(

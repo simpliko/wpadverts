@@ -201,7 +201,7 @@ function adverts_init() {
         'adverts-gallery', 
         ADVERTS_URL . '/assets/js/adverts-gallery.js', 
         array( 'jquery', 'plupload-all', 'jquery-ui-sortable', 'jquery-effects-core', 'jquery-effects-fade', 'wp-util', 'jcrop'  ), 
-        "5", 
+        "6", 
         true
     );
     

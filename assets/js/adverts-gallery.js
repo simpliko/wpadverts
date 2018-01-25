@@ -793,7 +793,7 @@ WPADVERTS.File.Browser.prototype.RotateCW = function(e) {
     this.dimHistory.push(this.dim);
     this.dim = [this.dim[1], this.dim[0]];
     
-    this.history.push({a: "ro", v: "90"});
+    this.history.push({a: "ro", v: "-90"});
     
     this.spinner.show();
     this.ImageLoad();
@@ -807,7 +807,7 @@ WPADVERTS.File.Browser.prototype.RotateCCW = function(e) {
     this.dimHistory.push(this.dim);
     this.dim = [this.dim[1], this.dim[0]];
     
-    this.history.push({a: "ro", v: "-90"});
+    this.history.push({a: "ro", v: "90"});
     
     this.spinner.show();
     this.ImageLoad();

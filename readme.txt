@@ -99,7 +99,7 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
-= 1.2.1 - 2018-01-22 =
+= 1.2.1 - 2018-01-29 =
 
 * TRANSLATION: Slovak
 * FEATURE: The first image in the Gallery will be used in [adverts_list] (unless featured image is selected).
@@ -110,6 +110,7 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 * FIXED: Loading icon not spinning when clicking on "Show contact Information".
 * FIXED: Uploaded files validation not working properly.
 * FIXED: File upload not working with modified jQuery.
+* FIXED: Image CW and CCW rotations mixed.
 
 Read release notes here https://wpadverts.com/blog/
 

@@ -65,20 +65,20 @@
                     <a href="#" class="adverts-manage-action-delete-no"><?php _e( "Cancel", "adverts" ) ?></a>
                 </div>
                 
-                <?php do_action( "adverts_sh_manage_actions_left", $post->ID ) ?>
+                <?php do_action( "adverts_sh_manage_actions_left", $post->ID, $baseurl ) ?>
             </span>
             <span class="adverts-manage-actions-right">
-                <?php do_action( "adverts_sh_manage_actions_right", $post->ID ) ?>
+                <?php do_action( "adverts_sh_manage_actions_right", $post->ID, $baseurl ) ?>
                 
                 <a href="#" class="adverts-manage-action adverts-manage-action-more"><span class="adverts-icon-menu"></span><?php _e("More", "adverts") ?></a>
             </span>
             
             <div class="adverts-manage-actions-more">
-                <?php do_action( "adverts_sh_manage_actions_more", $post->ID ) ?>
+                <?php do_action( "adverts_sh_manage_actions_more", $post->ID, $baseurl ) ?>
             </div>
         </div>
         
-        <?php do_action( "adverts_sh_manage_actions_after", $post->ID ) ?>
+        <?php do_action( "adverts_sh_manage_actions_after", $post->ID, $baseurl ) ?>
         
     </div>
     

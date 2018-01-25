@@ -8,7 +8,10 @@
         </div>
      
         <div class="advert-post-title">
-            <span title="<?php echo esc_attr( get_the_title() ) ?>" class="advert-link"><?php the_title() ?></span>
+            <span title="<?php echo esc_attr( get_the_title() ) ?>" class="advert-link">
+                <span class="advert-link-text"><?php the_title() ?></span>
+                <?php do_action( "adverts_list_after_title", get_the_ID() ) ?>
+            </span>
             <a href="<?php the_permalink() ?>" title="<?php echo esc_attr( get_the_title() ) ?>" class="advert-link-wrap"></a>
         </div>
         

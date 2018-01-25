@@ -19,9 +19,13 @@
 }
 
 .advert-item span.advert-link {
+    height:1.6em;
+    line-height: 1.6em;
+}
+
+.advert-item span.advert-link .advert-link-text {
     color: #21759b;
     font-size: 1.2em;
-    height:1.6em;
     font-weight: bold;
 }
 
@@ -815,6 +819,10 @@ div.adverts-flash-messages.adverts-flash-error {
 
 div.adverts-flash-messages.adverts-flash-info {
     background-color: #5bc3a2;
+}
+
+div.adverts-flash-messages.adverts-flash-warn {
+    background-color: #ffcc00;
 }
 
 div.adverts-flash-single {
@@ -2688,4 +2696,15 @@ ul.adverts-tabs li {
 .adverts-field-radio .adverts-form-input-group > div {
     /* display: block; */
     clear: both;
+}
+
+.wpadverts-list-item-marked-as-sold {
+    background-color: #ffcc00;
+    color: white;
+    font-weight: bold;
+    font-size: 11px;
+    padding: 2px 4px;
+    display: inline-block;
+    line-height: 16px;
+    margin-left: 4px;
 }

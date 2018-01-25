@@ -103,7 +103,7 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 * TRANSLATION: Slovak
 * FEATURE: The first image in the Gallery will be used in [adverts_list] (unless featured image is selected).
-* FEATURE: [adverts_list] now accepts featured_only param to show only featured Ads.
+* FEATURE: [adverts_list] now accepts list_type param which allows to show only Featured or Normal ads.
 * FEATURE: The email and name are prefilled in the Contact Form if logged in user is viewing the page.
 * FEATURE: Sri Lankan Ruppes added to the currencies list.
 * FEATURE: Ability to display forms as either: stacked (input below label) or aligned (input next to label).

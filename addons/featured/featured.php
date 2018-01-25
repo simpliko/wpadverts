@@ -311,7 +311,7 @@ function adext_featured_manage_list_status( $post ) {
 }
 
 /**
- * Adds featured_only param to shortcode
+ * Adds list_type param to shortcode
  * 
  * The param is being registered using shortcode_atts_adverts_list filter.
  * 
@@ -322,11 +322,11 @@ function adext_featured_manage_list_status( $post ) {
  * @return int
  */
 function adext_featured_adverts_list_params( $out, $pairs, $atts ) {
-    if( ! isset( $atts["featured_only"] ) ) {
-        $atts["featured_only"] = 0;
+    if( ! isset( $atts["list_type"] ) ) {
+        $atts["list_type"] = "all";
     }
     
-    $out["featured_only"] = $atts["featured_only"];
+    $out["list_type"] = $atts["list_type"];
     return $out;
 }
 
@@ -344,8 +344,18 @@ function adext_featured_adverts_list_params( $out, $pairs, $atts ) {
  */
 function adext_featured_adverts_list_query( $args, $params ) {
     
-    if( isset( $params["featured_only"] ) && $params["featured_only"] == "1" ) {
-        $args["menu_order"] = 1;
+    if( isset( $params["list_type"] ) ) {
+        switch( $params["list_type"] ) {
+            case "featured":
+                $args["menu_order"] = 1;
+                break;
+            case "normal":
+                $args["menu_order"] = 0;
+                break;
+            default:
+                // do nothing
+                break;
+        }
     }
     
     if( isset( $args["orderby"] ) && is_array( $args["orderby"] ) ) {

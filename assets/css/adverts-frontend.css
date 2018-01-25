@@ -25,7 +25,7 @@
 
 .advert-item span.advert-link .advert-link-text {
     color: #21759b;
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: bold;
 }
 
@@ -426,7 +426,7 @@ a.adverts-manage-action:visited {
 }
 
 .advert-item-col-1 .advert-post-title {
-    padding: 2px 0 2px 0;
+    padding: 4px 0 2px 0;
 }
 
 .advert-item-col-1 .advert-published {

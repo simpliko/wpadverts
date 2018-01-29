@@ -105,14 +105,14 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 * FEATURE: The first image in the Gallery will be used in [adverts_list] (unless featured image is selected).
 * FEATURE: [adverts_list] now accepts list_type param which allows to show only Featured or Normal ads.
 * FEATURE: The email and name are prefilled in the Contact Form if logged in user is viewing the page.
-* FEATURE: Sri Lankan Ruppes added to the currencies list.
+* FEATURE: Sri Lankan Rupees added to the currencies list.
 * FEATURE: Ability to display forms as either: stacked (input below label) or aligned (input next to label).
 * FIXED: Loading icon not spinning when clicking on "Show contact Information".
 * FIXED: Uploaded files validation not working properly.
 * FIXED: File upload not working with modified jQuery.
 * FIXED: Image CW and CCW rotations mixed.
 
-Read release notes here https://wpadverts.com/blog/
+Read release notes here https://wpadverts.com/blog/mark-as-sold-custom-fields/
 
 = 1.2.0 - 2017-12-05 =
 

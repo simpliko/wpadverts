@@ -75,7 +75,7 @@ function adverts_admin_page_extensions() {
     
     // Load modules config
     $module = adverts_config( 'module' );
-    $module_groups = array(
+    $module_groups = apply_filters( "wpadverts_module_groups", array(
         array(
             "title" => __( "Modules", "adverts" ),
             "modules" => array(
@@ -192,7 +192,7 @@ function adverts_admin_page_extensions() {
             )
         )
 
-    );
+    ) );
 
     if(adverts_request('enable')) {
         // User is trying to enable module

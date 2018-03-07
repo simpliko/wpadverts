@@ -77,7 +77,19 @@
     vertical-align: middle;
 }
 
-.adverts-license-link > span {
+body .plugin-title .adverts-license-link > span.dashicons {
     font-size: 16px;
     vertical-align: middle;
+    float: none;
+    padding: 0;
+    width: auto;
+    height: auto;
+}
+
+body .plugin-title .adverts-license-link > span.dashicons:before {
+    padding: 0;
+    background-color: transparent;
+    box-shadow: none;
+    font-size: 16px;
+    color: #0073aa
 }

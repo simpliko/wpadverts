@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classified script, classifieds sc
 Requires PHP: 5.3
 Requires at least: 4.0
 Tested up to: 4.9
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -98,6 +98,15 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.2.2 - 2018-03-07 =
+
+* TRANSLATION: Improved Brazilian Translation.
+* FEATURE: Ability to show an image on the left side in Recent Adverts widget.
+* FIXED: The padlock icon in wp-admin / Plugins list shows too big.
+* FIXED: Gallery shows black when jQuery 2.0 or newer is being used.
+* FIXED: Warning in Featured Ads module.
+* FIXED: Image gallery not showing (when Ad has some images uploaded).
 
 = 1.2.1 - 2018-01-29 =
 

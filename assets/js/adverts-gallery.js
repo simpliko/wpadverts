@@ -580,7 +580,6 @@ WPADVERTS.File.Browser.prototype.Render = function(result) {
     if(mime == "video") {
         this.RenderVideo();
     }
-
 };
 
 WPADVERTS.File.Browser.prototype.RenderVideo = function() {

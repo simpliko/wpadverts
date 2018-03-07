@@ -2522,10 +2522,12 @@ ul.adverts-tabs li {
 .adverts-widget-recent {
     clear: both;
     overflow: hidden;
-    padding: 10px 0 15px 0;
+    padding: 10px 0 10px 0;
 
     border-bottom: 1px solid #e5e5e5;
 }
+
+
 
 .adverts-widget-recent:hover {
     background: #f9f9f9;
@@ -2554,7 +2556,7 @@ ul.adverts-tabs li {
 .adverts-widget-recent .adverts-widget-recent-location {
     display: inline-block;
     float: left;
-    width: 75%;
+    margin: 0 5px 0 0;
 
     color: #666;
 }
@@ -2569,6 +2571,39 @@ ul.adverts-tabs li {
 
     color: #b34040;
     font-weight: bold;
+}
+
+.adverts-widget-recent .advert-widget-recent-item-img {
+    width: 65px;
+    height: 45px;
+    float: left;
+}
+
+.adverts-widget-recent .advert-widget-recent-item-img > img {
+    max-width: 60px;
+    max-height: 42px;
+    margin: 0 5px 0 0;
+    border-radius: 0;
+    box-shadow: none;
+    display: block;
+}
+
+.adverts-widget-recent .advert-widget-recent-item-img .advert-widget-recent-item-img-blank {
+    width: 60px;
+    height: 42px;
+    float: left;
+    background: whitesmoke;
+}
+
+
+
+.adverts-widget-recent .advert-widget-recent-item-text {
+    
+}
+
+.adverts-widget-recent .advert-widget-recent-item-text.advert-widget-recent-item-with-img {
+    float: left;
+    width: calc( 100% - 65px );
 }
 
 @media all and (min-width: 760px) {

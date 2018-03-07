@@ -445,7 +445,7 @@ function adext_payments_action_payment($content, Adverts_Form $form ) {
     
     $post_id = adverts_request( "_post_id" );
     $post = get_post( $post_id );
-    
+
     wp_update_post( array( 
         "ID" => $post_id,
         "post_status" => "advert-pending"

@@ -82,7 +82,13 @@ class Adverts_Gallery_Helper {
     public function load_attachments( ) {
         
         $post_id = $this->_post_id;
-        $children = get_children( array( 'post_parent' => $post_id ) );
+        $args = array(
+            'post_parent' => $post_id,
+            'post_type' => 'attachment',
+            'posts_per_page' => -1,
+        );
+        
+        $children = get_children( $args );
         $thumb_id = get_post_thumbnail_id( $post_id );
         $attach = array();
 

@@ -84,6 +84,11 @@ class Adverts_Widget_Ads extends WP_Widget
                 "append" => array( "step" => 1, "placeholder" => 5 )
             ),
             array(
+                "name" => "show_image",
+                "label" => __( "Show images on the list.", "adverts" ),
+                "type" => "checkbox",
+            ),
+            array(
                 "name" => "keyword",
                 "label" => __( "Keyword", "adverts" ),
                 "type" => "text"
@@ -330,6 +335,7 @@ class Adverts_Widget_Ads extends WP_Widget
         $instance['price_max'] = intval($new_instance['price_max']);
         $instance['sort'] = $new_instance['sort'];
         $instance['order'] = $new_instance['order'];
+        $instance['show_image'] = intval( isset( $new_instance['show_image'] ) ? $new_instance['show_image'] : 0 );
         
         $modules = adverts_config('config.module');
         
@@ -424,6 +430,12 @@ class Adverts_Widget_Ads extends WP_Widget
                 break;
         }
         
+        if( isset( $instance["show_image"] ) && $instance["show_image"] == "1" ) {
+            $show_image = true;
+        } else {
+            $show_image = false;
+        }
+        
         $params = apply_filters( "adverts_widget_list_query", array( 
             'post_type' => 'advert', 
             'post_status' => 'publish',
@@ -460,23 +472,36 @@ class Adverts_Widget_Ads extends WP_Widget
                 <?php $location = esc_html( get_post_meta( get_the_ID(), "adverts_location", true ) ) ?>
                 <div class="<?php echo adverts_css_classes( 'adverts-widget-recent', get_the_ID() ) ?>">
                     
-                    <div class="advert-widget-recent-item">
-                        <span class="adverts-widget-recent-title">
-                            <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
-                        </span>
-                    </div>
-                    
-                    <?php if( $location ): ?>
-                    <div class="adverts-widget-recent-location">
-                        <span class=" adverts-icon-location">
-                        <?php echo ( $location ) ?>
-                        </span>
+                    <?php if( $show_image ): ?>
+                    <?php $image = adverts_get_main_image( get_the_ID() ) ?>
+                    <div class="advert-widget-recent-item-img">
+                        <?php if($image): ?>
+                            <img src="<?php echo esc_attr($image) ?>" alt="" class="advert-item-grow" />
+                        <?php else: ?>
+                            <div class="advert-widget-recent-item-img-blank"></div>
+                        <?php endif; ?>
                     </div>
                     <?php endif; ?>
                     
-                    <?php if( $price ): ?>
-                    <span class="advert-widget-recent-price"><?php echo esc_html( $price ) ?></span>
-                    <?php endif; ?>
+                    <div class="advert-widget-recent-item-text <?php if($show_image): ?>advert-widget-recent-item-with-img<?php endif; ?>">
+                        <div class="advert-widget-recent-item">
+                            <span class="adverts-widget-recent-title">
+                                <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+                            </span>
+                        </div>
+
+                        <?php if( $location ): ?>
+                        <div class="adverts-widget-recent-location">
+                            <span class=" adverts-icon-location">
+                            <?php echo ( $location ) ?>
+                            </span>
+                        </div>
+                        <?php endif; ?>
+
+                        <?php if( $price ): ?>
+                        <span class="advert-widget-recent-price"><?php echo esc_html( $price ) ?></span>
+                        <?php endif; ?>
+                    </div>
                     
                 </div>
                 <?php endwhile; ?>

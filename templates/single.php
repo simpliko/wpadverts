@@ -13,7 +13,9 @@
 <div class="adverts-single-box">
     <div class="adverts-single-author">
         <div class="adverts-single-author-avatar">
-            <?php echo get_avatar( get_post_meta($post_id, 'adverts_email', true), 48 ) ?>
+            <?php $id_or_email = get_post_field( 'post_author', $post_id ) ?>
+            <?php $id_or_email = $id_or_email ? $id_or_email : get_post_meta($post_id, 'adverts_email', true) ?>
+            <?php echo get_avatar( $id_or_email, 48 ) ?>
         </div>
         <div class="adverts-single-author-name">
             <?php echo apply_filters( "adverts_tpl_single_posted_by", sprintf( __("by <strong>%s</strong>", "adverts"), get_post_meta($post_id, 'adverts_person', true) ), $post_id ) ?><br/>

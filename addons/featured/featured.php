@@ -342,7 +342,7 @@ function adext_featured_adverts_list_params( $out, $pairs, $atts ) {
  * @param array     $params     [adverts_list] shortcode params 
  * @return array                Updated list of WP_Query arguments
  */
-function adext_featured_adverts_list_query( $args, $params ) {
+function adext_featured_adverts_list_query( $args, $params = array() ) {
     
     if( isset( $params["list_type"] ) ) {
         switch( $params["list_type"] ) {

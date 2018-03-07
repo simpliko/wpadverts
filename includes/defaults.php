@@ -223,6 +223,14 @@ adverts_form_add_field("adverts_field_text", array(
     "callback_bind" => "adverts_bind_single",
 ));
 
+// Register <input type="password" /> input
+/** @see adverts_field_text() */
+adverts_form_add_field("adverts_field_password", array(
+    "renderer" => "adverts_field_password",
+    "callback_save" => "adverts_save_single",
+    "callback_bind" => "adverts_bind_single",
+));
+
 // Register <textarea></textarea> input
 /** @see adverts_field_textarea() */
 adverts_form_add_field("adverts_field_textarea", array(

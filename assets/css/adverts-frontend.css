@@ -1676,6 +1676,7 @@ https://github.com/yui/pure/blob/master/LICENSE.md
 }
 
 .adverts-form.adverts-form-aligned .adverts-control-group.adverts-field-text label,
+.adverts-form.adverts-form-aligned .adverts-control-group.adverts-field-password label,
 .adverts-form.adverts-form-aligned .adverts-control-group.adverts-field-select label,
 .adverts-form.adverts-form-aligned .adverts-control-group[class*='adverts-field-text-'] label,
 .adverts-form.adverts-form-aligned .adverts-control-group[class*='adverts-field-select-'] label {

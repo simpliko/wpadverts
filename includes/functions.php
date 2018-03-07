@@ -1184,6 +1184,46 @@ function adverts_field_text( $field ) {
     echo $html->render();
 }
 
+
+/**
+ * Form input text renderer
+ * 
+ * Prints (to browser) HTML for <input type="text" /> input
+ * 
+ * $field params:
+ * - name: string
+ * - value: mixed (scalar or array)
+ * - class: string (HTML class attribute)
+ * - placeholder: string
+ * 
+ * @param array $field
+ * @since 0.1
+ * @return void
+ */
+function adverts_field_password( $field ) {
+    
+    $attr = array(
+        "type" => "password",
+        "name" => $field["name"],
+        "id" => $field["name"],
+        "value" => isset($field["value"]) ? $field["value"] : "",
+        "placeholder" => isset($field["placeholder"]) ? $field["placeholder"] : null,
+        "class" => isset($field["class"]) ? $field["class"] : null
+    );
+    
+    if( isset( $field["attr"] ) && is_array( $field["attr"] ) ) {
+        foreach( $field["attr"] as $key => $value ) {
+            if( $value !== null && is_scalar( $value ) ) {
+                $attr[$key] = $value;
+            }
+        }
+    }
+    
+    $html = new Adverts_Html( "input", $attr );
+    
+    echo $html->render();
+}
+
 /**
  * Form dropdown renderer
  * 

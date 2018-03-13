@@ -99,10 +99,13 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
-= 1.2.2 - 2018-03-07 =
+= 1.2.2 - 2018-03-13 =
 
 * TRANSLATION: Improved Brazilian Translation.
 * FEATURE: Ability to show an image on the left side in Recent Adverts widget.
+* FEATURE: On Advert details page user ID will be used to get an Avatar, the adverts_email will be used as a fallback.
+* API: adverts_field_password added to the Forms API
+* API: filter wpadverts_module_groups added to allow dynamic group adding in wp-admin / Classifieds / Options
 * FIXED: The padlock icon in wp-admin / Plugins list shows too big.
 * FIXED: Gallery shows black when jQuery 2.0 or newer is being used.
 * FIXED: Warning in Featured Ads module.

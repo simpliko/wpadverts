@@ -111,6 +111,13 @@ function adverts_admin_page_extensions() {
                     "type" => "",
                     "plugin" => "wpadverts-custom-fields/wpadverts-custom-fields.php",
                     "purchase_url" => "https://wpadverts.com/extensions/custom-fields/"
+                ),
+                "authors" => array(
+                    "title" => __("Authors", "adverts"),
+                    "text" => __("Using Authors module users can create their profiles with list of authors ads.", "adverts"),
+                    "type" => "",
+                    "plugin" => "wpadverts-authors/wpadverts-authors.php",
+                    "purchase_url" => "https://wpadverts.com/extensions/authors/"
                 )
             )
         ),

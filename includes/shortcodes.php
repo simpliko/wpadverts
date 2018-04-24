@@ -353,6 +353,8 @@ function shortcode_adverts_add( $atts ) {
         
         $form->bind( $bind );
         
+        $actions_class = "adverts-field-actions";
+        
         // adverts/templates/add.php
         ob_start();
         include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/add.php' );
@@ -696,6 +698,7 @@ function _adverts_manage_edit( $atts ) {
     
     $adverts_flash = array( "error" => $error, "info" => $info );
     $baseurl = apply_filters( "adverts_manage_baseurl", get_the_permalink() );
+    $actions_class = "adverts-field-actions";
     
     // adverts/templates/manage-edit.php
     include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/manage-edit.php' );

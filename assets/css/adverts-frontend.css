@@ -1660,6 +1660,21 @@ https://github.com/yui/pure/blob/master/LICENSE.md
     padding: 0 0 0 0.3em;
 }
 
+.adverts-form.adverts-form-aligned .adverts-control-group > textarea {
+    margin: 0 0 0 0.3em;
+}
+
+.adverts-form.adverts-form-aligned .adverts-control-group > div.adverts-form-input-group-checkbox,
+.adverts-form.adverts-form-aligned .adverts-control-group > div.adverts-form-input-group-radio {
+    padding: 0 0 0 0;
+}
+
+.adverts-form .adverts-control-group.adverts-field-actions {
+    margin: 1.5rem 0 1.5rem 0;
+    padding: 1rem 0 1rem 0;
+    border-top: 2px solid silver;
+}
+
 .adverts-form .adverts-control-group > div.adverts-field-header {
     width: 100%;
     border-bottom: 2px solid silver;

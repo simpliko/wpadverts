@@ -42,6 +42,8 @@ function _adext_core_page_options_main() {
     $button_text = __("Update Options", "adverts");
     
     wp_enqueue_style( 'adverts-admin' );
+    wp_enqueue_script( 'adverts-admin-config-core' );
+        
     $flash = Adverts_Flash::instance();
     $error = array();
     
@@ -55,9 +57,11 @@ function _adext_core_page_options_main() {
         if($valid) {
             
             $data = $form->get_values();
+            $data['expired_ad_public_cap'] = adverts_request( 'expired_ad_public_cap' );
+            
             $data["module"] = adverts_config( 'config.module' );
             $data["license"] = adverts_config( 'config.license' );
-            
+
             update_option("adverts_config", $data );
             $flash->add_info( __("Settings updated.", "adverts") );
         } else {
@@ -345,6 +349,42 @@ Adverts::instance()->set("form_core_config", array(
             "type" => "adverts_field_text",
             "order" => 10,
             "label" => __("Thousands Separator", "adverts"),
+        ),
+        array(
+            "name" => "_expired_ads_settings",
+            "type" => "adverts_field_header",
+            "order" => 10,
+            "label" => __( 'Expired Ads Handling', 'adverts' ),
+            "title" => __( 'Expired Ads Handling', 'adverts' )
+        ),
+        array(
+            "name" => "expired_ad_status",
+            "type" => "adverts_field_radio",
+            "order" => 10,
+            "label" => __("Expired Ad HTTP Status", "adverts"),
+            "class" => "expired_ad_status",
+            "options" => array(
+                array("value"=>"404", "text"=>__("<strong>404</strong> — Show 'Page Not Found' Error", "adverts")),
+                array("value"=>"301", "text"=>__("<strong>301</strong> — Redirect to a different page ...", "adverts")),
+                array("value"=>"200", "text"=>__("<strong>200</strong> — Show Ad details page with contact options disabled.", "adverts")),
+            )
+        ),
+        array(
+            "name" => "expired_ad_redirect_url",
+            "type" => "adverts_field_text",
+            "order" => 10,
+            "label" => __("Redirect URL", "adverts"),
+            "placeholder" => "e.g. https://example.com/"
+        ),
+        array(
+            "name" => "expired_ad_public_cap",
+            "type" => "adverts_field_select",
+            "order" => 10,
+            "label" => __("Always Visible For", "adverts"),
+            "empty_option" => true,
+            "empty_option_text" => "",
+            "options_callback" => "adverts_get_roles_dropdown",
+            "hint" => __( "Cabability (or Role) required to always see expired Ads details pages.", "adverts" )
         ),
     )
 ));

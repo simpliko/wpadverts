@@ -5,7 +5,10 @@
  * This template is being used tot generate most of the frontend forms in Adverts
  * 
  * @since 1.0
- * @var $form Adverts_Form
+ * @var $form           Adverts_Form    Form Object
+ * @var $buttons        array           Array of buttons to display below the form
+ * @var $actions_class  string          A class name to display in the last div in the form (the div with submit button)
+ * @var $adverts_flash  array           Array with flash messages
  */
 ?>
 
@@ -40,7 +43,9 @@
                     <span class="adverts-form-required">*</span>
                     <?php endif; ?>
                 <?php endif; ?>
-            </label><?php call_user_func( adverts_field_get_renderer($field), $field) ?>
+            </label>
+                
+            <?php call_user_func( adverts_field_get_renderer($field), $field) ?>
 
             <?php endif; ?>
             
@@ -56,7 +61,7 @@
         <?php endforeach; ?>
         
         <?php if( isset($buttons) && is_array($buttons) ): ?>
-        <div  style="">
+        <div class="adverts-control-group <?php echo isset($actions_class) ? $actions_class : '' ?>">
             <?php include_once ADVERTS_PATH . "/includes/class-html.php"; ?>
             <?php foreach($buttons as $button): ?>
             <?php echo Adverts_Html::build($button["tag"], array_replace($button, array("tag"=>null, "html"=>null)), $button["html"]) ?>

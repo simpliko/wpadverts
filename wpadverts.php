@@ -5,7 +5,7 @@
  * Description: The lightweight WordPress classifieds plugin done right.
  * Author: Greg Winiarski
  * Text Domain: adverts
- * Version: 1.2.2
+ * Version: 1.2.3
  * 
  * Adverts is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -58,7 +58,11 @@ $adverts_namespace['config'] = array(
         'ads_list_default__columns' => 2,
         'ads_list_default__display' => 'grid',
         'ads_list_default__switch_views' => 0,
-        'ads_list_default__posts_per_page' => 20
+        'ads_list_default__posts_per_page' => 20,
+        'expired_ad_status' => '404', // one of: 404, 200, 301
+        'expired_ad_redirect_url' => '',
+        'expired_ad_public_cap' => 'edit_pages'
+        
     )
 );
 
@@ -105,9 +109,31 @@ function adverts_init() {
     
     load_plugin_textdomain("adverts", false, dirname(plugin_basename(__FILE__))."/languages/");
     
+    $expired_status = adverts_config( 'expired_ad_status' );
+    $public_cap = adverts_config( 'expired_ad_public_cap' );
+    if( is_admin() ) {
+        // current user is viewing admin panel
+        $expired_is_public = is_admin();
+    } else if( $public_cap && current_user_can( $public_cap ) ) {
+        // current user can always see expired Ads.
+        $expired_is_public = true;
+        add_action( "wp", "adverts_handle_expired_ads" );
+    } else if( $expired_status == '404' ) {
+        // show 404 page
+        $expired_is_public = false;
+    } else if( $expired_status == '301' ) {
+        // redirect (301) to some other page.
+        $expired_is_public = true;
+        add_action( "template_redirect", "adverts_template_redirect_expired" );
+    } else {
+        // most likely 200
+        $expired_is_public = true;
+        add_action( "wp", "adverts_handle_expired_ads" );
+    }
+    
     register_post_status( 'expired', array(
         'label'          => _x( 'Expired', 'post' ),
-        'public'         => is_admin(),
+        'public'         => $expired_is_public,
         'internal'       => false,
         'label_count'    => _n_noop( 'Expired <span class="count">(%s)</span>', 'Expired <span class="count">(%s)</span>' )
      ) );
@@ -337,6 +363,7 @@ function adverts_init_admin() {
     add_action( 'add_meta_boxes', 'adverts_box_gallery' );
     
     wp_register_script('adverts-admin', ADVERTS_URL . '/assets/js/adverts-admin.js', array( 'jquery' ), "3", true);
+    wp_register_script('adverts-admin-config-core', ADVERTS_URL . '/assets/js/adverts-admin-config-core.js', array( 'jquery' ), "1", true);
     wp_register_style('adverts-admin', ADVERTS_URL . '/assets/css/adverts-admin.css', array(), "4" );
     
     wp_register_script( 'adverts-admin-updates', ADVERTS_URL . '/assets/js/adverts-admin-updates.js', array( 'jquery' ), false, true );

@@ -17,7 +17,12 @@
         <div class="adverts-control-group <?php echo esc_attr( str_replace("_", "-", $field["type"] ) . " adverts-field-name-" . $field["name"] ) ?> <?php if(adverts_field_has_errors($field)): ?>adverts-field-error<?php endif; ?>">
             
             <?php if($field["type"] == "adverts_field_header"): ?>
-            <h3 style="border-bottom:2px solid silver"><?php echo esc_html($field["label"]) ?></h3>
+            <div class="adverts-field-header">
+                <span class="adverts-field-header-title"><?php echo esc_html($field["label"]) ?></span>
+                <?php if( isset( $field["description"] ) ): ?>
+                <span class="adverts-field-header-description"><?php echo esc_html( $field["description"] ) ?></span>
+                <?php endif; ?>
+            </div>
             <?php else: ?>
             
             <label for="<?php esc_attr_e($field["name"]) ?>">
@@ -42,7 +47,7 @@
         </div>
         <?php endforeach; ?>
         
-        <div  style="border-top:2px solid silver; padding: 1em 0 1em 0">
+        <div  class="adverts-control-group <?php echo isset($actions_class) ? $actions_class : '' ?>" stylex="border-top:2px solid silver; padding: 1em 0 1em 0">
 
             <input type="submit" name="submit" value="<?php _e("Update", "adverts") ?>" style="font-size:1.2em" />
         </div>

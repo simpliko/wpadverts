@@ -101,8 +101,7 @@ msgstr "Nazwa metody płatności"
 
 #: addons/bank-transfer/includes/admin-pages.php:61
 msgid "Payment gateway name visible in the frontend when making a payment."
-msgstr ""
-"Nazwa bramki płatności widoczna na stronie kiedy dokonywana jest płatność"
+msgstr "Nazwa bramki płatności widoczna na stronie kiedy dokonywana jest płatność"
 
 #: addons/bank-transfer/includes/admin-pages.php:70
 #: addons/contact-form/contact-form.php:240
@@ -110,17 +109,8 @@ msgid "Message"
 msgstr "Wiadomość"
 
 #: addons/bank-transfer/includes/admin-pages.php:73
-msgid ""
-"User will see this message when asked to make payment, make sure that "
-"instructions here will make it as easy as possible to make a payment.<br/>"
-"Allowed variables:<br/>- {total} - total amount to pay (for example $10.00)"
-"<br/>- {order_number} - unique order number<br/>To revert to default message "
-"remove whole text from editor and save the form."
-msgstr ""
-"Użytkownik zobaczy tą wiadomość kiedy będzie pytany o płatność. Upewnij się "
-"że instrukcje tu zawarte są możliwie łatwe do zrozumienia.<br/>Dozwolone "
-"wartości:<br/>- {total} - całkowita kwota do zapłaty (na przykład 10,00 zł)"
-"<br/>- {order_number} - unikalny numer zamówienia<br/>"
+msgid "User will see this message when asked to make payment, make sure that instructions here will make it as easy as possible to make a payment.<br/>Allowed variables:<br/>- {total} - total amount to pay (for example $10.00)<br/>- {order_number} - unique order number<br/>To revert to default message remove whole text from editor and save the form."
+msgstr Użytkownik zobaczy tą wiadomość kiedy będzie pytany o płatność. Upewnij się że instrukcje tu zawarte są możliwie łatwe do zrozumienia.<br/>Dozwolone wartości:<br/>- {total} - całkowita kwota do zapłaty (na przykład 10,00 zł)<br/>- {order_number} - unikalny numer zamówienia<br/>"
 
 #: addons/contact-form/admin/options.php:15 includes/admin-pages.php:127
 msgid "Contact Form"
@@ -485,18 +475,12 @@ msgid "Free"
 msgstr "Darmowe"
 
 #: addons/payments/includes/admin-pages.php:75
-msgid ""
-"Enable at least one <a href='%s'>Payment Gateway</a> before selecting "
-"default."
-msgstr ""
-"Włącz co najmniej jedną <a href='%s'>Bramkę płatności</a> przed wybraniem "
-"domyślnej."
+msgid "Enable at least one <a href='%s'>Payment Gateway</a> before selecting default."
+msgstr "Włącz co najmniej jedną <a href='%s'>Bramkę płatności</a> przed wybraniem domyślnej."
 
 #: addons/payments/includes/admin-pages.php:88
 msgid "Create at least one <a href='%s'>Pricing</a> before selecting default."
-msgstr ""
-"Utwórz co najmniej jeden <a href='%s'>Cennik</a> przed wybraniem opcji "
-"domyślnych."
+msgstr "Utwórz co najmniej jeden <a href='%s'>Cennik</a> przed wybraniem opcji domyślnych."
 
 #: addons/payments/includes/admin-pages.php:127
 #: addons/payments/includes/admin-pages.php:128
@@ -541,16 +525,12 @@ msgstr[1] "%s ceny usunięte."
 msgstr[2] "%s cen usunięte."
 
 #: addons/payments/includes/admin-pages.php:271
-msgid ""
-"Payment Method [%s] assigned to this Payment does not exist or was disabled."
-msgstr ""
-"Metoda Płatności [%s] przypisana do tej Płatności nie istnieje lub została "
-"wyłączona."
+msgid "Payment Method [%s] assigned to this Payment does not exist or was disabled."
+msgstr "Metoda Płatności [%s] przypisana do tej Płatności nie istnieje lub została wyłączona."
 
 #: addons/payments/includes/admin-pages.php:288
 msgid "<strong>%1$s</strong> changed payment status to <strong>%2$s</strong>"
-msgstr ""
-"<strong>%1$s</strong> zmienił status płatności na <strong>%2$s</strong>"
+msgstr "<strong>%1$s</strong> zmienił status płatności na <strong>%2$s</strong>"
 
 #: addons/payments/includes/admin-pages.php:300
 msgid "Payment updated."
@@ -723,11 +703,8 @@ msgid "Core"
 msgstr "Rdzeń"
 
 #: includes/admin-pages.php:84
-msgid ""
-"Here you can configure most basic Adverts options, applicable on any site."
-msgstr ""
-"Tutaj można skonfigurować większość podstawowych opcji ogłoszeń dla całej "
-"witryny."
+msgid "Here you can configure most basic Adverts options, applicable on any site."
+msgstr "Tutaj można skonfigurować większość podstawowych opcji ogłoszeń dla całej witryny."
 
 #: includes/admin-pages.php:89
 msgid "Payments"
@@ -735,8 +712,7 @@ msgstr "Płatności"
 
 #: includes/admin-pages.php:90
 msgid "Charge users for posting classified ads on your site."
-msgstr ""
-"Pobierania opłat od użytkowników za umieszczanie ogłoszeń na swojej stronie."
+msgstr "Pobierania opłat od użytkowników za umieszczanie ogłoszeń na swojej stronie."
 
 #: includes/admin-pages.php:95
 msgid "WooCommerce Payments"
@@ -751,24 +727,16 @@ msgid "BuddyPress Integration"
 msgstr "Integracja z BuddyPressem"
 
 #: includes/admin-pages.php:103
-msgid ""
-"Integrate user Ads with BuddyPress profiles, registration and private "
-"messages."
-msgstr ""
-"Zintegruj Ogłoszenia użytkownika z profilami, rejestracją i prywatnymi "
-"wiadomościami BuddyPressa."
+msgid "Integrate user Ads with BuddyPress profiles, registration and private messages."
+msgstr "Zintegruj Ogłoszenia użytkownika z profilami, rejestracją i prywatnymi wiadomościami BuddyPressa."
 
 #: includes/admin-pages.php:109
 msgid "Custom Fields"
 msgstr "Własne Pola"
 
 #: includes/admin-pages.php:110
-msgid ""
-"Allow users to edit: Add, Search and Contact forms using easy to use drag "
-"and drop editor."
-msgstr ""
-"Zezwalaj użytkownikom na edytowanie: Dodaj, Szukaj i Formularz Kontaktowy "
-"uzywa łatwego w obsłudze edytora \"przeciągnij i upuść:\""
+msgid "Allow users to edit: Add, Search and Contact forms using easy to use drag and drop editor."
+msgstr "Zezwalaj użytkownikom na edytowanie: Dodaj, Szukaj i Formularz Kontaktowy uzywa łatwego w obsłudze edytora \"przeciągnij i upuść:\""
 
 #: includes/admin-pages.php:118
 msgid "Features"
@@ -776,17 +744,11 @@ msgstr "Funkcje"
 
 #: includes/admin-pages.php:122
 msgid "Allow users to post Ads displayed always at the top of the list."
-msgstr ""
-"Zezwala użytkownikom publikować Ogłoszenia, które są zawsze wyświetlane na "
-"górze listy."
+msgstr "Zezwala użytkownikom publikować Ogłoszenia, które są zawsze wyświetlane na górze listy."
 
 #: includes/admin-pages.php:128
-msgid ""
-"Display contact form on Ad details pages instead of just the contact "
-"information."
-msgstr ""
-"Wyświetlaj formularz kontaktowy na stronach szczegółów ogłoszenia, zamiast "
-"samych informacji kontaktowych."
+msgid "Display contact form on Ad details pages instead of just the contact information."
+msgstr "Wyświetlaj formularz kontaktowy na stronach szczegółów ogłoszenia, zamiast samych informacji kontaktowych."
 
 #: includes/admin-pages.php:133
 msgid "Maps And Locations"
@@ -801,36 +763,25 @@ msgid "Fee Per Category"
 msgstr "Opłata za kategorię"
 
 #: includes/admin-pages.php:141
-msgid ""
-"Set fee for Ads posting per category or allow to post for free in some "
-"categories."
-msgstr ""
-"Ustaw opłatę dla Ogłoszeń na kategorię lub pozwól na darmowe ogłoszenia w "
-"niektórych kategoriach."
+msgid 
+"Set fee for Ads posting per category or allow to post for free in some categories."
+msgstr "Ustaw opłatę dla Ogłoszeń na kategorię lub pozwól na darmowe ogłoszenia w niektórych kategoriach."
 
 #: includes/admin-pages.php:147
 msgid "reCAPTCHA"
 msgstr "reCAPTCHA"
 
 #: includes/admin-pages.php:148
-msgid ""
-"Protect your forms from SPAM using easy easy for humans and hard for bots "
-"captcha."
-msgstr ""
-"Chroń swoje formularze przed SPAMEM łatwej dla ludzi i trudnej dla botów "
-"captcha."
+msgid "Protect your forms from SPAM using easy easy for humans and hard for bots captcha."
+msgstr "Chroń swoje formularze przed SPAMEM łatwej dla ludzi i trudnej dla botów captcha."
 
 #: includes/admin-pages.php:156
 msgid "Payment Gateways"
 msgstr "Bramki płatności"
 
 #: includes/admin-pages.php:160
-msgid ""
-"Allow users to pay for ad posting using direct bank transfer or cash "
-"payments."
-msgstr ""
-"Zezwalaj użytkownikom płacić za ogłoszenia przy użyciu zwykłego przelewem "
-"lub gotówki."
+msgid "Allow users to pay for ad posting using direct bank transfer or cash payments."
+msgstr "Zezwalaj użytkownikom płacić za ogłoszenia przy użyciu zwykłego przelewem lub gotówki."
 
 #: includes/admin-pages.php:165
 msgid "PayPal Standard"
@@ -838,9 +789,7 @@ msgstr "PayPal Standard"
 
 #: includes/admin-pages.php:166
 msgid "PayPal Payments Standard, allow users to pay for ads via PayPal."
-msgstr ""
-"Płatność PayPal Standard, umożliwia użytkownikom płatność za ogłoszenia za "
-"pośrednictwem systemu PayPal."
+msgstr "Płatność PayPal Standard, umożliwia użytkownikom płatność za ogłoszenia za pośrednictwem systemu PayPal."
 
 #: includes/admin-pages.php:308
 msgid "Category Icon"
@@ -856,8 +805,7 @@ msgstr "Oops! Podana data jest nieprawidłowa."
 
 #: includes/admin-post-type.php:181
 msgid "Post updated, but some required data is not filled properly."
-msgstr ""
-"Post zaktualizowany, ale niektóre wymagane dane nie są wypełnione poprawnie."
+msgstr "Post zaktualizowany, ale niektóre wymagane dane nie są wypełnione poprawnie."
 
 #. translators: 1: month number (01, 02, etc.), 2: month abbreviation
 #: includes/admin-post-type.php:253
@@ -954,11 +902,8 @@ msgid "Expired:"
 msgstr "Wygasło:"
 
 #: includes/admin-post-type.php:704
-msgid ""
-"Start typing user name, email or login below, some suggestions will appear."
-msgstr ""
-"Zacznij wpisywać nazwę użytkownika, e-mail lub login, pojawi się kilka "
-"sugestii."
+msgid "Start typing user name, email or login below, some suggestions will appear."
+msgstr "Zacznij wpisywać nazwę użytkownika, e-mail lub login, pojawi się kilka sugestii."
 
 #: includes/ajax.php:62 includes/ajax.php:144 includes/ajax.php:192
 msgid "Invalid Session. Please refresh the page and try again."
@@ -990,8 +935,7 @@ msgstr "Licencja"
 
 #: includes/class-updates-manager.php:150
 msgid "Cannot connect to remote server. Please try again later."
-msgstr ""
-"Nie można połączyć się z serwerem zdalnym. Proszę spróbować ponownie później."
+msgstr "Nie można połączyć się z serwerem zdalnym. Proszę spróbować ponownie później."
 
 #: includes/class-updates-manager.php:316
 msgid "License ..."
@@ -1127,8 +1071,7 @@ msgstr "Wprowadzony adres email jest nieprawidłowy!"
 
 #: includes/defaults.php:299
 msgid "Cannot create account. User with this email address already exists."
-msgstr ""
-"Nie można utworzyć konta. Użytkownik z tym adresem e-mail już istnieje."
+msgstr "Nie można utworzyć konta. Użytkownik z tym adresem e-mail już istnieje."
 
 #: includes/defaults.php:307
 msgid "Is Integer"
@@ -1163,32 +1106,20 @@ msgid "Category: %s"
 msgstr "Kategoria: %s"
 
 #: includes/functions.php:1064
-msgid ""
-"You are posting as <strong>%1$s</strong>. <br/>If you want to use a "
-"different account, please <a href=\"%2$s\">logout</a>."
-msgstr ""
-"Dodajesz ogłoszenie jako <strong>%1$s</strong>. <br/> Jeśli chcesz użyć "
-"innego kont  <a href=\"%2$s\">wyloguj się</a>."
+msgid "You are posting as <strong>%1$s</strong>. <br/>If you want to use a different account, please <a href=\"%2$s\">logout</a>."
+msgstr "Dodajesz ogłoszenie jako <strong>%1$s</strong>. <br/> Jeśli chcesz użyć innego kont  <a href=\"%2$s\">wyloguj się</a>."
 
 #: includes/functions.php:1069
-msgid ""
-"Create an account for me so i can manage all my ads from one place (password "
-"will be emailed to you) or <a href=\"%s\">Sign In</a>"
-msgstr ""
-"Załóż konto i zarządzaj swoimi ogłoszeniami  (hasło wyślemy na Twój adres e-"
-"mail) albo poprostu <a href=\"%s\">Zaloguj się</a>"
+msgid "Create an account for me so i can manage all my ads from one place (password will be emailed to you) or <a href=\"%s\">Sign In</a>"
+msgstr "Załóż konto i zarządzaj swoimi ogłoszeniami  (hasło wyślemy na Twój adres e-mail) albo poprostu <a href=\"%s\">Zaloguj się</a>"
 
 #: includes/functions.php:1284
 msgid "Redirecting"
 msgstr "Przekierowanie"
 
 #: includes/functions.php:1285
-msgid ""
-"Your are being redirected to Edit page. <a href=\"%s\">Click here</a> if it "
-"is taking to long. "
-msgstr ""
-"Zostaniesz przekierowany do strony Edycji. Jeśli trwa to zbyt długo <a "
-"href=\"%s\">Kliknij tutaj</a>."
+msgid "Your are being redirected to Edit page. <a href=\"%s\">Click here</a> if it is taking to long. "
+msgstr "Zostaniesz przekierowany do strony Edycji. Jeśli trwa to zbyt długo <a href=\"%s\">Kliknij tutaj</a>."
 
 #: includes/functions.php:1454
 msgid "US Dollars"
@@ -1343,12 +1274,8 @@ msgid "There are errors in your form. Please correct them before proceeding."
 msgstr "Proszę wypełnij formularz poprawnie."
 
 #: includes/shortcodes.php:318
-msgid ""
-"Only logged in users can access this page. <a href=\"%1$s\">Login</a> or <a "
-"href=\"%2$s\">Register</a>."
-msgstr ""
-"Tylko zalogowani użytkownicy mają dostęp do tej strony. <a href=\"%1$s\">"
-"Zaloguj się</a> lub <a href=\"%2$s\">Zarejestuj</a>"
+msgid "Only logged in users can access this page. <a href=\"%1$s\">Login</a> or <a href=\"%2$s\">Register</a>."
+msgstr "Tylko zalogowani użytkownicy mają dostęp do tej strony. <a href=\"%1$s\">Zaloguj się</a> lub <a href=\"%2$s\">Zarejestuj</a>"
 
 #: includes/shortcodes.php:413
 msgid "Ad does not exist."
@@ -1375,19 +1302,12 @@ msgid "Publish Listing"
 msgstr "Opublikuj Ogłoszenie"
 
 #: templates/add-save.php:5
-msgid ""
-"Your ad has been put into moderation, please wait for admin to approve it."
-msgstr ""
-"Twoje ogłoszenie jest w trakcie moderacji, proszę poczekać na  zatwierdzenie "
-"przez administratora."
+msgid "Your ad has been put into moderation, please wait for admin to approve it."
+msgstr "Twoje ogłoszenie jest w trakcie moderacji, proszę poczekać na  zatwierdzenie przez administratora."
 
 #: templates/add-save.php:7
-msgid ""
-"Your ad has been published. You can view it here \"<a href=\"%1$s\">%2$s</a>"
-"\"."
-msgstr ""
-"Twoje ogłoszenie została opublikowane. Możesz zobaczyć je tutaj \"<a "
-"href=\"%1$s\">%2$s</a>\"."
+msgid "Your ad has been published. You can view it here \"<a href=\"%1$s\">%2$s</a>\"."
+msgstr "Twoje ogłoszenie została opublikowane. Możesz zobaczyć je tutaj \"<a href=\"%1$s\">%2$s</a>\"."
 
 #: templates/add.php:42
 msgid "Preview"

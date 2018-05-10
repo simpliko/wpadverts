@@ -136,10 +136,13 @@ function adverts_gallery_upload() {
     
     // Insert the attachment.
     $attach_id = wp_insert_attachment( $attachment, $filename, $parent_post_id );
+    
     if ( !is_wp_error( $attach_id ) ) {
         wp_update_attachment_metadata( $attach_id, wp_generate_attachment_metadata( $attach_id, $filename ) );
     }
-        
+    
+    do_action( "adverts_attachment_uploaded", $attach_id );
+    
     include_once ADVERTS_PATH . 'includes/gallery.php';
     
     echo json_encode( adverts_upload_item_data( $attach_id ) );

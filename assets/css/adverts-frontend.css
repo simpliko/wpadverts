@@ -455,6 +455,9 @@ a.adverts-manage-action:visited {
     min-width: 20%;
 }
 
+.advert-item-col-right {
+    float:right;
+}
 /*}*/
 
 @media all and (max-width: 760px) {
@@ -522,8 +525,7 @@ a.adverts-manage-action:visited {
 }
 
 .advert-post-title .advert-link {
-    display: block;
-    overflow: hidden;
+    display: inline-block;
     font-size: 1.1em;
     height:1.3em;
     text-decoration: none;
@@ -532,8 +534,8 @@ a.adverts-manage-action:visited {
 
 .advert-date {
     line-height: 1.8em;
-padding: 10px 0 10px 0;
-display: inline-block;
+    padding: 10px 0 10px 0;
+    display: inline-block;
 
 }
 
@@ -2759,3 +2761,62 @@ ul.adverts-tabs li {
     line-height: 16px;
     margin-left: 4px;
 }
+
+/** FLEXBOX FOR WPADVERTS **/
+
+.adverts-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.adverts-list .advert-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.adverts-list .advert-item .advert-img {
+    height: auto;
+  
+}
+
+.adverts-list .advert-item .advert-below-img {
+    display: flex;
+    flex-direction: column;
+    
+    align-self: flex-end;
+    width: 100%;
+    justify-content: space-between;
+    
+}
+
+.adverts-list .advert-item .advert-post-title {
+
+}
+
+.adverts-list .advert-item .advert-published {
+   
+}
+
+/** GRID FOR WPADVERTS **/
+
+/*
+.adverts-list {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-rows: fr fr fr;
+}
+
+.adverts-list .advert-item {
+    width: 90%;
+
+    box-sizing: content-box;
+}
+
+.adverts-list .advert-item .advert-below-img {
+
+    align-self: end;
+    
+}
+*/

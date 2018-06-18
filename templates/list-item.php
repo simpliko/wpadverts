@@ -7,27 +7,31 @@
             <?php endif; ?>
         </div>
      
-        <div class="advert-post-title">
-            <span title="<?php echo esc_attr( get_the_title() ) ?>" class="advert-link">
-                <span class="advert-link-text"><?php the_title() ?></span>
-                <?php do_action( "adverts_list_after_title", get_the_ID() ) ?>
-            </span>
-            <a href="<?php the_permalink() ?>" title="<?php echo esc_attr( get_the_title() ) ?>" class="advert-link-wrap"></a>
-        </div>
+        <div class="advert-below-img">
         
-        <div class="advert-published ">
+            <div class="advert-post-title">
+                <span title="<?php echo esc_attr( get_the_title() ) ?>" class="advert-link">
+                    <span class="advert-link-text"><?php the_title() ?></span>
+                    <?php do_action( "adverts_list_after_title", get_the_ID() ) ?>
+                </span>
+                <a href="<?php the_permalink() ?>" title="<?php echo esc_attr( get_the_title() ) ?>" class="advert-link-wrap"></a>
+            </div>
+
+            <div class="advert-published ">
+
+                <span class="advert-date"><?php echo date_i18n( get_option( 'date_format' ), get_post_time( 'U', false, get_the_ID() ) ) ?></span>
+
+                <?php $location = get_post_meta( get_the_ID(), "adverts_location", true ) ?>
+                <?php if( ! empty( $location ) ): ?>
+                <span class="advert-item-col-1-only advert-location adverts-icon-location"><?php echo esc_html( $location ) ?></span>
+                <?php endif; ?>
+
+                <?php $price = get_post_meta( get_the_ID(), "adverts_price", true ) ?>
+                <?php if( $price ): ?>
+                <div class="advert-price"><?php echo esc_html( adverts_get_the_price( get_the_ID(), $price ) ) ?></div>
+                <?php endif; ?>
+            </div>
             
-            <span class="advert-date"><?php echo date_i18n( get_option( 'date_format' ), get_post_time( 'U', false, get_the_ID() ) ) ?></span>
-            
-            <?php $location = get_post_meta( get_the_ID(), "adverts_location", true ) ?>
-            <?php if( ! empty( $location ) ): ?>
-            <span class="advert-item-col-1-only advert-location adverts-icon-location"><?php echo esc_html( $location ) ?></span>
-            <?php endif; ?>
-            
-            <?php $price = get_post_meta( get_the_ID(), "adverts_price", true ) ?>
-            <?php if( $price ): ?>
-            <div class="advert-price"><?php echo esc_html( adverts_get_the_price( get_the_ID(), $price ) ) ?></div>
-            <?php endif; ?>
         </div>
         
     </div>

@@ -45,15 +45,15 @@ function adverts_save_post($ID = false, $post = false) {
     if ( !current_user_can( $post_type->cap->edit_post, $ID ) ) {
         return $ID;
     }
-    
+
     if ( !$post->post_type == 'advert' ) {
         return $ID;
     }
-    
+
     if ( defined( "DOING_AJAX" ) && DOING_AJAX ) {
         return $ID;
     }
- 
+
     /* Save expiration date in DB */
     if( !empty( $_POST ) ) { 
         $current_exp_date = get_post_meta( $ID, "_expiration_date", true );

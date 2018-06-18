@@ -68,6 +68,7 @@ class Adverts_Form
      */
     public function load( $form ) {
         $this->_scheme = apply_filters("adverts_form_load", $form);
+        //echo "<pre>";print_r($this->_scheme);echo "</pre>";
     }
     
     /**

@@ -283,7 +283,8 @@ function adext_payments_form_load( $form ) {
     $opts = array();
     $pricings = new WP_Query( array( 
         'post_type' => 'adverts-pricing',
-        'post_status' => 'draft'
+        'post_status' => 'draft',
+        'posts_per_page' => -1
     ) );
     
     adverts_form_add_field("adverts_payments_field_payment", array(

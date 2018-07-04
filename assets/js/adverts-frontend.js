@@ -37,7 +37,6 @@ jQuery(function($) {
        $(this).closest("form").submit();
    });
    
-   /*
    $('.advert-item .advert-link').each(function() {
 
     $el = $(this);
@@ -72,7 +71,6 @@ jQuery(function($) {
     }
    
    }); 
-   */
   
    if( $(".wpadverts-slides").length > 0 ) {
        

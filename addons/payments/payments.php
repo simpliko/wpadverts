@@ -696,12 +696,14 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
                 
                 $post_id = $post->ID;
                 $moderate = apply_filters( "adverts_manage_moderate", false );
-                
+                $menu_order = absint( get_post_meta( $listing->ID, "is_featured", true ) );
+
                 $post_id = wp_update_post( array(
                     "ID" => $post_id,
                     "post_status" => $moderate == "1" ? 'pending' : 'publish',
                     'post_date'     => current_time('mysql'),
-                    'post_date_gmt' => current_time('mysql', 1)
+                    'post_date_gmt' => current_time('mysql', 1),
+                    'menu_order'    => $menu_order
                 ));
 
                 $v = get_post_meta( $listing->ID, "adverts_visible", true );

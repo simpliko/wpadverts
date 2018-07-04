@@ -375,7 +375,7 @@ function adext_payments_page_history() {
 
                 if($status_old != $status_new) {
                     wp_update_post(array("ID"=>$id, "post_status"=>$status_new));
-                    do_action("adverts_payment_".$status_new, $payment);
+                    do_action("adverts_payment_".$status_new, get_post( $id ) );
                 }
             }
             

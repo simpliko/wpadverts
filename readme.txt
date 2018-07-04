@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classified script, classifieds sc
 Requires PHP: 5.3
 Requires at least: 4.0
 Tested up to: 4.9
-Stable tag: 1.2.4
+Stable tag: 1.2.5
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -98,6 +98,14 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.2.5 - 2018-07-04 =
+
+* FIXED: Thumbnails slider not showing all slides.
+* FIXED: Not all pricings are shown when there is long list of pricings (over 20).
+* FIXED: Allow using .adverts-button CSS class for input[type=submit].
+* FIXED: The is_featured param not passed to Advert when renewing.
+* FIXED: Incorrect parameter passed to adverts_payment_* filter.
 
 = 1.2.4 - 2018-05-10 =
 

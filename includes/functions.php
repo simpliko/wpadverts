@@ -780,7 +780,6 @@ function adverts_string_length( $data, $params = null ) {
  * @return string|boolean
  */
 function adverts_max_choices( $data, $params = null ) {
-    var_dump($data);var_dump($params);
     if( count( $data ) > $params["max_choices"] ) {
         return "invalid";
     } else {

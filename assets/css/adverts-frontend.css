@@ -39,6 +39,7 @@
     margin: 0 auto;
 }
 
+input[type="submit"].adverts-button,
 .adverts-button,
 .adverts-upload-actions a.button {
     height:35px;
@@ -76,6 +77,16 @@
 }
 body .adverts-button-small:visited {
     color: #666;
+}
+
+.adverts-buttons-line {
+    display: inline-block;
+    margin: 0 0 0 1em;
+    height: 35px;
+    line-height: 35px;
+    border: 0;
+    padding: 0;
+    vertical-align: middle;
 }
 
 input.adverts-submit[type=submit] {
@@ -1447,6 +1458,11 @@ body .wpadverts-slide .wpadverts-slide-description.wpadverts-slide-desc {
     display: none;
 }
 
+.wpadverts-slides-with-thumbnail ul#wpadverts-rsliders-controls {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
 .wpadverts-slides {
     margin: 0 0 24px 0;
     clear: both;
@@ -1674,12 +1690,12 @@ https://github.com/yui/pure/blob/master/LICENSE.md
 .adverts-form .adverts-control-group.adverts-field-actions {
     margin: 1.5rem 0 1.5rem 0;
     padding: 1rem 0 1rem 0;
-    border-top: 2px solid silver;
+    border-top: 1px solid #e5e5e5;
 }
 
 .adverts-form .adverts-control-group > div.adverts-field-header {
     width: 100%;
-    border-bottom: 2px solid silver;
+    border-bottom: 1px solid #e5e5e5;
     padding: 0 0 5px 0;
     margin: 5px 0 10px 0;
 }
@@ -1687,8 +1703,8 @@ https://github.com/yui/pure/blob/master/LICENSE.md
 .adverts-form .adverts-control-group > div.adverts-field-header > .adverts-field-header-title {
     display: inline-block;
     width: 100%;
-    font-size: 1.3rem;
-    line-height:1.3rem;
+    font-size: 1.2rem;
+    line-height:1.6rem;
     font-weight: bold;
 }
 
@@ -2657,8 +2673,7 @@ ul.adverts-tabs li {
     
     .advert-item.advert-item-col-4,
     .advert-item.advert-item-col-3,
-    .advert-item.advert-item-col-2,
-    .advert-item {
+    .advert-item.advert-item-col-2 {
         width: 100%;
         margin: 0 0 1em 0;
     }
@@ -2680,6 +2695,7 @@ ul.adverts-tabs li {
     }
     
     .adverts-form input[type="text"],
+    .adverts-form input[type="password"],
     .adverts-form textarea,
     .adverts-form-aligned #adverts-plupload-upload-ui,
     .adverts-form.adverts-form-aligned .adverts-control-group > div.adverts-multiselect-holder,
@@ -2734,6 +2750,10 @@ ul.adverts-tabs li {
     .adverts-manage-actions-right a.adverts-manage-action {
         margin: 5px 5px 0 0;
     }
+    
+    .adverts-form.adverts-form-aligned .adverts-control-group > textarea {
+        margin: 0 0 0 0;
+    }
 }
 
 @media all and (max-width: 240px) {
@@ -2762,61 +2782,3 @@ ul.adverts-tabs li {
     margin-left: 4px;
 }
 
-/** FLEXBOX FOR WPADVERTS **/
-
-.adverts-list {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-.adverts-list .advert-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.adverts-list .advert-item .advert-img {
-    height: auto;
-  
-}
-
-.adverts-list .advert-item .advert-below-img {
-    display: flex;
-    flex-direction: column;
-    
-    align-self: flex-end;
-    width: 100%;
-    justify-content: space-between;
-    
-}
-
-.adverts-list .advert-item .advert-post-title {
-
-}
-
-.adverts-list .advert-item .advert-published {
-   
-}
-
-/** GRID FOR WPADVERTS **/
-
-/*
-.adverts-list {
-    display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
-    grid-template-rows: fr fr fr;
-}
-
-.adverts-list .advert-item {
-    width: 90%;
-
-    box-sizing: content-box;
-}
-
-.adverts-list .advert-item .advert-below-img {
-
-    align-self: end;
-    
-}
-*/

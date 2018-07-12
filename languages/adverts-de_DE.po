@@ -400,7 +400,23 @@ msgstr "Speichern"
 #: ../includes/class-updates-manager.php:333 ../includes/gallery.php:130 ..
 #: includes/gallery.php:230 ../includes/admin-post-type.php:271
 msgid "Cancel"
-msgstr "Löschen"
+msgstr "Abbrechen"
+
+#: ../templates/manage.php:54
+msgid "View"
+msgstr "Anzeigen"
+
+#: ../templates/manage.php:64
+msgid "Yes"
+msgstr "Ja"
+
+#: ../templates/manage.php:73
+msgid "More"
+msgstr "Mehr"
+
+#: ../templates/manage.php:62
+msgid "Are you sure?"
+msgstr "Sind Sie sicher?"
 
 #: ../includes/defaults.php:44
 msgid "Contact Information"

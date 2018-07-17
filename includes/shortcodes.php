@@ -529,16 +529,24 @@ function _adverts_manage_list( $atts ) {
     wp_enqueue_script( 'adverts-frontend' );
     wp_enqueue_script( 'adverts-frontend-manage' );
 
+	if ( $atts['post_status'] ) {
+        // clear whitespaces
+	    $atts['post_status'] = str_replace( ' ', '', strtolower( $atts['post_status'] ) );
+        // create array
+	    $atts['post_status'] = explode( ',', $atts['post_status'] );
+	}
+	
     extract(shortcode_atts(array(
         'name' => 'default',
         'paged' => adverts_request("pg", 1),
         'posts_per_page' => 20,
+		'post_status' => array('publish', 'advert-pending', 'expired')
     ), $atts));
     
     // Load ONLY current user data
     $loop = new WP_Query( array( 
         'post_type' => 'advert', 
-        'post_status' => apply_filters("adverts_sh_manage_list_statuses", array('publish', 'advert-pending', 'expired') ),
+        'post_status' => apply_filters( "adverts_sh_manage_list_statuses", $post_status ),
         'posts_per_page' => $posts_per_page, 
         'paged' => $paged,
         'author' => get_current_user_id()

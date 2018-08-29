@@ -61,7 +61,8 @@ $adverts_namespace['config'] = array(
         'ads_list_default__posts_per_page' => 20,
         'expired_ad_status' => '404', // one of: 404, 200, 301
         'expired_ad_redirect_url' => '',
-        'expired_ad_public_cap' => 'edit_pages'
+        'expired_ad_public_cap' => 'edit_pages',
+        'empty_price' => ''
         
     )
 );
@@ -254,12 +255,12 @@ function adverts_init() {
     ));
     
     wp_localize_script( 'adverts-autocomplete', 'adverts_autocomplete_lang', array(
-        "ajaxurl" => admin_url( 'admin-ajax.php' ),
+        "ajaxurl" => adverts_ajax_url(),
         "no_results" => __( "No results found.", "adverts" )
     ));
     
     wp_localize_script( 'adverts-gallery', 'adverts_gallery_lang', array(
-        "ajaxurl" => admin_url("admin-ajax.php"),
+        "ajaxurl" => adverts_ajax_url(),
         "edit_image" => __( "Edit Image", "adverts" ),
         "delete_image" => __( "Delete Image", "adverts" ),
         "view_image" => __( "View Full Image", "adverts" ),
@@ -300,7 +301,7 @@ function adverts_init() {
  */
 function adverts_init_frontend() {
     
-    wp_register_style( 'adverts-frontend', ADVERTS_URL . '/assets/css/adverts-frontend.css', array(), "1.2.5" );
+    wp_register_style( 'adverts-frontend', ADVERTS_URL . '/assets/css/adverts-frontend.css', array(), "1.2.6" );
     wp_register_style( 'adverts-swipebox', ADVERTS_URL . '/assets/css/swipebox.min.css', array(), "1.4.5" );
     
     wp_register_script('adverts-single', ADVERTS_URL . '/assets/js/adverts-single.js', array( 'jquery' ), "2" );
@@ -327,14 +328,14 @@ function adverts_init_frontend() {
     add_filter('adverts_create_user_from_post_id', '_adverts_create_user_from_post_id', 20, 2 );
     
     wp_localize_script( 'adverts-frontend', 'adverts_frontend_lang', array(
-        "ajaxurl" => admin_url('admin-ajax.php'),
+        "ajaxurl" => adverts_ajax_url(),
         "als_visible_items" => adverts_config( "gallery.visible_items" ),
         "als_scrolling_items" => adverts_config( "gallery.scrolling_items" ),
         "lightbox" => adverts_config( "gallery.lightbox" )
     ) );
     
     wp_localize_script( 'adverts-frontend-manage', 'adverts_frontend_manage_lang', array(
-        "ajaxurl" => admin_url('admin-ajax.php'),
+        "ajaxurl" => adverts_ajax_url(),
         "ok" => __( "OK", "adverts" )
     ) );
     

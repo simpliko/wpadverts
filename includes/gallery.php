@@ -45,7 +45,7 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
         'file_data_name'      => 'async-upload',            
         'multiple_queues'     => true,
         'max_file_size'       => wp_max_upload_size().'b',
-        'url'                 => admin_url('admin-ajax.php'),
+        'url'                 => adverts_ajax_url(),
         'flash_swf_url'       => includes_url('js/plupload/plupload.flash.swf'),
         'silverlight_xap_url' => includes_url('js/plupload/plupload.silverlight.xap'),
         'filters'             => array(array('title' => __('Allowed Files'), 'extensions' => '*')),
@@ -402,7 +402,7 @@ function adverts_gallery_modal() {
     <script type="text/html" id="tmpl-wpadverts-browser-attachment-image">
         <div class="wpadverts-attachment-media-view wpadverts-overlay-content wpadverts-attachment-media-image-editor">
             <div class="wpadverts-attachment-image">
-                <img src="#" data-src="<?php echo admin_url('admin-ajax.php') ?>?action=adverts_gallery_image_stream&post_id={{ data.file.post_id }}&attach_id={{ data.file.attach_id }}&size={{ data.size }}&history={{ data.history }}&rand={{ data.rand }}&_ajax_nonce={{ data.nonce }}" id="wpadverts-image-crop" alt="" style="max-width: 100%; max-height: 100%;">
+                <img src="#" data-src="<?php echo adverts_ajax_url() ?>?action=adverts_gallery_image_stream&post_id={{ data.file.post_id }}&attach_id={{ data.file.attach_id }}&size={{ data.size }}&history={{ data.history }}&rand={{ data.rand }}&_ajax_nonce={{ data.nonce }}" id="wpadverts-image-crop" alt="" style="max-width: 100%; max-height: 100%;">
             </div>
         </div>
 

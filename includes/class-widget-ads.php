@@ -500,6 +500,8 @@ class Adverts_Widget_Ads extends WP_Widget
 
                         <?php if( $price ): ?>
                         <span class="advert-widget-recent-price"><?php echo esc_html( $price ) ?></span>
+                        <?php elseif( adverts_config( 'empty_price' ) ): ?>
+                        <div class="advert-widget-recent-price adverts-price-empty"><?php echo esc_html( adverts_empty_price( get_the_ID() ) ) ?></div>
                         <?php endif; ?>
                     </div>
                     

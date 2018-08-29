@@ -53,7 +53,7 @@
             <span class="adverts-manage-actions-left">
                 <a href="<?php echo esc_attr(get_the_permalink()) ?>" title="<?php _e("View", "adverts") ?>" class="adverts-manage-action"><span class="adverts-icon-eye"></span><?php _e("View", "adverts") ?></a>
                 <a href="<?php echo esc_attr($baseurl . str_replace("%#%", get_the_ID(), $edit_format)) ?>" title="<?php _e("Edit", "adverts") ?>" class="adverts-manage-action"><span class="adverts-icon-pencil-squared"></span><?php _e("Edit", "adverts") ?></a>
-                <a href="<?php echo esc_attr(admin_url("admin-ajax.php")) ?>?action=adverts_delete&id=<?php echo get_the_ID() ?>&redirect_to=<?php esc_attr_e( urlencode( $baseurl ) ) ?>&_ajax_nonce=<?php echo wp_create_nonce('adverts-delete') ?>" title="<?php _e("Delete", "adverts") ?>" class="adverts-manage-action adverts-manage-action-delete" data-id="<?php echo get_the_ID() ?>" data-nonce="<?php echo wp_create_nonce('adverts-delete') ?>">
+                <a href="<?php echo esc_attr(adverts_ajax_url()) ?>?action=adverts_delete&id=<?php echo get_the_ID() ?>&redirect_to=<?php esc_attr_e( urlencode( $baseurl ) ) ?>&_ajax_nonce=<?php echo wp_create_nonce('adverts-delete') ?>" title="<?php _e("Delete", "adverts") ?>" class="adverts-manage-action adverts-manage-action-delete" data-id="<?php echo get_the_ID() ?>" data-nonce="<?php echo wp_create_nonce('adverts-delete') ?>">
                     <span class="adverts-icon-trash-1"></span><?php _e("Delete", "adverts") ?>
                 </a>
                 

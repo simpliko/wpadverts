@@ -780,6 +780,10 @@ function adverts_string_length( $data, $params = null ) {
  * @return string|boolean
  */
 function adverts_max_choices( $data, $params = null ) {
+    if( ! is_array( $data ) ) {
+        $data = array( $data );
+    }
+    
     if( count( $data ) > $params["max_choices"] ) {
         return "invalid";
     } else {
@@ -2703,4 +2707,18 @@ function adverts_template_redirect_expired() {
         wp_redirect( $redirect_url, $status );
         exit;
     }
+}
+
+/**
+ * Returns URL to AJAX request page
+ * 
+ * @since 1.2.6
+ * @return string
+ */
+function adverts_ajax_url() {
+    return apply_filters( "adverts_ajax_url", admin_url( "admin-ajax.php") );
+}
+
+function adverts_empty_price( $post_id ) {
+    return apply_filters( "adverts_empty_price", adverts_config( 'empty_price' ), $post_id );
 }

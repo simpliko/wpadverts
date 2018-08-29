@@ -541,6 +541,7 @@ a.adverts-manage-action:visited {
     height:1.3em;
     text-decoration: none;
     font-weight: bold;
+    overflow: hidden;
 }
 
 .advert-date {

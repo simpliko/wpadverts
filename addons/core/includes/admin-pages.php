@@ -248,6 +248,14 @@ Adverts::instance()->set("form_core_config", array(
             )
         ),
         array(
+            "name" => "empty_price",
+            "type" => "adverts_field_text",
+            "order" => 10,
+            "label" => __("Empty Price Text", "adverts"),
+            "hint" => __("The text to display instead of price if item price was not provided.", "adverts"),
+            "validator" => array()
+        ),
+        array(
             "name" => "_defaults_adverts_list",
             "type" => "adverts_field_header",
             "order" => 10,

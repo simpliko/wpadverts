@@ -27,6 +27,8 @@
             <?php $price = get_post_meta( get_the_ID(), "adverts_price", true ) ?>
             <?php if( $price ): ?>
             <div class="advert-price"><?php echo esc_html( adverts_get_the_price( get_the_ID(), $price ) ) ?></div>
+            <?php elseif( adverts_config( 'empty_price' ) ): ?>
+            <div class="advert-price adverts-price-empty"><?php echo esc_html( adverts_empty_price( get_the_ID() ) ) ?></div>
             <?php endif; ?>
         </div>
 

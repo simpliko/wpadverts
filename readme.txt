@@ -105,6 +105,7 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 * FIXED: Boxes on [adverts_list] not reszied correctly, which sometimes broke the grid layout.
 * FIXED: max_choices validator shows a warning message when only one value is passed to validation.
 * FIXED: Unicode characters in the URL break the file upload.
+* TRANSLATION: Updated German translation
 
 = 1.2.5 - 2018-07-04 =
 

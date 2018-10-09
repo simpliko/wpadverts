@@ -331,13 +331,19 @@ function shortcode_adverts_add( $atts ) {
         $bind["post_content"] = $post->post_content;
         $bind["advert_category"] = array();
         
-        $terms = get_the_terms( $post_id, 'advert_category' );
-        
-        if(is_array($terms)) {
-            foreach($terms as $term) {
-                $bind["advert_category"][] = $term->term_id;
+        $taxonomy_objects = get_object_taxonomies( 'advert', 'objects' );
+        foreach( $taxonomy_objects as $taxonomy_key => $taxonomy ) {
+            $terms = get_the_terms( $post_id, $taxonomy_key );
+            if( is_array( $terms ) ) {
+                foreach( $terms as $term ) {
+                    if(!isset($bind[$taxonomy_key]) || !is_array($bind[$taxonomy_key])) {
+                        $bind[$taxonomy_key] = array();
+                    }
+                    $bind[$taxonomy_key][] = $term->term_id;
+                }
             }
         }
+        
         
     } elseif( is_user_logged_in() ) {
         $bind["adverts_person"] = wp_get_current_user()->display_name;

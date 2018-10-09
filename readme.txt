@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classified script, classifieds sc
 Requires PHP: 5.3
 Requires at least: 4.0
 Tested up to: 4.9
-Stable tag: 1.2.6
+Stable tag: 1.2.7
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -98,6 +98,16 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.2.7 - 2018-10-09 =
+
+* FEATURE: Added Stripe panel in wp-admin / Classifieds / Options
+* FIXED: On mobile devices the page background is being scorlled instead of the gallery image editor.
+* FIXED: Filling radio input options using callback function does not work.
+* FIXED: [adverts_add] prefills values only for the advert_category taxonomy (added support for other taxonomies).
+* API: Payments Module /payments.js file allows callback to customize checkout experience for different payment gateways.
+* API: wpadverts_filter_pricings filter allows filtering pricings before they will be displayed in [adverts_add]. 
+* TRANSLATION: Updated Spanish translation
 
 = 1.2.6 - 2018-08-30 =
 

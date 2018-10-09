@@ -196,6 +196,13 @@ function adverts_admin_page_extensions() {
                     "plugin" => "wpadverts-paypal-standard/wpadverts-paypal-standard.php",
                     "purchase_url" => "https://wpadverts.com/extensions/paypal-payments-standard/"
                 ),
+                "stripe" => array(
+                    "title" => __("Stripe", "adverts"),
+                    "text" => __("Charge users for Ad postings using credit cards (and some other payment gateways).", "adverts"),
+                    "type" => "",
+                    "plugin" => "wpadverts-stripe/wpadverts-stripe.php",
+                    "purchase_url" => "https://wpadverts.com/extensions/stripe/"
+                ),
             )
         )
 

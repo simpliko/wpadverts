@@ -468,6 +468,7 @@ WPADVERTS.File.Browser.prototype.Open = function(e) {
     }
         
     this.browser.show();
+    jQuery("html").css("overflow", "hidden");
 };
 
 WPADVERTS.File.Browser.prototype.Close = function(e) {
@@ -476,6 +477,7 @@ WPADVERTS.File.Browser.prototype.Close = function(e) {
     }
     
     this.browser.hide();
+    jQuery("html").css("overflow", '');
 };
 
 WPADVERTS.File.Browser.prototype.NextClicked = function(e) {

@@ -1515,18 +1515,27 @@ function adverts_field_radio( $field ) {
         $value = $field["value"];
     }
     
-    foreach($field["options"] as $opt) {
+    if(isset($field["options_callback"]) && !empty($field["options_callback"])) {
+        $opt = call_user_func( $field["options_callback"] );
+    } elseif(isset($field["options"])) {
+        $opt = $field["options"];
+    } else {
+        trigger_error("You need to specify options source for field [{$field['name']}].", E_USER_ERROR);
+        $opt = array();
+    }
+    
+    foreach($opt as $v) {
         $checkbox = new Adverts_Html("input", array(
             "type" => "radio",
             "name" => $field["name"],
             "id" => $field["name"].'_'.$i,
-            "value" => $opt["value"],
-            "checked" => $opt["value"] == $value ? "checked" : null
+            "value" => $v["value"],
+            "checked" => $v["value"] == $value ? "checked" : null
         ));
 
         $label = new Adverts_Html("label", array(
             "for" => $field["name"].'_'.$i
-        ), $checkbox->render() . ' ' . $opt["text"]);
+        ), $checkbox->render() . ' ' . $v["text"]);
         
         $opts .= "<div>".$label->render()."</div>";
         

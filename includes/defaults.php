@@ -397,6 +397,17 @@ adverts_form_add_validator("max_choices", array(
     "validate_empty" => false
 ));
 
+// Register "verify_choices" validator
+/** @see adverts_verify_choices() */
+adverts_form_add_validator("verify_choices", array(
+    "callback" => "adverts_verify_choices",
+    "label" => __( "Verify Choices", "adverts" ),
+    "params" => array(),
+    "default_error" => __( "One or more selected values are not available in the options list.", "adverts" ),
+    "message" => array(),
+    "validate_empty" => false
+));
+
 // Register "upload_limit" validator
 /** @see adverts_validate_upload_limit() */
 adverts_form_add_validator("upload_limit", array(

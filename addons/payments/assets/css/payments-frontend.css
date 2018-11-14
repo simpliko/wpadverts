@@ -185,3 +185,12 @@
     height: 20px;
     display: inline-block;
 }
+
+.adverts-listing-type-x.adverts-listing-type-x-disabled {
+    opacity:0.7; 
+    cursor: default;
+}
+
+.adverts-listing-type-x.adverts-listing-type-x-disabled label.adverts-cute-input {
+    cursor: default;
+}

@@ -49,9 +49,9 @@ function shortcode_adverts_list( $atts ) {
         'posts_per_page' => adverts_config( 'config.ads_list_default__posts_per_page' ),
         'show_pagination' => true
     ), $atts, 'adverts_list' );
-    
+
     extract( $params );
-    
+
     if( is_numeric( $redirect_to ) ) {
         $action = get_permalink( $redirect_to );
     } else {
@@ -166,7 +166,7 @@ function shortcode_adverts_list( $atts ) {
     } else {
         $pbase = get_the_permalink();
     }
-    
+
     $loop = new WP_Query( $args );
     $paginate_base = apply_filters( 'adverts_list_pagination_base', $pbase . '%_%' );
     $paginate_format = stripos( $paginate_base, '?' ) ? '&pg=%#%' : '?pg=%#%';

@@ -792,6 +792,44 @@ function adverts_max_choices( $data, $params = null ) {
 }
 
 /**
+ * Choices VALIDATOR
+ * 
+ * This validator checks if the selected values in checkbox, select or radio
+ * are in a valid values range. 
+ * 
+ * In other words it checks if the values were selected from available options
+ * in the form.
+ * 
+ * @since 1.2.8
+ * 
+ * @param mixed $data
+ * @param array $params Validation parameters
+ * @param array $field  Field definition
+ * @return string|boolean
+ */
+function adverts_verify_choices( $data, $params = null, $field = null ) {
+    $allowed = array();
+    
+    foreach( $field["options"] as $option ) {
+        if( ! isset( $option["disabled"] ) || ! $option["disabled"] ) {
+            $allowed[] = $option["value"];
+        }
+    }
+    
+    if( ! is_array( $data ) ) {
+        $data = array( $data );
+    }
+    
+    foreach( $data as $input ) {
+        if( ! in_array( $input, $allowed ) ) {
+            return "invalid";
+        }
+    }
+    
+    return true;
+}
+
+/**
  * Upload Limit VALIDATOR
  * 
  * This validator checks if user have reached maximum files upload limit.

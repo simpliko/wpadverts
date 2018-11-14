@@ -63,6 +63,9 @@ function adext_payment_completed_renew( WP_Post $payment ) {
     }
 
     $object_id = get_post_meta( $payment->ID, "_adverts_object_id", true );
+    $pricing_id = get_post_meta( $payment->ID, "_adverts_pricing_id", true );
+    
+    $menu_order = absint( get_post_meta( $pricing_id, "is_featured", true ) );
     
     $post_date = current_time('mysql');
     $post_date_gmt = current_time('mysql', 1);
@@ -94,13 +97,14 @@ function adext_payment_completed_renew( WP_Post $payment ) {
         }
     }
     
-    /* @todo add activity log */
+    $moderate = apply_filters( "adverts_manage_moderate", false, $payment, $pricing_id );
     
     wp_update_post( array(
-        "ID" => $object_id,
-        "post_status" => "publish",
+        "ID"            => $object_id,
+        "post_status"   => $moderate == "1" ? 'pending' : 'publish',
         'post_date'     => $post_date,
-        'post_date_gmt' => $post_date_gmt
+        'post_date_gmt' => $post_date_gmt,
+        'menu_order'    => $menu_order
     ) );
 }
 

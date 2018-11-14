@@ -146,7 +146,7 @@ class Adverts_Form
                     continue;
                 } 
                 
-                $result = call_user_func( $v["callback"], $value, $v["params"] );
+                $result = call_user_func( $v["callback"], $value, $v["params"], $field );
                 
                 if( $result === true || $result === 1) {
                     continue;

@@ -278,9 +278,13 @@ function adext_payments_page_history() {
         $form->bind( Adverts_Post::to_array( $payment ) );
         
         $gateway_name = get_post_meta( $payment->ID, '_adverts_payment_gateway', true);
-        $gateway = adext_payment_gateway_get( $gateway_name );
+        $gateway = null;
         
-        if( !$gateway ) {
+        if( ! empty( $gateway_name ) ) {
+            $gateway = adext_payment_gateway_get( $gateway_name );
+        }
+        
+        if( ! $gateway && $gateway_name ) {
             $msg = sprintf( __( "Payment Method [%s] assigned to this Payment does not exist or was disabled.", "adverts" ), $gateway_name );
             $flash->add_error( $msg );
         }

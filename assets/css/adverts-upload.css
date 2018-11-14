@@ -306,6 +306,12 @@
     right: 0;
 }
 
+@media (max-width: 420px) and (min-width: 0px) {
+ .wpadverts-attachment-details {
+    position: initial !important;
+  }
+}
+
 .adverts-form.adverts-form-aligned .adverts-control-group.wpadverts-file-browser-video-actions > div {
     width:100%;
     padding: 0;

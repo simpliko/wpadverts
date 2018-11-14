@@ -209,6 +209,12 @@ function adext_payments_add_action_payment( $action ) {
             update_post_meta( $post_id, "_expiration_date", $expiry );
         }
         
+        $menu_order = absint( get_post_meta( $listing_type, "is_featured", true ) );
+        
+        if( $menu_order > 0 ) {
+            wp_update_post( array( "ID" => $post_id, "menu_order" => $menu_order ) );
+        }
+        
         return $action;
     }
     
@@ -314,10 +320,11 @@ function adext_payments_form_load( $form ) {
         "label" => __("Listing", "adverts"),
         "order" => 1001,
         "empty_option" => true,
-        "options" => $opts,
+        "options" => apply_filters( "wpadverts_filter_pricings_options", $opts ),
         "value" => "",
         "validator" => array(
-            array( "name" => "is_required" )
+            array( "name" => "is_required" ),
+            array( "name" => "verify_choices" )
         )
     );
     
@@ -363,12 +370,18 @@ function adverts_payments_field_payment($field) {
             $post_content = '';
         }
         
+        if( isset( $option['disabled'] ) && $option['disabled'] ) {
+            $disabled = true;
+        } else {
+            $disabled = false;
+        }
+        
         ?>
 
-        <div class="adverts-listing-type-x">
+        <div class="adverts-listing-type-x <?php if($disabled): ?>adverts-listing-type-x-disabled<?php endif; ?>">
 
             <label class="adverts-cute-input adverts-cute-radio " for="<?php echo esc_attr( $field["name"] . "_" . $option["value"] ) ?>">
-                <input name="<?php echo esc_attr( $field["name"] ) ?>" class="adverts-listing-type-input" id="<?php echo esc_attr( $field["name"] . "_" . $option["value"] ) ?>" type="radio" value="<?php echo $post->ID ?>" <?php checked($post->ID, $field["value"]) ?> />
+                <input name="<?php echo esc_attr( $field["name"] ) ?>" class="adverts-listing-type-input" id="<?php echo esc_attr( $field["name"] . "_" . $option["value"] ) ?>" type="radio" value="<?php echo $post->ID ?>" <?php checked($post->ID, $field["value"]) ?> <?php disabled( $disabled) ?> />
                 <div class="adverts-cute-input-indicator"></div>
             </label>
 
@@ -599,7 +612,7 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
     );
     
     $opts = array();
-    $pricings = new WP_Query( array( 
+    $pricings = get_posts( array( 
         'post_type' => 'adverts-renewal',
         'post_status' => 'draft'
     ) );
@@ -612,7 +625,7 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
         "callback_bind" => "adverts_bind_single",
     ) );
     
-    foreach($pricings->posts as $data) {
+    foreach($pricings as $data) {
         
         if( get_post_meta( $data->ID, 'adverts_price', true ) ) {
             $adverts_price = adverts_price( get_post_meta( $data->ID, 'adverts_price', true ) );
@@ -639,7 +652,7 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
                 "label" => null,
                 "order" => 1001,
                 "empty_option" => true,
-                "options" => $opts,
+                "options" => apply_filters( "wpadverts_filter_pricings_options", $opts ),
                 "value" => "",
                 "validator" => array(
                     array( "name" => "is_required" )
@@ -696,21 +709,21 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
                 $m = __( 'Ad <strong>%s</strong> renewed. <a href="%s">Go back to Ads list</a>.', 'adverts');
                 $adverts_flash["info"][] = sprintf( $m, $post->post_title, $baseurl );
                 
+                $payment_id = adext_insert_payment( array(
+                    "payment_status" => "completed",
+                    "object_id" => $post->ID,
+                    "pricing_id" => $listing->ID,
+                    "payment_gateway" => null,
+                    "payment_for" => "post",
+                    "payment_paid" => 0,
+                ) );
+                
+                adext_payments_log($payment_id, __( "Free Renewal automatically marked as completed.", "adverts" ) );
+                
+                $payment = get_post( $payment_id );
+                
                 $post_id = $post->ID;
-                $moderate = apply_filters( "adverts_manage_moderate", false );
-                $menu_order = absint( get_post_meta( $listing->ID, "is_featured", true ) );
-
-                $post_id = wp_update_post( array(
-                    "ID" => $post_id,
-                    "post_status" => $moderate == "1" ? 'pending' : 'publish',
-                    'post_date'     => current_time('mysql'),
-                    'post_date_gmt' => current_time('mysql', 1),
-                    'menu_order'    => $menu_order
-                ));
-
-                $v = get_post_meta( $listing->ID, "adverts_visible", true );
-                $time = strtotime( current_time('mysql') . " +" . $v . " DAYS" );
-                update_post_meta( $post_id, "_expiration_date", $time );
+                $moderate = $payment->post_status === 'pending' ? true : false;
                 
                 ob_start();
                 // wpadverts/templates/add-payment.php
@@ -881,4 +894,112 @@ function adext_payments_manage_list_status( $post ) {
     ?>
     <span class="adverts-inline-icon adverts-inline-icon-warn adverts-icon-credit-card" title="<?php _e("Inactive — Waiting for payment.", "adverts") ?>"></span>
     <?php 
+}
+
+/**
+ * Inserts or updates a Payment
+ * 
+ * If the $postarr parameter has 'ID' set to a value, then post will be updated.
+ * 
+ * @since 1.2.8
+ * @param array $postarr {
+ *      @type int    $ID                    The post ID. If equal to something other than 0,
+ *                                          the post with that ID will be updated. Default 0.
+ *      @type string $buyer_name            The buyer first and last name or company name
+ *      @type string $buyer_email           The buyer email address
+ *      @type string $buyer_ip              User IP Address
+ *      @type int    $buyer_id              User ID (from wp_users table)
+ *      @type string $payment_status        One of ("pending", "completed", "failed", "refunded")
+ *      @type string $payment_type          For future use currently defaults to "adverts-payment"
+ *      @type int    $object_id             ID of an Advert
+ *      @type int    $pricing_id            ID of a selected Pricing
+ *      @type string $payment_gateway       Payment Gateway name
+ *      @type string $payment_for           For future use currently default to "post"
+ *      @type float  $payment_paid          How much user already paid
+ * }
+ * @return int|WP_Error The post ID on success. The WP_Error on failure.
+ */
+function adext_insert_payment( $postarr ) {
+    
+    $defaults = array(
+        "ID" => 0,
+        "buyer_name" => "",
+        "buyer_email" => "",
+        "buyer_ip" => adverts_get_ip(),
+        "buyer_id" => get_current_user_id(),
+        "payment_status" => "pending",
+        "payment_type" => "adverts-payment",
+        "object_id" => null,
+        "pricing_id" => null,
+        "payment_gateway" => null,
+        "payment_for" => "post",
+        "payment_paid" => 0,
+    );
+    
+    $data = array_merge( $defaults, $postarr );
+    
+    if( $data["buyer_id"] > 0 ) {
+        $user_info = get_userdata( $data["buyer_id"] );
+    }
+    
+    if( empty( $data["buyer_name"] ) && $user_info ) {
+        $data["buyer_name"] = trim( sprintf( "%s %s", $user_info->first_name, $user_info->last_name ) );
+    }
+    
+    if( empty( $data["buyer_email"] ) && $user_info ) {
+        $data["buyer_email"] = $user_info->user_email;
+    }
+    
+    $pricing = get_post( $data["pricing_id"] );
+    $price = get_post_meta( $data["pricing_id"], "adverts_price", true );
+
+    $payment_data = array(
+        'post_title'    => $data['buyer_name'],
+        'post_content'  => '',
+        'post_status'   => $data['payment_status'],
+        'post_type'     => $data['payment_type']
+    );
+
+    $meta = array(
+        "pricing" => array(
+            "post_title" => $pricing->post_title,
+            "visible" => get_post_meta( $pricing->ID, "adverts_visible", true )
+        ),
+    );
+    
+    $data["meta"] = $meta;
+
+    if( $data["ID"] > 0 ) {
+        $payment_id = wp_update_post( $payment_data );
+    } else {
+        $payment_id = wp_insert_post( $payment_data );
+    }
+    
+    if( is_wp_error( $payment_id ) ) {
+        return $payment_id;
+    }
+    
+    if( $data["payment_paid"] == "total" ) {
+        $paid = $price;
+    } else {
+        $paid = $data["payment_paid"];
+    }
+    
+    update_post_meta( $payment_id, 'adverts_person', $data['buyer_name'] );
+    update_post_meta( $payment_id, 'adverts_email', $data['buyer_email'] );
+    update_post_meta( $payment_id, '_adverts_user_ip', $data['buyer_ip'] );
+    update_post_meta( $payment_id, '_adverts_user_id', $data['buyer_id'] );
+    update_post_meta( $payment_id, '_adverts_object_id', $data["object_id"] );
+    update_post_meta( $payment_id, '_adverts_pricing_id', $data["pricing_id"] );
+    update_post_meta( $payment_id, '_adverts_payment_type', $pricing->post_type );
+    update_post_meta( $payment_id, '_adverts_payment_gateway', $data["payment_gateway"] );
+    update_post_meta( $payment_id, '_adverts_payment_for', $data["payment_for"] );
+    update_post_meta( $payment_id, '_adverts_payment_paid', $paid );
+    update_post_meta( $payment_id, '_adverts_payment_total', $price );
+    update_post_meta( $payment_id, '_adverts_payment_meta', $meta );
+    
+    do_action( "adext_insert_payment", $payment_id, $postarr, $pricing );
+    do_action( "adverts_payment_" . $data["payment_status"], get_post( $payment_id ) );
+    
+    return $payment_id;
 }

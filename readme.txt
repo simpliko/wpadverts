@@ -104,6 +104,7 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 * FEATURE: Allow non-expiring paid listings.
 * FIXED: The free listings purchased using Payments module were not featured correctly.
 * FIXED: When renewing listings the is_featured flag is never changed.
+* FIXED: Pagination in [adverts_manage] displays next to the list (instead of below the list).
 * API: wpadverts_filter_pricings_options filter - allows filtering available pricings.
 * API: verify_choices form filter - allows checking if selected options (in select or checkboxes list) are valid values.
 * API: "disabled" param was added to select, checkbox and radio input options.

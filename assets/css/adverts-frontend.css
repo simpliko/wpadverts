@@ -693,8 +693,10 @@ a.adverts-manage-action:visited {
     
 
 .adverts-pagination {
-    margin: 20px 0;
+    padding: 20px 0;
     text-align: right;
+    clear: both;
+    overflow: hidden;
 }
 
 .adverts-pagination a {

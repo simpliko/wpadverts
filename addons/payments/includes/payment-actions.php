@@ -30,15 +30,13 @@ function adext_payment_completed_publish( WP_Post $payment ) {
         $visible = 0;
     }
     
-
     wp_update_post( array(
         "ID" => $object_id,
         "post_status" => "publish",
         "post_date" => $publish,
         "post_date_gmt" => $publish_gmt
     ));
-    
-        
+     
     if( $visible > 0) {
         $expiry = strtotime( $publish . " +$visible DAYS" );
         update_post_meta( $object_id, "_expiration_date", $expiry );

@@ -107,7 +107,7 @@ function adext_payments_init() {
     add_action("adverts_install_module_payments", "adext_payments_install");
     add_filter("adverts_form_load", "adext_payments_form_load");
     
-    wp_register_style( 'adverts-payments-frontend', ADVERTS_URL . '/addons/payments/assets/css/payments-frontend.css');
+    wp_register_style( 'adverts-payments-frontend', ADVERTS_URL . '/addons/payments/assets/css/payments-frontend.css', array(), '1.2.8' );
 }
 
 /**
@@ -207,6 +207,8 @@ function adext_payments_add_action_payment( $action ) {
         if( $visible > 0 ) {
             $expiry = strtotime( $publish . " +$visible DAYS" );
             update_post_meta( $post_id, "_expiration_date", $expiry );
+        } else {
+            delete_post_meta( $post_id, "_expiration_date" );
         }
         
         $menu_order = absint( get_post_meta( $listing_type, "is_featured", true ) );
@@ -394,7 +396,11 @@ function adverts_payments_field_payment($field) {
                 <div class="adverts-listing-type-features">
                     <span class="adverts-listing-type-feature-duration">
                         <span class="adverts-listing-type-icon adverts-icon-clock"></span>
+                        <?php if( $visible > 0 ): ?>
                         <?php printf( _n("Visible 1 day", "Visible %d days", $visible, "adverts"), $visible) ?>
+                        <?php else: ?>
+                        <?php echo esc_html_e( "Never Expires", "adverts" ) ?>
+                        <?php endif; ?>
                     </span>
 
                     <?php do_action("adverts_payments_features", $post->ID ) ?>

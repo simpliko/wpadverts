@@ -4,8 +4,8 @@ Contributors: gwin
 Tags: classifieds, classified, classified ads, classified script, classifieds script, wp classified, wp classifieds
 Requires PHP: 5.3
 Requires at least: 4.0
-Tested up to: 4.9
-Stable tag: 1.2.7
+Tested up to: 5.0
+Stable tag: 1.2.8
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -98,6 +98,17 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.2.8 - 2018-11-29 =
+
+* FEATURE: Allow non-expiring paid listings.
+* FIXED: The free listings purchased using Payments module were not featured correctly.
+* FIXED: When renewing listings the is_featured flag is never changed.
+* API: wpadverts_filter_pricings_options filter - allows filtering available pricings.
+* API: verify_choices form filter - allows checking if selected options (in select or checkboxes list) are valid values.
+* API: "disabled" param was added to select, checkbox and radio input options.
+* API: adverts_manage_moderate filter allows putting Advert into moderation when renewing.
+* API: adext_insert_payment() function allows quickly creating payment programatically.
 
 = 1.2.7 - 2018-10-09 =
 

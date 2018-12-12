@@ -24,6 +24,13 @@ class Adverts {
     private $_data = array();
     
     /**
+     * List of objects registering WPAdverts emails
+     *
+     * @var array
+     */
+    private $_messages = array();
+    
+    /**
      * Singleton, returns Adverts instance
      * 
      * @return Adverts
@@ -61,4 +68,11 @@ class Adverts {
         $this->_data[$key] = $data;
     }
     
+    public function add_messages( $key, $messages ) {
+        $this->_messages[$key] = $messages;
+    }
+    
+    public function get_messages( $key ) {
+        return $this->_messages[$key];
+    }
 }

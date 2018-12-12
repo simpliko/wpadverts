@@ -2196,6 +2196,10 @@ function adverts_create_user_from_post_id( $ID, $update_post = false ) {
                 "post_author" => $user_id
             ) );
         }
+        
+        if( $user_id ) {
+            do_action( "wpadverts_user_saved", $user_id, $id );
+        }
 
     } // end if
     

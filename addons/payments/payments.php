@@ -473,6 +473,8 @@ function adext_payments_action_payment($content, Adverts_Form $form ) {
         "post_status" => "advert-pending"
     ) );
 
+    do_action( "wpadverts_advert_saved", $post_id );
+    
     if( !is_user_logged_in() && get_post_meta( $post_id, "_adverts_account", true) == 1 ) {
         adverts_create_user_from_post_id( $post_id, true );
     }
@@ -481,6 +483,26 @@ function adext_payments_action_payment($content, Adverts_Form $form ) {
     $listing = get_post( $listing_id );
     
     $price = get_post_meta($listing_id, 'adverts_price', true);
+    
+    $payment_id = adext_post_get_payment( $post_id, $listing_id, "pending" );
+    
+    if( ! $payment_id  ) {
+        $payment_id = adext_insert_payment( array(
+            "buyer_name" => get_post_meta( $post_id, "adverts_person", true ), 
+            "buyer_email" => get_post_meta( $post_id, "adverts_email", true ),           
+            "buyer_ip" => null,
+            "buyer_id" => get_current_user_id(),
+            "payment_status" => "pending",
+            "payment_type" => "adverts-payment",
+            "object_id" => $post_id,
+            "pricing_id" => $listing_id,
+            "payment_gateway" => adverts_config("payments.default_gateway"),
+            "payment_for" => "post",
+            "payment_paid" => 0
+        ) );
+    }
+    
+    $payment = get_post( $payment_id );
     
     ob_start();
     include ADVERTS_PATH . 'addons/payments/templates/add-payment.php';
@@ -704,6 +726,29 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
                 $m = __( 'Renew <strong>%s</strong> or <a href="%s">cancel and go back</a>.', 'adverts');
                 $adverts_flash["info"][] = sprintf( $m, $post->post_title, $baseurl );
                 
+                $post_id = $post->ID;
+                $listing_id = $listing->ID;
+                
+                $payment_id = adext_post_get_payment( $post_id, $listing_id, "pending" );
+
+                if( ! $payment_id  ) {
+                    $payment_id = adext_insert_payment( array(
+                        "buyer_name" => get_post_meta( $post_id, "adverts_person", true ), 
+                        "buyer_email" => get_post_meta( $post_id, "adverts_email", true ),           
+                        "buyer_ip" => null,
+                        "buyer_id" => get_current_user_id(),
+                        "payment_status" => "pending",
+                        "payment_type" => "adverts-payment",
+                        "object_id" => $post_id,
+                        "pricing_id" => $listing_id,
+                        "payment_gateway" => adverts_config("payments.default_gateway"),
+                        "payment_for" => "post",
+                        "payment_paid" => 0
+                    ) );
+                }
+
+                $payment = get_post( $payment_id );
+                
                 ob_start();
                 // wpadverts/addons/payments/templates/add-payment.php
                 include ADVERTS_PATH . 'addons/payments/templates/add-payment.php';
@@ -729,7 +774,9 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
                 $payment = get_post( $payment_id );
                 
                 $post_id = $post->ID;
-                $moderate = $payment->post_status === 'pending' ? true : false;
+                $moderate = $post->post_status === 'pending' ? true : false;
+                
+                do_action( "wpadverts_advert_saved", $post_id );
                 
                 ob_start();
                 // wpadverts/templates/add-payment.php
@@ -809,6 +856,10 @@ function adext_payments_core_init() {
     add_action("adverts_payment_completed", "adext_payment_completed_renew");
     add_action("adverts_payment_completed", "adext_payment_completed_notify_user");
     add_action("adverts_payment_completed", "adext_payment_completed_notify_admin");
+    
+    include_once ADVERTS_PATH . 'addons/payments/includes/class-payment-messages.php';
+    
+    Adverts::instance()->add_messages( "adverts-payment", new Adverts_Payment_Messages() );
     
     do_action("adext_register_payment_gateway");
 }
@@ -944,6 +995,12 @@ function adext_insert_payment( $postarr ) {
     
     $data = array_merge( $defaults, $postarr );
     
+    if( $data["ID"] > 0 ) {
+        $old_status = get_post_status( $data["ID"] );
+    } else {
+        $old_status = "new";
+    }
+    
     if( $data["buyer_id"] > 0 ) {
         $user_info = get_userdata( $data["buyer_id"] );
     }
@@ -1004,8 +1061,53 @@ function adext_insert_payment( $postarr ) {
     update_post_meta( $payment_id, '_adverts_payment_total', $price );
     update_post_meta( $payment_id, '_adverts_payment_meta', $meta );
     
+    $new_status = $data["payment_status"];
+    
     do_action( "adext_insert_payment", $payment_id, $postarr, $pricing );
-    do_action( "adverts_payment_" . $data["payment_status"], get_post( $payment_id ) );
+    
+    if( $old_status != $new_status ) {
+        do_action( "adverts_payment_status_change", get_post( $payment_id ), $new_status, $old_status );
+        do_action( "adverts_payment_{$new_status}", get_post( $payment_id ) );
+        do_action( "adverts_payment_{$old_status}_to_{$new_status}", get_post( $payment_id ) );
+    }
+
+    
     
     return $payment_id;
+}
+
+/**
+ * Checks if post has payment created
+ * 
+ * @since 1.3.0
+ * 
+ * @param   int       $post_id          Post ID
+ * @param   int       $listing_id       Pricing ID
+ * @param   string    $post_status      Payment status (default 'pending')
+ * @return  int|bool                    The Payment ID or false
+ */
+function adext_post_get_payment( $post_id, $listing_id, $post_status = "pending" ) {
+    $query = new WP_Query(array(
+        "post_type" => "adverts-payment",
+        "post_status" => $post_status,
+        "orderby" => "date",
+        "order" => "ASC",
+        "posts_per_page" => 1,
+        "meta_query" => array(
+            array(
+                "meta_key" => '_adverts_object_id',
+                "meta_value" => $post_id
+            ),
+            array(
+                "meta_key" => '_adverts_pricing_id',
+                "meta_value" => $listing_id
+            )
+        )
+    ));
+    
+    if( isset( $query->posts[0] ) ) {
+        return $query->posts[0]->ID;
+    } else {
+        return false;
+    }
 }

@@ -30,7 +30,7 @@
 
 <br/>
 
-<ul class="adverts-tabs adverts-payment-data" data-page-id="<?php esc_attr_e(get_the_ID()) ?>" data-listing-id="<?php esc_attr_e($listing->ID) ?>" data-object-id="<?php esc_attr_e($post->ID) ?>">
+<ul class="adverts-tabs adverts-payment-data" data-page-id="<?php esc_attr_e(get_the_ID()) ?>" data-listing-id="<?php echo esc_attr($listing->ID) ?>" data-object-id="<?php echo esc_attr($post->ID) ?>" data-payment-id="<?php echo esc_attr($payment->ID) ?>">
     <?php foreach($gateways as $g_name => $gateway): ?>
     <li class="adverts-tab-link <?php if($g_name==adverts_config("payments.default_gateway")):?>current<?php endif; ?>" data-tab="<?php esc_attr_e($g_name) ?>"><?php esc_html_e($gateway["title"]) ?></li>
     <?php endforeach; ?>

@@ -450,7 +450,8 @@ function shortcode_adverts_add( $atts ) {
         if( !is_user_logged_in() && get_post_meta( $post_id, "_adverts_account", true) == 1 ) {
             adverts_create_user_from_post_id( $post_id, true );
         }
-    
+        
+        do_action( "wpadverts_advert_saved", $post_id );
         
         // adverts/templates/add-save.php
         ob_start();

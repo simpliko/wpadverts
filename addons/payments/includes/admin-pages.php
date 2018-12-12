@@ -301,7 +301,11 @@ function adext_payments_page_history() {
                 $post_id = Adverts_Post::save($form, $payment);
                 
                 if(is_numeric($post_id) && $post_id>0 &&  $status_old!=$status_new ) {
-                    do_action("adverts_payment_".$status_new, $payment);
+                    
+                    do_action( "adverts_payment_status_change", get_post( $payment_id ), $new_status, $old_status );
+                    do_action( "adverts_payment_{$status_new}", $payment );
+                    do_action( "adverts_payment_{$status_old}_to_{$status_new}", $payment );
+                    
                     $text = __('<strong>%1$s</strong> changed payment status to <strong>%2$s</strong>', 'adverts');
                     $message = sprintf( $text, wp_get_current_user()->user_login, $status_new);
                     adext_payments_log( $post_id, $message );
@@ -379,7 +383,9 @@ function adext_payments_page_history() {
 
                 if($status_old != $status_new) {
                     wp_update_post(array("ID"=>$id, "post_status"=>$status_new));
-                    do_action("adverts_payment_".$status_new, get_post( $id ) );
+                    do_action( "adverts_payment_status_change", get_post( $payment_id ), $new_status, $old_status );
+                    do_action( "adverts_payment_{$status_new}", get_post( $id ) );
+                    do_action( "adverts_payment_{$status_old}_to_{$status_new}", get_post( $id ) );
                 }
             }
             

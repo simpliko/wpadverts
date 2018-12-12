@@ -33,7 +33,10 @@ if( !defined("ADVERTS_FILE") ) {
 }
 
 // init global variables
-global $adverts_config, $adverts_namespace;
+global $wpadverts, $adverts_config, $adverts_namespace;
+
+// define global $wpadverts variable
+$wpadverts = null;
 
 // define global $adverts_config variable
 $adverts_config = null;
@@ -97,7 +100,7 @@ $adverts_namespace['gallery'] = array(
  * @return void
  */
 function adverts_init() {
-    global $wp_embed;
+    global $wp_embed, $wpadverts;
     
     add_filter( 'adverts_the_content', array( $wp_embed, 'autoembed' ), 8 );
     add_filter( 'adverts_the_content', 'wptexturize' );
@@ -109,6 +112,12 @@ function adverts_init() {
     wp_register_style( 'adverts-icons-animate', ADVERTS_URL . '/assets/css/animation.css', array(), "1" );
     
     load_plugin_textdomain("adverts", false, dirname(plugin_basename(__FILE__))."/languages/");
+    
+    include_once ADVERTS_PATH . 'includes/class-adverts.php';
+    $wpadverts = Adverts::instance();
+    
+    include_once ADVERTS_PATH . 'includes/class-messages.php';
+    $wpadverts->add_messages( "adverts", new Adverts_Messages() );
     
     include_once ADVERTS_PATH . 'includes/functions.php';
     

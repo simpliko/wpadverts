@@ -1,0 +1,107 @@
+var WPADVERTS = WPADVERTS || {};
+
+WPADVERTS.EMAILS = WPADVERTS.EMAILS || {};
+
+WPADVERTS.EMAILS.Edit = {
+    
+};
+
+WPADVERTS.EMAILS.Edit.Headers = function( el ) {
+    this.button = el;
+    this.row = el.closest( "tr" );
+    
+    this.button.on( "click", jQuery.proxy( this.AddHeaderClicked, this ) );
+};
+
+WPADVERTS.EMAILS.Edit.Headers.prototype.AddHeaderClicked = function( e ) {
+    e.preventDefault();
+    
+    // { header_name: "Content-Type", header_value: "text/html" }
+    var row = new WPADVERTS.EMAILS.Edit.HeaderRow( {} ).InsertBefore( this.row );
+};
+
+WPADVERTS.EMAILS.Edit.HeaderRow = function( data ) {
+    this._inserted = false;
+    this.tpl = null;
+    this.header_name = null;
+    this.header_value = null;
+    
+    if( typeof data.header_name !== 'undefined' ) {
+        this.header_name = data.header_name;
+    } else {
+        data.header_name = "";
+    }
+    
+    if( typeof data.header_value !== 'undefined' ) {
+        this.header_value = data.header_value;
+    } else {
+        data.header_value = "";
+    }
+    
+    data._mode = "edit";
+    
+    this.Render(data);
+
+};
+
+WPADVERTS.EMAILS.Edit.HeaderRow.prototype.Render = function( data ) {
+    var template = wp.template( 'adext-email-edit-header-row' );
+    var tpl = jQuery( template( data ) );
+    
+
+    
+    if(this._inserted === true) {
+        this.tpl.html(tpl.html());
+    } else {
+        this.tpl = tpl;
+    }
+    
+    this.tpl.find(".adext-emails-edit-td-yes").on( "click", jQuery.proxy( this.OkHeaderClicked, this ) );
+    this.tpl.find(".adext-emails-edit-td-edit").on( "click", jQuery.proxy( this.EditHeaderClicked, this ) );
+    this.tpl.find(".adext-emails-edit-td-no").on( "click", jQuery.proxy( this.RemoveHeaderClicked, this ) );
+};
+
+WPADVERTS.EMAILS.Edit.HeaderRow.prototype.InsertBefore = function( el ) {
+    el.before( this.tpl );
+    this.tpl.fadeIn("slow");
+    this._inserted = true;
+};
+
+
+WPADVERTS.EMAILS.Edit.HeaderRow.prototype.OkHeaderClicked = function( e ) {
+    e.preventDefault();
+    
+    this.header_name = this.tpl.find( "input[name=header_name]" ).val();
+    this.header_value = this.tpl.find( "input[name=header_value]").val();
+    
+    var data = {
+        _mode: "read",
+        header_name: this.header_name,
+        header_value: this.header_value
+    };
+    
+    this.Render(data);
+    
+
+};
+
+WPADVERTS.EMAILS.Edit.HeaderRow.prototype.RemoveHeaderClicked = function( e ) {
+    e.preventDefault();
+    this.tpl.remove();
+};
+
+WPADVERTS.EMAILS.Edit.HeaderRow.prototype.EditHeaderClicked = function( e ) {
+    e.preventDefault();
+    
+    var data = {
+        _mode: "edit",
+        header_name: this.header_name,
+        header_value: this.header_value
+    };
+    
+    this.Render(data);
+};
+
+jQuery(function($) {
+    new WPADVERTS.EMAILS.Edit.Headers($(".button.adext-emails-add-header"));
+});

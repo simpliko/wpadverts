@@ -118,6 +118,12 @@ function adverts_admin_page_extensions() {
                     "type" => "",
                     "plugin" => "wpadverts-authors/wpadverts-authors.php",
                     "purchase_url" => "https://wpadverts.com/extensions/authors/"
+                ),
+                "emails" => array(
+                    "title" => __("Emails", "adverts"),
+                    "text" => __("Emails module sends transactional emails to users and allows editing the email templates content.", "adverts"),
+                    "type" => "",
+                    "plugin" => null
                 )
             )
         ),

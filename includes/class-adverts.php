@@ -72,7 +72,11 @@ class Adverts {
         $this->_messages[$key] = $messages;
     }
     
-    public function get_messages( $key ) {
-        return $this->_messages[$key];
+    public function get_messages( $key = null ) {
+        if( $key === null ) {
+            return $this->_messages;
+        } else {
+            return $this->_messages[$key];
+        }
     }
 }

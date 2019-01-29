@@ -33,6 +33,106 @@ class Adverts_Messages {
         add_action( "advert_tmp_to_pending", array( $this, "on_draft_to_pending_notify_admin" ), 10, 1 );
     }
     
+    public function register_messages() {
+        return array(
+            array(
+                "name" => "core::on_draft_to_publish_notify_user",
+                "action" => "advert_tmp_to_publish",
+                "enabled" => 1,
+                "label" => __( "Core / Free Advert Published", "adverts" ),
+                "notify" => "user",
+                "from" => array( "name" => "", "email" => "" ),
+                "to" => array( "name" => "", "email" => "" ),
+                "subject" => __( "Your Ad has been published.", "adverts" ),
+                "body" => "",
+                "headers" => array(),
+                "attachments" => array()
+            ),
+            array(
+                "name" => "core::on_draft_to_pending_notify_user",
+                "action" => "advert_tmp_to_pending",
+                "enabled" => 1,
+                "label" => __( "Core / Free Advert Pending", "adverts" ),
+                "notify" => "user",
+                "from" => array( "name" => "", "email" => "" ),
+                "to" => array( "name" => "", "email" => "" ),
+                "subject" => __( "Your Ad has been saved.", "adverts" ),
+                "body" => "",
+                "headers" => array(),
+                "attachments" => array()
+            ),
+            array(
+                "name" => "core::on_pending_to_publish_notify_user",
+                "action" => "pending_to_publish",
+                "enabled" => 1,
+                "label" => __( "Core / Free Advert Approved", "adverts" ),
+                "notify" => "user",
+                "from" => array( "name" => "", "email" => "" ),
+                "to" => array( "name" => "", "email" => "" ),
+                "subject" => __( "Your Ad has been approved.", "adverts" ),
+                "body" => "",
+                "headers" => array(),
+                "attachments" => array()
+            ),
+            array(
+                "name" => "core::on_pending_to_trash_notify_user",
+                "action" => "pending_to_trash",
+                "enabled" => 1,
+                "label" => __( "Core / Free Advert Rejected", "adverts" ),
+                "notify" => "user",
+                "from" => array( "name" => "", "email" => "" ),
+                "to" => array( "name" => "", "email" => "" ),
+                "subject" => __( "Your Ad has been rejected.", "adverts" ),
+                "body" => "",
+                "headers" => array(),
+                "attachments" => array()
+            ),
+            array(
+                "name" => "core::on_publish_to_expired_notify_user",
+                "action" => "publish_to_expired",
+                "enabled" => 1,
+                "label" => __( "Core / Advert Expired", "adverts" ),
+                "notify" => "user",
+                "from" => array( "name" => "", "email" => "" ),
+                "to" => array( "name" => "", "email" => "" ),
+                "subject" => __( "Your Ad has expired.", "adverts" ),
+                "body" => "",
+                "headers" => array(),
+                "attachments" => array()
+            ),
+            array(
+                "name" => "core::on_draft_to_publish_notify_admin",
+                "action" => "advert_tmp_to_publish",
+                "enabled" => 1,
+                "label" => __( "Core / Free Advert Published", "adverts" ),
+                "notify" => "admin",
+                "from" => array( "name" => "", "email" => "" ),
+                "to" => array( "name" => "", "email" => "" ),
+                "subject" => __( "New Ad has been published.", "adverts" ),
+                "body" => "",
+                "headers" => array(),
+                "attachments" => array()
+            ),
+            array(
+                "name" => "core::on_draft_to_pending_notify_admin",
+                "action" => "advert_tmp_to_pending",
+                "enabled" => 0,
+                "label" => __( "Core / Free Advert Pending", "adverts" ),
+                "notify" => "admin",
+                "from" => array( "name" => "", "email" => "" ),
+                "to" => array( "name" => "", "email" => "" ),
+                "subject" => __( "New Ad is pending (action required).", "adverts" ),
+                "body" => "",
+                "headers" => array(),
+                "attachments" => array()
+            ),
+        );
+    }
+    
+    public function get_messages() {
+        return $this->register_messages();
+    }
+    
     protected function _get_to( $post_id ) {
         $author = get_post_field( 'post_author', $post_id );
 

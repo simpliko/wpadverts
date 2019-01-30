@@ -13,7 +13,17 @@
 
 class Adverts_Messages {
 
+    /**
+     * List of registered messages
+     *
+     * @var array 
+     */
+    public $messages = null;
+    
     public function __construct() {
+        
+        add_filter( "wpadverts_messages_register", array( $this, "load" ) );
+        add_filter( "wpadverts_message", array( $this, "parse" ), 10, 3 );
         
         // Free Advert Published -> Notify User
         add_action( "advert_tmp_to_publish", array( $this, "on_draft_to_publish_notify_user" ), 10, 1 );
@@ -34,21 +44,23 @@ class Adverts_Messages {
     }
     
     public function register_messages() {
-        return array(
-            array(
+        $this->messages = apply_filters( "wpadverts_messages_register", array(
+            "core::on_draft_to_publish_notify_user" => array(
                 "name" => "core::on_draft_to_publish_notify_user",
                 "action" => "advert_tmp_to_publish",
                 "enabled" => 1,
                 "label" => __( "Core / Free Advert Published", "adverts" ),
                 "notify" => "user",
-                "from" => array( "name" => "", "email" => "" ),
+                "from" => array( "name" => "Admin", "email" => "admin@example.com" ),
                 "to" => array( "name" => "", "email" => "" ),
                 "subject" => __( "Your Ad has been published.", "adverts" ),
                 "body" => "",
-                "headers" => array(),
+                "headers" => array(
+                    array( "name" => "Reply-To", "value" => "admin@example.com" )
+                ),
                 "attachments" => array()
             ),
-            array(
+            "core::on_draft_to_pending_notify_user" => array(
                 "name" => "core::on_draft_to_pending_notify_user",
                 "action" => "advert_tmp_to_pending",
                 "enabled" => 1,
@@ -61,7 +73,7 @@ class Adverts_Messages {
                 "headers" => array(),
                 "attachments" => array()
             ),
-            array(
+            "core::on_pending_to_publish_notify_user" => array(
                 "name" => "core::on_pending_to_publish_notify_user",
                 "action" => "pending_to_publish",
                 "enabled" => 1,
@@ -74,7 +86,7 @@ class Adverts_Messages {
                 "headers" => array(),
                 "attachments" => array()
             ),
-            array(
+            "core::on_pending_to_trash_notify_user" => array(
                 "name" => "core::on_pending_to_trash_notify_user",
                 "action" => "pending_to_trash",
                 "enabled" => 1,
@@ -87,7 +99,7 @@ class Adverts_Messages {
                 "headers" => array(),
                 "attachments" => array()
             ),
-            array(
+            "core::on_publish_to_expired_notify_user" => array(
                 "name" => "core::on_publish_to_expired_notify_user",
                 "action" => "publish_to_expired",
                 "enabled" => 1,
@@ -100,7 +112,7 @@ class Adverts_Messages {
                 "headers" => array(),
                 "attachments" => array()
             ),
-            array(
+            "core::on_draft_to_publish_notify_admin" => array(
                 "name" => "core::on_draft_to_publish_notify_admin",
                 "action" => "advert_tmp_to_publish",
                 "enabled" => 1,
@@ -113,7 +125,7 @@ class Adverts_Messages {
                 "headers" => array(),
                 "attachments" => array()
             ),
-            array(
+            "core::on_draft_to_pending_notify_admin" => array(
                 "name" => "core::on_draft_to_pending_notify_admin",
                 "action" => "advert_tmp_to_pending",
                 "enabled" => 0,
@@ -126,11 +138,11 @@ class Adverts_Messages {
                 "headers" => array(),
                 "attachments" => array()
             ),
-        );
+        ) );
     }
     
     public function get_messages() {
-        return $this->register_messages();
+        return $this->messages;
     }
     
     protected function _get_to( $post_id ) {
@@ -144,6 +156,68 @@ class Adverts_Messages {
         return $to;
     }
 
+    public function _get_headers( $message, $exclude = null ) {
+        
+        if( $exclude === null ) {
+            $exclude = array( "from", "subject" );
+        } else if( is_string( $exclude ) ) {
+            $exclude = array_map( "trim", explode( ",", $exclude ) );
+        } else if( ! is_array( $exclude ) ) {
+            $exclude = (array)$exclude;
+        }
+        
+        $exclude = array_map( "strtolower", $exclude );
+        $fr = $message["from"];
+        
+        $headers = array(
+            "From" => empty( $fr["name"] ) ? $fr["email"] : sprintf( "%s <%s>", $fr["name"], $fr["email"] ),  
+        );
+        
+        foreach( $message["headers"] as $key => $value ) {
+            if( in_array( strtolower( $key ), $exclude ) ) {
+                continue;
+            }
+            
+            $headers[ $key ] = $value;
+        }
+        
+        return $headers;
+    }
+    
+    public function load( $messages ) {
+        $templates = get_option( "adext_emails_templates" );
+        
+        if( ! is_array( $templates ) ) {
+            return $messages;
+        }
+        
+        foreach( $templates as $k => $update ) {
+            if( isset( $messages[$k] ) ) {
+                $messages[$k] = array_merge( $messages[$k], $update );
+            }
+        }
+        
+        return $messages;
+    }
+    
+    public function send( $message, $args ) {
+        $mail_args = array(
+            "to" => $message["to"]["value"],
+            "subject" => $message["subject"],
+            "message" => $message["body"],
+            "headers" => $this->_get_headers( $message ),
+            "attachments" => $message["headers"]
+        );
+        
+        $mail = apply_filters( "wpadverts_message", $mail_args, $message["name"], $args );
+        
+        wp_mail( $mail["to"], $mail["subject"], $mail["message"], $mail["headers"], $mail["attachments"] );
+    }
+    
+    public function parse( $mail, $name, $args ) {
+        return $mail;
+    }
+    
     public function on_draft_to_publish_notify_user( $post ) {
         if( $post->post_type !== "advert" ) {
             return;

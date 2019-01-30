@@ -3,6 +3,4 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-global $adverts_emails;
-
-$adverts_emails->admin->dispatch();
+Adverts::instance()->get("emails")->admin->dispatch();

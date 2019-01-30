@@ -25,5 +25,5 @@ $adverts_namespace['emails'] = array(
 
 include_once ADVERTS_PATH . 'addons/emails/includes/class-emails.php';
 
-$adverts_emails = new Adext_Emails;
+Adverts::instance()->set("emails", new Adext_Emails);
 

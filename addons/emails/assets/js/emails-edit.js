@@ -65,14 +65,19 @@ WPADVERTS.EMAILS.Edit.HeaderRow.prototype.InsertBefore = function( el ) {
     el.before( this.tpl );
     this.tpl.fadeIn("slow");
     this._inserted = true;
+    
+    return this;
 };
 
 
 WPADVERTS.EMAILS.Edit.HeaderRow.prototype.OkHeaderClicked = function( e ) {
     e.preventDefault();
-    
-    this.header_name = this.tpl.find( "input[name=header_name]" ).val();
-    this.header_value = this.tpl.find( "input[name=header_value]").val();
+    this.OkHeader();
+};
+
+WPADVERTS.EMAILS.Edit.HeaderRow.prototype.OkHeader = function() {
+    this.header_name = this.tpl.find( "input.header-name" ).val();
+    this.header_value = this.tpl.find( "input.header-value").val();
     
     var data = {
         _mode: "read",
@@ -81,8 +86,6 @@ WPADVERTS.EMAILS.Edit.HeaderRow.prototype.OkHeaderClicked = function( e ) {
     };
     
     this.Render(data);
-    
-
 };
 
 WPADVERTS.EMAILS.Edit.HeaderRow.prototype.RemoveHeaderClicked = function( e ) {
@@ -104,4 +107,17 @@ WPADVERTS.EMAILS.Edit.HeaderRow.prototype.EditHeaderClicked = function( e ) {
 
 jQuery(function($) {
     new WPADVERTS.EMAILS.Edit.Headers($(".button.adext-emails-add-header"));
+    
+    if( typeof WPADVERTS_EMAIL_EDIT_HEADERS !== 'undefined' ) {
+        $.each(WPADVERTS_EMAIL_EDIT_HEADERS, function(index, item) {
+            var data = {
+                header_name: item.name,
+                header_value: item.value
+            };
+            var row = $(".button.adext-emails-add-header").closest("tr");
+            
+            new WPADVERTS.EMAILS.Edit.HeaderRow( data ).InsertBefore( row ).OkHeader();
+        });
+    }
+    
 });

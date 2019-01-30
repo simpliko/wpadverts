@@ -115,10 +115,7 @@ function adverts_init() {
     
     include_once ADVERTS_PATH . 'includes/class-adverts.php';
     $wpadverts = Adverts::instance();
-    
-    include_once ADVERTS_PATH . 'includes/class-messages.php';
-    $wpadverts->add_messages( "adverts", new Adverts_Messages() );
-    
+
     include_once ADVERTS_PATH . 'includes/functions.php';
     
     $expired_status = adverts_config( 'expired_ad_status' );

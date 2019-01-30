@@ -2,6 +2,22 @@
 
 class Adext_Emails_Admin {
 
+    /**
+     * Currently edited email headers
+     *
+     * @since 1.3
+     * @var array
+     */
+    protected $_headers = null;
+    
+    /**
+     * Function used to decide which action to execute.
+     * 
+     * This function is run when user will access wp-admin / Classifieds / Options / Emails panel.
+     * 
+     * @since 1.3
+     * @return void
+     */
     public function dispatch() {
         $edit = adverts_request( "edit" );
         $config = adverts_request( "config" );
@@ -16,7 +32,7 @@ class Adext_Emails_Admin {
     }
     
     /** 
-     * Renders Emails config form.
+     * Renders Emails List.
      * 
      * The page is rendered in wp-admin / Classifieds / Options / Emails 
      * 
@@ -31,7 +47,7 @@ class Adext_Emails_Admin {
         
         wp_enqueue_style( 'adverts-admin' );
         $flash = Adverts_Flash::instance();
-        $messages = Adverts::instance()->get_messages();
+        $messages = Adverts::instance()->get("emails")->messages;
 
         include ADVERTS_PATH . 'addons/emails/admin/emails-list.php';
     }
@@ -50,9 +66,25 @@ class Adext_Emails_Admin {
         wp_enqueue_style( 'adverts-emails-admin' );
         wp_enqueue_script( 'adverts-emails-admin' );
         
-        $scheme = $this->edit_form();
+        $flash = Adverts_Flash::instance();
+        $message = $this->get_current_message();
+        
+        if( $message === null ) {
+            wp_die();
+        }
+        
+        $bind = array(
+            "message_enabled" => $message["enabled"],
+            "message_subject" => $message["subject"],
+            "message_from" => $message["from"],
+            "message_to" => $message["to"],
+            "message_headers" => $message["headers"],
+            "message_body" => $message["body"]
+        );
+        
+        $scheme = $this->edit_form( $message );
         $form = new Adverts_Form( $scheme );
-        $form->bind( get_option ( "adext_payments_config", array() ) );
+        $form->bind( $bind );
 
         $button_text = __("Update Options", "adverts");
 
@@ -61,8 +93,10 @@ class Adext_Emails_Admin {
             $valid = $form->validate();
 
             if($valid) {
-                update_option("adext_payments_config", $form->get_values());
-                $flash->add_info( __("Settings updated.", "adverts") );
+                $this->edit_save( $form, adverts_request( "edit" ) );
+                Adverts::instance()->get("emails")->messages->register_messages();
+                $message = $this->get_current_message();
+                $flash->add_info( __("Email template has been saved.", "adverts") );
             } else {
                 $flash->add_error( __("There are errors in your form.", "adverts") );
             }
@@ -71,42 +105,95 @@ class Adext_Emails_Admin {
         include ADVERTS_PATH . 'addons/emails/admin/emails-edit.php';
     }
     
-    public function edit_form_add_header( $field ) {
-        echo '<a href="#" class="button button-secondary adext-emails-add-header"><span class="dashicons dashicons-plus" style="vertical-align:middle"></span> Add Header</a>';
+    public function edit_save($form, $email_name ) {
+        
+        $values = $form->get_values();
+
+        $insert = false;
+        $templates = get_option( "adext_emails_templates" );
+        
+        if( $templates === false ) {
+            $insert = true;
+            $templates = array();
+        }
+        
+        $templates[ $email_name ] = array(
+            "enabled" => isset( $values["message_enabled"] ) ? 1 : 0,
+            "subject" => $values["message_subject"],
+            "from" => $values["message_from"],
+            "to" => $values["message_to"],
+            "body" => $values["message_body"],
+            "headers" => array()
+        );
+        
+        $x1 = 0;
+        if( isset( $_POST["header_name"] ) ) {
+            $x1 = count( $_POST["header_name"] );
+        }
+        
+        $x2 = 0;
+        if( isset( $_POST["header_value"] ) ) {
+            $x2 = count( $_POST["header_value"] );
+        }
+        
+        $x = max( $x1, $x2 );
+        
+        for( $i=0; $i<$x; $i++ ) {
+            $hname = isset( $_POST["header_name"][$i] ) ? trim( $_POST["header_name"][$i] ) : "";
+            $hvalue = isset( $_POST["header_value"][$i] ) ? trim( $_POST["header_value"][$i] ) : "";
+            
+            if( empty( $hname ) && empty( $hvalue ) ) {
+                continue;
+            }
+            
+            $templates[ $email_name ]["headers"][] = array( "name" => $hname, "value" => $hvalue );
+        }
+                
+        if( $insert ) {
+            add_option( "adext_emails_templates", $templates, '', 'no' );
+        } else {
+            update_option( "adext_emails_templates", $templates );
+        }
+        
+        return true;
     }
     
-    public function edit_form_name_email( $field ) {
-        $field1 = $field;
-        $field2 = $field;
+    public function get_current_message() {
+        $messages = Adverts::instance()->get("emails")->messages;
+        $message = null;
+        $edit = adverts_request( "edit" );
+
+        foreach( $messages->get_messages() as $m ) {
+            if( $m["name"] == $edit ) {
+                $message = $m;
+                break;
+            }
+        }
         
-        $field1["placeholder"] = __( "Full Name", "adverts" );
-        $field2["placeholder"] = __( "Email Address (e.g. user@example.com)", "adverts" );
-        
-        echo '<div class="adext-emails-field-name-email">';
-        adverts_field_text($field1);
-        adverts_field_text($field2);
-        echo '</div>';
+        return $message;
     }
     
-    public function edit_form() {
+    public function edit_form_add_header( ) {
+        return '<a href="#" class="button button-secondary adext-emails-add-header"><span class="dashicons dashicons-plus" style="vertical-align:middle"></span> Add Header</a>';
+    }
+    
+    public function edit_form( $message ) {
         
-        adverts_form_add_field("adext_emails_field_name_email", array(
-            "renderer" => array( $this, "edit_form_name_email"),
-            "callback_save" => "adverts_save_multi",
-            "callback_bind" => "adverts_bind_multi",
-        ));
+        include_once ADVERTS_PATH . "/addons/emails/includes/class-field-name-email.php";
         
-        adverts_form_add_field("adext_emails_field_add_header", array(
-            "renderer" => array( $this, "edit_form_add_header"),
-            "callback_save" => "adverts_save_multi",
-            "callback_bind" => "adverts_bind_multi",
-        ));
-        
+        $nameemail = new Adext_Emails_Field_Name_Email();
+
         return array(
             "name" => "adext_email_edit",
             "field" => array(
                 array(
-                    "name" => "is_active",
+                    "name" => "_email",
+                    "type" => "adverts_field_label",
+                    "label" => __( "Email Name", "adverts" ),
+                    "content" => sprintf( "<strong>%s</strong> 	— <code>%s</code>", $message["label"], $message["name"] )
+                ),
+                array(
+                    "name" => "message_enabled",
                     "type" => "adverts_field_checkbox",
                     "label" => __( "Is Active", "adverts"),
                     "options" => array(
@@ -120,21 +207,22 @@ class Adext_Emails_Admin {
                     "label" => __( "Subject", "adverts" ),
                 ),
                 array(
-                    "name" => "from",
+                    "name" => "message_from",
                     "type" => "adext_emails_field_name_email",
                     "label" => __( "From", "adverts" ),
                     "class" => "adext-emails-full-width",
                 ),
                 array(
-                    "name" => "to",
+                    "name" => "message_to",
                     "type" => "adext_emails_field_name_email",
                     "label" => __( "To", "adverts" ),
                     
                 ),
                 array( 
-                    "name" => "_headers",
-                    "type" => "adext_emails_field_add_header",
-                    "label" => "&nbsp;"
+                    "name" => "_add_headers",
+                    "type" => "adverts_field_label",
+                    "label" => "&nbsp;",
+                    "content" => $this->edit_form_add_header()
                 ),
                 array(
                     "name" => "_divider",
@@ -149,5 +237,6 @@ class Adext_Emails_Admin {
             )
         );
     }
+    
     
 }

@@ -74,18 +74,19 @@
 </div>
 
 <script type="type/text" id="tmpl-adext-email-edit-header-row">
-    <tr valign="top" class="adext-emails-edit-row" style="background:whitesmoke;display:none">
+    <tr valign="top" class="adext-emails-edit-row" style="display:none">
         <th scope="row">
             <label for="message_subject">
                 <# if ( data._mode == "edit" ) { #>
-                <input type="text" name="header_name" placeholder="<?php _e( "Header Name", "adverts" ) ?>" value="{{ data.header_name }}" style="width:150px" />      
+                <input type="text" class="header-name" name="header_name[]" placeholder="<?php _e( "Header Name", "adverts" ) ?>" value="{{ data.header_name }}" style="width:150px" />      
                 <# } else { #>
-                <label for="from">{{ data.header_name }}</label>
+                <label>{{ data.header_name }}</label>
+                <input type="hidden" name="header_name[]" value="{{ data.header_name }}" />
                 <# } #>
             </label>
         </th>
         <td class="adext-emails-edit-td">
-            <input type="text" name="header_value" id="" class="adext-emails-full-width regular-text" value="{{ data.header_value }}" />
+            <input type="text" name="header_value[]" class="header-value adext-emails-full-width regular-text" value="{{ data.header_value }}" />
             <# if ( data._mode == "edit" ) { #>
             <a href="#" class="button button-secondary button-small adext-emails-edit-td-yes"><span class="dashicons dashicons-yes"></span></a>
             <a href="#" class="button button-secondary button-small adext-emails-edit-td-no"><span class="dashicons dashicons-no"></span></a>
@@ -96,3 +97,9 @@
         </td>
     </tr>
 </script>
+
+<?php if( ! empty( $message["headers"] ) && is_array( $message["headers"] ) ): ?>
+<script type="text/javascript">
+var WPADVERTS_EMAIL_EDIT_HEADERS = <?php echo json_encode( $message["headers"] ) ?>;
+</script>
+<?php endif; ?>

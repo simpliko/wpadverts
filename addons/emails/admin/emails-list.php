@@ -51,33 +51,31 @@
 
     <tbody>
         <?php $z = 0; ?>
-        <?php foreach( $messages as $i => $message_o): ?>
-            <?php foreach( $message_o->get_messages() as $j => $message): ?>
-            <tr valign="top" class="<?php if($z%2==0): ?>alternate <?php endif; ?>  author-self status-publish iedit">
-                <td class="post-title column-title">
-                    <strong><a href="<?php echo esc_attr( add_query_arg( "edit", $message["name"] ) ) ?>" title=""><?php echo esc_html( $message["subject"] ) ?></a></strong>
-                </td>
-                <td>
-                    <?php echo esc_html( $message["label"] ) ?>
-                </td>
-                <td>
-                    <?php if( $message["notify"] == "admin" ): ?>
-                    admin@example.com
-                    <?php else: ?>
-                    <?php _e( "User", "adverts" ) ?>
-                    <?php endif; ?>
-                </td>
-                <td>
-                    <?php if( $message["enabled"] == "1" ): ?>
-                    <span class="dashicons dashicons-yes" style="font-size:23px"></span>
-                    <?php else: ?>
-                    <span class="dashicons dashicons-no" style="font-size:21px"></span>
-                    <?php endif; ?>
-                </td>
-                <?php do_action('adext_emails_list_tbody', $item) ?>
-            </tr>
-            <?php $z++; ?>
-            <?php endforeach; ?>
+        <?php foreach( $messages->get_messages() as $j => $message): ?>
+        <tr valign="top" class="<?php if($z%2==0): ?>alternate <?php endif; ?>  author-self status-publish iedit">
+            <td class="post-title column-title">
+                <strong><a href="<?php echo esc_attr( add_query_arg( "edit", $message["name"] ) ) ?>" title=""><?php echo esc_html( $message["subject"] ) ?></a></strong>
+            </td>
+            <td>
+                <?php echo esc_html( $message["label"] ) ?>
+            </td>
+            <td>
+                <?php if( $message["notify"] == "admin" ): ?>
+                admin@example.com
+                <?php else: ?>
+                <?php _e( "User", "adverts" ) ?>
+                <?php endif; ?>
+            </td>
+            <td>
+                <?php if( $message["enabled"] == "1" ): ?>
+                <span class="dashicons dashicons-yes" style="font-size:23px"></span>
+                <?php else: ?>
+                <span class="dashicons dashicons-no" style="font-size:21px"></span>
+                <?php endif; ?>
+            </td>
+            <?php do_action('adext_emails_list_tbody', $item) ?>
+        </tr>
+        <?php $z++; ?>
         <?php endforeach; ?>
     </tbody>
 </table>

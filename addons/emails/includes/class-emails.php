@@ -4,6 +4,8 @@ class Adext_Emails {
     
     public $admin = null;
     
+    public $messages = null;
+    
     public function __construct() {
         
         add_action( "admin_init", array( $this, "init_admin" ) );
@@ -12,6 +14,10 @@ class Adext_Emails {
             include_once ADVERTS_PATH . 'addons/emails/includes/class-emails-admin.php';
             $this->admin = new Adext_Emails_Admin();
         }
+        
+        include_once ADVERTS_PATH . 'includes/class-messages.php';
+        $this->messages =  new Adverts_Messages();
+        $this->messages->register_messages();
     }
     
     public function init_admin() {

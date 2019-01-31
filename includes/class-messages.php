@@ -8,6 +8,22 @@
  * Adverts_Authos_Messages -> WPAdverts Author Messages
  * Adverts_Wc_Messages
  * 
+ * Free Advert Published -> Notify User
+ * add_action( "advert_tmp_to_publish", array( $this, "on_draft_to_publish_notify_user" ), 10, 1 );
+ * Free Advert Pending -> Notify User
+ * add_action( "advert_tmp_to_pending", array( $this, "on_draft_to_pending_notify_user" ), 10, 1 );
+ * Free Advert Approved -> Notify User
+ * add_action( "pending_to_publish", array( $this, "on_pending_to_publish_notify_user" ), 10, 1 );
+
+ * Free Advert Rejected -> Notify User
+ * add_action( "pending_to_trash", array( $this, "on_pending_to_trash_notify_user" ), 10, 1 );
+ * Advert Expired -> Notify User
+ * add_action( "publish_to_expired", array( $this, "on_publish_to_expired_notify_user" ), 10, 1 );
+
+ * Free Advert Published -> Notify Admin
+ * add_action( "advert_tmp_to_publish", array( $this, "on_draft_to_publish_notify_admin" ), 10, 1 );
+ * Free Advert Pending -> Notify Admin
+ * add_action( "advert_tmp_to_pending", array( $this, "on_draft_to_pending_notify_admin" ), 10, 1 );
  * 
  */
 
@@ -22,25 +38,43 @@ class Adverts_Messages {
     
     public function __construct() {
         
-        add_filter( "wpadverts_messages_register", array( $this, "load" ) );
-        add_filter( "wpadverts_message", array( $this, "parse" ), 10, 3 );
+
+    }
+    
+    public function register_actions() {
         
-        // Free Advert Published -> Notify User
-        add_action( "advert_tmp_to_publish", array( $this, "on_draft_to_publish_notify_user" ), 10, 1 );
-        // Free Advert Pending -> Notify User
-        add_action( "advert_tmp_to_pending", array( $this, "on_draft_to_pending_notify_user" ), 10, 1 );
-        // Free Advert Approved -> Notify User
-        add_action( "pending_to_publish", array( $this, "on_pending_to_publish_notify_user" ), 10, 1 );
-        
-        // Free Advert Rejected -> Notify User
-        add_action( "pending_to_trash", array( $this, "on_pending_to_trash_notify_user" ), 10, 1 );
-        // Advert Expired -> Notify User
-        add_action( "publish_to_expired", array( $this, "on_publish_to_expired_notify_user" ), 10, 1 );
-        
-        // Free Advert Published -> Notify Admin
-        add_action( "advert_tmp_to_publish", array( $this, "on_draft_to_publish_notify_admin" ), 10, 1 );
-        // Free Advert Pending -> Notify Admin
-        add_action( "advert_tmp_to_pending", array( $this, "on_draft_to_pending_notify_admin" ), 10, 1 );
+        foreach( $this->messages as $message ) {
+            
+            if( ! isset( $message["callback"] ) ) {
+                $message["callback"] = array( $this, "post_status_transition" );
+            }
+            
+            $callback = $message["callback"];
+            $action = $message["action"];
+            
+            $func = $message["callback"];
+            $priority = 10;
+            $args = 1;
+            $filter = "action";
+            
+            if( is_array( $callback ) && array_key_exists( "function", $callback ) ) {
+                $func = $callback["function"];
+            }
+            if( isset( $callback["priority"] ) ) {
+                $priority = $callback["priority"];
+            }
+            if( isset( $callback["args"] ) ) {
+                $args = $callback["args"];
+            }
+            
+            if( $filter === "action" ) {
+                add_action( $action, $func, $priority, $args );
+            } else if( $filter === "filter" ) {
+                add_filter( $action, $func, $priority, $args );
+            } else {
+                // ??
+            }
+        }
     }
     
     public function register_messages() {
@@ -48,13 +82,14 @@ class Adverts_Messages {
             "core::on_draft_to_publish_notify_user" => array(
                 "name" => "core::on_draft_to_publish_notify_user",
                 "action" => "advert_tmp_to_publish",
+                "callback" => array( $this, "on_draft_to_publish_notify_user" ),
                 "enabled" => 1,
                 "label" => __( "Core / Free Advert Published", "adverts" ),
                 "notify" => "user",
                 "from" => array( "name" => "Admin", "email" => "admin@example.com" ),
                 "to" => array( "name" => "", "email" => "" ),
                 "subject" => __( "Your Ad has been published.", "adverts" ),
-                "body" => "",
+                "body" => __("Hello,\nYour Ad titled '{\$advert.post_title}' has been published.\n\nTo view your Ad you can use the link below:\n{\$advert.ID|get_permalink}", 'adverts'),
                 "headers" => array(
                     array( "name" => "Reply-To", "value" => "admin@example.com" )
                 ),
@@ -201,6 +236,7 @@ class Adverts_Messages {
     }
     
     public function send( $message, $args ) {
+        
         $mail_args = array(
             "to" => $message["to"]["value"],
             "subject" => $message["subject"],
@@ -209,39 +245,23 @@ class Adverts_Messages {
             "attachments" => $message["headers"]
         );
         
-        $mail = apply_filters( "wpadverts_message", $mail_args, $message["name"], $args );
+        $args = apply_filters( "wpadverts_message_args", $args, $message, $mail_args );
+        $mail = apply_filters( "wpadverts_message", $mail_args, $message, $args );
         
         wp_mail( $mail["to"], $mail["subject"], $mail["message"], $mail["headers"], $mail["attachments"] );
     }
     
-    public function parse( $mail, $name, $args ) {
-        return $mail;
+    public function send_message( $message_key, $args ) {
+        return $this->send( $this->messages[ $message_key ], $args );
     }
     
     public function on_draft_to_publish_notify_user( $post ) {
+        
         if( $post->post_type !== "advert" ) {
             return;
         }
-        $to = $this->_get_to( $post->ID );
-        $subject = "Your Ad has been published.";
-        $message = array();
-        $message[] = "Hello,";
-        $message[] = sprintf( "Your Ad titled '%s' has been published.", $post->post_title );
-        $message[] = "";
-        $message[] = sprintf( "To view your Ad you can use the link below:" );
-        $message[] = get_permalink( $post->ID );
-
-        $mail_args = array(
-            "to" => $to,
-            "subject" => $subject,
-            "message" => join( "\r\n", $message ),
-            "headers" => "",
-            "attachments" => array()
-        );
         
-        $mail = apply_filters( "wpadverts_message", $mail_args, __METHOD__, $post );
-        
-        wp_mail( $mail["to"], $mail["subject"], $mail["message"], $mail["headers"], $mail["attachments"] );
+        return $this->send_message( "core::on_draft_to_publish_notify_user", $post );
     }
     
     public function on_draft_to_pending_notify_user( $post ) {

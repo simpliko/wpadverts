@@ -6,6 +6,8 @@ class Adext_Emails {
     
     public $messages = null;
     
+    public $parser = null;
+    
     public function __construct() {
         
         add_action( "admin_init", array( $this, "init_admin" ) );
@@ -16,8 +18,16 @@ class Adext_Emails {
         }
         
         include_once ADVERTS_PATH . 'includes/class-messages.php';
+        include_once ADVERTS_PATH . 'addons/emails/includes/class-emails-parser.php';
+        
         $this->messages =  new Adverts_Messages();
+        $this->parser = new Adext_Emails_Parser();
+        
+        add_filter( "wpadverts_messages_register", array( $this->messages, "load" ) );
+        add_filter( "wpadverts_message", array( $this->parser, "compile" ), 10, 3 );
+        
         $this->messages->register_messages();
+        $this->messages->register_actions();
     }
     
     public function init_admin() {

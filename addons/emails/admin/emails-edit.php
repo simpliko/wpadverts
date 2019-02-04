@@ -4,6 +4,9 @@
  * 
  * This file is a template for wp-admin / Classifieds / Options / Emails panel. 
  * 
+ * It is being loaded by Adext_Emails_Admin::edit_form()
+ * 
+ * @see Adext_Emails_Admin::edit_form()
  * @since 1.3
  */
 ?>
@@ -11,53 +14,11 @@
     
     <h2 class="nav-tab-wrapper">
         <a href="<?php esc_attr_e( remove_query_arg( array( 'edit', 'emaction' ) ) ) ?>" class="nav-tab nav-tab-active"><?php _e("Email Templates", "adverts") ?></a>
-        <a href="<?php esc_attr_e( add_query_arg( array('emaction'=>'options') ) ) ?>" class="nav-tab "><?php _e("Options", "adverts") ?></a>
+        <a href="<?php esc_attr_e( add_query_arg( array('emaction'=>'options', 'edit'=>null) ) ) ?>" class="nav-tab "><?php _e("Options", "adverts") ?></a>
     </h2>
 
     <?php adverts_admin_flash() ?>
 
-    <style type="text/css">
-        .adverts-adext-emails-edit tr > th {
-            width: 150px;
-            padding: 10px 0px 10px 0;
-        }
-        .adverts-adext-emails-edit tr > td {
-            padding: 5px 0px 5px 0;
-        }
-        #wp-message_body-wrap,
-        .adext-emails-full-width {
-            width: 85%;
-        }
-        .adext-emails-field-name-email {
-            width: 85%;
-            display: flex;
-            justify-content: space-between;
-        }
-        .adext-emails-field-name-email > input:first-child {
-            width: 50%;
-        }
-        .adext-emails-field-name-email > input:last-child {
-            width: 50%;
-            margin-left: 2px;
-            margin-right: 0;
-        }
-        #message_subject {
-            padding: 3px 8px;
-            font-size: 1.7em;
-            line-height: 100%;
-            height: 1.7em;
-            outline: 0;
-            margin: 0 0 3px;
-            background-color: #fff;
-        }
-        .adext-emails-edit-td .button-small {
-            margin-top: 2px;
-        }
-        .adext-emails-edit-td .button-small .dashicons {
-            vertical-align: middle;
-        }
-    </style>
-    
     <form action="" method="post" class="adverts-form adverts-adext-emails-edit">
         <table class="form-table">
             <tbody>

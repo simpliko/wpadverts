@@ -19,11 +19,11 @@ global $adverts_namespace, $adverts_emails;
 $adverts_namespace['emails'] = array(
     'option_name' => 'adext_emails_config',
     'default' => array(
-        
+        "enable_html_emails" => 0
     )
 );
 
 include_once ADVERTS_PATH . 'addons/emails/includes/class-emails.php';
 
-Adverts::instance()->set("emails", new Adext_Emails);
+Adverts::instance()->set( "emails", new Adext_Emails );
 

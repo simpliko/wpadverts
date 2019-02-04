@@ -2,50 +2,148 @@
 
 class Adext_Emails_Parser {
     
+    /**
+     * Variables assigned to the email
+     *
+     * @since   1.3.0
+     * @var     array
+     */
     protected $_args = array();
     
+    /**
+     * Variables in flat array format.
+     * 
+     * The variables are flatten using dot. For example an array
+     * <code>array( "x" => 10, "y" => 20, "xy" => array( 0 => 10, "z" => 20 )</code>
+     * after flattening will be saved as
+     * <code>array( "x" => 10, "y" => 20, "xy.0" => 10, "xy.z" => 20 )</code>
+     * 
+     * @since   1.3.0
+     * @var     array
+     */
     protected $_flat = array();
     
+    /**
+     * Listed of registered callbacks
+     * 
+     * The callbacks can be applied to variables in the email.
+     *
+     * @since   1.3.0
+     * @var     array
+     */
+    protected $_functions = array();
+    
+    /**
+     * Class constructor
+     * 
+     * @since 1.3.0
+     */
     public function __construct() {
         
     }
     
+    /**
+     * Assign variable to parser
+     * 
+     * Only assigned variables can be used when parsing an email template.
+     * 
+     * @since   1.3.0
+     * @param   string    $name   Variable name
+     * @param   mixed     $value  Variable value
+     * @return  void
+     */
     public function assign( $name, $value ) {
         $this->_args[$name] = $value;
     }
     
+    /**
+     * Add a custom function
+     * 
+     * The function can be later use on a variable in the message.
+     * 
+     * For example if you register function named my_custom_func then you can
+     * use it on a variable with using this syntax {$advert.ID|my_custom_func}
+     * 
+     * @since   1.3.0
+     * @param   string    $name       Function name
+     * @param   mixed     $callback   Valid callback function
+     * @return  void
+     */
+    public function add_function( $name, $callback ) {
+        $this->_functions[ $name ] = $callback;
+    }
+    
+    /**
+     * Flattens variables (self::$_args)
+     * 
+     * @since   1.3.0
+     * @return  array
+     */
     public function flatten() {
-        $flat = array();
-        
-        foreach( $this->_args as $key => $value ) {
-            if( is_array( $value ) ) {
-                
-            }
-        }
-        
-        $this->_flat = apply_filters( "wpadverts_email_parser", $flat, $this->_args );
+        $this->_flat = apply_filters( "wpadverts_email_parser_flatten", $this->_flatten_inner( array(), array(), $this->_args ) );
+        return $this->_flat;
     }
     
-    protected function _flatten_inner( $prefix, $data ) {
-        
-    }
-    
-    public function parse( $text ) {
-        preg_match_all( '/\{\$([A-z0-9\._]*)((|[A-z0-9_]?.*)([:]?[A-z0-9_]?))?\}/', $body, $matches );
+    /**
+     * Recursively flattens variables.
+     * 
+     * This function is run by self::flatten()
+     * 
+     * @since   1.3.0
+     * @param   array   $flat       
+     * @param   array   $prefix     Prefix for flat key name
+     * @param   array   $data       Variables to flatten
+     * @return  array               Flatten self::$_args array
+     */
+    protected function _flatten_inner( $flat, $prefix, $data ) {
+        foreach( $data as $key => $value ) {
+            
+            $t = $prefix;
+            $t[] = $key;
+            $pfix = implode( ".", $t );
 
+            $flat[ $pfix ] = $value;
+            
+            if( is_array( $value ) ) {
+                $flat = array_merge( $flat, $this->_flatten_inner( $flat, $t, $value ) );
+            } else if( is_object( $value ) ) {
+                $flat = array_merge( $flat, $this->_flatten_inner( $flat, $t, $value ) );
+            } 
+        }
+        return $flat;
+    }
+    
+    /**
+     * Parses text
+     * 
+     * This function finds variables in the $text and replaces them with
+     * actual variable values and applies filter functions
+     * 
+     * @since   1.3.0
+     * @param   string  $text   Text to parse
+     * @return  string          Parsed text
+     */
+    public function parse( $text ) {
+        
+        $matches = array();
+        preg_match_all( '/\{\$([A-z0-9\._\:\ }\|]*)\}/', $text, $matches );
+        preg_match_all( '/\{\$([^\}]*)\}/', $text, $matches );
+
+        $flat = $this->_flat;
         $vars = array();
         $count = count( $matches[0] );
         
         for( $i = 0; $i<$count; $i++ ) {
+            list( $var, $filters ) = explode( "|", $matches[1][$i] );
             $vars[ $matches[0][$i] ] = array( 
-                "value" => $matches[1][$i], 
-                "callback" => $matches[2][$i]
+                "value" => $var, 
+                "callback" => $filters
             );
         }
 
         foreach( $vars as $var => $repl ) {
-            if( isset( $this->_flat[ $repl["value"] ] ) ) {
-                $value = $this->_flat[ $repl["value"] ];
+            if( isset( $flat[ $repl["value"] ] ) ) {
+                $value = $flat[ $repl["value"] ];
             } else {
                 $value = "";
             }
@@ -58,20 +156,39 @@ class Adext_Emails_Parser {
                     $callback = array_shift( $cb_args );
                     array_unshift( $cb_args, $value );
 
-                    $value = call_user_func_array( $callback, $cb_args );
+                    if( isset( $this->_functions[ $callback ] ) ) {
+                        $value = call_user_func_array( $this->_functions[ $callback ], $cb_args );
+                    } else {
+                        $value = call_user_func_array( $callback, $cb_args );
+                    }
                 }
             }
-            $body = str_replace( $var, $value, $body );
+            $text = str_replace( $var, $value, $text );
         }
         
-        return $body;
+        return $text;
     }
     
+    /**
+     * Resets variables and the flat array.
+     * 
+     * @since   1.3.0
+     * @return  void
+     */
     public function reset() {
         $this->_args = array();
         $this->_flat = array();
     }
     
+    /**
+     * Compiles the email arguments.
+     * 
+     * @since   1.3.0
+     * @param   array       $mail_args     An array with keys (to, subject, message, headers, attachments)
+     * @param   string      $message       Message key
+     * @param   array       $args          Variables passed to the message
+     * @return  array                      Compiled message
+     */
     public function compile( $mail_args, $message, $args ) {
         
         $this->assign( "args", $args );

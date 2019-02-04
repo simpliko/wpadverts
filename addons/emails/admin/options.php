@@ -4,16 +4,16 @@
  * 
  * This file is a template for wp-admin / Classifieds / Options / Emails panel. 
  * 
- * It is being loaded by adext_emails_page_options function.
+ * It is being loaded by Adext_Emails_Admin::options() method.
  * 
- * @see adext_emails_page_options()
- * @since 0.1
+ * @see Adext_Emails_Admin::options()
+ * @since 1.3
  */
 ?>
 <div class="wrap">
     <h2 class="nav-tab-wrapper">
-        <a href="<?php esc_attr_e( remove_query_arg( array( 'edit', 'emaction' ) ) ) ?>" class="nav-tab nav-tab-active"><?php _e("Email Templates", "adverts") ?></a>
-        <a href="<?php esc_attr_e( add_query_arg( array('emaction'=>'options') ) ) ?>" class="nav-tab "><?php _e("Options", "adverts") ?></a>
+        <a href="<?php esc_attr_e( remove_query_arg( array( 'edit', 'emaction' ) ) ) ?>" class="nav-tab"><?php _e("Email Templates", "adverts") ?></a>
+        <a href="<?php esc_attr_e( add_query_arg( array('emaction'=>'options') ) ) ?>" class="nav-tab nav-tab-active"><?php _e("Options", "adverts") ?></a>
     </h2>
 
     <?php adverts_admin_flash() ?>

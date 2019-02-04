@@ -4,10 +4,10 @@
  * 
  * This file is a template for wp-admin / Classifieds / Options / Emails / Email Templates panel. 
  * 
- * It is being loaded by adext_payments_page_pricing function.
+ * It is being loaded by Adext_Emails_Admin::list() function.
  * 
- * @see adext_emails_page_templates_list()
- * @since 0.1
+ * @see Adext_Emails_Admin::list()
+ * @since 1.3
  */
 ?>
 <div class="wrap">

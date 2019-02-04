@@ -20,15 +20,57 @@ class Adext_Emails_Admin {
      */
     public function dispatch() {
         $edit = adverts_request( "edit" );
-        $config = adverts_request( "config" );
+        $emaction = adverts_request( "emaction" );
         
         if( ! empty( $edit ) )  {
             $this->edit();
-        } else if( $config == "1" ) {
-            $this->config();
+        } else if( $emaction == "options" ) {
+            $this->options();
         } else {
             $this->list();
         }
+    }
+    
+    /** 
+     * Renders Emails Options Page.
+     * 
+     * The page is rendered in wp-admin / Classifieds / Options / Emails / Options panel
+     * 
+     * @since 1.3
+     * @return void
+     */
+    public function options() {
+        wp_enqueue_style( 'adverts-admin' );
+        $flash = Adverts_Flash::instance();
+        $messages = Adverts::instance()->get("emails")->messages;
+
+        $scheme = $this->options_form( );
+        $form = new Adverts_Form( $scheme );
+        $form->bind( adverts_config( "emails.all" ) );
+        print_r(adverts_config( "emails.all" ));
+        $button_text = __("Update Options", "adverts");
+
+        if( isset( $_POST ) && !empty( $_POST ) ) {
+            $form->bind( stripslashes_deep( $_POST ) );
+            $valid = $form->validate();
+
+            if($valid) {
+
+                $update =  $form->get_values();
+                if( ! isset( $update["enable_html_emails"] ) ) {
+                    $update["enable_html_emails"] = 0;
+                }
+                var_dump($update);
+                update_option("adext_emails_config", $update);
+                $flash->add_info( __("Settings updated.", "adverts") );
+            } else {
+                $flash->add_error( __("There are errors in your form.", "adverts") );
+            }
+        } else {
+            $form->bind( get_option ( "adext_bank_transfer_config", array() ) );
+        }
+
+        include ADVERTS_PATH . 'addons/emails/admin/options.php';
     }
     
     /** 
@@ -105,6 +147,18 @@ class Adext_Emails_Admin {
         include ADVERTS_PATH . 'addons/emails/admin/emails-edit.php';
     }
     
+    /**
+     * Save function for self::edit()
+     * 
+     * This function is executed when trying to save an email template
+     * from wp-admin / Classifieds / Options / Emails / Edit panel
+     * 
+     * @since   1.3.0
+     * 
+     * @param   array   $form           Form Scheme
+     * @param   string  $email_name     Edited email name
+     * @return  boolean                 True if the message was saved
+     */
     public function edit_save($form, $email_name ) {
         
         $values = $form->get_values();
@@ -158,6 +212,13 @@ class Adext_Emails_Admin {
         return true;
     }
     
+    /**
+     * Returns currently edited message
+     * 
+     * Retrives a message identified by $_GET['edit'] from Adverts::instance()->get("emails")->messages
+
+     * @return  array    Message
+     */
     public function get_current_message() {
         $messages = Adverts::instance()->get("emails")->messages;
         $message = null;
@@ -173,10 +234,35 @@ class Adext_Emails_Admin {
         return $message;
     }
     
+    /**
+     * Renders "Add Header" button
+     * 
+     * The button is being used when editing an email template in
+     * wp-admin / Classifieds / Options / Emails / Edit panel.
+     * 
+     * @since 1.3.0
+     * @return string   HTML for "Add Header" button
+     */
     public function edit_form_add_header( ) {
-        return '<a href="#" class="button button-secondary adext-emails-add-header"><span class="dashicons dashicons-plus" style="vertical-align:middle"></span> Add Header</a>';
+        include_once ADVERTS_PATH . "/includes/class-html.php";
+        
+        $icon_text = '<span class="dashicons dashicons-plus" style="vertical-align:middle"></span> ' . __( "Add Header", "adverts" );
+        
+        $a = new Adverts_Html( "a", array(
+            "href" => "#",
+            "class" => "button button-secondary adext-emails-add-header"
+        ), $icon_text );
+        
+        return $a->render();
     }
     
+    /**
+     * Returns a form scheme for Edit email page
+     * 
+     * @since   1.3.0
+     * @param   array   $message    Currently edited message (identified by $_GET['edit'])
+     * @return  array               Form scheme
+     */
     public function edit_form( $message ) {
         
         include_once ADVERTS_PATH . "/addons/emails/includes/class-field-name-email.php";
@@ -184,7 +270,7 @@ class Adext_Emails_Admin {
         $nameemail = new Adext_Emails_Field_Name_Email();
 
         return array(
-            "name" => "adext_email_edit",
+            "name" => "adext_emails_edit",
             "field" => array(
                 array(
                     "name" => "_email",
@@ -231,8 +317,30 @@ class Adext_Emails_Admin {
                 array(
                     "name" => "message_body",
                     "type" => "adverts_field_textarea",
-                    "mode" => "tinymce-full",
+                    "mode" => "plain-text",
                     "label" => __( "Body", "adverts" )
+                )
+            )
+        );
+    }
+    
+    /**
+     * Returns form scheme for Options page
+     * 
+     * @since   1.3.0
+     * @return  array    Form scheme
+     */
+    public function options_form() {
+        return array(
+            "name" => "adext_emails_options",
+            "field" => array(
+                array(
+                    "name" => "enable_html_emails",
+                    "type" => "adverts_field_checkbox",
+                    "label" => "HTML Emails",
+                    "options" => array(
+                        array( "value" => "1", "text" => __( "Send emails as HTML", "adverts" ) )
+                    )
                 )
             )
         );

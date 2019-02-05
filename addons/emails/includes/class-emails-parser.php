@@ -1,4 +1,26 @@
 <?php
+/**
+ * Emails Module - Emails Parser
+ * 
+ * The default email parser. This class is responsible for replacing variables in the emails.
+ * (The variable looks like this {$var.property|callback:arg})
+ * 
+ * If you would like to use your own variable then you can do that by adding the code
+ * below in your theme functions.php file
+ * 
+ * <code>
+ * add_action( "init", function() {
+ *      Adverts::instance()->get( "emails" )->parser = new My_Parser_Class;
+ * });
+ * </code>
+ * 
+ * Refer to class-emails-parser.php file to see how the parser class should look like.
+ * 
+ * @author Grzegorz Winiarski
+ * @since 1.3.0
+ * @package Adverts
+ * @subpackage Emails
+ */
 
 class Adext_Emails_Parser {
     

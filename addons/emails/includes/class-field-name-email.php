@@ -1,4 +1,17 @@
 <?php
+/**
+ * Emails Module - Field Name 
+ * 
+ * This class handles the Name and Email field used in wp-admin / Classifieds / Options / Emails / Edit panel.
+ * 
+ * The class generates a field with two input fields
+ * <input type="text" /> <input type="text" />
+ * 
+ * @author Grzegorz Winiarski
+ * @since 1.3.0
+ * @package Adverts
+ * @subpackage Emails
+ */
 
 class Adext_Emails_Field_Name_Email {
     

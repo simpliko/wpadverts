@@ -1,9 +1,18 @@
 <?php
-
 /**
+ * Emails Module - Messages Class
+ * 
+ * This class registers emails that can be sent by WPAdverts and edited from 
+ * the wp-admin / Classifieids / Options / Emails panel
+ * 
+ * @author Grzegorz Winiarski
+ * @since 1.3.0
+ * @package Adverts
+ * @subpackage Emails
+ * 
  * The message keys are generated using the following scheme
  * 
- * Adverts_Messages -> WPAdverts Messages
+ * Adext_Emails_Messages -> WPAdverts Messages
  * Adverts_Payment_Messages
  * Adverts_Authos_Messages -> WPAdverts Author Messages
  * Adverts_Wc_Messages
@@ -27,7 +36,7 @@
  * 
  */
 
-class Adverts_Messages {
+class Adext_Emails_Messages {
 
     /**
      * List of registered messages
@@ -36,11 +45,25 @@ class Adverts_Messages {
      */
     public $messages = null;
     
+    /**
+     * Class Constructor
+     * 
+     * @since 1.3.0
+     * @return void
+     */
     public function __construct() {
-        
 
     }
     
+    /**
+     * Registers Actions and Filters
+     * 
+     * This action registers actions (usually post status transitions) and filters
+     * which will be sending the emails.
+     * 
+     * @since 1.3.0
+     * @return void
+     */
     public function register_actions() {
         
         foreach( $this->messages as $message ) {
@@ -77,6 +100,19 @@ class Adverts_Messages {
         }
     }
     
+    /**
+     * Registers Messages
+     * 
+     * This function registers messages which WPAdverts can send. 
+     * 
+     * By default there are few messages sent by WPAdverts Core registered but it
+     * is possible to register additional messages using wpadverts_messages_register filter.
+     * 
+     * @see wpadverts_messages_register filter
+     * 
+     * @since 1.3.0
+     * @return void
+     */
     public function register_messages() {
         $this->messages = apply_filters( "wpadverts_messages_register", array(
             "core::on_draft_to_publish_notify_user" => array(
@@ -176,11 +212,26 @@ class Adverts_Messages {
         ) );
     }
     
+    /**
+     * Returns list of registered messages
+     * 
+     * @since 1.3.0
+     * @return  array    List of registered messages
+     */
     public function get_messages() {
         return $this->messages;
     }
     
-    protected function _get_to( $post_id ) {
+    /**
+     * Returns to address
+     * 
+     * @deprecated      1.3.0
+     * @param  int       $post_id
+     * @return string
+     */
+    private function _get_to( $post_id ) {
+        _deprecated_function(__METHOD__, "1.3.0");
+        
         $author = get_post_field( 'post_author', $post_id );
 
         $to = get_post_meta( $post_id, "adverts_email", true );
@@ -191,7 +242,18 @@ class Adverts_Messages {
         return $to;
     }
 
-    public function _get_headers( $message, $exclude = null ) {
+    /**
+     * Returns parsed list of headers
+     * 
+     * The headers are in an associative array 
+     * <code>array( "From" => "test", "Reply-To" => "test" )</code>
+     * 
+     * @since       1.3.0
+     * @param       array    $message   Message
+     * @param       array    $exclude   List of header names (lowercase) to exclude
+     * @return      array               Parsed list of headers
+     */
+    private function _get_headers( $message, $exclude = null ) {
         
         if( $exclude === null ) {
             $exclude = array( "from", "subject" );
@@ -219,6 +281,22 @@ class Adverts_Messages {
         return $headers;
     }
     
+    /**
+     * Loads messages config from the database
+     * 
+     * The data from the database is merged with the messages registered in
+     * self::register_messages() function.
+     * 
+     * This function is executed using wpadverts_messages_register filter registered
+     * in Adext_Emails::__construct()
+     * 
+     * @see Adext_Emails::__construct()
+     * @see wpadverts_messages_register filter
+     * 
+     * @since   1.3.0
+     * @param   array   $messages   List of messages
+     * @return  array
+     */
     public function load( $messages ) {
         $templates = get_option( "adext_emails_templates" );
         
@@ -235,6 +313,20 @@ class Adverts_Messages {
         return $messages;
     }
     
+    /**
+     * Sends a $message
+     * 
+     * This function parses email variables and the message and then sends
+     * an email using wp_mail() function.
+     * 
+     * @see wpadverts_message_args filter
+     * @see wpadverts_message filter
+     * 
+     * @since   1.3.0
+     * @param   array     $message      One of registered messages to be sent
+     * @param   array     $args         Arguments passed tothe message as variables
+     * @return  void
+     */
     public function send( $message, $args ) {
         
         $mail_args = array(
@@ -248,9 +340,21 @@ class Adverts_Messages {
         $args = apply_filters( "wpadverts_message_args", $args, $message, $mail_args );
         $mail = apply_filters( "wpadverts_message", $mail_args, $message, $args );
         
-        wp_mail( $mail["to"], $mail["subject"], $mail["message"], $mail["headers"], $mail["attachments"] );
+        $headers = array();
+        foreach( $mail["headers"] as $k => $v ) {
+            $headers[] = sprintf( "%s: %s", $k, $v );
+        }
+        
+        wp_mail( $mail["to"], $mail["subject"], $mail["message"], $headers, $mail["attachments"] );
     }
     
+    /**
+     * Calls self::send() function
+     * 
+     * @param   string  $message_key    Message key
+     * @param   array   $args           Arguments passed tothe message as variables
+     * @return  void
+     */
     public function send_message( $message_key, $args ) {
         return $this->send( $this->messages[ $message_key ], $args );
     }

@@ -1,4 +1,15 @@
 <?php
+/**
+ * Emails Module - Admin Class
+ * 
+ * This class is used to handle Emails Module configuration in 
+ * wp-admin / Classifieds / Options / Emails panel.
+ * 
+ * @author Grzegorz Winiarski
+ * @since 1.3.0
+ * @package Adverts
+ * @subpackage Emails
+ */
 
 class Adext_Emails_Admin {
 
@@ -46,8 +57,7 @@ class Adext_Emails_Admin {
 
         $scheme = $this->options_form( );
         $form = new Adverts_Form( $scheme );
-        $form->bind( adverts_config( "emails.all" ) );
-        print_r(adverts_config( "emails.all" ));
+
         $button_text = __("Update Options", "adverts");
 
         if( isset( $_POST ) && !empty( $_POST ) ) {
@@ -57,17 +67,21 @@ class Adext_Emails_Admin {
             if($valid) {
 
                 $update =  $form->get_values();
+                
                 if( ! isset( $update["enable_html_emails"] ) ) {
                     $update["enable_html_emails"] = 0;
+                } else {
+                    $update["enable_html_emails"] = 1;
                 }
-                var_dump($update);
+                
                 update_option("adext_emails_config", $update);
+                
                 $flash->add_info( __("Settings updated.", "adverts") );
             } else {
                 $flash->add_error( __("There are errors in your form.", "adverts") );
             }
         } else {
-            $form->bind( get_option ( "adext_bank_transfer_config", array() ) );
+            $form->bind( adverts_config( "emails.ALL" ) );
         }
 
         include ADVERTS_PATH . 'addons/emails/admin/options.php';

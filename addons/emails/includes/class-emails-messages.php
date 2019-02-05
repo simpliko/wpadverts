@@ -122,25 +122,24 @@ class Adext_Emails_Messages {
                 "enabled" => 1,
                 "label" => __( "[adverts_add] / Free Advert Published", "adverts" ),
                 "notify" => "user",
-                "from" => array( "name" => "Admin", "email" => "admin@example.com" ),
-                "to" => array( "name" => "", "email" => "" ),
+                "from" => array( "name" => "", "email" => "" ),
+                "to" => "{\$advert.ID|meta:adverts_email}",
                 "subject" => __( "Your Ad has been published.", "adverts" ),
                 "body" => __("Hello,\nYour Ad titled '{\$advert.post_title}' has been published.\n\nTo view your Ad you can use the link below:\n{\$advert.ID|get_permalink}", 'adverts'),
-                "headers" => array(
-                    array( "name" => "Reply-To", "value" => "admin@example.com" )
-                ),
+                "headers" => array(),
                 "attachments" => array()
             ),
             "core::on_draft_to_pending_notify_user" => array(
                 "name" => "core::on_draft_to_pending_notify_user",
                 "action" => "advert_tmp_to_pending",
+                "callback" => array( $this, "on_draft_to_pending_notify_user" ),
                 "enabled" => 1,
                 "label" => __( "[adverts_add] / Free Advert Pending", "adverts" ),
                 "notify" => "user",
                 "from" => array( "name" => "", "email" => "" ),
-                "to" => array( "name" => "", "email" => "" ),
+                "to" => "{\$advert.ID|meta:adverts_email}",
                 "subject" => __( "Your Ad has been saved.", "adverts" ),
-                "body" => "",
+                "body" => __( "Hello,\nYour Ad titled '{\$advert.post_title}' has been saved and is pending moderation.\n\nOnce the administrator will approve or reject your Ad you will be notified by email.", "adverts" ),
                 "headers" => array(),
                 "attachments" => array()
             ),
@@ -151,9 +150,9 @@ class Adext_Emails_Messages {
                 "label" => __( "wp-admin / Free Advert Approved", "adverts" ),
                 "notify" => "user",
                 "from" => array( "name" => "", "email" => "" ),
-                "to" => array( "name" => "", "email" => "" ),
+                "to" => "{\$advert.ID|meta:adverts_email}",
                 "subject" => __( "Your Ad has been approved.", "adverts" ),
-                "body" => "",
+                "body" => __( "Hello,\nyour Ad titled '{\$advert.post_title} has been approved.\n\nTo view your Ad you can use the link below:\n{\$advert.ID|get_permalink}", "adverts"),
                 "headers" => array(),
                 "attachments" => array()
             ),
@@ -164,9 +163,9 @@ class Adext_Emails_Messages {
                 "label" => __( "wp-admin / Free Advert Rejected", "adverts" ),
                 "notify" => "user",
                 "from" => array( "name" => "", "email" => "" ),
-                "to" => array( "name" => "", "email" => "" ),
+                "to" => "{\$advert.ID|meta:adverts_email}",
                 "subject" => __( "Your Ad has been rejected.", "adverts" ),
-                "body" => "",
+                "body" => __( "Hello,\nwe are sorry, but your Ad titled '{\$advert.post_title}' has been rejected.", "adverts" ),
                 "headers" => array(),
                 "attachments" => array()
             ),
@@ -177,9 +176,9 @@ class Adext_Emails_Messages {
                 "label" => __( "Core / Advert Expired", "adverts" ),
                 "notify" => "user",
                 "from" => array( "name" => "", "email" => "" ),
-                "to" => array( "name" => "", "email" => "" ),
+                "to" => "{\$advert.ID|meta:adverts_email}",
                 "subject" => __( "Your Ad has expired.", "adverts" ),
-                "body" => "",
+                "body" => __( "Hello,\nyour Ad titled '{\$advert.post_title}' has expired and is no longer available on site.", "adverts" ),
                 "headers" => array(),
                 "attachments" => array()
             ),
@@ -190,9 +189,9 @@ class Adext_Emails_Messages {
                 "label" => __( "[adverts_add] / Free Advert Published", "adverts" ),
                 "notify" => "admin",
                 "from" => array( "name" => "", "email" => "" ),
-                "to" => array( "name" => "", "email" => "" ),
+                "to" => "{\$admin_email}",
                 "subject" => __( "New Ad has been published.", "adverts" ),
-                "body" => "",
+                "body" => __( "Hello,\nnew Ad titled '{\$advert.post_title}' has been published.\n\nYou can view the Ad here:\n{\$advert.ID|get_permalink}\n\nYou can edit the Ad here:\n{\$admin_edit_url}", "adverts" ),
                 "headers" => array(),
                 "attachments" => array()
             ),
@@ -203,9 +202,9 @@ class Adext_Emails_Messages {
                 "label" => __( "[adverts_add] / Free Advert Pending", "adverts" ),
                 "notify" => "admin",
                 "from" => array( "name" => "", "email" => "" ),
-                "to" => array( "name" => "", "email" => "" ),
+                "to" => "{\$admin_email}",
                 "subject" => __( "New Ad is pending (action required).", "adverts" ),
-                "body" => "",
+                "body" => __( "Hellp\nNew Ad titled '{\$advert.post_title}' has been saved and is pending moderation.\n\nYou can edit the Ad here:\n{\$advert.ID|get_permalink}\n\nPlease either publish or trash the Ad.", "adverts" ),
                 "headers" => array(),
                 "attachments" => array()
             ),
@@ -359,167 +358,147 @@ class Adext_Emails_Messages {
         return $this->send( $this->messages[ $message_key ], $args );
     }
     
+    /**
+     * [adverts_add] / Free Advert Published
+     * 
+     * Variables
+     * - $advert => WP_Post
+     * 
+     * @since   1.3.0
+     * @param   WP_Post     $post
+     * @return  void
+     */
     public function on_draft_to_publish_notify_user( $post ) {
         
         if( $post->post_type !== "advert" ) {
             return;
         }
         
-        return $this->send_message( "core::on_draft_to_publish_notify_user", $post );
+        return $this->send_message( "core::on_draft_to_publish_notify_user", array( "advert" => $post ) );
     }
     
+    /**
+     * [adverts_add] / Free Advert Pending
+     * 
+     * Variables
+     * - $advert => WP_Post
+     * 
+     * @since   1.3.0
+     * @param   WP_Post     $post
+     * @return  void
+     */
     public function on_draft_to_pending_notify_user( $post ) {
+
         if( $post->post_type !== "advert" ) {
             return;
         }
         
-        $to = $this->_get_to( $post->ID );
-        $subject = "Your Ad has been saved.";
-        $message = array();
-        $message[] = "Hello,";
-        $message[] = sprintf( "Your Ad titled '%s' has been saved and is pending moderation.", $post->post_title );
-        $message[] = "Once the administrator will approve or reject your Ad you will be notified by email.";
-
-        $mail_args = array(
-            "to" => $to,
-            "subject" => $subject,
-            "message" => join( "\r\n", $message ),
-            "headers" => "",
-            "attachments" => array()
-        );
-        
-        $mail = apply_filters( "wpadverts_message", $mail_args, __METHOD__, $post );
-        
-        wp_mail( $mail["to"], $mail["subject"], $mail["message"], $mail["headers"], $mail["attachments"] );
+        return $this->send_message( "core::on_draft_to_pending_notify_user", array( "advert" => $post ) );
     }
     
+    /**
+     * wp-admin / Free Advert Approved
+     * 
+     * Variables
+     * - $advert => WP_Post
+     * 
+     * @since   1.3.0
+     * @param   WP_Post     $post
+     * @return  void
+     */
     public function on_pending_to_publish_notify_user( $post ) {
+        
         if( $post->post_type !== "advert" ) {
             return;
         }
-        $to = $this->_get_to( $post->ID );
-        $subject = "Your Ad has been approved.";
-        $message = array();
-        $message[] = "Hello,";
-        $message[] = sprintf( "Your Ad titled '%s' has been approved.", $post->post_title );
-        $message[] = "";
-        $message[] = sprintf( "To view your Ad you can use the link below:" );
-        $message[] = get_permalink( $post->ID );
-
-        $mail_args = array(
-            "to" => $to,
-            "subject" => $subject,
-            "message" => join( "\r\n", $message ),
-            "headers" => "",
-            "attachments" => array()
-        );
         
-        $mail = apply_filters( "wpadverts_message", $mail_args, __METHOD__, $post );
-        
-        wp_mail( $mail["to"], $mail["subject"], $mail["message"], $mail["headers"], $mail["attachments"] );
+        return $this->send_message( "core::on_pending_to_publish_notify_user", array( "advert" => $post ) );
     }
     
+    /**
+     * wp-admin / Free Advert Rejected
+     * 
+     * Variables
+     * - $advert => WP_Post
+     * 
+     * @since   1.3.0
+     * @param   WP_Post     $post
+     * @return  void
+     */
     public function on_pending_to_trash_notify_user( $post ) {
+        
         if( $post->post_type !== "advert" ) {
             return;
         }
-        $to = $this->_get_to( $post->ID );
-        $subject = "Your Ad has been rejected.";
-        $message = array();
-        $message[] = "Hello,";
-        $message[] = sprintf( "we are sorry, but your Ad titled '%s' has been rejected.", $post->post_title );
-
-        $mail_args = array(
-            "to" => $to,
-            "subject" => $subject,
-            "message" => join( "\r\n", $message ),
-            "headers" => "",
-            "attachments" => array()
-        );
         
-        $mail = apply_filters( "wpadverts_message", $mail_args, __METHOD__, $post );
-        
-        wp_mail( $mail["to"], $mail["subject"], $mail["message"], $mail["headers"], $mail["attachments"] );
+        return $this->send_message( "core::on_pending_to_trash_notify_user", array( "advert" => $post ) );
     }
 
+    /**
+     * Core / Advert Expired
+     * 
+     * Variables
+     * - $advert            => WP_Post
+     * 
+     * @since   1.3.0
+     * @param   WP_Post     $post
+     * @return  void
+     */
     public function on_publish_to_expired_notify_user( $post ) {
+        
         if( $post->post_type !== "advert" ) {
             return;
         }
-        $to = $this->_get_to( $post->ID );
-        $subject = "Your Ad has expired.";
-        $message = array();
-        $message[] = "Hello,";
-        $message[] = sprintf( "your Ad titled '%s' has expired and is no longer available on site.", $post->post_title );
-
-        $mail_args = array(
-            "to" => $to,
-            "subject" => $subject,
-            "message" => join( "\r\n", $message ),
-            "headers" => "",
-            "attachments" => array()
-        );
         
-        $mail = apply_filters( "wpadverts_message", $mail_args, __METHOD__, $post );
-        
-        wp_mail( $mail["to"], $mail["subject"], $mail["message"], $mail["headers"], $mail["attachments"] );
+        return $this->send_message( "core::on_publish_to_expired_notify_user", array( "advert" => $post ) );
     }
     
+    /**
+     * [adverts_add] / Free Advert Published -> Notify Admin
+     * 
+     * Variables
+     * - $advert            => WP_Post
+     * - $admin_edit_url    => string           Post edit URL in wp-admin
+     * 
+     * @since   1.3.0
+     * @param   WP_Post     $post
+     * @return  void
+     */
     public function on_draft_to_publish_notify_admin( $post ) {
+
         if( $post->post_type !== "advert" ) {
             return;
         }
-        $to = get_option( 'admin_email ');
-        $subject = "New Ad has been published.";
-        $message = array();
-        $message[] = "Hello,";
-        $message[] = sprintf( "New Ad titled '%s' has been published.", $post->post_title );
-        $message[] = "";
-        $message[] = sprintf( "You can view the Ad here:" );
-        $message[] = get_permalink( $post->ID );
-        $message[] = "";
-        $message[] = sprintf( "You can edit the Ad here:" );
-        $message[] = admin_url( sprintf( 'post.php?post=%d&action=edit', $post->ID ) );
-
-        $mail_args = array(
-            "to" => $to,
-            "subject" => $subject,
-            "message" => join( "\r\n", $message ),
-            "headers" => "",
-            "attachments" => array()
-        );
         
-        $mail = apply_filters( "wpadverts_message", $mail_args, __METHOD__, $post );
-        
-        wp_mail( $mail["to"], $mail["subject"], $mail["message"], $mail["headers"], $mail["attachments"] );
+        return $this->send_message( "core::on_publish_to_expired_notify_user", array( 
+            "advert" => $post,
+            "admin_email" => Adext_Emails::admin_email(),
+            "admin_edit_url" => admin_url( sprintf( 'post.php?post=%d&action=edit', $post->ID ) )
+        ) );
     }
     
+    /**
+     * [adverts_add] / Free Advert Pending -> Notify Admin
+     * 
+     * Variables
+     * - $advert            => WP_Post
+     * - $admin_edit_url    => string           Post edit URL in wp-admin
+     * 
+     * @since   1.3.0
+     * @param   WP_Post     $post
+     * @return  void
+     */
     public function on_draft_to_pending_notify_admin( $post ) {
+
         if( $post->post_type !== "advert" ) {
             return;
         }
-        $to = get_option( 'admin_email ');
-        $subject = "New Ad is pending (action required).";
-        $message = array();
-        $message[] = "Hello,";
-        $message[] = sprintf( "New Ad titled '%s' has been saved and is pending moderation.", $post->post_title );
-        $message[] = "";
-        $message[] = sprintf( "You can edit the Ad here:" );
-        $message[] = admin_url( sprintf( 'post.php?post=%d&action=edit', $post->ID ) );
-        $message[] = "";
-        $message[] = "Please either publish or trash the Ad.";
-
-        $mail_args = array(
-            "to" => $to,
-            "subject" => $subject,
-            "message" => join( "\r\n", $message ),
-            "headers" => "",
-            "attachments" => array()
-        );
         
-        $mail = apply_filters( "wpadverts_message", $mail_args, __METHOD__, $post );
-        
-        wp_mail( $mail["to"], $mail["subject"], $mail["message"], $mail["headers"], $mail["attachments"] );
+        return $this->send_message( "core::on_publish_to_expired_notify_user", array( 
+            "advert" => $post,
+            "admin_email" => Adext_Emails::admin_email(),
+            "admin_edit_url" => admin_url( sprintf( 'post.php?post=%d&action=edit', $post->ID ) )
+        ) );
     }
 
 }

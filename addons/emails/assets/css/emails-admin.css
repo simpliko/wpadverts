@@ -37,6 +37,7 @@
 .adext-emails-edit-td .button-small .dashicons {
     vertical-align: middle;
 }
+input#message_to,
 textarea[name=message_body] {
     width: 85%;
 }

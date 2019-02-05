@@ -19,7 +19,8 @@ global $adverts_namespace, $adverts_emails;
 $adverts_namespace['emails'] = array(
     'option_name' => 'adext_emails_config',
     'default' => array(
-        "enable_html_emails" => 0
+        "enable_html_emails" => 0,
+        "admin_email" => ""
     )
 );
 

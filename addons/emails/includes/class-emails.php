@@ -186,4 +186,23 @@ class Adext_Emails {
         
         return $form;
     }
+    
+    /**
+     * Returns Admin Email Address
+     * 
+     * This function will return admin email set in wp-admin / Classifieds / Options / Emails / Options panel
+     * or in wp-admin / Settings / General panel.
+     * 
+     * @since   1.3.0
+     * @return  string   Administrator Email
+     */
+    public static function admin_email() {
+        $admin_email = adverts_config( "emails.admin_email" );
+        
+        if( empty( $admin_email ) ) {
+            $admin_email = get_option( "admin_email" );
+        }
+        
+        return $admin_email;
+    }
 }

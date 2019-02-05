@@ -314,7 +314,7 @@ class Adext_Emails_Admin {
                 ),
                 array(
                     "name" => "message_to",
-                    "type" => "adext_emails_field_name_email",
+                    "type" => "adverts_field_text",
                     "label" => __( "To", "adverts" ),
                     
                 ),
@@ -348,6 +348,12 @@ class Adext_Emails_Admin {
         return array(
             "name" => "adext_emails_options",
             "field" => array(
+                array(
+                    "name" => "admin_email",
+                    "type" => "adverts_field_text",
+                    "label" => __( "Send Admin Notifications To", "adverts" ),
+                    "placeholder" => get_option( "admin_email" )
+                ),
                 array(
                     "name" => "enable_html_emails",
                     "type" => "adverts_field_checkbox",

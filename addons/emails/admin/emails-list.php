@@ -19,19 +19,22 @@
     
 <?php adverts_admin_flash() ?>
     
-<form method="post" action="<?php esc_attr_e( add_query_arg( array( 'noheader'=>1, 'pg'=>null ) ) ) ?>" id="posts-filter">
-<input type="hidden" name="noheader" value="1" />
+
 
 <div class="tablenav">
 
 <div class="alignleft actions">
-    <select name="action" id="wpjb-action1">
-        <option selected="selected" value=""><?php _e("Bulk Actions") ?></option>
-        <option value="delete"><?php _e("Delete") ?></option>
-    </select>
+    <form method="post" action="<?php esc_attr_e( add_query_arg( array( 'pg'=>null ) ) ) ?>">
+        <select name="ftype" id="adext-emails-action1">
+            <option selected="selected" value=""><?php _e("Filter By Module", "adverts") ?></option>
+            <?php foreach( Adext_Emails::instance()->get_filter_options() as $opt ): ?>
+            <option value="<?php echo esc_html( $opt["key"]) ?>" <?php selected( $opt["key"], adverts_request( "ftype" ) ) ?>><?php echo esc_html( $opt["label"] ) ?></option>
+            <?php endforeach; ?>
+            
+        </select>
 
-    <input type="submit" class="button-secondary action" id="wpjb-doaction1" value="<?php _e("Apply", "adverts") ?>"/>
-
+        <input type="submit" class="button-secondary action" value="<?php _e("Filter", "adverts") ?>"/>
+    </form>
 </div>
 
 <div class="clear"/>&nbsp;</div>
@@ -41,8 +44,8 @@
     <<?php echo $tx; ?>>
         <tr>
             <th style="" class="" scope="col"><?php _e("Email Subject", "adverts") ?></th>
-            <th style="" class="" scope="col"><?php _e("Label", "adverts") ?></th>
-            <th style="" class="" scope="col"><?php _e("Recipient", "adverts") ?></th>
+            <th style="min-width:65%" class="" scope="col" ><?php _e("Code", "adverts") ?></th>
+            <!--th style="" class="" scope="col"><?php _e("", "adverts") ?></th-->
             <th style="width:25px" class="" scope="col"><span class="dashicons dashicons-email"></span></th>
             <?php do_action('adext_emails_list_thead') ?>
         </tr>
@@ -51,21 +54,19 @@
 
     <tbody>
         <?php $z = 0; ?>
-        <?php foreach( $messages->get_messages() as $j => $message): ?>
+        <?php foreach( $messages as $j => $message): ?>
         <tr valign="top" class="<?php if($z%2==0): ?>alternate <?php endif; ?>  author-self status-publish iedit">
             <td class="post-title column-title">
                 <strong><a href="<?php echo esc_attr( add_query_arg( "edit", $message["name"] ) ) ?>" title=""><?php echo esc_html( $message["subject"] ) ?></a></strong>
             </td>
-            <td>
-                <?php echo esc_html( $message["label"] ) ?>
+            <td style="">
+                
+                <code><?php echo $message["name"] ?></code> 
+                <a href="#" title="Read when this message is sent ...">
+                    <span class="dashicons dashicons-welcome-learn-more" style="font-size:22px"></span>
+                </a>
             </td>
-            <td>
-                <?php if( $message["notify"] == "admin" ): ?>
-                admin@example.com
-                <?php else: ?>
-                <?php _e( "User", "adverts" ) ?>
-                <?php endif; ?>
-            </td>
+            
             <td>
                 <?php if( $message["enabled"] == "1" ): ?>
                 <span class="dashicons dashicons-yes" style="font-size:23px"></span>
@@ -96,12 +97,17 @@
 
 
     <div class="alignleft actions">
-        <select name="action2" id="wpjb-action2">
-            <option selected="selected" value=""><?php _e("Bulk Actions", "adverts") ?></option>
-            <option value="delete"><?php _e("Delete", "adverts") ?></option>
-        </select>
-        <input type="submit" class="button-secondary action" id="wpjb-doaction2" value="<?php _e("Apply", "adverts") ?>"/>
+        <form method="post" action="<?php esc_attr_e( add_query_arg( array( 'pg'=>null ) ) ) ?>">
+            <select name="ftype" id="adext-emails-action2">
+                <option selected="selected" value=""><?php _e("Filter By Module", "adverts") ?></option>
+                <?php foreach( Adext_Emails::instance()->get_filter_options() as $opt ): ?>
+                <option value="<?php echo esc_html( $opt["key"]) ?>" <?php selected( $opt["key"], adverts_request( "ftype" ) ) ?>><?php echo esc_html( $opt["label"] ) ?></option>
+                <?php endforeach; ?>
 
+            </select>
+
+            <input type="submit" class="button-secondary action" value="<?php _e("Filter", "adverts") ?>"/>
+        </form>
         <br class="clear"/>
     </div>
 
@@ -109,6 +115,5 @@
 </div>
 
 
-</form>
 
 </div>

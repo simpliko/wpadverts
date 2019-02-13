@@ -41,3 +41,6 @@ input#message_to,
 textarea[name=message_body] {
     width: 85%;
 }
+.adverts-adext-emails-edit tr:nth-child(3) > th {
+    line-height:30px;
+}

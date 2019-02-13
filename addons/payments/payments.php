@@ -857,9 +857,10 @@ function adext_payments_core_init() {
     add_action("adverts_payment_completed", "adext_payment_completed_notify_user");
     add_action("adverts_payment_completed", "adext_payment_completed_notify_admin");
     
-    include_once ADVERTS_PATH . 'addons/payments/includes/class-payment-messages.php';
-    
-    Adverts::instance()->add_messages( "adverts-payment", new Adverts_Payment_Messages() );
+    if( class_exists( "Adext_Emails" ) ) {
+        include_once ADVERTS_PATH . 'addons/payments/includes/class-emails-integration.php';
+        new Adext_Payments_Emails_Integration();
+    }
     
     do_action("adext_register_payment_gateway");
 }

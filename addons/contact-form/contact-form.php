@@ -22,6 +22,8 @@ $adverts_namespace['contact_form'] = array(
     )
 );
 
+add_action( "init", "adext_contact_form_init", 20 );
+
 if(is_admin() ) {
     add_action( "init", "adext_contact_form_init_admin", 20 );
 } else {
@@ -72,30 +74,8 @@ function adext_contact_form( $post_id ) {
         
         if( $valid ) {
             
-            $reply_to = $form->get_value( "message_email" );
-            
-            if( $form->get_value( "message_name" ) ) {
-                $reply_to = $form->get_value( "message_name" ) . "<$reply_to>";
-            }
-            
-            $mail = array(
-                "to" => get_post_meta( $post_id, "adverts_email", true ),
-                "subject" => $form->get_value( "message_subject" ),
-                "message" => $form->get_value( "message_body" ),
-                "headers" => array(
-                    "Reply-To: " . $reply_to
-                )
-            );
-            
-            $mail = apply_filters( "adverts_contact_form_email", $mail, $post_id, $form );
-           
-            add_filter( 'wp_mail_from', 'adext_contact_form_mail_from' );
-            add_filter( 'wp_mail_from_name', 'adext_contact_form_mail_from_name' );
-            
-            wp_mail( $mail["to"], $mail["subject"], $mail["message"], $mail["headers"] );
-            
-            remove_filter( 'wp_mail_from', 'adext_contact_form_mail_from' );
-            remove_filter( 'wp_mail_from_name', 'adext_contact_form_mail_from_name' );
+            //Adext_Contact_Form::instance()->send_message( get_post( $post_id ), $form );
+            do_action( "adext_contact_form_send", $post_id, $form );
             
             $form->bind( array() );
             
@@ -159,6 +139,24 @@ function adext_contact_form( $post_id ) {
 }
 
 /**
+ * Adverts Contact Form Init Function
+ * 
+ * Registers actions and filters which need to be run in both wp-admin and frontend.
+ * 
+ * @since 1.3.0
+ * @return void
+ */
+function adext_contact_form_init() {
+
+    if( class_exists( "Adext_Emails" ) ) {
+        include_once ADVERTS_PATH . '/addons/contact-form/includes/class-emails-integration.php';
+        new Adext_Contact_Form_Emails_Integration();
+    } else {
+        add_action( "adext_contact_form_send", "adext_contact_form_send_default_message", 10, 2 );
+    }
+}
+
+/**
  * Frontend Adverts Contact Form Init Function
  * 
  * Deregister default contact box and register contact form box instead.
@@ -169,7 +167,7 @@ function adext_contact_form( $post_id ) {
 function adext_contact_form_init_frontend() {
     remove_action('adverts_tpl_single_bottom', 'adverts_single_contact_information');
     add_action('adverts_tpl_single_bottom', 'adext_contact_form');
-    
+
     wp_register_script( 'adverts-contact-form-scroll', ADVERTS_URL  .'/assets/js/adverts-contact-form-scroll.js', array( 'jquery' ), "1", true);
 }
 
@@ -218,6 +216,48 @@ function adext_contact_form_mail_from_name( $from_name ) {
     } else {
         return $from_name;
     }
+}
+
+/**
+ * Sends the default contact form message.
+ * 
+ * This function is executed by adext_contact_form_send action registered in
+ * adext_contact_form_init function.
+ * 
+ * @see adext_contact_form_send filter
+ * @see adext_contact_form_init()
+ * 
+ * @since   1.3.0
+ * @param   int           $post_id    ID of the current Advert
+ * @param   Adverts_Form  $form       Submitted form object
+ * @return  void
+ */
+function adext_contact_form_send_default_message( $post_id, $form ) {
+    
+    $reply_to = $form->get_value( "message_email" );
+
+    if( $form->get_value( "message_name" ) ) {
+        $reply_to = $form->get_value( "message_name" ) . "<$reply_to>";
+    }
+
+    $mail = array(
+        "to" => get_post_meta( $post_id, "adverts_email", true ),
+        "subject" => $form->get_value( "message_subject" ),
+        "message" => $form->get_value( "message_body" ),
+        "headers" => array(
+            "Reply-To: " . $reply_to
+        )
+    );
+
+    $mail = apply_filters( "adverts_contact_form_email", $mail, $post_id, $form );
+
+    add_filter( 'wp_mail_from', 'adext_contact_form_mail_from' );
+    add_filter( 'wp_mail_from_name', 'adext_contact_form_mail_from_name' );
+
+    wp_mail( $mail["to"], $mail["subject"], $mail["message"], $mail["headers"] );
+
+    remove_filter( 'wp_mail_from', 'adext_contact_form_mail_from' );
+    remove_filter( 'wp_mail_from_name', 'adext_contact_form_mail_from_name' );
 }
 
 // Contact Form

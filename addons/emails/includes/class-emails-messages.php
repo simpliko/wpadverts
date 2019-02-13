@@ -114,13 +114,16 @@ class Adext_Emails_Messages {
      * @return void
      */
     public function register_messages() {
+        $arrow = '<span class="dashicons dashicons-arrow-right-alt2"></span>';
+        $em = '<span class="dashicons dashicons-email"></span>';
+        $ok = '';
         $this->messages = apply_filters( "wpadverts_messages_register", array(
             "core::on_draft_to_publish_notify_user" => array(
                 "name" => "core::on_draft_to_publish_notify_user",
                 "action" => "advert_tmp_to_publish",
                 "callback" => array( $this, "on_draft_to_publish_notify_user" ),
                 "enabled" => 1,
-                "label" => __( "[adverts_add] / Free Advert Published", "adverts" ),
+                "label" => __( "<a href='#'>Core</a> $arrow [adverts_add] $arrow $ok Free Advert Published $arrow $em Notify User", "adverts" ),
                 "notify" => "user",
                 "from" => array( "name" => "", "email" => "" ),
                 "to" => "{\$advert.ID|meta:adverts_email}",
@@ -134,7 +137,7 @@ class Adext_Emails_Messages {
                 "action" => "advert_tmp_to_pending",
                 "callback" => array( $this, "on_draft_to_pending_notify_user" ),
                 "enabled" => 1,
-                "label" => __( "[adverts_add] / Free Advert Pending", "adverts" ),
+                "label" => __( "<a href='#'>Core</a> $arrow [adverts_add] $arrow $ok Free Advert Pending $arrow $em Notify User", "adverts" ),
                 "notify" => "user",
                 "from" => array( "name" => "", "email" => "" ),
                 "to" => "{\$advert.ID|meta:adverts_email}",
@@ -147,7 +150,7 @@ class Adext_Emails_Messages {
                 "name" => "core::on_pending_to_publish_notify_user",
                 "action" => "pending_to_publish",
                 "enabled" => 1,
-                "label" => __( "wp-admin / Free Advert Approved", "adverts" ),
+                "label" => __( "<a href='#'>Core</a> $arrow wp-admin $arrow $ok Free Advert Approved $arrow $em Notify User", "adverts" ),
                 "notify" => "user",
                 "from" => array( "name" => "", "email" => "" ),
                 "to" => "{\$advert.ID|meta:adverts_email}",
@@ -160,7 +163,7 @@ class Adext_Emails_Messages {
                 "name" => "core::on_pending_to_trash_notify_user",
                 "action" => "pending_to_trash",
                 "enabled" => 1,
-                "label" => __( "wp-admin / Free Advert Rejected", "adverts" ),
+                "label" => __( "<a href='#'>Core</a> $arrow wp-admin $arrow $ok Free Advert Rejected $arrow $em Notify User", "adverts" ),
                 "notify" => "user",
                 "from" => array( "name" => "", "email" => "" ),
                 "to" => "{\$advert.ID|meta:adverts_email}",
@@ -173,7 +176,7 @@ class Adext_Emails_Messages {
                 "name" => "core::on_publish_to_expired_notify_user",
                 "action" => "publish_to_expired",
                 "enabled" => 1,
-                "label" => __( "Core / Advert Expired", "adverts" ),
+                "label" => __( "<a href='#'>Core</a> $arrow wp-cron $arrow $ok Advert Expired $arrow $em Notify User", "adverts" ),
                 "notify" => "user",
                 "from" => array( "name" => "", "email" => "" ),
                 "to" => "{\$advert.ID|meta:adverts_email}",
@@ -186,7 +189,7 @@ class Adext_Emails_Messages {
                 "name" => "core::on_draft_to_publish_notify_admin",
                 "action" => "advert_tmp_to_publish",
                 "enabled" => 1,
-                "label" => __( "[adverts_add] / Free Advert Published", "adverts" ),
+                "label" => __( "<a href='#'>Core</a> $arrow [adverts_add] $arrow $ok Free Advert Published $arrow $em Notify Admin", "adverts" ),
                 "notify" => "admin",
                 "from" => array( "name" => "", "email" => "" ),
                 "to" => "{\$admin_email}",
@@ -198,13 +201,13 @@ class Adext_Emails_Messages {
             "core::on_draft_to_pending_notify_admin" => array(
                 "name" => "core::on_draft_to_pending_notify_admin",
                 "action" => "advert_tmp_to_pending",
-                "enabled" => 0,
-                "label" => __( "[adverts_add] / Free Advert Pending", "adverts" ),
+                "enabled" => 1,
+                "label" => __( "<a href='#'>Core</a> $arrow [adverts_add] $arrow $ok Free Advert Pending $arrow $em Notify Admin", "adverts" ),
                 "notify" => "admin",
                 "from" => array( "name" => "", "email" => "" ),
                 "to" => "{\$admin_email}",
                 "subject" => __( "New Ad is pending (action required).", "adverts" ),
-                "body" => __( "Hellp\nNew Ad titled '{\$advert.post_title}' has been saved and is pending moderation.\n\nYou can edit the Ad here:\n{\$advert.ID|get_permalink}\n\nPlease either publish or trash the Ad.", "adverts" ),
+                "body" => __( "Hello,\nNew Ad titled '{\$advert.post_title}' has been saved and is pending moderation.\n\nYou can edit the Ad here:\n{\$advert.ID|get_permalink}\n\nPlease either publish or trash the Ad.", "adverts" ),
                 "headers" => array(),
                 "attachments" => array()
             ),
@@ -266,15 +269,16 @@ class Adext_Emails_Messages {
         $fr = $message["from"];
         
         $headers = array(
+            
             "From" => empty( $fr["name"] ) ? $fr["email"] : sprintf( "%s <%s>", $fr["name"], $fr["email"] ),  
         );
         
         foreach( $message["headers"] as $key => $value ) {
-            if( in_array( strtolower( $key ), $exclude ) ) {
+            if( in_array( strtolower( $value["name"] ), $exclude ) ) {
                 continue;
             }
             
-            $headers[ $key ] = $value;
+            $headers[ $value["name"] ] = $value["value"];
         }
         
         return $headers;
@@ -329,14 +333,16 @@ class Adext_Emails_Messages {
     public function send( $message, $args ) {
         
         $mail_args = array(
-            "to" => $message["to"]["value"],
+            "to" => $message["to"],
             "subject" => $message["subject"],
             "message" => $message["body"],
             "headers" => $this->_get_headers( $message ),
-            "attachments" => $message["headers"]
+            "attachments" => $message["attachments"]
         );
         
         $args = apply_filters( "wpadverts_message_args", $args, $message, $mail_args );
+        
+        // by default Adext_Emails_Parser::compile() function is run
         $mail = apply_filters( "wpadverts_message", $mail_args, $message, $args );
         
         $headers = array();

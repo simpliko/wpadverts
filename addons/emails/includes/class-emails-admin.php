@@ -53,7 +53,7 @@ class Adext_Emails_Admin {
     public function options() {
         wp_enqueue_style( 'adverts-admin' );
         $flash = Adverts_Flash::instance();
-        $messages = Adverts::instance()->get("emails")->messages;
+        $messages = Adext_Emails::instance()->messages;
 
         $scheme = $this->options_form( );
         $form = new Adverts_Form( $scheme );
@@ -103,7 +103,15 @@ class Adext_Emails_Admin {
         
         wp_enqueue_style( 'adverts-admin' );
         $flash = Adverts_Flash::instance();
-        $messages = Adverts::instance()->get("emails")->messages;
+        $messages = array();
+        
+        foreach(Adext_Emails::instance()->messages->get_messages() as $k => $m) {
+            if( adverts_request( "ftype" ) && stripos( $k, adverts_request( "ftype" )."::" ) !== 0 ) {
+                continue;
+            }
+            
+            $messages[$k] = $m; 
+        }
 
         include ADVERTS_PATH . 'addons/emails/admin/emails-list.php';
     }
@@ -150,7 +158,7 @@ class Adext_Emails_Admin {
 
             if($valid) {
                 $this->edit_save( $form, adverts_request( "edit" ) );
-                Adverts::instance()->get("emails")->messages->register_messages();
+                Adext_Emails::instance()->messages->register_messages();
                 $message = $this->get_current_message();
                 $flash->add_info( __("Email template has been saved.", "adverts") );
             } else {
@@ -229,12 +237,12 @@ class Adext_Emails_Admin {
     /**
      * Returns currently edited message
      * 
-     * Retrives a message identified by $_GET['edit'] from Adverts::instance()->get("emails")->messages
+     * Retrives a message identified by $_GET['edit'] from Adext_Emails::instance()->messages
 
      * @return  array    Message
      */
     public function get_current_message() {
-        $messages = Adverts::instance()->get("emails")->messages;
+        $messages = Adext_Emails::instance()->messages;
         $message = null;
         $edit = adverts_request( "edit" );
 
@@ -290,7 +298,7 @@ class Adext_Emails_Admin {
                     "name" => "_email",
                     "type" => "adverts_field_label",
                     "label" => __( "Email Name", "adverts" ),
-                    "content" => sprintf( "<strong>%s</strong> 	— <code>%s</code>", $message["label"], $message["name"] )
+                    "content" => sprintf( "<code>%s</code> <a href='%s'><span class=\"dashicons dashicons-info\"></span></a>", $message["name"], "https://" )
                 ),
                 array(
                     "name" => "message_enabled",

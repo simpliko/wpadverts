@@ -3,4 +3,4 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-Adverts::instance()->get("emails")->admin->dispatch();
+Adext_Emails::instance()->admin->dispatch();

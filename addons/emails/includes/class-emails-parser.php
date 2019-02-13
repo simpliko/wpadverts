@@ -10,7 +10,7 @@
  * 
  * <code>
  * add_action( "init", function() {
- *      Adverts::instance()->get( "emails" )->parser = new My_Parser_Class;
+ *      Adext_Emails::instance()->parser = new My_Parser_Class;
  * });
  * </code>
  * 
@@ -135,6 +135,26 @@ class Adext_Emails_Parser {
         return $flat;
     }
     
+    protected function _rec_var( $path, $x ) {
+
+        if( empty( $path ) ) {
+            return $x;
+        }
+
+        $key = array_shift( $path );
+
+        if( is_scalar( $x ) ) {
+            return $x;
+        } else if( is_object( $x ) && isset( $x->$key) ) {
+            return $this->_rec_var( $path, $x->$key);
+        } else if( is_array( $x ) && isset( $x[$key] ) ) {
+            return $this->_rec_var( $path, $x[$key] );
+        } else {
+            return "";
+        }
+
+    }
+    
     /**
      * Parses text
      * 
@@ -148,7 +168,7 @@ class Adext_Emails_Parser {
     public function parse( $text ) {
         
         $matches = array();
-        preg_match_all( '/\{\$([A-z0-9\._\:\ }\|]*)\}/', $text, $matches );
+        //preg_match_all( '/\{\$([A-z0-9\._\:\ }\|]*)\}/', $text, $matches );
         preg_match_all( '/\{\$([^\}]*)\}/', $text, $matches );
 
         $flat = $this->_flat;
@@ -164,12 +184,17 @@ class Adext_Emails_Parser {
         }
 
         foreach( $vars as $var => $repl ) {
+            /*
             if( isset( $flat[ $repl["value"] ] ) ) {
                 $value = $flat[ $repl["value"] ];
             } else {
                 $value = "";
             }
-
+             * 
+             */
+            $value = $this->_rec_var( explode( ".", $repl["value"] ), $this->_args );
+            
+            
             if( ! empty( $repl["callback"] ) ) {
                 $cb = array();
                 $cb_array = explode( "|", trim( $repl["callback"], "|" ) );
@@ -213,8 +238,15 @@ class Adext_Emails_Parser {
      */
     public function compile( $mail_args, $message, $args ) {
         
-        $this->assign( "args", $args );
+        foreach( $args as $arg_name => $arg_value ) {
+            $this->assign( $arg_name, $arg_value );
+        }
         $this->flatten();
+        
+        echo "<pre>";
+        print_r($args);
+        print_r($mail_args);
+        echo "</pre>";
 
         $mail_args["to"] = $this->parse( $mail_args["to"] );
         $mail_args["subject"] = $this->parse( $mail_args["subject"] );
@@ -227,7 +259,12 @@ class Adext_Emails_Parser {
         }
         
         $this->reset();
-
+        
+        echo "<pre>";
+        print_r($mail_args);
+        echo "</pre>";
+        //exit;
+        
         return $mail_args;
     }
 }

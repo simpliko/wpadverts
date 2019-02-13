@@ -14,7 +14,7 @@
  * @version 1.3
  */
 
-global $adverts_namespace, $adverts_emails;
+global $adverts_namespace, $adext_emails;
 
 $adverts_namespace['emails'] = array(
     'option_name' => 'adext_emails_config',
@@ -26,5 +26,5 @@ $adverts_namespace['emails'] = array(
 
 include_once ADVERTS_PATH . 'addons/emails/includes/class-emails.php';
 
-Adverts::instance()->set( "emails", new Adext_Emails );
+$adext_emails = Adext_Emails::instance();
 

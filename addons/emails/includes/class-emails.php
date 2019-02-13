@@ -14,6 +14,13 @@
 class Adext_Emails {
     
     /**
+     * Object instance
+     *
+     * @var Adext_Emails
+     */
+    private static $_instance = null;
+    
+    /**
      * Admin Object
      *
      * @since 1.3.0
@@ -39,6 +46,14 @@ class Adext_Emails {
      */
     public $parser = null;
     
+    public static function instance() {
+        if( self::$_instance === null ) {
+            self::$_instance = new self();
+        }
+        
+        return self::$_instance;
+    }
+    
     /**
      * Class constructor
      * 
@@ -48,7 +63,7 @@ class Adext_Emails {
     public function __construct() {
         
         add_action( "admin_init", array( $this, "init_admin" ) );
-        
+        add_action( "init", array( $this, "init" ), 1000 );
         if( is_admin() ) {
             include_once ADVERTS_PATH . 'addons/emails/includes/class-emails-admin.php';
             $this->admin = new Adext_Emails_Admin();
@@ -67,9 +82,46 @@ class Adext_Emails {
         
         $this->parser->add_function( "meta", array( $this, "get_meta" ) );
         $this->parser->add_function( "terms", array( $this, "get_terms" ) );
+        $this->parser->add_function( "contact_email", array( $this, "contact_email" ) );
         
         add_filter( "wpadverts_messages_register", array( $this->messages, "load" ) );
         add_filter( "wpadverts_message", array( $this->parser, "compile" ), 10, 3 );
+        add_filter( "wpadverts_message_args", array( $this, "common_args" ) );
+
+
+    }
+    
+    /**
+     * Registers common variables
+     * 
+     * These variables can be used in all emails sent by Emails Module.
+     * 
+     * This function is executed by wpadverts_message_args filter registered
+     * in self::__construct()
+     * 
+     * @see wpadverts_message_args filter
+     * 
+     * @since   1.3.0
+     * @param   array $args     List of message variables
+     * @return  array
+     */
+    public function common_args( $args ) {
+        $args["admin_email"] = self::admin_email();
+        return $args;
+    }
+    
+    /**
+     * Registers actions and messages
+     * 
+     * This function is executed by "init" action registered in self::__construct() with
+     * a low priority so other plugins can register their own messages.
+     * 
+     * @see init action
+     * 
+     * @since 1.3.0
+     * @return void
+     */
+    public function init() {
         
         $this->messages->register_messages();
         $this->messages->register_actions();
@@ -102,7 +154,7 @@ class Adext_Emails {
      * @param   string   $meta_key      Name of a the meta field
      * @return  string
      */
-    public function get_meta( $post, $meta_key ) {
+    public function get_meta( $post, $meta_key, $separator = ", " ) {
         if( ! is_int( $post ) ) {
             $post_id = $post->ID;
         } else {
@@ -135,6 +187,27 @@ class Adext_Emails {
         }
         
         return join( ", ", $terms_list );
+    }
+    
+    public function contact_email( $post ) {
+        
+        if( $post instanceof WP_Post ) {
+            $post_id = $post->ID;
+        } else {
+            $post_id = $post;
+        }
+        
+        $contact_email = get_post_meta( $post_id, "adverts_email", true );
+        
+        if( $contact_email ) {
+            return $contact_email;
+        }
+        
+        $post_author = get_post_field( "post_author", $post );
+        
+        if( $post_author > 0 ) {
+            return get_user_by( "id", $post_author )->user_email;
+        }
     }
     
     /**
@@ -204,5 +277,19 @@ class Adext_Emails {
         }
         
         return $admin_email;
+    }
+    
+    /**
+     * Returns filtering options
+     * 
+     * Returns options for a dropdown in wp-admin / Classifieds / Options / Emails / Options list
+     * 
+     * @since   1.3.0
+     * @return  array    Filter options
+     */
+    public function get_filter_options() {
+        return apply_filters( "adext_emails_list_filter_options", array(
+            array( "key" => "core", "label" => __( "Core", "adverts" ) )
+        ) );
     }
 }

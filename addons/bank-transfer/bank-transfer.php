@@ -127,9 +127,11 @@ add_filter( "adverts_form_bind", "adext_bank_transfer_form_bind_defaults", 10, 2
  * This function checks if current payment form is Bank Transfer. If so and 
  * the $data is empty then we set default values for contact person and email fields.
  * 
- * @param Adverts_Form $form Instance of form.
- * @param array $data User submitted form values ( key => value )
- * @return Adverts_Form Modified instance of form.
+ * @since   1.3.0   The function will try to get the details from payment object first (if it exists).
+ * 
+ * @param   Adverts_Form    $form   Instance of form.
+ * @param   array           $data   User submitted form values ( key => value )
+ * @return  Adverts_Form            Modified instance of form.
  */
 function adext_bank_transfer_form_bind_defaults( Adverts_Form $form, $data ) {
     
@@ -140,10 +142,17 @@ function adext_bank_transfer_form_bind_defaults( Adverts_Form $form, $data ) {
     }
     
     if( empty( $data ) && adverts_request( "action" ) == "adext_payments_render" ) {
-        $ad = get_post( adverts_request( "object_id" ) );
         
-        $form->set_value( "adverts_person", get_post_meta( $ad->ID, "adverts_person", true ) );
-        $form->set_value( "adverts_email", get_post_meta( $ad->ID, "adverts_email", true ) );
+        if( adverts_request( "payment_id" ) ) {
+            $object = get_post( adverts_request( "payment_id" ) );
+        } else if(adverts_request( "object_id" ) ) {
+            $object = get_post( adverts_request( "object_id" ) );
+        } else {
+            return $form;
+        }
+        
+        $form->set_value( "adverts_person", get_post_meta( $object->ID, "adverts_person", true ) );
+        $form->set_value( "adverts_email", get_post_meta( $object->ID, "adverts_email", true ) );
     }
 
     return $form;

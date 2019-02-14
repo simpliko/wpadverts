@@ -137,6 +137,11 @@ class Adverts_Widget_Ads extends WP_Widget
                         "depth" => 0,
                         "text" => __( "Price", "adverts" )
                     ),
+                    array(
+                        "value" => "random",
+                        "depth" => 0,
+                        "text" => __( "Random", "adverts" )
+                    )
                 )
             ),
             array(
@@ -424,6 +429,9 @@ class Adverts_Widget_Ads extends WP_Widget
             case "price": 
                 $meta_key = 'adverts_price';
                 $orderby['meta_value_num'] = $sort; 
+                break;
+            case "random":
+                $orderby = "rand";
                 break;
             default:            
                 $orderby['date'] = $sort;

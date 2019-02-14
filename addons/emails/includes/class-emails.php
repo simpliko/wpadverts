@@ -64,6 +64,7 @@ class Adext_Emails {
         
         add_action( "admin_init", array( $this, "init_admin" ) );
         add_action( "init", array( $this, "init" ), 1000 );
+        
         if( is_admin() ) {
             include_once ADVERTS_PATH . 'addons/emails/includes/class-emails-admin.php';
             $this->admin = new Adext_Emails_Admin();
@@ -83,6 +84,8 @@ class Adext_Emails {
         $this->parser->add_function( "meta", array( $this, "get_meta" ) );
         $this->parser->add_function( "terms", array( $this, "get_terms" ) );
         $this->parser->add_function( "contact_email", array( $this, "contact_email" ) );
+        $this->parser->add_function( "admin_edit_url", array( $this, "admin_edit_url" ) );
+        $this->parser->add_function( "complete_payment_url", array( $this, "complete_payment_url" ) );
         
         add_filter( "wpadverts_messages_register", array( $this->messages, "load" ) );
         add_filter( "wpadverts_message", array( $this->parser, "compile" ), 10, 3 );
@@ -189,6 +192,16 @@ class Adext_Emails {
         return join( ", ", $terms_list );
     }
     
+    /**
+     * Returns contact email
+     * 
+     * This function is registered as email function and can be used in the
+     * email templates.
+     * 
+     * @since   1.3.0
+     * @param   WP_Post     $post   Post object
+     * @return  string              Contact email or empty string
+     */
     public function contact_email( $post ) {
         
         if( $post instanceof WP_Post ) {
@@ -208,6 +221,46 @@ class Adext_Emails {
         if( $post_author > 0 ) {
             return get_user_by( "id", $post_author )->user_email;
         }
+    }
+    
+    /**
+     * Returns Post edit URL
+     * 
+     * This function is registered as email function and can be used in the
+     * email templates.
+     * 
+     * @since   1.3.0
+     * @param   WP_Post     $post   Post object
+     * @return  string              Admin edit URL
+     */
+    public function admin_edit_url( $post ) {
+        $url = null;
+        
+        if( ! $post instanceof WP_Post ) {
+            $url = "";
+        } else if( in_array( $post->post_type, array( 'adverts-payment' ) ) ) {
+            // advert-payment
+            $url = admin_url( sprintf( 'edit.php?post_type=advert&page=adext-payment-history&edit=%d', $post->ID ) );
+        } else {
+            // advert, advert-author, page, post and etc.
+            $url = admin_url( sprintf( 'post.php?post=%d&action=edit', $post->ID ) );
+        }
+        
+        return apply_filters( "adext_emails_admin_edit_url", $url, $post );
+    }
+    
+    /**
+     * Returns complete payment URL
+     * 
+     * This function is registered as email function and can be used in the
+     * email templates.
+     * 
+     * @since   1.3.0
+     * @param   WP_Post     $post   Post object
+     * @return  string              Admin edit URL
+     */
+    public function payment_complete_url( $post ) {
+        return "@todo";
     }
     
     /**

@@ -178,6 +178,12 @@ function adext_featured_form_load( $form ) {
  */
 function adext_featured_completed_publish( WP_Post $payment ) {
     
+    $type = get_post_meta( $payment->ID, "_adverts_payment_type", true );
+    
+    if( $type && $type != "adverts-pricing" ) {
+        return;
+    }
+    
     $object_id = get_post_meta( $payment->ID, "_adverts_object_id", true );
     
     $meta = maybe_unserialize( get_post_meta( $payment->ID, "_adverts_payment_meta", true ) );

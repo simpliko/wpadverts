@@ -18,6 +18,7 @@ WPADVERTS.Payments = {
             page_id: $(".adverts-payment-data").data("page-id"),
             listing_id: $(".adverts-payment-data").data("listing-id"),
             object_id: $(".adverts-payment-data").data("object-id"),
+            payment_id: $(".adverts-payment-data").data("payment-id"),
             form: $(".adverts-tab-content form").serializeArray()
         };
         
@@ -89,7 +90,8 @@ jQuery(function($) {
             gateway: $(this).data("tab"),
             page_id: $(".adverts-payment-data").data("page-id"),
             listing_id: $(".adverts-payment-data").data("listing-id"),
-            object_id: $(".adverts-payment-data").data("object-id")
+            object_id: $(".adverts-payment-data").data("object-id"),
+            payment_id: $(".adverts-payment-data").data("payment-id")
         };
         
         var tab = $(this).data("tab");

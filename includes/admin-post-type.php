@@ -135,7 +135,8 @@ function adverts_save_post($ID = false, $post = false) {
         }
     }
     
-    
+    // Generate frontend edit hash
+    adverts_create_hash( $post_id );
 }
 
 /**

@@ -156,7 +156,7 @@ function adext_payments_install() {
  * @since 1.0
  */
 function adext_payments_init_frontend() {
-    wp_register_script('adext-payments', plugins_url().'/wpadverts/addons/payments/assets/js/payments.js', array('jquery'), '1.2.7');
+    wp_register_script('adext-payments', plugins_url().'/wpadverts/addons/payments/assets/js/payments.js', array('jquery'), '1.3.0');
     
     add_filter("adverts_action", "adext_payments_add_action_payment");
     add_filter("adverts_action", "adext_payments_add_action_notify");
@@ -1096,12 +1096,12 @@ function adext_post_get_payment( $post_id, $listing_id, $post_status = "pending"
         "posts_per_page" => 1,
         "meta_query" => array(
             array(
-                "meta_key" => '_adverts_object_id',
-                "meta_value" => $post_id
+                "key" => '_adverts_object_id',
+                "value" => $post_id
             ),
             array(
-                "meta_key" => '_adverts_pricing_id',
-                "meta_value" => $listing_id
+                "key" => '_adverts_pricing_id',
+                "value" => $listing_id
             )
         )
     ));

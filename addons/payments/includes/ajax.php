@@ -6,6 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 add_action('wp_ajax_adext_payments_render', 'adext_payments_ajax_render');
 add_action('wp_ajax_nopriv_adext_payments_render', 'adext_payments_ajax_render');
 
+add_action('wp_ajax_adext_payments_complete_payment', 'adext_payments_ajax_complete_payment');
+add_action('wp_ajax_nopriv_adext_payments_complete_payment', 'adext_payments_ajax_complete_payment');
+
 /**
  * AJAX Function renders payment form in [adverts_add] third step.
  * 
@@ -83,4 +86,9 @@ function adext_payments_ajax_render() {
     
     echo json_encode( $response );
     exit;
+}
+
+function adext_payments_ajax_complete_payment() {
+    wp_die( adext_payments_checkout(), "Test" );
+   // exit;
 }

@@ -89,9 +89,6 @@ class Adext_Payments_Emails_Integration {
         
         /**
          * @TODO: {$payment|payment_complete_url} callback
-         * @TODO: {$payment|contact_email}
-         * @TODO: {$advert|advert_admin_edit_url} 
-         * @TODO: {$payment|payment_admin_edit_url}
          */
         
         $messages["payments::on_advert_pending_notify_user"] = array(
@@ -160,7 +157,7 @@ class Adext_Payments_Emails_Integration {
             "from" => array( "name" => "", "email" => "" ),
             "to" => "{\$admin_email}",
             "subject" => __( "Payment Completed.", "adverts" ),
-            "body" => __( "Hello,\nthe payment for Ad '{\$advert.post_title}' has been completed.\n\nYou can view the payment details here:\n{\$payment|payment_admin_edit_url}", "adverts" ),
+            "body" => __( "Hello,\nthe payment for Ad '{\$advert.post_title}' has been completed.\n\nYou can view the payment details here:\n{\$payment|admin_edit_url}", "adverts" ),
             "headers" => array(),
             "attachments" => array()
         );
@@ -188,7 +185,7 @@ class Adext_Payments_Emails_Integration {
             "from" => array( "name" => "", "email" => "" ),
             "to" => "{\$admin_email}",
             "subject" => __( "New Ad has been published", "adverts" ),
-            "body" => __( "Hello,\nnew Ad titled '{\$advert.post_title}' has been published.\n\nYou can view the Ad here:\n{\$advert.ID|get_permalink}\n\nYou can edit the Ad here:\n{\$advert|advert_admin_edit_url}", "adverts" ),
+            "body" => __( "Hello,\nnew Ad titled '{\$advert.post_title}' has been published.\n\nYou can view the Ad here:\n{\$advert.ID|get_permalink}\n\nYou can edit the Ad here:\n{\$advert|admin_edit_url}", "adverts" ),
             "headers" => array(),
             "attachments" => array()
         );

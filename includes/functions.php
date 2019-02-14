@@ -2773,3 +2773,45 @@ function adverts_ajax_url() {
 function adverts_empty_price( $post_id ) {
     return apply_filters( "adverts_empty_price", adverts_config( 'empty_price' ), $post_id );
 }
+
+/**
+ * Genenrate Advert frontend hash
+ * 
+ * The unique hash can be used to complete payment or allow annonymous Ad edition.
+ * 
+ * @since   1.3.0
+ * @param   int     $post_id    Advert ID
+ * @return  string              Advert frontend hash
+ */
+function adverts_create_hash( $post_id ) {
+    
+    $ehash = get_post_meta( $post_id, "_adverts_frontend_edit_hash", true );
+
+    if( ! $ehash ) {
+        $ehash = sprintf( "%s-%s", md5( uniqid() ), str_pad( $post_id, 6, "0", STR_PAD_LEFT ) );
+        $ehash = apply_filters( "adverts_frontend_hash", $ehash, $post_id );
+        update_post_meta( $post_id, "_adverts_frontend_hash", $ehash );
+        
+        $ecan = apply_filters( "adverts_frontend_hash_enabled", 1, $post_id );
+        update_post_meta( $post_id, "_adverts_frontend_hash_enabled", $ecan );
+    }
+    
+    return $ehash;
+}
+
+/**
+ * Returns post_id based on _adverts_frontend_hash meta.
+ * 
+ * @since   1.3.0
+ * @global  wpdb    $wpdb   wpdb object
+ * @param   string  $hash   Frontend hash
+ * @return  int             Post ID
+ */
+function adverts_get_post_id_from_hash( $hash ) {
+    global $wpdb;
+    
+    $sql = "SELECT post_id FROM {$wpdb->postmenta} WHERE meta_value = %s AND meta_key = '_adverts_frontend_hash' LIMIT 1";
+    $post_id = $wpdb->get_var( $wpdb->prepare( $sql, $hash) );
+    
+    return absint( $post_id );
+}

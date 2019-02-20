@@ -625,6 +625,45 @@ Adverts::instance()->set("form_payments_history", array(
     )
 ));
 
+/**
+ * Register <select> input with list of Pages as options.
+ * 
+ * This is basically a wrapper for wp_dropdown_pages() WordPress function.
+ * 
+ * @see wp_dropdown_pages()
+ * 
+ * @param array $field Fields settings
+ * @since 1.3
+ * @return void
+ */
+function adext_payments_dropdown_pages( $field ) {
+    
+    if(isset($field["value"])) {
+        $value = $field["value"];
+    } else {
+        $value = null;
+    }
+    
+    $args = array(
+        'selected' => $value, 
+        'echo' => 1,
+	'name' => $field["name"], 
+        'id' => $field["name"],
+	'show_option_none' => ' ',
+        'option_none_value' => 0
+    );
+    
+    wp_dropdown_pages( $args );
+}
+
+// Register <select> with list of pages 
+/** @see adverts_dropdown_pages() */
+adverts_form_add_field("adext_payments_dropdown_pages", array(
+    "renderer" => "adext_payments_dropdown_pages",
+    "callback_bind" => "adverts_bind_single",
+    "callback_save" => "adverts_save_single",
+));
+
 // Payment Default Config Form Structure
 Adverts::instance()->set("form_payments_config", array(
     "name" => "payments_config",
@@ -646,6 +685,14 @@ Adverts::instance()->set("form_payments_config", array(
             "order" => 10,
             "empty_option" => true,
             "options" => array()
+        ),
+        array(
+            "name" => "checkout_page",
+            "type" => "adext_payments_dropdown_pages",
+            "label" => __("Complete Payment Page", "adverts"),
+            "order" => 10,
+            "empty_option" => true,
+            "hint" => __("Select page where user can complete payments. This should be a page with [adverts_payments_checkout] shortcode.", "adverts")
         )
     )
 ));

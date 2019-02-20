@@ -44,7 +44,7 @@ class Adext_Emails {
      * @since 1.3.0
      * @var Adext_Emails_Parser
      */
-    public $parser = null;
+    protected $_parser = null;
     
     public static function instance() {
         if( self::$_instance === null ) {
@@ -76,22 +76,43 @@ class Adext_Emails {
         }
         
         include_once ADVERTS_PATH . 'addons/emails/includes/class-emails-messages.php';
+        include_once ADVERTS_PATH . 'addons/emails/includes/class-emails-parser-interface.php';
         include_once ADVERTS_PATH . 'addons/emails/includes/class-emails-parser.php';
         
         $this->messages =  new Adext_Emails_Messages();
-        $this->parser = new Adext_Emails_Parser();
+        $this->_parser = new Adext_Emails_Parser();
         
-        $this->parser->add_function( "meta", array( $this, "get_meta" ) );
-        $this->parser->add_function( "terms", array( $this, "get_terms" ) );
-        $this->parser->add_function( "contact_email", array( $this, "contact_email" ) );
-        $this->parser->add_function( "admin_edit_url", array( $this, "admin_edit_url" ) );
-        $this->parser->add_function( "complete_payment_url", array( $this, "complete_payment_url" ) );
+        $this->_parser->add_function( "meta", array( $this, "get_meta" ) );
+        $this->_parser->add_function( "terms", array( $this, "get_terms" ) );
+        $this->_parser->add_function( "contact_email", array( $this, "contact_email" ) );
+        $this->_parser->add_function( "admin_edit_url", array( $this, "admin_edit_url" ) );
+        $this->_parser->add_function( "complete_payment_url", array( $this, "complete_payment_url" ) );
         
         add_filter( "wpadverts_messages_register", array( $this->messages, "load" ) );
-        add_filter( "wpadverts_message", array( $this->parser, "compile" ), 10, 3 );
+        add_filter( "wpadverts_message", array( $this->_parser, "compile" ), 10, 3 );
         add_filter( "wpadverts_message_args", array( $this, "common_args" ) );
 
 
+    }
+    
+    /**
+     * Sets a new parser
+     * 
+     * @since 1.3.0
+     * @param Adext_Emails_Parser_Interface     $parser
+     */
+    public function set_parser( Adext_Emails_Parser_Interface $parser ) {
+        $this->_parser = $parser;
+    }
+    
+    /**
+     * Returns Email Parser Object
+     * 
+     * @since  1.3.0
+     * @return Adext_Emails_Parser_Interface
+     */
+    public function get_parser() {
+        return $this->_parser;
     }
     
     /**

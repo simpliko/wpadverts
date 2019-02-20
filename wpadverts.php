@@ -107,6 +107,8 @@ function adverts_init() {
     add_filter( 'adverts_the_content', 'convert_chars' );
     add_filter( 'adverts_the_content', 'wpautop' );
     
+    add_action( 'save_post_advert', 'adverts_create_hash', 10, 3 );
+    
     wp_register_style( 'adverts-upload', ADVERTS_URL . '/assets/css/adverts-upload.css', array(), "1.2.8" );
     wp_register_style( 'adverts-icons', ADVERTS_URL . '/assets/css/adverts-glyphs.css', array(), "1" );
     wp_register_style( 'adverts-icons-animate', ADVERTS_URL . '/assets/css/animation.css', array(), "1" );

@@ -160,7 +160,7 @@ function shortcode_adverts_list( $atts ) {
         'tax_query' => $taxonomy,
         'orderby' => $orderby
     ), $params);
-    
+
     if( $category && is_tax( 'advert_category' ) ) {
         $pbase = get_term_link( get_queried_object()->term_id, 'advert_category' );
     } else {
@@ -403,8 +403,6 @@ function shortcode_adverts_add( $atts ) {
             
             // Save post as temporary in DB
             $post_id = Adverts_Post::save($form, $post_id, $init);
-            
-            adverts_create_hash( $post_id );
             
             $post_content = apply_filters("the_content", get_post( $post_id )->post_content );
             

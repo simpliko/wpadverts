@@ -89,6 +89,19 @@ function adext_payments_ajax_render() {
 }
 
 function adext_payments_ajax_complete_payment() {
-    wp_die( adext_payments_checkout(), "Test" );
-   // exit;
+    
+    adverts_init_frontend();
+    adext_payments_init_frontend();
+    
+    $title = __( "Complete Payment", "adverts" );
+    $text_direction = 'ltr';
+    if( function_exists( 'is_rtl' ) && is_rtl() ) {
+        $text_direction = 'rtl';
+    }
+    $content = shortcode_payments_checkout( array() );
+    
+    wp_enqueue_style( 'adverts-payments-white-page' );
+    
+    include apply_filters( "adverts_template_load", ADVERTS_PATH . 'addons/payments/templates/white-page.php' );
+    exit;
 }

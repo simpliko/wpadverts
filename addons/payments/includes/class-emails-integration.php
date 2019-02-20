@@ -55,6 +55,7 @@ class Adext_Payments_Emails_Integration {
         add_filter( "wpadverts_messages_register", array( $this, "register_messages" ) );
         add_filter( "adext_emails_list_filter_options", array( $this, "register_filter_optons" ) );
 
+        Adext_Emails::instance()->get_parser()->add_function( "payment_complete_url", "adext_payments_get_checkout_url" );
     }
     
     /**

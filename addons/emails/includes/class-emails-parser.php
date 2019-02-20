@@ -22,7 +22,7 @@
  * @subpackage Emails
  */
 
-class Adext_Emails_Parser {
+class Adext_Emails_Parser implements Adext_Emails_Parser_Interface {
     
     /**
      * Variables assigned to the email

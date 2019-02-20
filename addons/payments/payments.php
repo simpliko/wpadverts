@@ -21,7 +21,8 @@ $adverts_namespace['payments'] = array(
     'option_name' => 'adext_payments_config',
     'default' => array(
         'default_gateway' => '',
-        'default_pricing' => ''
+        'default_pricing' => '',
+        'checkout_page' => ''
     )
 );
 
@@ -57,6 +58,8 @@ function adext_payments_init() {
     );
     
     register_post_type( 'adverts-payment', apply_filters( 'adverts_post_type', $args, 'adverts-payment') ); 
+    
+    add_action( 'save_post_adverts-payment', 'adverts_create_hash', 10, 3 );
     
     register_post_status( 'completed', array(
         'label'                     => _x( 'Completed', 'completed status payment', 'adverts' ),
@@ -108,6 +111,9 @@ function adext_payments_init() {
     add_filter("adverts_form_load", "adext_payments_form_load");
     
     wp_register_style( 'adverts-payments-frontend', ADVERTS_URL . '/addons/payments/assets/css/payments-frontend.css', array(), '1.2.8' );
+    wp_register_style( 'adverts-payments-white-page', ADVERTS_URL . '/addons/payments/assets/css/white-page.css', array(), '1.3.0' );
+    
+    include_once ADVERTS_PATH . 'addons/payments/includes/shortcodes.php';
 }
 
 /**
@@ -458,15 +464,19 @@ function adext_payments_form_bind( Adverts_Form $form ) {
  */
 function adext_payments_action_payment($content, Adverts_Form $form ) {
     
-    $info[] = __("Thank you for submitting your ad!", "adverts");
+    $post_id = adverts_request( "_post_id" );
+    $post = get_post( $post_id );
+    
+    $info[] = array(
+        "message" => sprintf( __( "<p><strong>Your Payment Is Required</strong><p>Please complete payment for the <em>'%s'</em> Ad posting to have it published.</p>"), $post->post_title ),
+        "icon" => "adverts-icon-basket"
+    );
     $error = array();
     
     wp_enqueue_script( 'adext-payments' );
     
     $adverts_flash = array( "error" => $error, "info" => $info );
-    
-    $post_id = adverts_request( "_post_id" );
-    $post = get_post( $post_id );
+
 
     wp_update_post( array( 
         "ID" => $post_id,
@@ -1111,4 +1121,30 @@ function adext_post_get_payment( $post_id, $listing_id, $post_status = "pending"
     } else {
         return false;
     }
+}
+
+/**
+ * 
+ * @param type $post
+ * @return type
+ */
+function adext_payments_get_checkout_url( $post = null ) {
+    
+    if( ! is_object( $post ) ) {
+        $post = get_post( $post );
+    }
+    
+    $hash = get_post_meta( $post->ID, '_adverts_frontend_hash', true );
+    
+    $url = "";
+    $args = array( 'advert-hash' => $hash );
+    
+    if( adverts_config( "payments.checkout_page" ) ) {
+        $url = get_permalink( adverts_config( "payments.checkout_page" ) );
+    } else {
+        $url = admin_url( "admin-ajax.php" );
+        $args['action'] = 'adext_payments_complete_payment';
+    }
+    
+    return add_query_arg( $args, $url );
 }

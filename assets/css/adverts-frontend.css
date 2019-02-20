@@ -876,6 +876,16 @@ div.adverts-flash-messages .adverts-flash-message-text {
     display: block;
 }
 
+div.adverts-flash-messages .adverts-flash-message-text > p {
+    padding: 0 0 0 0;
+    margin: 0 0 4px 0;
+}
+
+div.adverts-flash-messages .adverts-flash-message-text > p:last-child {
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+
 div.adverts-flash-messages .adverts-flash-message-text.adverts-flash-padding {
     margin-left: 40px;
     padding-left: 10px;

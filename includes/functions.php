@@ -1321,7 +1321,7 @@ function adverts_field_select( $field ) {
     if($multiple && isset($field["empty_option_text"])) {
         $options["data-empty-option-text"] = $field["empty_option_text"];
     }
-
+    
     if(!$multiple && isset($field["empty_option"]) && $field["empty_option"]) {
         if(isset($field["empty_option_text"]) && !empty($field["empty_option_text"])) {
             $html .= '<option value="">'.esc_html($field["empty_option_text"]).'</options>';
@@ -2780,19 +2780,21 @@ function adverts_empty_price( $post_id ) {
  * The unique hash can be used to complete payment or allow annonymous Ad edition.
  * 
  * @since   1.3.0
- * @param   int     $post_id    Advert ID
+ * @param int       $post_id    Post ID
+ * @param WP_Post   $post       Post obect
+ * @param boolean   $update     Whether this is an existing post being updated or not
  * @return  string              Advert frontend hash
  */
-function adverts_create_hash( $post_id ) {
+function adverts_create_hash( $post_id, $post, $update ) {
     
     $ehash = get_post_meta( $post_id, "_adverts_frontend_edit_hash", true );
 
-    if( ! $ehash ) {
+    if( empty( $ehash ) ) {
         $ehash = sprintf( "%s-%s", md5( uniqid() ), str_pad( $post_id, 6, "0", STR_PAD_LEFT ) );
-        $ehash = apply_filters( "adverts_frontend_hash", $ehash, $post_id );
+        $ehash = apply_filters( "adverts_frontend_hash", $ehash, $post_id, $post, $update );
         update_post_meta( $post_id, "_adverts_frontend_hash", $ehash );
         
-        $ecan = apply_filters( "adverts_frontend_hash_enabled", 1, $post_id );
+        $ecan = apply_filters( "adverts_frontend_hash_enabled", 1, $post_id, $post_id, $post, $update );
         update_post_meta( $post_id, "_adverts_frontend_hash_enabled", $ecan );
     }
     
@@ -2809,9 +2811,9 @@ function adverts_create_hash( $post_id ) {
  */
 function adverts_get_post_id_from_hash( $hash ) {
     global $wpdb;
-    
-    $sql = "SELECT post_id FROM {$wpdb->postmenta} WHERE meta_value = %s AND meta_key = '_adverts_frontend_hash' LIMIT 1";
+
+    $sql = "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_value = %s AND meta_key = '_adverts_frontend_hash' LIMIT 1";
     $post_id = $wpdb->get_var( $wpdb->prepare( $sql, $hash) );
-    
+
     return absint( $post_id );
 }

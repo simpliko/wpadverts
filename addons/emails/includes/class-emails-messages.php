@@ -123,7 +123,7 @@ class Adext_Emails_Messages {
                 "action" => "advert_tmp_to_publish",
                 "callback" => array( $this, "on_draft_to_publish_notify_user" ),
                 "enabled" => 1,
-                "label" => __( "<a href='#'>Core</a> $arrow [adverts_add] $arrow $ok Free Advert Published $arrow $em Notify User", "adverts" ),
+                "help" => "https://wpadverts.com/documentation/emails/#core-on_draft_to_publish_notify_user",
                 "notify" => "user",
                 "from" => array( "name" => "", "email" => "" ),
                 "to" => "{\$advert.ID|meta:adverts_email}",
@@ -137,7 +137,7 @@ class Adext_Emails_Messages {
                 "action" => "advert_tmp_to_pending",
                 "callback" => array( $this, "on_draft_to_pending_notify_user" ),
                 "enabled" => 1,
-                "label" => __( "<a href='#'>Core</a> $arrow [adverts_add] $arrow $ok Free Advert Pending $arrow $em Notify User", "adverts" ),
+                "help" => "https://wpadverts.com/documentation/emails/#core-on_draft_to_pending_notify_user",
                 "notify" => "user",
                 "from" => array( "name" => "", "email" => "" ),
                 "to" => "{\$advert.ID|meta:adverts_email}",
@@ -149,8 +149,9 @@ class Adext_Emails_Messages {
             "core::on_pending_to_publish_notify_user" => array(
                 "name" => "core::on_pending_to_publish_notify_user",
                 "action" => "pending_to_publish",
+                "callback" => array( $this, "on_draft_to_pending_notify_user" ),
                 "enabled" => 1,
-                "label" => __( "<a href='#'>Core</a> $arrow wp-admin $arrow $ok Free Advert Approved $arrow $em Notify User", "adverts" ),
+                "help" => "https://wpadverts.com/documentation/emails/#core-on_pending_to_publish_notify_user",
                 "notify" => "user",
                 "from" => array( "name" => "", "email" => "" ),
                 "to" => "{\$advert.ID|meta:adverts_email}",
@@ -162,8 +163,9 @@ class Adext_Emails_Messages {
             "core::on_pending_to_trash_notify_user" => array(
                 "name" => "core::on_pending_to_trash_notify_user",
                 "action" => "pending_to_trash",
+                "callback" => array( $this, "on_pending_to_trash_notify_user" ),
                 "enabled" => 1,
-                "label" => __( "<a href='#'>Core</a> $arrow wp-admin $arrow $ok Free Advert Rejected $arrow $em Notify User", "adverts" ),
+                "help" => "https://wpadverts.com/documentation/emails/#core-on_pending_to_trash_notify_user",
                 "notify" => "user",
                 "from" => array( "name" => "", "email" => "" ),
                 "to" => "{\$advert.ID|meta:adverts_email}",
@@ -175,8 +177,9 @@ class Adext_Emails_Messages {
             "core::on_publish_to_expired_notify_user" => array(
                 "name" => "core::on_publish_to_expired_notify_user",
                 "action" => "publish_to_expired",
+                "callback" => array( $this, "on_publish_to_expired_notify_user" ),
                 "enabled" => 1,
-                "label" => __( "<a href='#'>Core</a> $arrow wp-cron $arrow $ok Advert Expired $arrow $em Notify User", "adverts" ),
+                "help" => "https://wpadverts.com/documentation/emails/#core-on_publish_to_expired_notify_user",
                 "notify" => "user",
                 "from" => array( "name" => "", "email" => "" ),
                 "to" => "{\$advert.ID|meta:adverts_email}",
@@ -188,8 +191,9 @@ class Adext_Emails_Messages {
             "core::on_draft_to_publish_notify_admin" => array(
                 "name" => "core::on_draft_to_publish_notify_admin",
                 "action" => "advert_tmp_to_publish",
+                "callback" => array( $this, "on_draft_to_publish_notify_admin" ),
                 "enabled" => 1,
-                "label" => __( "<a href='#'>Core</a> $arrow [adverts_add] $arrow $ok Free Advert Published $arrow $em Notify Admin", "adverts" ),
+                "help" => "https://wpadverts.com/documentation/emails/#core-on_draft_to_publish_notify_admin",
                 "notify" => "admin",
                 "from" => array( "name" => "", "email" => "" ),
                 "to" => "{\$admin_email}",
@@ -201,8 +205,9 @@ class Adext_Emails_Messages {
             "core::on_draft_to_pending_notify_admin" => array(
                 "name" => "core::on_draft_to_pending_notify_admin",
                 "action" => "advert_tmp_to_pending",
+                "callback" => array( $this, "on_draft_to_pending_notify_admin" ),
                 "enabled" => 1,
-                "label" => __( "<a href='#'>Core</a> $arrow [adverts_add] $arrow $ok Free Advert Pending $arrow $em Notify Admin", "adverts" ),
+                "help" => "https://wpadverts.com/documentation/emails/#core-on_draft_to_pending_notify_admin",
                 "notify" => "admin",
                 "from" => array( "name" => "", "email" => "" ),
                 "to" => "{\$admin_email}",
@@ -476,7 +481,7 @@ class Adext_Emails_Messages {
             return;
         }
         
-        return $this->send_message( "core::on_publish_to_expired_notify_user", array( 
+        return $this->send_message( "core::on_draft_to_publish_notify_admin", array( 
             "advert" => $post,
             "admin_email" => Adext_Emails::admin_email(),
             "admin_edit_url" => admin_url( sprintf( 'post.php?post=%d&action=edit', $post->ID ) )
@@ -500,7 +505,7 @@ class Adext_Emails_Messages {
             return;
         }
         
-        return $this->send_message( "core::on_publish_to_expired_notify_user", array( 
+        return $this->send_message( "core::on_draft_to_pending_notify_admin", array( 
             "advert" => $post,
             "admin_email" => Adext_Emails::admin_email(),
             "admin_edit_url" => admin_url( sprintf( 'post.php?post=%d&action=edit', $post->ID ) )

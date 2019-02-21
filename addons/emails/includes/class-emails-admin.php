@@ -109,6 +109,9 @@ class Adext_Emails_Admin {
             if( adverts_request( "ftype" ) && stripos( $k, adverts_request( "ftype" )."::" ) !== 0 ) {
                 continue;
             }
+            if( adverts_request( "fnotify" ) && $m["notify"] != adverts_request( "fnotify" ) ) {
+                continue;
+            }
             
             $messages[$k] = $m; 
         }
@@ -291,6 +294,11 @@ class Adext_Emails_Admin {
         
         $nameemail = new Adext_Emails_Field_Name_Email();
 
+        $code = sprintf( "<code>%s</code>", $message["name"] );
+        if( isset( $message["help"] ) ) {
+            $code .= sprintf( " <a href=\"%s\" style=\"text-decoration:none\"><span class=\"dashicons dashicons-welcome-learn-more\"></span></a>", $message["help"] );
+        }
+        
         return array(
             "name" => "adext_emails_edit",
             "field" => array(
@@ -298,7 +306,7 @@ class Adext_Emails_Admin {
                     "name" => "_email",
                     "type" => "adverts_field_label",
                     "label" => __( "Email Name", "adverts" ),
-                    "content" => sprintf( "<code>%s</code> <a href='%s'><span class=\"dashicons dashicons-info\"></span></a>", $message["name"], "https://" )
+                    "content" => $code
                 ),
                 array(
                     "name" => "message_enabled",

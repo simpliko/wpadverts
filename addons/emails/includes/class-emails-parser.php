@@ -10,9 +10,12 @@
  * 
  * <code>
  * add_action( "init", function() {
- *      Adext_Emails::instance()->parser = new My_Parser_Class;
+ *      Adext_Emails::instance()->set_parser( new My_Parser_Class );
  * });
  * </code>
+ * 
+ * The My_Parser_Class needs to implement Adext_Emails_Parser_Interface interface
+ * otherwise using set_parser() method will cause a fatal error.
  * 
  * Refer to class-emails-parser.php file to see how the parser class should look like.
  * 
@@ -243,10 +246,10 @@ class Adext_Emails_Parser implements Adext_Emails_Parser_Interface {
         }
         $this->flatten();
         
-        echo "<pre>";
-        print_r($args);
-        print_r($mail_args);
-        echo "</pre>";
+        //echo "<pre>";
+        //print_r($args);
+        //print_r($mail_args);
+        //echo "</pre>";
 
         $mail_args["to"] = $this->parse( $mail_args["to"] );
         $mail_args["subject"] = $this->parse( $mail_args["subject"] );
@@ -260,9 +263,9 @@ class Adext_Emails_Parser implements Adext_Emails_Parser_Interface {
         
         $this->reset();
         
-        echo "<pre>";
-        print_r($mail_args);
-        echo "</pre>";
+        //echo "<pre>";
+        //print_r($mail_args);
+        //echo "</pre>";
         //exit;
         
         return $mail_args;

@@ -88,14 +88,11 @@ class Adext_Payments_Emails_Integration {
      */
     public function register_messages( $messages ) {
         
-        /**
-         * @TODO: {$payment|payment_complete_url} callback
-         */
-        
         $messages["payments::on_advert_pending_notify_user"] = array(
             "name" => "payments::on_advert_pending_notify_user",
             "action" => "advert_tmp_to_advert-pending",
             "callback" => array( "function" => array( $this, "on_advert_pending_notify_user" ), "priority" => 10, "args" => 1 ),
+            "help" => "https://wpadverts.com/documentation/payments/#payments-on_advert_pending_notify_user",
             "enabled" => 1,
             "label" => "",
             "notify" => "user",
@@ -110,6 +107,7 @@ class Adext_Payments_Emails_Integration {
             "name" => "payments::on_payment_pending_notify_user",
             "action" => "adverts_payment_new_to_pending",
             "callback" => array( "function" => array( $this, "on_payment_pending_notify_user" ), "priority" => 10, "args" => 1 ),
+            "help" => "https://wpadverts.com/documentation/payments/#payments-on_payment_pending_notify_user",
             "enabled" => 1,
             "label" => "",
             "notify" => "user",
@@ -124,6 +122,7 @@ class Adext_Payments_Emails_Integration {
             "name" => "payments::on_payment_completed_notify_user",
             "action" => "adverts_payment_pending_to_completed",
             "callback" => array( "function" => array( $this, "on_payment_completed_notify_user" ), "priority" => 10, "args" => 1 ),
+            "help" => "https://wpadverts.com/documentation/payments/#payments-on_payment_completed_notify_user",
             "enabled" => 1,
             "label" => "",
             "notify" => "user",
@@ -138,12 +137,13 @@ class Adext_Payments_Emails_Integration {
             "name" => "payments::on_payment_pending_notify_admin",
             "action" => "advert_tmp_to_advert-pending",
             "callback" => array( "function" => array( $this, "on_payment_pending_notify_admin" ), "priority" => 10, "args" => 1 ),
+            "help" => "https://wpadverts.com/documentation/payments/#payments-on_payment_pending_notify_admin",
             "enabled" => 1,
             "label" => "",
             "notify" => "admin",
             "from" => array( "name" => "", "email" => "" ),
             "to" => "{\$admin_email}",
-            "subject" => __( "New Ad has been published.", "adverts" ),
+            "subject" => __( "New Ad has been saved.", "adverts" ),
             "body" => __( "Hello,\nnew Ad titled '{\$advert.post_title}' has been posted and is pending payment.\n\nYou will be notified again when the payment will be proccessed.\n\nYou can edit the Ad here:\n{\$advert|admin_edit_url}", "adverts" ),
             "headers" => array(),
             "attachments" => array()
@@ -152,6 +152,7 @@ class Adext_Payments_Emails_Integration {
             "name" => "payments::on_payment_completed_notify_admin",
             "action" => "adverts_payment_pending_to_completed",
             "callback" => array( "function" => array( $this, "on_payment_completed_notify_admin" ), "priority" => 10, "args" => 1 ),
+            "help" => "https://wpadverts.com/documentation/payments/#payments-on_payment_completed_notify_admin",
             "enabled" => 1,
             "label" => "",
             "notify" => "admin",
@@ -166,6 +167,7 @@ class Adext_Payments_Emails_Integration {
             "name" => "payments::on_paid_pending_to_publish_notify_user",
             "action" => "advert-pending_to_publish",
             "callback" => array( "function" => array( $this, "on_paid_pending_to_publish_notify_user" ), "priority" => 10, "args" => 1 ),
+            "help" => "https://wpadverts.com/documentation/payments/#payments-on_paid_pending_to_publish_notify_user",
             "enabled" => 1,
             "label" => "",
             "notify" => "user",
@@ -180,6 +182,7 @@ class Adext_Payments_Emails_Integration {
             "name" => "payments::on_paid_pending_to_publish_notify_admin",
             "action" => "advert-pending_to_publish",
             "callback" => array( "function" => array( $this, "on_paid_pending_to_publish_notify_admin" ), "priority" => 10, "args" => 1 ),
+            "help" => "https://wpadverts.com/documentation/payments/#payments-on_paid_pending_to_publish_notify_admin",
             "enabled" => 1,
             "label" => "",
             "notify" => "admin",
@@ -194,6 +197,7 @@ class Adext_Payments_Emails_Integration {
             "name" => "payments::on_expired_to_publish_notify_user",
             "action" => "expired_to_publish",
             "callback" => array( "function" => array( $this, "on_expired_to_publish_notify_user" ), "priority" => 10, "args" => 1 ),
+            "help" => "https://wpadverts.com/documentation/payments/#payments-on_expired_to_publish_notify_user",
             "enabled" => 1,
             "label" => "",
             "notify" => "user",
@@ -208,6 +212,7 @@ class Adext_Payments_Emails_Integration {
             "name" => "payments::on_expired_to_pending_notify_user",
             "action" => "expired_to_pending",
             "callback" => array( "function" => array( $this, "on_expired_to_pending_notify_user" ), "priority" => 10, "args" => 1 ),
+            "help" => "https://wpadverts.com/documentation/payments/#payments-on_expired_to_pending_notify_user",
             "enabled" => 1,
             "label" => "",
             "notify" => "user",
@@ -222,6 +227,7 @@ class Adext_Payments_Emails_Integration {
             "name" => "payments::on_expired_to_publish_notify_admin",
             "action" => "expired_to_publish",
             "callback" => array( "function" => array( $this, "on_expired_to_publish_notify_admin" ), "priority" => 10, "args" => 1 ),
+            "help" => "https://wpadverts.com/documentation/payments/#payments-on_expired_to_publish_notify_admin",
             "enabled" => 1,
             "label" => "",
             "notify" => "admin",
@@ -236,6 +242,7 @@ class Adext_Payments_Emails_Integration {
             "name" => "payments::on_expired_to_pending_notify_admin",
             "action" => "expired_to_pending",
             "callback" => array( "function" => array( $this, "on_expired_to_pending_notify_admin" ), "priority" => 10, "args" => 1 ),
+            "help" => "https://wpadverts.com/documentation/payments/#payments-on_expired_to_pending_notify_admin",
             "enabled" => 1,
             "label" => "",
             "notify" => "admin",

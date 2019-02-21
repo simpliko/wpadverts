@@ -26,11 +26,15 @@
 <div class="alignleft actions">
     <form method="post" action="<?php esc_attr_e( add_query_arg( array( 'pg'=>null ) ) ) ?>">
         <select name="ftype" id="adext-emails-action1">
-            <option selected="selected" value=""><?php _e("Filter By Module", "adverts") ?></option>
+            <option value=""><?php _e("Filter By Module", "adverts") ?></option>
             <?php foreach( Adext_Emails::instance()->get_filter_options() as $opt ): ?>
             <option value="<?php echo esc_html( $opt["key"]) ?>" <?php selected( $opt["key"], adverts_request( "ftype" ) ) ?>><?php echo esc_html( $opt["label"] ) ?></option>
             <?php endforeach; ?>
-            
+        </select>
+        <select name="fnotify">
+            <option value=""><?php _e( "Filter By Recipient", "adverts" ) ?></option>
+            <option value="user" <?php selected( "user", adverts_request( "fnotify") ) ?>><?php _e( "User", "adverts" ) ?></option>
+            <option value="admin" <?php selected( "admin", adverts_request( "fnotify") ) ?>><?php _e( "Administrator", "adverts" ) ?></option>
         </select>
 
         <input type="submit" class="button-secondary action" value="<?php _e("Filter", "adverts") ?>"/>
@@ -46,7 +50,7 @@
             <th style="" class="" scope="col"><?php _e("Email Subject", "adverts") ?></th>
             <th style="min-width:65%" class="" scope="col" ><?php _e("Code", "adverts") ?></th>
             <!--th style="" class="" scope="col"><?php _e("", "adverts") ?></th-->
-            <th style="width:25px" class="" scope="col"><span class="dashicons dashicons-email"></span></th>
+            <th style="width:25px" class="" scope="col"><span class="dashicons dashicons-email" title="<?php esc_attr_e( "Message Enabled", "adverts" ) ?>"></span></th>
             <?php do_action('adext_emails_list_thead') ?>
         </tr>
     </<?php echo $tx; ?>>
@@ -62,9 +66,11 @@
             <td style="">
                 
                 <code><?php echo $message["name"] ?></code> 
-                <a href="#" title="Read when this message is sent ...">
+                <?php if( isset( $message["help"] ) ): ?>
+                <a href="<?php echo esc_attr( $message["help"]) ?>" title="Read when this message is sent ...">
                     <span class="dashicons dashicons-welcome-learn-more" style="font-size:22px"></span>
                 </a>
+                <?php endif; ?>
             </td>
             
             <td>

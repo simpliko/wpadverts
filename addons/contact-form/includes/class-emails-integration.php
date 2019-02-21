@@ -60,6 +60,7 @@ class Adext_Contact_Form_Emails_Integration {
             "name" => "contact-form::on_contact_form_sent",
             "action" => "adext_contact_form_send",
             "callback" => array( "function" => array( $this, "on_contact_form_sent" ), "priority" => 10, "args" => 2 ),
+            "help" => "https://wpadverts.com/documentation/contact-form/#contact-form-on_contact_form_sent",
             "enabled" => 1,
             "label" => "",
             "notify" => "user",

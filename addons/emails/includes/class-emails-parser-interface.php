@@ -1,4 +1,17 @@
 <?php
+/**
+ * Emails Module - Emails Parser Interface
+ * 
+ * The interface which the any email parser should implement.
+ * 
+ * The interface makes sure that a new email parser will implement all methods
+ * required for the parser to work properly.
+ * 
+ * @author Grzegorz Winiarski
+ * @since 1.3.0
+ * @package Adverts
+ * @subpackage Emails
+ */
 
 interface Adext_Emails_Parser_Interface {
     

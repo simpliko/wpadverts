@@ -117,7 +117,7 @@ class Adext_Payments_Emails_Integration {
             "from" => array( "name" => "", "email" => "" ),
             "to" => "{\$payment|contact_email}",
             "subject" => __( "Payment Pending ({\$payment|payment_order_id}).", "adverts" ),
-            "body" => __( "Hello,\nwe have received your order {\$payment|payment_order_id} and we are processing your payment.\n\nCreated By: {\$payment|meta:buyer_name}\nOrder Date: {\$payment.post_date|format_date}\nTo Pay: {\$payment|payment_to_pay}\n\nIf you were unable to finish the payment on site you can do it using the link below.\n{\$payment|payment_complete_url}", "adverts" ),
+            "body" => __( "Hello,\nwe have received your order {\$payment|payment_order_id} and we are processing your payment.\n\nCreated By: {\$payment|meta:adverts_person}\nOrder Date: {\$payment.post_date|format_date}\nTo Pay: {\$payment|payment_to_pay}\n\nIf you were unable to finish the payment on site you can do it using the link below.\n{\$payment|payment_complete_url}", "adverts" ),
             "headers" => array(),
             "attachments" => array()
         );
@@ -136,36 +136,6 @@ class Adext_Payments_Emails_Integration {
             "headers" => array(),
             "attachments" => array()
         );
-        $messages["payments::on_payment_pending_notify_admin"] = array(
-            "name" => "payments::on_payment_pending_notify_admin",
-            "action" => "advert_tmp_to_advert-pending",
-            "callback" => array( "function" => array( $this, "on_payment_pending_notify_admin" ), "priority" => 10, "args" => 1 ),
-            "help" => "https://wpadverts.com/documentation/payments/#payments-on_payment_pending_notify_admin",
-            "enabled" => 1,
-            "label" => "",
-            "notify" => "admin",
-            "from" => array( "name" => "", "email" => "" ),
-            "to" => "{\$admin_email}",
-            "subject" => __( "New Ad has been saved (waiting for payment).", "adverts" ),
-            "body" => __( "Hello,\nnew Ad titled '{\$advert.post_title}' (ID {\$advert.ID}) has been posted and is pending payment.\n\nYou will be notified again when the payment will be processed.\n\nYou can edit the Ad here:\n{\$advert|admin_edit_url}", "adverts" ),
-            "headers" => array(),
-            "attachments" => array()
-        );
-        $messages["payments::on_payment_completed_notify_admin"] = array(
-            "name" => "payments::on_payment_completed_notify_admin",
-            "action" => "adverts_payment_pending_to_completed",
-            "callback" => array( "function" => array( $this, "on_payment_completed_notify_admin" ), "priority" => 10, "args" => 1 ),
-            "help" => "https://wpadverts.com/documentation/payments/#payments-on_payment_completed_notify_admin",
-            "enabled" => 1,
-            "label" => "",
-            "notify" => "admin",
-            "from" => array( "name" => "", "email" => "" ),
-            "to" => "{\$admin_email}",
-            "subject" => __( "Payment Completed.", "adverts" ),
-            "body" => __( "Hello,\nthe payment for Ad '{\$advert.post_title}' has been completed.\n\nYou can view the payment details here:\n{\$payment|admin_edit_url}", "adverts" ),
-            "headers" => array(),
-            "attachments" => array()
-        );
         $messages["payments::on_paid_pending_to_publish_notify_user"] = array(
             "name" => "payments::on_paid_pending_to_publish_notify_user",
             "action" => "advert-pending_to_publish",
@@ -178,21 +148,6 @@ class Adext_Payments_Emails_Integration {
             "to" => "{\$advert|contact_email}",
             "subject" => __( "Your Ad has been paid and published.", "adverts" ),
             "body" => __( "Hello,\nyour Ad titled '{\$advert.post_title}' has been approved.\n\nTo view your Ad you can use the link below:\n{\$advert.ID|get_permalink}", "adverts" ),
-            "headers" => array(),
-            "attachments" => array()
-        );
-        $messages["payments::on_paid_pending_to_publish_notify_admin"] = array(
-            "name" => "payments::on_paid_pending_to_publish_notify_admin",
-            "action" => "advert-pending_to_publish",
-            "callback" => array( "function" => array( $this, "on_paid_pending_to_publish_notify_admin" ), "priority" => 10, "args" => 1 ),
-            "help" => "https://wpadverts.com/documentation/payments/#payments-on_paid_pending_to_publish_notify_admin",
-            "enabled" => 1,
-            "label" => "",
-            "notify" => "admin",
-            "from" => array( "name" => "", "email" => "" ),
-            "to" => "{\$admin_email}",
-            "subject" => __( "New Ad has been paid nad published", "adverts" ),
-            "body" => __( "Hello,\nnew Ad titled '{\$advert.post_title}' has been published.\n\nYou can view the Ad here:\n{\$advert.ID|get_permalink}\n\nYou can edit the Ad here:\n{\$advert|admin_edit_url}", "adverts" ),
             "headers" => array(),
             "attachments" => array()
         );
@@ -223,6 +178,51 @@ class Adext_Payments_Emails_Integration {
             "to" => "{\$advert|contact_email}",
             "subject" => __( "Your expired Ad has been renewed and is panding approval.", "adverts" ),
             "body" => __( "Hello,\nyour Ad titled '{\$post.post_title}' has been renewed and is pending moderation.\n\nOnce the administrator will approve or reject your Ad you will be notified by email.", "adverts" ),
+            "headers" => array(),
+            "attachments" => array()
+        );
+        $messages["payments::on_payment_pending_notify_admin"] = array(
+            "name" => "payments::on_payment_pending_notify_admin",
+            "action" => "advert_tmp_to_advert-pending",
+            "callback" => array( "function" => array( $this, "on_payment_pending_notify_admin" ), "priority" => 10, "args" => 1 ),
+            "help" => "https://wpadverts.com/documentation/payments/#payments-on_payment_pending_notify_admin",
+            "enabled" => 1,
+            "label" => "",
+            "notify" => "admin",
+            "from" => array( "name" => "", "email" => "" ),
+            "to" => "{\$admin_email}",
+            "subject" => __( "New Ad has been saved (waiting for payment).", "adverts" ),
+            "body" => __( "Hello,\nnew Ad titled '{\$advert.post_title}' (ID {\$advert.ID}) has been posted and is pending payment.\n\nYou will be notified again when the payment will be processed.\n\nYou can edit the Ad here:\n{\$advert|admin_edit_url}", "adverts" ),
+            "headers" => array(),
+            "attachments" => array()
+        );
+        $messages["payments::on_payment_completed_notify_admin"] = array(
+            "name" => "payments::on_payment_completed_notify_admin",
+            "action" => "adverts_payment_pending_to_completed",
+            "callback" => array( "function" => array( $this, "on_payment_completed_notify_admin" ), "priority" => 10, "args" => 1 ),
+            "help" => "https://wpadverts.com/documentation/payments/#payments-on_payment_completed_notify_admin",
+            "enabled" => 1,
+            "label" => "",
+            "notify" => "admin",
+            "from" => array( "name" => "", "email" => "" ),
+            "to" => "{\$admin_email}",
+            "subject" => __( "Payment Completed ({\$payment|payment_order_id}).", "adverts" ),
+            "body" => __( "Hello,\nthe payment for Ad '{\$advert.post_title}' has been completed.\n\nYou can view the payment details here:\n{\$payment|admin_edit_url}", "adverts" ),
+            "headers" => array(),
+            "attachments" => array()
+        );
+        $messages["payments::on_paid_pending_to_publish_notify_admin"] = array(
+            "name" => "payments::on_paid_pending_to_publish_notify_admin",
+            "action" => "advert-pending_to_publish",
+            "callback" => array( "function" => array( $this, "on_paid_pending_to_publish_notify_admin" ), "priority" => 10, "args" => 1 ),
+            "help" => "https://wpadverts.com/documentation/payments/#payments-on_paid_pending_to_publish_notify_admin",
+            "enabled" => 1,
+            "label" => "",
+            "notify" => "admin",
+            "from" => array( "name" => "", "email" => "" ),
+            "to" => "{\$admin_email}",
+            "subject" => __( "New Ad has been paid nad published", "adverts" ),
+            "body" => __( "Hello,\nnew Ad titled '{\$advert.post_title}' has been published.\n\nYou can view the Ad here:\n{\$advert.ID|get_permalink}\n\nYou can edit the Ad here:\n{\$advert|admin_edit_url}", "adverts" ),
             "headers" => array(),
             "attachments" => array()
         );

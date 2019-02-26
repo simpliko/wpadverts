@@ -4,8 +4,8 @@ Contributors: gwin
 Tags: classifieds, classified, classified ads, classified script, classifieds script, wp classified, wp classifieds
 Requires PHP: 5.3
 Requires at least: 4.0
-Tested up to: 5.0
-Stable tag: 1.2.8
+Tested up to: 5.1
+Stable tag: 1.3.0
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -98,6 +98,18 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.3.0 - 2019-02-27 =
+
+ * FEATURE: Emails Module allows configuring and sending email messages when various actions occur (for example when user posts an Ad).
+ * FEATURE: Secure "Complete Payment Link" if a user will not complete payment when posting an Ad he can do that using unique payment link.
+ * FEATURE: Random Order option added to the Recent Ads widget.
+ * FEATURE: The payment object is created on load in [adverts_add] third step (it makes it easy to complete payment later and prefill data).
+ * FEATURE: Integration with Emails Module for Payments Module.
+ * FEATURE: Integration with Emails Module for Contact Form Module (allows editing the contact form message template from wp-admin panel).
+ * API: The video in gallery can use the default controls after adding add_filter( "adverts_gallery_enable_custom_controls", "__return_false" ) line in theme functions.php
+ * API: The adverts_payment_$status filter should be run once only (on status change).
+ * TRANSLATION: Updated French translation.
 
 = 1.2.8 - 2018-11-29 =
 

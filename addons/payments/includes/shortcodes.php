@@ -59,13 +59,21 @@ function shortcode_payments_checkout( $atts ) {
         adverts_flash( $adverts_flash );
         return ob_get_clean();
     }
-    
+
     $payment = get_post( $payment_id );
     
     if( $payment === null ) {
         ob_start();
         $adverts_flash["error"][0] = array(
             "message" => __( "The payment does not exist or the payment hash is incorrect.", "adverts" ),
+            "icon" => "adverts-icon-cancel"
+        );
+        adverts_flash( $adverts_flash );
+        return ob_get_clean();
+    } else if( ! in_array( $payment->post_type, array( 'adverts-pricing', 'adverts-renewal' ) ) ) {
+        ob_start();
+        $adverts_flash["error"][0] = array(
+            "message" => __( "The provided hash is not assigned to any of the payment objects.", "adverts" ),
             "icon" => "adverts-icon-cancel"
         );
         adverts_flash( $adverts_flash );

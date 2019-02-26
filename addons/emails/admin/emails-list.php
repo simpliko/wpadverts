@@ -48,8 +48,9 @@
     <<?php echo $tx; ?>>
         <tr>
             <th style="" class="" scope="col"><?php _e("Email Subject", "adverts") ?></th>
+            <th style="width:100px" class="" scope="col"><?php _e("Recipient", "adverts") ?></th>
             <th style="min-width:65%" class="" scope="col" ><?php _e("Code", "adverts") ?></th>
-            <!--th style="" class="" scope="col"><?php _e("", "adverts") ?></th-->
+            
             <th style="width:25px" class="" scope="col"><span class="dashicons dashicons-email" title="<?php esc_attr_e( "Message Enabled", "adverts" ) ?>"></span></th>
             <?php do_action('adext_emails_list_thead') ?>
         </tr>
@@ -57,17 +58,48 @@
     <?php endforeach; ?>
 
     <tbody>
-        <?php $z = 0; ?>
+
+        <?php 
+            $z = 0; 
+            $current_module = null;
+            $opts = array();
+            foreach(Adext_Emails::instance()->get_filter_options() as $opt ) {
+                $opts[ $opt["key"] ] = $opt["label"];
+            }
+        ?>
         <?php foreach( $messages as $j => $message): ?>
+        
+        <?php list( $module_name, $email_name ) = explode( "::", $message["name"]); ?>
+        <?php if( $current_module !== $module_name ): ?>
+        <?php $current_module = $module_name ?>
+        <tr valign="top" class="<?php if($z%2==0): ?>alternate <?php endif; ?>  author-self status-publish iedit">
+            <th colspan="4" style="--background-color: white; border-bottom: 2px solid #666">
+                <span style="font-size:16px; padding: 5px 0 5px 0; color: #32373c; font-weight: bold; display:inline-block">
+                    <?php $mod = ( isset( $opts[ $current_module ] ) ) ? $opts[ $current_module ] : __( "Unknown", "adverts" ) ?>
+                    <?php echo esc_html( sprintf( __( "Module / %s", "adverts" ),  $mod ) ) ?>
+                </span>
+            </th>
+        </tr>
+        <?php $z++; ?>
+        <?php endif; ?>
         <tr valign="top" class="<?php if($z%2==0): ?>alternate <?php endif; ?>  author-self status-publish iedit">
             <td class="post-title column-title">
                 <strong><a href="<?php echo esc_attr( add_query_arg( "edit", $message["name"] ) ) ?>" title=""><?php echo esc_html( $message["subject"] ) ?></a></strong>
+            </td>
+            <td>
+                <?php if( $message["notify"] == "user" ): ?>
+                <?php esc_html_e( "User", "adverts" ) ?>
+                <?php elseif( $message["notify"] ): ?>
+                <?php esc_html_e( "Administrator", "adverts" ) ?>
+                <?php else: ?>
+                <?php esc_html_e( "Other", "adverts" ) ?>
+                <?php endif; ?>
             </td>
             <td style="">
                 
                 <code><?php echo $message["name"] ?></code> 
                 <?php if( isset( $message["help"] ) ): ?>
-                <a href="<?php echo esc_attr( $message["help"]) ?>" title="Read when this message is sent ...">
+                <a href="<?php echo esc_attr( $message["help"]) ?>" title="<?php esc_attr_e( "Read when this message is sent ...", "adverts" ) ?>">
                     <span class="dashicons dashicons-welcome-learn-more" style="font-size:22px"></span>
                 </a>
                 <?php endif; ?>

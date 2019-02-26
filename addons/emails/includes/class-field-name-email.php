@@ -79,7 +79,7 @@ class Adext_Emails_Field_Name_Email {
         if( isset( $field["placeholder"]["user_firstname"] ) ) {
             $uf_placeholder = $field["placeholder"]["user_firstname"] ;
         } else {
-            $uf_placeholder = __( "First Name", "wpadverts-authors" );
+            $uf_placeholder = __( "First Name", "adverts" );
         }
         
         echo adverts_field_text(array(
@@ -94,7 +94,7 @@ class Adext_Emails_Field_Name_Email {
         if( isset( $field["placeholder"]["user_lastname"] ) ) {
             $ul_placeholder = $field["placeholder"]["user_lastname"] ;
         } else {
-            $ul_placeholder = __( "Last Name", "wpadverts-authors" );
+            $ul_placeholder = __( "Last Name", "adverts" );
         }
         
         echo adverts_field_text(array(

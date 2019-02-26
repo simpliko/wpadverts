@@ -148,6 +148,12 @@
                 </div>
                 
             </div><!-- /.inside -->
+            
+            <div class="inside" style="font-size:1.1em; clear:both; overflow:hidden">
+                <hr/>
+                <strong><?php _e("Secure Complete Payment URL", "adverts") ?></strong><br/>
+                <input type="text" readonly="readonly" name="_adverts_frontend_hash" value="<?php echo esc_attr( adext_payments_get_checkout_url( $post->ID ) ) ?>" style="width: 100%" />
+            </div>
         </div>
         
         

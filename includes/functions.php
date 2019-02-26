@@ -2787,7 +2787,7 @@ function adverts_empty_price( $post_id ) {
  */
 function adverts_create_hash( $post_id, $post, $update ) {
     
-    $ehash = get_post_meta( $post_id, "_adverts_frontend_edit_hash", true );
+    $ehash = get_post_meta( $post_id, "_adverts_frontend_hash", true );
 
     if( empty( $ehash ) ) {
         $ehash = sprintf( "%s-%s", md5( uniqid() ), str_pad( $post_id, 6, "0", STR_PAD_LEFT ) );

@@ -1124,9 +1124,13 @@ function adext_post_get_payment( $post_id, $listing_id, $post_status = "pending"
 }
 
 /**
+ * Returns an URL to complete payment page
  * 
- * @param type $post
- * @return type
+ * The passed argument needs to be a post with post_type = adverts-payment
+ * 
+ * @since   1.3.0
+ * @param   WP_Post $post   Post object
+ * @return  string          Complete Payment URL
  */
 function adext_payments_get_checkout_url( $post = null ) {
     
@@ -1147,4 +1151,27 @@ function adext_payments_get_checkout_url( $post = null ) {
     }
     
     return add_query_arg( $args, $url );
+}
+
+/**
+ * Returns formatted order id
+ * 
+ * This functions applies adext_payments_format_order_id filter which allows
+ * changing the order ID formatting.
+ * 
+ * @see     adext_payments_format_order_id
+ * 
+ * @since   1.3.0
+ * @param   WP_Post $post   Post object
+ * @return  string          Formatted order id
+ */
+function adext_payments_format_order_id( $post ) {
+    
+    if( ! is_object( $post ) ) {
+        $post_id = $post;
+    } else {
+        $post_id = $post->ID;
+    }
+    
+    return apply_filters("adext_payments_format_order_id", "#".str_pad($post_id, 6, "0", STR_PAD_LEFT), $post_id );
 }

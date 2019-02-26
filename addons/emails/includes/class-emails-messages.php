@@ -114,9 +114,7 @@ class Adext_Emails_Messages {
      * @return void
      */
     public function register_messages() {
-        $arrow = '<span class="dashicons dashicons-arrow-right-alt2"></span>';
-        $em = '<span class="dashicons dashicons-email"></span>';
-        $ok = '';
+
         $this->messages = apply_filters( "wpadverts_messages_register", array(
             "core::on_draft_to_publish_notify_user" => array(
                 "name" => "core::on_draft_to_publish_notify_user",
@@ -128,7 +126,7 @@ class Adext_Emails_Messages {
                 "from" => array( "name" => "", "email" => "" ),
                 "to" => "{\$advert.ID|meta:adverts_email}",
                 "subject" => __( "Your Ad has been published.", "adverts" ),
-                "body" => __("Hello,\nYour Ad titled '{\$advert.post_title}' has been published.\n\nTo view your Ad you can use the link below:\n{\$advert.ID|get_permalink}", 'adverts'),
+                "body" => __("Hello,\nyour Ad titled '{\$advert.post_title}' has been published.\n\nTo view your Ad you can use the link below:\n{\$advert.ID|get_permalink}", 'adverts'),
                 "headers" => array(),
                 "attachments" => array()
             ),
@@ -141,21 +139,21 @@ class Adext_Emails_Messages {
                 "notify" => "user",
                 "from" => array( "name" => "", "email" => "" ),
                 "to" => "{\$advert.ID|meta:adverts_email}",
-                "subject" => __( "Your Ad has been saved.", "adverts" ),
-                "body" => __( "Hello,\nYour Ad titled '{\$advert.post_title}' has been saved and is pending moderation.\n\nOnce the administrator will approve or reject your Ad you will be notified by email.", "adverts" ),
+                "subject" => __( "Your Ad has been saved (pending moderation).", "adverts" ),
+                "body" => __( "Hello,\nyour Ad titled '{\$advert.post_title}' has been saved and is pending moderation.\n\nOnce the administrator will approve or reject your Ad you will be notified by email.", "adverts" ),
                 "headers" => array(),
                 "attachments" => array()
             ),
             "core::on_pending_to_publish_notify_user" => array(
                 "name" => "core::on_pending_to_publish_notify_user",
                 "action" => "pending_to_publish",
-                "callback" => array( $this, "on_draft_to_pending_notify_user" ),
+                "callback" => array( $this, "on_pending_to_publish_notify_user" ),
                 "enabled" => 1,
                 "help" => "https://wpadverts.com/documentation/emails/#core-on_pending_to_publish_notify_user",
                 "notify" => "user",
                 "from" => array( "name" => "", "email" => "" ),
                 "to" => "{\$advert.ID|meta:adverts_email}",
-                "subject" => __( "Your Ad has been approved.", "adverts" ),
+                "subject" => __( "Your Ad has been approved by administrator.", "adverts" ),
                 "body" => __( "Hello,\nyour Ad titled '{\$advert.post_title} has been approved.\n\nTo view your Ad you can use the link below:\n{\$advert.ID|get_permalink}", "adverts"),
                 "headers" => array(),
                 "attachments" => array()
@@ -169,8 +167,8 @@ class Adext_Emails_Messages {
                 "notify" => "user",
                 "from" => array( "name" => "", "email" => "" ),
                 "to" => "{\$advert.ID|meta:adverts_email}",
-                "subject" => __( "Your Ad has been rejected.", "adverts" ),
-                "body" => __( "Hello,\nwe are sorry, but your Ad titled '{\$advert.post_title}' has been rejected.", "adverts" ),
+                "subject" => __( "Your Ad has been rejected by administrator.", "adverts" ),
+                "body" => __( "Hello,\nwe are sorry to inform you that your Ad titled '{\$advert.post_title}' has been rejected by the administrator and will not be published.", "adverts" ),
                 "headers" => array(),
                 "attachments" => array()
             ),
@@ -198,7 +196,7 @@ class Adext_Emails_Messages {
                 "from" => array( "name" => "", "email" => "" ),
                 "to" => "{\$admin_email}",
                 "subject" => __( "New Ad has been published.", "adverts" ),
-                "body" => __( "Hello,\nnew Ad titled '{\$advert.post_title}' has been published.\n\nYou can view the Ad here:\n{\$advert.ID|get_permalink}\n\nYou can edit the Ad here:\n{\$admin_edit_url}", "adverts" ),
+                "body" => __( "Hello,\nnew Ad titled '{\$advert.post_title}' has been published.\n\nYou can view the Ad here:\n{\$advert.ID|get_permalink}\n\nYou can edit the Ad here:\n{\$advert|admin_edit_url}", "adverts" ),
                 "headers" => array(),
                 "attachments" => array()
             ),
@@ -212,7 +210,7 @@ class Adext_Emails_Messages {
                 "from" => array( "name" => "", "email" => "" ),
                 "to" => "{\$admin_email}",
                 "subject" => __( "New Ad is pending (action required).", "adverts" ),
-                "body" => __( "Hello,\nNew Ad titled '{\$advert.post_title}' has been saved and is pending moderation.\n\nYou can edit the Ad here:\n{\$advert.ID|get_permalink}\n\nPlease either publish or trash the Ad.", "adverts" ),
+                "body" => __( "Hello,\nNew Ad titled '{\$advert.post_title}' has been saved and is pending moderation.\n\nYou can edit the Ad here:\n{\$advert|admin_edit_url}\n\nPlease either publish or trash the Ad.", "adverts" ),
                 "headers" => array(),
                 "attachments" => array()
             ),

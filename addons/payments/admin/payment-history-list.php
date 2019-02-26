@@ -82,7 +82,7 @@
                 <input type="checkbox" value="<?php echo $item->ID ?>" name="item[]"/>
             </th>
             <td class="">
-                <strong><a title='<?php _e("View Order", "adverts") ?>' href="<?php esc_attr_e(add_query_arg('edit', $item->ID)) ?>" class=""><?php echo esc_html("#".str_pad($item->ID, 6, "0", STR_PAD_LEFT)) ?></a></strong>
+                <strong><a title='<?php _e("View Order", "adverts") ?>' href="<?php esc_attr_e(add_query_arg('edit', $item->ID)) ?>" class=""><?php echo esc_html(adext_payments_format_order_id($item->ID)) ?></a></strong>
                 <div class="row-actions" style="">
                     <span class="edit"><a href="<?php esc_attr_e(add_query_arg('edit', $item->ID)) ?>"><?php _e("View Order", "adverts") ?></a> | </span>
                     <span class=""><a href="<?php esc_attr_e( add_query_arg( array( "delete" => $item->ID,"noheader" => 1 ) ) ) ?>" title="<?php _e("Delete") ?>" class="adverts-delete"><?php _e("Delete") ?></a> | </span>

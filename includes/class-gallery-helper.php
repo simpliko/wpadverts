@@ -135,6 +135,8 @@ class Adverts_Gallery_Helper {
             return;
         }
         
+        $custom_cotrols = apply_filters( "adverts_gallery_enable_custom_controls", true );
+        
         $this->register_scripts();
         
         ?>
@@ -175,39 +177,15 @@ class Adverts_Gallery_Helper {
                         <div class="wpadverts-slide wpadverts-slide-video" id="<?php echo "wpadverts-slide-".$attach->ID ?>">
 
                             <div class="wpadverts-video-player">
-                                <video src="<?php echo $attach->guid ?>" preload="metadata" poster="<?php echo adverts_get_post_img_url( $attach, array( 'adverts_gallery' ) ) ?>">
+                                <video <?php if(!$custom_cotrols):?>controls="true"<?php endif; ?> src="<?php echo $attach->guid ?>" preload="metadata" poster="<?php echo adverts_get_post_img_url( $attach, array( 'adverts_gallery' ) ) ?>">
                                     Your browser cannot play this video. 
                                     Please use a different browser or download the video and play on your device.
                                     <a href="<?php echo $attach->guid ?>" class="adverts-button"><?php _e("Download", "adverts") ?></a>
                                 </video>
-                                <div class="wpadverts-slide-with-shadow"></div>
 
-                                <div class="wpadverts-player">
-                                    <div class="wpadverts-player-item wpadverts-player-item-play-pause">
-                                        <span class="adverts-icon-play wpadverts-player-play wpadverts-slide-nav-pointer" title="<?php _e("Play", "adverts") ?>"></span>
-                                        <span class="adverts-icon-pause wpadverts-player-pause wpadverts-slide-nav-pointer" title="<?php _e("Pause", "adverts") ?>"></span>
-                                        <span class="adverts-icon-ccw wpadverts-player-replay wpadverts-slide-nav-pointer" title="<?php _e("Replay", "adverts") ?>"></span>
-                                    </div>
-                                    <div class="wpadverts-player-item wpadverts-player-item-progress">
-                                        <span class="wpadverts-player-item-progress-bar wpadverts-slide-nav-pointer" style="">
-                                            <span class="wpadverts-player-progress"></span>
-                                            <span class="wpadverts-player-item-progress-text"></span>
-                                        </span>
-                                    </div>
-                                    <div class="wpadverts-player-item wpadverts-player-item-volume-down">
-                                        <span class="wpadverts-player-volume-down adverts-icon-volume-down wpadverts-slide-nav-pointer" title="<?php _e("Volume Down", "adverts") ?>"></span>
-                                    </div>
-                                    <div class="wpadverts-player-item wpadverts-player-item-volume-up">
-                                        <span class="wpadverts-player-volume-up adverts-icon-volume-up wpadverts-slide-nav-pointer" title="<?php _e("Volume Up", "adverts") ?>"></span>
-                                    </div>
-
-                                    <?php if( adverts_config( 'gallery.lightbox' ) == "1"): ?>
-                                    <div class="wpadverts-player-item wpadverts-player-item-fullscreen">
-                                        <span class="wpadverts-player-fullscreen adverts-icon-resize-full-alt wpadverts-slide-nav-pointer" title="<?php _e("Full Screen", "adverts") ?>"></span>
-                                    </div>
-                                    <a class="wpadverts-swipe" href="#<?php echo "wpadverts-slide-full-".$attach->ID ?>" style="display:none"></a>
-                                    <?php endif; ?>
-                                </div>
+                                <?php if( $custom_cotrols ): ?>
+                                <?php $this->render_custom_video_controls( $attach ) ?>
+                                <?php endif; ?>
 
                                 <div class="wpadverts-slide-caption">
                                     <?php if($attach->post_excerpt): ?>
@@ -269,6 +247,48 @@ class Adverts_Gallery_Helper {
         </div>
 
         <?php    
+    }
+    
+    /**
+     * Renders custom controls for the video player
+     * 
+     * @since   1.3.0
+     * @param   WP_Post   $attach     The attachment object
+     * @return  void
+     */
+    public function render_custom_video_controls( $attach ) {
+        ?>
+
+        <div class="wpadverts-slide-with-shadow"></div>
+
+        <div class="wpadverts-player">
+            <div class="wpadverts-player-item wpadverts-player-item-play-pause">
+                <span class="adverts-icon-play wpadverts-player-play wpadverts-slide-nav-pointer" title="<?php _e("Play", "adverts") ?>"></span>
+                <span class="adverts-icon-pause wpadverts-player-pause wpadverts-slide-nav-pointer" title="<?php _e("Pause", "adverts") ?>"></span>
+                <span class="adverts-icon-ccw wpadverts-player-replay wpadverts-slide-nav-pointer" title="<?php _e("Replay", "adverts") ?>"></span>
+            </div>
+            <div class="wpadverts-player-item wpadverts-player-item-progress">
+                <span class="wpadverts-player-item-progress-bar wpadverts-slide-nav-pointer" style="">
+                    <span class="wpadverts-player-progress"></span>
+                    <span class="wpadverts-player-item-progress-text"></span>
+                </span>
+            </div>
+            <div class="wpadverts-player-item wpadverts-player-item-volume-down">
+                <span class="wpadverts-player-volume-down adverts-icon-volume-down wpadverts-slide-nav-pointer" title="<?php _e("Volume Down", "adverts") ?>"></span>
+            </div>
+            <div class="wpadverts-player-item wpadverts-player-item-volume-up">
+                <span class="wpadverts-player-volume-up adverts-icon-volume-up wpadverts-slide-nav-pointer" title="<?php _e("Volume Up", "adverts") ?>"></span>
+            </div>
+
+            <?php if( adverts_config( 'gallery.lightbox' ) == "1"): ?>
+            <div class="wpadverts-player-item wpadverts-player-item-fullscreen">
+                <span class="wpadverts-player-fullscreen adverts-icon-resize-full-alt wpadverts-slide-nav-pointer" title="<?php _e("Full Screen", "adverts") ?>"></span>
+            </div>
+            <a class="wpadverts-swipe" href="#<?php echo "wpadverts-slide-full-".$attach->ID ?>" style="display:none"></a>
+            <?php endif; ?>
+        </div>
+
+        <?php
     }
     
     /**

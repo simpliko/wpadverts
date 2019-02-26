@@ -87,6 +87,7 @@ class Adext_Emails {
         $this->_parser->add_function( "contact_email", array( $this, "contact_email" ) );
         $this->_parser->add_function( "admin_edit_url", array( $this, "admin_edit_url" ) );
         $this->_parser->add_function( "complete_payment_url", array( $this, "complete_payment_url" ) );
+        $this->_parser->add_function( "format_date", array( $this, "format_date" ) );
         
         add_filter( "wpadverts_messages_register", array( $this->messages, "load" ) );
         add_filter( "wpadverts_message", array( $this->_parser, "compile" ), 10, 3 );
@@ -365,5 +366,23 @@ class Adext_Emails {
         return apply_filters( "adext_emails_list_filter_options", array(
             array( "key" => "core", "label" => __( "Core", "adverts" ) )
         ) );
+    }
+    
+    /**
+     * Returns a formatted date
+     * 
+     * To format a date the default date_format option is used.
+     * 
+     * @since   1.3.0
+     * @param   mixed   $date   Date or timestamp
+     * @return  string          Formatted date
+     */
+    public function format_date( $date ) {
+        
+        if( ! is_numeric( $date ) ) {
+            $date = strtotime( $date );
+        }
+        
+        return date_i18n( get_option( 'date_format' ), $date );
     }
 }

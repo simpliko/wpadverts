@@ -80,10 +80,10 @@ function shortcode_payments_checkout( $atts ) {
         "icon" => "adverts-icon-basket"
     );
     
-    $listing = get_post( get_post_meta( $post->ID, "payments_listing_type", true ) );
+    $listing = get_post( get_post_meta( $payment->ID, "_adverts_pricing_id", true ) );
     $listing_id = $listing->ID;
     
-    $price = get_post_meta($listing_id, 'adverts_price', true);
+    $price = get_post_meta( $payment->ID, "_adverts_payment_total", true );
     
     if( $payment->payment_status === "completed" ) {
         ob_start();

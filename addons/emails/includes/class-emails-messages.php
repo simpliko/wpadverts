@@ -210,7 +210,7 @@ class Adext_Emails_Messages {
                 "from" => array( "name" => "", "email" => "" ),
                 "to" => "{\$admin_email}",
                 "subject" => __( "New Ad is pending (action required).", "adverts" ),
-                "body" => __( "Hello,\nNew Ad titled '{\$advert.post_title}' has been saved and is pending moderation.\n\nYou can edit the Ad here:\n{\$advert|admin_edit_url}\n\nPlease either publish or trash the Ad.", "adverts" ),
+                "body" => __( "Hello,\nNew Ad titled '{\$advert.post_title}' has been saved and is pending moderation.\n\nYou can edit the Ad here:\n{\$advert|admin_edit_url}\n\nPlease either Publish or Trash it then the owner will be notified.", "adverts" ),
                 "headers" => array(),
                 "attachments" => array()
             ),

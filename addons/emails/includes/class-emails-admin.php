@@ -153,7 +153,7 @@ class Adext_Emails_Admin {
         $form = new Adverts_Form( $scheme );
         $form->bind( $bind );
 
-        $button_text = __("Update Options", "adverts");
+        $button_text = __("Update Message Template", "adverts");
 
         if(isset($_POST) && !empty($_POST)) {
             $form->bind( stripslashes_deep( $_POST ) );

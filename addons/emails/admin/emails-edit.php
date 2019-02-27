@@ -23,12 +23,20 @@
         <table class="form-table">
             <tbody>
             <?php echo adverts_form_layout_config($form) ?>
+                
+            <tr valign="top" class="<?php if(adverts_field_has_errors($field)): ?>adverts-field-error<?php endif; ?>">
+                <th scope="row">&nbsp;</th>
+                <td>
+                    <p class="submit">
+                       <input type="submit" value="<?php esc_attr_e($button_text) ?>" class="button-primary" name="Submit"/>
+                    </p>
+                </td>
+            </tr>
+                
             </tbody>
         </table>
 
-        <p class="submit">
-            <input type="submit" value="<?php esc_attr_e($button_text) ?>" class="button-primary" name="Submit"/>
-        </p>
+
 
     </form>
 

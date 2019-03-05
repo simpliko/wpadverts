@@ -1052,13 +1052,13 @@ function adext_insert_payment( $postarr ) {
     if( is_wp_error( $payment_id ) ) {
         return $payment_id;
     }
-    
-    if( $data["payment_paid"] == "total" ) {
+
+    if( $data["payment_paid"] === "total" ) {
         $paid = $price;
     } else {
         $paid = $data["payment_paid"];
     }
-    
+
     update_post_meta( $payment_id, 'adverts_person', $data['buyer_name'] );
     update_post_meta( $payment_id, 'adverts_email', $data['buyer_email'] );
     update_post_meta( $payment_id, '_adverts_user_ip', $data['buyer_ip'] );

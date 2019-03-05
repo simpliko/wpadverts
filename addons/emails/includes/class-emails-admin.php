@@ -38,7 +38,7 @@ class Adext_Emails_Admin {
         } else if( $emaction == "options" ) {
             $this->options();
         } else {
-            $this->list();
+            $this->browse();
         }
     }
     
@@ -95,7 +95,7 @@ class Adext_Emails_Admin {
      * @since 1.3
      * @return void
      */
-    public function list() {
+    public function browse() {
         if(adverts_request( "edit" ) != "" ) {
             $this->emails_edit();
             return;

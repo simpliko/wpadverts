@@ -88,7 +88,7 @@ class Adext_Contact_Form_Emails_Integration {
      * @return  void
      */
     public function on_contact_form_sent( $post_id, $form ) {
-        return Adext_Emails::instance()->messages->send_message( "core::on_contact_form_sent", array( 
+        return Adext_Emails::instance()->messages->send_message( "contact-form::on_contact_form_sent", array( 
             "advert" => get_post( $post_id ),
             "form" => $form->get_values()
         ) );

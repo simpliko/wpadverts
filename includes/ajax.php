@@ -132,6 +132,8 @@ function adverts_gallery_upload() {
         ) ) );
         
         remove_filter("post_type_link", "__return_empty_string");
+    } else {
+        _check_post_ownership( $parent_post_id );
     }
     
     // Insert the attachment.
@@ -236,6 +238,8 @@ function adverts_gallery_update_order() {
 
     $post_id = intval( adverts_request( "post_id" ) );
 
+    //_check_post_ownership( $post_id );
+    
     $dirty_ordered_keys = json_decode( stripslashes( adverts_request( "ordered_keys" ) ) );
     $length = sizeof( $dirty_ordered_keys );
     $clean_ordered_keys = array();
@@ -274,6 +278,8 @@ function adverts_gallery_delete() {
     $attach_id = intval($_POST["attach_id"]);
     $attach = get_post( $attach_id );
 
+    _check_post_ownership( $attach->post_parent );
+    
     if ( $attach === null ) {
         echo json_encode( array( "result" => 0, "error" => __( "Attachment does not exist.", "adverts" ) ) );
     } elseif ( $attach->post_parent != absint(adverts_request( "post_id" ) ) ) {
@@ -948,8 +954,8 @@ function adverts_delete() {
         );
     }
     
-    // check if current user is post author
-    if( $post->post_author != get_current_user_id() ) {
+    // check if current user is post author or admin
+    if( $post->post_author != get_current_user_id() && ! current_user_can( "edit_pages" ) ) {
         $result = array( 
             "result" => -2, 
             "error" => __( "Post you are trying to delete does not belong to you.", "adverts" ) 
@@ -964,9 +970,10 @@ function adverts_delete() {
         );
     }
     
-    if( ! $result === null ) {
+    if( $result !== null ) {
         if( $is_ajax ) {
             echo json_encode( $result );
+            exit;
         } else {
             wp_die( $result["error"] );
         }
@@ -995,4 +1002,39 @@ function adverts_delete() {
     }
     
     exit;
+}
+
+function _check_post_ownership( $advert_id ) {
+    
+    $post = get_post( $advert_id );
+    $result = null;
+    
+    // check if post exists
+    if( !$post ) {
+        $result = array( 
+            "result" => -1, 
+            "error" => __( "This post does not exist.", "adverts" ) 
+        );
+    }
+
+    // check if current user is post author
+    if( $post->post_author != get_current_user_id() && ! current_user_can( "edit_pages" ) ) {
+        $result = array( 
+            "result" => -2, 
+            "error" => __( "This post does not belong to you.", "adverts" ) 
+        );
+    }
+
+    // check if post is an advert
+    if( $post->post_type != 'advert') {
+        $result = array( 
+            "result" => -3, 
+            "error" => __( "This post is not an Advert.", "adverts" ) 
+        );
+    } 
+    
+    if( $result !== null ) {
+        echo json_encode($result);
+        exit;
+    }
 }

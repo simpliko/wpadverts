@@ -2464,8 +2464,28 @@ function adverts_single_contact_information( $post_id ) {
         </a>
         <span class="adverts-loader adverts-icon-spinner animate-spin"></span>
     </div>
+    <?php
 
-    <div class="adverts-contact-box">
+    add_action( "adverts_tpl_single_bottom", "adverts_single_contact_information_box", 2000 );
+}
+
+/**
+ * Renders contact box
+ * 
+ * This function is called by adverts_tpl_single_bottom filter registered in
+ * adverts_single_contact_information function 
+ * 
+ * @see adverts_single_contact_information() function
+ * @see adverts_tpl_single_bottom filter
+ * 
+ * @since   1.3.2
+ * @param   int   $post_id
+ * @return  void
+ */
+function adverts_single_contact_information_box( $post_id ) {
+
+    ?>
+    <div class="adverts-contact-box adverts-contact-box-toggle">
         <p class="adverts-contact-method">
             <span class="adverts-icon-phone adverts-contact-icon" title="<?php _e("Phone", "adverts") ?>"></span>
             <span class="adverts-contact-phone"></span>
@@ -2816,4 +2836,55 @@ function adverts_get_post_id_from_hash( $hash ) {
     $post_id = $wpdb->get_var( $wpdb->prepare( $sql, $hash) );
 
     return absint( $post_id );
+}
+
+/**
+ * Checks if the current user is owner of the $advert_id
+ * 
+ * The function can additionally return true if the current user is an
+ * editor or administrator (that is a user with "edit_pages" capability).
+ * 
+ * The required capability can be customized using adverts_ajax_ownership_cap filter.
+ * 
+ * @since 1.3.2
+ * @param int       $advert_id      ID of an Advert
+ * @param boolean   $return         True to return result as object;
+ * @return void
+ */
+function _adverts_ajax_check_post_ownership( $advert_id, $return = false ) {
+    
+    $post = get_post( $advert_id );
+    $result = null;
+    
+    // check if post exists
+    if( !$post ) {
+        $result = array( 
+            "result" => -1, 
+            "error" => __( "This post does not exist.", "adverts" ) 
+        );
+    }
+
+    $required_cap = apply_filters( "adverts_ajax_ownership_cap", "edit_pages" );
+    $has_required_cap = current_user_can( $required_cap );
+    
+    // check if current user is post author
+    if( $post->post_author != get_current_user_id() && ! $has_required_cap ) {
+        $result = array( 
+            "result" => -2, 
+            "error" => __( "This post does not belong to you.", "adverts" ) 
+        );
+    }
+
+    // check if post is an advert
+    if( $post->post_type != 'advert') {
+        $result = array( 
+            "result" => -3, 
+            "error" => __( "This post is not an Advert.", "adverts" ) 
+        );
+    } 
+
+    if( $result !== null ) {
+        echo json_encode($result);
+        exit;
+    }
 }

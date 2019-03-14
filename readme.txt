@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classified script, classifieds sc
 Requires PHP: 5.3
 Requires at least: 4.0
 Tested up to: 5.1
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -98,6 +98,12 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.3.1 - 2019-03-07 =
+
+ * FIXED: Fatal Error on some older PHP version when enabling Emails Module.
+ * FIXED: Setting default visibility to 0 should set the Expiration Date to Never Expires when posting from wp-admin.
+ * FIXED: Contact Form message is not being sent after enabling Emails Module.
 
 = 1.3.0 - 2019-02-27 =
 

@@ -112,7 +112,7 @@
                 <span class="dashicons dashicons-no" style="font-size:21px"></span>
                 <?php endif; ?>
             </td>
-            <?php do_action('adext_emails_list_tbody', $item) ?>
+            <?php do_action('adext_emails_list_tbody', $message) ?>
         </tr>
         <?php $z++; ?>
         <?php endforeach; ?>

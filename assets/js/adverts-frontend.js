@@ -124,7 +124,7 @@ jQuery(function($) {
                 if(response.result == 1) {
                     $('.adverts-contact-phone').html(phone);
                     $('.adverts-contact-email').html(email);
-                    $('.adverts-contact-box').slideToggle("fast");
+                    $('.adverts-contact-box-toggle').slideToggle("fast");
                 } else {
                     alert(response.error);
                 }
@@ -142,7 +142,7 @@ jQuery(function($) {
     if($(".adverts-show-contact-form").length > 0) {
         $(".adverts-show-contact-form").click(function(e) {
             e.preventDefault();
-            $('.adverts-contact-box').slideToggle("fast");
+            $('.adverts-contact-box-toggle').slideToggle("fast");
         });
     }
     

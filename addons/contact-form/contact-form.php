@@ -44,7 +44,35 @@ if(is_admin() ) {
  * @return void
  */
 function adext_contact_form( $post_id ) {
-   
+
+    $email = get_post_meta( $post_id, "adverts_email", true );
+    $phone = get_post_meta( $post_id, "adverts_phone", true );
+    
+    ?>
+    <div class="adverts-single-actions">
+        <?php if( ! empty( $email ) ): ?>
+        <a href="#" class="adverts-button adverts-show-contact-form">
+            <?php esc_html_e("Send Message", "adverts") ?>
+            <span class="adverts-icon-down-open"></span>
+        </a>
+        <?php endif; ?>
+        
+        <?php if( adverts_config( "contact_form.show_phone") == "1" && ! empty( $phone ) ): ?>
+        <span class="adverts-button" style="background-color: transparent; cursor: auto">
+            <?php esc_html_e( "Phone", "adverts" ) ?>
+            <a href="tel:<?php echo esc_html( $phone ) ?>"><?php echo esc_html( $phone ) ?></a>
+            <span class="adverts-icon-phone"></span>
+        </span>
+        <?php endif; ?>
+    </div>
+    <?php
+    
+    add_action( "adverts_tpl_single_bottom", "adext_contact_form_content", 2000 );
+}
+
+function adext_contact_form_content( $post_id ) {
+    
+
     include_once ADVERTS_PATH . 'includes/class-form.php';
     include_once ADVERTS_PATH . 'includes/class-html.php';
     
@@ -54,13 +82,14 @@ function adext_contact_form( $post_id ) {
     $phone = get_post_meta( $post_id, "adverts_phone", true );
     $message = null;
     $form = new Adverts_Form( Adverts::instance()->get( "form_contact_form" ) );
+    $actions_class = "adverts-field-actions";
     $buttons = array(
         array(
             "tag" => "input",
             "name" => "adverts_contact_form",
             "type" => "submit",
             "value" => __( "Send Message", "adverts" ),
-            "style" => "font-size:1.2em; margin-top:1em",
+            "class" => "adverts-button",
             "html" => null
         ),
     );
@@ -109,28 +138,10 @@ function adext_contact_form( $post_id ) {
     ?>
 
     <div id="adverts-contact-form-scroll"></div>
-
-    <?php adverts_flash( $flash ) ?>
-
-    <div class="adverts-single-actions">
-        <?php if( ! empty( $email ) ): ?>
-        <a href="#" class="adverts-button adverts-show-contact-form">
-            <?php esc_html_e("Send Message", "adverts") ?>
-            <span class="adverts-icon-down-open"></span>
-        </a>
-        <?php endif; ?>
-        
-        <?php if( adverts_config( "contact_form.show_phone") == "1" && ! empty( $phone ) ): ?>
-        <span class="adverts-button" style="background-color: transparent; cursor: auto">
-            <?php esc_html_e( "Phone", "adverts" ) ?>
-            <a href="tel:<?php echo esc_html( $phone ) ?>"><?php echo esc_html( $phone ) ?></a>
-            <span class="adverts-icon-phone"></span>
-        </span>
-        <?php endif; ?>
-    </div>
-
+    
     <?php if( ! empty( $email ) ): ?>
-    <div class="adverts-contact-box" <?php if($show_form): ?>style="display: block"<?php endif ?>>
+    <div class="adverts-contact-box adverts-contact-box-toggle" <?php if($show_form): ?>style="display: block"<?php endif ?>>
+        <?php adverts_flash( $flash ) ?>
         <?php include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/form.php' ) ?>
     </div>
     <?php endif; ?>

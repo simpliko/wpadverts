@@ -104,7 +104,7 @@ WPADVERTS.File.Uploader = function(setup) {
     if($(setup.conf.post_id_input).val()) {
         this.PostID = $(setup.conf.post_id_input).val();
     }
-    
+
     this.Item = {};
     this.Browser = new WPADVERTS.File.Browser(this);
     
@@ -145,6 +145,10 @@ WPADVERTS.File.Uploader.prototype.SortableUpdate = function(e) {
 
     if(typeof e !== "undefined") {
         this.ui.find(".adverts-gallery-upload-update.adverts-icon-spinner.animate-spin").fadeIn();
+    }
+
+    if(typeof this.PostID === 'undefined') {
+        return;
     }
 
     jQuery.ajax({
@@ -282,7 +286,10 @@ WPADVERTS.File.Uploader.Plupload.prototype.FileUploaded = function(up, file, res
     }
 
     this.FileUploaded(file, result);
-    this.SortableUpdate();
+    
+    if( typeof result.attach_id !== 'undefined' ) { 
+        this.SortableUpdate();
+    }
 };
 
 WPADVERTS.File.Singular = function(file, container, init) {

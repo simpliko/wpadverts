@@ -306,7 +306,8 @@ class Adext_Emails_Admin {
                     "name" => "_email",
                     "type" => "adverts_field_label",
                     "label" => __( "Email Name", "adverts" ),
-                    "content" => $code
+                    "content" => $code,
+                    "order" => 10,
                 ),
                 array(
                     "name" => "message_enabled",
@@ -314,41 +315,47 @@ class Adext_Emails_Admin {
                     "label" => __( "Is Active", "adverts"),
                     "options" => array(
                         array( "value" => 1, "text" => __( "Enable sending this message.", "adverts" ) )
-                    )
+                    ),
+                    "order" => 20,
                 ),
                 array(
                     "name" => "message_subject",
                     "type" => "adverts_field_text",
                     "class" => "adext-emails-full-width",
                     "label" => __( "Subject", "adverts" ),
+                    "order" => 30,
                 ),
                 array(
                     "name" => "message_from",
                     "type" => "adext_emails_field_name_email",
                     "label" => __( "From", "adverts" ),
                     "class" => "adext-emails-full-width",
+                    "order" => 40,
                 ),
                 array(
                     "name" => "message_to",
                     "type" => "adverts_field_text",
                     "label" => __( "To", "adverts" ),
-                    
+                    "order" => 50,
                 ),
                 array( 
                     "name" => "_add_headers",
                     "type" => "adverts_field_label",
                     "label" => "&nbsp;",
-                    "content" => $this->edit_form_add_header()
+                    "content" => $this->edit_form_add_header(),
+                    "order" => 60,
                 ),
                 array(
                     "name" => "_divider",
                     "type" => "adverts_field_header",
+                    "order" => 70,
                 ),
                 array(
                     "name" => "message_body",
                     "type" => "adverts_field_textarea",
                     "mode" => "plain-text",
-                    "label" => __( "Body", "adverts" )
+                    "label" => __( "Body", "adverts" ),
+                    "order" => 80,
                 )
             )
         );
@@ -368,7 +375,8 @@ class Adext_Emails_Admin {
                     "name" => "admin_email",
                     "type" => "adverts_field_text",
                     "label" => __( "Send Admin Notifications To", "adverts" ),
-                    "placeholder" => get_option( "admin_email" )
+                    "placeholder" => get_option( "admin_email" ),
+                    "order" => 10
                 ),
                 array(
                     "name" => "enable_html_emails",
@@ -376,7 +384,8 @@ class Adext_Emails_Admin {
                     "label" => "HTML Emails",
                     "options" => array(
                         array( "value" => "1", "text" => __( "Send emails as HTML", "adverts" ) )
-                    )
+                    ),
+                    "order" => 20
                 )
             )
         );

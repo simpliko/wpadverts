@@ -345,10 +345,17 @@ function adverts_expiry_meta_box() {
     } else {
         // User is creating a new Advert, the expiration date is set to today+30 days.
         $duration = intval( adverts_config( "config.visibility" ) );
-        $expiry = strtotime( current_time('mysql') . " +$duration DAYS" );
-        $date = date_i18n( $datef, $expiry );
-        $touch_time = date( "Y-m-d H:i:s", $expiry );
-        $never_expires = false;
+        if( $duration == 0 ) {
+            $expiry = strtotime( current_time('mysql') . " +30 DAYS" );
+            $date = __("Never Expires", "adverts");
+            $touch_time = date( "Y-m-d H:i:s", $expiry );
+            $never_expires = true;
+        } else {
+            $expiry = strtotime( current_time('mysql') . " +$duration DAYS" );
+            $date = date_i18n( $datef, $expiry );
+            $touch_time = date( "Y-m-d H:i:s", $expiry );
+            $never_expires = false;
+        }
     }
     
     // Check if date is in the past or in the future and set correct label based on this.

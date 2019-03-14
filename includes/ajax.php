@@ -133,7 +133,7 @@ function adverts_gallery_upload() {
         
         remove_filter("post_type_link", "__return_empty_string");
     } else {
-        _check_post_ownership( $parent_post_id );
+        _adverts_ajax_check_post_ownership( $parent_post_id );
     }
     
     // Insert the attachment.
@@ -177,6 +177,8 @@ function adverts_gallery_update() {
     $caption = trim( adverts_request("caption", "" ) );
     $content = trim( adverts_request("content", "" ) );
     $featured = intval($_POST["featured"]);
+    
+    _adverts_ajax_check_post_ownership( $post_id );
     
     $attach = get_post( $attach_id );
     
@@ -237,8 +239,7 @@ function adverts_gallery_update_order() {
     }
 
     $post_id = intval( adverts_request( "post_id" ) );
-
-    //_check_post_ownership( $post_id );
+    _adverts_ajax_check_post_ownership( $post_id );
     
     $dirty_ordered_keys = json_decode( stripslashes( adverts_request( "ordered_keys" ) ) );
     $length = sizeof( $dirty_ordered_keys );
@@ -278,7 +279,7 @@ function adverts_gallery_delete() {
     $attach_id = intval($_POST["attach_id"]);
     $attach = get_post( $attach_id );
 
-    _check_post_ownership( $attach->post_parent );
+    _adverts_ajax_check_post_ownership( $attach->post_parent );
     
     if ( $attach === null ) {
         echo json_encode( array( "result" => 0, "error" => __( "Attachment does not exist.", "adverts" ) ) );
@@ -327,6 +328,8 @@ function adverts_gallery_image_stream() {
     $post_id = intval( adverts_request( "post_id" ) );
     
     $attach = get_post( $attach_id );
+    
+    _adverts_ajax_check_post_ownership( $post_id );
     
     if( $attach->post_parent != $post_id ) {
         echo json_encode( array( 
@@ -417,6 +420,8 @@ function adverts_gallery_image_restore() {
     $attach_id = adverts_request( "attach_id" );
     $post_id = intval( adverts_request( "post_id" ) );
     
+    _adverts_ajax_check_post_ownership( $post_id );
+    
     $attach = get_post( $attach_id );
     
     if( $attach->post_parent != $post_id ) {
@@ -500,6 +505,7 @@ function adverts_gallery_image_save() {
     $attach = get_post( $attach_id );
     $history = json_decode( $history_encoded );
     
+    _adverts_ajax_check_post_ownership( $post_id );
 
     if( $attach->post_parent != $post_id ) {
         echo json_encode( array( 
@@ -712,6 +718,8 @@ function adverts_gallery_video_cover() {
     $attach_id = adverts_request("attach_id");
     $post_id = intval( adverts_request( "post_id" ) );
     $attach = get_post( $attach_id );
+    
+    _adverts_ajax_check_post_ownership( $post_id );
     
     if( $attach->post_parent != $post_id ) {
         echo json_encode( array( 
@@ -954,8 +962,8 @@ function adverts_delete() {
         );
     }
     
-    // check if current user is post author or admin
-    if( $post->post_author != get_current_user_id() && ! current_user_can( "edit_pages" ) ) {
+    // check if current user is post author
+    if( $post->post_author != get_current_user_id() ) {
         $result = array( 
             "result" => -2, 
             "error" => __( "Post you are trying to delete does not belong to you.", "adverts" ) 
@@ -1004,37 +1012,3 @@ function adverts_delete() {
     exit;
 }
 
-function _check_post_ownership( $advert_id ) {
-    
-    $post = get_post( $advert_id );
-    $result = null;
-    
-    // check if post exists
-    if( !$post ) {
-        $result = array( 
-            "result" => -1, 
-            "error" => __( "This post does not exist.", "adverts" ) 
-        );
-    }
-
-    // check if current user is post author
-    if( $post->post_author != get_current_user_id() && ! current_user_can( "edit_pages" ) ) {
-        $result = array( 
-            "result" => -2, 
-            "error" => __( "This post does not belong to you.", "adverts" ) 
-        );
-    }
-
-    // check if post is an advert
-    if( $post->post_type != 'advert') {
-        $result = array( 
-            "result" => -3, 
-            "error" => __( "This post is not an Advert.", "adverts" ) 
-        );
-    } 
-    
-    if( $result !== null ) {
-        echo json_encode($result);
-        exit;
-    }
-}

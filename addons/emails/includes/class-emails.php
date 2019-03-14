@@ -89,7 +89,7 @@ class Adext_Emails {
         $this->_parser->add_function( "complete_payment_url", array( $this, "complete_payment_url" ) );
         $this->_parser->add_function( "format_date", array( $this, "format_date" ) );
         
-        add_filter( "wpadverts_messages_register", array( $this->messages, "load" ) );
+        add_filter( "wpadverts_messages_register", array( $this->messages, "load" ), 20 );
         add_filter( "wpadverts_message", array( $this->_parser, "compile" ), 10, 3 );
         add_filter( "wpadverts_message_args", array( $this, "common_args" ) );
 

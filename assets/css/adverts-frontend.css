@@ -793,6 +793,10 @@ a.adverts-manage-action:visited {
 .adverts-grid .adverts-col-65 { width: 65%; }
 .adverts-grid .adverts-col-70 { width: 70%; }
 .adverts-grid .adverts-col-80 { width: 80%; }
+.adverts-grid .adverts-col-85 { width: 85%; }
+.adverts-grid .adverts-col-90 { width: 90%; }
+.adverts-grid .adverts-col-95 { width: 95%; }
+.adverts-grid .adverts-col-100 { width: 100%; }
 
 .adverts-multi-level.adverts-multi-level-0 .adverts-widget-grid-link {
     padding-left: 15px;
@@ -1704,6 +1708,16 @@ https://github.com/yui/pure/blob/master/LICENSE.md
     margin: 1.5rem 0 1.5rem 0;
     padding: 1rem 0 1rem 0;
     border-top: 1px solid #e5e5e5;
+}
+
+.adverts-contact-box .adverts-form .adverts-control-group.adverts-field-actions {
+    clear: both;
+    margin: 15px 0 0 0;
+    padding: 1em 0 0 0;
+}
+
+.adverts-contact-box .adverts-form fieldset:last-child {
+    padding-bottom: 0;
 }
 
 .adverts-form .adverts-control-group > div.adverts-field-header {

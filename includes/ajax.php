@@ -276,14 +276,14 @@ function adverts_gallery_delete() {
         exit;
     }
     
-    $attach_id = intval($_POST["attach_id"]);
+    $attach_id = intval( adverts_request("attach_id") );
     $attach = get_post( $attach_id );
 
     _adverts_ajax_check_post_ownership( $attach->post_parent );
     
     if ( $attach === null ) {
         echo json_encode( array( "result" => 0, "error" => __( "Attachment does not exist.", "adverts" ) ) );
-    } elseif ( $attach->post_parent != absint(adverts_request( "post_id" ) ) ) {
+    } elseif ( $attach->post_parent != absint( adverts_request( "post_id" ) ) ) {
         echo json_encode( array( "result" => 0, "error" => __( "Incorrect attachment ID.", "adverts" ) ) );
     } elseif ( wp_delete_attachment( $attach_id ) ) {
         echo json_encode( array( "result" => 1 ) );

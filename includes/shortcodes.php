@@ -404,7 +404,9 @@ function shortcode_adverts_add( $atts ) {
             // Save post as temporary in DB
             $post_id = Adverts_Post::save($form, $post_id, $init);
             
-            $post_content = apply_filters("the_content", get_post( $post_id )->post_content );
+            $post_content = get_post( $post_id )->post_content;
+            $post_content = wp_kses($post_content, wp_kses_allowed_html( 'post' ) );
+            $post_content = apply_filters("adverts_the_content", $post_content );
             
             if(is_wp_error($post_id)) {
                 $error[] = $post_id->get_error_message();

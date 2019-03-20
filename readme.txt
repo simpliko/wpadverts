@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classified script, classifieds sc
 Requires PHP: 5.3
 Requires at least: 4.0
 Tested up to: 5.1
-Stable tag: 1.3.1
+Stable tag: 1.3.2
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -98,6 +98,17 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.3.2 - 2019-03-21 =
+
+ * FIXED: Ability to manage other users images.
+ * FIXED: Email templates other than Core do not show updated version when editing them.
+ * FIXED: Notices in Emails module configuration.
+ * FIXED: If "Visibility" in Settings is set to 0, the Ad posted from wp-admin instantly expires.
+ * FIXED: (In some themes) Infiniete loop in [adverts_add] Preview due to the_content filter being used.
+ * API: Additional CSS row widths added to adverts-frontend.css.
+ * API: Contact information are now loaded differently. First the button and with a second apply_filters call the box which the button opens. 
+ * NOTE: If you changed how how contact options work on Ad details page make sure they are working properly after the update.
 
 = 1.3.1 - 2019-03-07 =
 

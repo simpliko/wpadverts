@@ -443,7 +443,7 @@ class Adverts_Widget_Ads extends WP_Widget
         } else {
             $show_image = false;
         }
-        
+
         $params = apply_filters( "adverts_widget_list_query", array( 
             'post_type' => 'advert', 
             'post_status' => 'publish',

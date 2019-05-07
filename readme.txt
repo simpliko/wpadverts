@@ -105,7 +105,8 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
  * FEATURE: "Complete Payment" button will show in [adverts_manage] if user posted an Ad but not payed for it.
  * FEATURE: if adverts_email is not provided in [adverts_add] then contact form will be sent to user email address if Ad was posted by logged in user.
  * FIXED: Labels for advert_category taxonomy (fixes conflict with WP Post Modules plugin).
-
+ * FIXED: Success message not visible after submitting contact form.
+ * FIXED: HTML glitch in wp-admin / Classifieds / Options (visible on some installations on mobile devices).
 
 
 = 1.3.2 - 2019-03-21 =

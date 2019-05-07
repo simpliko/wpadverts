@@ -336,43 +336,26 @@ function adverts_get_the_price( $post_id = null, $price = null ) {
  */
 function adverts_get_main_image( $id ) {
     
-    $thumb_id = get_post_thumbnail_id( $id );   
+    $thumb_id =  adverts_get_main_image_id( $id );
     
-    if($thumb_id) {
+    if( $thumb_id !== null ) {
         $image = wp_get_attachment_image_src( $thumb_id, 'adverts-list' );
         
         if(isset( $image[0] ) ) {
             return $image[0];
         }
-    } 
-    
-    $children = get_children( array( 'post_parent' => $id ) );
-    $attach = array();
-
-    if( empty( $children ) ) {
-        return null;
-    }
-
-    if( isset( $children[$thumb_id] ) ) {
-        $attach[$thumb_id] = $children[$thumb_id];
-        unset($children[$thumb_id]);
-    }
-
-    $attach += $children;
-    $images = adverts_sort_images($attach, $id);
-    
-    foreach($images as $tmp_post) {
-        $image = wp_get_attachment_image_src( $tmp_post->ID , 'adverts-list' ); 
-        
-        if(isset( $image[0] ) ) {
-            return $image[0];
-        }
-        
     }
     
     return null;
 }
 
+/**
+ * Returns ID of the image that will be displayed on adverts list.
+ * 
+ * @since   1.3.3
+ * @param   int     $id     Advert ID
+ * @return  int             Either main image Attachment ID or null
+ */
 function adverts_get_main_image_id( $id ) {
     
     $thumb_id = get_post_thumbnail_id( $id );   

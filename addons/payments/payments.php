@@ -170,6 +170,7 @@ function adext_payments_init_frontend() {
     add_filter("adverts_action_payment", "adext_payments_action_payment", 10, 2);
     
     add_action( "adverts_sh_manage_actions_more", "adext_payments_action_renew" );
+    add_action( "adverts_sh_manage_actions_more", "adext_payments_action_complete" );
     
     add_filter( "adverts_manage_action", "adext_payments_manage_action" );
     add_filter( "adverts_manage_action_renew", "adext_payments_manage_action_renew" );
@@ -573,6 +574,53 @@ function adext_payments_manage_action( $action ) {
 }
 
 /**
+ * Displays "Complete Payment" button in [adverts_manage].
+ * 
+ * This function is executed by adverts_sh_manage_actions_more filter, so
+ * it will be displayed after clicking "More".
+ * 
+ * @see adverts_sh_manage_actions_more
+ * 
+ * @since   1.3.3
+ * @param   int     $post_id    Advert ID
+ * @return  void
+ */
+function adext_payments_action_complete( $post_id ) {
+    
+    if( get_post_field( "post_status", $post_id ) != "advert-pending" ) {
+        return;
+    }
+    
+    $loop = get_posts( array( 
+        'post_type' => 'adverts-payment', 
+        'post_status' => 'pending',
+        'posts_per_page' => 1, 
+        'meta_query' => array(
+            array(
+                'key' => '_adverts_object_id', 
+                'value' => $post_id
+            )
+        )
+    ) );
+
+    if( ! isset( $loop[0] ) ) {
+        return;
+    }
+    
+    $id = $loop[0]->ID;
+
+    include_once ADVERTS_PATH . "/includes/class-html.php";
+
+    $span = '<span class="adverts-icon-arrows-cw"></span>';
+    $a = new Adverts_Html("a", array(
+        "href" => adext_payments_get_checkout_url( $id ),
+        "class" => "adverts-manage-action",
+    ), $span . " " . __("Complete Payment", "adverts") );
+
+    echo $a->render();
+}
+
+/**
  * Displays "Renew Ad" button in [adverts_manage].
  * 
  * This function is executed by adverts_sh_manage_actions_more filter, so
@@ -586,6 +634,10 @@ function adext_payments_manage_action( $action ) {
  */
 function adext_payments_action_renew( $post_id ) {
     
+    if( get_post_field( "post_status", $post_id ) == "advert-pending" ) {
+        return;
+    }
+        
     $renewals = get_posts( array( 
         'post_type' => 'adverts-renewal', 
         'post_status' => 'any',

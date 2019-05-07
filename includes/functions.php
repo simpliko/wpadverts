@@ -373,6 +373,45 @@ function adverts_get_main_image( $id ) {
     return null;
 }
 
+function adverts_get_main_image_id( $id ) {
+    
+    $thumb_id = get_post_thumbnail_id( $id );   
+    
+    if($thumb_id) {
+        $image = wp_get_attachment_image_src( $thumb_id, 'adverts-list' );
+        
+        if(isset( $image[0] ) ) {
+            return $thumb_id;
+        }
+    } 
+    
+    $children = get_children( array( 'post_parent' => $id ) );
+    $attach = array();
+
+    if( empty( $children ) ) {
+        return null;
+    }
+
+    if( isset( $children[$thumb_id] ) ) {
+        $attach[$thumb_id] = $children[$thumb_id];
+        unset($children[$thumb_id]);
+    }
+
+    $attach += $children;
+    $images = adverts_sort_images($attach, $id);
+    
+    foreach($images as $tmp_post) {
+        $image = wp_get_attachment_image_src( $tmp_post->ID , 'adverts-list' ); 
+        
+        if(isset( $image[0] ) ) {
+            return $tmp_post->ID;
+        }
+        
+    }
+    
+    return null;
+}
+
 /**
  * Dynamically replace post content with Advert template.
  * 

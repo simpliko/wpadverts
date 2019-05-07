@@ -1,9 +1,10 @@
     <div class="<?php echo adverts_css_classes( 'advert-item advert-item-col-'.(int)$columns, get_the_ID() ) ?>">
 
-        <?php $image = adverts_get_main_image( get_the_ID() ) ?>
+        <?php $image_id = adverts_get_main_image_id( get_the_ID() ) ?>
         <div class="advert-img">
-            <?php if($image): ?>
-                <img src="<?php echo esc_attr($image) ?>" alt="" class="advert-item-grow" />
+            <?php if($image_id): ?>
+                <?php $image = get_post( $image_id ) ?>
+                <img src="<?php echo esc_attr( adverts_get_main_image( get_the_ID() ) ) ?>" class="advert-item-grow" title="<?php echo esc_attr($image->post_excerpt) ?>" alt="<?php echo esc_attr($image->post_content) ?>" />
             <?php endif; ?>
         </div>
      

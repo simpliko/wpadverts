@@ -50,11 +50,12 @@ function adext_contact_form( $post_id ) {
     
     ?>
     <div class="adverts-single-actions">
-        <?php if( ! empty( $email ) ): ?>
+        <?php if( adext_contact_form_get_to( $post_id ) ): ?>
         <a href="#" class="adverts-button adverts-show-contact-form">
             <?php esc_html_e("Send Message", "adverts") ?>
             <span class="adverts-icon-down-open"></span>
         </a>
+        <?php add_action( "adverts_tpl_single_bottom", "adext_contact_form_content", 2000 ) ?>
         <?php endif; ?>
         
         <?php if( adverts_config( "contact_form.show_phone") == "1" && ! empty( $phone ) ): ?>
@@ -67,7 +68,6 @@ function adext_contact_form( $post_id ) {
     </div>
     <?php
     
-    add_action( "adverts_tpl_single_bottom", "adext_contact_form_content", 2000 );
 }
 
 function adext_contact_form_content( $post_id ) {
@@ -112,6 +112,7 @@ function adext_contact_form_content( $post_id ) {
                 "message" => __( "Your message has been sent.", "adverts" ),
                 "icon" => "adverts-icon-ok"
             );
+            $show_form = true; 
         } else {
             $flash["error"][] = array(
                 "message" => __( "There are errors in your form.", "adverts" ),
@@ -139,7 +140,7 @@ function adext_contact_form_content( $post_id ) {
 
     <div id="adverts-contact-form-scroll"></div>
     
-    <?php if( ! empty( $email ) ): ?>
+    <?php if( adext_contact_form_get_to( $post_id ) ): ?>
     <div class="adverts-contact-box adverts-contact-box-toggle" <?php if($show_form): ?>style="display: block"<?php endif ?>>
         <?php adverts_flash( $flash ) ?>
         <?php include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/form.php' ) ?>
@@ -250,9 +251,9 @@ function adext_contact_form_send_default_message( $post_id, $form ) {
     if( $form->get_value( "message_name" ) ) {
         $reply_to = $form->get_value( "message_name" ) . "<$reply_to>";
     }
-
+    
     $mail = array(
-        "to" => get_post_meta( $post_id, "adverts_email", true ),
+        "to" => adext_contact_form_get_to( $post_id ),
         "subject" => $form->get_value( "message_subject" ),
         "message" => $form->get_value( "message_body" ),
         "headers" => array(
@@ -269,6 +270,35 @@ function adext_contact_form_send_default_message( $post_id, $form ) {
 
     remove_filter( 'wp_mail_from', 'adext_contact_form_mail_from' );
     remove_filter( 'wp_mail_from_name', 'adext_contact_form_mail_from_name' );
+}
+
+/**
+ * Returns "to" address for contact form.
+ * 
+ * Note this function is used only when Emails Module is disabled.
+ * 
+ * @uses adext_contact_form_get_to_meta_name filter
+ * @uses adext_contact_form_get_to filter
+ * 
+ * @since   1.3.3
+ * @param   int     $post_id    Current Post ID
+ * @return  string              Email address to send the contact form to
+ */
+function adext_contact_form_get_to( $post_id ) {
+    
+    $meta_name = apply_filters( "adext_contact_form_get_to_meta_name", "adverts_email" );
+    $to = trim( get_post_meta( $post_id, $meta_name, true ) );
+    
+    if( empty( $to ) && get_post_field( 'post_author') > 0 ) {
+        
+        $user_to = get_user_by( "ID", get_post_field( 'post_author' ) );
+        
+        if( $user_to ) {
+            $to = $user_to->user_email;
+        }
+    }
+    
+    return apply_filters( "adext_contact_form_get_to", $to, $post_id );
 }
 
 // Contact Form

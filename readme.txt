@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classified script, classifieds sc
 Requires PHP: 5.3
 Requires at least: 4.0
 Tested up to: 5.1
-Stable tag: 1.3.2
+Stable tag: 1.3.3
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -21,8 +21,8 @@ is NOT a demo, this is a fully functional classifieds software with most crucial
 **Links**
 
 * [WordPress Classifieds Plugin](https://wpadverts.com/) - official site.
-* [View User Demo](https://demo.wpadverts.com/) - see plugin frontend.
-* [View Admin Demo](https://demo.wpadverts.com/wp-admin/) - see wp-admin panel.
+* [View User Demo](https://demo.wpadverts.com/lite/) - see plugin frontend.
+* [View Admin Demo](https://demo.wpadverts.com/lite/wp-admin/) - see wp-admin panel.
 * [Documentation](https://wpadverts.com/documentation/) - mainly for users.
 * [Code Snippets](https://github.com/simpliko/wpadverts-snippets) - for programmers and developers.
 
@@ -90,7 +90,7 @@ See all https://wpadverts.com/extensions/
 
 = I have a problem what now? =
 
-Please describe your issue and submit ticket on plugin support forum, you should receive reply within 24 hours (except Sunday).
+Please describe your issue and submit ticket on plugin support forum, you should receive reply within 24 hours (except weekends).
 
 = Ads pages are showing 404 error? =
 
@@ -98,6 +98,15 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.3.3 - 2019-05-08 =
+
+ * FEATURE: "alt" and "title" tags for images in [adverts_list].
+ * FEATURE: "Complete Payment" button will show in [adverts_manage] if user posted an Ad but not payed for it.
+ * FEATURE: if adverts_email is not provided in [adverts_add] then contact form will be sent to user email address if Ad was posted by logged in user.
+ * FIXED: Labels for advert_category taxonomy (fixes conflict with WP Post Modules plugin).
+
+
 
 = 1.3.2 - 2019-03-21 =
 

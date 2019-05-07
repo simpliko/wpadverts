@@ -9,6 +9,9 @@
  * @since 0.1
  */
 ?>
+
+<div class="wrap">
+    
 <?php foreach($module_groups as $mg_name => $group): ?>
 <h2><?php esc_html_e($group["title"]) ?></h2>
 
@@ -60,3 +63,5 @@
     
 </div>
 <?php endforeach; ?>
+
+</div>

@@ -4,7 +4,7 @@ Contributors: gwin
 Tags: classifieds, classified, classified ads, classified script, classifieds script, wp classified, wp classifieds
 Requires PHP: 5.3
 Requires at least: 4.0
-Tested up to: 5.1
+Tested up to: 5.2
 Stable tag: 1.3.3
 License: GNU Version 2 or Any Later Version
 

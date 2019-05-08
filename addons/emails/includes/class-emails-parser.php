@@ -179,7 +179,13 @@ class Adext_Emails_Parser implements Adext_Emails_Parser_Interface {
         $count = count( $matches[0] );
         
         for( $i = 0; $i<$count; $i++ ) {
-            list( $var, $filters ) = explode( "|", $matches[1][$i] );
+
+            if( stripos( $matches[1][$i], "|" ) !== false ) {
+                list( $var, $filters ) = explode( "|", $matches[1][$i] );
+            } else {
+                $var = $matches[1][$i];
+                $filters = null;
+            }
             $vars[ $matches[0][$i] ] = array( 
                 "value" => $var, 
                 "callback" => $filters

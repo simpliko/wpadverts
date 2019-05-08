@@ -120,18 +120,6 @@
 </table>
 
 <div class="tablenav">
-    <div class="tablenav-pages">
-        <?php
-            echo paginate_links( array(
-                'base' => remove_query_arg('pg') . "%_%",
-                'format' => '&pg=%#%',
-                'prev_text' => __('&laquo;'),
-                'next_text' => __('&raquo;'),
-                'current' => max( 1, adverts_request( 'pg', 1 ) ),
-                'total' => $loop->max_num_pages,
-            ));
-        ?>
-    </div>
 
 
     <div class="alignleft actions">

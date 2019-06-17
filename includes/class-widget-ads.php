@@ -168,8 +168,13 @@ class Adverts_Widget_Ads extends WP_Widget
         if( isset( $modules["featured"] ) ) {
             $options[] = array(
                 "name" => "featured",
-                "label" => __( "Show featured Ads only.", "adverts" ),
-                "type" => "checkbox",
+                "label" => __( "Ads Types", "adverts" ),
+                "type" => "select",
+                "options" => array(
+                    array( "value" => "all", "depth" => 0, "text" => __( "All", "adverts" ) ),
+                    array( "value" => "featured", "depth" => 0, "text" => __( "Featured Only", "adverts" ) ),
+                    array( "value" => "regular", "depth" => 0, "text" => __( "Regular Only", "adverts" ) )
+                )
             );
         }
         
@@ -181,6 +186,16 @@ class Adverts_Widget_Ads extends WP_Widget
                 $value = $instance[$option["name"]];
             } else {
                 $value = null;
+            }
+            
+            if( $option["name"] == "featured" ) {
+                if( is_string( $value ) ) {
+                    // do nothing
+                } else if( $value === 1) {
+                    $value = "featured";
+                } else if( $value === 0 ) {
+                    $value = "all";
+                }
             }
             
             if( in_array($option["type"], array( "text", "number", "range" ) ) ) {
@@ -335,7 +350,7 @@ class Adverts_Widget_Ads extends WP_Widget
         $instance['count'] = intval($new_instance['count']);
         $instance['keyword'] = trim( $new_instance['keyword'] );
         $instance['location'] = trim( $new_instance['location'] );
-        $instance['category'] = array_map("intval", $new_instance['category']);
+        $instance['category'] = isset( $new_instance['category'] ) ? array_map("intval", $new_instance['category']) : array();
         $instance['price_min'] = intval($new_instance['price_min']);
         $instance['price_max'] = intval($new_instance['price_max']);
         $instance['sort'] = $new_instance['sort'];
@@ -347,10 +362,10 @@ class Adverts_Widget_Ads extends WP_Widget
         if( isset( $modules["featured"] ) ) {
 
             if( ! isset( $new_instance["featured"] ) ) {
-                $new_instance["featured"] = 0;
+                $new_instance["featured"] = "all";
             }
             
-            $instance["featured"] = intval( $new_instance["featured"] );
+            $instance["featured"] = trim( $new_instance["featured"] );
         }
         
         return $instance;
@@ -397,8 +412,16 @@ class Adverts_Widget_Ads extends WP_Widget
             $orderby = array( 'menu_order' => 'DESC' );
         }
         
-        if( isset( $modules["featured"] ) && isset( $instance["featured"] ) && $instance["featured"] == "1" ) {
-            $menu_order = 1;
+        if( isset( $modules["featured"] ) && isset( $instance["featured"] ) ) {
+            if( $instance["featured"] == "all" ) {
+                $menu_order = null;
+            } else if( $instance["featured"] == "featured" || $instance["featured"] == 1 ) {
+                $menu_order = 1;
+            } else if( $instance["featured"] == "regular" ) {
+                $menu_order = 0;
+            } else {
+                $menu_order = null;
+            }
         } 
         
         if( isset( $instance["price_min"]) && $instance["price_min"] > 0 ) {

@@ -208,7 +208,7 @@ function adverts_init() {
     include_once ADVERTS_PATH . 'includes/functions.php';
     
     include_once ADVERTS_PATH . 'includes/defaults.php';
-    
+
     foreach( adverts_config( "gallery.image_sizes" ) as $image_key => $image_size ) {
         if( $image_size["enabled"] ) {
             add_image_size( $image_key, $image_size["width"], $image_size["height"], $image_size["crop"] );

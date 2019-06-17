@@ -302,7 +302,7 @@ function adext_payments_page_history() {
                 
                 if(is_numeric($post_id) && $post_id>0 &&  $status_old!=$status_new ) {
                     
-                    do_action( "adverts_payment_status_change", get_post( $payment_id ), $new_status, $old_status );
+                    do_action( "adverts_payment_status_change", get_post( $payment->ID ), $status_new, $status_old );
                     do_action( "adverts_payment_{$status_new}", $payment );
                     do_action( "adverts_payment_{$status_old}_to_{$status_new}", $payment );
                     

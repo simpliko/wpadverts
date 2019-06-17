@@ -88,16 +88,13 @@ function shortcode_payments_checkout( $atts ) {
         return ob_get_clean();
     }
     
-    $post_id = get_post_meta( $payment_id, '_adverts_object_id', true );
-    $post = get_post( $post_id );
-
+    $post = adext_payments_get_payment_object( $payment );
+    $listing = adext_payments_get_payment_pricing( $payment );
+    
     $adverts_flash["info"][0] = array(
-        "message" => sprintf( __( "<p><strong>Your Payment Is Required</strong><p>Please complete payment for the <em>'%s'</em> Ad posting to have it published.</p>"), $post->post_title ),
+        "message" => sprintf( __( "<p><strong>Your Payment Is Required</strong><p>Please complete payment for the <em>'%s'</em> Ad posting.</p>"), $post->post_title ),
         "icon" => "adverts-icon-basket"
     );
-    
-    $listing = get_post( get_post_meta( $payment->ID, "_adverts_pricing_id", true ) );
-    $listing_id = $listing->ID;
     
     $price = get_post_meta( $payment->ID, "_adverts_payment_total", true );
     

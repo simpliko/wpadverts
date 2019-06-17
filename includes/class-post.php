@@ -113,11 +113,11 @@ class Adverts_Post {
         if($post && $post->ID > 0) {
             // Post already exists, update only.
             $data["ID"] = $post->ID;
-            $post_id = wp_update_post( apply_filters( "adverts_update_post", $data ) );
+            $post_id = wp_update_post( apply_filters( "adverts_update_post", $data ), true );
         } else {
             // Post does not exist, insert it.
             $data["comment_status"] = "closed";
-            $post_id = wp_insert_post( apply_filters( "adverts_insert_post", $data ) );
+            $post_id = wp_insert_post( apply_filters( "adverts_insert_post", $data ), true );
         }
         
         if(is_wp_error($post_id)) {

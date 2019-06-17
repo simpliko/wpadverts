@@ -871,6 +871,7 @@ function adext_payments_init_admin() {
     add_action( 'admin_menu', 'adext_payments_add_history_link');
     add_filter( 'display_post_states', 'adext_payments_display_pending_state' );
     add_action( 'admin_head', 'adext_payments_admin_head' );
+    add_action( 'adext_payments_details_box', 'adext_payments_details_box' );
 }
 
 /**
@@ -1039,7 +1040,7 @@ function adext_payments_manage_list_status( $post ) {
  * }
  * @return int|WP_Error The post ID on success. The WP_Error on failure.
  */
-function adext_insert_payment( $postarr ) {
+function adext_insert_payment( $postarr, $pricing = null ) {
     
     $defaults = array(
         "ID" => 0,
@@ -1076,8 +1077,12 @@ function adext_insert_payment( $postarr ) {
         $data["buyer_email"] = $user_info->user_email;
     }
     
-    $pricing = get_post( $data["pricing_id"] );
-    $price = get_post_meta( $data["pricing_id"], "adverts_price", true );
+    if( ! $pricing ) {
+        $pricing = get_post( $data["pricing_id"] );
+        $price = get_post_meta( $data["pricing_id"], "adverts_price", true );
+    } else {
+        $price = $pricing->price;
+    }
 
     $payment_data = array(
         'post_title'    => $data['buyer_name'],
@@ -1137,6 +1142,124 @@ function adext_insert_payment( $postarr ) {
     
     
     return $payment_id;
+}
+
+
+function adext_get_payment_pricing( $payment ) {
+    _deprecated_function(__FUNCTION__, "1.0");
+    if( is_object( $payment ) ) {
+        $payment_id = $payment->ID;
+    } else {
+        $payment_id = $payment;
+        $payment = get_post( $payment_id );
+    }
+    
+    $default_types = array( "adverts-pricing", "adverts-renewal" );
+    
+    if( in_array( $payment->post_type, $default_types ) ) {
+        $pricing_id = get_post_meta( $payment_id, "_adverts_pricing_id", true );
+        $pricing = get_post( $pricing_id );
+    } 
+    
+    return apply_filters( "adext_get_payment_pricing", $pricing, $payment );
+}
+
+function adext_get_payment_pricing_price( $payment ) {
+    _deprecated_function(__FUNCTION__, "1.0");
+}
+
+function adext_payments_get_payment_object( $payment ) {
+    
+    $object_id = get_post_meta( $payment->ID, '_adverts_object_id', true );
+    $type = get_post_meta( $payment->ID, "_adverts_payment_for", true);
+    $object = null;
+    
+    if( ! in_array( $type, array( "post", "renewal" ) ) ) {
+        $object = get_post( $object_id );
+    }
+    
+    return apply_filters( "adext_payments_get_payment_object", $object, $payment, $type );
+}
+
+function adext_payments_get_payment_pricing( $payment ) {
+    
+    $listing = get_post( get_post_meta( $payment->ID, "_adverts_pricing_id", true ) );
+    $type = get_post_meta( $payment->ID, "_adverts_payment_for", true);
+    
+    if( ! in_array( $type, array( "post", "renewal" ) ) ) {
+        $object = get_post( $listing->ID );
+    }
+    
+    return apply_filters( "adext_payments_get_payment_pricing", $object, $payment, $type );
+}
+
+function adext_payments_payment_type( $item ) {
+    
+    $listing_id = get_post_meta( $item->ID, "_adverts_pricing_id", true );
+    $listing = get_post( $listing_id );
+      
+    $payment_type = "—";
+    
+    if( $listing->post_type == "adverts-pricing" ) {
+        $payment_type = __( "Posting", "adverts" ); 
+    } elseif( $listing->post_type == "adverts-renewal" ) {
+        $payment_type = __( "Renewal", "adverts" );
+    } else {
+               
+    }
+    
+    return apply_filters( "adext_payments_payment_type", $payment_type, $item ); 
+}
+
+function adext_payments_details_box( $payment ) {
+    
+    $type = get_post_meta( $payment->ID, "_adverts_payment_for", true);
+    
+    if( ! in_array( $type, array( "post", "renewal" ) ) ) {
+        return;
+    }
+    
+    $listing_id = get_post_meta( $payment->ID, "_adverts_pricing_id", true );
+    $listing = get_post( $listing_id );
+    
+    ?>
+    <div class="inside " style="font-size:1.1em; clear:both; overflow:hidden">
+
+        <div class="column" style="width:33%; float:left">
+            <strong><?php _e("Purchase Type", "adverts") ?></strong><br/>
+            <span>
+                <?php echo adext_payments_payment_type( $payment ) ?>
+            </span>
+        </div>
+
+        <div class="column" style="width:33%; float: left">
+            <strong><?php _e("Listing Type", "adverts") ?></strong><br/>
+            <?php if($listing): ?>
+            <span>
+                <a href="<?php echo admin_url('edit.php?post_type=advert&page=adverts-extensions&module=payments&adaction=list&edit='.$listing->ID) ?>"><?php esc_html_e($listing->post_title) ?></a> 
+                <?php echo adverts_price( get_post_meta( $listing->ID, "adverts_price", true ) ) ?>
+            </span>
+            <?php else: ?>
+            <?php esc_html_e( sprintf( __("Listing [%d] no longer exists.", "adverts"), $listing_id ) ) ?>
+            <?php endif; ?>
+        </div>
+
+        <div class="column" style="width:33%; float: left">
+            <strong><?php _e("Purchased Item", "adverts") ?></strong><br/>
+            <?php $post_id = get_post_meta( $payment->ID, "_adverts_object_id", true ); ?>
+            <?php $post = get_post( $post_id ) ?>
+            <?php if($post): ?>
+            <span>
+                <a href="<?php echo admin_url('post.php?post='.$post->ID.'&action=edit') ?>"><?php esc_html_e($post->post_title) ?></a>
+            </span>
+            <?php else: ?>
+            <?php esc_html_e( sprintf( __("Ad [%d] no longer exists.", "adverts"), $listing_id ) ) ?>
+            <?php endif; ?>
+        </div>
+
+    </div><!-- /.inside -->
+    
+    <?php
 }
 
 /**

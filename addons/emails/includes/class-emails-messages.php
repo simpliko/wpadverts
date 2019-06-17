@@ -80,6 +80,10 @@ class Adext_Emails_Messages {
             $args = 1;
             $filter = "action";
             
+            if( isset( $message['enabled'] ) && $message['enabled'] == 0 ) {
+                continue;
+            }
+
             if( is_array( $callback ) && array_key_exists( "function", $callback ) ) {
                 $func = $callback["function"];
             }
@@ -352,7 +356,7 @@ class Adext_Emails_Messages {
         foreach( $mail["headers"] as $k => $v ) {
             $headers[] = sprintf( "%s: %s", $k, $v );
         }
-        
+
         wp_mail( $mail["to"], $mail["subject"], $mail["message"], $headers, $mail["attachments"] );
     }
     

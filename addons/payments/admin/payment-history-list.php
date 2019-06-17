@@ -106,16 +106,8 @@
             </td>  
             
             <td class="">
-                <?php $listing_id = get_post_meta( $item->ID, "_adverts_pricing_id", true ); ?>
-                <?php $listing = get_post( $listing_id ) ?>
-                
-                <?php if( $listing->post_type == "adverts-pricing" ): ?>
-                <?php _e( "Posting", "adverts" ) ?>
-                <?php elseif( $listing->post_type == "adverts-renewal" ): ?>
-                <?php _e( "Renewal", "adverts" ) ?>
-                <?php else: ?>
-                —
-                <?php endif; ?>
+                <?php echo adext_payments_payment_type( $item ) ?>
+
             </td>  
 
             <td>

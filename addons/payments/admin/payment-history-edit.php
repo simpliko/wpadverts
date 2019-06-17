@@ -97,8 +97,7 @@
         </div><!-- /#side-sortables -->
     </div>
         
-    <?php $listing_id = get_post_meta( $payment->ID, "_adverts_pricing_id", true ); ?>
-    <?php $listing = get_post( $listing_id ) ?>
+
 
     <div id="postbox-container-2" class="postbox-container">
     
@@ -107,48 +106,9 @@
             <h3 class="hndle">
                 <span><?php _e("Purchase Details", "adverts") ?></span>
             </h3>
-            <div class="inside " style="font-size:1.1em; clear:both; overflow:hidden">
-                
-                <div class="column" style="width:33%; float:left">
-                    <strong><?php _e("Purchase Type", "adverts") ?></strong><br/>
-                    <span>
-                        <?php if( $listing->post_type == "adverts-pricing" ): ?>
-                        <?php _e( "Posting", "adverts" ) ?>
-                        <?php elseif( $listing->post_type == "adverts-renewal" ): ?>
-                        <?php _e( "Renewal", "adverts" ) ?>
-                        <?php else: ?>
-                        -
-                        <?php endif; ?>
-                    </span>
-                </div>
-                
-                <div class="column" style="width:33%; float: left">
-                    <strong><?php _e("Listing Type", "adverts") ?></strong><br/>
-                    <?php if($listing): ?>
-                    <span>
-                        <a href="<?php echo admin_url('edit.php?post_type=advert&page=adverts-extensions&module=payments&adaction=list&edit='.$listing->ID) ?>"><?php esc_html_e($listing->post_title) ?></a> 
-                        <?php echo adverts_price( get_post_meta( $listing->ID, "adverts_price", true ) ) ?>
-                    </span>
-                    <?php else: ?>
-                    <?php esc_html_e( sprintf( __("Listing [%d] no longer exists.", "adverts"), $listing_id ) ) ?>
-                    <?php endif; ?>
-                </div>
-                
-                <div class="column" style="width:33%; float: left">
-                    <strong><?php _e("Purchased Item", "adverts") ?></strong><br/>
-                    <?php $post_id = get_post_meta( $payment->ID, "_adverts_object_id", true ); ?>
-                    <?php $post = get_post( $post_id ) ?>
-                    <?php if($post): ?>
-                    <span>
-                        <a href="<?php echo admin_url('post.php?post='.$post->ID.'&action=edit') ?>"><?php esc_html_e($post->post_title) ?></a>
-                    </span>
-                    <?php else: ?>
-                    <?php esc_html_e( sprintf( __("Ad [%d] no longer exists.", "adverts"), $listing_id ) ) ?>
-                    <?php endif; ?>
-                </div>
-                
-            </div><!-- /.inside -->
             
+            <?php do_action( "adext_payments_details_box", $payment ) ?>
+
             <div class="inside" style="font-size:1.1em; clear:both; overflow:hidden">
                 <hr/>
                 <strong><?php _e("Secure Complete Payment URL", "adverts") ?></strong><br/>

@@ -107,6 +107,9 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
  * FIXED: Labels for advert_category taxonomy (fixes conflict with WP Post Modules plugin).
  * FIXED: Success message not visible after submitting contact form.
  * FIXED: HTML glitch in wp-admin / Classifieds / Options (visible on some installations on mobile devices).
+ * FIXED: Notices showing when viewing wp-admin / Classifieds / Emails panel.
+ * FIXED: Notices showing after submitting contact form with Emails Module enabled.
+ * FIXED: Contact form is loaded only when "Send Message" button is visible on Ad details page.
 
 
 = 1.3.2 - 2019-03-21 =

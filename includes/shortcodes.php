@@ -415,6 +415,10 @@ function shortcode_adverts_add( $atts ) {
             
             $adverts_flash = array( "error" => $error, "info" => $info );
             
+            if( is_wp_error($post_id) ) {
+                return adverts_flash( $adverts_flash );
+            }
+            
             // adverts/templates/add-preview.php
             ob_start();
             include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/add-preview.php' );

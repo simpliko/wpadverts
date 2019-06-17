@@ -429,7 +429,8 @@ class Adverts_Widget_Categories extends WP_Widget
             ?>
             <div class="adverts-grid-row">
                 <div class="adverts-col-100">
-                    <span class="adverts-widget-grid-link <?php echo "adverts-icon-".$icon ?> <?php $this->is_term($term_item->term_id) ?>">
+                    <span class="adverts-widget-grid-link <?php echo apply_filters("adverts_category_font_icon", "adverts-icon-".$icon, $term_item, "small") ?> <?php $this->is_term($term_item->term_id) ?>">
+                        <?php do_action( "adverts_category_pre_title", $term_item, "small") ?>
                         <a href="<?php echo esc_attr(get_term_link($term_item)) ?>"><?php esc_html_e($term_item->name) ?></a>
                         <?php if( $instance['show_count'] ): ?>
                         (<?php echo adverts_category_post_count( $term_item ) ?>)

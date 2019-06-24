@@ -273,6 +273,13 @@ function adext_payments_page_history() {
     } elseif( adverts_request( "edit" ) ) {
         // Display payment edit page.
         $payment = get_post( adverts_request( "edit" ) );
+        
+        if( $payment === null ) {
+            $flash->add_error( sprintf( __( "Payment #%d does not exist or was deleted.", "adverts" ), adverts_request( "edit" ) ) );
+            include ADVERTS_PATH . 'addons/payments/admin/payment-history-edit.php';
+            return;
+        }
+        
         $form = new Adverts_Form();
         $form->load( Adverts::instance()->get( "form_payments_history" ) );
         $form->bind( Adverts_Post::to_array( $payment ) );

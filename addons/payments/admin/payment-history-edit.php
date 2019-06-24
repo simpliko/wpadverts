@@ -18,6 +18,8 @@
 
     <?php adverts_admin_flash() ?>
     
+    <?php if( $payment !== null ): ?>
+    
     <form action="" method="post" class="adverts-form">
     <div id="poststuff" class=" ">
     <div id="post-body" class="metabox-holder columns-2">
@@ -159,6 +161,8 @@
     </div>
     </div>
     </form>
+    
+    <?php endif; ?>
     
 </div>
 

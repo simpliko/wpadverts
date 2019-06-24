@@ -1717,12 +1717,6 @@ function adverts_save_multi( $post_id, $key, $value ) {
 
     $post_meta = get_post_meta( $post_id, $key, false);
 
-    if( empty( $post_meta ) ) {
-        $post_meta = array();
-    } else if( ! is_array( $post_meta ) ) {
-        $post_meta = array( $post_meta );
-    }
-    
     $to_insert = array_diff($value, $post_meta);
     $to_delete = array_diff($post_meta, $value);
 

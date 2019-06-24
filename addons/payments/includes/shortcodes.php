@@ -92,7 +92,7 @@ function shortcode_payments_checkout( $atts ) {
     $listing = adext_payments_get_payment_pricing( $payment );
     
     $adverts_flash["info"][0] = array(
-        "message" => sprintf( __( "<p><strong>Your Payment Is Required</strong><p>Please complete payment for the <em>'%s'</em> Ad posting.</p>"), $post->post_title ),
+        "message" => sprintf( __( "<p><strong>Your Payment Is Required</strong><p>Please complete payment for the <em>'%s'</em> Ad posting.</p>", "adverts" ), $post->post_title ),
         "icon" => "adverts-icon-basket"
     );
     

@@ -469,7 +469,7 @@ function adext_payments_action_payment($content, Adverts_Form $form ) {
     $post = get_post( $post_id );
     
     $info[] = array(
-        "message" => sprintf( __( "<p><strong>Your Payment Is Required</strong><p>Please complete payment for the <em>'%s'</em> Ad posting to have it published.</p>"), $post->post_title ),
+        "message" => sprintf( __( "<p><strong>Your Payment Is Required</strong><p>Please complete payment for the <em>'%s'</em> Ad posting to have it published.</p>", "adverts" ), $post->post_title ),
         "icon" => "adverts-icon-basket"
     );
     $error = array();
@@ -1101,9 +1101,9 @@ function adext_insert_payment( $postarr, $pricing = null ) {
     $data["meta"] = $meta;
 
     if( $data["ID"] > 0 ) {
-        $payment_id = wp_update_post( $payment_data );
+        $payment_id = wp_update_post( $payment_data, true );
     } else {
-        $payment_id = wp_insert_post( $payment_data );
+        $payment_id = wp_insert_post( $payment_data, true );
     }
     
     if( is_wp_error( $payment_id ) ) {

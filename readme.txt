@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classified script, classifieds sc
 Requires PHP: 5.3
 Requires at least: 4.0
 Tested up to: 5.2
-Stable tag: 1.3.3
+Stable tag: 1.3.4
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -65,6 +65,7 @@ See all https://wpadverts.com/extensions/
 * French
 * Dutch
 * German
+* Italian
 * Polish
 * Portugese
 * Russian
@@ -98,6 +99,17 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.3.4 - 2019-06-25 =
+
+ * FEATURE: Recent Ads widget allows now showing: featured, normal or all ads.
+ * FEATURE: Extended Payments API to allow custom pricings (will be used with Membership extension).
+ * FIXED: Categories widget does not use filter which allows customizing icons for sub-categories.
+ * FIXED: Email messages in Emails module are being sent even if disabled.
+ * FIXED: When wp_insert_post() function fails in [adverts_add] an error message should be shown on screen (instead of preview)
+ * FIXED: Some phrases could not be translated due to missing text domain.
+ * FIXED: Fatal Error shown in wp-admin / Payments History when trying to access payment which does not exist.
+ * TRANSLATION: Italian translation added
 
 = 1.3.3 - 2019-05-08 =
 

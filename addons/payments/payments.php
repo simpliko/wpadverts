@@ -1174,8 +1174,10 @@ function adext_payments_get_payment_object( $payment ) {
     $type = get_post_meta( $payment->ID, "_adverts_payment_for", true);
     $object = null;
     
-    if( ! in_array( $type, array( "post", "renewal" ) ) ) {
+    if( in_array( $type, array( "post", "renewal" ) ) ) {
         $object = get_post( $object_id );
+    } else {
+        $object = null;
     }
     
     return apply_filters( "adext_payments_get_payment_object", $object, $payment, $type );
@@ -1185,9 +1187,11 @@ function adext_payments_get_payment_pricing( $payment ) {
     
     $listing = get_post( get_post_meta( $payment->ID, "_adverts_pricing_id", true ) );
     $type = get_post_meta( $payment->ID, "_adverts_payment_for", true);
-    
-    if( ! in_array( $type, array( "post", "renewal" ) ) ) {
+
+    if( in_array( $type, array( "post", "renewal" ) ) ) {
         $object = get_post( $listing->ID );
+    } else {
+        $object = null;
     }
     
     return apply_filters( "adext_payments_get_payment_pricing", $object, $payment, $type );

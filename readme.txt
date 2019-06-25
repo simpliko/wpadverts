@@ -104,6 +104,7 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
  * FEATURE: Recent Ads widget allows now showing: featured, normal or all ads.
  * FEATURE: Extended Payments API to allow custom pricings (will be used with Membership extension).
+ * FIXED: adverts_payment_status_change filter uses incorrect arguments.
  * FIXED: Categories widget does not use filter which allows customizing icons for sub-categories.
  * FIXED: Email messages in Emails module are being sent even if disabled.
  * FIXED: When wp_insert_post() function fails in [adverts_add] an error message should be shown on screen (instead of preview)

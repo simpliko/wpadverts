@@ -221,7 +221,7 @@ class Adext_Payments_Emails_Integration {
             "notify" => "admin",
             "from" => array( "name" => "", "email" => "" ),
             "to" => "{\$admin_email}",
-            "subject" => __( "New Ad has been paid nad published", "adverts" ),
+            "subject" => __( "New Ad has been paid and published", "adverts" ),
             "body" => __( "Hello,\nnew Ad titled '{\$advert.post_title}' has been published.\n\nYou can view the Ad here:\n{\$advert.ID|get_permalink}\n\nYou can edit the Ad here:\n{\$advert|admin_edit_url}", "adverts" ),
             "headers" => array(),
             "attachments" => array()

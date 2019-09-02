@@ -33,18 +33,18 @@ function adext_payments_ajax_render() {
     $data["listing_id"] = adverts_request( "listing_id" );
     $data["object_id"] = adverts_request( "object_id" );
     $data["payment_id"] = adverts_request( "payment_id" );
-    $data["payment_for"] = "post";
+    $data["payment_for"] = adverts_request( "object_type", "post" );
     $data["gateway_name"] = $gateway_name;
     $data["bind"] = array();
     foreach(adverts_request( 'form', array() ) as $item) {
         $data["bind"][$item["name"]] = $item["value"];
     }
-    
+
     $form = new Adverts_Form();
     $form->load( $gateway["form"]["payment_form"] );
     $form->bind( $data["bind"] );
     
-    if( isset($data["bind"]) && !empty( $data["bind"] ) ) {
+    if( isset( $data["bind"] ) && !empty( $data["bind"] ) ) {
         
         $isValid = $form->validate();
         
@@ -59,7 +59,8 @@ function adext_payments_ajax_render() {
             
             wp_update_post( array(
                 'ID' => $payment_id,
-                'post_title' => $form->get_value( "adverts_person" )
+                'post_title' => $form->get_value( "adverts_person" ),
+                'post_status' => 'pending'
             ) );
             
             update_post_meta( $payment_id, 'adverts_person', $form->get_value('adverts_person') );

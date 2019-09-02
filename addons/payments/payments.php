@@ -61,6 +61,15 @@ function adext_payments_init() {
     
     add_action( 'save_post_adverts-payment', 'adverts_create_hash', 10, 3 );
     
+    register_post_status( 'adverts-payment-tmp', array(
+        'label'                     => _x( 'Temporary', 'temporary status payment', 'adverts' ),
+        'public'                    => is_admin(),
+        'exclude_from_search'       => false,
+        'show_in_admin_all_list'    => true,
+        'show_in_admin_status_list' => true,
+        'label_count'               => _n_noop( 'Unread <span class="count">(%s)</span>', 'Unread <span class="count">(%s)</span>', 'adverts' ),
+    ) );
+    
     register_post_status( 'completed', array(
         'label'                     => _x( 'Completed', 'completed status payment', 'adverts' ),
         'public'                    => is_admin(),
@@ -114,6 +123,7 @@ function adext_payments_init() {
     wp_register_style( 'adverts-payments-white-page', ADVERTS_URL . '/addons/payments/assets/css/white-page.css', array(), '1.3.0' );
     
     include_once ADVERTS_PATH . 'addons/payments/includes/shortcodes.php';
+    include_once ADVERTS_PATH . 'addons/payments/includes/events.php';
 }
 
 /**
@@ -1037,6 +1047,7 @@ function adext_payments_manage_list_status( $post ) {
  *      @type string $payment_gateway       Payment Gateway name
  *      @type string $payment_for           For future use currently default to "post"
  *      @type float  $payment_paid          How much user already paid
+ *      @type string $post_date_gmt         Payment creation date in YYYY-MM-DD H:i:s format
  * }
  * @return int|WP_Error The post ID on success. The WP_Error on failure.
  */
@@ -1055,6 +1066,7 @@ function adext_insert_payment( $postarr, $pricing = null ) {
         "payment_gateway" => null,
         "payment_for" => "post",
         "payment_paid" => 0,
+        "post_date_gmt" => current_time( 'mysql', true )
     );
     
     $data = array_merge( $defaults, $postarr );
@@ -1088,7 +1100,8 @@ function adext_insert_payment( $postarr, $pricing = null ) {
         'post_title'    => $data['buyer_name'],
         'post_content'  => '',
         'post_status'   => $data['payment_status'],
-        'post_type'     => $data['payment_type']
+        'post_type'     => $data['payment_type'],
+        'post_date_gmt' => $data['post_date_gmt']
     );
 
     $meta = array(
@@ -1270,13 +1283,15 @@ function adext_payments_details_box( $payment ) {
  * Checks if post has payment created
  * 
  * @since 1.3.0
+ * @since 1.3.5       Added $post_type param
  * 
  * @param   int       $post_id          Post ID
  * @param   int       $listing_id       Pricing ID
  * @param   string    $post_status      Payment status (default 'pending')
+ * @param   string    $post_type        Payment type (default 'post')
  * @return  int|bool                    The Payment ID or false
  */
-function adext_post_get_payment( $post_id, $listing_id, $post_status = "pending" ) {
+function adext_post_get_payment( $post_id, $listing_id, $post_status = "pending", $post_type = "post" ) {
     $query = new WP_Query(array(
         "post_type" => "adverts-payment",
         "post_status" => $post_status,
@@ -1291,6 +1306,10 @@ function adext_post_get_payment( $post_id, $listing_id, $post_status = "pending"
             array(
                 "key" => '_adverts_pricing_id',
                 "value" => $listing_id
+            ),
+            array(
+                "key" => '_adverts_payment_for',
+                "value" => $post_type
             )
         )
     ));

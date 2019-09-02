@@ -170,7 +170,7 @@ function shortcode_adverts_list( $atts ) {
     $loop = new WP_Query( $args );
     $paginate_base = apply_filters( 'adverts_list_pagination_base', $pbase . '%_%' );
     $paginate_format = stripos( $paginate_base, '?' ) ? '&pg=%#%' : '?pg=%#%';
-    
+
     include_once ADVERTS_PATH . 'includes/class-html.php';
     include_once ADVERTS_PATH . 'includes/class-form.php';
 

@@ -280,9 +280,7 @@ function adext_payments_page_history() {
             return;
         }
         
-        $form = new Adverts_Form();
-        $form->load( Adverts::instance()->get( "form_payments_history" ) );
-        $form->bind( Adverts_Post::to_array( $payment ) );
+        $form_scheme = Adverts::instance()->get( "form_payments_history" );
         
         $gateway_name = get_post_meta( $payment->ID, '_adverts_payment_gateway', true);
         $gateway = null;
@@ -294,7 +292,13 @@ function adext_payments_page_history() {
         if( ! $gateway && $gateway_name ) {
             $msg = sprintf( __( "Payment Method [%s] assigned to this Payment does not exist or was disabled.", "adverts" ), $gateway_name );
             $flash->add_error( $msg );
+        } else {
+            $form_scheme = $gateway["form"]["payment_form"];
         }
+        
+        $form = new Adverts_Form();
+        $form->load( $form_scheme );
+        $form->bind( Adverts_Post::to_array( $payment ) );
         
         if(isset($_POST) && !empty($_POST)) {
             $form->bind( stripslashes_deep( $_POST ) );
@@ -396,10 +400,23 @@ function adext_payments_page_history() {
                 }
             }
             
-            $flash->add_info( sprintf(__("Status for selected Payments was changed to: %s"), $status_obj->label ) );
+            $flash->add_info( sprintf(__("Status for selected Payments was changed to: %s", "adverts"), $status_obj->label ) );
         }
         
         wp_redirect( remove_query_arg( array( 'delete', 'noheader', 'pg' ) ) );
+        exit;
+    } elseif( adverts_request( "payments-manual-gc" ) == "1" ) {
+        
+        $deleted = adext_payments_event_gc();
+        if( $deleted > 0 ) {
+            $n = _n( "Deleted %d temporary payment.", "Deleted %d temporary payments", $deleted, "adverts" );
+            $flash->add_info( sprintf( $n, $deleted ) );
+        } else {
+            $n = __( "No temporary payments to delete at this time.", "adverts" );
+            $flash->add_info( $n );
+        }
+
+        wp_redirect( remove_query_arg( array( 'payments-manual-gc', 'noheader', 'pg' ) ) );
         exit;
     } else {
         // Display Payments History
@@ -414,6 +431,9 @@ function adext_payments_page_history() {
             $sql = "SELECT COUNT(*) FROM $wpdb->posts WHERE post_status = %s AND post_type = 'adverts-payment'";
             $status_list[$k] = (int) $wpdb->get_var( $wpdb->prepare( $sql, $k ) );
         }
+        
+        $sql = "SELECT COUNT(*) FROM $wpdb->posts WHERE post_status = %s AND post_type = 'adverts-payment'";
+        $temporary_count = (int) $wpdb->get_var( $wpdb->prepare( $sql, 'adverts-payment-tmp' ) );
         
         $sql = "SELECT DISTINCT YEAR( post_date ) AS year, MONTH( post_date ) AS month FROM $wpdb->posts WHERE post_type = %s ORDER BY post_date DESC";
         $months_list = $wpdb->get_results( $wpdb->prepare( $sql, 'adverts-payment' ) );
@@ -434,6 +454,7 @@ function adext_payments_page_history() {
             'post_type' => 'adverts-payment',
             'posts_per_page' => 20, 
             'paged' => adverts_request( 'pg', 1 ),
+            'post_status' => array_keys( $status_list )
         );
         
         if($filter) {

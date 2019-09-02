@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classified script, classifieds sc
 Requires PHP: 5.3
 Requires at least: 4.0
 Tested up to: 5.2
-Stable tag: 1.3.4
+Stable tag: 1.3.5
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -99,6 +99,13 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.3.5 - 2019-09-03 =
+
+* FEATURE: Updated list of icons to version 4.7.0, that is about 200 icons added.
+* FEATURE: Extended Payments Module API to allow registering different payment types.
+* FIXED: Some assets (CSS and JS files) are being blocked by AdBlockers due to file names starting with "adverts-*".
+* FIXED: Payments History edit page does not load correct form scheme if a payment gateway is using different form then the standard one.
 
 = 1.3.4 - 2019-06-25 =
 

@@ -24,6 +24,10 @@
     <?php foreach($status_list as $status => $count): ?>
     <li><a <?php if($filter == $status): ?>class="current"<?php endif; ?> href="<?php esc_attr_e(add_query_arg(array('status'=>$status))) ?>"><?php esc_html_e(get_post_status_object($status)->label) ?></a><span class="count">(<?php echo (int)$count ?>)</span> | </li>
     <?php endforeach; ?>
+    
+    <?php if($temporary_count > 0): ?>
+    <li><a <?php if($filter == "adverts-payment-tmp"): ?>class="current"<?php endif; ?>href="<?php esc_attr_e(add_query_arg(array('status'=>"adverts-payment-tmp"))) ?>"> <?php esc_html_e(get_post_status_object("adverts-payment-tmp")->label) ?></a></li>
+    <?php endif; ?>
 </ul>
 
 <form method="post" action="<?php esc_attr_e( add_query_arg( array( 'noheader'=>1, 'pg'=>null ) ) ) ?>" id="posts-filter">
@@ -145,6 +149,18 @@
         </select>
         <input type="submit" class="button-secondary action" id="wpjb-doaction2" value="<?php _e("Apply", "adverts") ?>"/>
 
+        <?php if( adverts_request( "status" ) === "adverts-payment-tmp" ): ?>
+        <a href="<?php echo esc_attr( add_query_arg( array( "noheader" => 1, "payments-manual-gc" => 1 ) ) ) ?>" class="button-secondary"><?php _e( "Cleanup Now", "adverts" ) ?></a>
+        <span style="line-height:28px">
+            <?php $from = wp_next_scheduled("adext_payments_event_gc"); ?>
+            <?php if( $from === false ): ?>
+            <?php echo esc_html( __("Automatic cleanup was never run.", "adverts" ) ) ?>
+            <?php else: ?>
+            <?php echo sprintf( __("Next automatic cleanup <strong>%s</strong>.", "adverts" ), date_i18n( get_option( "date_format" ) . " @ " . get_option( "time_format"), $from + ( intval( get_option( 'gmt_offset' ) * 3600 ) ) ) ) ?>
+            <?php endif; ?>
+        </span>
+        <?php endif; ?>
+        
         <br class="clear"/>
     </div>
 

@@ -297,7 +297,7 @@ function adverts_category_form_fields($tag)
     wp_enqueue_script('wp-color-picker');
     
     $icons = array("");
-    $file = file(ADVERTS_PATH . '/assets/css/adverts-glyphs.css');
+    $file = file(ADVERTS_PATH . '/assets/css/wpadverts-glyphs.css');
     
     foreach($file as $line) {
         if(stripos($line, ".adverts-icon-") === 0) {

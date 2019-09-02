@@ -180,7 +180,7 @@ function adext_contact_form_init_frontend() {
     remove_action('adverts_tpl_single_bottom', 'adverts_single_contact_information');
     add_action('adverts_tpl_single_bottom', 'adext_contact_form');
 
-    wp_register_script( 'adverts-contact-form-scroll', ADVERTS_URL  .'/assets/js/adverts-contact-form-scroll.js', array( 'jquery' ), "1", true);
+    wp_register_script( 'adverts-contact-form-scroll', ADVERTS_URL  .'/assets/js/wpadverts-contact-form-scroll.js', array( 'jquery' ), "1.3.5", true);
 }
 
 /**

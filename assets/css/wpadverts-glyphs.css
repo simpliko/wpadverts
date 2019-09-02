@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'adverts-glyphs';
-  src: url('../font/adverts-glyphs.eot?55810574');
-  src: url('../font/adverts-glyphs.eot?55810574#iefix') format('embedded-opentype'),
-       url('../font/adverts-glyphs.woff2?55810574') format('woff2'),
-       url('../font/adverts-glyphs.woff?55810574') format('woff'),
-       url('../font/adverts-glyphs.ttf?55810574') format('truetype'),
-       url('../font/adverts-glyphs.svg?55810574#adverts-glyphs') format('svg');
+  src: url('../font/wpadverts-glyphs.eot?55810574');
+  src: url('../font/wpadverts-glyphs.eot?55810574#iefix') format('embedded-opentype'),
+       url('../font/wpadverts-glyphs.woff2?55810574') format('woff2'),
+       url('../font/wpadverts-glyphs.woff?55810574') format('woff'),
+       url('../font/wpadverts-glyphs.ttf?55810574') format('truetype'),
+       url('../font/wpadverts-glyphs.svg?55810574#adverts-glyphs') format('svg');
   font-weight: normal;
   font-style: normal;
 }

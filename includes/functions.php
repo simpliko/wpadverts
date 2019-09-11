@@ -1227,7 +1227,7 @@ function adverts_field_label( $field ) {
 function adverts_field_text( $field ) {
     
     $attr = array(
-        "type" => "text",
+        "type" => isset( $field["subtype"] ) ? $field["subtype"] : "text",
         "name" => $field["name"],
         "id" => $field["name"],
         "value" => isset($field["value"]) ? $field["value"] : "",
@@ -1310,6 +1310,7 @@ function adverts_field_password( $field ) {
  */
 function adverts_field_select( $field ) {
     
+    $i = 1;
     $html = "";
     $name = $field["name"];
     $multiple = false;
@@ -1336,8 +1337,12 @@ function adverts_field_select( $field ) {
         "multiple" => $multiple
     );
 
-    if(isset($field["attr"])) {
-        $options += $field["attr"];
+    if( isset( $field["attr"] ) && is_array( $field["attr"] ) ) {
+        foreach( $field["attr"] as $key => $value ) {
+            if( $value !== null && is_scalar( $value ) ) {
+                $options[$key] = $value;
+            }
+        }
     }
     
     if($multiple && isset($field["empty_option_text"])) {
@@ -1366,8 +1371,23 @@ function adverts_field_select( $field ) {
     }
     
     foreach($opt as $k => $v) {
+        
         $selected = null;
         $depth = null;
+        $disabled = null;
+
+        
+        if( isset( $v["id"] ) ) {
+            $id = $id.'_'.$i;
+        } else {
+            $id = null;
+        }
+        
+        $id = apply_filters( "adverts_form_field_option_id", $id, $v, $field, $i );
+        
+        if( isset( $v["disabled"] ) ) {
+            $disabled = $v["disabled"];
+        }
         
         if(in_array($v["value"], (array)$field["value"])) {
             $selected = "selected";
@@ -1384,12 +1404,16 @@ function adverts_field_select( $field ) {
         }
         
         $o = new Adverts_Html("option", array(
+            "id" => $id,
             "value" => $v["value"],
             "data-depth" => $depth,
             "selected" => $selected,
+            "disabled" => $disabled
         ), $padding . $v["text"]);
 
         $html .= $o->render();
+        
+        $i++;
     }
 
     $input = new Adverts_Html("select", $options, $html);
@@ -1498,16 +1522,25 @@ function adverts_field_checkbox( $field ) {
     }
 
     foreach($opt as $v) {
+        
+        if( isset( $v["id"] ) ) {
+            $id = $v["id"];
+        } else {
+            $id = $field["name"];
+        }
+        
+        $id = apply_filters( "adverts_form_field_option_id", $id.'_'.$i, $v, $field, $i );
+        
         $checkbox = new Adverts_Html("input", array(
             "type" => "checkbox",
             "name" => $field["name"].'[]',
-            "id" => $field["name"].'_'.$i,
+            "id" => $id,
             "value" => $v["value"],
             "checked" => in_array($v["value"], $value) ? "checked" : null
         ));
 
         $label = new Adverts_Html("label", array(
-            "for" => $field["name"].'_'.$i
+            "for" => $id
         ), $checkbox->render() . ' ' . $v["text"]);
         
         if( isset( $field["class"] ) ) {
@@ -1585,16 +1618,26 @@ function adverts_field_radio( $field ) {
     }
     
     foreach($opt as $v) {
+        
+        $id = $field["name"];
+        
+        if( isset( $v["id"] ) ) {
+            $id = $v["id"];
+        } 
+        
+        $id = apply_filters( "adverts_form_field_option_id", $id.'_'.$i, $v, $field, $i );
+        
+        
         $checkbox = new Adverts_Html("input", array(
             "type" => "radio",
             "name" => $field["name"],
-            "id" => $field["name"].'_'.$i,
+            "id" => $id,
             "value" => $v["value"],
             "checked" => $v["value"] == $value ? "checked" : null
         ));
 
         $label = new Adverts_Html("label", array(
-            "for" => $field["name"].'_'.$i
+            "for" => $id
         ), $checkbox->render() . ' ' . $v["text"]);
         
         $opts .= "<div>".$label->render()."</div>";
@@ -1889,7 +1932,8 @@ function adverts_form_layout_config(Adverts_Form $form, $options = array()) {
         <?php else: ?>
         <tr valign="top" class="<?php if(adverts_field_has_errors($field)): ?>adverts-field-error<?php endif; ?>">
             <th scope="row">
-                <label <?php if(!in_array($field['type'], $a)): ?>for="<?php esc_attr_e($field["name"]) ?>"<?php endif; ?>>
+                <?php $label_for = isset( $field["attr"]["id"] ) ? $field["attr"]["id"] : $field["name"] ?>
+                <label <?php if(!in_array($field['type'], $a)): ?>for="<?php echo esc_attr( $label_for ) ?>"<?php endif; ?>>
                     <?php esc_html_e($field["label"]) ?>
                     <?php if(adverts_field_is_required($field)): ?><span class="adverts-red">&nbsp;*</span><?php endif; ?>
                 </label>

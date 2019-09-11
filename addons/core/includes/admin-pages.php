@@ -197,11 +197,17 @@ function adverts_dropdown_pages( $field ) {
         $value = null;
     }
     
+    if( isset( $field["attr"]["id"] ) ) {
+        $id = $field["attr"]["id"];
+    } else {
+        $id = $field["name"];
+    }
+    
     $args = array(
         'selected' => $value, 
         'echo' => 1,
 	'name' => $field["name"], 
-        'id' => $field["name"],
+        'id' => $id,
 	'show_option_none' => ' ',
         'option_none_value' => 0
     );
@@ -234,7 +240,10 @@ Adverts::instance()->set("form_core_config", array(
             "type" => "adverts_dropdown_pages",
             "order" => 10,
             "label" => __("Default Ads List Page", "adverts"),
-            "hint" => __("Select page on which the main [adverts_list] shortcode is being used.", "adverts")
+            "hint" => __("Select page on which the main [adverts_list] shortcode is being used.", "adverts"),
+            "attr" => array(
+                "id" => "option__ads_list_id"
+            )
         ),
         array(
             "name" => "visibility",
@@ -270,6 +279,9 @@ Adverts::instance()->set("form_core_config", array(
             "options" => array(
                 array( "value" => "enabled", "text" => __( "Enabled", "adverts" ) ),
                 array( "value" => "disabled", "text" => __( "Disabled", "adverts" ) )
+            ),
+            "attr" => array(
+                "id" => "option__ads_list_default__search_bar"
             )
         ),
         array(
@@ -280,6 +292,9 @@ Adverts::instance()->set("form_core_config", array(
             "options" => array(
                 array( "value" => "grid", "text" => __( "Grid (2 or more columns)", "adverts" ) ),
                 array( "value" => "list", "text" => __( "List (1 column)", "adverts" ) )
+            ),
+            "attr" => array(
+                "id" => "option__ads_list_default__display"
             )
         ),
         array(
@@ -291,6 +306,9 @@ Adverts::instance()->set("form_core_config", array(
                 array( "value" => 2, "text" => "2" ),
                 array( "value" => 3, "text" => "3" ),
                 array( "value" => 4, "text" => "4" ),
+            ),
+            "attr" => array(
+                "id" => "option__ads_list_default__columns"
             )
         ),
         array(
@@ -301,6 +319,9 @@ Adverts::instance()->set("form_core_config", array(
             "validator" => array(
                 array("name"=>"is_required"),
                 array("name"=>"is_integer")
+            ),
+            "attr" => array(
+                "id" => "option__ads_list_default__posts_per_page"
             )
         ),
         array(
@@ -309,7 +330,7 @@ Adverts::instance()->set("form_core_config", array(
             "label" => __( "Switch Views", "adverts" ),
             "order" => 10,
             "options" => array(
-                array( "value" => "grid", "text" => __( "Allow users to switch between grid and list view.", "adverts" ) ),
+                array( "value" => "grid", "text" => __( "Allow users to switch between grid and list view.", "adverts" ), "id" => "option__ads_list_default__switch_views" ),
             )
         ),
         array(

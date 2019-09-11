@@ -449,9 +449,11 @@ class Adverts_Gallery_Helper {
                             </a>
                         </li>
                     <?php endif; ?>
-
+                        
                     <?php endforeach; ?>
                 </ul>
+                
+                <div class="wpadverts-slide-nav-thumbnails-close"><span class="adverts-icon-cancel"></span></div>
             </div>
 
         </div>

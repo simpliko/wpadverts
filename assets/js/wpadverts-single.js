@@ -24,6 +24,7 @@ WPADVERTS.Single.Gallery = {
         this.Nav.Current = nav.find(".wpadverts-slide-nav-current");
         this.Nav.Thumbnails = nav.find(".wpadverts-slide-nav-thumbnails");
         this.Nav.ThumbsList = nav.find(".wpadverts-slide-nav-thumbnails-list");
+        this.Nav.ThumbsClose = nav.find(".wpadverts-slide-nav-thumbnails-close");
         this.Nav.Prev = nav.find(".wpadverts-slide-nav-paginate-left");
         this.Nav.Next = nav.find(".wpadverts-slide-nav-paginate-right");
         
@@ -33,6 +34,7 @@ WPADVERTS.Single.Gallery = {
         this.Nav.Thumbnails.on("click", jQuery.proxy(this.ToggleThumbnails, this));
         
         this.Nav.ThumbsList.find("li").each(jQuery.proxy(this.ThumbnailLoad, this));
+        this.Nav.ThumbsClose.on("click", jQuery.proxy(this.ThumbnailClose, this));
 
     },
     
@@ -126,7 +128,9 @@ WPADVERTS.Single.Gallery = {
         thumb.on("click", jQuery.proxy(this.ThumbnailClicked, this));
         this.Thumbs.push(thumb);
     },
-    
+    ThumbnailClose: function() {
+        this.Nav.ThumbsList.hide();
+    },
     ThumbnailClicked: function(e) {
         e.preventDefault();
         var index = jQuery(e.currentTarget).index();

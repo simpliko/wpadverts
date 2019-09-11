@@ -285,6 +285,40 @@ function adext_payments_page_history() {
         $gateway_name = get_post_meta( $payment->ID, '_adverts_payment_gateway', true);
         $gateway = null;
         
+        $default_fields = array(
+            array(
+                "name" => "_adverts_user_id",
+                "type" => "adverts_field_text",
+                "order" => 10,
+                "label" => __( "User ID", "adverts" ),
+            ),
+            array(
+                "name" => "_adverts_payment_total",
+                "type" => "adverts_field_text",
+                "order" => 10,
+                "filter" => array(
+                    array( "name" => "money" )
+                ),
+            ),
+            array(
+                "name" => "_adverts_payment_paid",
+                "type" => "adverts_field_text",
+                "order" => 10,
+                "filter" => array(
+                    array( "name" => "money" )
+                ),
+            ),
+            array(
+                "name" => "post_status",
+                "type" => "adverts_field_text",
+                "order" => 10,
+                "is_required" => true,
+                "validator" => array( 
+                    array( "name" => "is_required" ),
+                )
+            )
+        );
+        
         if( ! empty( $gateway_name ) ) {
             $gateway = adext_payment_gateway_get( $gateway_name );
         }
@@ -292,9 +326,13 @@ function adext_payments_page_history() {
         if( ! $gateway && $gateway_name ) {
             $msg = sprintf( __( "Payment Method [%s] assigned to this Payment does not exist or was disabled.", "adverts" ), $gateway_name );
             $flash->add_error( $msg );
-        } else {
+        } 
+        
+        if( isset( $gateway["form"]["payment_form"] ) ) {
             $form_scheme = $gateway["form"]["payment_form"];
         }
+        
+        $form_scheme["field"] = array_merge( $form_scheme["field"], $default_fields );
         
         $form = new Adverts_Form();
         $form->load( $form_scheme );
@@ -308,7 +346,7 @@ function adext_payments_page_history() {
 
                 $status_new = $form->get_value("post_status");
                 $status_old = $payment->post_status;
-                
+
                 $post_id = Adverts_Post::save($form, $payment);
                 
                 if(is_numeric($post_id) && $post_id>0 &&  $status_old!=$status_new ) {
@@ -599,12 +637,6 @@ Adverts::instance()->set("form_payments_history", array(
     "action" => "",
     "field" => array(
         array(
-            "name" => "_adverts_user_id",
-            "type" => "adverts_field_text",
-            "order" => 10,
-            "label" => __( "User ID", "adverts" ),
-        ),
-        array(
             "name" => "adverts_person",
             "type" => "adverts_field_text",
             "order" => 10,
@@ -623,31 +655,6 @@ Adverts::instance()->set("form_payments_history", array(
             "validator" => array( 
                 array( "name" => "is_required" ),
                 array( "name" => "is_email" )
-            )
-        ),
-        array(
-            "name" => "_adverts_payment_total",
-            "type" => "adverts_field_text",
-            "order" => 10,
-            "filter" => array(
-                array( "name" => "money" )
-            ),
-        ),
-        array(
-            "name" => "_adverts_payment_paid",
-            "type" => "adverts_field_text",
-            "order" => 10,
-            "filter" => array(
-                array( "name" => "money" )
-            ),
-        ),
-        array(
-            "name" => "post_status",
-            "type" => "adverts_field_text",
-            "order" => 10,
-            "is_required" => true,
-            "validator" => array( 
-                array( "name" => "is_required" ),
             )
         ),
     )

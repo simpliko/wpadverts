@@ -1428,6 +1428,14 @@ body .wpadverts-slide .wpadverts-slide-description.wpadverts-slide-desc {
     padding: 12px;
 }
 
+.wpadverts-slide-nav-thumbnails-close {
+    position: absolute;
+    right: 0;
+    top: 0px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
 .wpadverts-slides-list {
     margin: 0;
     position: relative;

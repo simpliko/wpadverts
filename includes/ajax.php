@@ -143,6 +143,10 @@ function adverts_gallery_upload() {
         wp_update_attachment_metadata( $attach_id, wp_generate_attachment_metadata( $attach_id, $filename ) );
     }
     
+    update_post_meta( $attach_id, "wpadverts_form", "advert" );
+    update_post_meta( $attach_id, "wpadverts_form_field", $field_name );
+    update_post_meta( $attach_id, "wpadverts_form_scheme", $form_scheme );
+    
     do_action( "adverts_attachment_uploaded", $attach_id );
     
     include_once ADVERTS_PATH . 'includes/gallery.php';

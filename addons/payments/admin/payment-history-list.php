@@ -57,6 +57,13 @@
         <option value="<?php esc_attr_e($m["value"]) ?>" <?php selected($month, $m["value"]) ?>><?php esc_html_e($m["label"]) ?></option>
         <?php endforeach; ?>
     </select>  
+    
+
+    <select name="hide_free">
+        <option value=""><?php _e( "All Payments", "adverts" ) ?></option>
+        <option value="1" <?php selected( $hide_free ) ?>><?php _e( "Hide Free", "adverts" ) ?></option>
+    </select>
+    
     <input type="submit" name="filter_action" id="post-query-submit" class="button" value="<?php _e("Filter") ?>" />
 </div>
     
@@ -163,12 +170,17 @@
         
         <br class="clear"/>
     </div>
+    
+    <div class="tablenav-pages one-page">
+        <span class="displaying-num">
+            <?php echo sprintf( __( "Items: <strong>%d</strong>. Revenue <strong>%s</strong>.", "adverts" ), $loop->found_posts, adverts_price( $sold_total ) ) ?>
 
+        </span>
+
+    </div>
+    
     <br class="clear"/>
 </div>
-
-
-
 
 
 

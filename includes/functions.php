@@ -2954,3 +2954,33 @@ function _adverts_ajax_check_post_ownership( $advert_id, $return = false ) {
         exit;
     }
 }
+
+/**
+ * Hides the Advert attachments in Media Library
+ * 
+ * This function is executed by ajax_query_attachments_args action registered
+ * in adverts_init() function.
+ * 
+ * It modifies the Media Library query so the attachments added to WPAdverts forms
+ * are not visible in Media Library.
+ * 
+ * @see     ajax_query_attachments_args action
+ * @see     adverts_init() function
+ * 
+ * @since   1.3.6
+ * @param   array $args   WP_Query arguments
+ * @return  array
+ */
+function adverts_query_attachments_args( $args ) {
+    
+    if( ! isset( $args["meta_query"] ) || ! is_array( $args["meta_query"] ) ) {
+        $args["meta_query"] = array();
+    }
+
+    $args["meta_query"][] = array(
+        "key" => "wpadverts_form",
+        "compare" => "NOT EXISTS"
+    );
+
+    return $args;
+}

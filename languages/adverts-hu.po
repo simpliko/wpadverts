@@ -1,0 +1,1398 @@
+# Translation of Plugins - WPAdverts &#8211; Classifieds Plugin - Development Readme (trunk) in Hungarian
+# This file is distributed under the same license as the Plugins - WPAdverts &#8211; Classifieds Plugin - Development Readme (trunk) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2017-01-29 10:39:58+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: hu\n"
+"Project-Id-Version: Plugins - WPAdverts &#8211; Classifieds Plugin - Development Readme (trunk)\n"
+
+#. Short description.
+msgid "Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site."
+msgstr ""
+
+#. Plugin name.
+msgid "WPAdverts - Classifieds Plugin"
+msgstr ""
+
+#. Found in description list item.
+msgid "Italian"
+msgstr ""
+
+#. Found in description list item.
+msgid "Slovak"
+msgstr ""
+
+#. Found in description list item.
+msgid "British (UK)"
+msgstr ""
+
+#. Found in description list item.
+msgid "Brazilian"
+msgstr ""
+
+#. Found in description list item.
+msgid "Croatian"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "WPAdverts plugin can be extended with premium add-ons."
+msgstr ""
+
+#. Found in description list item.
+msgid "<a href=\"https://wpadverts.com/extensions/all-extensions-bundle/\"><strong>ALL EXTENSIONS BUNDLE</strong></a> <strong>one price, huge discount</strong>"
+msgstr ""
+
+#. Found in description list item.
+msgid "Spanish"
+msgstr ""
+
+#. Found in description list item.
+msgid "Dutch"
+msgstr ""
+
+#. Found in description list item.
+msgid "Charge users for renewing expired ads"
+msgstr ""
+
+#. Found in description list item.
+msgid "Charge users for posting classifieds ads"
+msgstr ""
+
+#. Found in description list item.
+msgid "Allow users to browse, edit and delete their ads ([adverts_manage] shortcode)."
+msgstr ""
+
+#. Found in description list item.
+msgid "Allow (registered and/or anonymous) users to post classifieds ([adverts_add] shortcode)."
+msgstr ""
+
+#. Found in description list item.
+msgid "Display classifieds categories grid ([adverts_categories] shortcode)."
+msgstr ""
+
+#. Found in description list item.
+msgid "Intuitive classified Ads browsing and searching ([adverts_list] shortcode)."
+msgstr ""
+
+#. Found in description list item.
+msgid "Polish"
+msgstr ""
+
+#. Found in description list item.
+msgid "<a href=\"https://wpadverts.com/extensions/custom-fields/\">Custom Fields</a>"
+msgstr ""
+
+#. Found in description list item.
+msgid "Portugese"
+msgstr ""
+
+#. Found in description list item.
+msgid "<a href=\"https://wpadverts.com/extensions/recaptcha/\">reCAPTCHA Integration</a>"
+msgstr ""
+
+#. Found in description list item.
+msgid "<a href=\"https://wpadverts.com/extensions/fee-per-category/\">Fee Per Category</a>"
+msgstr ""
+
+#. Screenshot description.
+msgid "Ads list [adverts_list] displayed as a list."
+msgstr ""
+
+#. Screenshot description.
+msgid "Ads list [adverts_list] displayed as a grid (you can select how many columns to display)."
+msgstr ""
+
+#. Found in description list item.
+msgid "<a href=\"https://wpadverts.com/extensions/buddypress-integration/\">BuddyPress Integration</a>"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "See all https://wpadverts.com/extensions/"
+msgstr ""
+
+#. Found in description list item.
+msgid "<a href=\"https://wpadverts.com/extensions/restricted-categories/\">Restricted Categories</a>"
+msgstr ""
+
+#. Found in description list item.
+msgid "<a href=\"https://wpadverts.com/extensions/maps-and-locations/\">Maps and Locations</a>"
+msgstr ""
+
+#. Found in description list item.
+msgid "Russian"
+msgstr "Orosz"
+
+#. Found in description list item.
+msgid "French"
+msgstr "Francia"
+
+#. Found in faq paragraph.
+msgid ""
+"Most likely rewrite rules were not registered properly for some reason. Go to wp-admin / Settings / Permalinks panel and click\n"
+"\"Save Changes\" button without actually changing anything, this should reset router and fix URLs."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Please describe your issue and submit ticket on plugin support forum, you should receive reply within 24 hours (except weekends)."
+msgstr ""
+
+#. Found in faq header.
+msgid "Ads pages are showing 404 error?"
+msgstr ""
+
+#. Found in faq header.
+msgid "I have a problem what now?"
+msgstr ""
+
+#. Found in installation list item.
+msgid "For more detailed instructions visit plugin <a href=\"https://wpadverts.com/documentation/\">documentation</a>"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Go to Classifieds / Options panel and configure the options."
+msgstr ""
+
+#. Found in installation list item.
+msgid "On activation plugin will create two Pages (in wp-admin / Pages panel)  with [adverts_list] and [adverts_add] shortcodes ."
+msgstr ""
+
+#. Found in installation list item.
+msgid "Activate the plugin"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "<strong>Get Involved</strong>"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "<strong>Available Translations</strong>"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "<strong>Extensions</strong>"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "<strong>Noatble Features</strong>"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "<strong>Links</strong>"
+msgstr ""
+
+#. Found in description paragraph.
+msgid ""
+"When building Adverts we are focusing on ease of use, WordPress compatibility and extensibility, the plugin core is small but this\n"
+"is NOT a demo, this is a fully functional classifieds software with most crucial functionalities builtin."
+msgstr ""
+
+#. Found in description paragraph.
+msgid ""
+"WPAdverts is a lite weight plugin which allows to build beatufiul classifieds site in minutes. Plugin will work with ANY properly\n"
+"coded WordPress theme and you can use it on new or existing site."
+msgstr ""
+
+#. Found in description list item.
+msgid "Submit a Bug - If you find some issue please <a href=\"https://github.com/simpliko/wpadverts/issues/new\">submit a bug</a> on GitHub."
+msgstr ""
+
+#. Found in description list item.
+msgid "Rate Adverts - If you find this plugin useful please leave <a href=\"https://wordpress.org/support/view/plugin-reviews/wpadverts\">positive review</a>."
+msgstr ""
+
+#. Found in description list item.
+msgid "Translation - If you translated Adverts to your language feel free to submit translation."
+msgstr ""
+
+#. Found in description list item.
+msgid "Wording - I am not English native speaker, if you find any typo, grammer mistake or etc. please report it on support forum."
+msgstr ""
+
+#. Found in description list item.
+msgid "Slovenian"
+msgstr "Szlovén"
+
+#. Found in description list item.
+msgid "German"
+msgstr "Német"
+
+#. Found in description list item.
+msgid "<a href=\"https://wpadverts.com/extensions/woocommerce-integration/\">WooCommerce Integration</a>"
+msgstr ""
+
+#. Found in description list item.
+msgid "<a href=\"https://wpadverts.com/extensions/paypal-payments-standard/\">PayPal Payments Standard</a>"
+msgstr ""
+
+#. Found in description list item.
+msgid "Detailed user and developer documenation."
+msgstr ""
+
+#. Found in description list item.
+msgid "Ads will automatically expire after set number of days."
+msgstr ""
+
+#. Found in description list item.
+msgid "Easy to use drag and drop image upload."
+msgstr ""
+
+#. Found in description list item.
+msgid "Bank Transfer payment gateway included."
+msgstr ""
+
+#. Found in description list item.
+msgid "Payments Module to track user payments and transactions logs."
+msgstr ""
+
+#. Found in description list item.
+msgid "Modern, responsive design."
+msgstr ""
+
+#. Found in description list item.
+msgid "<a href=\"https://github.com/simpliko/wpadverts-snippets\">Code Snippets</a> - for programmers and developers."
+msgstr ""
+
+#. Found in description list item.
+msgid "<a href=\"https://wpadverts.com/documentation/\">Documentation</a> - mainly for users."
+msgstr ""
+
+#. Found in description list item.
+msgid "<a href=\"https://demo.wpadverts.com/lite/wp-admin/\">View Admin Demo</a> - see wp-admin panel."
+msgstr ""
+
+#. Found in description list item.
+msgid "<a href=\"https://demo.wpadverts.com/lite/\">View User Demo</a> - see plugin frontend."
+msgstr ""
+
+#. Found in description list item.
+msgid "<a href=\"https://wpadverts.com/\">WordPress Classifieds Plugin</a> - official site."
+msgstr ""
+
+#. Screenshot description.
+msgid "Payment details"
+msgstr ""
+
+#. Screenshot description.
+msgid "Payment history (if you are planning to charge users for posting Ads)"
+msgstr ""
+
+#. Screenshot description.
+msgid "Options, modules and premium extensions."
+msgstr ""
+
+#. Screenshot description.
+msgid "Category edition with icon select."
+msgstr ""
+
+#. Screenshot description.
+msgid "Ad edit page in wp-admin panel."
+msgstr ""
+
+#. Screenshot description.
+msgid "Ads list in wp-admin panel."
+msgstr ""
+
+#. Screenshot description.
+msgid "Post an Ad Form [adverts_add] (allow anonymous and/or registered users to post ads)."
+msgstr ""
+
+#. Screenshot description.
+msgid "All Categories [adverts_categories]."
+msgstr ""
+
+#. Screenshot description.
+msgid "Top Categories [adverts_categories show=\"top\"] icons are configurable from wp-admin / Classifieds / Categories panel."
+msgstr ""
+
+#. Screenshot description.
+msgid "Ad details page (compatible with all popular SEO plugins to boost your rankings)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Payments History edit page does not load correct form scheme if a payment gateway is using different form then the standard one."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Some assets (CSS and JS files) are being blocked by AdBlockers due to file names starting with \"adverts-*\"."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Extended Payments Module API to allow registering different payment types."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Updated list of icons to version 4.7.0, that is about 200 icons added."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "TRANSLATION: Italian translation added"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Fatal Error shown in wp-admin / Payments History when trying to access payment which does not exist."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Some phrases could not be translated due to missing text domain."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: When wp_insert_post() function fails in [adverts_add] an error message should be shown on screen (instead of preview)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Email messages in Emails module are being sent even if disabled."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Categories widget does not use filter which allows customizing icons for sub-categories."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: adverts_payment_status_change filter uses incorrect arguments."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Extended Payments API to allow custom pricings (will be used with Membership extension)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Recent Ads widget allows now showing: featured, normal or all ads."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Contact form is loaded only when \"Send Message\" button is visible on Ad details page."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Notices showing after submitting contact form with Emails Module enabled."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Notices showing when viewing wp-admin / Classifieds / Emails panel."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: HTML glitch in wp-admin / Classifieds / Options (visible on some installations on mobile devices)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Success message not visible after submitting contact form."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Labels for advert_category taxonomy (fixes conflict with WP Post Modules plugin)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: if adverts_email is not provided in [adverts_add] then contact form will be sent to user email address if Ad was posted by logged in user."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: \"Complete Payment\" button will show in [adverts_manage] if user posted an Ad but not payed for it."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: \"alt\" and \"title\" tags for images in [adverts_list]."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "NOTE: If you changed how how contact options work on Ad details page make sure they are working properly after the update."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: Contact information are now loaded differently. First the button and with a second apply_filters call the box which the button opens. "
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: Additional CSS row widths added to adverts-frontend.css."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: (In some themes) Infiniete loop in [adverts_add] Preview due to the_content filter being used."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: If \"Visibility\" in Settings is set to 0, the Ad posted from wp-admin instantly expires."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Notices in Emails module configuration."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Email templates other than Core do not show updated version when editing them."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Ability to manage other users images."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Contact Form message is not being sent after enabling Emails Module."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Setting default visibility to 0 should set the Expiration Date to Never Expires when posting from wp-admin."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Fatal Error on some older PHP version when enabling Emails Module."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "TRANSLATION: Updated French translation."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: The adverts_payment_$status filter should be run once only (on status change)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: The video in gallery can use the default controls after adding add_filter( \"adverts_gallery_enable_custom_controls\", \"__return_false\" ) line in theme functions.php"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Integration with Emails Module for Contact Form Module (allows editing the contact form message template from wp-admin panel)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Integration with Emails Module for Payments Module."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: The payment object is created on load in [adverts_add] third step (it makes it easy to complete payment later and prefill data)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Random Order option added to the Recent Ads widget."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Secure \"Complete Payment Link\" if a user will not complete payment when posting an Ad he can do that using unique payment link."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Emails Module allows configuring and sending email messages when various actions occur (for example when user posts an Ad)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: adext_insert_payment() function allows quickly creating payment programatically."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: adverts_manage_moderate filter allows putting Advert into moderation when renewing."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: \"disabled\" param was added to select, checkbox and radio input options."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: verify_choices form filter - allows checking if selected options (in select or checkboxes list) are valid values."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: wpadverts_filter_pricings_options filter - allows filtering available pricings."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Pagination in [adverts_manage] displays next to the list (instead of below the list)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: When renewing listings the is_featured flag is never changed."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: The free listings purchased using Payments module were not featured correctly."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Allow non-expiring paid listings."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "TRANSLATION: Updated Spanish translation"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: wpadverts_filter_pricings filter allows filtering pricings before they will be displayed in [adverts_add]. "
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: Payments Module /payments.js file allows callback to customize checkout experience for different payment gateways."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: [adverts_add] prefills values only for the advert_category taxonomy (added support for other taxonomies)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Filling radio input options using callback function does not work."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: On mobile devices the page background is being scorlled instead of the gallery image editor."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Added Stripe panel in wp-admin / Classifieds / Options"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "TRANSLATION: Updated German translation"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Unicode characters in the URL break the file upload."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: max_choices validator shows a warning message when only one value is passed to validation."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Boxes on [adverts_list] not reszied correctly, which sometimes broke the grid layout."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: In Settings it is not possible to set a text which will display instead of price if price was not provided."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Incorrect parameter passed to adverts_payment_* filter."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: The is_featured param not passed to Advert when renewing."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Allow using .adverts-button CSS class for input[type=submit]."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Not all pricings are shown when there is long list of pricings (over 20)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Thumbnails slider not showing all slides."
+msgstr ""
+
+#. Found in changelog paragraph.
+msgid "Read release notes here https://wpadverts.com/blog/handling-expired-adverts-pages/"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Updated headers and removed inline styling in manage-edit.php template."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Inline styling in form.php template replaced with actions_class."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Inline styling in add.php template replaced with actions_class."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Updated CSS for textarea, checkbox and radio inputs marings and paddings."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: adverts_attachment_uploaded action allows modifying attachment after upload."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Added link to Authors extension in wp-admin / Classifieds / Options panel."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Ability to handle Expired Adverts pages."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "TRANSLATION: Improved Polish Translation."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Fatal Error After 1.2.3 update."
+msgstr ""
+
+#. Found in changelog paragraph.
+msgid "Read release notes here https://wpadverts.com/blog/images-in-recent-ads-widget-wpadverts-1-2-2/"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Image gallery not showing (when Ad has some images uploaded)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Warning in Featured Ads module."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Gallery shows black when jQuery 2.0 or newer is being used."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: The padlock icon in wp-admin / Plugins list shows too big."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: filter wpadverts_module_groups added to allow dynamic group adding in wp-admin / Classifieds / Options"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: adverts_field_password added to the Forms API"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: On Advert details page user ID will be used to get an Avatar, the adverts_email will be used as a fallback."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Ability to show an image on the left side in Recent Adverts widget."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "TRANSLATION: Improved Brazilian Translation."
+msgstr ""
+
+#. Found in changelog paragraph.
+msgid "Read release notes here https://wpadverts.com/blog/mark-as-sold-custom-fields/"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Image CW and CCW rotations mixed."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: File upload not working with modified jQuery."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Uploaded files validation not working properly."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Loading icon not spinning when clicking on \"Show contact Information\"."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Ability to display forms as either: stacked (input below label) or aligned (input next to label)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Sri Lankan Rupees added to the currencies list."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: The email and name are prefilled in the Contact Form if logged in user is viewing the page."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: [adverts_list] now accepts list_type param which allows to show only Featured or Normal ads."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: The first image in the Gallery will be used in [adverts_list] (unless featured image is selected)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "TRANSLATION: Slovak"
+msgstr ""
+
+#. Found in changelog paragraph.
+msgid "Read release notes here https://wpadverts.com/blog/video-uploads-and-image-editing-v1-2-0/"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "REMOVED: Responsive Slides jQuery plugin"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: It is now possible to disable Money filter in adverts_price field."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: \"Send Message\" phrase marked for translation incorrectly."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: Added file upload validators"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "NEW: Lightbox allows displaying images and videos in fullscreen mode on click."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "NEW: Ability to display image gallery with thumbnails slider below image."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "NEW: Additional Gallery options in wp-admin / Classifieds / Options / Core / Gallery."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "NEW: Redesigned image gallery in the frontend with better optimization for mobile devices."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "NEW: Video upload, note only web video (mp4, webm and ogg) is accepted."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "NEW: Image edition in WPAdverts Gallery (available for logged in users by default)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Gallery Upload incompatibility with WordPress 4.9"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "NOTE: The update 1.2 is coming soon, this one is a quick patch to fix incompatibility with WP 4.9"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: adverts_category_post_count filter allows to recalculate number of Ads in a category"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: Actions and filters for replacing default icons with custom images"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Incorrect tag closing in pt_BR translation"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Some flash messages displayed in an old mode"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Use esc_attr() and esc_html() function when needed (for better WP compatibility)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Display properly [adverts_list] with 4 columns"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Ability to display Adverts Categories Widget as a categories tree"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Added Required PHP version (for infomational purposes only)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Updated [adverts_list] search form CSS"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "TRANSLATION: British"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Changing number of dcimal places in configuration applies this change to Price field in [adverts_add]"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Impossible to uncheck the \"Show Phone\" option in Contact Form configuration"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Fatal Error in [adverts_manage] (occurs on some installations with BuddyPress enabled)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Access to Adverts options requires now manage_options capability instead of install_plugins"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: When on Ad detail page, the Ad category has an additional CSS class in the Adverts Categories widget"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: [adverts_add] has now a \"requires\" param which allows to show the shortcode only to users with specific capability"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: In wp-admin left menu the Classifieds menu has a red icon with number of pending Ads"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Updated design for flash (error and info) messages."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: 2nd param in adverts_list_query filter"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Disallow shortcodes and some HTML tags in the Advert content"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Warning message when displaying drop down field with no options."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Small update to Gallery upload layout."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: CSS class for current category in Adverts Categories widget."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Display full category tree in Adverts Categories widget."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Do not show Contact Form on Ad details page if user did not enter contact email in [adverts_add]."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Beautiful Advert edit forms in wp-admin / Classifieds panel."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "TRANSLATION: Croatian"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Advert renewal page in [adverts_manage] does not load required assets."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Do not display location icon on [adverts_list] if location was not provided."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Missing adverts_filter_number function."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Renewing updates post publication date (basically renewing bumps Ad to the top)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: adverts_sh_manage_actions_after filter."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: adverts_renewal_time_min filter allows to set how often free renewals can be used."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: allow_sorting and order_by params in [adverts_list]."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Allow sorting Ads in the [adverts_list] (by default disabled)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Display category description above [adverts_list] when browsing Ads by category."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Free Ads renewals cannot be used more than once a week."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Removed images from [adverts_manage] on mobile devices."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Display [adverts_list] in list mode on mobile (if selected)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Google Analytics integration box in wp-admin / Classifieds / Options."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: adverts_price() throwing a warning when price is incorrectly formatted."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Incorrect textarea width in the frontend forms."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Adverts are being assigned to user who is editing the Ad from wp-admin."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Replaced annonymous sorting function with a static function (to make WPAdverts compatible with PHP 5.2 again)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Payments Module not showing all available pricings."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: show_pagination param added to [adverts_list]."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: max_choices validator for dropdown and checkbox fields."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: adverts_data_box_content_exclude filter added"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "TRANSLATION: Dutch"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "TRANSLATION: Spanish"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: (API) Binding data to multiselect fields."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Typo in plugins list HTML (wp-admin / Plugins)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Clearing list saved licenses when saving Core settings."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Not displaying warning in [adverts_manage] for unregistered users."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Allow editing pending ads from [adverts_manage] panel."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Displaying meta data in [adverts_add]"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Do not display Listing Type field in [adverts_manage]"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: Ability to extend [adverts_manage] with additional buttons"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "NEW: Renew ads from [adverts_manage]"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "NEW: Drag and drop image sorting in the gallery"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "NEW: \"Are you sure?\" question before deleting an Ad in [adverts_manage]"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "NEW: Redesigned [adverts_manage] layout"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: New field validators: Is URL, Is Number"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: New field filters: Integer, Number, URL"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: Added \"adverts_form_scheme\" filter"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "NEW: Support for \"description\" in adverts_field_header"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Unique order number for each field in [adverts_add] form"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Aligning fields in [adverts_list] search form"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Displaying multiselect values in forms"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: Allow to custom format the Advert price displayed in [adverts_list] and in Ad details."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: Saving Custom Fields as Taxonomies instead of Meta (go to Snippets library to see an example code)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: Ability to Trash posts instead of deleting them in the frontend (to enable this feature add this line to your theme functions.php <code>add_filter(\"adverts_skip_trash\", \"__return_false\");</code>)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: Alternative category browsing URLs (easy fix for categories if they are not compatible with your theme)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Handle multiple taxonomies (if needed) in [adverts_manage]."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Using <code>esc_html_e()</code> instead of <code>echo esc_html()</code>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "NEW: 3 new code snippets in Snippets Library https://github.com/simpliko/wpadverts-snippets"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "NEW: Custom Fields module link in wp-admin / Options"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "NEW: Defaut values for [adverts_list]"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: 'advert' class replaced with 'classified' on Advert details pages (to avoid AdBlockers)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: JavaScript error on Pricings list"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: adverts_config() causing a fatal error in WP-CLI"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "NEW: Contact Form Module (you can enable it from wp-admin / Classifieds / Options)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "TRANSLATION: Portugese"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Clicking on multiselect dropdown will hide options (if the options are currently displayed)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Images in Gallery are resized to completely fit inside the gallery box (previously if image was vertical a part of it was not displayed)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: JavaScript and CSS files are now versioned, so always newest version will be loaded."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Communication with WPAdverts updates server (for premium addons) will be handled via secure SSL connection only."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Featured image will always be displayed as first one in the gallery."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Administrator can save Advert from wp-admin panel even if required fields are not filled (he will saw notification though)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "NEW: Customizable \"Recents Ads\" widget."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: [adverts_manage] displays \"Listing Type\" field if post_status = pending."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Deleting incorrect media library items when deleting Pricings or Payments History"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Removed \"Account\" field from [adverts_manage] (it's not needed there)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Updated HTML for showing hidden items in [adverts_list]"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: [adverts_add] custom display for \"Listing Type\" field, so users will know they are selecting payment type, not filling yet another field"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: [adverts_list] 'switch_views' param allow users to switch between list and grid views"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: [adverts_list] 'display' param allows to display Ads in a list instead of grid"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Posts with status 'pending' no longer show on site."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: \"Sign In\" redirects user back to [adverts_add] instead of wp-admin"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Allow to set custom empty text for each multiselect field."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Allow to disable money filter for Price field"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: [adverts_list] has two new params redirect_to and show_results (see https://wpadverts.com/documentation/creating-ads-list-adverts_list/)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Advanced Search button on [adverts_list] (will show when some hidden fields are added to search form, see http://wpadverts.com/documentation/custom-fields-search-form/)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "API: adverts_tpl_single_top and adverts_tpl_single_bottom filters on Ad details pages (allow to replace \"show contact information\" and default gallery)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Riderct loop when Ad content is empty."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Disallow user registration with email address already existing in wp_users table [adverts_add]."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: File upload on mobile devices"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: File upload on Edge"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Using proper ajax URL variable in [adverts_add] when editing an image."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Set default [adverts_list] page on WPAdverts activation."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Listing duration for free ads not applied properly."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Show Temporary Ads in wp-admin / Classifieds panel (this is a list of posts abandoned by users)."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: CSS classes in form rows (each form row has class name adverts-field-name-{$field_name})."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: jQuery dependecies."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: pagination on category pages."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: adverts_template_load for single.php file."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Multiselect field displayed in wrong place in HTML code."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: in wp-admin when creating Ad required fields are not makred properly."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: autocomplete field API"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: adverts_tpl_single_location on Ad details page."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: adverts_tpl_single_posted_by filter on Ad details page."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: search_bar param in [adverts_list] shortcode."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: [adverts_list] search form API,"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "TRANSLATION: Russian (thanks to @Mick Levin)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Default visibility not working in wp-admin"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Some 'Featured Ads' module files not commited."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: 'adverts_list_query'"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "TRANSLATION: French (thanks to @Ceyar)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "First Release *"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Delete link not working on some installations with mod_security enabled."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Improved Gallery upload/edit/delete security."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: In [adverts_add] correct post names are now generated instead of 'Adverts Auto Draft'"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Default listing type selection in [adverts_add]"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: HTML updates for WP 4.3"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Set default user role for registered user to Subscriber."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Removed the_editor_content filter."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Improved UX in [adverts_manage]. When unregistered user tries to access this page he will see Login and Register links in addition to error message."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Not translated phrase"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Logout link in [adverts_add]"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Loading Adverts_HTML class in Categories widget"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Saving Ads categories in [adverts_manage]"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Sending registration emails in WP 4.3.0 and newer"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Categories display on Android and iPhone/iPad"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Improved design for search bar in [adverts_list]"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: 'adverts-option-depth-x' class in multiselect dropdowns"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "TRANSLATION: German (thanks to @Juliandaddy)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Expiration Date not changing when switching Ad from 'Never Expires'"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Removing not needed 'slashes' in user submitted data"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Advert Price reset, when marking payment as complete"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Is_Integer validator accepts texts"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: Incorrect Expiration Date on ads list in wp-admin"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FIXED: [adverts_manage] incorrect edit link"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: 'adverts_new_user_notification' filter"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: String Length Validator"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Overriding templates using 'adverts_template_load' filter"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Featured Ads"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "FEATURE: Category Widget, 'show top categories only' option"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "TRANSLATION: Slovenian (thanks to @gdolenc)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "TRANSLATION: German Updated"
+msgstr ""

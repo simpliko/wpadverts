@@ -1109,11 +1109,11 @@ body .wpadverts-slide .wpadverts-slide-description.wpadverts-slide-desc {
 
 .wpadverts-slide .wpadverts-slide-img.wpadverts-slide-img-square,
 .wpadverts-slide .wpadverts-slide-img.wpadverts-slide-img-landscape {
-    object-fit: cover;
+
 }
 
 .wpadverts-slide .wpadverts-slide-img.wpadverts-slide-img-portrait {
-    object-fit: contain;
+
 }
 
 .wpadverts-slide video {
@@ -1121,6 +1121,18 @@ body .wpadverts-slide .wpadverts-slide-description.wpadverts-slide-desc {
     width: 100%;
     height: 350px;
 
+}
+
+.wpadverts-slide .wpadverts-slide-img.wpadverts-slide-img-fit-contain {
+   object-fit: contain; 
+}
+
+.wpadverts-slide .wpadverts-slide-img.wpadverts-slide-img-fit-cover {
+   object-fit: cover; 
+}
+
+.wpadverts-slide .wpadverts-slide-img.wpadverts-slide-img-fit-fill {
+   object-fit: fill; 
 }
 
 .wpadverts-video-player video {

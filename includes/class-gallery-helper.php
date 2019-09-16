@@ -136,7 +136,7 @@ class Adverts_Gallery_Helper {
         }
         
         $custom_cotrols = apply_filters( "adverts_gallery_enable_custom_controls", true );
-        
+        $image_fit = "wpadverts-slide-img-fit-" . adverts_config( "gallery.image_fit" );
         $this->register_scripts();
         
         ?>
@@ -146,12 +146,13 @@ class Adverts_Gallery_Helper {
                 <?php foreach($this->_attachments as $attach): ?>
                     <?php if( adverts_get_attachment_mime( $attach ) == "image" ): ?>
                         <?php $image = adverts_get_post_img( $attach, array( "adverts_gallery", "full" ) ); ?>
+                        <?php $image_classes = "wpadverts-slide-img-" . $image["orient"] . " " . $image_fit; ?>
                         <div class="wpadverts-slide wpadverts-slide-image" id="<?php echo "wpadverts-slide-".$attach->ID ?>">
 
                             <div class="wpadverts-slide-decoration">
                                 <?php if( adverts_config( 'gallery.lightbox' ) == "1"): ?>
                                 <a class="wpadverts-swipe" href="<?php echo adverts_get_post_img_url( $attach, array( "full" ) ); ?>" title="<?php echo esc_html(trim($attach->post_excerpt . " - " . $attach->post_content, " -")) ?>">
-                                    <img src="<?php echo esc_attr($image["url"]) ?>" class="<?php echo "wpadverts-slide-img wpadverts-slide-img-".$image["orient"] ?>" title="<?php echo esc_html($attach->post_excerpt) ?>" alt="<?php echo esc_html($attach->post_content) ?>" />
+                                    <img src="<?php echo esc_attr($image["url"]) ?>" class="<?php echo "wpadverts-slide-img " . $image_classes ?>" title="<?php echo esc_html($attach->post_excerpt) ?>" alt="<?php echo esc_html($attach->post_content) ?>" />
                                     <div class="wpadverts-slide-with-shadow"></div>
                                 </a>
                                 <?php else: ?>

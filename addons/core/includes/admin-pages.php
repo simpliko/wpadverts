@@ -59,6 +59,12 @@ function _adext_core_page_options_main() {
             $data = $form->get_values();
             $data['expired_ad_public_cap'] = adverts_request( 'expired_ad_public_cap' );
             
+            if( adverts_request( 'hide_images_in_media_library' ) ) {
+                $data['hide_images_in_media_library'] = 1;
+            } else {
+                $data['hide_images_in_media_library'] = 0;
+            }
+            
             $data["module"] = adverts_config( 'config.module' );
             $data["license"] = adverts_config( 'config.license' );
 
@@ -115,6 +121,7 @@ function _adext_core_page_options_gallery() {
             "scrolling_items" => absint( adverts_request( "scrolling_items" ) ),
             "lightbox" => $lightbox_enabled,
             "image_edit_cap" => adverts_request( "image_edit_cap" ),
+            "image_fit" => adverts_request( "image_fit" ),
         );
         
         $tosave = $bind;
@@ -148,6 +155,7 @@ function _adext_core_page_options_gallery() {
             "scrolling_items" => adverts_config( "gallery.scrolling_items" ),
             "lightbox" => adverts_config( "gallery.lightbox" ),
             "image_edit_cap" => adverts_config( "gallery.image_edit_cap" ),
+            "image_fit" => adverts_config( "gallery.image_fit" ),
         );
         
         foreach( adverts_config( "gallery.image_sizes" ) as $size_key => $size ) {
@@ -263,6 +271,15 @@ Adverts::instance()->set("form_core_config", array(
             "label" => __("Empty Price Text", "adverts"),
             "hint" => __("The text to display instead of price if item price was not provided.", "adverts"),
             "validator" => array()
+        ),
+        array(
+            "name" => "hide_images_in_media_library",
+            "type" => "adverts_field_checkbox",
+            "label" => __( "Media Library", "adverts" ),
+            "order" => 10,
+            "options" => array(
+                array( "value" => "1", "text" => __( "Do not show Advert images (and other files) in Media Library.", "adverts" ) ),
+            )
         ),
         array(
             "name" => "_defaults_adverts_list",
@@ -463,6 +480,20 @@ Adverts::instance()->set("form_gallery_config", array(
             "options" => array(
                 array( "value" => "1", "text" => __( "Allow opening Gallery images in a Lightbox.", "adverts" ) )
             )
+        ),
+        array(
+            "name" => "image_fit",
+            "type" => "adverts_field_select",
+            "order" => 10,
+            "label" => __("Image Fit", "adverts"),
+            "empty_option" => true,
+            "empty_option_text" => "",
+            "options" =>  array(
+                array( "value" => "contain", "text" => __( "Contain", "adverts" ) ),
+                array( "value" => "cover", "text" => __( "Cover", "adverts" ) ),
+                array( "value" => "fill", "text" => __( "Fill", "adverts" ) ),
+            ),
+            "hint" => __( "How images should be displayed in the gallery.", "adverts" )
         ),
         array(
             "name" => "_gallery_upload_settings",

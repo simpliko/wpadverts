@@ -396,7 +396,7 @@ function adext_payments_page_history() {
     } elseif( adverts_request( 'filter_action' ) ) {
         // Apply filters and return to payments history list
         $url = remove_query_arg( array( 'delete', 'noheader', 'pg' ) );
-        $url = add_query_arg( array( 'month' => adverts_request('month') ), $url );
+        $url = add_query_arg( array( 'month' => adverts_request('month'), "hide_free" => adverts_request('hide_free') ), $url );
         
         wp_redirect( $url );
         exit;
@@ -485,7 +485,7 @@ function adext_payments_page_history() {
         
         $month = adverts_request("month", "");
         $filter = adverts_request("status", "");
-        
+        $hide_free = adverts_request("hide_free", "");
 
         
         $loop_params = array( 
@@ -498,7 +498,7 @@ function adext_payments_page_history() {
         if($filter) {
             $loop_params['post_status'] = $filter;
         }
-        
+
         if($month == "this-month") {
             $before = date('Y-m-d H:i:s', strtotime('last day of this month', current_time('timestamp')));
             $after = date('Y-m-d H:i:s', strtotime('first day of this month', current_time('timestamp')));
@@ -511,11 +511,36 @@ function adext_payments_page_history() {
             $time = strtotime( $month."-10");
             $before = date('Y-m-d', strtotime('last day of this month', $time));
             $after = date('Y-m-d H:i:s', strtotime('first day of this month', $time));
-            $loop_params['date_query'] = array( array( 'before'=>'', 'after'=>'', 'inclusive'=>true) );
+            $loop_params['date_query'] = array( array( 'before'=>$before, 'after'=>$after, 'inclusive'=>true) );
+        }
+
+        if( $hide_free ) {
+            $loop_params["meta_query"] = array(
+                array(
+                    "key" => "_adverts_payment_total",
+                    "value" => 0,
+                    "compare" => ">"
+                )
+            );
         }
 
         $loop = new WP_Query( $loop_params );
 
+        $loop_params_count = $loop_params;
+        $loop_params_count["fields"] = "ids";
+        $loop_params_count["posts_per_page"] = -1;
+        
+        $total = new WP_Query( $loop_params_count );
+        $sold_total = 0;
+        
+        if( ! empty( $total->posts) ) {
+            global $wpdb;
+            $q = "SELECT SUM(`meta_value`) AS `total` FROM {$wpdb->prefix}postmeta WHERE post_id IN(%s) AND `meta_key`='_adverts_payment_total'";
+            $result = $wpdb->get_row( sprintf( $q, join( ",", $total->posts ) ) );
+
+            $sold_total = $result->total;
+        }
+        
         include ADVERTS_PATH . 'addons/payments/admin/payment-history-list.php';
     }
 }

@@ -5,7 +5,7 @@
  * Description: The lightweight WordPress classifieds plugin done right.
  * Author: Greg Winiarski
  * Text Domain: adverts
- * Version: 1.3.5
+ * Version: 1.3.6
  * 
  * Adverts is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -65,7 +65,8 @@ $adverts_namespace['config'] = array(
         'expired_ad_status' => '404', // one of: 404, 200, 301
         'expired_ad_redirect_url' => '',
         'expired_ad_public_cap' => 'edit_pages',
-        'empty_price' => ''
+        'empty_price' => '',
+        'hide_images_in_media_library' => 0
         
     )
 );
@@ -77,6 +78,7 @@ $adverts_namespace['gallery'] = array(
         'visible_items' => 5,
         'scrolling_items' => 1,
         'lightbox' => 1,
+        'image_fit' => 'cover',
         'image_edit_cap' => 'read',
         'image_sizes' => array(
             // supported sizes: adverts-upload-thumbnail, adverts-list, adverts-gallery
@@ -140,6 +142,10 @@ function adverts_init() {
         // most likely 200
         $expired_is_public = true;
         add_action( "wp", "adverts_handle_expired_ads" );
+    }
+
+    if( adverts_config( 'hide_images_in_media_library' ) == 1 ) {
+        add_action( "ajax_query_attachments_args", "adverts_query_attachments_args" );
     }
     
     register_post_status( 'expired', array(

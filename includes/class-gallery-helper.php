@@ -136,7 +136,13 @@ class Adverts_Gallery_Helper {
         }
         
         $custom_cotrols = apply_filters( "adverts_gallery_enable_custom_controls", true );
-        $image_fit = "wpadverts-slide-img-fit-" . adverts_config( "gallery.image_fit" );
+        
+        if( adverts_config( "gallery.image_fit" ) != '' ) {
+            $image_fit = "wpadverts-slide-img-fit-" . adverts_config( "gallery.image_fit" );
+        } else {
+            $image_fit = "wpadverts-slide-img-fit-auto";
+        }
+        
         $this->register_scripts();
         
         ?>

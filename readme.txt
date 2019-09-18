@@ -100,14 +100,19 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
-= 1.3.6 - 2019-09-18 =
+= 1.3.6 - 2019-09-19 =
 
+ * FEATURE: Option to hide 'free' payments in the wp-admin / Classifieds / Payments History
+ * FEATURE: Ability to hide Advert files in wp-admin / Media Library (and Media Library overlays).
  * FEATURE: Added a close icon in the Gallery on Ad details pages when gallery is in thumbnails mode.
+ * FEATURE: Total sales added at the bottom of wp-admin / Classifieds / Payments History list.
+ * FIXED: Sorting payments by selected month payments in wp-admin / Classifieds / Payments History does not work.
  * FIXED: Payment status does not change when updating a payment from wp-admin / Classifieds / Payments History panel.
  * FIXED: Browser AdBlockers are hiding some inputs in wp-admin / Classifieds / Options / Core panel.
  * API: adverts_form_field_option_id filter allows customizing the element option id.
  * API: Field options (radio, select and checkbox) support an "id" param now.
  * TRANSLATION: Hungarian translation added
+ * TRANSLATION: Italian translation updated
 
 = 1.3.5 - 2019-09-03 =
 

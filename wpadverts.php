@@ -78,7 +78,7 @@ $adverts_namespace['gallery'] = array(
         'visible_items' => 5,
         'scrolling_items' => 1,
         'lightbox' => 1,
-        'image_fit' => 'cover',
+        'image_fit' => '',
         'image_edit_cap' => 'read',
         'image_sizes' => array(
             // supported sizes: adverts-upload-thumbnail, adverts-list, adverts-gallery

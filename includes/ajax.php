@@ -145,7 +145,6 @@ function adverts_gallery_upload() {
     
     update_post_meta( $attach_id, "wpadverts_form", "advert" );
     update_post_meta( $attach_id, "wpadverts_form_field", $field_name );
-    update_post_meta( $attach_id, "wpadverts_form_scheme", $form_scheme );
     
     do_action( "adverts_attachment_uploaded", $attach_id );
     

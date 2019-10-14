@@ -450,7 +450,7 @@ function adverts_data_box_content( $post ) {
                     </label>
                 </th>
                 <td>
-                    <?php call_user_func( adverts_field_get_renderer($field), $field) ?>
+                    <?php call_user_func( adverts_field_get_renderer($field), $field, $form ) ?>
                     <?php if( isset($field["error"]) && !empty($field["error"])): ?>
                     <ul class="adverts-error-list">
                         <?php foreach($field["error"] as $error): ?>

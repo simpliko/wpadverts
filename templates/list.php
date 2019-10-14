@@ -16,7 +16,7 @@
     <form action="<?php echo esc_attr( $action ) ?>" class="adverts-search-form" method="get">
         
         <?php foreach($form->get_fields( array( "type" => array( "adverts_field_hidden" ) ) ) as $field): ?>
-        <?php call_user_func( adverts_field_get_renderer($field), $field) ?>
+        <?php call_user_func( adverts_field_get_renderer($field), $field, $form ) ?>
         <?php endforeach; ?>
         
         <?php if( !empty( $fields_visible ) ): ?>
@@ -26,7 +26,7 @@
                 <?php if( isset( $field["label"] ) && ! empty( $field["label"] ) ): ?>
                 <span class="adverts-search-input-label"><?php echo esc_html( $field["label"] ) ?></span>
                 <?php endif; ?>
-                <?php call_user_func( adverts_field_get_renderer($field), $field) ?>
+                <?php call_user_func( adverts_field_get_renderer($field), $field, $form ) ?>
             </div>
             <?php endforeach; ?>
         </div>
@@ -39,7 +39,7 @@
                 <?php if( isset( $field["label"] ) && ! empty( $field["label"] ) ): ?>
                 <span class="adverts-search-input-label"><?php echo esc_html( $field["label"] ) ?></span>
                 <?php endif; ?>
-                <?php call_user_func( adverts_field_get_renderer($field), $field) ?>
+                <?php call_user_func( adverts_field_get_renderer($field), $field, $form ) ?>
             </div>
             <?php endforeach; ?>
         </div>

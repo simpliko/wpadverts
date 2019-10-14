@@ -25,7 +25,7 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
     
     wp_nonce_field( plugin_basename( __FILE__ ), 'adverts_gallery_content_nonce' ); 
     
-    $field_name = "gallery";
+
     $button = "adverts-button";
     
     if(is_admin()) {
@@ -34,8 +34,13 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
     
     $conf = shortcode_atts( array(
         "button_class" => "button-secondary",
-        "post_id_input" => "#post_ID"
+        "post_id_input" => "#post_ID",
+        "field_name" => "gallery",
+        "form_name" => "advert"
     ), $conf);
+    
+    $field_name = $conf["field_name"];
+    $form_name = $conf["form_name"];
     
     $init = array(
         'runtimes'            => 'html5,silverlight,flash,html4',
@@ -53,11 +58,11 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
         'urlstream_upload'    => true,
 
         // additional post data to send to our ajax hook
-        'multipart_params'    => array(
-            '_ajax_nonce' => wp_create_nonce('adverts-gallery'),
-            'action'      => 'adverts_gallery_upload',            // the ajax action name
-            'form'        => 'adverts_add',
-            'field_name'       => $field_name
+        'multipart_params'  => array(
+            '_ajax_nonce'   => wp_create_nonce('adverts-gallery'),
+            'action'        => 'adverts_gallery_upload',
+            'form'          => $form_name,
+            'field_name'    => $field_name
           
         ),
     );

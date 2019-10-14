@@ -1695,11 +1695,14 @@ function adverts_field_account( $field ) {
  * 
  * Prints (to browser) HTML for for gallery field.
  * 
- * @param array $field Should be an empty array
  * @since 0.1
+ * @since 1.3.7 $form param added
+ * 
+ * @param array         $field      Should be an empty array
+ * @param Adverts_Form  $form       Form object
  * @return void
  */
-function adverts_field_gallery($field) {
+function adverts_field_gallery($field, $form = null ) {
     include_once ADVERTS_PATH . "includes/gallery.php";
     
     wp_enqueue_script( 'adverts-gallery' );
@@ -1707,9 +1710,19 @@ function adverts_field_gallery($field) {
     $post_id = adverts_request("_post_id", adverts_request("advert_id"));
     $post = $post_id>0 ? get_post( $post_id ) : null;
     
+    if( ! is_null( $form ) ) {
+        $form_name = $form->get_scheme( "name" );
+    } else {
+        $form_name = "advert";
+    }
+    
+    $field_name = $field["name"];
+    
     adverts_gallery_content($post, array( 
         "button_class" => "adverts-button",
-        "post_id_input" => "#_post_id"
+        "post_id_input" => "#_post_id",
+        "form_name" => $form_name,
+        "field_name" => $field_name
     ));
 }
 
@@ -1915,7 +1928,7 @@ function adverts_form_layout_config(Adverts_Form $form, $options = array()) {
 ?>
 
     <?php foreach($form->get_fields( array( "type" => array( "adverts_field_hidden" ) ) ) as $field): ?>
-    <?php call_user_func( adverts_field_get_renderer($field), $field) ?>
+    <?php call_user_func( adverts_field_get_renderer($field), $field, $form ) ?>
     <?php endforeach; ?>
     
     <?php foreach($form->get_fields( $options ) as $field): ?>
@@ -1948,7 +1961,7 @@ function adverts_form_layout_config(Adverts_Form $form, $options = array()) {
                     }
                 ?>
                 
-                <?php call_user_func( adverts_field_get_renderer($field), $field) ?>
+                <?php call_user_func( adverts_field_get_renderer($field), $field, $form ) ?>
 
                 <?php if(isset($field['hint']) && !empty($field['hint'])): ?>
                 <br/><span class="description"><?php echo $field['hint'] ?></span>

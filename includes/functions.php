@@ -418,12 +418,6 @@ function adverts_the_content($content) {
         
         include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/single.php' );
         $content = ob_get_clean();
-    } elseif( is_tax( 'advert_category' ) && in_the_loop() ) {
-        add_action( 'adverts_sh_list_before', 'adverts_list_show_term_description' );
-        $content = shortcode_adverts_list(array(
-            "category" => $wp_query->get_queried_object_id()
-        ));
-        remove_action( 'adverts_sh_list_before', 'adverts_list_show_term_description' );
     }
 
     return $content;
@@ -437,11 +431,18 @@ function adverts_the_content($content) {
  * over the page content. In order to do that this function removes main query
  * list of terms and replaces them with post that holds adverts list.
  * 
+ * This functionality was replaced with Adverts_Taxonomies class
+ * 
+ * @deprecated since version 1.4.0
+ * 
  * @param array $posts
  * @param WP_Query $query
  * @return array Post objects
  */
 function adverts_posts_results( $posts, $query ) {
+    
+    _deprecated_function(__FUNCTION__, "1.4.0" );
+    
     if( $query->is_main_query() && $query->is_tax("advert_category") ) {
         
         $title = sprintf( __("Category: %s", "adverts"), $query->get_queried_object()->name );
@@ -474,13 +475,27 @@ function adverts_posts_results( $posts, $query ) {
  * @return string Page template path
  */
 function adverts_template_include( $template ) {
-
-    if( is_tax( 'advert_category' ) ) {
-        return @get_page_template();
-    }
     
+    $possible_templates = array(
+        'page',
+        'single',
+        'singular',
+        'index',
+    );
+
+    foreach ( $possible_templates as $possible_template ) {
+        $path = get_query_template( $possible_template );
+        if ( $path ) {
+            return $path;
+        }
+    }
+
     return $template;
 }
+
+
+
+
 
 /**
  * Shows Term description in [adverts_list] if not empty.
@@ -2221,7 +2236,7 @@ function adverts_css_rem_fix() {
  * @return void
  */
 function adverts_disable_default_archive() {
-    if(is_post_type_archive( "advert" )) {
+    if( is_post_type_archive( "advert" ) && ! is_feed() ) {
         wp_redirect( get_permalink( adverts_config( "ads_list_id" ) ) );
         exit;
     }

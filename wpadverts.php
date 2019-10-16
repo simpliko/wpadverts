@@ -188,6 +188,11 @@ function adverts_init() {
         'supports'      => array( 'title', 'editor', 'author' ),
         'taxonomies'    => array( 'advert_category' ),
         'has_archive'   => true,
+        'rewrite'       => array(
+            'slug'          => 'advert',
+            'with_front'    => false,
+            'feeds'         => true
+        )
     );
   
     register_post_type( 'advert', apply_filters( 'adverts_post_type', $args, 'advert') ); 
@@ -208,6 +213,7 @@ function adverts_init() {
     register_taxonomy( 'advert_category', 'advert', apply_filters('adverts_register_taxonomy', $args, 'advert_category') );
     
     include_once ADVERTS_PATH . 'includes/class-adverts.php';
+    include_once ADVERTS_PATH . 'includes/class-taxonomies.php';
     include_once ADVERTS_PATH . 'includes/class-flash.php';
     include_once ADVERTS_PATH . 'includes/class-post.php';
     include_once ADVERTS_PATH . 'includes/events.php';
@@ -222,6 +228,8 @@ function adverts_init() {
     }
     
     $currency = Adverts::instance()->get("currency");
+    
+    Adverts::instance()->set( "taxonomies", new Adverts_Taxonomies() );
     
     wp_register_script( 
         'adverts-auto-numeric', 
@@ -336,10 +344,14 @@ function adverts_init_frontend() {
     include_once ADVERTS_PATH . 'includes/shortcodes.php';
     
     add_filter('the_content', 'adverts_the_content', 9999 );
-    add_filter('posts_results', 'adverts_posts_results', 10, 2 );
-    add_filter('template_include', 'adverts_template_include');
-    add_filter('post_thumbnail_html', 'adverts_post_thumbnail_html');
+    
+    // Below filters and actions were removed in version 1.4.0 in favor of Adverts_Taxonomies class
+    // add_filter('posts_results', 'adverts_posts_results', 10, 2 );
+    // add_filter('template_include', 'adverts_template_include'); 
+    
     add_action('template_redirect', 'adverts_disable_default_archive');
+    
+    add_filter('post_thumbnail_html', 'adverts_post_thumbnail_html');
     add_action('adverts_new_user_notification', 'wp_new_user_notification', 10, 3 );
     add_filter('post_class', 'adverts_post_class' );
     

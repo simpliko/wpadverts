@@ -146,6 +146,27 @@ class Adverts_Gallery_Helper {
         $this->register_scripts();
         
         ?>
+
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<style type="text/css">
+    .wpadverts-als-container {
+        display: flex;
+    }
+    .als-nav-wrap-left, als-nav-wrap-right {
+        flex-basis: 40px;
+    }
+    .als-nav-wrap, .als-nav-fake, .als-next, .als-prev {
+        position: initial !important;
+    }
+    .als-nav-wrap.slick-disabled span:before {
+        color: rgba(0,0,0, .25);
+        
+    }
+</style>
+
         <div class="wpadverts-slides wpadverts-slides-with-thumbnail">
 
             <div class="wpadverts-slides-list">
@@ -486,7 +507,7 @@ class Adverts_Gallery_Helper {
         <div class="wpadverts-als-container als-container">
 
             <div class="als-nav-wrap als-nav-wrap-left">
-                <div class="als-nav-fake"><span class="adverts-icon-left-open"></span></div>
+                <!--div class="als-nav-fake"><span class="adverts-icon-left-open"></span></div-->
                 <div href="#" class="als-prev" title="<?php _e( "Previous", "adverts" ) ?>"><span class="adverts-icon-left-open"></span></div>
 
             </div>
@@ -519,7 +540,7 @@ class Adverts_Gallery_Helper {
             </div>
 
             <div class="als-nav-wrap als-nav-wrap-right">
-                <div class="als-nav-fake"><span class="adverts-icon-right-open"></span></div>
+                <!--div class="als-nav-fake"><span class="adverts-icon-right-open"></span></div-->
                 <div href="#" class="als-next" title="<?php _e( "Next", "adverts" ) ?>"><span class="adverts-icon-right-open"></span></div>
             </div>
 

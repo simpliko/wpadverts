@@ -39,6 +39,21 @@ WPADVERTS.Single.Gallery = {
     },
     
     InitAls: function(als) {
+        /*
+        jQuery('.wpadverts-slides-list').slick({
+            nextArrow: "",
+            prevArrow: ""
+        });
+
+        jQuery('#wpadverts-rsliders-controls').slick({
+            infinite: false,
+            slidesToShow: 4,
+            slidesToScroll: 3,
+            prevArrow: '.als-nav-wrap-left',
+            nextArrow: '.als-nav-wrap-right'
+        });
+        return;
+*/
         this.Nav.Als = als;
         
         var visible_items = parseInt(adverts_frontend_lang.als_visible_items);

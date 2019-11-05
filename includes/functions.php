@@ -2933,12 +2933,22 @@ function _adverts_ajax_check_post_ownership( $advert_id, $return = false ) {
     $required_cap = apply_filters( "adverts_ajax_ownership_cap", "edit_pages" );
     $has_required_cap = current_user_can( $required_cap );
     
-    // check if current user is post author
-    if( $post->post_author != get_current_user_id() && ! $has_required_cap ) {
-        $result = array( 
-            "result" => -2, 
-            "error" => __( "This post does not belong to you.", "adverts" ) 
-        );
+    if( get_current_user_id() === 0 ) {
+        if( absint( $post->post_author ) !== 0 || $post->post_status !== adverts_tmp_post_status() ) {
+            // annonymous user
+            $result = array( 
+                "result" => -4, 
+                "error" => __( "This post cannot be edited by annonymous users.", "adverts" ) 
+            );
+        }
+    } else {
+        if( $post->post_author != get_current_user_id() && ! $has_required_cap ) {
+            // currently logged in user is not a post author
+            $result = array( 
+                "result" => -2, 
+                "error" => __( "This post does not belong to you.", "adverts" ) 
+            );
+        }
     }
 
     // check if post is an advert

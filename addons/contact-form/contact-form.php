@@ -52,7 +52,7 @@ function adext_contact_form( $post_id ) {
     <div class="adverts-single-actions">
         <?php if( adext_contact_form_get_to( $post_id ) ): ?>
         <a href="#" class="adverts-button adverts-show-contact-form">
-            <?php esc_html_e("Send Message", "adverts") ?>
+            <?php esc_html_e("Send Message", "wpadverts") ?>
             <span class="adverts-icon-down-open"></span>
         </a>
         <?php add_action( "adverts_tpl_single_bottom", "adext_contact_form_content", 2000 ) ?>
@@ -60,7 +60,7 @@ function adext_contact_form( $post_id ) {
         
         <?php if( adverts_config( "contact_form.show_phone") == "1" && ! empty( $phone ) ): ?>
         <span class="adverts-button" style="background-color: transparent; cursor: auto">
-            <?php esc_html_e( "Phone", "adverts" ) ?>
+            <?php esc_html_e( "Phone", "wpadverts" ) ?>
             <a href="tel:<?php echo esc_html( $phone ) ?>"><?php echo esc_html( $phone ) ?></a>
             <span class="adverts-icon-phone"></span>
         </span>
@@ -88,7 +88,7 @@ function adext_contact_form_content( $post_id ) {
             "tag" => "input",
             "name" => "adverts_contact_form",
             "type" => "submit",
-            "value" => __( "Send Message", "adverts" ),
+            "value" => __( "Send Message", "wpadverts" ),
             "class" => "adverts-button",
             "html" => null
         ),
@@ -109,13 +109,13 @@ function adext_contact_form_content( $post_id ) {
             $form->bind( array() );
             
             $flash["info"][] = array(
-                "message" => __( "Your message has been sent.", "adverts" ),
+                "message" => __( "Your message has been sent.", "wpadverts" ),
                 "icon" => "adverts-icon-ok"
             );
             $show_form = true; 
         } else {
             $flash["error"][] = array(
-                "message" => __( "There are errors in your form.", "adverts" ),
+                "message" => __( "There are errors in your form.", "wpadverts" ),
                 "icon" => "adverts-icon-attention-alt"
             );
             $show_form = true; 
@@ -309,7 +309,7 @@ Adverts::instance()->set("form_contact_form", array(
         array(
             "name" => "message_name",
             "type" => "adverts_field_text",
-            "label" => __("Your Name", "adverts"),
+            "label" => __("Your Name", "wpadverts"),
             "order" => 10,
             "class" => "",
             "validator" => array( 
@@ -319,7 +319,7 @@ Adverts::instance()->set("form_contact_form", array(
         array(
             "name" => "message_email",
             "type" => "adverts_field_text",
-            "label" => __("Your Email", "adverts"),
+            "label" => __("Your Email", "wpadverts"),
             "order" => 10,
             "class" => "",
             "validator" => array( 
@@ -330,7 +330,7 @@ Adverts::instance()->set("form_contact_form", array(
         array(
             "name" => "message_subject",
             "type" => "adverts_field_text",
-            "label" => __("Subject", "adverts"),
+            "label" => __("Subject", "wpadverts"),
             "order" => 10,
             "class" => "",
             "validator" => array( 
@@ -341,7 +341,7 @@ Adverts::instance()->set("form_contact_form", array(
             "name" => "message_body",
             "type" => "adverts_field_textarea",
             "mode" => "plain-text",
-            "label" => __("Message", "adverts"),
+            "label" => __("Message", "wpadverts"),
             "order" => 10,
             "class" => "",
             "validator" => array( 

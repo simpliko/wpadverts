@@ -75,7 +75,7 @@ class Adext_Payments_Emails_Integration {
      * @return  array               Updated list of options
      */
     public function register_filter_optons( $options ) {
-        $options[] = array( "key" => "payments", "label" => __( "Payments", "adverts" ) );
+        $options[] = array( "key" => "payments", "label" => __( "Payments", "wpadverts" ) );
         return $options;
     }
     
@@ -101,8 +101,8 @@ class Adext_Payments_Emails_Integration {
             "notify" => "user",
             "from" => array( "name" => "", "email" => "" ),
             "to" => "{\$advert|contact_email}",
-            "subject" => __( "Your Ad has been saved (waiting for payment).", "adverts" ),
-            "body" => __("Hello,\nyour Ad titled '{\$advert.post_title}' has been saved and is pending payment.\n\nWe will notify you once the payment will be processed.", 'adverts'),
+            "subject" => __( "Your Ad has been saved (waiting for payment).", "wpadverts" ),
+            "body" => __("Hello,\nyour Ad titled '{\$advert.post_title}' has been saved and is pending payment.\n\nWe will notify you once the payment will be processed.", "wpadverts"),
             "headers" => array(),
             "attachments" => array()
         );
@@ -116,8 +116,8 @@ class Adext_Payments_Emails_Integration {
             "notify" => "user",
             "from" => array( "name" => "", "email" => "" ),
             "to" => "{\$payment|contact_email}",
-            "subject" => __( "Payment Pending ({\$payment|payment_order_id}).", "adverts" ),
-            "body" => __( "Hello,\nwe have received your order {\$payment|payment_order_id} and we are processing your payment.\n\nCreated By: {\$payment|meta:adverts_person}\nOrder Date: {\$payment.post_date|format_date}\nTo Pay: {\$payment|payment_to_pay}\n\nIf you were unable to finish the payment on site you can do it using the link below.\n{\$payment|payment_complete_url}", "adverts" ),
+            "subject" => __( "Payment Pending ({\$payment|payment_order_id}).", "wpadverts" ),
+            "body" => __( "Hello,\nwe have received your order {\$payment|payment_order_id} and we are processing your payment.\n\nCreated By: {\$payment|meta:adverts_person}\nOrder Date: {\$payment.post_date|format_date}\nTo Pay: {\$payment|payment_to_pay}\n\nIf you were unable to finish the payment on site you can do it using the link below.\n{\$payment|payment_complete_url}", "wpadverts" ),
             "headers" => array(),
             "attachments" => array()
         );
@@ -131,8 +131,8 @@ class Adext_Payments_Emails_Integration {
             "notify" => "user",
             "from" => array( "name" => "", "email" => "" ),
             "to" => "{\$payment|contact_email}",
-            "subject" => __( "Payment Completed ({\$payment|payment_order_id}).", "adverts" ),
-            "body" => __( "Hello,\nyour order {\$payment|payment_order_id} has been proccessed and marked as completed.", "adverts" ),
+            "subject" => __( "Payment Completed ({\$payment|payment_order_id}).", "wpadverts" ),
+            "body" => __( "Hello,\nyour order {\$payment|payment_order_id} has been proccessed and marked as completed.", "wpadverts" ),
             "headers" => array(),
             "attachments" => array()
         );
@@ -146,8 +146,8 @@ class Adext_Payments_Emails_Integration {
             "notify" => "user",
             "from" => array( "name" => "", "email" => "" ),
             "to" => "{\$advert|contact_email}",
-            "subject" => __( "Your Ad has been paid and published.", "adverts" ),
-            "body" => __( "Hello,\nyour Ad titled '{\$advert.post_title}' has been approved.\n\nTo view your Ad you can use the link below:\n{\$advert.ID|get_permalink}", "adverts" ),
+            "subject" => __( "Your Ad has been paid and published.", "wpadverts" ),
+            "body" => __( "Hello,\nyour Ad titled '{\$advert.post_title}' has been approved.\n\nTo view your Ad you can use the link below:\n{\$advert.ID|get_permalink}", "wpadverts" ),
             "headers" => array(),
             "attachments" => array()
         );
@@ -161,8 +161,8 @@ class Adext_Payments_Emails_Integration {
             "notify" => "user",
             "from" => array( "name" => "", "email" => "" ),
             "to" => "{\$advert|contact_email}",
-            "subject" => __( "Your expired Ad has been renewed and published.", "adverts" ),
-            "body" => __( "Hello\nyour Ad titled '{\$advert.post_title}' has been renewed and is visible on site again.\n\nTo view your Ad you can use the link below:\n{\$advert.ID|get_permalink}", "adverts" ),
+            "subject" => __( "Your expired Ad has been renewed and published.", "wpadverts" ),
+            "body" => __( "Hello\nyour Ad titled '{\$advert.post_title}' has been renewed and is visible on site again.\n\nTo view your Ad you can use the link below:\n{\$advert.ID|get_permalink}", "wpadverts" ),
             "headers" => array(),
             "attachments" => array()
         );
@@ -176,8 +176,8 @@ class Adext_Payments_Emails_Integration {
             "notify" => "user",
             "from" => array( "name" => "", "email" => "" ),
             "to" => "{\$advert|contact_email}",
-            "subject" => __( "Your expired Ad has been renewed and is panding approval.", "adverts" ),
-            "body" => __( "Hello,\nyour Ad titled '{\$post.post_title}' has been renewed and is pending moderation.\n\nOnce the administrator will approve or reject your Ad you will be notified by email.", "adverts" ),
+            "subject" => __( "Your expired Ad has been renewed and is panding approval.", "wpadverts" ),
+            "body" => __( "Hello,\nyour Ad titled '{\$post.post_title}' has been renewed and is pending moderation.\n\nOnce the administrator will approve or reject your Ad you will be notified by email.", "wpadverts" ),
             "headers" => array(),
             "attachments" => array()
         );
@@ -191,8 +191,8 @@ class Adext_Payments_Emails_Integration {
             "notify" => "admin",
             "from" => array( "name" => "", "email" => "" ),
             "to" => "{\$admin_email}",
-            "subject" => __( "New Ad has been saved (waiting for payment).", "adverts" ),
-            "body" => __( "Hello,\nnew Ad titled '{\$advert.post_title}' (ID {\$advert.ID}) has been posted and is pending payment.\n\nYou will be notified again when the payment will be processed.\n\nYou can edit the Ad here:\n{\$advert|admin_edit_url}", "adverts" ),
+            "subject" => __( "New Ad has been saved (waiting for payment).", "wpadverts" ),
+            "body" => __( "Hello,\nnew Ad titled '{\$advert.post_title}' (ID {\$advert.ID}) has been posted and is pending payment.\n\nYou will be notified again when the payment will be processed.\n\nYou can edit the Ad here:\n{\$advert|admin_edit_url}", "wpadverts" ),
             "headers" => array(),
             "attachments" => array()
         );
@@ -206,8 +206,8 @@ class Adext_Payments_Emails_Integration {
             "notify" => "admin",
             "from" => array( "name" => "", "email" => "" ),
             "to" => "{\$admin_email}",
-            "subject" => __( "Payment Completed ({\$payment|payment_order_id}).", "adverts" ),
-            "body" => __( "Hello,\nthe payment for Ad '{\$advert.post_title}' has been completed.\n\nYou can view the payment details here:\n{\$payment|admin_edit_url}", "adverts" ),
+            "subject" => __( "Payment Completed ({\$payment|payment_order_id}).", "wpadverts" ),
+            "body" => __( "Hello,\nthe payment for Ad '{\$advert.post_title}' has been completed.\n\nYou can view the payment details here:\n{\$payment|admin_edit_url}", "wpadverts" ),
             "headers" => array(),
             "attachments" => array()
         );
@@ -221,8 +221,8 @@ class Adext_Payments_Emails_Integration {
             "notify" => "admin",
             "from" => array( "name" => "", "email" => "" ),
             "to" => "{\$admin_email}",
-            "subject" => __( "New Ad has been paid and published", "adverts" ),
-            "body" => __( "Hello,\nnew Ad titled '{\$advert.post_title}' has been published.\n\nYou can view the Ad here:\n{\$advert.ID|get_permalink}\n\nYou can edit the Ad here:\n{\$advert|admin_edit_url}", "adverts" ),
+            "subject" => __( "New Ad has been paid and published", "wpadverts" ),
+            "body" => __( "Hello,\nnew Ad titled '{\$advert.post_title}' has been published.\n\nYou can view the Ad here:\n{\$advert.ID|get_permalink}\n\nYou can edit the Ad here:\n{\$advert|admin_edit_url}", "wpadverts" ),
             "headers" => array(),
             "attachments" => array()
         );
@@ -236,8 +236,8 @@ class Adext_Payments_Emails_Integration {
             "notify" => "admin",
             "from" => array( "name" => "", "email" => "" ),
             "to" => "{\$admin_email}",
-            "subject" => __( "Expired Ad has been renewed.", "adverts" ),
-            "body" => __( "Hello,\nAd titled '%s' has been renewed and published.\n\nYou can view the Ad here:\n{\$advert.ID|get_permalink}\n\nYou can edit the Ad here:\n{\$advert|admin_edit_url}", "adverts" ),
+            "subject" => __( "Expired Ad has been renewed.", "wpadverts" ),
+            "body" => __( "Hello,\nAd titled '%s' has been renewed and published.\n\nYou can view the Ad here:\n{\$advert.ID|get_permalink}\n\nYou can edit the Ad here:\n{\$advert|admin_edit_url}", "wpadverts" ),
             "headers" => array(),
             "attachments" => array()
         );
@@ -251,8 +251,8 @@ class Adext_Payments_Emails_Integration {
             "notify" => "admin",
             "from" => array( "name" => "", "email" => "" ),
             "to" => "{\$admin_email}",
-            "subject" => __( "Expired Ad has been renewed (action required).", "adverts" ),
-            "body" => __( "Hello,\nAd titled '{\$advert.post_title}' has been renewed and is pending approval.\n\nYou can view the Ad here:\n{\$advert.ID|get_permalink}\n\nYou can edit the Ad here:\n{\$advert|admin_edit_url}", "adverts" ),
+            "subject" => __( "Expired Ad has been renewed (action required).", "wpadverts" ),
+            "body" => __( "Hello,\nAd titled '{\$advert.post_title}' has been renewed and is pending approval.\n\nYou can view the Ad here:\n{\$advert.ID|get_permalink}\n\nYou can edit the Ad here:\n{\$advert|admin_edit_url}", "wpadverts" ),
             "headers" => array(),
             "attachments" => array()
         );

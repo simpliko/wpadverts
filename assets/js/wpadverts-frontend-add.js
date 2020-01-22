@@ -7,7 +7,8 @@ jQuery(function($) {
         var data = {
             action: 'adverts_delete_tmp',
             security: 'nonce',
-            id: $("#_post_id").val()
+            _post_id: $("#_post_id").val(),
+            _post_id_nonce: $("#_post_id_nonce").val()
         };
 
         $.ajax(adverts_frontend_lang.ajaxurl, {

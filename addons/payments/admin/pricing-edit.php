@@ -13,9 +13,9 @@
 <div class="wrap">
     
     <h2 class="nav-tab-wrapper">
-        <a href="<?php esc_attr_e( remove_query_arg( array( 'add', 'edit', 'adaction' ) ) ) ?>" class="nav-tab "><?php _e("Options", "adverts") ?></a>
+        <a href="<?php esc_attr_e( remove_query_arg( array( 'add', 'edit', 'adaction' ) ) ) ?>" class="nav-tab "><?php _e("Options", "wpadverts") ?></a>
         <a href="<?php esc_attr_e( remove_query_arg( array( 'add', 'edit' ), add_query_arg( array('adaction'=>'list') ) ) ) ?>" class="nav-tab nav-tab-active">
-            <?php _e("Pricing", "adverts") ?>
+            <?php _e("Pricing", "wpadverts") ?>
             <a class="add-new-h2" href="<?php esc_attr_e( remove_query_arg( array('edit'), add_query_arg( array( 'add'=>1 ) ) ) ) ?>"><?php _e("Add New") ?></a> 
         </a>
     </h2>

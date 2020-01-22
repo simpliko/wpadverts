@@ -28,7 +28,7 @@ class Adverts_Widget_Categories extends WP_Widget
     public function __construct() {
 
         $this->defaults = array(
-            'title' => __("Advert Categories", "adverts"),
+            'title' => __("Advert Categories", "wpadverts"),
             'show_count' => 1,
             'hide_empty' => 1,
             'top_only' => 0,
@@ -38,9 +38,9 @@ class Adverts_Widget_Categories extends WP_Widget
         
         parent::__construct(
             'wpadverts-widget-categories', 
-            __("Advert Categories", "adverts"),
+            __("Advert Categories", "wpadverts"),
             array(
-                "description"=> __("Displays list of available categories.", "adverts"),
+                "description"=> __("Displays list of available categories.", "wpadverts"),
                 "classname" => 'wpadverts-widget-categories'
             )
         );
@@ -89,7 +89,7 @@ class Adverts_Widget_Categories extends WP_Widget
         );
         
         $input = Adverts_Html::build("input", $params);
-        $label = Adverts_Html::build("label", array("for" => $this->get_field_id('hide_empty')), $input . ' ' . __("Hide empty", "adverts") );
+        $label = Adverts_Html::build("label", array("for" => $this->get_field_id('hide_empty')), $input . ' ' . __("Hide empty", "wpadverts") );
         
         $buffer .= $label . '<br/>';
         
@@ -117,7 +117,7 @@ class Adverts_Widget_Categories extends WP_Widget
         );
         
         $input = Adverts_Html::build("input", $params);
-        $label = Adverts_Html::build("label", array("for" => $this->get_field_id('top_only')), $input . ' ' . __( "Show top categories only", "adverts" ) );
+        $label = Adverts_Html::build("label", array("for" => $this->get_field_id('top_only')), $input . ' ' . __( "Show top categories only", "wpadverts" ) );
         
         $buffer .= $label . '<br/>';
         
@@ -131,7 +131,7 @@ class Adverts_Widget_Categories extends WP_Widget
         );
         
         $input = Adverts_Html::build("input", $params);
-        $label = Adverts_Html::build("label", array("for" => $this->get_field_id('multi_level')), $input . ' ' . __( "Show multiple category levels", "adverts" ) );
+        $label = Adverts_Html::build("label", array("for" => $this->get_field_id('multi_level')), $input . ' ' . __( "Show multiple category levels", "wpadverts" ) );
         
         $buffer .= $label . '<br/>';
         
@@ -270,9 +270,9 @@ class Adverts_Widget_Categories extends WP_Widget
         if( $parent_id ) {
             $parent = get_term_by( 'term_id', $parent_id, 'advert_category' );
             $link = get_term_link( $parent );
-            $home_url = Adverts_Html::build("a", array("href"=>$link, 'title'=>$parent->name), sprintf(__("Go Up (%s)", "adverts"), $parent->name));
+            $home_url = Adverts_Html::build("a", array("href"=>$link, 'title'=>$parent->name), sprintf(__("Go Up (%s)", "wpadverts"), $parent->name));
         } else if ( $current !== false ) {
-            $home_url = Adverts_Html::build("a", array("href"=>get_permalink( adverts_config( "ads_list_id" ) ) ), __("Go Up (Home)", "adverts"));
+            $home_url = Adverts_Html::build("a", array("href"=>get_permalink( adverts_config( "ads_list_id" ) ) ), __("Go Up (Home)", "wpadverts"));
         }
         
         extract($args, EXTR_SKIP);
@@ -323,7 +323,7 @@ class Adverts_Widget_Categories extends WP_Widget
                 <?php else: ?>
                 <div class="adverts-grid-row">
                     <div class="adverts-col-100">
-                        <span><?php _e("No categories found.", "adverts") ?></span>
+                        <span><?php _e("No categories found.", "wpadverts") ?></span>
                     </div>
                 </div>
                 <?php endif; ?> 
@@ -390,7 +390,7 @@ class Adverts_Widget_Categories extends WP_Widget
                 ?>
                 <div class="adverts-grid-row">
                     <div class="adverts-col-100">
-                        <span><?php _e("No categories found.", "adverts") ?></span>
+                        <span><?php _e("No categories found.", "wpadverts") ?></span>
                     </div>
                 </div>
                 <?php endif; ?> 

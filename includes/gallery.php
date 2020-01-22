@@ -22,21 +22,23 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @return void
  */
 function adverts_gallery_content( $post = null, $conf = array() ) {
-    
-    wp_nonce_field( plugin_basename( __FILE__ ), 'adverts_gallery_content_nonce' ); 
-    
 
     $button = "adverts-button";
-    
+
     if(is_admin()) {
         $button = "button";
     }
     
     $conf = shortcode_atts( array(
         "button_class" => "button-secondary",
-        "post_id_input" => "#post_ID",
+        "input_post_id" => "#post_ID",
+        "input_post_id_nonce" => "#_post_id_nonce",
+        "_wpadverts_checksum_nonce" => "",
+        "_wpadverts_checksum" => "",
+        "_post_id" => 0,
+        "_post_id_nonce" => "",
         "field_name" => "gallery",
-        "form_name" => "advert"
+        "form_name" => "advert",
     ), $conf);
     
     $field_name = $conf["field_name"];
@@ -59,11 +61,11 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
 
         // additional post data to send to our ajax hook
         'multipart_params'  => array(
-            '_ajax_nonce'   => wp_create_nonce('adverts-gallery'),
+            '_wpadverts_checksum_nonce'   => $conf["_wpadverts_checksum_nonce"],
+            '_wpadverts_checksum' => $conf["_wpadverts_checksum"],
             'action'        => 'adverts_gallery_upload',
             'form'          => $form_name,
-            'field_name'    => $field_name
-          
+            'field_name'    => $field_name,
         ),
     );
     
@@ -80,8 +82,8 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
         
         </div>
         <div class="adverts-gallery">
-            <p><?php _e( "Drop files here to add them.", "adverts" ) ?></p>
-            <p><a href="#" id="<?php echo esc_html("adverts-plupload-browse-button-".$field_name) ?>" class="adverts-plupload-browse-button <?php echo $button ?>"><?php _e( "browse files ...", "adverts" ) ?></a></p>
+            <p><?php _e( "Drop files here to add them.", "wpadverts" ) ?></p>
+            <p><a href="#" id="<?php echo esc_html("adverts-plupload-browse-button-".$field_name) ?>" class="adverts-plupload-browse-button <?php echo $button ?>"><?php _e( "browse files ...", "wpadverts" ) ?></a></p>
         </div>
         <div class="adverts-gallery-uploads">
 
@@ -189,18 +191,18 @@ function adverts_gallery_modal() {
 
             <div class="adverts-gallery-item-features">
                 <# if(data.result.featured) { #>
-                <span class="adverts-gallery-item-feature adverts-icon-flag" title="<?php _e( "Featured", "adverts" ) ?>"></span>
+                <span class="adverts-gallery-item-feature adverts-icon-flag" title="<?php _e( "Featured", "wpadverts" ) ?>"></span>
                 <# } #>
                 
                 <# if(data.mime == "video") { #>
-                <span class="adverts-gallery-item-feature adverts-icon-videocam" title="<?php _e("Video", "adverts") ?>"></span>
+                <span class="adverts-gallery-item-feature adverts-icon-videocam" title="<?php _e("Video", "wpadverts") ?>"></span>
                 <# } #>
             </div>
 
 
             <div class="adverts-gallery-upload-actions">
-                <a href="#" class="adverts-button-edit <?php echo $button ?> adverts-button-icon adverts-icon-pencil" title="<?php _e("Edit File", "adverts") ?>"></a>
-                <a href="#" class="adverts-button-remove <?php echo $button ?> adverts-button-icon adverts-icon-trash-1" title="<?php _e("Delete File", "adverts") ?>"></a>
+                <a href="#" class="adverts-button-edit <?php echo $button ?> adverts-button-icon adverts-icon-pencil" title="<?php _e("Edit File", "wpadverts") ?>"></a>
+                <a href="#" class="adverts-button-remove <?php echo $button ?> adverts-button-icon adverts-icon-trash-1" title="<?php _e("Delete File", "wpadverts") ?>"></a>
             </div>
         <# } #>
     </script>
@@ -212,7 +214,7 @@ function adverts_gallery_modal() {
              
             <div class="wpadverts-overlay-header">
                 <div class="wpadverts-overlay-title">
-                    <?php _e( "Attachment Details", "adverts" ) ?>
+                    <?php _e( "Attachment Details", "wpadverts" ) ?>
                 </div>
                 <div class="wpadverts-overlay-buttons"><!-- no line break 
                     --><span class="wpadverts-overlay-button wpadverts-file-pagi-prev adverts-icon-left-open wpadverts-navi-disabled"></span><!-- no line break
@@ -255,7 +257,7 @@ function adverts_gallery_modal() {
                                 </span>
                             </div>
                             <div class="wpadverts-attachment-icon-big-wrap">
-                                <span><?php _e("In 'Preview' select 'Video' and click 'Capture ...' button to generate thumbnails.", "adverts") ?></strong>
+                                <span><?php _e("In 'Preview' select 'Video' and click 'Capture ...' button to generate thumbnails.", "wpadverts") ?></strong>
                             </div>
                         </div>
                     <# } else { #>
@@ -289,7 +291,7 @@ function adverts_gallery_modal() {
                 <div class="wpadverts-attachment-icon-big-wrap">
                     <span >{{ data.file.readable.name }} </span>
                 </div>
-                <a href="{{ data.file.guid }}" class="<?php echo $button ?>"><?php _e("Download File", "adverts") ?></a>
+                <a href="{{ data.file.guid }}" class="<?php echo $button ?>"><?php _e("Download File", "wpadverts") ?></a>
             </div>
             <# } #>
         </div>
@@ -299,19 +301,19 @@ function adverts_gallery_modal() {
                 <fieldset>
                     <# if( data.mime == "video" || data.mime == "image" ) { #>
                     <div class="adverts-control-group">
-                        <label for="adverts_featured"><?php _e("Featured", "adverts") ?></label>
+                        <label for="adverts_featured"><?php _e("Featured", "wpadverts") ?></label>
                         <input type="checkbox" id="adverts_featured" name="adverts_featured" value="1" <# if(data.file.featured) { #>checked="checked"<# } #> />
-                        <?php esc_html_e( "Use this image as main image", "adverts") ?>
+                        <?php esc_html_e( "Use this image as main image", "wpadverts") ?>
                     </div>
                     <# } #>
 
                     <div class="adverts-control-group">
-                        <label for="adverts_caption"><?php _e("Title", "adverts") ?></label>
+                        <label for="adverts_caption"><?php _e("Title", "wpadverts") ?></label>
                         <input type="text" id="adverts_caption" name="adverts_caption" value="{{ data.file.caption }}" />
                     </div>
 
                     <div class="adverts-control-group">
-                        <label for="adverts_content"><?php _e("Description", "adverts") ?></label>
+                        <label for="adverts_content"><?php _e("Description", "wpadverts") ?></label>
                         <textarea id="adverts_content" name="adverts_content">{{ data.file.content }}</textarea>
                     </div>
 
@@ -319,7 +321,7 @@ function adverts_gallery_modal() {
             </form>
 
             <div>
-                <a href="#" class="<?php echo $button ?> adverts-upload-modal-update"><?php _e( "Update Description", "adverts" ) ?></a>
+                <a href="#" class="<?php echo $button ?> adverts-upload-modal-update"><?php _e( "Update Description", "wpadverts" ) ?></a>
                 <span class="adverts-loader adverts-icon-spinner animate-spin"></span>
                 <span class="adverts-update-description-success adverts-icon-ok"></span>
             </div>
@@ -330,10 +332,10 @@ function adverts_gallery_modal() {
                 <form action="" method="post" class="adverts-form adverts-form-aligned">
                     <fieldset>
                         <div class="adverts-control-group">
-                            <label><?php _e("Preview", "adverts") ?></label>
+                            <label><?php _e("Preview", "wpadverts") ?></label>
                             <select class="wpadverts-image-sizes">
                                 <# if(data.mime == "video") { #>
-                                <option value="video" data-explain="<?php _e("Scroll the video to a selected place and click 'Capture' button to create video cover.", "adverts") ?>"><?php echo __("Video", "adverts") ?></option>
+                                <option value="video" data-explain="<?php _e("Scroll the video to a selected place and click 'Capture' button to create video cover.", "wpadverts") ?>"><?php echo __("Video", "wpadverts") ?></option>
                                 <# } #>
                                 <?php foreach( adverts_gallery_explain_size() as $key => $size): ?>
                                 <?php if($size["enabled"] == "1" && ( $key == "full" || has_image_size( $key ))): ?>
@@ -349,18 +351,18 @@ function adverts_gallery_modal() {
                         
                         <?php if( adverts_user_can_edit_image() ): ?>
                         <div class="adverts-control-group wpadverts-file-browser-image-actions">
-                            <a href="#" class="<?php echo $button ?> wpadverts-attachment-edit-image"><?php _e("Edit Image", "adverts") ?></a>
-                            <a href="#" class="<?php echo $button ?> wpadverts-attachment-create-image" title="<?php _e("Create thumbnail from full size image.", "adverts") ?>"><?php _e("Create Image", "adverts") ?></a>
+                            <a href="#" class="<?php echo $button ?> wpadverts-attachment-edit-image"><?php _e("Edit Image", "wpadverts") ?></a>
+                            <a href="#" class="<?php echo $button ?> wpadverts-attachment-create-image" title="<?php _e("Create thumbnail from full size image.", "wpadverts") ?>"><?php _e("Create Image", "wpadverts") ?></a>
                         </div>
                         
                         <div class="adverts-control-group wpadverts-file-browser-video-actions">
                             <div class="wpadverts-file-browser-video-player">
-                                <a href="#" class="wpadverts-file-browser-video-thumbnail <?php echo $button ?>"><?php _e("Capture ...", "adverts") ?></a>
+                                <a href="#" class="wpadverts-file-browser-video-thumbnail <?php echo $button ?>"><?php _e("Capture ...", "wpadverts") ?></a>
                             </div>
 
                             <div class="wpadverts-file-browser-video-select-thumbnail">
-                                <a href="#" class="wpadverts-file-browser-video-thumbnail-save <?php echo $button ?>"><?php _e("Save Thumbnail", "adverts") ?></a>
-                                <a href="#" class="wpadverts-file-browser-video-thumbnail-cancel <?php echo $button ?>"><?php _e("Cancel", "adverts") ?></a>
+                                <a href="#" class="wpadverts-file-browser-video-thumbnail-save <?php echo $button ?>"><?php _e("Save Thumbnail", "wpadverts") ?></a>
+                                <a href="#" class="wpadverts-file-browser-video-thumbnail-cancel <?php echo $button ?>"><?php _e("Cancel", "wpadverts") ?></a>
                                 <span class="adverts-file-video-spinner adverts-loader adverts-icon-spinner animate-spin"></span>
                             </div>
                             
@@ -407,7 +409,7 @@ function adverts_gallery_modal() {
     <script type="text/html" id="tmpl-wpadverts-browser-attachment-image">
         <div class="wpadverts-attachment-media-view wpadverts-overlay-content wpadverts-attachment-media-image-editor">
             <div class="wpadverts-attachment-image">
-                <img src="#" data-src="<?php echo adverts_ajax_url() ?>?action=adverts_gallery_image_stream&post_id={{ data.file.post_id }}&attach_id={{ data.file.attach_id }}&size={{ data.size }}&history={{ data.history }}&rand={{ data.rand }}&_ajax_nonce={{ data.nonce }}" id="wpadverts-image-crop" alt="" style="max-width: 100%; max-height: 100%;">
+                <img src="#" data-src="<?php echo adverts_ajax_url() ?>?action=adverts_gallery_image_stream&_wpadverts_checksum={{ data._wpadverts_checksum }}&_wpadverts_checksum_nonce={{ data._wpadverts_checksum_nonce }}&_post_id={{ data._post_id }}&_post_id_nonce={{ data._post_id_nonce }}&attach_id={{ data.file.attach_id }}&size={{ data.size }}&history={{ data.history }}&rand={{ data.rand }}&_ajax_nonce={{ data.nonce }}" id="wpadverts-image-crop" alt="" style="max-width: 100%; max-height: 100%;">
             </div>
         </div>
 
@@ -416,31 +418,31 @@ function adverts_gallery_modal() {
             <form action="" method="post" class="adverts-form adverts-form-aligned">
                 <fieldset>
                     <div class="adverts-control-group">
-                        <label for="adverts_featured"><?php _e("Image Manipulation", "adverts") ?></label>
-                        <a href="#" class="adverts-image-action-crop <?php echo $button ?> adverts-button-small" title="<?php _e("Crop", "adverts") ?>"><span class="adverts-icon-crop"></span></a>
-                        <a href="#" class="adverts-image-action-rotate-cw <?php echo $button ?> adverts-button-small" title="<?php _e("Rotate 90 degrees", "adverts") ?>"><span class="adverts-icon-cw"></span></a>
-                        <a href="#" class="adverts-image-action-rotate-ccw <?php echo $button ?> adverts-button-small" title="<?php _e("Rotate -90 degrees", "adverts") ?>"><span class="adverts-icon-ccw"></span></a>
-                        <a href="#" class="adverts-image-action-flip-h <?php echo $button ?> adverts-button-small" title="<?php _e("Flip Vertically", "adverts") ?>"><span class="adverts-icon-resize-vertical"></span></a>
-                        <a href="#" class="adverts-image-action-flip-v <?php echo $button ?> adverts-button-small" title="<?php _e("Flip Horizontally", "adverts") ?>"><span class="adverts-icon-resize-horizontal"></span></a>
-                        <a href="#" class="adverts-image-action-undo <?php echo $button ?> adverts-button-small" title="<?php _e("Undo", "adverts") ?>"><span class="adverts-icon-history"></span></a>
+                        <label for="adverts_featured"><?php _e("Image Manipulation", "wpadverts") ?></label>
+                        <a href="#" class="adverts-image-action-crop <?php echo $button ?> adverts-button-small" title="<?php _e("Crop", "wpadverts") ?>"><span class="adverts-icon-crop"></span></a>
+                        <a href="#" class="adverts-image-action-rotate-cw <?php echo $button ?> adverts-button-small" title="<?php _e("Rotate 90 degrees", "wpadverts") ?>"><span class="adverts-icon-cw"></span></a>
+                        <a href="#" class="adverts-image-action-rotate-ccw <?php echo $button ?> adverts-button-small" title="<?php _e("Rotate -90 degrees", "wpadverts") ?>"><span class="adverts-icon-ccw"></span></a>
+                        <a href="#" class="adverts-image-action-flip-h <?php echo $button ?> adverts-button-small" title="<?php _e("Flip Vertically", "wpadverts") ?>"><span class="adverts-icon-resize-vertical"></span></a>
+                        <a href="#" class="adverts-image-action-flip-v <?php echo $button ?> adverts-button-small" title="<?php _e("Flip Horizontally", "wpadverts") ?>"><span class="adverts-icon-resize-horizontal"></span></a>
+                        <a href="#" class="adverts-image-action-undo <?php echo $button ?> adverts-button-small" title="<?php _e("Undo", "wpadverts") ?>"><span class="adverts-icon-history"></span></a>
 
                     </div>
 
                     <div class="adverts-control-group">
-                        <label for="adverts_caption"><?php _e("Image Size", "adverts") ?></label>
+                        <label for="adverts_caption"><?php _e("Image Size", "wpadverts") ?></label>
                         <input type="number" class="adverts-image-scale-width" name="d_width" value="{{ data.dim[0] }}" max="{{ data.dim[0] }}" step="1" />
                         x
                         <input type="number" class="adverts-image-scale-height" name="d_height"  value="{{ data.dim[1] }}" max="{{ data.dim[1] }}" step="1" />
-                        <a href="#" class="adverts-image-action-scale <?php echo $button ?> adverts-button-small"><?php _e("Scale", "adverts") ?></a>
+                        <a href="#" class="adverts-image-action-scale <?php echo $button ?> adverts-button-small"><?php _e("Scale", "wpadverts") ?></a>
                     </div>
 
                     <div class="adverts-control-group">
-                        <label for="adverts_content"><?php _e("Actions", "adverts") ?></label>
+                        <label for="adverts_content"><?php _e("Actions", "wpadverts") ?></label>
                     
-                        <a href="#" class="adverts-image-action-save <?php echo $button ?> adverts-button-small" title="<?php _e("Save Image", "adverts") ?>"><?php _e("Save", "adverts") ?></a>
-                        <a href="#" class="adverts-image-action-cancel <?php echo $button ?> adverts-button-small" title="<?php _e("Cancel") ?>"><?php _e("Cancel", "adverts") ?></a>
+                        <a href="#" class="adverts-image-action-save <?php echo $button ?> adverts-button-small" title="<?php _e("Save Image", "wpadverts") ?>"><?php _e("Save", "wpadverts") ?></a>
+                        <a href="#" class="adverts-image-action-cancel <?php echo $button ?> adverts-button-small" title="<?php _e("Cancel") ?>"><?php _e("Cancel", "wpadverts") ?></a>
                         &nbsp;
-                        <a href="#" class="adverts-image-action-restore <?php echo $button ?> adverts-button-small" title="<?php _e("Restore original image", "adverts") ?>"><?php _e("Restore", "adverts") ?></a>
+                        <a href="#" class="adverts-image-action-restore <?php echo $button ?> adverts-button-small" title="<?php _e("Restore original image", "wpadverts") ?>"><?php _e("Restore", "wpadverts") ?></a>
 
                         &nbsp;
                         
@@ -449,7 +451,7 @@ function adverts_gallery_modal() {
                         <# if(data.size == "full") { #>
                         <div class="wpadverts-image-apply-to">
                             <input type="checkbox" name="wpadverts-image-action-apply-to" class="wpadverts-image-action-apply-to" value="1" checked="checked" />
-                            <label for="wpadverts-image-action-apply-to"><?php _e( "Apply changes to all image sizes", "adverts") ?></label>
+                            <label for="wpadverts-image-action-apply-to"><?php _e( "Apply changes to all image sizes", "wpadverts") ?></label>
                         </div>
                         <# } else { #>
                             <input type="hidden" name="wpadverts-image-action-apply-to" class="wpadverts-image-action-apply-to" value="0" />
@@ -575,6 +577,7 @@ function adverts_upload_item_data( $attach_id, $is_new = false ) {
 
     $data = array(
         "post_id" => $post->post_parent,
+        "post_id_nonce" => wp_create_nonce( "wpadverts-publish-" . $post->post_parent ),
         "attach_id" => $attach_id,
         "guid" => $post->guid,
         "mime_type" => $post->post_mime_type,
@@ -621,23 +624,23 @@ function adverts_gallery_explain_size( $size = null ) {
     $e = apply_filters( "adverts_gallery_explain", array( 
         "full" => array(
             "enabled" => 1,
-            "title" => __( "Gallery - Full Size", "adverts" ),
-            "desc" => __( "Image in original size - used on classified details page in the gallery.", "adverts" )
+            "title" => __( "Gallery - Full Size", "wpadverts" ),
+            "desc" => __( "Image in original size - used on classified details page in the gallery.", "wpadverts" )
         ),
         "adverts-gallery" => array(
             "enabled" => 0,
-            "title" => __( "Gallery - Slider", "adverts" ),
-            "desc" => __( "Image resized to %d x %d - used in the images slider on classified details page.", "adverts" )
+            "title" => __( "Gallery - Slider", "wpadverts" ),
+            "desc" => __( "Image resized to %d x %d - used in the images slider on classified details page.", "wpadverts" )
         ),
         "adverts-list" => array(
             "enabled" => 0,
-            "title" => __( "Classifieds List", "adverts" ),
-            "desc" => __( "Image resized to %d x %d - used on the classifieds list.", "adverts" )
+            "title" => __( "Classifieds List", "wpadverts" ),
+            "desc" => __( "Image resized to %d x %d - used on the classifieds list.", "wpadverts" )
         ),
         "adverts-upload-thumbnail" => array(
             "enabled" => 0,
-            "title" => __( "Thumbnail", "adverts" ),
-            "desc" => __( "Image resized to %d x %d - the image visible in upload preview.", "adverts" )
+            "title" => __( "Thumbnail", "wpadverts" ),
+            "desc" => __( "Image resized to %d x %d - the image visible in upload preview.", "wpadverts" )
         ),
     ), $size );
     

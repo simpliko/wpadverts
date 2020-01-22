@@ -12,7 +12,7 @@ module.exports = function(grunt) {
                     include: [],                      // List of files or directories to include.
                     mainFile: 'wpadverts.php',                     // Main project file.
                     potComments: '',                  // The copyright at the beginning of the POT file.
-                    potFilename: 'adverts.pot',                  // Name of the POT file.
+                    potFilename: 'wpadverts.pot',                  // Name of the POT file.
                     potHeaders: {
                         poedit: true,                 // Includes common Poedit headers.
                         'x-poedit-keywordslist': true // Include a list of all possible gettext functions.
@@ -39,7 +39,7 @@ module.exports = function(grunt) {
         checktextdomain: {
             deploy: {
                 options:{
-                    text_domain: 'adverts',
+                    text_domain: 'wpadverts',
                     report_missing: false,
                     keywords: [ 
                        '__:1,2d',

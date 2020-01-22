@@ -55,7 +55,7 @@ function adverts_setup_schedule() {
 function adverts_cron_5_min( $schedules ) {
     $schedules['5minutes'] = array(
         'interval' => 300,
-        'display' => __( 'Every 5 minutes', 'adverts' )
+        'display' => __( 'Every 5 minutes', 'wpadverts' )
     );
     return $schedules;
 }

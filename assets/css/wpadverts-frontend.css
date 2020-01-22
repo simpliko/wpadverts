@@ -1107,11 +1107,14 @@ body .wpadverts-slide .wpadverts-slide-description.wpadverts-slide-desc {
     height: 350px;
 }
 
-.wpadverts-slide .wpadverts-slide-img.wpadverts-slide-img-square,
-.wpadverts-slide .wpadverts-slide-img.wpadverts-slide-img-landscape {
+.adverts-list .advert-img > img {
     object-fit: cover;
+    width: 100%;
+    height: 100%;
 }
 
+.wpadverts-slide .wpadverts-slide-img.wpadverts-slide-img-square,
+.wpadverts-slide .wpadverts-slide-img.wpadverts-slide-img-landscape,
 .wpadverts-slide .wpadverts-slide-img.wpadverts-slide-img-portrait {
     object-fit: contain;
 }
@@ -1437,6 +1440,13 @@ body .wpadverts-slide .wpadverts-slide-description.wpadverts-slide-desc {
     z-index: 1000;
     overflow-y: scroll;
     padding: 12px;
+    border: 1px solid #ccc;
+}
+
+.wpadverts-slide-nav-thumbnails-list .wpadverts-als-item.als-item > a {
+    width: 120px;
+    border: 2px solid white;
+    background: whitesmoke;
 }
 
 .wpadverts-slide-nav-thumbnails-close {
@@ -1510,6 +1520,7 @@ body .wpadverts-slide .wpadverts-slide-description.wpadverts-slide-desc {
 }
 
 .wpadverts-als-container {
+    display: flex;
     position: relative;
     width: 100%;
     margin: 0px auto;
@@ -1536,18 +1547,21 @@ body .wpadverts-slide .wpadverts-slide-description.wpadverts-slide-desc {
     text-align: center;
     cursor: pointer;
     float: left;
-    padding: 1px;
-    border: 1px solid whitesmoke;
-    margin: 3px !important;
+    padding: 0px;
+    border: 0px solid transparent;
+    margin: 4px !important;
 }
 
 .wpadverts-als-item .wpadverts-als-img {
     border-radius: 0;
     box-shadow: none;
+    object-fit: cover;
+    width: 100%;
+    height: 72px;
 }
 
 .wpadverts-als-item a {
-    width: 100px;
+    width: auto;
     height: 70px;
     display: block;
     overflow: hidden;
@@ -1557,22 +1571,24 @@ body .wpadverts-slide .wpadverts-slide-description.wpadverts-slide-desc {
 .als-nav-fake,
 .als-next,
 .als-prev {
-    position: absolute;
+    position: initial;
     font-size: 48px;
     width:36px;
     clear: both;
-    height: 74px;
-    line-height:74px;
+    height: 80px;
+    line-height:80px;
     top: 0;
     z-index: 2000;
 }
 
 .als-nav-wrap-left {
+    flex-basis: 40px;
     z-index: 1000;
     left: 0;
 }
 
 .als-nav-wrap-right {
+    flex-basis: 40px;
     z-index: 1000;
     right: 0;
 }
@@ -1609,6 +1625,11 @@ body .wpadverts-slide .wpadverts-slide-description.wpadverts-slide-desc {
     vertical-align: baseline;
     color: rgba(0,0,0, .75);
     cursor: pointer;
+}
+
+.als-nav-wrap.slick-disabled span:before {
+    color: rgba(0,0,0, .25);
+
 }
 
 .wpadverts-slide-caption {

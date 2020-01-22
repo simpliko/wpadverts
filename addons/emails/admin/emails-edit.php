@@ -13,8 +13,8 @@
 <div class="wrap">
     
     <h2 class="nav-tab-wrapper">
-        <a href="<?php esc_attr_e( remove_query_arg( array( 'edit', 'emaction' ) ) ) ?>" class="nav-tab nav-tab-active"><?php _e("Email Templates", "adverts") ?></a>
-        <a href="<?php esc_attr_e( add_query_arg( array('emaction'=>'options', 'edit'=>null) ) ) ?>" class="nav-tab "><?php _e("Options", "adverts") ?></a>
+        <a href="<?php esc_attr_e( remove_query_arg( array( 'edit', 'emaction' ) ) ) ?>" class="nav-tab nav-tab-active"><?php _e("Email Templates", "wpadverts") ?></a>
+        <a href="<?php esc_attr_e( add_query_arg( array('emaction'=>'options', 'edit'=>null) ) ) ?>" class="nav-tab "><?php _e("Options", "wpadverts") ?></a>
     </h2>
 
     <?php adverts_admin_flash() ?>
@@ -47,7 +47,7 @@
         <th scope="row">
             <label for="message_subject">
                 <# if ( data._mode == "edit" ) { #>
-                <input type="text" class="header-name" name="header_name[]" placeholder="<?php _e( "Header Name", "adverts" ) ?>" value="{{ data.header_name }}" style="width:150px" />      
+                <input type="text" class="header-name" name="header_name[]" placeholder="<?php _e( "Header Name", "wpadverts" ) ?>" value="{{ data.header_name }}" style="width:150px" />      
                 <# } else { #>
                 <label>{{ data.header_name }}</label>
                 <input type="hidden" name="header_name[]" value="{{ data.header_name }}" />

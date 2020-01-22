@@ -47,8 +47,8 @@
     
         <div class="adverts-options-left adverts-js">
             <?php if($switch_views): ?>
-            <a href="<?php echo esc_html( add_query_arg( "display", "grid" ) ) ?>" class="adverts-button-small adverts-switch-view" title="<?php esc_attr_e("Grid", "adverts") ?>"><span class="adverts-square-icon adverts-icon-th-large"></span></a>
-            <a href="<?php echo esc_html( add_query_arg( "display", "list" ) ) ?>" class="adverts-button-small adverts-switch-view" title="<?php esc_attr_e("List", "adverts") ?>"><span class="adverts-square-icon adverts-icon-th-list"></span></a>
+            <a href="<?php echo esc_html( add_query_arg( "display", "grid" ) ) ?>" class="adverts-button-small adverts-switch-view" title="<?php esc_attr_e("Grid", "wpadverts") ?>"><span class="adverts-square-icon adverts-icon-th-large"></span></a>
+            <a href="<?php echo esc_html( add_query_arg( "display", "list" ) ) ?>" class="adverts-button-small adverts-switch-view" title="<?php esc_attr_e("List", "wpadverts") ?>"><span class="adverts-square-icon adverts-icon-th-list"></span></a>
             <?php endif; ?>
             
             <?php if($allow_sorting): ?>
@@ -82,13 +82,13 @@
 
         <div class="adverts-options-right adverts-js">
             <?php if( !empty( $fields_hidden ) ): ?>
-            <a href="#" class="adverts-form-filters adverts-button-small"><span><?php _e("Advanced Search", "adverts") ?> <span class="adverts-advanced-search-icon adverts-icon-down-open"></a>
+            <a href="#" class="adverts-form-filters adverts-button-small"><span><?php _e("Advanced Search", "wpadverts") ?> <span class="adverts-advanced-search-icon adverts-icon-down-open"></a>
             <?php endif; ?>
-            <a href="#" class="adverts-form-submit adverts-button-small"><?php _e("SEARCH", "adverts") ?> <span class="adverts-icon-search"><span></a>
+            <a href="#" class="adverts-form-submit adverts-button-small"><?php _e("SEARCH", "wpadverts") ?> <span class="adverts-icon-search"><span></a>
         </div>
 
         <div class="adverts-options-fallback adverts-no-js">
-            <input type="submit" value="<?php _e("Filter Results", "adverts") ?>" />
+            <input type="submit" value="<?php _e("Filter Results", "wpadverts") ?>" />
         </div>
     </form>
 </div>
@@ -101,7 +101,7 @@
     <?php include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/list-item.php' ) ?>
     <?php endwhile; ?>
     <?php else: ?>
-    <div class="adverts-list-empty"><em><?php _e("There are no ads matching your search criteria.", "adverts") ?></em></div>
+    <div class="adverts-list-empty"><em><?php _e("There are no ads matching your search criteria.", "wpadverts") ?></em></div>
     <?php endif; ?>
     <?php wp_reset_query(); ?>
 </div>

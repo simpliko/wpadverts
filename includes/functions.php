@@ -265,7 +265,7 @@ function adverts_file_is_image( $file ) {
         return $file;
     }
     
-    $file["error"] = __("Uploaded file is NOT an image", "adverts" );
+    $file["error"] = __("Uploaded file is NOT an image", "wpadverts" );
     
     return $file;
 }
@@ -445,7 +445,7 @@ function adverts_posts_results( $posts, $query ) {
     
     if( $query->is_main_query() && $query->is_tax("advert_category") ) {
         
-        $title = sprintf( __("Category: %s", "adverts"), $query->get_queried_object()->name );
+        $title = sprintf( __("Category: %s", "wpadverts"), $query->get_queried_object()->name );
         $post = get_post( adverts_config( 'config.ads_list_id' ) );
         
         if( ! is_null( $post ) ) {
@@ -532,7 +532,7 @@ function adverts_list_show_term_description( $params ) {
 function adverts_post_thumbnail_html($html) {
     global $post;
     
-    if( 'advert'==$post->post_type && in_the_loop()) {
+    if( is_object( $post ) && 'advert' == $post->post_type && in_the_loop() ) {
         $html = '';
     }
     
@@ -1685,12 +1685,12 @@ function adverts_field_account( $field ) {
     
     if(is_user_logged_in() ) {
         
-        $text = __('You are posting as <strong>%1$s</strong>. <br/>If you want to use a different account, please <a href="%2$s">logout</a>.', 'adverts');
+        $text = __('You are posting as <strong>%1$s</strong>. <br/>If you want to use a different account, please <a href="%2$s">logout</a>.', 'wpadverts');
         printf( '<div>'.$text.'</div>', wp_get_current_user()->display_name, wp_logout_url() );
         
     } else {
         
-        $text = __('Create an account for me so I can manage all my ads from one place (password will be emailed to you) or <a href="%s">Sign In</a>', 'adverts');
+        $text = __('Create an account for me so I can manage all my ads from one place (password will be emailed to you) or <a href="%s">Sign In</a>', 'wpadverts');
         $text = sprintf( $text, wp_login_url( get_permalink() ) );
         
         $fa["options"] = array(
@@ -1722,22 +1722,32 @@ function adverts_field_gallery($field, $form = null ) {
     
     wp_enqueue_script( 'adverts-gallery' );
     
-    $post_id = adverts_request("_post_id", adverts_request("advert_id"));
-    $post = $post_id>0 ? get_post( $post_id ) : null;
-    
     if( ! is_null( $form ) ) {
         $form_name = $form->get_scheme( "name" );
+        $checksum = $form->get_value( "_wpadverts_checksum" );
+        $checksum_nonce = $form->get_value( "_wpadverts_checksum_nonce" );
+        $post_id = $form->get_value( "_post_id" );
+        $post_id_nonce = $form->get_value( "_post_id_nonce" );
     } else {
         $form_name = "advert";
+        $checksum = "";
+        $checksum_nonce = "";
+        $post_id = adverts_request( "_post_id", adverts_request( "advert_id" ) );
+        $post_id_nonce = "";
     }
     
-    $field_name = $field["name"];
+    $post = $post_id > 0 ? get_post( $post_id ) : null;
     
     adverts_gallery_content($post, array( 
         "button_class" => "adverts-button",
-        "post_id_input" => "#_post_id",
+        "input_post_id" => "#_post_id",
+        "input_post_id_nonce" => "#_post_id_nonce",
+        "_wpadverts_checksum" => $form->get_value( "_wpadverts_checksum" ),
+        "_wpadverts_checksum_nonce" => $form->get_value( "_wpadverts_checksum_nonce" ),
+        "_post_id" => $form->get_value( "_post_id" ),
+        "_post_id_nonce" => $form->get_value( "_post_id_nonce" ),
         "form_name" => $form_name,
-        "field_name" => $field_name
+        "field_name" => $field["name"]
     ));
 }
 
@@ -1918,8 +1928,8 @@ function adverts_admin_flash() {
 function adverts_admin_js_redirect( $url ) {
     ?>
 
-    <h3><?php _e("Redirecting", "adverts") ?></h3>
-    <p><?php printf(__('Your are being redirected to Edit page. <a href="%s">Click here</a> if it is taking to long. ', 'adverts'), $url) ?></p>
+    <h3><?php _e("Redirecting", "wpadverts") ?></h3>
+    <p><?php printf(__('Your are being redirected to Edit page. <a href="%s">Click here</a> if it is taking to long. ', 'wpadverts'), $url) ?></p>
     
     <script type="text/javascript">
         window.location.href = "<?php echo ($url) ?>"
@@ -2089,35 +2099,35 @@ function adverts_get_ip() {
 function adverts_currency_list( $currency = null, $get = null ) {
     
     $list = apply_filters("adverts_currency_list", array(
-        array("code"=>"USD", "sign"=>"$", "label"=>__("US Dollars", "adverts")),
-        array("code"=>"EUR", "sign"=>"€", "label"=>__("Euros", "adverts")),
-        array("code"=>"GBP", "sign"=>"£", "label"=>__("Pounds Sterling", "adverts")),
-        array("code"=>"AUD", "sign"=>"$", "label"=>__("Australian Dollars", "adverts")),
-        array("code"=>"BRL", "sign"=>"R$", "label"=>__("Brazilian Real", "adverts")),
-        array("code"=>"CAD", "sign"=>"$", "label"=>__("Canadian Dollars", "adverts")),
-        array("code"=>"CZK", "sign"=>"", "label"=>__("Czech Koruna", "adverts")),
-        array("code"=>"DKK", "sign"=>"", "label"=>__("Danish Krone", "adverts")),
-        array("code"=>"HKD", "sign"=>"$", "label"=>__("Hong Kong Dollar", "adverts")),
-        array("code"=>"HUF", "sign"=>"", "label"=>__("Hungarian Forint", "adverts")),
-        array("code"=>"ILS", "sign"=>"₪", "label"=>__("Israeli Shekel", "adverts")),
-        array("code"=>"JPY", "sign"=>"¥", "label"=>__("Japanese Yen", "adverts")),
-        array("code"=>"MYR", "sign"=>"", "label"=>__("Malaysian Ringgits", "adverts")),
-        array("code"=>"MXN", "sign"=>"$", "label"=>__("Mexican Peso", "adverts")),
-        array("code"=>"NZD", "sign"=>"$", "label"=>__("New Zealand Dollar", "adverts")),
-        array("code"=>"NOK", "sign"=>"", "label"=>__("Norwegian Krone", "adverts")),
-        array("code"=>"PHP", "sign"=>"", "label"=>__("Philippine Pesos", "adverts")),
-        array("code"=>"PLN", "sign"=>"zł", "label"=>__("Polish Zloty", "adverts")),
-        array("code"=>"SGD", "sign"=>"$", "label"=>__("Singapore Dollar", "adverts")),
-        array("code"=>"SEK", "sign"=>"", "label"=>__("Swedish Krona", "adverts")),
-        array("code"=>"CHF", "sign"=>"", "label"=>__("Swiss Franc", "adverts")),
-        array("code"=>"TWD", "sign"=>"", "label"=>__("Taiwan New Dollars", "adverts")),
-        array("code"=>"THB", "sign"=>"฿", "label"=>__("Thai Baht", "adverts")),
-        array("code"=>"INR", "sign"=>"", "label"=>__("Indian Rupee", "adverts")),
-        array("code"=>"TRY", "sign"=>"", "label"=>__("Turkish Lira", "adverts")),
-        array("code"=>"RIAL", "sign"=>"", "label"=>__("Iranian Rial", "adverts")),
-        array("code"=>"RUB", "sign"=>"", "label"=>__("Russian Rubles", "adverts")),
-        array("code"=>"ZAR", "sign"=>"R", "label"=>__("South African Rand", "adverts")),
-        array("code"=>"LKR", "sign"=>"Rs. ", "label"=>__("Sri Lankan Rupees", "adverts")),
+        array("code"=>"USD", "sign"=>"$", "label"=>__("US Dollars", "wpadverts")),
+        array("code"=>"EUR", "sign"=>"€", "label"=>__("Euros", "wpadverts")),
+        array("code"=>"GBP", "sign"=>"£", "label"=>__("Pounds Sterling", "wpadverts")),
+        array("code"=>"AUD", "sign"=>"$", "label"=>__("Australian Dollars", "wpadverts")),
+        array("code"=>"BRL", "sign"=>"R$", "label"=>__("Brazilian Real", "wpadverts")),
+        array("code"=>"CAD", "sign"=>"$", "label"=>__("Canadian Dollars", "wpadverts")),
+        array("code"=>"CZK", "sign"=>"", "label"=>__("Czech Koruna", "wpadverts")),
+        array("code"=>"DKK", "sign"=>"", "label"=>__("Danish Krone", "wpadverts")),
+        array("code"=>"HKD", "sign"=>"$", "label"=>__("Hong Kong Dollar", "wpadverts")),
+        array("code"=>"HUF", "sign"=>"", "label"=>__("Hungarian Forint", "wpadverts")),
+        array("code"=>"ILS", "sign"=>"₪", "label"=>__("Israeli Shekel", "wpadverts")),
+        array("code"=>"JPY", "sign"=>"¥", "label"=>__("Japanese Yen", "wpadverts")),
+        array("code"=>"MYR", "sign"=>"", "label"=>__("Malaysian Ringgits", "wpadverts")),
+        array("code"=>"MXN", "sign"=>"$", "label"=>__("Mexican Peso", "wpadverts")),
+        array("code"=>"NZD", "sign"=>"$", "label"=>__("New Zealand Dollar", "wpadverts")),
+        array("code"=>"NOK", "sign"=>"", "label"=>__("Norwegian Krone", "wpadverts")),
+        array("code"=>"PHP", "sign"=>"", "label"=>__("Philippine Pesos", "wpadverts")),
+        array("code"=>"PLN", "sign"=>"zł", "label"=>__("Polish Zloty", "wpadverts")),
+        array("code"=>"SGD", "sign"=>"$", "label"=>__("Singapore Dollar", "wpadverts")),
+        array("code"=>"SEK", "sign"=>"", "label"=>__("Swedish Krona", "wpadverts")),
+        array("code"=>"CHF", "sign"=>"", "label"=>__("Swiss Franc", "wpadverts")),
+        array("code"=>"TWD", "sign"=>"", "label"=>__("Taiwan New Dollars", "wpadverts")),
+        array("code"=>"THB", "sign"=>"฿", "label"=>__("Thai Baht", "wpadverts")),
+        array("code"=>"INR", "sign"=>"", "label"=>__("Indian Rupee", "wpadverts")),
+        array("code"=>"TRY", "sign"=>"", "label"=>__("Turkish Lira", "wpadverts")),
+        array("code"=>"RIAL", "sign"=>"", "label"=>__("Iranian Rial", "wpadverts")),
+        array("code"=>"RUB", "sign"=>"", "label"=>__("Russian Rubles", "wpadverts")),
+        array("code"=>"ZAR", "sign"=>"R", "label"=>__("South African Rand", "wpadverts")),
+        array("code"=>"LKR", "sign"=>"Rs. ", "label"=>__("Sri Lankan Rupees", "wpadverts")),
     ));
     
     if( $currency == null ) {
@@ -2553,7 +2563,7 @@ function adverts_single_contact_information( $post_id ) {
     ?>
     <div class="adverts-single-actions">
         <a href="#" class="adverts-button adverts-show-contact" data-id="<?php echo $post_id ?>">
-            <?php esc_html_e("Show Contact Information", "adverts") ?>
+            <?php esc_html_e("Show Contact Information", "wpadverts") ?>
             <span class="adverts-icon-down-open"></span>
         </a>
         <span class="adverts-loader adverts-icon-spinner animate-spin"></span>
@@ -2581,12 +2591,12 @@ function adverts_single_contact_information_box( $post_id ) {
     ?>
     <div class="adverts-contact-box adverts-contact-box-toggle">
         <p class="adverts-contact-method">
-            <span class="adverts-icon-phone adverts-contact-icon" title="<?php _e("Phone", "adverts") ?>"></span>
+            <span class="adverts-icon-phone adverts-contact-icon" title="<?php _e("Phone", "wpadverts") ?>"></span>
             <span class="adverts-contact-phone"></span>
         </p>
 
         <p class="adverts-contact-method">
-           <span class="adverts-icon-mail-alt adverts-contact-icon" title="<?php _e("Email", "adverts") ?>"></span>
+           <span class="adverts-icon-mail-alt adverts-contact-icon" title="<?php _e("Email", "wpadverts") ?>"></span>
            <span class="adverts-contact-email"></span>
         </p>
     </div>
@@ -2757,7 +2767,7 @@ function adverts_add_menu_classes( $menu ) {
     
     foreach(array_keys($menu) as $key) {
         if(isset($menu[$key][5]) && $menu[$key][5] == "menu-posts-advert") {
-            $menu[$key][0] .= sprintf( $wrap, __( "Pending Ads", "adverts" ) );
+            $menu[$key][0] .= sprintf( $wrap, __( "Pending Ads", "wpadverts" ) );
             break;
         }
     }
@@ -2825,12 +2835,12 @@ function adverts_handle_expired_ads_notification( $post_id ) {
         
         if( adverts_config( 'expired_ad_status' ) !== "200" && current_user_can( adverts_config( 'expired_ad_public_cap' ) ) ) {
             $icon = "adverts-icon-eye-off";
-            $m = __( "<strong>Visible To Administrators Only</strong><br/>This Ad expired, but as a user with <em>%s</em> capability you can see this page.", "adverts" );
+            $m = __( "<strong>Visible To Administrators Only</strong><br/>This Ad expired, but as a user with <em>%s</em> capability you can see this page.", "wpadverts" );
             $message = sprintf( $m, adverts_config( 'expired_ad_public_cap' ) );
             
         } else {
             $icon = "adverts-icon-block";
-            $m = __( "<strong>This Ad expired and is no longer available.</strong><br/>See our other active <a href=\"%s\">classified ads</a>.", "adverts" );
+            $m = __( "<strong>This Ad expired and is no longer available.</strong><br/>See our other active <a href=\"%s\">classified ads</a>.", "wpadverts" );
             $message = sprintf( $m, get_permalink( adverts_config( 'ads_list_id' ) ) );
             
         }
@@ -2933,6 +2943,99 @@ function adverts_get_post_id_from_hash( $hash ) {
 }
 
 /**
+ * Returns upload nonce action based on attachment ID
+ * 
+ * The function generates a nonce action in format "wpadverts-upload-{post_type}-{form_name}-{field_name}"
+ * 
+ * @since   1.4.0                            $attach_id      Attachment ID
+ * @return  Adverts_Shortcode_Adverts_Add                    Upload nonce action
+ */
+function _adverts_ajax_verify_checksum( ) {
+    
+    include_once ADVERTS_PATH . "includes/class-checksum.php";
+
+    $checksum = new Adverts_Checksum();
+
+    $args = $checksum->get_args_from_checksum();
+    
+    if( ! is_array( $args ) ) {
+        
+        if( $args == -1 ) {
+            $error = __( "Could not verify the request checksum. Please refresh the page and try again.", "wpadverts" );
+        } else {
+            $error = __( "Checksum does not exist. Please refresh the page and try again.", "wpadverts" );
+        }
+        
+        echo json_encode( array( 
+            "result" => 0, 
+            "error" => $error
+        ) );
+        exit;
+    }
+    
+    return $args;
+}
+
+/**
+ * Checks if the post_id param is required
+ * 
+ * The post_id is required if $args is an array and the key "requires-post-id"
+ * or "is-wp-admin" is set.
+ * 
+ * This function usually uses as $args the value returned by _adverts_ajax_verify_checksum() 
+ * 
+ * @see     _adverts_ajax_verify_checksum() 
+ * 
+ * @param   array     $args
+ * @return  boolean             True if _post_id is required
+ */
+function _adverts_ajax_requires_post_id( $args ) {
+    
+    if( isset( $args["requires-post-id"] ) && $args["requires-post-id"] == "1" ) {
+        return true;
+    }
+    
+    if( isset( $args["is-wp-admin"] ) && $args["is-wp-admin"] == "1" ) {
+        return true;
+    }
+    
+    return false;
+}
+
+/**
+ * Verifies post ID
+ * 
+ * This function is usually used by AJAX to verify post ID using _post_id_nonce
+ * 
+ * @since   1.4.0
+ * @param   boolean     $is_required
+ * @return  int                         Post ID
+ */
+function _adverts_ajax_verify_post_id( $is_required = false ) {
+    
+    $post_id = adverts_request( "_post_id" );
+    $post_id_nonce = adverts_request( "_post_id_nonce" );
+
+    if( $post_id > 0 && ! wp_verify_nonce( $post_id_nonce, "wpadverts-publish-" . $post_id ) ) {
+        echo json_encode( array( 
+            "result" => 0, 
+            "error" => sprintf( __( "It seems you are not the post %d author. Please refresh the page and try again.", "wpadverts" ), $post_id ) 
+        ) );
+        exit;
+    }
+    
+    if( $is_required && $post_id < 1 ) {
+        echo json_encode( array( 
+            "result" => 0, 
+            "error" => __( "Post ID not provided.", "wpadverts" )
+        ) );
+        exit;
+    }
+    
+    return $post_id;
+}
+
+/**
  * Checks if the current user is owner of the $advert_id
  * 
  * The function can additionally return true if the current user is an
@@ -2951,22 +3054,29 @@ function _adverts_ajax_check_post_ownership( $advert_id, $return = false ) {
     $result = null;
     
     // check if post exists
-    if( !$post ) {
+    if( ! is_object( $post ) ) {
         $result = array( 
             "result" => -1, 
-            "error" => __( "This post does not exist.", "adverts" ) 
+            "error" => __( "This post does not exist.", "wpadverts" ) 
         );
+        
+        if( $return !== false ) {
+            echo json_encode( $result );
+            exit;
+        } else {
+            return $result;
+        }
     }
 
     $required_cap = apply_filters( "adverts_ajax_ownership_cap", "edit_pages" );
     $has_required_cap = current_user_can( $required_cap );
     
     if( get_current_user_id() === 0 ) {
-        if( $post->post_author !== 0 || $post->post_status !== adverts_tmp_post_status() ) {
+        if( absint( $post->post_author ) !== 0 || $post->post_status !== adverts_tmp_post_status() ) {
             // annonymous user
             $result = array( 
                 "result" => -4, 
-                "error" => __( "This post cannot be edited by annonymous users.", "adverts" ) 
+                "error" => __( "This post cannot be edited by annonymous users.", "wpadverts" ) 
             );
         }
     } else {
@@ -2974,22 +3084,33 @@ function _adverts_ajax_check_post_ownership( $advert_id, $return = false ) {
             // currently logged in user is not a post author
             $result = array( 
                 "result" => -2, 
-                "error" => __( "This post does not belong to you.", "adverts" ) 
+                "error" => __( "This post does not belong to you.", "wpadverts" ) 
             );
         }
     }
 
+    if( $result !== null ) {
+        if( $return !== false ) {
+            echo json_encode( $result );
+            exit;
+        } else {
+            return $result;
+        }
+    }
+    
     // check if post is an advert
     if( $post->post_type != 'advert') {
         $result = array( 
             "result" => -3, 
-            "error" => __( "This post is not an Advert.", "adverts" ) 
+            "error" => __( "This post is not an Advert.", "wpadverts" ) 
         );
     } 
 
-    if( $result !== null ) {
-        echo json_encode($result);
+    if( $return !== false ) {
+        echo json_encode( $result );
         exit;
+    } else {
+        return $result;
     }
 }
 

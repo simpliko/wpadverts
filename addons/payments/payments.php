@@ -62,54 +62,54 @@ function adext_payments_init() {
     add_action( 'save_post_adverts-payment', 'adverts_create_hash', 10, 3 );
     
     register_post_status( 'adverts-payment-tmp', array(
-        'label'                     => _x( 'Temporary', 'temporary status payment', 'adverts' ),
+        'label'                     => _x( 'Temporary', 'temporary status payment', 'wpadverts' ),
         'public'                    => is_admin(),
         'exclude_from_search'       => false,
         'show_in_admin_all_list'    => true,
         'show_in_admin_status_list' => true,
-        'label_count'               => _n_noop( 'Unread <span class="count">(%s)</span>', 'Unread <span class="count">(%s)</span>', 'adverts' ),
+        'label_count'               => _n_noop( 'Unread <span class="count">(%s)</span>', 'Unread <span class="count">(%s)</span>', 'wpadverts' ),
     ) );
     
     register_post_status( 'completed', array(
-        'label'                     => _x( 'Completed', 'completed status payment', 'adverts' ),
+        'label'                     => _x( 'Completed', 'completed status payment', 'wpadverts' ),
         'public'                    => is_admin(),
         'exclude_from_search'       => false,
         'show_in_admin_all_list'    => true,
         'show_in_admin_status_list' => true,
-        'label_count'               => _n_noop( 'Unread <span class="count">(%s)</span>', 'Unread <span class="count">(%s)</span>', 'adverts' ),
+        'label_count'               => _n_noop( 'Unread <span class="count">(%s)</span>', 'Unread <span class="count">(%s)</span>', 'wpadverts' ),
     ) );
     
     register_post_status( 'failed', array(
-        'label'                     => _x( 'Failed', 'failed status payment', 'adverts' ),
+        'label'                     => _x( 'Failed', 'failed status payment', 'wpadverts' ),
         'public'                    => is_admin(),
         'exclude_from_search'       => false,
         'show_in_admin_all_list'    => true,
         'show_in_admin_status_list' => true,
-        'label_count'               => _n_noop( 'Failed <span class="count">(%s)</span>', 'Failed <span class="count">(%s)</span>', 'adverts' ),
+        'label_count'               => _n_noop( 'Failed <span class="count">(%s)</span>', 'Failed <span class="count">(%s)</span>', 'wpadverts' ),
     ) );
     
     register_post_status( 'pending', array(
-        'label'                     => _x( 'Pending', 'pending status payment', 'adverts' ),
+        'label'                     => _x( 'Pending', 'pending status payment', 'wpadverts' ),
         'public'                    => is_admin(),
         'exclude_from_search'       => false,
         'show_in_admin_all_list'    => true,
         'show_in_admin_status_list' => true,
-        'label_count'               => _n_noop( 'Pending <span class="count">(%s)</span>', 'Pending <span class="count">(%s)</span>', 'adverts' ),
+        'label_count'               => _n_noop( 'Pending <span class="count">(%s)</span>', 'Pending <span class="count">(%s)</span>', 'wpadverts' ),
     ) );
     
     register_post_status( 'refunded', array(
-        'label'                     => _x( 'Refunded', 'refunded status payment', 'adverts' ),
+        'label'                     => _x( 'Refunded', 'refunded status payment', 'wpadverts' ),
         'public'                    => is_admin(),
         'exclude_from_search'       => false,
         'show_in_admin_all_list'    => true,
         'show_in_admin_status_list' => true,
-        'label_count'               => _n_noop( 'Refunded <span class="count">(%s)</span>', 'Refunded <span class="count">(%s)</span>', 'adverts' ),
+        'label_count'               => _n_noop( 'Refunded <span class="count">(%s)</span>', 'Refunded <span class="count">(%s)</span>', 'wpadverts' ),
     ) );
     
     register_post_status( 'advert-pending', array(
         'label'        => _x( 'Pending', 'post' ),
         'public'       => is_admin() || current_user_can( "edit_pages" ),
-        'label_count'  => _n_noop( 'Pending <span class="count">(%s)</span>', 'Pending <span class="count">(%s)</span>', 'adverts' )
+        'label_count'  => _n_noop( 'Pending <span class="count">(%s)</span>', 'Pending <span class="count">(%s)</span>', 'wpadverts' )
      ) );
     
     adverts_form_add_field( 'adverts_field_listing_type', array(
@@ -208,7 +208,7 @@ function adext_payments_add_action_payment( $action ) {
     }
     
     $listing_type = get_post_meta( adverts_request("_post_id", null), "payments_listing_type", true );
-    
+
     if( $listing_type === false || empty($listing_type) ) {
         return $action;
     } 
@@ -302,7 +302,7 @@ function adext_payments_form_load( $form ) {
         "name" => "_listing_information",
         "type" => "adverts_field_header",
         "order" => 1000,
-        "label" => __( 'Listing Information', 'adverts' )
+        "label" => __( 'Listing Information', 'wpadverts' )
     );
     
     $opts = array();
@@ -325,7 +325,7 @@ function adext_payments_form_load( $form ) {
         if( get_post_meta( $data->ID, 'adverts_price', true ) ) {
             $adverts_price = adverts_price( get_post_meta( $data->ID, 'adverts_price', true ) );
         } else {
-            $adverts_price = __("Free", "adverts");
+            $adverts_price = __("Free", "wpadverts");
         }
         
         $opts[] = array( "value"=>$data->ID, "text"=> $data->post_content );
@@ -336,7 +336,7 @@ function adext_payments_form_load( $form ) {
     $form["field"][] = array(
         "name" => "payments_listing_type",
         "type" => "adverts_payments_field_payment",
-        "label" => __("Listing", "adverts"),
+        "label" => __("Listing", "wpadverts"),
         "order" => 1001,
         "empty_option" => true,
         "options" => apply_filters( "wpadverts_filter_pricings_options", $opts ),
@@ -380,7 +380,7 @@ function adverts_payments_field_payment($field) {
         if( get_post_meta( $post_id, 'adverts_price', true ) ) {
             $adverts_price = adverts_price( get_post_meta( $post_id, 'adverts_price', true ) );
         } else {
-            $adverts_price = __("Free", "adverts");
+            $adverts_price = __("Free", "wpadverts");
         }
 
         if($post->post_content) {
@@ -414,9 +414,9 @@ function adverts_payments_field_payment($field) {
                     <span class="adverts-listing-type-feature-duration">
                         <span class="adverts-listing-type-icon adverts-icon-clock"></span>
                         <?php if( $visible > 0 ): ?>
-                        <?php printf( _n("Visible 1 day", "Visible %d days", $visible, "adverts"), $visible) ?>
+                        <?php printf( _n("Visible 1 day", "Visible %d days", $visible, "wpadverts"), $visible) ?>
                         <?php else: ?>
-                        <?php echo esc_html_e( "Never Expires", "adverts" ) ?>
+                        <?php echo esc_html_e( "Never Expires", "wpadverts" ) ?>
                         <?php endif; ?>
                     </span>
 
@@ -479,7 +479,7 @@ function adext_payments_action_payment($content, Adverts_Form $form ) {
     $post = get_post( $post_id );
     
     $info[] = array(
-        "message" => sprintf( __( "<p><strong>Your Payment Is Required</strong><p>Please complete payment for the <em>'%s'</em> Ad posting to have it published.</p>", "adverts" ), $post->post_title ),
+        "message" => sprintf( __( "<p><strong>Your Payment Is Required</strong><p>Please complete payment for the <em>'%s'</em> Ad posting to have it published.</p>", "wpadverts" ), $post->post_title ),
         "icon" => "adverts-icon-basket"
     );
     $error = array();
@@ -625,7 +625,7 @@ function adext_payments_action_complete( $post_id ) {
     $a = new Adverts_Html("a", array(
         "href" => adext_payments_get_checkout_url( $id ),
         "class" => "adverts-manage-action",
-    ), $span . " " . __("Complete Payment", "adverts") );
+    ), $span . " " . __("Complete Payment", "wpadverts") );
 
     echo $a->render();
 }
@@ -666,7 +666,7 @@ function adext_payments_action_renew( $post_id ) {
     $a = new Adverts_Html("a", array(
         "href" => add_query_arg( "advert_renew", $post_id ),
         "class" => "adverts-manage-action",
-    ), $span . " " . __("Renew Ad", "adverts") );
+    ), $span . " " . __("Renew Ad", "wpadverts") );
     
     echo $a->render();
 }
@@ -697,7 +697,7 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
     $post = get_post( adverts_request( "advert_renew" ) );
     
     if( ! in_array( $post->post_status, array( 'publish', 'expired' ) ) ) {
-        $format = __( 'Cannot renew Ads with status \'pending\', <a href="%s">cancel and go back</a>.', "adverts" );
+        $format = __( 'Cannot renew Ads with status \'pending\', <a href="%s">cancel and go back</a>.', "wpadverts" );
         $adverts_flash["error"][] = sprintf( $format, $baseurl );
         ob_start();
         adverts_flash( $adverts_flash );
@@ -708,7 +708,7 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
         "name" => "_listing_information",
         "type" => "adverts_field_header",
         "order" => 1000,
-        "label" => __( 'Listing Information', 'adverts' )
+        "label" => __( 'Listing Information', 'wpadverts' )
     );
     
     $opts = array();
@@ -730,7 +730,7 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
         if( get_post_meta( $data->ID, 'adverts_price', true ) ) {
             $adverts_price = adverts_price( get_post_meta( $data->ID, 'adverts_price', true ) );
         } else {
-            $adverts_price = __("Free", "adverts");
+            $adverts_price = __("Free", "wpadverts");
         }
         
         $opts[] = array( "value"=>$data->ID, "text"=> $data->post_content );
@@ -772,7 +772,7 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
             "html" => "",
             "tag" => "input",
             "type" => "submit",
-            "value" => __( "Renew", "adverts" ),
+            "value" => __( "Renew", "wpadverts" ),
             "style" => "font-size:1.2em"
         )
     );
@@ -795,7 +795,7 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
             $renewal_diff_min = 3600 * 24 * $renewal_diff_min_days;
             
             if( $price > 0 ) {
-                $m = __( 'Renew <strong>%s</strong> or <a href="%s">cancel and go back</a>.', 'adverts');
+                $m = __( 'Renew <strong>%s</strong> or <a href="%s">cancel and go back</a>.', 'wpadverts');
                 $adverts_flash["info"][] = sprintf( $m, $post->post_title, $baseurl );
                 
                 $post_id = $post->ID;
@@ -826,10 +826,10 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
                 include ADVERTS_PATH . 'addons/payments/templates/add-payment.php';
                 return ob_get_clean();
             } else if( $price == 0 && $renewal_diff < $renewal_diff_min ) {
-                $m = __( 'Free Renewals cannot be used more than once every %d days.', 'adverts');
+                $m = __( 'Free Renewals cannot be used more than once every %d days.', 'wpadverts');
                 $adverts_flash["error"][] = sprintf( $m, $renewal_diff_min_days );
             } else {
-                $m = __( 'Ad <strong>%s</strong> renewed. <a href="%s">Go back to Ads list</a>.', 'adverts');
+                $m = __( 'Ad <strong>%s</strong> renewed. <a href="%s">Go back to Ads list</a>.', 'wpadverts');
                 $adverts_flash["info"][] = sprintf( $m, $post->post_title, $baseurl );
                 
                 $payment_id = adext_insert_payment( array(
@@ -841,7 +841,7 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
                     "payment_paid" => 0,
                 ) );
                 
-                adext_payments_log($payment_id, __( "Free Renewal automatically marked as completed.", "adverts" ) );
+                adext_payments_log($payment_id, __( "Free Renewal automatically marked as completed.", "wpadverts" ) );
                 
                 $payment = get_post( $payment_id );
                 
@@ -858,8 +858,8 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
         }
     } 
     
-    $m1 = __( 'Renew <strong>%s</strong> or <a href="%s">cancel and go back</a>.', 'adverts');
-    $m2 = __( 'Select renewal option and click "Renew" button.', 'adverts');
+    $m1 = __( 'Renew <strong>%s</strong> or <a href="%s">cancel and go back</a>.', 'wpadverts');
+    $m2 = __( 'Select renewal option and click "Renew" button.', 'wpadverts');
     $adverts_flash["info"][] = sprintf( $m1, $post->post_title, $baseurl ) . "<br/>" . sprintf( $m2, $baseurl );
 
     ob_start();
@@ -894,8 +894,8 @@ function adext_payments_add_history_link() {
     
    $menu_page = apply_filters('adverts_menu_page', array(
         "parent_slug" => "edit.php?post_type=advert",
-        "page_title" => __( 'Adverts Payment History', 'adverts' ),
-        "menu_title" => __( 'Payment History', 'adverts' ),
+        "page_title" => __( 'Adverts Payment History', 'wpadverts' ),
+        "menu_title" => __( 'Payment History', 'wpadverts' ),
         "capability" => "manage_options",
         "menu_slug" => 'adext-payment-history',
         "function" => "adext_payments_page_history"
@@ -1023,7 +1023,7 @@ function adext_payments_manage_list_status( $post ) {
     }
     
     ?>
-    <span class="adverts-inline-icon adverts-inline-icon-warn adverts-icon-credit-card" title="<?php _e("Inactive — Waiting for payment.", "adverts") ?>"></span>
+    <span class="adverts-inline-icon adverts-inline-icon-warn adverts-icon-credit-card" title="<?php _e("Inactive — Waiting for payment.", "wpadverts") ?>"></span>
     <?php 
 }
 
@@ -1218,9 +1218,9 @@ function adext_payments_payment_type( $item ) {
     $payment_type = "—";
     
     if( $listing->post_type == "adverts-pricing" ) {
-        $payment_type = __( "Posting", "adverts" ); 
+        $payment_type = __( "Posting", "wpadverts" ); 
     } elseif( $listing->post_type == "adverts-renewal" ) {
-        $payment_type = __( "Renewal", "adverts" );
+        $payment_type = __( "Renewal", "wpadverts" );
     } else {
                
     }
@@ -1243,26 +1243,26 @@ function adext_payments_details_box( $payment ) {
     <div class="inside " style="font-size:1.1em; clear:both; overflow:hidden">
 
         <div class="column" style="width:33%; float:left">
-            <strong><?php _e("Purchase Type", "adverts") ?></strong><br/>
+            <strong><?php _e("Purchase Type", "wpadverts") ?></strong><br/>
             <span>
                 <?php echo adext_payments_payment_type( $payment ) ?>
             </span>
         </div>
 
         <div class="column" style="width:33%; float: left">
-            <strong><?php _e("Listing Type", "adverts") ?></strong><br/>
+            <strong><?php _e("Listing Type", "wpadverts") ?></strong><br/>
             <?php if($listing): ?>
             <span>
                 <a href="<?php echo admin_url('edit.php?post_type=advert&page=adverts-extensions&module=payments&adaction=list&edit='.$listing->ID) ?>"><?php esc_html_e($listing->post_title) ?></a> 
                 <?php echo adverts_price( get_post_meta( $listing->ID, "adverts_price", true ) ) ?>
             </span>
             <?php else: ?>
-            <?php esc_html_e( sprintf( __("Listing [%d] no longer exists.", "adverts"), $listing_id ) ) ?>
+            <?php esc_html_e( sprintf( __("Listing [%d] no longer exists.", "wpadverts"), $listing_id ) ) ?>
             <?php endif; ?>
         </div>
 
         <div class="column" style="width:33%; float: left">
-            <strong><?php _e("Purchased Item", "adverts") ?></strong><br/>
+            <strong><?php _e("Purchased Item", "wpadverts") ?></strong><br/>
             <?php $post_id = get_post_meta( $payment->ID, "_adverts_object_id", true ); ?>
             <?php $post = get_post( $post_id ) ?>
             <?php if($post): ?>
@@ -1270,7 +1270,7 @@ function adext_payments_details_box( $payment ) {
                 <a href="<?php echo admin_url('post.php?post='.$post->ID.'&action=edit') ?>"><?php esc_html_e($post->post_title) ?></a>
             </span>
             <?php else: ?>
-            <?php esc_html_e( sprintf( __("Ad [%d] no longer exists.", "adverts"), $listing_id ) ) ?>
+            <?php esc_html_e( sprintf( __("Ad [%d] no longer exists.", "wpadverts"), $listing_id ) ) ?>
             <?php endif; ?>
         </div>
 

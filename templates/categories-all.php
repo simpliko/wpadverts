@@ -37,7 +37,7 @@
                 <?php endforeach; ?>
                 <li>
                     <a href="<?php echo esc_attr(get_term_link($term)) ?>">
-                        <?php _e("<em>View All &raquo;</em>", "adverts") ?>
+                        <?php _e("<em>View All &raquo;</em>", "wpadverts") ?>
                     </a>
                 </li>
             </ul>
@@ -49,7 +49,7 @@
 <?php else: ?>
 <div class="adverts-grid-row">
     <div class="adverts-col-100">
-        <span><?php _e("No categories found.", "adverts") ?></span>
+        <span><?php _e("No categories found.", "wpadverts") ?></span>
     </div>
 </div>
 <?php endif; ?> 

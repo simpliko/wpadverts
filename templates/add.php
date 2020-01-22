@@ -44,7 +44,7 @@
         
         <div class="adverts-control-group <?php echo isset($actions_class) ? $actions_class : '' ?>">
 
-            <input type="submit" name="submit" value="<?php _e("Preview", "adverts") ?>" style="font-size:1.2em" class="adverts-button adverts-cancel-unload" />
+            <input type="submit" name="submit" value="<?php echo isset($action_label) ? esc_attr($action_label) : __("Preview", "wpadverts") ?>" style="font-size:1.2em" class="adverts-button adverts-cancel-unload" />
         </div>
         
     </fieldset>

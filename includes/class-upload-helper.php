@@ -85,7 +85,7 @@ class Adverts_Upload_Helper {
             } elseif( isset($v["default_error"]) ) {
                 $file["error"] = str_replace($find, $repl, $v["default_error"]); 
             } else {
-                $file["error"] = __( "Invalid value.", "adverts" );
+                $file["error"] = __( "Invalid value.", "wpadverts" );
             }
 
             //if( isset($v["on_failure"]) && $v["on_failure"] == "break" ) {

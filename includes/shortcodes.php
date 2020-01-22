@@ -88,31 +88,31 @@ function shortcode_adverts_list( $atts ) {
     // options: title, post_date, adverts_price
     $sort_options = apply_filters( "adverts_list_sort_options", array(
         "date" => array(
-            "label" => __("Publish Date", "adverts"),
+            "label" => __("Publish Date", "wpadverts"),
             "items" => array(
-                "date-desc" => __("Newest First", "adverts"),
-                "date-asc" => __("Oldest First", "adverts")
+                "date-desc" => __("Newest First", "wpadverts"),
+                "date-asc" => __("Oldest First", "wpadverts")
             )
         ),
         "price" => array(
-            "label" => __("Price", "adverts"),
+            "label" => __("Price", "wpadverts"),
             "items" => array(
-                "price-asc" => __("Cheapest First", "adverts"),
-                "price-desc" => __("Most Expensive First", "adverts")
+                "price-asc" => __("Cheapest First", "wpadverts"),
+                "price-desc" => __("Most Expensive First", "wpadverts")
             )
         ),
         "title" => array(
-            "label" => __("Title", "adverts"),
+            "label" => __("Title", "wpadverts"),
             "items" => array(
-                "title-asc" => __("From A to Z", "adverts"),
-                "title-desc" => __("From Z to A", "adverts")
+                "title-asc" => __("From A to Z", "wpadverts"),
+                "title-desc" => __("From Z to A", "wpadverts")
             )
         )
     ) );
     
     $sarr = explode("-", $adverts_sort);
-    $sort_current_text = __("Publish Date", "adverts");
-    $sort_current_title = sprintf( __( "Sort By: %s - %s", "adverts"), __("Publish Date", "adverts"), __("Newest First", "adverts") );
+    $sort_current_text = __("Publish Date", "wpadverts");
+    $sort_current_title = sprintf( __( "Sort By: %s - %s", "wpadverts"), __("Publish Date", "wpadverts"), __("Newest First", "wpadverts") );
     
     if( isset( $sarr[1] ) && isset( $sort_options[$sarr[0]]["items"][$adverts_sort] ) ) {
 
@@ -142,7 +142,7 @@ function shortcode_adverts_list( $atts ) {
 
         $sort_current_text = $sort_options[$sort_key]["label"] ;
         $s_descr = $sort_options[$sort_key]["items"][$adverts_sort];
-        $sort_current_title = sprintf( __( "Sort By: %s - %s", "adverts"), $sort_current_text, $s_descr );
+        $sort_current_title = sprintf( __( "Sort By: %s - %s", "wpadverts"), $sort_current_text, $s_descr );
     } else {
         $adverts_sort = $order_by;
         $orderby["date"] = "desc"; 
@@ -249,235 +249,11 @@ function shortcode_adverts_list( $atts ) {
  * @return string Fully formatted HTML for "post ad" form.
  */
 function shortcode_adverts_add( $atts ) {
-    wp_enqueue_style( 'adverts-frontend' );
-    wp_enqueue_style( 'adverts-icons' );
-    wp_enqueue_style( 'adverts-icons-animate' );
-
-    wp_enqueue_script( 'adverts-frontend' );
-    wp_enqueue_script( 'adverts-auto-numeric' );
     
-    $params = shortcode_atts(array(
-        'name' => 'default',
-        'moderate' => false,
-        'requires' => "",
-        'requires_error' => ""
-    ), $atts, 'adverts_add');
+    include_once ADVERTS_PATH . 'includes/class-shortcode-adverts-add.php';
     
-    if( ! empty( $params["requires"] ) && ! current_user_can( $params["requires"] ) ) {
-        
-
-        if( !empty( $params["requires_error"] ) ) {
-            $parsed = $params["requires_error"];
-        } else {
-            $permalink = get_permalink();
-            $message = __('Only logged in users can access this page. <a href="%1$s">Login</a> or <a href="%2$s">Register</a>.', "adverts");
-            $parsed = sprintf($message, wp_login_url( $permalink ), wp_registration_url( $permalink ) );
-
-        }
-        
-        $adverts_flash = array(
-            "error" => array(
-                array( 
-                    "message" => $parsed,
-                    "icon" => "adverts-icon-lock"
-                )
-            ),
-            "info" => array()
-        );
-        ob_start();
-        adverts_flash($adverts_flash);
-        return ob_get_clean();
-    }
-    
-    extract( $params );
-    
-    include_once ADVERTS_PATH . 'includes/class-html.php';
-    include_once ADVERTS_PATH . 'includes/class-form.php';
-
-    $form_scheme = apply_filters( "adverts_form_scheme", Adverts::instance()->get("form"), $params );
-
-    $form = new Adverts_Form( $form_scheme );
-    $valid = null;
-    $error = array();
-    $info = array();
-    $bind = array();
-    $content = "";
-    $adverts_flash = array( "error" => array(), "info" => array() );
-    
-    $action = apply_filters( 'adverts_action', adverts_request("_adverts_action", ""), __FUNCTION__ );
-    $post_id = (adverts_request("_post_id", null));
-    $post_id = ($post_id>0) ? $post_id : null;
-    
-    // $post_id hijack attempt protection here!
-    
-    if( $post_id>0 && get_post( $post_id )->post_author == get_current_user_id() ) {
-        
-        // if post was already saved in DB (for example for preview) then load it.
-        $post = get_post( $post_id );
-        
-        // bind data by field name
-        foreach( $form->get_fields() as $f ) {
-            $value = get_post_meta( $post_id, $f["name"], false );
-            if( empty( $value ) ) {
-                $bind[$f["name"]] = "";
-            } else if( count( $value ) == 1 ) {
-                $bind[$f["name"]] = $value[0];
-            } else {
-                $bind[$f["name"]] = $value;
-            }
-        }
-        
-        $bind["post_title"] = $post->post_title;
-        $bind["post_content"] = $post->post_content;
-        $bind["advert_category"] = array();
-        
-        $taxonomy_objects = get_object_taxonomies( 'advert', 'objects' );
-        foreach( $taxonomy_objects as $taxonomy_key => $taxonomy ) {
-            $terms = get_the_terms( $post_id, $taxonomy_key );
-            if( is_array( $terms ) ) {
-                foreach( $terms as $term ) {
-                    if(!isset($bind[$taxonomy_key]) || !is_array($bind[$taxonomy_key])) {
-                        $bind[$taxonomy_key] = array();
-                    }
-                    $bind[$taxonomy_key][] = $term->term_id;
-                }
-            }
-        }
-        
-        
-    } elseif( is_user_logged_in() ) {
-        $bind["adverts_person"] = wp_get_current_user()->display_name;
-        $bind["adverts_email"] = wp_get_current_user()->user_email;
-    }
-    
-    if($action == "") {
-        // show post ad form page
-        wp_enqueue_style( 'adverts-frontend-add' );
-        
-        $bind["_post_id"] = $post_id;
-        $bind["_adverts_action"] = "preview";
-        
-        $form->bind( $bind );
-        
-        $actions_class = "adverts-field-actions";
-        
-        // adverts/templates/add.php
-        ob_start();
-        include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/add.php' );
-        $content = ob_get_clean();
-        
-    } elseif($action == "preview") {
-        // show preview page
-        wp_enqueue_style( 'adverts-frontend-add' );
-
-        $form->bind( (array)stripslashes_deep( $_POST ) );
-        $valid = $form->validate();
-
-        $adverts_flash = array( "error" => $error, "info" => $info );
-        
-        // Allow to preview only if data in the form is valid.
-        if($valid) {
-            
-            $init = array(
-                "post" => array(
-                    "ID" => $post_id,
-                    "post_name" => sanitize_title( $form->get_value( "post_title" ) ),
-                    "post_type" => "advert",
-                    "post_author" => get_current_user_id(),
-                    "post_date" => current_time( 'mysql' ),
-                    "post_date_gmt" => current_time( 'mysql', 1 ),
-                    "post_status" => adverts_tmp_post_status(),
-                    "guid" => ""
-                ),
-                "meta" => array()
-            );
-            
-            if( adverts_config( "config.visibility" ) > 0 ) {
-                $init["meta"]["_expiration_date"] = array(
-                    "value" => strtotime( current_time('mysql') . " +". adverts_config( "config.visibility" ) ." DAYS" ),
-                    "field" => array(
-                        "type" => "adverts_field_hidden"
-                    )
-                );
-            }
-            
-            // Save post as temporary in DB
-            $post_id = Adverts_Post::save($form, $post_id, $init);
-            
-            $post_content = get_post( $post_id )->post_content;
-            $post_content = wp_kses($post_content, wp_kses_allowed_html( 'post' ) );
-            $post_content = apply_filters("adverts_the_content", $post_content );
-            
-            if(is_wp_error($post_id)) {
-                $error[] = $post_id->get_error_message();
-                $valid = false;
-            } 
-            
-            $adverts_flash = array( "error" => $error, "info" => $info );
-            
-            if( is_wp_error($post_id) ) {
-                return adverts_flash( $adverts_flash );
-            }
-            
-            // adverts/templates/add-preview.php
-            ob_start();
-            include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/add-preview.php' );
-            $content = ob_get_clean();
-            
-        } else {
-            $error[] = array(
-                "message" => __("There are errors in your form. Please correct them before proceeding.", "adverts"),
-                "icon" => "adverts-icon-attention-alt"
-            );
-            
-            $adverts_flash = array( "error" => $error, "info" => $info );
-            
-            // adverts/templates/add.php
-            ob_start();
-            include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/add.php' );
-            $content = ob_get_clean();
-            
-        } // endif $valid
-
-    } elseif( $action == "save") {
-        
-        // Save form in the database
-        $post_id = wp_update_post( array(
-            "ID" => $post_id,
-            "post_status" => $moderate == "1" ? 'pending' : 'publish',
-        ));
-        
-        $info[] = array(
-            "message" => __("Thank you for submitting your ad!", "adverts"),
-            "icon" => "adverts-icon-ok"
-        );
-        
-        $adverts_flash = array( "error" => $error, "info" => $info );
-
-        if( !is_user_logged_in() && get_post_meta( $post_id, "_adverts_account", true) == 1 ) {
-            adverts_create_user_from_post_id( $post_id, true );
-        }
-        
-        do_action( "wpadverts_advert_saved", $post_id );
-        
-        // adverts/templates/add-save.php
-        ob_start();
-        include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/add-save.php' );
-        $content = ob_get_clean();
-        
-    }
-
-    /**
-     * Filters the content generated by [adverts_add] action.
-     *
-     * @since 1.0
-     * @since 1.2.1     $post_id param was added
-     *
-     * @param string        $content  HTML generated for this action.
-     * @param Adverts_Form  $form     Form object submitted.
-     * @param int           $post_ID  The post ID.
-     */
-    return apply_filters("adverts_action_$action", $content, $form, $post_id);
+    $shortcode = new Adverts_Shortcode_Adverts_Add();
+    return $shortcode->main($atts);
 }
 
 /**
@@ -495,7 +271,7 @@ function shortcode_adverts_manage( $atts ) {
         
         ob_start();
         $permalink = get_permalink();
-        $message = __('Only logged in users can access this page. <a href="%1$s">Login</a> or <a href="%2$s">Register</a>.', "adverts");
+        $message = __('Only logged in users can access this page. <a href="%1$s">Login</a> or <a href="%2$s">Register</a>.', "wpadverts");
         $parsed = sprintf($message, wp_login_url( $permalink ), wp_registration_url( $permalink ) );
         adverts_flash( array( 
             "error" => array( 
@@ -594,8 +370,16 @@ function _adverts_manage_edit( $atts ) {
     
     include_once ADVERTS_PATH . 'includes/class-html.php';
     include_once ADVERTS_PATH . 'includes/class-form.php';
-
+    include_once ADVERTS_PATH . 'includes/class-checksum.php';
     
+    $checksum_args = array(
+        "requires-post-id" => 1,
+        "name" => $params["name"],
+        "moderate" => $params["moderate"]
+    );
+    
+    $checksum = new Adverts_Checksum();
+    $checksum_keys = $checksum->get_integrity_keys( $checksum_args );
     
     add_filter( 'adverts_form_load', 'adverts_remove_account_field' );
     
@@ -618,7 +402,7 @@ function _adverts_manage_edit( $atts ) {
     
     if( $post === null) {
         $flash["error"][] = array(
-            "message" =>  __("Ad does not exist.", "adverts"),
+            "message" =>  __("Ad does not exist.", "wpadverts"),
             "icon" => "adverts-icon-attention-alt"
         );
         ob_start();
@@ -628,7 +412,7 @@ function _adverts_manage_edit( $atts ) {
     
     if( $post->post_author != get_current_user_id() ) {
         $flash["error"][] = array(
-            "message" =>  __("You do not own this Ad.", "adverts"),
+            "message" =>  __("You do not own this Ad.", "wpadverts"),
             "icon" => "adverts-icon-attention-alt"
         );
         ob_start();
@@ -640,7 +424,7 @@ function _adverts_manage_edit( $atts ) {
     
     if( !in_array( $post->post_status, $slist ) ) {
         $flash["error"][] = array(
-            "message" =>  sprintf( __( "Incorrect post status [%s].", "adverts" ), $post->post_status ),
+            "message" =>  sprintf( __( "Incorrect post status [%s].", "wpadverts" ), $post->post_status ),
             "icon" => "adverts-icon-attention-alt"
         );
         ob_start();
@@ -665,8 +449,10 @@ function _adverts_manage_edit( $atts ) {
     $bind["post_title"] = $post->post_title;
     $bind["post_content"] = $post->post_content;
     $bind["advert_category"] = array();
-
-    $taxonomy_objects = get_object_taxonomies( 'advert', 'objects' );
+    $bind["_wpadverts_checksum"] = $checksum_keys["checksum"];
+    $bind["_wpadverts_checksum_nonce"] = $checksum_keys["nonce"];
+    
+    $taxonomy_objects = get_object_taxonomies( $post->post_type, 'objects' );
     foreach( $taxonomy_objects as $taxonomy_key => $taxonomy ) {
         $terms = get_the_terms( $post_id, $taxonomy_key );
         if( is_array( $terms ) ) {
@@ -697,14 +483,14 @@ function _adverts_manage_edit( $atts ) {
                 );
             } else {
                 $info[] = array(
-                    "message" => __("Post has been updated.", "adverts"),
+                    "message" => __("Post has been updated.", "wpadverts"),
                     "icon" => "adverts-icon-ok"
                 );
             }
             
         } else {
             $error[] = array(
-                "message" => __("Cannot update. There are errors in your form.", "adverts"),
+                "message" => __("Cannot update. There are errors in your form.", "wpadverts"),
                 "icon" => "adverts-icon-attention-alt"
             );
         }
@@ -755,6 +541,24 @@ function shortcode_adverts_categories( $atts ) {
     include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/categories-'.$show.'.php' );
     return ob_get_clean();
 }
+
+/**
+ * Flash message shortcode
+ * 
+ * Wrapper for adverts_flash function. Catches the content generated by adverts_flash() 
+ * and returns it as a string.
+ * 
+ * @see adverts_flash()
+ * 
+ * @since   1.4.0
+ * @param   array       $data   Flash array ["info"=>[ 0=>[ "icon"=>"adverts-icon-xxx", "message"=>"..."], ...], "error"=>[...]]
+ * @return  string              Flash message content
+ */
+function shortcode_adverts_flash( $data ) {
+    ob_start();
+    adverts_flash( $data );
+    return ob_get_clean();
+} 
 
 /**
  * Renders flash messages

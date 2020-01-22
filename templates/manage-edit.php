@@ -1,6 +1,6 @@
 <p>
-    <a href="<?php echo esc_attr($baseurl) ?>" class="adverts-button"><?php _e("Go Back", "adverts") ?></a>
-    <a href="<?php echo esc_attr(get_post_permalink( $post_id )) ?>" class="adverts-button"><?php _e("View Ad", "adverts") ?></a>
+    <a href="<?php echo esc_attr($baseurl) ?>" class="adverts-button"><?php _e("Go Back", "wpadverts") ?></a>
+    <a href="<?php echo esc_attr(get_post_permalink( $post_id )) ?>" class="adverts-button"><?php _e("View Ad", "wpadverts") ?></a>
 </p>
 
 <?php adverts_flash( $adverts_flash ) ?>
@@ -49,7 +49,7 @@
         
         <div  class="adverts-control-group <?php echo isset($actions_class) ? $actions_class : '' ?>">
 
-            <input type="submit" name="submit" value="<?php _e("Update", "adverts") ?>" style="font-size:1.2em" />
+            <input type="submit" name="submit" value="<?php _e("Update", "wpadverts") ?>" style="font-size:1.2em" />
         </div>
         
     </fieldset>

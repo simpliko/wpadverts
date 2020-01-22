@@ -39,7 +39,7 @@ function adext_core_page_options() {
  */
 function _adext_core_page_options_main() {
     
-    $button_text = __("Update Options", "adverts");
+    $button_text = __("Update Options", "wpadverts");
     
     wp_enqueue_style( 'adverts-admin' );
     wp_enqueue_script( 'adverts-admin-config-core' );
@@ -69,9 +69,9 @@ function _adext_core_page_options_main() {
             $data["license"] = adverts_config( 'config.license' );
 
             update_option("adverts_config", $data );
-            $flash->add_info( __("Settings updated.", "adverts") );
+            $flash->add_info( __("Settings updated.", "wpadverts") );
         } else {
-            $flash->add_error( __("There are errors in your form.", "adverts") );
+            $flash->add_error( __("There are errors in your form.", "wpadverts") );
         }
     } else {
         $form->bind( adverts_config("config.ALL") );
@@ -90,7 +90,7 @@ function _adext_core_page_options_main() {
  */
 function _adext_core_page_options_gallery() {
     
-    $button_text = __("Update Options", "adverts");
+    $button_text = __("Update Options", "wpadverts");
     
     wp_enqueue_style( 'adverts-admin' );
     $flash = Adverts_Flash::instance();
@@ -144,9 +144,9 @@ function _adext_core_page_options_gallery() {
         if($valid) {
             
             update_option("adverts_gallery", $tosave );
-            $flash->add_info( __("Settings updated.", "adverts") );
+            $flash->add_info( __("Settings updated.", "wpadverts") );
         } else {
-            $flash->add_error( __("There are errors in your form.", "adverts") );
+            $flash->add_error( __("There are errors in your form.", "wpadverts") );
         }
     } else {
         $bind = array(
@@ -240,15 +240,15 @@ Adverts::instance()->set("form_core_config", array(
             "name" => "_common_settings",
             "type" => "adverts_field_header",
             "order" => 10,
-            "label" => __( 'Common Settings', 'adverts' ),
-            "title" => __( 'Common Settings', 'adverts' )
+            "label" => __( 'Common Settings', "wpadverts" ),
+            "title" => __( 'Common Settings', "wpadverts" )
         ),
         array(
             "name" => "ads_list_id",
             "type" => "adverts_dropdown_pages",
             "order" => 10,
-            "label" => __("Default Ads List Page", "adverts"),
-            "hint" => __("Select page on which the main [adverts_list] shortcode is being used.", "adverts"),
+            "label" => __("Default Ads List Page", "wpadverts"),
+            "hint" => __("Select page on which the main [adverts_list] shortcode is being used.", "wpadverts"),
             "attr" => array(
                 "id" => "option__ads_list_id"
             )
@@ -257,8 +257,8 @@ Adverts::instance()->set("form_core_config", array(
             "name" => "visibility",
             "type" => "adverts_field_text",
             "order" => 10,
-            "label" => __("Default Visibility", "adverts"),
-            "hint" => __("Number of days Ad will be visible by default.", "adverts"),
+            "label" => __("Default Visibility", "wpadverts"),
+            "hint" => __("Number of days Ad will be visible by default.", "wpadverts"),
             "validator" => array(
                 array("name"=>"is_required"),
                 array("name"=>"is_integer")
@@ -268,34 +268,34 @@ Adverts::instance()->set("form_core_config", array(
             "name" => "empty_price",
             "type" => "adverts_field_text",
             "order" => 10,
-            "label" => __("Empty Price Text", "adverts"),
-            "hint" => __("The text to display instead of price if item price was not provided.", "adverts"),
+            "label" => __("Empty Price Text", "wpadverts"),
+            "hint" => __("The text to display instead of price if item price was not provided.", "wpadverts"),
             "validator" => array()
         ),
         array(
             "name" => "hide_images_in_media_library",
             "type" => "adverts_field_checkbox",
-            "label" => __( "Media Library", "adverts" ),
+            "label" => __( "Media Library", "wpadverts" ),
             "order" => 10,
             "options" => array(
-                array( "value" => "1", "text" => __( "Do not show Advert images (and other files) in Media Library.", "adverts" ) ),
+                array( "value" => "1", "text" => __( "Do not show Advert images (and other files) in Media Library.", "wpadverts" ) ),
             )
         ),
         array(
             "name" => "_defaults_adverts_list",
             "type" => "adverts_field_header",
             "order" => 10,
-            "label" => __( 'Defaults Values For [adverts_list]', 'adverts' ),
-            "title" => __( 'Defaults Values For [adverts_list]', 'adverts' )
+            "label" => __( 'Defaults Values For [adverts_list]', "wpadverts" ),
+            "title" => __( 'Defaults Values For [adverts_list]', "wpadverts" )
         ),
         array(
             "name" => "ads_list_default__search_bar",
             "type" => "adverts_field_select",
-            "label" => __( "Search Bar", "adverts" ),
+            "label" => __( "Search Bar", "wpadverts" ),
             "order" => 10,
             "options" => array(
-                array( "value" => "enabled", "text" => __( "Enabled", "adverts" ) ),
-                array( "value" => "disabled", "text" => __( "Disabled", "adverts" ) )
+                array( "value" => "enabled", "text" => __( "Enabled", "wpadverts" ) ),
+                array( "value" => "disabled", "text" => __( "Disabled", "wpadverts" ) )
             ),
             "attr" => array(
                 "id" => "option__ads_list_default__search_bar"
@@ -304,11 +304,11 @@ Adverts::instance()->set("form_core_config", array(
         array(
             "name" => "ads_list_default__display",
             "type" => "adverts_field_select",
-            "label" => __( "Display Ads As", "adverts" ),
+            "label" => __( "Display Ads As", "wpadverts" ),
             "order" => 10,
             "options" => array(
-                array( "value" => "grid", "text" => __( "Grid (2 or more columns)", "adverts" ) ),
-                array( "value" => "list", "text" => __( "List (1 column)", "adverts" ) )
+                array( "value" => "grid", "text" => __( "Grid (2 or more columns)", "wpadverts" ) ),
+                array( "value" => "list", "text" => __( "List (1 column)", "wpadverts" ) )
             ),
             "attr" => array(
                 "id" => "option__ads_list_default__display"
@@ -318,7 +318,7 @@ Adverts::instance()->set("form_core_config", array(
             "name" => "ads_list_default__columns",
             "type" => "adverts_field_select",
             "order" => 10,
-            "label" => __( "Columns", "adverts" ),
+            "label" => __( "Columns", "wpadverts" ),
             "options" => array(
                 array( "value" => 2, "text" => "2" ),
                 array( "value" => 3, "text" => "3" ),
@@ -332,7 +332,7 @@ Adverts::instance()->set("form_core_config", array(
             "name" => "ads_list_default__posts_per_page",
             "type" => "adverts_field_text",
             "order" => 10,
-            "label" => __( "Posts Per Page", "adverts" ),
+            "label" => __( "Posts Per Page", "wpadverts" ),
             "validator" => array(
                 array("name"=>"is_required"),
                 array("name"=>"is_integer")
@@ -344,41 +344,41 @@ Adverts::instance()->set("form_core_config", array(
         array(
             "name" => "ads_list_default__switch_views",
             "type" => "adverts_field_checkbox",
-            "label" => __( "Switch Views", "adverts" ),
+            "label" => __( "Switch Views", "wpadverts" ),
             "order" => 10,
             "options" => array(
-                array( "value" => "grid", "text" => __( "Allow users to switch between grid and list view.", "adverts" ), "id" => "option__ads_list_default__switch_views" ),
+                array( "value" => "grid", "text" => __( "Allow users to switch between grid and list view.", "wpadverts" ), "id" => "option__ads_list_default__switch_views" ),
             )
         ),
         array(
             "name" => "_currency_settings",
             "type" => "adverts_field_header",
             "order" => 10,
-            "label" => __( 'Currency Settings', 'adverts' ),
-            "title" => __( 'Currency Settings', 'adverts' )
+            "label" => __( 'Currency Settings', "wpadverts" ),
+            "title" => __( 'Currency Settings', "wpadverts" )
         ),
         array(
             "name" => "currency_code",
             "type" => "adverts_field_select",
             "order" => 10,
-            "label" => __("Currency", "adverts"),
+            "label" => __("Currency", "wpadverts"),
             "options" => $currency_code_options
         ),
         array(
             "name" => "currency_sign_type",
             "type" => "adverts_field_select",
             "order" => 10,
-            "label" => __("Currency Position", "adverts"),
+            "label" => __("Currency Position", "wpadverts"),
             "options" => array(
-                array("value"=>"p", "text"=>__("Prefix - $10", "adverts")),
-                array("value"=>"s", "text"=>__("Suffix - 10$", "adverts")),
+                array("value"=>"p", "text"=>__("Prefix - $10", "wpadverts")),
+                array("value"=>"s", "text"=>__("Suffix - 10$", "wpadverts")),
             )
         ),
         array(
             "name" => "currency_decimals",
             "type" => "adverts_field_text",
             "order" => 10,
-            "label" => __("Decimal Places", "adverts"),
+            "label" => __("Decimal Places", "wpadverts"),
             "validator" => array(
                 array("name"=>"is_required"),
                 array("name"=>"is_integer")
@@ -388,49 +388,49 @@ Adverts::instance()->set("form_core_config", array(
             "name" => "currency_char_decimal",
             "type" => "adverts_field_text",
             "order" => 10,
-            "label" => __("Decimal Separator", "adverts"),
+            "label" => __("Decimal Separator", "wpadverts"),
         ),
         array(
             "name" => "currency_char_thousand",
             "type" => "adverts_field_text",
             "order" => 10,
-            "label" => __("Thousands Separator", "adverts"),
+            "label" => __("Thousands Separator", "wpadverts"),
         ),
         array(
             "name" => "_expired_ads_settings",
             "type" => "adverts_field_header",
             "order" => 10,
-            "label" => __( 'Expired Ads Handling', 'adverts' ),
-            "title" => __( 'Expired Ads Handling', 'adverts' )
+            "label" => __( 'Expired Ads Handling', "wpadverts" ),
+            "title" => __( 'Expired Ads Handling', "wpadverts" )
         ),
         array(
             "name" => "expired_ad_status",
             "type" => "adverts_field_radio",
             "order" => 10,
-            "label" => __("Expired Ad HTTP Status", "adverts"),
+            "label" => __("Expired Ad HTTP Status", "wpadverts"),
             "class" => "expired_ad_status",
             "options" => array(
-                array("value"=>"404", "text"=>__("<strong>404</strong> — Show 'Page Not Found' Error", "adverts")),
-                array("value"=>"301", "text"=>__("<strong>301</strong> — Redirect to a different page ...", "adverts")),
-                array("value"=>"200", "text"=>__("<strong>200</strong> — Show Ad details page with contact options disabled.", "adverts")),
+                array("value"=>"404", "text"=>__("<strong>404</strong> — Show 'Page Not Found' Error", "wpadverts")),
+                array("value"=>"301", "text"=>__("<strong>301</strong> — Redirect to a different page ...", "wpadverts")),
+                array("value"=>"200", "text"=>__("<strong>200</strong> — Show Ad details page with contact options disabled.", "wpadverts")),
             )
         ),
         array(
             "name" => "expired_ad_redirect_url",
             "type" => "adverts_field_text",
             "order" => 10,
-            "label" => __("Redirect URL", "adverts"),
+            "label" => __("Redirect URL", "wpadverts"),
             "placeholder" => "e.g. https://example.com/"
         ),
         array(
             "name" => "expired_ad_public_cap",
             "type" => "adverts_field_select",
             "order" => 10,
-            "label" => __("Always Visible For", "adverts"),
+            "label" => __("Always Visible For", "wpadverts"),
             "empty_option" => true,
             "empty_option_text" => "",
             "options_callback" => "adverts_get_roles_dropdown",
-            "hint" => __( "Cabability (or Role) required to always see expired Ads details pages.", "adverts" )
+            "hint" => __( "Cabability (or Role) required to always see expired Ads details pages.", "wpadverts" )
         ),
     )
 ));
@@ -444,17 +444,17 @@ Adverts::instance()->set("form_gallery_config", array(
             "name" => "_common_settings",
             "type" => "adverts_field_header",
             "order" => 10,
-            "label" => __( 'Advert Details Pages', 'adverts' ),
-            "title" => __( 'Advert Details Pages', 'adverts' )
+            "label" => __( 'Advert Details Pages', "wpadverts" ),
+            "title" => __( 'Advert Details Pages', "wpadverts" )
         ),
         array(
             "name" => "ui",
             "type" => "adverts_field_radio",
             "order" => 10,
-            "label" => __("Gallery Pagination", "adverts"),
+            "label" => __("Gallery Pagination", "wpadverts"),
             "options" => array(
-                array( "value" => "pagination", "text" => __( "Next and Previous Buttons", "adverts" ) ),
-                array( "value" => "thumbnails", "text" => __( "Thumbnails Slider", "adverts" ) )
+                array( "value" => "pagination", "text" => __( "Next and Previous Buttons", "wpadverts" ) ),
+                array( "value" => "thumbnails", "text" => __( "Thumbnails Slider", "wpadverts" ) )
             ),
             "rows" => 1
         ),
@@ -462,83 +462,83 @@ Adverts::instance()->set("form_gallery_config", array(
             "name" => "visible_items",
             "type" => "adverts_field_text",
             "order" => 10,
-            "label" => __("Visible Thumbnails", "adverts"),
-            "hint" => __( "Number of thumbnails to show below gallery.", "adverts" )
+            "label" => __("Visible Thumbnails", "wpadverts"),
+            "hint" => __( "Number of thumbnails to show below gallery.", "wpadverts" )
         ),
         array(
             "name" => "scrolling_items",
             "type" => "adverts_field_text",
             "order" => 10,
-            "label" => __("Scrolling Thumbnails", "adverts"),
-            "hint" => __( "Number of thumbnails to scroll when clicking Previous or Next buttons.", "adverts" )
+            "label" => __("Scrolling Thumbnails", "wpadverts"),
+            "hint" => __( "Number of thumbnails to scroll when clicking Previous or Next buttons.", "wpadverts" )
         ),
         array(
             "name" => "lightbox",
             "type" => "adverts_field_checkbox",
             "order" => 10,
-            "label" => __("Lightbox", "adverts"),
+            "label" => __("Lightbox", "wpadverts"),
             "options" => array(
-                array( "value" => "1", "text" => __( "Allow opening Gallery images in a Lightbox.", "adverts" ) )
+                array( "value" => "1", "text" => __( "Allow opening Gallery images in a Lightbox.", "wpadverts" ) )
             )
         ),
         array(
             "name" => "image_fit",
             "type" => "adverts_field_select",
             "order" => 10,
-            "label" => __("Image Fit", "adverts"),
+            "label" => __("Image Fit", "wpadverts"),
             "empty_option" => true,
             "empty_option_text" => "",
             "options" =>  array(
-                array( "value" => "contain", "text" => __( "Contain", "adverts" ) ),
-                array( "value" => "cover", "text" => __( "Cover", "adverts" ) ),
-                array( "value" => "fill", "text" => __( "Fill", "adverts" ) ),
+                array( "value" => "contain", "text" => __( "Contain", "wpadverts" ) ),
+                array( "value" => "cover", "text" => __( "Cover", "wpadverts" ) ),
+                array( "value" => "fill", "text" => __( "Fill", "wpadverts" ) ),
             ),
-            "hint" => __( "How images should be displayed in the gallery.", "adverts" )
+            "hint" => __( "How images should be displayed in the gallery.", "wpadverts" )
         ),
         array(
             "name" => "_gallery_upload_settings",
             "type" => "adverts_field_header",
             "order" => 10,
-            "label" => __( 'Gallery Upload', 'adverts' ),
-            "title" => __( 'Gallery Upload', 'adverts' )
+            "label" => __( 'Gallery Upload', "wpadverts" ),
+            "title" => __( 'Gallery Upload', "wpadverts" )
         ),
         array(
             "name" => "image_edit_cap",
             "type" => "adverts_field_select",
             "order" => 10,
-            "label" => __("Image Editor Capability", "adverts"),
+            "label" => __("Image Editor Capability", "wpadverts"),
             "empty_option" => true,
             "empty_option_text" => "",
             "options_callback" => "adverts_get_roles_dropdown",
-            "hint" => __( "Cabability required to edit images in the Gallery.", "adverts" )
+            "hint" => __( "Cabability required to edit images in the Gallery.", "wpadverts" )
         ),
         array(
             "name" => "_gallery_image_sizes",
             "type" => "adverts_field_header",
             "order" => 10,
-            "label" => __( 'Image Sizes', 'adverts' ),
-            "title" => __( 'Image Sizes', 'adverts' )
+            "label" => __( 'Image Sizes', "wpadverts" ),
+            "title" => __( 'Image Sizes', "wpadverts" )
         ),
         array(
             "name" => "image_size__adverts-gallery",
             "type" => "adext_field_image_size",
             "order" => 10,
-            "label" => __("Adverts Gallery", "adverts"),
-            "hint" => __("This image size is being used in the image slider on Advert details pages.", "adverts")
+            "label" => __("Adverts Gallery", "wpadverts"),
+            "hint" => __("This image size is being used in the image slider on Advert details pages.", "wpadverts")
         ),
         array(
             "name" => "image_size__adverts-list",
             "type" => "adext_field_image_size",
             "order" => 10,
-            "label" => __("Adverts List", "adverts"),
-            "hint" => __("This image size is being used in the [adverts_list] shortcode.", "adverts")
+            "label" => __("Adverts List", "wpadverts"),
+            "hint" => __("This image size is being used in the [adverts_list] shortcode.", "wpadverts")
         ),
         array(
             "name" => "image_size__adverts-upload-thumbnail",
             "type" => "adext_field_image_size",
             "order" => 10,
-            "label" => __("Upload Thumbnail", "adverts"),
-            "hint" => __("This image size is being used in gallery thumbnails.", "adverts")
+            "label" => __("Upload Thumbnail", "wpadverts"),
+            "hint" => __("This image size is being used in gallery thumbnails.", "wpadverts")
         )
     )
 ));
@@ -608,15 +608,15 @@ function adext_field_image_size( $field ) {
     ?>
     <input type="hidden" name="<?php echo esc_attr( sprintf( $name, "enabled" ) ) ?>" value="1" />
 
-    <span style="opacity:0.65"><?php _e("max. width", "adverts") ?></span>
+    <span style="opacity:0.65"><?php _e("max. width", "wpadverts") ?></span>
     <input type="number" name="<?php echo esc_attr( sprintf( $name, "width" ) ) ?>" step="1" min="0" style="width:60px" value="<?php echo esc_attr( $width ) ?>" /> 
     
     <strong>x</strong>
     
-    <span style="opacity:0.65"><?php _e("max. height", "adverts") ?></span>
+    <span style="opacity:0.65"><?php _e("max. height", "wpadverts") ?></span>
     <input type="number" name="<?php echo esc_attr( sprintf( $name, "height" ) ) ?>" step="1" min="0" style="width:60px" value="<?php echo esc_attr( $height ) ?>" />
     
-    <label for="<?php echo esc_attr( sprintf( $name, "crop" ) ) ?>" style="opacity:0.65; vertical-align: initial" ><?php _e("crop image", "adverts") ?></label>
+    <label for="<?php echo esc_attr( sprintf( $name, "crop" ) ) ?>" style="opacity:0.65; vertical-align: initial" ><?php _e("crop image", "wpadverts") ?></label>
     <input type="checkbox" name="<?php echo esc_attr( sprintf( $name, "crop" ) ) ?>" id="<?php echo esc_attr( sprintf( $name, "width" ) ) ?>" value="1" <?php checked($crop) ?> />
 
     <?php

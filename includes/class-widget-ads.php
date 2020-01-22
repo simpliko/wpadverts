@@ -32,7 +32,7 @@ class Adverts_Widget_Ads extends WP_Widget
     public function __construct() {
 
         $this->defaults = array(
-            'title' => __("WPAdverts Ads", "adverts"),
+            'title' => __("WPAdverts Ads", "wpadverts"),
             'count' => 5,
             'keyword' => '',
             'location' => '',
@@ -47,9 +47,9 @@ class Adverts_Widget_Ads extends WP_Widget
         
         parent::__construct(
             'wpadverts-widget-ads', 
-            __("WPAdverts Ads", "adverts"),
+            __("WPAdverts Ads", "wpadverts"),
             array(
-                "description"=> __("Displays list of recent ads.", "adverts"),
+                "description"=> __("Displays list of recent ads.", "wpadverts"),
                 "classname" => 'wpadverts-widget-recent'
             )
         );
@@ -85,47 +85,47 @@ class Adverts_Widget_Ads extends WP_Widget
             ),
             array(
                 "name" => "show_image",
-                "label" => __( "Show images on the list.", "adverts" ),
+                "label" => __( "Show images on the list.", "wpadverts" ),
                 "type" => "checkbox",
             ),
             array(
                 "name" => "keyword",
-                "label" => __( "Keyword", "adverts" ),
+                "label" => __( "Keyword", "wpadverts" ),
                 "type" => "text"
             ),
             array(
                 "name" => "location",
-                "label" => __( "Location", "adverts" ),
+                "label" => __( "Location", "wpadverts" ),
                 "type" => "text"
             ),
             array(
                 "name" => "category",
-                "label" => __( "Category", "adverts" ),
+                "label" => __( "Category", "wpadverts" ),
                 "type" => "select",
                 "options" => adverts_taxonomies(),
                 "append" => array( "multiple" => "multiple" ),
             ),
             array(
                 "name" => "price_min",
-                "label" => __( "Price Min.", "adverts" ),
+                "label" => __( "Price Min.", "wpadverts" ),
                 "type" => "number",
                 "append" => array( "step" => 1 )
             ),
             array(
                 "name" => "price_max",
-                "label" => __( "Price Max.", "adverts" ),
+                "label" => __( "Price Max.", "wpadverts" ),
                 "type" => "number",
                 "append" => array( "step" => 1 )
             ),
             array(
                 "name" => "sort",
-                "label" => __( "Sort By", "adverts" ),
+                "label" => __( "Sort By", "wpadverts" ),
                 "type" => "select",
                 "options" => array(
                     array(
                         "value" => "published",
                         "depth" => 0,
-                        "text" => __( "Publish Date", "adverts" )
+                        "text" => __( "Publish Date", "wpadverts" )
                     ),
                     array(
                         "value" => "title",
@@ -135,29 +135,29 @@ class Adverts_Widget_Ads extends WP_Widget
                     array(
                         "value" => "price",
                         "depth" => 0,
-                        "text" => __( "Price", "adverts" )
+                        "text" => __( "Price", "wpadverts" )
                     ),
                     array(
                         "value" => "random",
                         "depth" => 0,
-                        "text" => __( "Random", "adverts" )
+                        "text" => __( "Random", "wpadverts" )
                     )
                 )
             ),
             array(
                 "name" => "order",
-                "label" => __( "Order", "adverts" ),
+                "label" => __( "Order", "wpadverts" ),
                 "type" => "select",
                 "options" => array(
                     array(
                         "value" => "desc",
                         "depth" => 0,
-                        "text" => __( "Descending", "adverts" )
+                        "text" => __( "Descending", "wpadverts" )
                     ),
                     array(
                         "value" => "asc",
                         "depth" => 0,
-                        "text" => __( "Ascending", "adverts" )
+                        "text" => __( "Ascending", "wpadverts" )
                     ),
                 )
             ),
@@ -168,12 +168,12 @@ class Adverts_Widget_Ads extends WP_Widget
         if( isset( $modules["featured"] ) ) {
             $options[] = array(
                 "name" => "featured",
-                "label" => __( "Ads Types", "adverts" ),
+                "label" => __( "Ads Types", "wpadverts" ),
                 "type" => "select",
                 "options" => array(
-                    array( "value" => "all", "depth" => 0, "text" => __( "All", "adverts" ) ),
-                    array( "value" => "featured", "depth" => 0, "text" => __( "Featured Only", "adverts" ) ),
-                    array( "value" => "regular", "depth" => 0, "text" => __( "Regular Only", "adverts" ) )
+                    array( "value" => "all", "depth" => 0, "text" => __( "All", "wpadverts" ) ),
+                    array( "value" => "featured", "depth" => 0, "text" => __( "Featured Only", "wpadverts" ) ),
+                    array( "value" => "regular", "depth" => 0, "text" => __( "Regular Only", "wpadverts" ) )
                 )
             );
         }
@@ -539,7 +539,7 @@ class Adverts_Widget_Ads extends WP_Widget
                 </div>
                 <?php endwhile; ?>
             <?php else: ?>
-                <div class="adverts-list-empty"><em><?php _e("There are no ads matching your search criteria.", "adverts") ?></em></div>
+                <div class="adverts-list-empty"><em><?php _e("There are no ads matching your search criteria.", "wpadverts") ?></em></div>
             <?php endif; ?>
             </div>
         </div>

@@ -171,7 +171,7 @@ class Adverts_Form
                 } elseif( isset($v["default_error"]) ) {
                    $this->_form[$name]["error"][] = str_replace($find, $repl, $v["default_error"]); 
                 } else {
-                    $this->_form[$name]["error"][] = __( "Invalid value.", "adverts" );
+                    $this->_form[$name]["error"][] = __( "Invalid value.", "wpadverts" );
                 }
                 
                 if( isset($v["on_failure"]) && $v["on_failure"] == "break" ) {

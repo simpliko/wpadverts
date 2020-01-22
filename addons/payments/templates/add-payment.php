@@ -12,7 +12,7 @@
     
     <div class="adverts-grid-row">
         <div class="adverts-grid-col adverts-col-65">
-            <strong><?php _e( 'Total', 'adverts') ?></strong>
+            <strong><?php _e( "Total", "wpadverts") ?></strong>
         </div>
         <div class="adverts-grid-col adverts-col-35">
             <strong><?php echo adverts_price($price) ?></strong>
@@ -24,7 +24,7 @@
 <?php $gateways = adext_payment_gateway_get() ?>
 <?php if(empty($gateways)): ?>
 <div class="adverts-flash-error">
-    <span><?php _e("No Payment Gateway Enabled!", "adverts") ?></span>
+    <span><?php _e("No Payment Gateway Enabled!", "wpadverts") ?></span>
 </div>
 <?php else: ?>
 
@@ -41,6 +41,6 @@
 
 <br/>
 
-<a href="#" class="adverts-button adext-payments-place-order"><?php esc_html_e("Place Order", "adverts") ?></a>
+<a href="#" class="adverts-button adext-payments-place-order"><?php esc_html_e("Place Order", "wpadverts") ?></a>
 
 <?php endif; ?>

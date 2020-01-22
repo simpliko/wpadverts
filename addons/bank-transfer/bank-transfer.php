@@ -39,7 +39,7 @@ function adext_bank_transfer_register() {
     if( adverts_config('bank_transfer.custom_title') ) {
         $title = adverts_config('bank_transfer.custom_title');
     } else {
-        $title = __("Bank Transfer", "adverts");
+        $title = __("Bank Transfer", "wpadverts");
     }
     
     adext_payment_gateway_add("bank-transfer", array(
@@ -60,7 +60,7 @@ function adext_bank_transfer_register() {
                         "name" => "adverts_person",
                         "type" => "adverts_field_text",
                         "order" => 10,
-                        "label" => __( "Contact Person", "adverts" ),
+                        "label" => __( "Contact Person", "wpadverts" ),
                         "is_required" => true,
                         "validator" => array( 
                             array( "name" => "is_required" ),
@@ -70,7 +70,7 @@ function adext_bank_transfer_register() {
                         "name" => "adverts_email",
                         "type" => "adverts_field_text",
                         "order" => 10,
-                        "label" => __( "Email", "adverts" ),
+                        "label" => __( "Email", "wpadverts" ),
                         "is_required" => true,
                         "validator" => array( 
                             array( "name" => "is_required" ),

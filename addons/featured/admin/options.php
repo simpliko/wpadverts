@@ -12,14 +12,14 @@
 ?>
 <div class="wrap">
     <h2 class="">
-        <?php _e("Featured Ads", "adverts") ?>
+        <?php _e("Featured Ads", "wpadverts") ?>
     </h2>
 
     <?php adverts_admin_flash() ?>
 
     <div class="updated fade">
         <p>
-            <a href="<?php esc_attr_e( 'http://wpadverts.com/documentation/featured-ads/' ) ?>"><strong><?php _e( 'View Documentation', 'adverts' ) ?></strong></a>
+            <a href="<?php echo esc_attr( 'http://wpadverts.com/documentation/featured-ads/' ) ?>"><strong><?php _e( 'View Documentation', "wpadverts" ) ?></strong></a>
         </p>
     </div>
     

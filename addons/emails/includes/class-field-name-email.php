@@ -61,11 +61,11 @@ class Adext_Emails_Field_Name_Email {
         $field1 = $field;
         $field2 = $field;
         
-        $field1["placeholder"] = __( "Full Name", "adverts" );
+        $field1["placeholder"] = __( "Full Name", "wpadverts" );
         $field1["name"] = $field["name"] . "[name]";
         $field1["value"] = $field["value"]["name"];
         
-        $field2["placeholder"] = __( "Email Address (e.g. user@example.com)", "adverts" );
+        $field2["placeholder"] = __( "Email Address (e.g. user@example.com)", "wpadverts" );
         $field2["name"] = $field["name"] . "[email]";
         $field2["value"] = $field["value"]["email"];
         
@@ -79,7 +79,7 @@ class Adext_Emails_Field_Name_Email {
         if( isset( $field["placeholder"]["user_firstname"] ) ) {
             $uf_placeholder = $field["placeholder"]["user_firstname"] ;
         } else {
-            $uf_placeholder = __( "First Name", "adverts" );
+            $uf_placeholder = __( "First Name", "wpadverts" );
         }
         
         echo adverts_field_text(array(
@@ -94,7 +94,7 @@ class Adext_Emails_Field_Name_Email {
         if( isset( $field["placeholder"]["user_lastname"] ) ) {
             $ul_placeholder = $field["placeholder"]["user_lastname"] ;
         } else {
-            $ul_placeholder = __( "Last Name", "adverts" );
+            $ul_placeholder = __( "Last Name", "wpadverts" );
         }
         
         echo adverts_field_text(array(

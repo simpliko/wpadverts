@@ -39,34 +39,32 @@ WPADVERTS.Single.Gallery = {
     },
     
     InitAls: function(als) {
-        /*
-        jQuery('.wpadverts-slides-list').slick({
-            nextArrow: "",
-            prevArrow: ""
-        });
 
-        jQuery('#wpadverts-rsliders-controls').slick({
+        var als = jQuery('#wpadverts-rsliders-controls');
+        var SlickSettings = {
             infinite: false,
-            slidesToShow: 4,
-            slidesToScroll: 3,
+            slidesToShow: parseInt(adverts_frontend_lang.als_visible_items),
+            slidesToScroll: parseInt(adverts_frontend_lang.als_scrolling_items),
             prevArrow: '.als-nav-wrap-left',
-            nextArrow: '.als-nav-wrap-right'
-        });
-        return;
-*/
+            nextArrow: '.als-nav-wrap-right',
+            responsive: [
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        };
+
+        if(typeof wpadverts_slick_override !== 'undefined' ) {
+            jQuery.extend( SlickSettings, wpadverts_slick_override );
+        }
+
         this.Nav.Als = als;
         
-        var visible_items = parseInt(adverts_frontend_lang.als_visible_items);
-        
-        if(visible_items > jQuery("#wpadverts-rsliders-controls li").length) {
-            visible_items = jQuery("#wpadverts-rsliders-controls li").length;
-        }
-        
-        this.Nav.Als.als({
-            visible_items: visible_items,
-            scrolling_items: parseInt(adverts_frontend_lang.als_scrolling_items),
-            circular: "no"
-        });
+        this.Nav.Als.slick( SlickSettings );
         
         this.Nav.Als.find(".wpadverts-als-item a").each(jQuery.proxy(this.AlsItem, this));
         this.Nav.Als.find(".wpadverts-als-item:first-child a").click();

@@ -13,7 +13,7 @@
 <div class="wrap">
   
 <h2 class="">
-    <?php _e("Payment History", "adverts") ?>
+    <?php _e("Payment History", "wpadverts") ?>
 </h2>
     
 <?php adverts_admin_flash() ?>
@@ -39,20 +39,20 @@
     <select name="action" id="wpjb-action1">
         <option selected="selected" value=""><?php _e("Bulk Actions") ?></option>
         <?php foreach(array("pending", "completed", "failed", "refunded") as $status): ?>
-        <option value="set-status-<?php echo $status ?>"><?php esc_html_e( sprintf( __("Set status: %s", "adverts"), get_post_status_object( $status )->label ) ) ?></option>
+        <option value="set-status-<?php echo $status ?>"><?php esc_html_e( sprintf( __("Set status: %s", "wpadverts"), get_post_status_object( $status )->label ) ) ?></option>
         <?php endforeach; ?>
         <option value="delete"><?php _e("Delete") ?></option>
     </select>
 
-    <input type="submit" class="button-secondary action" id="wpjb-doaction1" value="<?php _e("Apply", "adverts") ?>"/>
+    <input type="submit" class="button-secondary action" id="wpjb-doaction1" value="<?php _e("Apply", "wpadverts") ?>"/>
 
 </div>
 
 <div class="alignleft actions">
     <select name="month">
         <option value=""><?php _e("All dates") ?></option>
-        <option value="this-month" <?php selected($month, "this-month") ?>><?php _e("This month", "adverts") ?></option>
-        <option value="last-month" <?php selected($month, "last-month") ?>><?php _e("Last month", "adverts") ?></option>
+        <option value="this-month" <?php selected($month, "this-month") ?>><?php _e("This month", "wpadverts") ?></option>
+        <option value="last-month" <?php selected($month, "last-month") ?>><?php _e("Last month", "wpadverts") ?></option>
         <?php foreach($months as $m): ?>
         <option value="<?php esc_attr_e($m["value"]) ?>" <?php selected($month, $m["value"]) ?>><?php esc_html_e($m["label"]) ?></option>
         <?php endforeach; ?>
@@ -60,11 +60,11 @@
     
 
     <select name="hide_free">
-        <option value=""><?php _e( "All Payments", "adverts" ) ?></option>
-        <option value="1" <?php selected( $hide_free ) ?>><?php _e( "Hide Free", "adverts" ) ?></option>
+        <option value=""><?php _e( "All Payments", "wpadverts" ) ?></option>
+        <option value="1" <?php selected( $hide_free ) ?>><?php _e( "Hide Free", "wpadverts" ) ?></option>
     </select>
     
-    <input type="submit" name="filter_action" id="post-query-submit" class="button" value="<?php _e("Filter") ?>" />
+    <input type="submit" name="filter_action" id="post-query-submit" class="button" value="<?php _e("Filter", "wpadverts") ?>" />
 </div>
     
 </div>
@@ -74,13 +74,13 @@
     <<?php echo $tx; ?>>
         <tr>
             <td style="" class="manage-column column-cb check-column" scope="col"><input type="checkbox"/></td>
-            <th style="" class="" scope="col"><?php _e("ID", "adverts") ?></th>
-            <th style="" class="" scope="col"><?php _e("User", "adverts") ?></th>
-            <th style="" class="" scope="col"><?php _e("Email", "adverts") ?></th>
-            <th style="" class="" scope="col"><?php _e("Date", "adverts") ?></th>
-            <th style="" class="" scope="col"><?php _e("Amount", "adverts") ?></th>
-            <th style="" class="" scope="col"><?php _e("Type", "adverts") ?></th>
-            <th style="" class="" scope="col"><?php _e("Status", "adverts") ?></th>
+            <th style="" class="" scope="col"><?php _e("ID", "wpadverts") ?></th>
+            <th style="" class="" scope="col"><?php _e("User", "wpadverts") ?></th>
+            <th style="" class="" scope="col"><?php _e("Email", "wpadverts") ?></th>
+            <th style="" class="" scope="col"><?php _e("Date", "wpadverts") ?></th>
+            <th style="" class="" scope="col"><?php _e("Amount", "wpadverts") ?></th>
+            <th style="" class="" scope="col"><?php _e("Type", "wpadverts") ?></th>
+            <th style="" class="" scope="col"><?php _e("Status", "wpadverts") ?></th>
             <?php do_action('adext_payment_list_thead') ?>
         </tr>
     </<?php echo $tx; ?>>
@@ -93,9 +93,9 @@
                 <input type="checkbox" value="<?php echo $item->ID ?>" name="item[]"/>
             </th>
             <td class="">
-                <strong><a title='<?php _e("View Order", "adverts") ?>' href="<?php esc_attr_e(add_query_arg('edit', $item->ID)) ?>" class=""><?php echo esc_html(adext_payments_format_order_id($item->ID)) ?></a></strong>
+                <strong><a title='<?php _e("View Order", "wpadverts") ?>' href="<?php esc_attr_e(add_query_arg('edit', $item->ID)) ?>" class=""><?php echo esc_html(adext_payments_format_order_id($item->ID)) ?></a></strong>
                 <div class="row-actions" style="">
-                    <span class="edit"><a href="<?php esc_attr_e(add_query_arg('edit', $item->ID)) ?>"><?php _e("View Order", "adverts") ?></a> | </span>
+                    <span class="edit"><a href="<?php esc_attr_e(add_query_arg('edit', $item->ID)) ?>"><?php _e("View Order", "wpadverts") ?></a> | </span>
                     <span class=""><a href="<?php esc_attr_e( add_query_arg( array( "delete" => $item->ID,"noheader" => 1 ) ) ) ?>" title="<?php _e("Delete") ?>" class="adverts-delete"><?php _e("Delete") ?></a> | </span>
                 </div>
             </td>
@@ -148,22 +148,22 @@
 
     <div class="alignleft actions">
         <select name="action2" id="wpjb-action2">
-            <option selected="selected" value=""><?php _e("Bulk Actions", "adverts") ?></option>
+            <option selected="selected" value=""><?php _e("Bulk Actions", "wpadverts") ?></option>
             <?php foreach(array("pending", "completed", "failed", "refunded") as $status): ?>
-            <option value="set-status-<?php echo $status ?>"><?php esc_html_e( sprintf( __("Set status: %s", "adverts"), get_post_status_object( $status )->label ) ) ?></option>
+            <option value="set-status-<?php echo $status ?>"><?php esc_html_e( sprintf( __("Set status: %s", "wpadverts"), get_post_status_object( $status )->label ) ) ?></option>
             <?php endforeach; ?>
-            <option value="delete"><?php _e("Delete", "adverts") ?></option>
+            <option value="delete"><?php _e("Delete", "wpadverts") ?></option>
         </select>
-        <input type="submit" class="button-secondary action" id="wpjb-doaction2" value="<?php _e("Apply", "adverts") ?>"/>
+        <input type="submit" class="button-secondary action" id="wpjb-doaction2" value="<?php _e("Apply", "wpadverts") ?>"/>
 
         <?php if( adverts_request( "status" ) === "adverts-payment-tmp" ): ?>
-        <a href="<?php echo esc_attr( add_query_arg( array( "noheader" => 1, "payments-manual-gc" => 1 ) ) ) ?>" class="button-secondary"><?php _e( "Cleanup Now", "adverts" ) ?></a>
+        <a href="<?php echo esc_attr( add_query_arg( array( "noheader" => 1, "payments-manual-gc" => 1 ) ) ) ?>" class="button-secondary"><?php _e( "Cleanup Now", "wpadverts" ) ?></a>
         <span style="line-height:28px">
             <?php $from = wp_next_scheduled("adext_payments_event_gc"); ?>
             <?php if( $from === false ): ?>
-            <?php echo esc_html( __("Automatic cleanup was never run.", "adverts" ) ) ?>
+            <?php echo esc_html( __("Automatic cleanup was never run.", "wpadverts" ) ) ?>
             <?php else: ?>
-            <?php echo sprintf( __("Next automatic cleanup <strong>%s</strong>.", "adverts" ), date_i18n( get_option( "date_format" ) . " @ " . get_option( "time_format"), $from + ( intval( get_option( 'gmt_offset' ) * 3600 ) ) ) ) ?>
+            <?php echo sprintf( __("Next automatic cleanup <strong>%s</strong>.", "wpadverts" ), date_i18n( get_option( "date_format" ) . " @ " . get_option( "time_format"), $from + ( intval( get_option( 'gmt_offset' ) * 3600 ) ) ) ) ?>
             <?php endif; ?>
         </span>
         <?php endif; ?>
@@ -173,7 +173,7 @@
     
     <div class="tablenav-pages one-page">
         <span class="displaying-num">
-            <?php echo sprintf( __( "Items: <strong>%d</strong>. Revenue <strong>%s</strong>.", "adverts" ), $loop->found_posts, adverts_price( $sold_total ) ) ?>
+            <?php echo sprintf( __( "Items: <strong>%d</strong>. Revenue <strong>%s</strong>.", "wpadverts" ), $loop->found_posts, adverts_price( $sold_total ) ) ?>
 
         </span>
 

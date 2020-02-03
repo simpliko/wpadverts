@@ -3143,3 +3143,46 @@ function adverts_query_attachments_args( $args ) {
 
     return $args;
 }
+
+function adverts_skip_preview( $tpl ) {
+    
+    if( adverts_request( "_adverts_action" ) != "save-ff" ) {
+        return $tpl;
+    }
+    
+    include_once ADVERTS_PATH . "includes/class-shortcode-adverts-add.php";
+    
+    $shortcode = new Adverts_Shortcode_Adverts_Add();
+    $shortcode->load_args_from_checksum();
+    $shortcode->init();
+    if( $shortcode->action_preview() === true ) {
+        wp_redirect( add_query_arg( array(
+            "_adverts_action" => "save",
+            "_post_id" => $shortcode->get_post_id(),
+            "_post_id_nonce" => $shortcode->get_post_id_nonce()
+        ) ) );
+        exit;
+    }
+    
+    return $tpl;
+}
+
+function adverts_form_load_checksum_fields( $form ) {
+    
+    if( $form["name"] != "advert" ) {
+        return $form;
+    }
+    
+    $checksum_fields = array( "_wpadverts_checksum", "_wpadverts_checksum_nonce", "_post_id_nonce" );
+    
+    foreach( $checksum_fields as $field_name ) {
+        $form["field"][] = array(
+            "name" => $field_name,
+            "type" => "adverts_field_hidden",
+            "order" => 0,
+            "label" => ""
+        );
+    }
+    
+    return $form;
+}

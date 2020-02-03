@@ -4,7 +4,7 @@ Contributors: gwin
 Tags: classifieds, classified, classified ads, classified script, classifieds script, wp classified, wp classifieds
 Requires PHP: 5.3
 Requires at least: 4.0
-Tested up to: 5.2
+Tested up to: 5.3
 Stable tag: 1.4.0
 License: GNU Version 2 or Any Later Version
 
@@ -99,6 +99,12 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.4.0 - 2020-02-04 =
+
+ * WARNING: This is major update with potential backward-incompatible changes!
+ * Before updating please read the update notices
+ * https://wpadverts.com/blog/wpadverts-1-4-0-released/
 
 = 1.3.7 - 2019-11-06 =
 

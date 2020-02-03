@@ -111,6 +111,8 @@ function adverts_init() {
     
     add_action( 'save_post_advert', 'adverts_create_hash', 10, 3 );
     
+    add_filter( 'adverts_form_load', 'adverts_form_load_checksum_fields', 9999 );
+    
     wp_register_style( 'adverts-upload', ADVERTS_URL . '/assets/css/wpadverts-upload.css', array(), "1.3.5" );
     wp_register_style( 'adverts-icons', ADVERTS_URL . '/assets/css/wpadverts-glyphs.css', array(), "4.7.2" );
     wp_register_style( 'adverts-icons-animate', ADVERTS_URL . '/assets/css/animation.css', array(), "1.3.5" );
@@ -359,6 +361,7 @@ function adverts_init_frontend() {
     add_action('adverts_tpl_single_bottom', 'adverts_single_contact_information');
     
     add_filter('adverts_create_user_from_post_id', '_adverts_create_user_from_post_id', 20, 2 );
+    add_action('template_redirect', 'adverts_skip_preview' );
     
     wp_localize_script( 'adverts-frontend', 'adverts_frontend_lang', array(
         "ajaxurl" => adverts_ajax_url(),
@@ -598,49 +601,4 @@ if(is_admin() ) {
     // Run Adverts frontend only actions
     add_action( 'init', 'adverts_init_frontend' );
 }
-
-add_action( "template_redirect", function( $tpl ) {
-    
-    if( adverts_request( "_adverts_action" ) != "save-ff" ) {
-        return $tpl;
-    }
-    
-    include_once ADVERTS_PATH . "includes/class-shortcode-adverts-add.php";
-    
-    $shortcode = new Adverts_Shortcode_Adverts_Add();
-    $shortcode->load_args_from_checksum();
-    $shortcode->init();
-    if( $shortcode->action_preview() === true ) {
-        wp_redirect( add_query_arg( array(
-            "_adverts_action" => "save",
-            "_post_id" => $shortcode->get_post_id(),
-            "_post_id_nonce" => $shortcode->get_post_id_nonce()
-        ) ) );
-        exit;
-    }
-    
-    return $tpl;
-});
-
-add_filter( "adverts_form_load", function( $form ) {
-    
-    if( $form["name"] != "advert" ) {
-        return $form;
-    }
-    
-    $checksum_fields = array( "_wpadverts_checksum", "_wpadverts_checksum_nonce", "_post_id_nonce" );
-    
-    foreach( $checksum_fields as $field_name ) {
-        $form["field"][] = array(
-            "name" => $field_name,
-            "type" => "adverts_field_hidden",
-            "order" => 0,
-            "label" => ""
-        );
-    }
-    
-    return $form;
-}, 9999 );
-
-
 

@@ -40,6 +40,7 @@ WPADVERTS.Single.Gallery = {
     
     InitAls: function(als) {
 
+        var container = als;
         var als = jQuery('#wpadverts-rsliders-controls');
         var SlickSettings = {
             infinite: false,
@@ -68,6 +69,11 @@ WPADVERTS.Single.Gallery = {
         
         this.Nav.Als.find(".wpadverts-als-item a").each(jQuery.proxy(this.AlsItem, this));
         this.Nav.Als.find(".wpadverts-als-item:first-child a").click();
+        
+        if(this.Items.length <= 1) {
+            container.hide();
+            return;
+        }
     },
     
     AlsItem: function(index, item) {

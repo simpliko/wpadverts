@@ -1532,6 +1532,7 @@ body .wpadverts-slide .wpadverts-slide-description.wpadverts-slide-desc {
     position: relative;
     overflow: hidden;
     margin: 0px auto;
+    width: 100% !important;
 }
 
 .wpadverts-als-wrapper {
@@ -1565,6 +1566,12 @@ body .wpadverts-slide .wpadverts-slide-description.wpadverts-slide-desc {
     height: 70px;
     display: block;
     overflow: hidden;
+}
+
+.slick-arrow.slick-hidden,
+.slick-arrow.slick-hidden span:before {
+    color: rgba(0,0,0, .25);
+    cursor: default !important;
 }
 
 .als-nav-wrap,
@@ -1628,6 +1635,7 @@ body .wpadverts-slide .wpadverts-slide-description.wpadverts-slide-desc {
 }
 
 .als-nav-wrap.slick-disabled span:before {
+    cursor: default !important;
     color: rgba(0,0,0, .25);
 
 }

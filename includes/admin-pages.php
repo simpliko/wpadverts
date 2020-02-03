@@ -34,8 +34,8 @@ function adverts_add_options_link() {
      */
     $menu_page = apply_filters('adverts_menu_page', array(
         "parent_slug" => "edit.php?post_type=advert",
-        "page_title" => __( 'Adverts Options', 'adverts' ),
-        "menu_title" => __( 'Options', 'adverts' ),
+        "page_title" => __( 'Adverts Options', "wpadverts" ),
+        "menu_title" => __( 'Options', "wpadverts" ),
         "capability" => "manage_options",
         "menu_slug" => "adverts-extensions",
         "function" => "adverts_admin_page_extensions"
@@ -77,109 +77,109 @@ function adverts_admin_page_extensions() {
     $module = adverts_config( 'module' );
     $module_groups = apply_filters( "wpadverts_module_groups", array(
         array(
-            "title" => __( "Modules", "adverts" ),
+            "title" => __( "Modules", "wpadverts" ),
             "modules" => array(
                 "core" => array(
-                    "title" => __("Core", "adverts"),
-                    "text" => __("Here you can configure most basic Adverts options, applicable on any site.", "adverts"),
+                    "title" => __("Core", "wpadverts"),
+                    "text" => __("Here you can configure most basic Adverts options, applicable on any site.", "wpadverts"),
                     "type" => "static",
                     "plugin" => null,
                 ),
                 "payments" => array(
-                    "title" => __("Payments", "adverts"),
-                    "text" => __("Charge users for posting classified ads on your site.", "adverts"),
+                    "title" => __("Payments", "wpadverts"),
+                    "text" => __("Charge users for posting classified ads on your site.", "wpadverts"),
                     "type" => "",
                     "plugin" => null
                 ),
                 "wc-payments" => array(
-                    "title" => __("WooCommerce Payments", "adverts"),
-                    "text" => __("Use WooCommerce to charge users for posting classifieds.", "adverts"),
+                    "title" => __("WooCommerce Payments", "wpadverts"),
+                    "text" => __("Use WooCommerce to charge users for posting classifieds.", "wpadverts"),
                     "type" => "",
                     "plugin" => "wpadverts-wc/wpadverts-wc.php",
                     "purchase_url" => "https://wpadverts.com/extensions/woocommerce-integration/"
                 ),
                 "buddypress" => array(
-                    "title" => __("BuddyPress Integration", "adverts"),
-                    "text" => __("Integrate user Ads with BuddyPress profiles, registration and private messages.", "adverts"),
+                    "title" => __("BuddyPress Integration", "wpadverts"),
+                    "text" => __("Integrate user Ads with BuddyPress profiles, registration and private messages.", "wpadverts"),
                     "type" => "",
                     "plugin" => "wpadverts-bp/wpadverts-bp.php",
                     "purchase_url" => "https://wpadverts.com/extensions/buddypress-integration/"
                 ),
                 "custom-fields" => array(
-                    "title" => __("Custom Fields", "adverts"),
-                    "text" => __("Allow users to edit: Add, Search and Contact forms using easy to use drag and drop editor.", "adverts"),
+                    "title" => __("Custom Fields", "wpadverts"),
+                    "text" => __("Allow users to edit: Add, Search and Contact forms using easy to use drag and drop editor.", "wpadverts"),
                     "type" => "",
                     "plugin" => "wpadverts-custom-fields/wpadverts-custom-fields.php",
                     "purchase_url" => "https://wpadverts.com/extensions/custom-fields/"
                 ),
                 "authors" => array(
-                    "title" => __("Authors", "adverts"),
-                    "text" => __("Using Authors module users can create their profiles with list of authors ads.", "adverts"),
+                    "title" => __("Authors", "wpadverts"),
+                    "text" => __("Using Authors module users can create their profiles with list of authors ads.", "wpadverts"),
                     "type" => "",
                     "plugin" => "wpadverts-authors/wpadverts-authors.php",
                     "purchase_url" => "https://wpadverts.com/extensions/authors/"
                 ),
                 "emails" => array(
-                    "title" => __("Emails", "adverts"),
-                    "text" => __("Emails module sends transactional emails to users and allows editing the email templates content.", "adverts"),
+                    "title" => __("Emails", "wpadverts"),
+                    "text" => __("Emails module sends transactional emails to users and allows editing the email templates content.", "wpadverts"),
                     "type" => "",
                     "plugin" => null
                 )
             )
         ),
         array(
-            "title" => __( "Features", "adverts" ),
+            "title" => __( "Features", "wpadverts" ),
             "modules" => array(
                 "featured" => array(
-                    "title" => __( "Featured Ads", "adverts" ),
-                    "text" => __( "Allow users to post Ads displayed always at the top of the list.", "adverts" ),
+                    "title" => __( "Featured Ads", "wpadverts" ),
+                    "text" => __( "Allow users to post Ads displayed always at the top of the list.", "wpadverts" ),
                     "type" => "",
                     "plugin" => null
                 ),
                 "contact-form" => array(
-                    "title" => __( "Contact Form", "adverts" ),
-                    "text" => __( "Display contact form on Ad details pages instead of just the contact information.", "adverts" ),
+                    "title" => __( "Contact Form", "wpadverts" ),
+                    "text" => __( "Display contact form on Ad details pages instead of just the contact information.", "wpadverts" ),
                     "type" => "",
                     "plugin" => null
                 ),
                 "wpadverts-mal" => array(
-                    "title" => __( "Maps And Locations", "adverts" ),
-                    "text" => __( "Locations Taxonomy, Google Maps integration and more.", "adverts" ),
+                    "title" => __( "Maps And Locations", "wpadverts" ),
+                    "text" => __( "Locations Taxonomy, Google Maps integration and more.", "wpadverts" ),
                     "type" => "",
                     "plugin" => "wpadverts-mal/wpadverts-mal.php",
                     "purchase_url" => "https://wpadverts.com/extensions/maps-and-locations/"
                 ),
                 "wpadverts-fee-per-category" => array(
-                    "title" => __( "Fee Per Category", "adverts" ),
-                    "text" => __( "Set fee for Ads posting per category or allow to post for free in some categories.", "adverts" ),
+                    "title" => __( "Fee Per Category", "wpadverts" ),
+                    "text" => __( "Set fee for Ads posting per category or allow to post for free in some categories.", "wpadverts" ),
                     "type" => "",
                     "plugin" => "wpadverts-fee-per-category/wpadverts-fee-per-category.php",
                     "purchase_url" => "https://wpadverts.com/extensions/fee-per-category/"
                 ),
                 "wpadverts-recaptcha" => array(
-                    "title" => __( "reCAPTCHA", "adverts" ),
-                    "text" => __( "Protect your forms from SPAM using easy easy for humans and hard for bots captcha.", "adverts" ),
+                    "title" => __( "reCAPTCHA", "wpadverts" ),
+                    "text" => __( "Protect your forms from SPAM using easy easy for humans and hard for bots captcha.", "wpadverts" ),
                     "type" => "",
                     "plugin" => "wpadverts-recaptcha/wpadverts-recaptcha.php",
                     "purchase_url" => "https://wpadverts.com/extensions/recaptcha/"
                 ),
                 "wpadverts-google-analytics" => array(
-                    "title" => __( "Analytics", "adverts" ),
-                    "text" => __( "Google Analytics integration, allows users to view their Ads stats in past 30 days.", "adverts" ),
+                    "title" => __( "Analytics", "wpadverts" ),
+                    "text" => __( "Google Analytics integration, allows users to view their Ads stats in past 30 days.", "wpadverts" ),
                     "type" => "",
                     "plugin" => "wpadverts-google-analytics/wpadverts-google-analytics.php",
                     "purchase_url" => "https://wpadverts.com/extensions/google-analytics/"
                 ),
                 "wpadverts-category-icons" => array(
-                    "title" => __( "Category Icons", "adverts" ),
-                    "text" => __( "Set custom icons (small and big) for each category.", "adverts" ),
+                    "title" => __( "Category Icons", "wpadverts" ),
+                    "text" => __( "Set custom icons (small and big) for each category.", "wpadverts" ),
                     "type" => "",
                     "plugin" => "wpadverts-category-icons/wpadverts-category-icons.php",
                     "purchase_url" => "https://wpadverts.com/extensions/wpadverts-category-icons/"
                 ),
                 "wpadverts-mark-as-sold" => array(
-                    "title" => __( "Mark As Sold", "adverts" ),
-                    "text" => __( "Allow users and administrators to mark the Ads as sold.", "adverts" ),
+                    "title" => __( "Mark As Sold", "wpadverts" ),
+                    "text" => __( "Allow users and administrators to mark the Ads as sold.", "wpadverts" ),
                     "type" => "",
                     "plugin" => "wpadverts-mark-as-sold/wpadverts-mark-as-sold.php",
                     "purchase_url" => "https://wpadverts.com/extensions/wpadverts-mark-as-sold/"
@@ -187,24 +187,24 @@ function adverts_admin_page_extensions() {
             )
         ),
         array(
-            "title" => __( "Payment Gateways", "adverts" ),
+            "title" => __( "Payment Gateways", "wpadverts" ),
             "modules" => array(
                 "bank-transfer" => array(
-                    "title" => __("Bank Transfer", "adverts"),
-                    "text" => __("Allow users to pay for ad posting using direct bank transfer or cash payments.", "adverts"),
+                    "title" => __("Bank Transfer", "wpadverts"),
+                    "text" => __("Allow users to pay for ad posting using direct bank transfer or cash payments.", "wpadverts"),
                     "type" => "",
                     "plugin" => null
                 ),
                 "paypal-standard" => array(
-                    "title" => __("PayPal Standard", "adverts"),
-                    "text" => __("PayPal Payments Standard, allow users to pay for ads via PayPal.", "adverts"),
+                    "title" => __("PayPal Standard", "wpadverts"),
+                    "text" => __("PayPal Payments Standard, allow users to pay for ads via PayPal.", "wpadverts"),
                     "type" => "",
                     "plugin" => "wpadverts-paypal-standard/wpadverts-paypal-standard.php",
                     "purchase_url" => "https://wpadverts.com/extensions/paypal-payments-standard/"
                 ),
                 "stripe" => array(
-                    "title" => __("Stripe", "adverts"),
-                    "text" => __("Charge users for Ad postings using credit cards (and some other payment gateways).", "adverts"),
+                    "title" => __("Stripe", "wpadverts"),
+                    "text" => __("Charge users for Ad postings using credit cards (and some other payment gateways).", "wpadverts"),
                     "type" => "",
                     "plugin" => "wpadverts-stripe/wpadverts-stripe.php",
                     "purchase_url" => "https://wpadverts.com/extensions/stripe/"
@@ -261,7 +261,7 @@ function adverts_admin_page_extensions() {
         }
         
         if( $module_current === null ) {
-            esc_html_e( sprintf( __( "Module [%s] does not exist.", "adverts" ), $name ) );
+            esc_html_e( sprintf( __( "Module [%s] does not exist.", "wpadverts" ), $name ) );
             return;
         }
 
@@ -346,10 +346,10 @@ function adverts_category_form_fields($tag)
 })( jQuery );
 </script>
     <tr class="form-field">
-        <th scope="row" valign="top"><label for="advert_category_icon"><?php _e("Category Icon", "adverts") ?></label></th>
+        <th scope="row" valign="top"><label for="advert_category_icon"><?php _e("Category Icon", "wpadverts") ?></label></th>
         <td>
             <input type="hidden" name="advert_category_icon" id="advert_category_icon" value="<?php esc_attr_e($current_icon) ?>" />
-            <input type="text" autocomplete="off" id="adverts-category-icon-filter" placeholder="<?php _e("Filter Icons ...", "adverts") ?>" />
+            <input type="text" autocomplete="off" id="adverts-category-icon-filter" placeholder="<?php _e("Filter Icons ...", "wpadverts") ?>" />
             <ul class="adverts-image-icon-picker">
                 <?php foreach($icons as $icon): ?>
                 <?php $title = ucfirst(str_replace("-", " ", $icon ) ) ?>

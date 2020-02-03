@@ -12,7 +12,7 @@
 ?>
 <div class="wrap">
     <h2 class="">
-        <?php _e("Contact Form", "adverts") ?>
+        <?php _e("Contact Form", "wpadverts") ?>
     </h2>
 
     <?php adverts_admin_flash() ?>

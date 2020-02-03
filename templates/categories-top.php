@@ -21,7 +21,7 @@
 <?php else: ?>
 <div class="adverts-grid-row">
     <div class="adverts-col-100">
-        <span><?php _e("No categories found.", "adverts") ?></span>
+        <span><?php _e("No categories found.", "wpadverts") ?></span>
     </div>
 </div>
 <?php endif; ?> 

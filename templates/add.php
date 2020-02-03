@@ -4,7 +4,7 @@
     <fieldset>
         
         <?php foreach($form->get_fields( array( "type" => array( "adverts_field_hidden" ) ) ) as $field): ?>
-        <?php call_user_func( adverts_field_get_renderer($field), $field) ?>
+        <?php call_user_func( adverts_field_get_renderer($field), $field, $form ) ?>
         <?php endforeach; ?>
         
         <?php foreach($form->get_fields() as $field): ?>
@@ -27,7 +27,7 @@
                 <?php endif; ?>
             </label>
             
-            <?php call_user_func( adverts_field_get_renderer($field), $field) ?>
+            <?php call_user_func( adverts_field_get_renderer($field), $field, $form ) ?>
 
             <?php endif; ?>
             
@@ -44,7 +44,7 @@
         
         <div class="adverts-control-group <?php echo isset($actions_class) ? $actions_class : '' ?>">
 
-            <input type="submit" name="submit" value="<?php _e("Preview", "adverts") ?>" style="font-size:1.2em" class="adverts-cancel-unload" />
+            <input type="submit" name="submit" value="<?php echo isset($action_label) ? esc_attr($action_label) : __("Preview", "wpadverts") ?>" style="font-size:1.2em" class="adverts-button adverts-cancel-unload" />
         </div>
         
     </fieldset>

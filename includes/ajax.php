@@ -56,22 +56,24 @@ function adverts_author_suggest() {
  */
 function adverts_gallery_upload() {
 
-    if( ! check_ajax_referer( 'adverts-gallery', '_ajax_nonce', false ) ) {
-        echo json_encode( array( 
-            "result" => 0, 
-            "error" => __( "Invalid Session. Please refresh the page and try again.", "adverts" ) 
-        ) );
-        
-        exit;
-    }
+    $args = _adverts_ajax_verify_checksum();
+    $post_id = _adverts_ajax_verify_post_id( _adverts_ajax_requires_post_id( $args ) );
 
+    $form_name = adverts_request( "form" );
+    $field_name = adverts_request( "field_name" );
+    
     include_once ADVERTS_PATH . '/includes/class-upload-helper.php';
     $v = new Adverts_Upload_Helper;
-    $field_name = adverts_request( "field_name" );
-    $form_params = array(
-        "form_scheme" => adverts_request( "_form_scheme" ),
-        "form_scheme_id" => adverts_request( "_form_scheme_id" )
-    );
+    
+    if( $post_id > 0 ) {
+        $form_params = array(
+            "form_scheme_id" => get_post_meta( $post_id, "_wpacf_form_scheme_id", true )
+        );
+    } else {
+        $form_params = array(
+            "form_scheme_id" => isset( $args["form_scheme_id"] ) ? $args["form_scheme_id"]: null
+        );
+    }
     $form_scheme = apply_filters( "adverts_form_scheme", Adverts::instance()->get("form"), $form_params );
     $form_scheme = apply_filters( "adverts_form_load", $form_scheme );
 
@@ -100,7 +102,7 @@ function adverts_gallery_upload() {
     $filename = $status['file'];
 
     // The ID of the post this attachment is for.
-    $parent_post_id = intval($_POST["post_id"]);
+    $parent_post_id = $post_id;
 
     // Check the type of tile. We'll use this as the 'post_mime_type'.
     $filetype = wp_check_filetype( basename( $filename ), null );
@@ -127,7 +129,7 @@ function adverts_gallery_upload() {
             'post_content'      => '',
             'post_status'       => adverts_tmp_post_status(),
             'post_author'       => wp_get_current_user()->ID,
-            'post_type'         => 'advert',
+            'post_type'         => isset( $args["post_type"] ) ? $args["post_type"] : "advert",
             'comments_status'   => 'closed'
         ) ) );
         
@@ -143,7 +145,7 @@ function adverts_gallery_upload() {
         wp_update_attachment_metadata( $attach_id, wp_generate_attachment_metadata( $attach_id, $filename ) );
     }
     
-    update_post_meta( $attach_id, "wpadverts_form", "advert" );
+    update_post_meta( $attach_id, "wpadverts_form", $form_name );
     update_post_meta( $attach_id, "wpadverts_form_field", $field_name );
     
     do_action( "adverts_attachment_uploaded", $attach_id );
@@ -167,19 +169,13 @@ function adverts_gallery_upload() {
  */
 function adverts_gallery_update() {
     
-    if( ! check_ajax_referer( 'adverts-gallery', '_ajax_nonce', false ) ) {
-        echo json_encode( array( 
-            "result" => 0, 
-            "error" => __( "Invalid Session. Please refresh the page and try again.", "adverts" ) 
-        ) );
-        exit;
-    }
+    $args = _adverts_ajax_verify_checksum();
+    $post_id = _adverts_ajax_verify_post_id( true );
        
-    $post_id = intval($_POST["post_id"]);
-    $attach_id = intval($_POST["attach_id"]);
+    $attach_id = intval( $_POST["attach_id"] );
     $caption = trim( adverts_request("caption", "" ) );
     $content = trim( adverts_request("content", "" ) );
-    $featured = intval($_POST["featured"]);
+    $featured = intval( $_POST["featured"]);
     
     _adverts_ajax_check_post_ownership( $post_id );
     
@@ -188,7 +184,7 @@ function adverts_gallery_update() {
     if( $attach->post_parent != $post_id ) {
         echo json_encode( array( 
             "result" => 0, 
-            "error" => __( "Incorrect Post or Attachment ID.", "adverts" ) 
+            "error" => __( "Incorrect Post or Attachment ID.", "wpadverts" ) 
         ) );
         exit;
     }
@@ -232,16 +228,9 @@ function adverts_gallery_update() {
  */
 function adverts_gallery_update_order() {
     
-    if (!check_ajax_referer('adverts-gallery', '_ajax_nonce', false)) {
-        echo json_encode(array(
-            "result" => 0,
-            "error" => __("Invalid Session. Please refresh the page and try again.", "adverts")
-        ));
-
-        exit;
-    }
-
-    $post_id = intval( adverts_request( "post_id" ) );
+    $args = _adverts_ajax_verify_checksum();
+    $post_id = _adverts_ajax_verify_post_id( true );
+    
     _adverts_ajax_check_post_ownership( $post_id );
     
     $dirty_ordered_keys = json_decode( stripslashes( adverts_request( "ordered_keys" ) ) );
@@ -270,28 +259,22 @@ function adverts_gallery_update_order() {
  */
 function adverts_gallery_delete() {
     
-    if( ! check_ajax_referer( 'adverts-gallery', '_ajax_nonce', false ) ) {
-        echo json_encode( array( 
-            "result" => 0, 
-            "error" => __( "Invalid Session. Please refresh the page and try again.", "adverts" ) 
-        ) );
-        
-        exit;
-    }
-    
+    $args = _adverts_ajax_verify_checksum();
+    $post_id = _adverts_ajax_verify_post_id( true );
+
     $attach_id = intval( adverts_request("attach_id") );
     $attach = get_post( $attach_id );
 
     _adverts_ajax_check_post_ownership( $attach->post_parent );
     
     if ( $attach === null ) {
-        echo json_encode( array( "result" => 0, "error" => __( "Attachment does not exist.", "adverts" ) ) );
-    } elseif ( $attach->post_parent != absint( adverts_request( "post_id" ) ) ) {
-        echo json_encode( array( "result" => 0, "error" => __( "Incorrect attachment ID.", "adverts" ) ) );
+        echo json_encode( array( "result" => 0, "error" => __( "Attachment does not exist.", "wpadverts" ) ) );
+    } elseif ( $attach->post_parent != absint( $post_id ) ) {
+        echo json_encode( array( "result" => 0, "error" => __( "Incorrect attachment ID.", "wpadverts" ) ) );
     } elseif ( wp_delete_attachment( $attach_id ) ) {
         echo json_encode( array( "result" => 1 ) );
     } else {
-        echo json_encode( array( "result" => 0, "error" => __( "File could not be deleted.", "adverts" ) ) );
+        echo json_encode( array( "result" => 0, "error" => __( "File could not be deleted.", "wpadverts" ) ) );
     }
     
     exit;
@@ -309,18 +292,13 @@ function adverts_gallery_delete() {
  */
 function adverts_gallery_image_stream() {
     
-    if( ! check_ajax_referer( 'adverts-gallery', '_ajax_nonce', false ) ) {
-        echo json_encode( array( 
-            "result" => 0, 
-            "error" => __( "Invalid Session. Please refresh the page and try again.", "adverts" ) 
-        ) );
-        exit;
-    }
+    $args = _adverts_ajax_verify_checksum();
+    $post_id = _adverts_ajax_verify_post_id( true );
     
     if( ! adverts_user_can_edit_image() ) {
         echo json_encode( array( 
             "result" => 0, 
-            "error" => __( "You cannot edit images.", "adverts" ) 
+            "error" => __( "You cannot edit images.", "wpadverts" ) 
         ) );
         exit;
     }
@@ -328,7 +306,6 @@ function adverts_gallery_image_stream() {
     $attach_id = adverts_request( "attach_id" );
     $history_encoded = adverts_request( "history" );
     $size = adverts_request( "size" );
-    $post_id = intval( adverts_request( "post_id" ) );
     
     $attach = get_post( $attach_id );
     
@@ -337,7 +314,7 @@ function adverts_gallery_image_stream() {
     if( $attach->post_parent != $post_id ) {
         echo json_encode( array( 
             "result" => 0, 
-            "error" => __( "Incorrect Post or Attachment ID.", "adverts" ) 
+            "error" => __( "Incorrect Post or Attachment ID.", "wpadverts" ) 
         ) );
         exit;
     }
@@ -402,26 +379,19 @@ function adverts_gallery_image_stream() {
  */
 function adverts_gallery_image_restore() {
     
-    if( ! check_ajax_referer( 'adverts-gallery', '_ajax_nonce', false ) ) {
-        echo json_encode( array( 
-            "result" => 0, 
-            "error" => __( "Invalid Session. Please refresh the page and try again.", "adverts" ) 
-        ) );
-        
-        exit;
-    }
+    $args = _adverts_ajax_verify_checksum();
+    $post_id = _adverts_ajax_verify_post_id( true );
     
     if( ! adverts_user_can_edit_image() ) {
         echo json_encode( array( 
             "result" => 0, 
-            "error" => __( "You cannot edit images.", "adverts" ) 
+            "error" => __( "You cannot edit images.", "wpadverts" ) 
         ) );
         exit;
     }
     
     $size = adverts_request( "size" );
     $attach_id = adverts_request( "attach_id" );
-    $post_id = intval( adverts_request( "post_id" ) );
     
     _adverts_ajax_check_post_ownership( $post_id );
     
@@ -430,7 +400,7 @@ function adverts_gallery_image_restore() {
     if( $attach->post_parent != $post_id ) {
         echo json_encode( array( 
             "result" => 0, 
-            "error" => __( "Incorrect Post or Attachment ID.", "adverts" ) 
+            "error" => __( "Incorrect Post or Attachment ID.", "wpadverts" ) 
         ) );
         exit;
     }
@@ -480,19 +450,13 @@ function adverts_gallery_image_restore() {
  */
 function adverts_gallery_image_save() {
     
-    if( ! check_ajax_referer( 'adverts-gallery', '_ajax_nonce', false ) ) {
-        echo json_encode( array( 
-            "result" => 0, 
-            "error" => __( "Invalid Session. Please refresh the page and try again.", "adverts" ) 
-        ) );
-        
-        exit;
-    }
-    
+    $args = _adverts_ajax_verify_checksum();
+    $post_id = _adverts_ajax_verify_post_id( true );
+
     if( ! adverts_user_can_edit_image() ) {
         echo json_encode( array( 
             "result" => 0, 
-            "error" => __( "You cannot edit images.", "adverts" ) 
+            "error" => __( "You cannot edit images.", "wpadverts" ) 
         ) );
         exit;
     }
@@ -500,7 +464,6 @@ function adverts_gallery_image_save() {
     $attach_id = adverts_request( "attach_id" );
     $action_type = adverts_request( "action_type" );
     $history_encoded = adverts_request( "history" );
-    $post_id = adverts_request( "post_id" );
     
     $size_dash = adverts_request( "size" );
     $size = str_replace("_", "-", adverts_request( "size" ));
@@ -513,7 +476,7 @@ function adverts_gallery_image_save() {
     if( $attach->post_parent != $post_id ) {
         echo json_encode( array( 
             "result" => 0, 
-            "error" => __( "Incorrect Post or Attachment ID.", "adverts" ) 
+            "error" => __( "Incorrect Post or Attachment ID.", "wpadverts" ) 
         ) );
         exit;
     }
@@ -565,6 +528,10 @@ function adverts_gallery_image_save() {
     
     $backup_sizes = get_post_meta( $attach_id, '_wp_attachment_backup_sizes', true );
     $meta = wp_get_attachment_metadata( $attach_id );
+    
+    if( ! is_array( $backup_sizes ) ) {
+        $backup_sizes = array();
+    }
     
     $basename = pathinfo( $attached_file, PATHINFO_BASENAME );
     $dirname = pathinfo( $attached_file, PATHINFO_DIRNAME );
@@ -701,25 +668,18 @@ function adverts_gallery_image_save() {
  */
 function adverts_gallery_video_cover() {
     
-    if( ! check_ajax_referer( 'adverts-gallery', '_ajax_nonce', false ) ) {
-        echo json_encode( array( 
-            "result" => 0, 
-            "error" => __( "Invalid Session. Please refresh the page and try again.", "adverts" ) 
-        ) );
-        
-        exit;
-    }
+    $args = _adverts_ajax_verify_checksum();
+    $post_id = _adverts_ajax_verify_post_id( true );
     
     if( ! adverts_user_can_edit_image() ) {
         echo json_encode( array( 
             "result" => 0, 
-            "error" => __( "You cannot edit images.", "adverts" ) 
+            "error" => __( "You cannot edit images.", "wpadverts" ) 
         ) );
         exit;
     }
     
     $attach_id = adverts_request("attach_id");
-    $post_id = intval( adverts_request( "post_id" ) );
     $attach = get_post( $attach_id );
     
     _adverts_ajax_check_post_ownership( $post_id );
@@ -727,7 +687,7 @@ function adverts_gallery_video_cover() {
     if( $attach->post_parent != $post_id ) {
         echo json_encode( array( 
             "result" => 0, 
-            "error" => __( "Incorrect Post or Attachment ID.", "adverts" ) 
+            "error" => __( "Incorrect Post or Attachment ID.", "wpadverts" ) 
         ) );
         exit;
     }
@@ -872,7 +832,7 @@ function adverts_show_contact() {
     if( $post === null || $post->post_type != 'advert') {
         echo json_encode( array( 
             'result' => 0,
-            'error' => __("Post with given ID does not exist.", "adverts")
+            'error' => __("Post with given ID does not exist.", "wpadverts")
         ));
         exit;
     } else {
@@ -899,15 +859,15 @@ function adverts_show_contact() {
  */
 function adverts_delete_tmp() {
     
-    // @todo check_ajax_referer( 'my-special-string', 'security' );
+    $post_id = _adverts_ajax_verify_post_id( true );
+    $id = $post_id;
     
-    $id = adverts_request("id");
     $post = get_post($id);
     
     if( $post === null || $post->post_status != adverts_tmp_post_status()) {
         echo json_encode( array( 
             'result' => 0,
-            'error' => __("Post with given ID does not exist.", "adverts")
+            'error' => __("Post with given ID does not exist.", "wpadverts")
         ));
         exit;
     }
@@ -944,16 +904,16 @@ function adverts_delete_tmp() {
  */
 function adverts_delete() {
     
-    $id = adverts_request("id");
+    $id = absint( adverts_request("id") ) ;
     $is_ajax = adverts_request( "ajax", false );
     $post = get_post($id);
     $result = null;
     
     // Check AJAX referer
-    if( ! check_ajax_referer( 'adverts-delete', '_ajax_nonce', false ) ) {
+    if( ! check_ajax_referer( sprintf( "wpadverts-delete-%d", $id ), '_ajax_nonce', false ) ) {
         $result = array( 
             "result" => 0, 
-            "error" => __( "Invalid Session. Please refresh the page and try again.", "adverts" ) 
+            "error" => __( "Invalid Session. Please refresh the page and try again.".sprintf( "wpadverts-delete-%d", $id ).".", "wpadverts" ) 
         );
     }
     
@@ -961,7 +921,7 @@ function adverts_delete() {
     if( !$post ) {
         $result = array( 
             "result" => -1, 
-            "error" => __( "Post you are trying to delete does not exist.", "adverts" ) 
+            "error" => __( "Post you are trying to delete does not exist.", "wpadverts" ) 
         );
     }
     
@@ -969,7 +929,7 @@ function adverts_delete() {
     if( $post->post_author != get_current_user_id() ) {
         $result = array( 
             "result" => -2, 
-            "error" => __( "Post you are trying to delete does not belong to you.", "adverts" ) 
+            "error" => __( "Post you are trying to delete does not belong to you.", "wpadverts" ) 
         );
     }
     
@@ -977,7 +937,7 @@ function adverts_delete() {
     if( $post->post_type != 'advert') {
         $result = array( 
             "result" => -3, 
-            "error" => __( "This post is not an Advert.", "adverts" ) 
+            "error" => __( "This post is not an Advert.", "wpadverts" ) 
         );
     }
     
@@ -1008,7 +968,7 @@ function adverts_delete() {
     } else if( $is_ajax ) {
         echo json_encode( array( 
             "result" => 1, 
-            "message" => sprintf( __( "Advert <strong>%s</strong> deleted.", "adverts" ), $post_title )
+            "message" => sprintf( __( "Advert <strong>%s</strong> deleted.", "wpadverts" ), $post_title )
         ) );
     }
     

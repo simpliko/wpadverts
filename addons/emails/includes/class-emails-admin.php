@@ -58,7 +58,7 @@ class Adext_Emails_Admin {
         $scheme = $this->options_form( );
         $form = new Adverts_Form( $scheme );
 
-        $button_text = __("Update Options", "adverts");
+        $button_text = __("Update Options", "wpadverts");
 
         if( isset( $_POST ) && !empty( $_POST ) ) {
             $form->bind( stripslashes_deep( $_POST ) );
@@ -76,9 +76,9 @@ class Adext_Emails_Admin {
                 
                 update_option("adext_emails_config", $update);
                 
-                $flash->add_info( __("Settings updated.", "adverts") );
+                $flash->add_info( __("Settings updated.", "wpadverts") );
             } else {
-                $flash->add_error( __("There are errors in your form.", "adverts") );
+                $flash->add_error( __("There are errors in your form.", "wpadverts") );
             }
         } else {
             $form->bind( adverts_config( "emails.ALL" ) );
@@ -153,7 +153,7 @@ class Adext_Emails_Admin {
         $form = new Adverts_Form( $scheme );
         $form->bind( $bind );
 
-        $button_text = __("Update Message Template", "adverts");
+        $button_text = __("Update Message Template", "wpadverts");
 
         if(isset($_POST) && !empty($_POST)) {
             $form->bind( stripslashes_deep( $_POST ) );
@@ -163,9 +163,9 @@ class Adext_Emails_Admin {
                 $this->edit_save( $form, adverts_request( "edit" ) );
                 Adext_Emails::instance()->messages->register_messages();
                 $message = $this->get_current_message();
-                $flash->add_info( __("Email template has been saved.", "adverts") );
+                $flash->add_info( __("Email template has been saved.", "wpadverts") );
             } else {
-                $flash->add_error( __("There are errors in your form.", "adverts") );
+                $flash->add_error( __("There are errors in your form.", "wpadverts") );
             }
         }
         
@@ -271,7 +271,7 @@ class Adext_Emails_Admin {
     public function edit_form_add_header( ) {
         include_once ADVERTS_PATH . "/includes/class-html.php";
         
-        $icon_text = '<span class="dashicons dashicons-plus" style="vertical-align:middle"></span> ' . __( "Add Header", "adverts" );
+        $icon_text = '<span class="dashicons dashicons-plus" style="vertical-align:middle"></span> ' . __( "Add Header", "wpadverts" );
         
         $a = new Adverts_Html( "a", array(
             "href" => "#",
@@ -305,16 +305,16 @@ class Adext_Emails_Admin {
                 array(
                     "name" => "_email",
                     "type" => "adverts_field_label",
-                    "label" => __( "Email Name", "adverts" ),
+                    "label" => __( "Email Name", "wpadverts" ),
                     "content" => $code,
                     "order" => 10,
                 ),
                 array(
                     "name" => "message_enabled",
                     "type" => "adverts_field_checkbox",
-                    "label" => __( "Is Active", "adverts"),
+                    "label" => __( "Is Active", "wpadverts"),
                     "options" => array(
-                        array( "value" => 1, "text" => __( "Enable sending this message.", "adverts" ) )
+                        array( "value" => 1, "text" => __( "Enable sending this message.", "wpadverts" ) )
                     ),
                     "order" => 20,
                 ),
@@ -322,20 +322,20 @@ class Adext_Emails_Admin {
                     "name" => "message_subject",
                     "type" => "adverts_field_text",
                     "class" => "adext-emails-full-width",
-                    "label" => __( "Subject", "adverts" ),
+                    "label" => __( "Subject", "wpadverts" ),
                     "order" => 30,
                 ),
                 array(
                     "name" => "message_from",
                     "type" => "adext_emails_field_name_email",
-                    "label" => __( "From", "adverts" ),
+                    "label" => __( "From", "wpadverts" ),
                     "class" => "adext-emails-full-width",
                     "order" => 40,
                 ),
                 array(
                     "name" => "message_to",
                     "type" => "adverts_field_text",
-                    "label" => __( "To", "adverts" ),
+                    "label" => __( "To", "wpadverts" ),
                     "order" => 50,
                 ),
                 array( 
@@ -354,7 +354,7 @@ class Adext_Emails_Admin {
                     "name" => "message_body",
                     "type" => "adverts_field_textarea",
                     "mode" => "plain-text",
-                    "label" => __( "Body", "adverts" ),
+                    "label" => __( "Body", "wpadverts" ),
                     "order" => 80,
                 )
             )
@@ -374,7 +374,7 @@ class Adext_Emails_Admin {
                 array(
                     "name" => "admin_email",
                     "type" => "adverts_field_text",
-                    "label" => __( "Send Admin Notifications To", "adverts" ),
+                    "label" => __( "Send Admin Notifications To", "wpadverts" ),
                     "placeholder" => get_option( "admin_email" ),
                     "order" => 10
                 ),
@@ -383,7 +383,7 @@ class Adext_Emails_Admin {
                     "type" => "adverts_field_checkbox",
                     "label" => "HTML Emails",
                     "options" => array(
-                        array( "value" => "1", "text" => __( "Send emails as HTML", "adverts" ) )
+                        array( "value" => "1", "text" => __( "Send emails as HTML", "wpadverts" ) )
                     ),
                     "order" => 20
                 )

@@ -20,7 +20,7 @@
     <fieldset>
         
         <?php foreach($form->get_fields( array( "type" => array( "adverts_field_hidden" ) ) ) as $field): ?>
-        <?php call_user_func( adverts_field_get_renderer($field), $field) ?>
+        <?php call_user_func( adverts_field_get_renderer($field), $field, $form ) ?>
         <?php endforeach; ?>
         
         <?php foreach($form->get_fields() as $field): ?>
@@ -45,7 +45,7 @@
                 <?php endif; ?>
             </label>
                 
-            <?php call_user_func( adverts_field_get_renderer($field), $field) ?>
+            <?php call_user_func( adverts_field_get_renderer($field), $field, $form ) ?>
 
             <?php endif; ?>
             

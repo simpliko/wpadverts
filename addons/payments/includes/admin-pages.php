@@ -32,7 +32,7 @@ function adext_payments_page_options() {
     $form = new Adverts_Form( $scheme );
     $form->bind( get_option ( "adext_payments_config", array() ) );
     
-    $button_text = __("Update Options", "adverts");
+    $button_text = __("Update Options", "wpadverts");
     
     if(isset($_POST) && !empty($_POST)) {
         $form->bind( stripslashes_deep( $_POST ) );
@@ -40,9 +40,9 @@ function adext_payments_page_options() {
 
         if($valid) {
             update_option("adext_payments_config", $form->get_values());
-            $flash->add_info( __("Settings updated.", "adverts") );
+            $flash->add_info( __("Settings updated.", "wpadverts") );
         } else {
-            $flash->add_error( __("There are errors in your form.", "adverts") );
+            $flash->add_error( __("There are errors in your form.", "wpadverts") );
         }
     }
     
@@ -73,7 +73,7 @@ function adext_payments_load( $form ) {
         
         if($field["name"] == "default_gateway") {
             if(empty($gateways)) {
-                $content = __("Enable at least one <a href='%s'>Payment Gateway</a> before selecting default.", "adverts");
+                $content = __("Enable at least one <a href='%s'>Payment Gateway</a> before selecting default.", "wpadverts");
                 $form["field"][$key]["type"] = 'adverts_field_label';
                 $form["field"][$key]["content"] = sprintf($content, admin_url('edit.php?post_type=advert&page=adverts-extensions'));
             } else {
@@ -86,7 +86,7 @@ function adext_payments_load( $form ) {
         
         if($field["name"] == "default_pricing") {
             if($pricings->posts == 0) {
-                $content = __("Create at least one <a href='%s'>Pricing</a> before selecting default.", "adverts");
+                $content = __("Create at least one <a href='%s'>Pricing</a> before selecting default.", "wpadverts");
                 $form["field"][$key]["type"] = 'adverts_field_label';
                 $form["field"][$key]["content"] = sprintf($content, admin_url('edit.php?post_type=advert&page=adverts-extensions&module=payments&adaction=list'));
             } else {
@@ -125,8 +125,8 @@ function adext_payments_page_pricing() {
         // Show Add New Pricing Page
         wp_enqueue_script( 'adverts-auto-numeric' );
         
-        $title = __("Add Pricing", "adverts");
-        $button_text = __("Add Pricing", "adverts");
+        $title = __("Add Pricing", "wpadverts");
+        $button_text = __("Add Pricing", "wpadverts");
         $form = new Adverts_Form(Adverts::instance()->get("form_payments"));
         
         if(isset($_POST) && !empty($_POST)) {
@@ -147,15 +147,15 @@ function adext_payments_page_pricing() {
                 if(is_wp_error($post_id)) {
                     $flash->add_error( $post_id->get_error_message() );
                 } elseif($post_id === 0 ) {
-                    $flash->add_error( __("There was an error while saving pricing in database.", "adverts") );
+                    $flash->add_error( __("There was an error while saving pricing in database.", "wpadverts") );
                 } else {
                     $redirect = remove_query_arg('add');
                     $redirect = add_query_arg('edit', $post_id, $redirect);
-                    $flash->add_info( __("New pricing has been added.", "adverts") );
+                    $flash->add_info( __("New pricing has been added.", "wpadverts") );
                     return adverts_admin_js_redirect( $redirect );
                 }
             } else {
-                $flash->add_error( __("There are errors in your form.", "adverts") );
+                $flash->add_error( __("There are errors in your form.", "wpadverts") );
             }
         }
         
@@ -165,8 +165,8 @@ function adext_payments_page_pricing() {
         // Show Pricing Edit Page
         wp_enqueue_script( 'adverts-auto-numeric' );
         
-        $title = __("Edit Pricing", "adverts");
-        $button_text = __("Update Pricing", "adverts");
+        $title = __("Edit Pricing", "wpadverts");
+        $button_text = __("Update Pricing", "wpadverts");
         
         $post = get_post( adverts_request("edit") );
         $bind = Adverts_Post::to_array( $post );
@@ -193,12 +193,12 @@ function adext_payments_page_pricing() {
                 if(is_wp_error($post_id)) {
                     $flash->add_error( $post_id->get_error_message() );
                 } elseif($post_id === 0 ) {
-                    $flash->add_error( __("There was an error while saving pricing in database.", "adverts") );
+                    $flash->add_error( __("There was an error while saving pricing in database.", "wpadverts") );
                 } else {
-                    $flash->add_info( __( "Pricing updated.", "adverts" ) );
+                    $flash->add_info( __( "Pricing updated.", "wpadverts" ) );
                 }
             } else {
-                $flash->add_error( __("There are errors in your form.", "adverts") );
+                $flash->add_error( __("There are errors in your form.", "wpadverts") );
             }
         }
         
@@ -208,14 +208,14 @@ function adext_payments_page_pricing() {
         $post = get_post( adverts_request( 'delete' ) );
 
         if( ! $post || ! in_array( $post->post_type, array( 'adverts-pricing', 'adverts-renewal' ) ) ) {
-            wp_die(__('Adverts Pricing with given ID does not exist.', 'adverts'));
+            wp_die(__('Adverts Pricing with given ID does not exist.', 'wpadverts'));
         }
         
         foreach( get_children( $post->ID ) as $child) {
             wp_delete_post( $child->ID, true );
         }
         
-        $flash->add_info( __("Pricing deleted.", "adverts"));
+        $flash->add_info( __("Pricing deleted.", "wpadverts"));
         
         wp_delete_post( $post->ID, true );
         wp_redirect( remove_query_arg( array( 'delete', 'noheader', 'pg' ) ) );
@@ -235,7 +235,7 @@ function adext_payments_page_pricing() {
             $i++;
         }
         
-        $flash->add_info( sprintf( _n( "1 Pricing deleted.", "%s Pricings deleted.", $i, "adverts"), $i) );
+        $flash->add_info( sprintf( _n( "1 Pricing deleted.", "%s Pricings deleted.", $i, "wpadverts"), $i) );
         
         wp_redirect( remove_query_arg( array( 'delete', 'noheader', 'pg' ) ) );
         exit;
@@ -275,7 +275,7 @@ function adext_payments_page_history() {
         $payment = get_post( adverts_request( "edit" ) );
         
         if( $payment === null ) {
-            $flash->add_error( sprintf( __( "Payment #%d does not exist or was deleted.", "adverts" ), adverts_request( "edit" ) ) );
+            $flash->add_error( sprintf( __( "Payment #%d does not exist or was deleted.", "wpadverts" ), adverts_request( "edit" ) ) );
             include ADVERTS_PATH . 'addons/payments/admin/payment-history-edit.php';
             return;
         }
@@ -290,7 +290,7 @@ function adext_payments_page_history() {
                 "name" => "_adverts_user_id",
                 "type" => "adverts_field_text",
                 "order" => 10,
-                "label" => __( "User ID", "adverts" ),
+                "label" => __( "User ID", "wpadverts" ),
             ),
             array(
                 "name" => "_adverts_payment_total",
@@ -324,7 +324,7 @@ function adext_payments_page_history() {
         }
         
         if( ! $gateway && $gateway_name ) {
-            $msg = sprintf( __( "Payment Method [%s] assigned to this Payment does not exist or was disabled.", "adverts" ), $gateway_name );
+            $msg = sprintf( __( "Payment Method [%s] assigned to this Payment does not exist or was disabled.", "wpadverts" ), $gateway_name );
             $flash->add_error( $msg );
         } 
         
@@ -355,7 +355,7 @@ function adext_payments_page_history() {
                     do_action( "adverts_payment_{$status_new}", $payment );
                     do_action( "adverts_payment_{$status_old}_to_{$status_new}", $payment );
                     
-                    $text = __('<strong>%1$s</strong> changed payment status to <strong>%2$s</strong>', 'adverts');
+                    $text = __('<strong>%1$s</strong> changed payment status to <strong>%2$s</strong>', 'wpadverts');
                     $message = sprintf( $text, wp_get_current_user()->user_login, $status_new);
                     adext_payments_log( $post_id, $message );
                     
@@ -365,12 +365,12 @@ function adext_payments_page_history() {
                 if(is_wp_error($post_id)) {
                     $flash->add_error( $post_id->get_error_message() );
                 } elseif($post_id === 0 ) {
-                    $flash->add_error( __("There was an error while saving pricing in database.", "adverts") );
+                    $flash->add_error( __("There was an error while saving pricing in database.", "wpadverts") );
                 } else {
-                    $flash->add_info( __( "Payment updated.", "adverts" ) );
+                    $flash->add_info( __( "Payment updated.", "wpadverts" ) );
                 }
             } else {
-                $flash->add_error( __("There are errors in your form.", "adverts") );
+                $flash->add_error( __("There are errors in your form.", "wpadverts") );
             }
         }
         
@@ -381,14 +381,14 @@ function adext_payments_page_history() {
         $i = 1;
         
         if( !$post || $post->post_type != 'adverts-payment' ) {
-            wp_die(__('Adverts Payment with given ID does not exist.', 'adverts'));
+            wp_die(__('Adverts Payment with given ID does not exist.', 'wpadverts'));
         }
         
         foreach( get_children( $post->ID ) as $child) {
             wp_delete_post( $child->ID, true );
         }
 
-        $flash->add_info( sprintf( _n( "1 Payment deleted.", "%s Payments deleted.", $i, "adverts"), $i) );
+        $flash->add_info( sprintf( _n( "1 Payment deleted.", "%s Payments deleted.", $i, "wpadverts"), $i) );
         
         wp_delete_post( $post->ID, true );
         wp_redirect( remove_query_arg( array( 'delete', 'noheader', 'pg' ) ) );
@@ -420,7 +420,7 @@ function adext_payments_page_history() {
                 wp_delete_post( $id, true );
             }
             
-            $flash->add_info( sprintf( _n( "1 Payment deleted.", "%s Payments deleted.", $i, "adverts"), $i) );
+            $flash->add_info( sprintf( _n( "1 Payment deleted.", "%s Payments deleted.", $i, "wpadverts"), $i) );
             
         } elseif( stripos($action, "set-status-") === 0 ) {
             
@@ -438,7 +438,7 @@ function adext_payments_page_history() {
                 }
             }
             
-            $flash->add_info( sprintf(__("Status for selected Payments was changed to: %s", "adverts"), $status_obj->label ) );
+            $flash->add_info( sprintf(__("Status for selected Payments was changed to: %s", "wpadverts"), $status_obj->label ) );
         }
         
         wp_redirect( remove_query_arg( array( 'delete', 'noheader', 'pg' ) ) );
@@ -447,10 +447,10 @@ function adext_payments_page_history() {
         
         $deleted = adext_payments_event_gc();
         if( $deleted > 0 ) {
-            $n = _n( "Deleted %d temporary payment.", "Deleted %d temporary payments", $deleted, "adverts" );
+            $n = _n( "Deleted %d temporary payment.", "Deleted %d temporary payments", $deleted, "wpadverts" );
             $flash->add_info( sprintf( $n, $deleted ) );
         } else {
-            $n = __( "No temporary payments to delete at this time.", "adverts" );
+            $n = __( "No temporary payments to delete at this time.", "wpadverts" );
             $flash->add_info( $n );
         }
 
@@ -597,12 +597,12 @@ function adext_payments_display_pending_state( $states ) {
         
         $order_link = new Adverts_Html("a", array(
             "href" => admin_url("edit.php?post_type=advert&page=adext-payment-history&edit=".$id),
-            "title" => __("View order", "adverts")
+            "title" => __("View order", "wpadverts")
         ), $span->render());
     } else {
         $span = new Adverts_Html("span", array(
             "class" => "dashicons dashicons-info",
-            "title" => __( 'Abandoned', 'adverts' ),
+            "title" => __( 'Abandoned', 'wpadverts' ),
             "style" => "font-size: 18px"
         ));
         $span->forceLongClosing(true);
@@ -610,7 +610,7 @@ function adext_payments_display_pending_state( $states ) {
         $order_link = $span->render();
     }
     
-    return array( __( 'Pending Payment', 'adverts' ) . $order_link );
+    return array( __( 'Pending Payment', 'wpadverts' ) . $order_link );
 
     return $states;
 }
@@ -642,11 +642,11 @@ function adext_payments_admin_head() {
                 .attr("value", "advert-pending")
                 .addClass("adverts-post-status")
                 .css("display", "none")
-                .html("<?php _e( "Pending Payment", "adverts" ) ?>")
+                .html("<?php _e( "Pending Payment", "wpadverts" ) ?>")
             );
                 
             $("#adverts-payments-pending-payment").prop("selected", true).attr("selected", "selected");
-            $("input#publish").val("<?php _e("Update", "adverts") ?>");
+            $("input#publish").val("<?php _e("Update", "wpadverts") ?>");
             var x = 0;
         });
     </script>
@@ -665,7 +665,7 @@ Adverts::instance()->set("form_payments_history", array(
             "name" => "adverts_person",
             "type" => "adverts_field_text",
             "order" => 10,
-            "label" => __( "Contact Person", "adverts" ),
+            "label" => __( "Contact Person", "wpadverts" ),
             "is_required" => true,
             "validator" => array( 
                 array( "name" => "is_required" ),
@@ -675,7 +675,7 @@ Adverts::instance()->set("form_payments_history", array(
             "name" => "adverts_email",
             "type" => "adverts_field_text",
             "order" => 10,
-            "label" => __( "Email", "adverts" ),
+            "label" => __( "Email", "wpadverts" ),
             "is_required" => true,
             "validator" => array( 
                 array( "name" => "is_required" ),
@@ -732,7 +732,7 @@ Adverts::instance()->set("form_payments_config", array(
         array(
             "name" => "default_gateway",
             "type" => "adverts_field_select",
-            "label" => __("Default Payment Gateway", "adverts"),
+            "label" => __("Default Payment Gateway", "wpadverts"),
             "order" => 10,
             "empty_option" => true,
             "options" => array(),
@@ -741,7 +741,7 @@ Adverts::instance()->set("form_payments_config", array(
         array(
             "name" => "default_pricing",
             "type" => "adverts_field_select",
-            "label" => __("Default Pricing", "adverts"),
+            "label" => __("Default Pricing", "wpadverts"),
             "order" => 10,
             "empty_option" => true,
             "options" => array()
@@ -749,10 +749,10 @@ Adverts::instance()->set("form_payments_config", array(
         array(
             "name" => "checkout_page",
             "type" => "adext_payments_dropdown_pages",
-            "label" => __("Complete Payment Page", "adverts"),
+            "label" => __("Complete Payment Page", "wpadverts"),
             "order" => 10,
             "empty_option" => true,
-            "hint" => __("Select page where user can complete payments. This should be a page with [adverts_payments_checkout] shortcode.", "adverts")
+            "hint" => __("Select page where user can complete payments. This should be a page with [adverts_payments_checkout] shortcode.", "wpadverts")
         )
     )
 ));
@@ -765,12 +765,12 @@ Adverts::instance()->set("form_payments", array(
         array(
             "name" => "_post_type",
             "type" => "adverts_field_select",
-            "label" => __( "Pricing Type", "adverts" ),
+            "label" => __( "Pricing Type", "wpadverts" ),
             "order" => 10,
             "empty_option" => true,
             "options" => array(
-                array( "value" => "adverts-pricing", "text" => __( "New Advert Posting", "adverts" ) ),
-                array( "value" => "adverts-renewal", "text" => __( "Advert Renewal", "adverts" ) )
+                array( "value" => "adverts-pricing", "text" => __( "New Advert Posting", "wpadverts" ) ),
+                array( "value" => "adverts-renewal", "text" => __( "Advert Renewal", "wpadverts" ) )
             ),
             "validator" => array(
                 array( "name" => "is_required" )
@@ -780,7 +780,7 @@ Adverts::instance()->set("form_payments", array(
         array(
             "name" => "post_title",
             "type" => "adverts_field_text",
-            "label" => __("Title", "adverts"),
+            "label" => __("Title", "wpadverts"),
             "order" => 10,
             "validator" => array(
                 array( "name" => "is_required" )
@@ -789,13 +789,13 @@ Adverts::instance()->set("form_payments", array(
         array(
             "name" => "post_content",
             "type" => "adverts_field_text",
-            "label" => __("Description", "adverts"),
+            "label" => __("Description", "wpadverts"),
             "order" => 10,
         ),
         array(
             "name" => "adverts_price",
             "type" => "adverts_field_text",
-            "label" => __("Price", "adverts"),
+            "label" => __("Price", "wpadverts"),
             "order" => 10,
             "filter" => array(
                 array( "name" => "money" )
@@ -804,8 +804,8 @@ Adverts::instance()->set("form_payments", array(
         array(
             "name" => "adverts_visible",
             "type" => "adverts_field_text",
-            "label" => __("Visible", "adverts"),
-            "hint" => __("Number of days the Ad will be visible.", "adverts"),
+            "label" => __("Visible", "wpadverts"),
+            "hint" => __("Number of days the Ad will be visible.", "wpadverts"),
             "order" => 10,
             "validator" => array(
                 array( "name" => "is_required" ),

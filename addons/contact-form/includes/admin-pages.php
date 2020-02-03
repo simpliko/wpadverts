@@ -34,7 +34,7 @@ function adext_contact_form_page_options() {
     $scheme = Adverts::instance()->get("form_contact_form_config");
     $form = new Adverts_Form( $scheme );
     
-    $button_text = __("Update Options", "adverts");
+    $button_text = __("Update Options", "wpadverts");
     
     if(isset($_POST) && !empty($_POST)) {
         $form->bind( stripslashes_deep( $_POST ) );
@@ -47,9 +47,9 @@ function adext_contact_form_page_options() {
             }
             
             update_option("adext_contact_form_config", $form_data);
-            $flash->add_info( __("Settings updated.", "adverts") );
+            $flash->add_info( __("Settings updated.", "wpadverts") );
         } else {
-            $flash->add_error( __("There are errors in your form.", "adverts") );
+            $flash->add_error( __("There are errors in your form.", "wpadverts") );
         }
     } else {
         $form->bind( $options );
@@ -66,11 +66,11 @@ Adverts::instance()->set("form_contact_form_config", array(
         array(
             "name" => "show_phone",
             "type" => "adverts_field_checkbox",
-            "label" => __("Phone Number", "adverts"),
+            "label" => __("Phone Number", "wpadverts"),
             "options" => array(
                 array(
                     "value" => "1",
-                    "text" => __( "Show phone number next to contact button.", "adverts" )
+                    "text" => __( "Show phone number next to contact button.", "wpadverts" )
                 )
             ),
             "order" => 10,
@@ -79,14 +79,14 @@ Adverts::instance()->set("form_contact_form_config", array(
         array(
             "name" => "from_name",
             "type" => "adverts_field_text",
-            "label" => __("From Name", "adverts"),
+            "label" => __("From Name", "wpadverts"),
             "order" => 10,
             "class" => "",
         ),
         array(
             "name" => "from_email",
             "type" => "adverts_field_text",
-            "label" => __("From Email", "adverts"),
+            "label" => __("From Email", "wpadverts"),
             "order" => 10,
             "class" => "",
         ),

@@ -12,8 +12,8 @@
 ?>
 <div class="wrap">
     <h2 class="nav-tab-wrapper">
-        <a href="<?php esc_attr_e( remove_query_arg( array( 'edit', 'emaction' ) ) ) ?>" class="nav-tab"><?php _e("Email Templates", "adverts") ?></a>
-        <a href="<?php esc_attr_e( add_query_arg( array('emaction'=>'options') ) ) ?>" class="nav-tab nav-tab-active"><?php _e("Options", "adverts") ?></a>
+        <a href="<?php echo esc_attr( remove_query_arg( array( 'edit', 'emaction' ) ) ) ?>" class="nav-tab"><?php _e("Email Templates", "wpadverts") ?></a>
+        <a href="<?php echo esc_attr( add_query_arg( array('emaction'=>'options') ) ) ?>" class="nav-tab nav-tab-active"><?php _e("Options", "wpadverts") ?></a>
     </h2>
 
     <?php adverts_admin_flash() ?>
@@ -26,7 +26,7 @@
         </table>
 
         <p class="submit">
-            <input type="submit" value="<?php esc_attr_e($button_text) ?>" class="button-primary" name="Submit"/>
+            <input type="submit" value="<?php echo esc_attr($button_text) ?>" class="button-primary" name="Submit"/>
         </p>
 
     </form>

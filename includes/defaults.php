@@ -41,19 +41,19 @@ Adverts::instance()->set("form", array(
             "name" => "_contact_information",
             "type" => "adverts_field_header",
             "order" => 1,
-            "label" => __( 'Contact Information', 'adverts' )
+            "label" => __( 'Contact Information', 'wpadverts' )
         ),
         array(
             "name" => "_adverts_account",
             "type" => "adverts_field_account",
             "order" => 2,
-            "label" => __( "Account", "adverts" ),
+            "label" => __( "Account", "wpadverts" ),
         ),
         array(
             "name" => "adverts_person",
             "type" => "adverts_field_text",
             "order" => 3,
-            "label" => __( "Contact Person", "adverts" ),
+            "label" => __( "Contact Person", "wpadverts" ),
             "is_required" => true,
             "validator" => array( 
                 array( "name" => "is_required" ),
@@ -63,7 +63,7 @@ Adverts::instance()->set("form", array(
             "name" => "adverts_email",
             "type" => "adverts_field_text",
             "order" => 4,
-            "label" => __( "Email", "adverts" ),
+            "label" => __( "Email", "wpadverts" ),
             "is_required" => true,
             "validator" => array( 
                 array( "name" => "is_required" ),
@@ -75,7 +75,7 @@ Adverts::instance()->set("form", array(
             "name" => "adverts_phone",
             "type" => "adverts_field_text",
             "order" => 5,
-            "label" => __( "Phone Number", "adverts"),
+            "label" => __( "Phone Number", "wpadverts"),
             "validator" => array(
                 array(
                     "name" => "string_length",
@@ -87,13 +87,13 @@ Adverts::instance()->set("form", array(
             "name" => "_item_information",
             "type" => "adverts_field_header",
             "order" => 6,
-            "label" => __( 'Item Information', 'adverts' )
+            "label" => __( 'Item Information', 'wpadverts' )
         ),
         array(
             "name" => "post_title",
             "type" => "adverts_field_text",
             "order" => 7,
-            "label" => __( "Title", "adverts" ),
+            "label" => __( "Title", "wpadverts" ),
             "validator" => array(
                 array( "name"=> "is_required" )
             )
@@ -102,7 +102,7 @@ Adverts::instance()->set("form", array(
             "name" => "advert_category",
             "type" => "adverts_field_select",
             "order" => 8,
-            "label" => __("Category", "adverts"),
+            "label" => __("Category", "wpadverts"),
             "max_choices" => 10,
             "options" => array(),
             "options_callback" => "adverts_taxonomies",
@@ -117,7 +117,7 @@ Adverts::instance()->set("form", array(
             "name" => "gallery",
             "type" => "adverts_field_gallery",
             "order" => 9,
-            "label" => __( "Gallery", "adverts" ),
+            "label" => __( "Gallery", "wpadverts" ),
             "validator" => array(
                 array(
                     "name" => "upload_type",
@@ -129,7 +129,7 @@ Adverts::instance()->set("form", array(
             "name" => "post_content",
             "type" => "adverts_field_textarea",
             "order" => 10,
-            "label" => __( "Description", "adverts" ),
+            "label" => __( "Description", "wpadverts" ),
             "validator" => array(
                 array( "name"=> "is_required" )
             ),
@@ -139,7 +139,7 @@ Adverts::instance()->set("form", array(
             "name" => "adverts_price",
             "type" => "adverts_field_text",
             "order" => 11,
-            "label" => __("Price", "adverts"),
+            "label" => __("Price", "wpadverts"),
             "class" => "adverts-filter-money",
             "description" => "",
             "attr" => array( ),
@@ -151,7 +151,7 @@ Adverts::instance()->set("form", array(
             "name" => "adverts_location",
             "type" => "adverts_field_text",
             "order" => 12,
-            "label" => __( "Location", "adverts" ),
+            "label" => __( "Location", "wpadverts" ),
         ),
     )
 ));
@@ -166,7 +166,7 @@ Adverts::instance()->set("form_search", array(
             "type" => "adverts_field_text",
             "label" => "",
             "order" => 10,
-            "placeholder" => __("Keyword ...", "adverts"),
+            "placeholder" => __("Keyword ...", "wpadverts"),
             "meta" => array(
                 "search_group" => "visible",
                 "search_type" => "half" 
@@ -178,7 +178,7 @@ Adverts::instance()->set("form_search", array(
             "type" => "adverts_field_text",
             "label" => "",
             "order" => 10,
-            "placeholder" => __("Location ...", "adverts"),
+            "placeholder" => __("Location ...", "wpadverts"),
             "meta" => array(
                 "search_group" => "visible",
                 "search_type" => "half"
@@ -284,28 +284,28 @@ adverts_form_add_field("adverts_field_account", array(
 // Register money filter (text input with currency validation)
 /** @see adverts_filter_money() */
 adverts_form_add_filter("money", array(
-    "description" => __( "Money - converts string formatted as price to float.", "adverts" ),
+    "description" => __( "Money - converts string formatted as price to float.", "wpadverts" ),
     "callback" => "adverts_filter_money"
 ));
 
 // Register money filter (text input with currency validation)
 /** @see adverts_filter_money() */
 adverts_form_add_filter("url", array(
-    "description" => __( "URL - converts string to a valid URL (if possible).", "adverts" ),
+    "description" => __( "URL - converts string to a valid URL (if possible).", "wpadverts" ),
     "callback" => "adverts_filter_url"
 ));
 
 // Register URL filter (text input with URL validation)
 /** @see adverts_filter_money() */
 adverts_form_add_filter("int", array(
-    "description" => __( "Integer - converts string to absolute integer.", "adverts" ),
+    "description" => __( "Integer - converts string to absolute integer.", "wpadverts" ),
     "callback" => "adverts_filter_int"
 ));
 
 // Register number filter
 /** @see adverts_filter_money() */
 adverts_form_add_filter("number", array(
-    "description" => __( "Number - converts string to a number.", "adverts" ),
+    "description" => __( "Number - converts string to a number.", "wpadverts" ),
     "callback" => "adverts_filter_number"
 ));
 
@@ -315,9 +315,9 @@ adverts_form_add_filter("number", array(
 /** @see adverts_is_required() */
 adverts_form_add_validator("is_required", array(
     "callback" => "adverts_is_required",
-    "label" => __( "Is Required", "adverts" ),
+    "label" => __( "Is Required", "wpadverts" ),
     "params" => array(),
-    "default_error" => __( "Field cannot be empty.", "adverts" ),
+    "default_error" => __( "Field cannot be empty.", "wpadverts" ),
     "on_failure" => "break",
     "validate_empty" => true
 ));
@@ -326,9 +326,9 @@ adverts_form_add_validator("is_required", array(
 /** @see adverts_is_email() */
 adverts_form_add_validator("is_email", array(
     "callback" => "adverts_is_email",
-    "label" => __( "Email", "adverts" ),
+    "label" => __( "Email", "wpadverts" ),
     "params" => array(),
-    "default_error" => __( "Provided email address is invalid.", "adverts" ),
+    "default_error" => __( "Provided email address is invalid.", "wpadverts" ),
     "validate_empty" => false
 ));
 
@@ -336,9 +336,9 @@ adverts_form_add_validator("is_email", array(
 /** @see adverts_is_email_registered() */
 adverts_form_add_validator("is_email_registered", array(
     "callback" => "adverts_is_email_registered",
-    "label" => __( "Email", "adverts" ),
+    "label" => __( "Email", "wpadverts" ),
     "params" => array(),
-    "default_error" => __( "Cannot create account. User with this email address already exists.", "adverts" ),
+    "default_error" => __( "Cannot create account. User with this email address already exists.", "wpadverts" ),
     "validate_empty" => false
 ));
 
@@ -346,9 +346,9 @@ adverts_form_add_validator("is_email_registered", array(
 /** @see adverts_is_url() */
 adverts_form_add_validator("is_url", array(
     "callback" => "adverts_is_url",
-    "label" => __( "URL", "adverts" ),
+    "label" => __( "URL", "wpadverts" ),
     "params" => array(),
-    "default_error" => __( "Provided URL is invalid.", "adverts" ),
+    "default_error" => __( "Provided URL is invalid.", "wpadverts" ),
     "validate_empty" => false
 ));
 
@@ -356,9 +356,9 @@ adverts_form_add_validator("is_url", array(
 /** @see adverts_is_integer() */
 adverts_form_add_validator("is_integer", array(
     "callback" => "adverts_is_integer",
-    "label" => __( "Is Integer", "adverts" ),
+    "label" => __( "Is Integer", "wpadverts" ),
     "params" => array(),
-    "default_error" => __( "Provided value is not an integer.", "adverts" ),
+    "default_error" => __( "Provided value is not an integer.", "wpadverts" ),
     "validate_empty" => false
 ));
 
@@ -366,9 +366,9 @@ adverts_form_add_validator("is_integer", array(
 /** @see adverts_is_number() */
 adverts_form_add_validator("is_number", array(
     "callback" => "adverts_is_number",
-    "label" => __( "Is Number", "adverts" ),
+    "label" => __( "Is Number", "wpadverts" ),
     "params" => array(),
-    "default_error" => __( "Provided value is not a number.", "adverts" ),
+    "default_error" => __( "Provided value is not a number.", "wpadverts" ),
     "validate_empty" => false
 ));
 
@@ -376,12 +376,12 @@ adverts_form_add_validator("is_number", array(
 /** @see adverts_string_length() */
 adverts_form_add_validator("string_length", array(
     "callback" => "adverts_string_length",
-    "label" => __( "String Length", "adverts" ),
+    "label" => __( "String Length", "wpadverts" ),
     "params" => array(),
-    "default_error" => __( "Incorrect string length.", "adverts" ),
+    "default_error" => __( "Incorrect string length.", "wpadverts" ),
     "message" => array(
-        "to_short" => __( "Text needs to be at least %min% characters long.", "adverts" ),
-        "to_long" => __( "Text cannot be longer than %max% characters.", "adverts")
+        "to_short" => __( "Text needs to be at least %min% characters long.", "wpadverts" ),
+        "to_long" => __( "Text cannot be longer than %max% characters.", "wpadverts")
     ),
     "validate_empty" => false
 ));
@@ -390,9 +390,9 @@ adverts_form_add_validator("string_length", array(
 /** @see adverts_max_choices() */
 adverts_form_add_validator("max_choices", array(
     "callback" => "adverts_max_choices",
-    "label" => __( "Max Choices", "adverts" ),
+    "label" => __( "Max Choices", "wpadverts" ),
     "params" => array(),
-    "default_error" => __( "You cannot select more than %max_choices% items.", "adverts" ),
+    "default_error" => __( "You cannot select more than %max_choices% items.", "wpadverts" ),
     "message" => array(),
     "validate_empty" => false
 ));
@@ -401,9 +401,9 @@ adverts_form_add_validator("max_choices", array(
 /** @see adverts_verify_choices() */
 adverts_form_add_validator("verify_choices", array(
     "callback" => "adverts_verify_choices",
-    "label" => __( "Verify Choices", "adverts" ),
+    "label" => __( "Verify Choices", "wpadverts" ),
     "params" => array(),
-    "default_error" => __( "One or more selected values are not available in the options list.", "adverts" ),
+    "default_error" => __( "One or more selected values are not available in the options list.", "wpadverts" ),
     "message" => array(),
     "validate_empty" => false
 ));
@@ -412,12 +412,12 @@ adverts_form_add_validator("verify_choices", array(
 /** @see adverts_validate_upload_limit() */
 adverts_form_add_validator("upload_limit", array(
     "callback" => "adverts_validate_upload_limit",
-    "label" => __( "Upload Limit", "adverts" ),
+    "label" => __( "Upload Limit", "wpadverts" ),
     "params" => array(),
     "default_error" => "",
     "message" => array(
-        "max_limit" => __( "You cannot upload more than %max% files.", "adverts" ),
-        "min_limit" => __( "You need to upload at least %min% files.", "adverts" )
+        "max_limit" => __( "You cannot upload more than %max% files.", "wpadverts" ),
+        "min_limit" => __( "You need to upload at least %min% files.", "wpadverts" )
     ),
     "validate_empty" => true
 ));
@@ -427,12 +427,12 @@ adverts_form_add_validator("upload_limit", array(
 /** @see adverts_validate_upload_size() */
 adverts_form_add_validator("upload_size", array(
     "callback" => "adverts_validate_upload_size",
-    "label" => __( "Upload Type", "adverts" ),
+    "label" => __( "Upload Type", "wpadverts" ),
     "params" => array(),
     "default_error" => "",
     "message" => array(
-        "too_big" => __( "The max. allowed file size is %max%.", "adverts" ),
-        "too_small" => __( "The min. allowed file size is %min%.", "adverts" )
+        "too_big" => __( "The max. allowed file size is %max%.", "wpadverts" ),
+        "too_small" => __( "The min. allowed file size is %min%.", "wpadverts" )
     ),
     "validate_empty" => false
 ));
@@ -441,9 +441,9 @@ adverts_form_add_validator("upload_size", array(
 /** @see adverts_validate_upload_type() */
 adverts_form_add_validator("upload_type", array(
     "callback" => "adverts_validate_upload_type",
-    "label" => __( "Upload Type", "adverts" ),
+    "label" => __( "Upload Type", "wpadverts" ),
     "params" => array(),
-    "default_error" => __( "This file type is not allowed.", "adverts" ),
+    "default_error" => __( "This file type is not allowed.", "wpadverts" ),
     "message" => array(),
     "validate_empty" => false
 ));
@@ -452,15 +452,15 @@ adverts_form_add_validator("upload_type", array(
 /** @see adverts_validate_upload_dimensions() */
 adverts_form_add_validator("upload_dimensions", array(
     "callback" => "adverts_validate_upload_dimensions",
-    "label" => __( "Upload Dimensions", "adverts" ),
+    "label" => __( "Upload Dimensions", "wpadverts" ),
     "params" => array(),
-    "default_error" => __( "The file size is incorrect.", "adverts" ),
+    "default_error" => __( "The file size is incorrect.", "wpadverts" ),
     "message" => array(
-        "cannot_check" => __( "Cannot validate uploaded image width and height.", "adverts" ),
-        "incorrect_min_width" => __( "The image min. width should be %min_width%.", "adverts" ),
-        "incorrect_max_width" => __( "The image max. width should be %max_width%.", "adverts" ),
-        "incorrect_min_height" => __( "The image min. height should be %min_height%.", "adverts" ),
-        "incorrect_max_height" => __( "The image max. height should be %max_height%.", "adverts" ),
+        "cannot_check" => __( "Cannot validate uploaded image width and height.", "wpadverts" ),
+        "incorrect_min_width" => __( "The image min. width should be %min_width%.", "wpadverts" ),
+        "incorrect_max_width" => __( "The image max. width should be %max_width%.", "wpadverts" ),
+        "incorrect_min_height" => __( "The image min. height should be %min_height%.", "wpadverts" ),
+        "incorrect_max_height" => __( "The image max. height should be %max_height%.", "wpadverts" ),
     ),
     "validate_empty" => false
 ));

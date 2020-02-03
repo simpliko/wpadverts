@@ -13,9 +13,9 @@
 <div class="wrap">
   
 <h2 class="nav-tab-wrapper">
-    <a href="<?php esc_attr_e( remove_query_arg( array( 'edit', 'adaction' ) ) ) ?>" class="nav-tab "><?php _e("Options", "adverts") ?></a>
+    <a href="<?php esc_attr_e( remove_query_arg( array( 'edit', 'adaction' ) ) ) ?>" class="nav-tab "><?php _e("Options", "wpadverts") ?></a>
     <a href="<?php esc_attr_e( add_query_arg( array('adaction'=>'list') ) ) ?>" class="nav-tab nav-tab-active">
-        <?php _e("Pricing", "adverts") ?>
+        <?php _e("Pricing", "wpadverts") ?>
         <a class="add-new-h2" href="<?php esc_attr_e( add_query_arg( array( 'add'=>1 ) ) ) ?>"><?php _e("Add New") ?></a> 
     </a>
 </h2>
@@ -33,7 +33,7 @@
         <option value="delete"><?php _e("Delete") ?></option>
     </select>
 
-    <input type="submit" class="button-secondary action" id="wpjb-doaction1" value="<?php _e("Apply", "adverts") ?>"/>
+    <input type="submit" class="button-secondary action" id="wpjb-doaction1" value="<?php _e("Apply", "wpadverts") ?>"/>
 
 </div>
 
@@ -44,10 +44,10 @@
     <<?php echo $tx; ?>>
         <tr>
             <td style="" class="manage-column column-cb check-column" scope="col"><input type="checkbox"/></td>
-            <th style="" class="" scope="col"><?php _e("Title", "adverts") ?></th>
-            <th style="" class="" scope="col"><?php _e("Type", "adverts") ?></th>
-            <th style="" class="" scope="col"><?php _e("Price", "adverts") ?></th>
-            <th style="" class="" scope="col"><?php _e("Visible", "adverts") ?></th>
+            <th style="" class="" scope="col"><?php _e("Title", "wpadverts") ?></th>
+            <th style="" class="" scope="col"><?php _e("Type", "wpadverts") ?></th>
+            <th style="" class="" scope="col"><?php _e("Price", "wpadverts") ?></th>
+            <th style="" class="" scope="col"><?php _e("Visible", "wpadverts") ?></th>
             <?php do_action('adext_pricing_list_thead') ?>
         </tr>
     </<?php echo $tx; ?>>
@@ -69,9 +69,9 @@
             
             <td class="">
                 <?php if( $item->post_type == "adverts-pricing" ): ?>
-                <?php _e( "New Post", "adverts" ) ?>
+                <?php _e( "New Post", "wpadverts" ) ?>
                 <?php elseif( $item->post_type == "adverts-renewal" ): ?>
-                <?php _e( "Renewal", "adverts" ) ?>
+                <?php _e( "Renewal", "wpadverts" ) ?>
                 <?php endif; ?>
             </td>
             
@@ -80,13 +80,13 @@
                 <?php if($price): ?> 
                 <?php echo adverts_price( $price ) ?>
                 <?php else: ?>
-                <?php _e("Free", "adverts") ?>
+                <?php _e("Free", "wpadverts") ?>
                 <?php endif; ?>
             </td>
 
             <td class="">
                 <?php $visible = get_post_meta( $item->ID, 'adverts_visible', true ) ?>
-                <?php printf( _n( '1 day', '%s days', $visible, 'adverts' ), $visible ) ?>
+                <?php printf( _n( '1 day', '%s days', $visible, "wpadverts" ), $visible ) ?>
             </td>
             
             <?php do_action('adext_pricing_list_tbody', $item) ?>
@@ -112,10 +112,10 @@
 
     <div class="alignleft actions">
         <select name="action2" id="wpjb-action2">
-            <option selected="selected" value=""><?php _e("Bulk Actions", "adverts") ?></option>
-            <option value="delete"><?php _e("Delete", "adverts") ?></option>
+            <option selected="selected" value=""><?php _e("Bulk Actions", "wpadverts") ?></option>
+            <option value="delete"><?php _e("Delete", "wpadverts") ?></option>
         </select>
-        <input type="submit" class="button-secondary action" id="wpjb-doaction2" value="<?php _e("Apply", "adverts") ?>"/>
+        <input type="submit" class="button-secondary action" id="wpjb-doaction2" value="<?php _e("Apply", "wpadverts") ?>"/>
 
         <br class="clear"/>
     </div>

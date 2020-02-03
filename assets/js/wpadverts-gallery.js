@@ -100,9 +100,13 @@ WPADVERTS.File.Uploader = function(setup) {
     var $ = jQuery;
     
     this.PostID = null;
+    this.PostIDNonce = null;
     
-    if($(setup.conf.post_id_input).val()) {
-        this.PostID = $(setup.conf.post_id_input).val();
+    if($(setup.conf.input_post_id).val()) {
+        this.PostID = $(setup.conf.input_post_id).val();
+    }
+    if($(setup.conf.input_post_id_nonce).val()) {
+        this.PostIDNonce = $(setup.conf.input_post_id_nonce).val();
     }
 
     this.Item = {};
@@ -158,8 +162,12 @@ WPADVERTS.File.Uploader.prototype.SortableUpdate = function(e) {
         dataType: "json",
         data: {
             action: "adverts_gallery_update_order",
-            _ajax_nonce: this.setup.init.multipart_params._ajax_nonce,
-            post_id: this.PostID,
+            _wpadverts_checksum_nonce: this.setup.init.multipart_params._wpadverts_checksum_nonce,
+            _wpadverts_checksum: this.setup.init.multipart_params._wpadverts_checksum,
+            _post_id: this.PostID,
+            _post_id_nonce: this.PostIDNonce,
+            form_name: this.setup.init.multipart_params.form,
+            field_name: this.setup.init.multipart_params.field_name,
             ordered_keys: JSON.stringify(keys)
         },
         success: jQuery.proxy(this.SortableUpdateSuccess, this),
@@ -201,8 +209,16 @@ WPADVERTS.File.Uploader.prototype.FileUploaded = function(file, result) {
         this.PostID = result.post_id;
     }
     
-    if( jQuery( this.setup.conf.post_id_input ).val().length === 0 ) {
-        jQuery( this.setup.conf.post_id_input ).val( this.PostID );
+    if( jQuery( this.setup.conf.input_post_id ).val().length === 0 ) {
+        jQuery( this.setup.conf.input_post_id ).val( this.PostID );
+    }
+    
+    if(typeof result.post_id_nonce !== "undefined") {
+        this.PostIDNonce = result.post_id_nonce;
+    }
+    
+    if( jQuery( this.setup.conf.input_post_id_nonce ).val().length === 0 ) {
+        jQuery( this.setup.conf.input_post_id_nonce ).val( this.PostIDNonce );
     }
 };
 
@@ -246,7 +262,8 @@ WPADVERTS.File.Uploader.Plupload.prototype.InitDragLeave = function() {
 };
 
 WPADVERTS.File.Uploader.Plupload.prototype.BeforeUpload = function(up,file) {
-    up.settings.multipart_params.post_id = this.PostID;
+    up.settings.multipart_params._post_id = this.PostID;
+    up.settings.multipart_params._post_id_nonce = this.PostIDNonce;
     
     var mp = up.settings.multipart_params;
     var form = this.ui.closest("form");
@@ -283,6 +300,9 @@ WPADVERTS.File.Uploader.Plupload.prototype.FileUploaded = function(up, file, res
 
     if( this.PostID === null ) {
         this.PostID = result.post_id;
+    }
+    if( this.PostIDNonce === null ) {
+        this.PostIDNonce = result.post_id_nonce;
     }
 
     this.FileUploaded(file, result);
@@ -379,8 +399,10 @@ WPADVERTS.File.Singular.prototype.RemoveClicked = function(e) {
         dataType: "json",
         data: {
             action: "adverts_gallery_delete",
-            _ajax_nonce: this.init._ajax_nonce,
-            post_id: this.result.post_id,
+            _post_id: this.result.post_id,
+            _post_id_nonce: this.result.post_id_nonce,
+            _wpadverts_checksum_nonce: jQuery("#_wpadverts_checksum_nonce").val(),
+            _wpadverts_checksum: jQuery("#_wpadverts_checksum").val(),
             attach_id: this.result.attach_id
         },
         success: jQuery.proxy(this.RemoveClickedSuccess, this),
@@ -426,6 +448,15 @@ WPADVERTS.File.Browser = function(uploader) {
     this.browser.hide();
 
     jQuery("body").append(this.browser);
+};
+
+WPADVERTS.File.Browser.prototype.GetIntegrityKeys = function() {
+    return {
+        _post_id: this.file.post_id,
+        _post_id_nonce: this.file.post_id_nonce,
+        _wpadverts_checksum_nonce: jQuery("#_wpadverts_checksum_nonce").val(),
+        _wpadverts_checksum: jQuery("#_wpadverts_checksum").val()
+    };
 };
 
 WPADVERTS.File.Browser.prototype.SetFile = function(file) {
@@ -594,7 +625,7 @@ WPADVERTS.File.Browser.prototype.Render = function(result) {
 WPADVERTS.File.Browser.prototype.RenderVideo = function() {
     this.video = new WPADVERTS.File.Browser.Video(this.browser);
     this.video.SetPostId(this.uploader.PostID);
-    this.video.SetNonce(this.uploader.setup.init.multipart_params._ajax_nonce);
+    this.video.SetIntegrityKeys(this.GetIntegrityKeys());
     this.video.SetAttachId(this.file.attach_id);
     this.video.buttonThumb.on("click", jQuery.proxy(this.video.CreateThumbnail, this));
 };
@@ -648,16 +679,20 @@ WPADVERTS.File.Browser.prototype.ImageLoad = function() {
         recommended = ADVERTS_IMAGE_SIZES[this.imageSize]
     }
     
+    var integrity = this.GetIntegrityKeys();
     var template = wp.template( "wpadverts-browser-attachment-image" );
     var $ = jQuery;
     var data = {
+        _wpadverts_checksum_nonce: integrity._wpadverts_checksum_nonce,
+        _wpadverts_checksum: integrity._wpadverts_checksum,
+        _post_id: integrity._post_id,
+        _post_id_nonce: integrity._post_id_nonce,
         file: this.file,
         size: imageSize,
         dim: this.dim,
         recommended: recommended,
         rand: Math.floor(Math.random() * 10000),
-        history: JSON.stringify(this.history),
-        nonce: this.uploader.setup.init.multipart_params._ajax_nonce
+        history: JSON.stringify(this.history)
     };
     
     var tpl = template(data);
@@ -909,6 +944,7 @@ WPADVERTS.File.Browser.prototype.ImageSave = function(e) {
     
     this.spinner.show();
     var applyAll = 0;
+    var integrity = this.GetIntegrityKeys();
     
     if(this.imageSize == "full" && this.browser.find(".wpadverts-image-action-apply-to").is(":checked")) {
         applyAll = 1;
@@ -916,8 +952,10 @@ WPADVERTS.File.Browser.prototype.ImageSave = function(e) {
     
     var data = {
         action: "adverts_gallery_image_save",
-        _ajax_nonce: this.uploader.setup.init.multipart_params._ajax_nonce,
-        post_id: this.uploader.PostID,
+        _wpadverts_checksum_nonce: integrity._wpadverts_checksum_nonce,
+        _wpadverts_checksum: integrity._wpadverts_checksum,
+        _post_id: integrity._post_id,
+        _post_id_nonce: integrity._post_id_nonce,
         history: JSON.stringify(this.history),
         size: this.imageSize,
         attach_id: this.file.attach_id,
@@ -950,10 +988,14 @@ WPADVERTS.File.Browser.prototype.ImageRestore = function(e) {
         e.preventDefault();
     }
     
+    var integrity = this.GetIntegrityKeys();
+    
     var data = {
         action: "adverts_gallery_image_restore",
-        _ajax_nonce: this.uploader.setup.init.multipart_params._ajax_nonce,
-        post_id: this.uploader.PostID,
+        _wpadverts_checksum_nonce: integrity._wpadverts_checksum_nonce,
+        _wpadverts_checksum: integrity._wpadverts_checksum,
+        _post_id: integrity._post_id,
+        _post_id_nonce: integrity._post_id_nonce,
         size: this.imageSize,
         attach_id: this.file.attach_id,
         action_type: this.actionType,
@@ -1033,7 +1075,8 @@ WPADVERTS.File.Browser.prototype.UpdateDescription = function(e) {
     this.element.spinner.css("display", "inline-block");
 
     var featured = this.element.input.featured.prop("checked") ? 1 : 0;
-
+    var integrity = this.GetIntegrityKeys();
+    
     jQuery.ajax({
         url: adverts_gallery_lang.ajaxurl,
         context: this,
@@ -1041,8 +1084,10 @@ WPADVERTS.File.Browser.prototype.UpdateDescription = function(e) {
         dataType: "json",
         data: {
             action: "adverts_gallery_update",
-            _ajax_nonce: this.uploader.setup.init.multipart_params._ajax_nonce,
-            post_id: this.uploader.PostID,
+            _wpadverts_checksum_nonce: integrity._wpadverts_checksum_nonce,
+            _wpadverts_checksum: integrity._wpadverts_checksum,
+            _post_id: integrity._post_id,
+            _post_id_nonce: integrity._post_id_nonce,
             attach_id: this.file.attach_id,
             caption: this.element.input.caption.val(),
             content: this.element.input.content.val(),
@@ -1084,7 +1129,7 @@ WPADVERTS.File.Browser.prototype.UpdateDescriptionSuccess = function(r) {
 };
 
 WPADVERTS.File.Browser.Video = function(browser) {
-    this.nonce = null;
+    this.integrity = null;
     this.attachId = null;
     this.PostId = null;
     
@@ -1106,12 +1151,12 @@ WPADVERTS.File.Browser.Video = function(browser) {
     this.canvas = null;
 };
 
-WPADVERTS.File.Browser.Video.prototype.SetNonce = function(nonce) {
-    this.nonce = nonce;
+WPADVERTS.File.Browser.Video.prototype.SetIntegrityKeys = function(integrity) {
+    this.integrity = integrity;
 };
 
-WPADVERTS.File.Browser.Video.prototype.GetNonce = function() {
-    return this.nonce;
+WPADVERTS.File.Browser.Video.prototype.GetIntegrityKeys = function() {
+    return this.integrity;
 };
 
 WPADVERTS.File.Browser.Video.prototype.SetPostId = function(PostId) {
@@ -1186,12 +1231,15 @@ WPADVERTS.File.Browser.Video.prototype.SaveClick = function(e) {
     }
     
     this.spinner.css("display", "inline-block");
+    var integrity = this.GetIntegrityKeys();
     
     var data = {
         action: "adverts_gallery_video_cover",
-        _ajax_nonce: this.GetNonce(),
+        _wpadverts_checksum_nonce: integrity._wpadverts_checksum_nonce,
+        _wpadverts_checksum: integrity._wpadverts_checksum,
+        _post_id: integrity._post_id,
+        _post_id_nonce: integrity._post_id_nonce,
         attach_id: this.GetAttachId(),
-        post_id: this.GetPostId(),
         image: this.canvasOriginal.toDataURL("image/png"),
         width: this.canvasOriginal.width,
         height: this.canvasOriginal.height

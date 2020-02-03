@@ -41,7 +41,7 @@ class Adext_Contact_Form_Emails_Integration {
      * @return  array               Updated list of options
      */
     public function register_filter_optons( $options ) {
-        $options[] = array( "key" => "contact-form", "label" => __( "Contact Form", "adverts" ) );
+        $options[] = array( "key" => "contact-form", "label" => __( "Contact Form", "wpadverts" ) );
         return $options;
     }
     
@@ -66,8 +66,8 @@ class Adext_Contact_Form_Emails_Integration {
             "notify" => "user",
             "from" => array( "name" => adverts_config( "contact_form.from_name"), "email" => adverts_config( "contact_form.from_email") ),
             "to" => "{\$advert|contact_email}",
-            "subject" => __( "[{\$advert.post_title}] {\$form.message_subject}.", "adverts" ),
-            "body" => __("{\$form.message_body}\n\nURL: {\$advert.ID|get_permalink}\nPrice: {\$advert.ID|adverts_get_the_price}", 'adverts'),
+            "subject" => __( "[{\$advert.post_title}] {\$form.message_subject}.", "wpadverts" ),
+            "body" => __("{\$form.message_body}\n\nURL: {\$advert.ID|get_permalink}\nPrice: {\$advert.ID|adverts_get_the_price}", "wpadverts"),
             "headers" => array(
                 array( 'name' => 'Reply-To', 'value' => "{\$form.message_name} <{\$form.message_email}>")
             ),

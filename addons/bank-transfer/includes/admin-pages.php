@@ -29,7 +29,7 @@ function adext_bank_transfer_page_options() {
     $scheme = Adverts::instance()->get("form_bank_transfer_config");
     $form = new Adverts_Form( $scheme );
     
-    $button_text = __("Update Options", "adverts");
+    $button_text = __("Update Options", "wpadverts");
     
     if(isset($_POST) && !empty($_POST)) {
         $form->bind( stripslashes_deep( $_POST ) );
@@ -38,9 +38,9 @@ function adext_bank_transfer_page_options() {
         if($valid) {
 
             update_option("adext_bank_transfer_config", $form->get_values());
-            $flash->add_info( __("Settings updated.", "adverts") );
+            $flash->add_info( __("Settings updated.", "wpadverts") );
         } else {
-            $flash->add_error( __("There are errors in your form.", "adverts") );
+            $flash->add_error( __("There are errors in your form.", "wpadverts") );
         }
     } else {
         $form->bind( get_option ( "adext_bank_transfer_config", array() ) );
@@ -57,8 +57,8 @@ Adverts::instance()->set("form_bank_transfer_config", array(
         array(
             "name" => "custom_title",
             "type" => "adverts_field_text",
-            "label" => __("Payment Name", "adverts"),
-            "hint" => __("Payment gateway name visible in the frontend when making a payment.", "adverts"),
+            "label" => __("Payment Name", "wpadverts"),
+            "hint" => __("Payment gateway name visible in the frontend when making a payment.", "wpadverts"),
             "placeholder" => adverts_config_default('bank_transfer.custom_title'),
             "order" => 10,
             "class" => "",
@@ -67,10 +67,10 @@ Adverts::instance()->set("form_bank_transfer_config", array(
             "name" => "custom_text",
             "type" => "adverts_field_textarea",
             "mode" => "tinymce-mini",
-            "label" => __("Message", "adverts"),
+            "label" => __("Message", "wpadverts"),
             "placeholder" => adverts_config_default('bank_transfer.custom_text'),
             "value" => adverts_config_default('bank_transfer.custom_text'),
-            "hint" => __("User will see this message when asked to make payment, make sure that instructions here will make it as easy as possible to make a payment.<br/>Allowed variables:<br/>- {total} - total amount to pay (for example $10.00)<br/>- {order_number} - unique order number<br/>To revert to default message remove whole text from editor and save the form.", "adverts"),
+            "hint" => __("User will see this message when asked to make payment, make sure that instructions here will make it as easy as possible to make a payment.<br/>Allowed variables:<br/>- {total} - total amount to pay (for example $10.00)<br/>- {order_number} - unique order number<br/>To revert to default message remove whole text from editor and save the form.", "wpadverts"),
             "order" => 10,
             "class" => "",
         )

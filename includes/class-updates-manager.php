@@ -113,7 +113,7 @@ class Adverts_Updates_Manager
     public function plugin_action_links( $actions ) {
         
         if( $this->license ) {
-            $actions["license"] = '<a href="#" title="" class="adverts-license-link"><span class="dashicons dashicons-lock"></span>'.__("License", "adverts").'</a>';
+            $actions["license"] = '<a href="#" title="" class="adverts-license-link"><span class="dashicons dashicons-lock"></span>'.__("License", "wpadverts").'</a>';
         }
         
         return $actions;
@@ -147,7 +147,7 @@ class Adverts_Updates_Manager
             
             if($request === false) {
                 $response->status = 400;
-                $response->message = __("Cannot connect to remote server. Please try again later.", "adverts");
+                $response->message = __("Cannot connect to remote server. Please try again later.", "wpadverts");
             } elseif($request->result == 1) {
                 $update = true;
             } else {
@@ -313,11 +313,11 @@ class Adverts_Updates_Manager
         <tr class="tr plugin-update-tr adverts-update-row adverts-update-row-license" data-slug="<?php echo $this->slug ?>">
             <td class="plugin-update" colspan="3">
                 <div class="adverts-update-notice adverts-update-activate">
-                    <input type="text" name="license" placeholder="<?php _e("License ...", "adverts") ?>" />
+                    <input type="text" name="license" placeholder="<?php _e("License ...", "wpadverts") ?>" />
                     <a href="#" class="button-secondary adverts-update-activate-button"><?php _e("Activate") ?></a>
                     <img src="<?php echo admin_url() ?>/images/wpspin_light-2x.gif" alt="" class="adverts-update-loader adverts-off" />
                     &nbsp;
-                    <span><em><?php _e("Activate your License in order to enable automatic updates.", "adverts") ?></em></span>
+                    <span><em><?php _e("Activate your License in order to enable automatic updates.", "wpadverts") ?></em></span>
                 </div>
             </td>
         </tr>
@@ -328,7 +328,7 @@ class Adverts_Updates_Manager
             <td class="plugin-update" colspan="3">
                 <div class="adverts-update-notice adverts-update-registered">
                     <span class="adverts-inline-edit">
-                        <input type="text" name="license" placeholder="<?php _e("License ...", "adverts") ?>" value="<?php echo esc_attr($this->license) ?>" data-value="<?php echo esc_attr($this->license) ?>" /> 
+                        <input type="text" name="license" placeholder="<?php _e("License ...", "wpadverts") ?>" value="<?php echo esc_attr($this->license) ?>" data-value="<?php echo esc_attr($this->license) ?>" /> 
                         <a href="#" class="button-secondary adverts-update-activate-button"><?php _e("Update") ?></a>
                         <a href="#" class="button-secondary adverts-update-button-cancel"><?php _e("Cancel") ?></a>
                         <img src="<?php echo admin_url() ?>/images/wpspin_light-2x.gif" alt="" class="adverts-update-loader adverts-off" />
@@ -339,24 +339,7 @@ class Adverts_Updates_Manager
         </tr>
         
         <?php endif; ?> 
-        
-        <?php /*if($tkey < 0): ?>
-        <tr class="tr plugin-update-tr" data-slug="<?php echo $this->slug ?>">
-            <td class="plugin-update" colspan="3">
-                <div class="update-message">
-                    <span class="adverts-update-error">
-                        <?php if( $tkey == -2 ): ?>
-                        <?php _e("<strong>Cannot update!</strong> License expired. It seems you last renewed your license over a year ago.", "adverts") ?>
-                        <?php elseif( $tkey == -3 ): ?>
-                        <?php _e("<strong>Cannot update!</strong> License expired. It seems you last renewed your license over a year ago.", "adverts") ?>
-                        <?php endif; ?>
-                    </span>
-                </div>
-            </td>
-        </tr>
 
-
-        <?php endif;*/ ?> 
         
         <?php
 

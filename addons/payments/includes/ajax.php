@@ -94,7 +94,7 @@ function adext_payments_ajax_complete_payment() {
     adverts_init_frontend();
     adext_payments_init_frontend();
     
-    $title = __( "Complete Payment", "adverts" );
+    $title = __( "Complete Payment", "wpadverts" );
     $text_direction = 'ltr';
     if( function_exists( 'is_rtl' ) && is_rtl() ) {
         $text_direction = 'rtl';

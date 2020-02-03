@@ -4,8 +4,8 @@
  * Plugin URI: https://wpadverts.com/
  * Description: The lightweight WordPress classifieds plugin done right.
  * Author: Greg Winiarski
- * Text Domain: adverts
- * Version: 1.3.7
+ * Text Domain: wpadverts
+ * Version: 1.4.0
  * 
  * Adverts is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -82,7 +82,7 @@ $adverts_namespace['gallery'] = array(
         'image_edit_cap' => 'read',
         'image_sizes' => array(
             // supported sizes: adverts-upload-thumbnail, adverts-list, adverts-gallery
-            "adverts-gallery" => array( 'enabled' => 1, 'width' => 650, 'height' => 300, 'crop' => true ),
+            "adverts-gallery" => array( 'enabled' => 1, 'width' => 650, 'height' => 300, 'crop' => false ),
             "adverts-list" => array( 'enabled' => 1, 'width' => 310, 'height' => 190, 'crop' => true ),
             "adverts-upload-thumbnail" => array( 'enabled' => 1, 'width' => 150, 'height' => 105, 'crop' => true ),
             //"adverts-gallery-thumbnail"
@@ -111,11 +111,13 @@ function adverts_init() {
     
     add_action( 'save_post_advert', 'adverts_create_hash', 10, 3 );
     
+    add_filter( 'adverts_form_load', 'adverts_form_load_checksum_fields', 9999 );
+    
     wp_register_style( 'adverts-upload', ADVERTS_URL . '/assets/css/wpadverts-upload.css', array(), "1.3.5" );
     wp_register_style( 'adverts-icons', ADVERTS_URL . '/assets/css/wpadverts-glyphs.css', array(), "4.7.2" );
     wp_register_style( 'adverts-icons-animate', ADVERTS_URL . '/assets/css/animation.css', array(), "1.3.5" );
     
-    load_plugin_textdomain("adverts", false, dirname(plugin_basename(__FILE__))."/languages/");
+    load_plugin_textdomain("wpadverts", false, dirname(plugin_basename(__FILE__))."/languages/");
     
     include_once ADVERTS_PATH . 'includes/class-adverts.php';
     $wpadverts = Adverts::instance();
@@ -164,19 +166,19 @@ function adverts_init() {
      ) );
 
     $labels = array(
-        'name'               => _x( 'Classifieds', 'post type general name', 'adverts' ),
-        'singular_name'      => _x( 'Classified', 'post type singular name', 'adverts' ),
-        'add_new'            => _x( 'Add New', 'classified', 'adverts' ),
-        'add_new_item'       => __( 'Add New Classified', 'adverts' ),
-        'edit_item'          => __( 'Edit Classified', 'adverts' ),
-        'new_item'           => __( 'New Classified', 'adverts' ),
-        'all_items'          => __( 'All Classifieds', 'adverts' ),
-        'view_item'          => __( 'View Classified', 'adverts' ),
-        'search_items'       => __( 'Search Classifieds', 'adverts' ),
-        'not_found'          => __( 'No Classifieds found', 'adverts' ),
-        'not_found_in_trash' => __( 'No Classifieds found in the Trash', 'adverts' ), 
+        'name'               => _x( 'Classifieds', 'post type general name', 'wpadverts' ),
+        'singular_name'      => _x( 'Classified', 'post type singular name', 'wpadverts' ),
+        'add_new'            => _x( 'Add New', 'classified', 'wpadverts' ),
+        'add_new_item'       => __( 'Add New Classified', 'wpadverts' ),
+        'edit_item'          => __( 'Edit Classified', 'wpadverts' ),
+        'new_item'           => __( 'New Classified', 'wpadverts' ),
+        'all_items'          => __( 'All Classifieds', 'wpadverts' ),
+        'view_item'          => __( 'View Classified', 'wpadverts' ),
+        'search_items'       => __( 'Search Classifieds', 'wpadverts' ),
+        'not_found'          => __( 'No Classifieds found', 'wpadverts' ),
+        'not_found_in_trash' => __( 'No Classifieds found in the Trash', 'wpadverts' ), 
         'parent_item_colon'  => '',
-        'menu_name'          => __( 'Classifieds', 'adverts' )
+        'menu_name'          => __( 'Classifieds', 'wpadverts' )
     );
     
     $args = array(
@@ -188,14 +190,19 @@ function adverts_init() {
         'supports'      => array( 'title', 'editor', 'author' ),
         'taxonomies'    => array( 'advert_category' ),
         'has_archive'   => true,
+        'rewrite'       => array(
+            'slug'          => 'advert',
+            'with_front'    => false,
+            'feeds'         => true
+        )
     );
   
     register_post_type( 'advert', apply_filters( 'adverts_post_type', $args, 'advert') ); 
     
     $labels = array(
-        'name'                       => _x( 'Adverts Categories', 'taxonomy general name', 'adverts' ),
-        'singular_name'              => _x( 'Advert Category', 'taxonomy singular name', 'adverts' ),
-        'menu_name'                  => __( 'Categories', 'adverts' ),
+        'name'                       => _x( 'Adverts Categories', 'taxonomy general name', 'wpadverts' ),
+        'singular_name'              => _x( 'Advert Category', 'taxonomy singular name', 'wpadverts' ),
+        'menu_name'                  => __( 'Categories', 'wpadverts' ),
     );
     
     $args = array(
@@ -208,6 +215,7 @@ function adverts_init() {
     register_taxonomy( 'advert_category', 'advert', apply_filters('adverts_register_taxonomy', $args, 'advert_category') );
     
     include_once ADVERTS_PATH . 'includes/class-adverts.php';
+    include_once ADVERTS_PATH . 'includes/class-taxonomies.php';
     include_once ADVERTS_PATH . 'includes/class-flash.php';
     include_once ADVERTS_PATH . 'includes/class-post.php';
     include_once ADVERTS_PATH . 'includes/events.php';
@@ -222,6 +230,8 @@ function adverts_init() {
     }
     
     $currency = Adverts::instance()->get("currency");
+    
+    Adverts::instance()->set( "taxonomies", new Adverts_Taxonomies() );
     
     wp_register_script( 
         'adverts-auto-numeric', 
@@ -256,10 +266,10 @@ function adverts_init() {
     );
     
     wp_register_script(
-        'adverts-als',
-        ADVERTS_URL . '/assets/js/jquery.als-1.7.min.js',
+        'adverts-slick',
+        ADVERTS_URL . '/assets/js/slick.min.js',
         array( 'jquery' ),
-        "1.7.1",
+        "1.8.1",
         true
     );
 
@@ -272,20 +282,20 @@ function adverts_init() {
     ));
     
     wp_localize_script( 'adverts-multiselect', 'adverts_multiselect_lang', array(
-        "hint" => __("Select options ...", "adverts")
+        "hint" => __("Select options ...", "wpadverts")
     ));
     
     wp_localize_script( 'adverts-autocomplete', 'adverts_autocomplete_lang', array(
         "ajaxurl" => adverts_ajax_url(),
-        "no_results" => __( "No results found.", "adverts" )
+        "no_results" => __( "No results found.", "wpadverts" )
     ));
     
     wp_localize_script( 'adverts-gallery', 'adverts_gallery_lang', array(
         "ajaxurl" => adverts_ajax_url(),
-        "edit_image" => __( "Edit Image", "adverts" ),
-        "delete_image" => __( "Delete Image", "adverts" ),
-        "view_image" => __( "View Full Image", "adverts" ),
-        "featured" => __( "Main", "adverts" ),
+        "edit_image" => __( "Edit Image", "wpadverts" ),
+        "delete_image" => __( "Delete Image", "wpadverts" ),
+        "view_image" => __( "View Full Image", "wpadverts" ),
+        "featured" => __( "Main", "wpadverts" ),
     ));
     
     $module = adverts_config( 'config.module' );
@@ -336,10 +346,14 @@ function adverts_init_frontend() {
     include_once ADVERTS_PATH . 'includes/shortcodes.php';
     
     add_filter('the_content', 'adverts_the_content', 9999 );
-    add_filter('posts_results', 'adverts_posts_results', 10, 2 );
-    add_filter('template_include', 'adverts_template_include');
-    add_filter('post_thumbnail_html', 'adverts_post_thumbnail_html');
+    
+    // Below filters and actions were removed in version 1.4.0 in favor of Adverts_Taxonomies class
+    // add_filter('posts_results', 'adverts_posts_results', 10, 2 );
+    // add_filter('template_include', 'adverts_template_include'); 
+    
     add_action('template_redirect', 'adverts_disable_default_archive');
+    
+    add_filter('post_thumbnail_html', 'adverts_post_thumbnail_html');
     add_action('adverts_new_user_notification', 'wp_new_user_notification', 10, 3 );
     add_filter('post_class', 'adverts_post_class' );
     
@@ -347,6 +361,7 @@ function adverts_init_frontend() {
     add_action('adverts_tpl_single_bottom', 'adverts_single_contact_information');
     
     add_filter('adverts_create_user_from_post_id', '_adverts_create_user_from_post_id', 20, 2 );
+    add_action('template_redirect', 'adverts_skip_preview' );
     
     wp_localize_script( 'adverts-frontend', 'adverts_frontend_lang', array(
         "ajaxurl" => adverts_ajax_url(),
@@ -357,7 +372,7 @@ function adverts_init_frontend() {
     
     wp_localize_script( 'adverts-frontend-manage', 'adverts_frontend_manage_lang', array(
         "ajaxurl" => adverts_ajax_url(),
-        "ok" => __( "OK", "adverts" )
+        "ok" => __( "OK", "wpadverts" )
     ) );
     
     if(wp_get_theme()->get_template() == "twentytwelve") {
@@ -487,7 +502,7 @@ function adverts_install_modules() {
         }
         if($status == 0.5) {
             add_action("init", "adverts_install_modules");
-            Adverts_Flash::instance()->add_info( __( "Module activated successfully.", "adverts" ) );
+            Adverts_Flash::instance()->add_info( __( "Module activated successfully.", "wpadverts" ) );
             
             $module[$mod] = 1;
             adverts_config_set( 'config.module', $module );

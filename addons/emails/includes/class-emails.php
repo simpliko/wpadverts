@@ -364,7 +364,7 @@ class Adext_Emails {
      */
     public function get_filter_options() {
         return apply_filters( "adext_emails_list_filter_options", array(
-            array( "key" => "core", "label" => __( "Core", "adverts" ) )
+            array( "key" => "core", "label" => __( "Core", "wpadverts" ) )
         ) );
     }
     

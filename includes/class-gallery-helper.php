@@ -64,7 +64,7 @@ class Adverts_Gallery_Helper {
      */
     public function register_scripts() {
         wp_enqueue_script( 'adverts-single' );
-        wp_enqueue_script( 'adverts-als' );
+        wp_enqueue_script( 'adverts-slick' );
 
         if( $this->has_lightbox() ) {
             add_action( "wp_footer", array( $this, "footer_lightbox" ) ); //"adverts_single_gallery_lightbox" );
@@ -146,6 +146,7 @@ class Adverts_Gallery_Helper {
         $this->register_scripts();
         
         ?>
+
         <div class="wpadverts-slides wpadverts-slides-with-thumbnail">
 
             <div class="wpadverts-slides-list">
@@ -187,7 +188,7 @@ class Adverts_Gallery_Helper {
                                 <video <?php if(!$custom_cotrols):?>controls="true"<?php endif; ?> src="<?php echo $attach->guid ?>" preload="metadata" poster="<?php echo adverts_get_post_img_url( $attach, array( 'adverts_gallery' ) ) ?>">
                                     Your browser cannot play this video. 
                                     Please use a different browser or download the video and play on your device.
-                                    <a href="<?php echo $attach->guid ?>" class="adverts-button"><?php _e("Download", "adverts") ?></a>
+                                    <a href="<?php echo $attach->guid ?>" class="adverts-button"><?php _e("Download", "wpadverts") ?></a>
                                 </video>
 
                                 <?php if( $custom_cotrols ): ?>
@@ -221,7 +222,7 @@ class Adverts_Gallery_Helper {
                                 <?php endif; ?>
                             </p>
 
-                            <a href="<?php echo esc_html( $attach->guid ) ?>" class="adverts-button"><?php _e("Download File", "adverts") ?></a>
+                            <a href="<?php echo esc_html( $attach->guid ) ?>" class="adverts-button"><?php _e("Download File", "wpadverts") ?></a>
 
                             <p class="wpadverts-slide-description wpadverts-slide-desc">
                                 <?php if($attach->post_content): ?>
@@ -270,9 +271,9 @@ class Adverts_Gallery_Helper {
 
         <div class="wpadverts-player">
             <div class="wpadverts-player-item wpadverts-player-item-play-pause">
-                <span class="adverts-icon-play wpadverts-player-play wpadverts-slide-nav-pointer" title="<?php _e("Play", "adverts") ?>"></span>
-                <span class="adverts-icon-pause wpadverts-player-pause wpadverts-slide-nav-pointer" title="<?php _e("Pause", "adverts") ?>"></span>
-                <span class="adverts-icon-ccw wpadverts-player-replay wpadverts-slide-nav-pointer" title="<?php _e("Replay", "adverts") ?>"></span>
+                <span class="adverts-icon-play wpadverts-player-play wpadverts-slide-nav-pointer" title="<?php _e("Play", "wpadverts") ?>"></span>
+                <span class="adverts-icon-pause wpadverts-player-pause wpadverts-slide-nav-pointer" title="<?php _e("Pause", "wpadverts") ?>"></span>
+                <span class="adverts-icon-ccw wpadverts-player-replay wpadverts-slide-nav-pointer" title="<?php _e("Replay", "wpadverts") ?>"></span>
             </div>
             <div class="wpadverts-player-item wpadverts-player-item-progress">
                 <span class="wpadverts-player-item-progress-bar wpadverts-slide-nav-pointer" style="">
@@ -281,15 +282,15 @@ class Adverts_Gallery_Helper {
                 </span>
             </div>
             <div class="wpadverts-player-item wpadverts-player-item-volume-down">
-                <span class="wpadverts-player-volume-down adverts-icon-volume-down wpadverts-slide-nav-pointer" title="<?php _e("Volume Down", "adverts") ?>"></span>
+                <span class="wpadverts-player-volume-down adverts-icon-volume-down wpadverts-slide-nav-pointer" title="<?php _e("Volume Down", "wpadverts") ?>"></span>
             </div>
             <div class="wpadverts-player-item wpadverts-player-item-volume-up">
-                <span class="wpadverts-player-volume-up adverts-icon-volume-up wpadverts-slide-nav-pointer" title="<?php _e("Volume Up", "adverts") ?>"></span>
+                <span class="wpadverts-player-volume-up adverts-icon-volume-up wpadverts-slide-nav-pointer" title="<?php _e("Volume Up", "wpadverts") ?>"></span>
             </div>
 
             <?php if( adverts_config( 'gallery.lightbox' ) == "1"): ?>
             <div class="wpadverts-player-item wpadverts-player-item-fullscreen">
-                <span class="wpadverts-player-fullscreen adverts-icon-resize-full-alt wpadverts-slide-nav-pointer" title="<?php _e("Full Screen", "adverts") ?>"></span>
+                <span class="wpadverts-player-fullscreen adverts-icon-resize-full-alt wpadverts-slide-nav-pointer" title="<?php _e("Full Screen", "wpadverts") ?>"></span>
             </div>
             <a class="wpadverts-swipe" href="#<?php echo "wpadverts-slide-full-".$attach->ID ?>" style="display:none"></a>
             <?php endif; ?>
@@ -330,8 +331,8 @@ class Adverts_Gallery_Helper {
 
                         <div class="wpadverts-video-player">
                             <video src="<?php echo $attach->guid ?>" preload="metadata" poster="<?php echo adverts_get_post_img_url( $attach, array( 'adverts_gallery' ) ) ?>">
-                                <?php _e("Your browser cannot play this video. Please use a different browser or download the video and play on your device.", "adverts") ?>
-                                <a href="<?php echo $attach->guid ?>" class="adverts-button"><?php _e("Download", "adverts") ?></a>
+                                <?php _e("Your browser cannot play this video. Please use a different browser or download the video and play on your device.", "wpadverts") ?>
+                                <a href="<?php echo $attach->guid ?>" class="adverts-button"><?php _e("Download", "wpadverts") ?></a>
                             </video>
                             <div class="wpadverts-slide-with-shadow"></div>
 
@@ -381,7 +382,7 @@ class Adverts_Gallery_Helper {
                             <?php endif; ?>
                         </p>
 
-                        <a href="<?php echo esc_html( $attach->guid ) ?>" class="adverts-button"><?php _e("Download File", "adverts") ?></a>
+                        <a href="<?php echo esc_html( $attach->guid ) ?>" class="adverts-button"><?php _e("Download File", "wpadverts") ?></a>
 
                         <p class="wpadverts-slide-description" style="margin-left: 5em; margin-right: 5em; line-height: 1.3em; color: white; white-space: normal">
                             <?php if($attach->post_content): ?>
@@ -418,20 +419,20 @@ class Adverts_Gallery_Helper {
         ?>
         <div class="wpadverts-slide-nav" style="">
             <div class="wpadverts-slide-nav-interface">
-                <span class="wpadverts-slide-nav-thumbnails adverts-icon-th wpadverts-slide-nav-action wpadverts-slide-nav-color-hover" title="<?php _e("Show Thumbnails ...", "adverts") ?>"></span>
+                <span class="wpadverts-slide-nav-thumbnails adverts-icon-th wpadverts-slide-nav-action wpadverts-slide-nav-color-hover" title="<?php _e("Show Thumbnails ...", "wpadverts") ?>"></span>
                 &nbsp;
                 <strong class="wpadverts-slide-nav-counter wpadverts-slide-nav-static">
                     <span class="wpadverts-slide-nav-current">-</span>/<?php echo count( $attachments ) ?>
                 </strong>
-                <span class="adverts-icon-camera wpadverts-slide-nav-static" title="<?php _e("Total Files", "adverts") ?>"></span>
+                <span class="adverts-icon-camera wpadverts-slide-nav-static" title="<?php _e("Total Files", "wpadverts") ?>"></span>
             </div>
 
             <div class="wpadverts-slide-nav-paginate wpadverts-slide-nav-paginate-left wpadverts-slide-nav-action">
-                <span class="adverts-icon-left-open wpadverts-slide-nav-color-hover" title="<?php _e("Previous", "adverts") ?>"></span>
+                <span class="adverts-icon-left-open wpadverts-slide-nav-color-hover" title="<?php _e("Previous", "wpadverts") ?>"></span>
             </div>
 
             <div class="wpadverts-slide-nav-paginate wpadverts-slide-nav-paginate-right wpadverts-slide-nav-action">
-                <span class="adverts-icon-right-open wpadverts-slide-nav-color-hover" title="<?php _e("Next", "adverts") ?>"></span>
+                <span class="adverts-icon-right-open wpadverts-slide-nav-color-hover" title="<?php _e("Next", "wpadverts") ?>"></span>
             </div>
 
             <div class="wpadverts-slide-nav-thumbnails-list" style="display: none">
@@ -486,8 +487,8 @@ class Adverts_Gallery_Helper {
         <div class="wpadverts-als-container als-container">
 
             <div class="als-nav-wrap als-nav-wrap-left">
-                <div class="als-nav-fake"><span class="adverts-icon-left-open"></span></div>
-                <div href="#" class="als-prev" title="<?php _e( "Previous", "adverts" ) ?>"><span class="adverts-icon-left-open"></span></div>
+                <!--div class="als-nav-fake"><span class="adverts-icon-left-open"></span></div-->
+                <div href="#" class="als-prev" title="<?php _e( "Previous", "wpadverts" ) ?>"><span class="adverts-icon-left-open"></span></div>
 
             </div>
 
@@ -519,8 +520,8 @@ class Adverts_Gallery_Helper {
             </div>
 
             <div class="als-nav-wrap als-nav-wrap-right">
-                <div class="als-nav-fake"><span class="adverts-icon-right-open"></span></div>
-                <div href="#" class="als-next" title="<?php _e( "Next", "adverts" ) ?>"><span class="adverts-icon-right-open"></span></div>
+                <!--div class="als-nav-fake"><span class="adverts-icon-right-open"></span></div-->
+                <div href="#" class="als-next" title="<?php _e( "Next", "wpadverts" ) ?>"><span class="adverts-icon-right-open"></span></div>
             </div>
 
         </div>

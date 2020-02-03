@@ -53,7 +53,7 @@ function shortcode_payments_checkout( $atts ) {
     if( ! $payment_id ) {
         ob_start();
         $adverts_flash["error"][0] = array(
-            "message" => __( "The provided payment hash could not be found.", "adverts" ),
+            "message" => __( "The provided payment hash could not be found.", "wpadverts" ),
             "icon" => "adverts-icon-cancel"
         );
         adverts_flash( $adverts_flash );
@@ -65,7 +65,7 @@ function shortcode_payments_checkout( $atts ) {
     if( $payment === null ) {
         ob_start();
         $adverts_flash["error"][0] = array(
-            "message" => __( "The payment does not exist or the payment hash is incorrect.", "adverts" ),
+            "message" => __( "The payment does not exist or the payment hash is incorrect.", "wpadverts" ),
             "icon" => "adverts-icon-cancel"
         );
         adverts_flash( $adverts_flash );
@@ -73,7 +73,7 @@ function shortcode_payments_checkout( $atts ) {
     } else if( ! in_array( $payment->post_type, array( 'adverts-payment' ) ) ) {
         ob_start();
         $adverts_flash["error"][0] = array(
-            "message" => __( "The provided hash is not assigned to any of the payment objects.", "adverts" ),
+            "message" => __( "The provided hash is not assigned to any of the payment objects.", "wpadverts" ),
             "icon" => "adverts-icon-cancel"
         );
         adverts_flash( $adverts_flash );
@@ -81,7 +81,7 @@ function shortcode_payments_checkout( $atts ) {
     } else if( $payment->post_status === "completed" ) {
         ob_start();
         $adverts_flash["info"][0] = array(
-            "message" => __( "This payment has already been paid.", "adverts" ),
+            "message" => __( "This payment has already been paid.", "wpadverts" ),
             "icon" => "adverts-icon-ok"
         );
         adverts_flash( $adverts_flash );
@@ -92,7 +92,7 @@ function shortcode_payments_checkout( $atts ) {
     $listing = adext_payments_get_payment_pricing( $payment );
     
     $adverts_flash["info"][0] = array(
-        "message" => sprintf( __( "<p><strong>Your Payment Is Required</strong><p>Please complete payment for the <em>'%s'</em> Ad posting.</p>", "adverts" ), $post->post_title ),
+        "message" => sprintf( __( "<p><strong>Your Payment Is Required</strong><p>Please complete payment for the <em>'%s'</em> Ad posting.</p>", "wpadverts" ), $post->post_title ),
         "icon" => "adverts-icon-basket"
     );
     
@@ -101,7 +101,7 @@ function shortcode_payments_checkout( $atts ) {
     if( $payment->payment_status === "completed" ) {
         ob_start();
         $adverts_flash["info"][0] = array(
-            "message" => __( "The payment has been already approved and your Ad should be published soon.", "adverts" ),
+            "message" => __( "The payment has been already approved and your Ad should be published soon.", "wpadverts" ),
             "icon" => "adverts-icon-ok"
         );
         adverts_flash( $adverts_flash );

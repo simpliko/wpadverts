@@ -12,7 +12,7 @@
 ?>
 <div class="wrap">
     <h2 class="">
-        <?php _e("Payment Gateway / Bank Transfer", "adverts") ?>
+        <?php _e("Payment Gateway / Bank Transfer", "wpadverts") ?>
     </h2>
 
     <?php adverts_admin_flash() ?>

@@ -445,6 +445,7 @@ function _adverts_manage_edit( $atts ) {
     
     $bind["_adverts_action"] = "update";
     $bind["_post_id"] = $post_id;
+    $bind["_post_id_nonce"] = wp_create_nonce( "wpadverts-publish-" . $post_id );
     
     $bind["post_title"] = $post->post_title;
     $bind["post_content"] = $post->post_content;

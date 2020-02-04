@@ -100,11 +100,11 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
-= 1.4.0 - 2020-02-04 =
+= 1.4.0 - 2020-02-06 =
 
  * WARNING: This is major update with potential backward-incompatible changes!
  * Before updating please read the update notices
- * https://wpadverts.com/blog/wpadverts-1-4-0-released/
+ * https://wpadverts.com/blog/wpadverts-1-4-0-release/
 
 = 1.3.7 - 2019-11-06 =
 

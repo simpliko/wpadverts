@@ -261,7 +261,7 @@ function adverts_init() {
         'adverts-gallery', 
         ADVERTS_URL . '/assets/js/wpadverts-gallery.js', 
         array( 'jquery', 'plupload-all', 'jquery-ui-sortable', 'jquery-effects-core', 'jquery-effects-fade', 'wp-util', 'jcrop'  ), 
-        "1.3.5", 
+        "1.4.0", 
         true
     );
     
@@ -332,12 +332,12 @@ function adverts_init() {
  */
 function adverts_init_frontend() {
     
-    wp_register_style( 'adverts-frontend', ADVERTS_URL . '/assets/css/wpadverts-frontend.css', array(), "1.3.6" );
+    wp_register_style( 'adverts-frontend', ADVERTS_URL . '/assets/css/wpadverts-frontend.css', array(), "1.4.0" );
     wp_register_style( 'adverts-swipebox', ADVERTS_URL . '/assets/css/swipebox.min.css', array(), "1.4.5" );
     
-    wp_register_script('adverts-single', ADVERTS_URL . '/assets/js/wpadverts-single.js', array( 'jquery' ), "1.3.6" );
+    wp_register_script('adverts-single', ADVERTS_URL . '/assets/js/wpadverts-single.js', array( 'jquery' ), "1.4.0" );
     wp_register_script('adverts-frontend', ADVERTS_URL . '/assets/js/wpadverts-frontend.js', array( 'jquery' ), "1.3.5" );
-    wp_register_script('adverts-frontend-add', ADVERTS_URL . '/assets/js/wpadverts-frontend-add.js', array( 'jquery'), "1.3.5" );
+    wp_register_script('adverts-frontend-add', ADVERTS_URL . '/assets/js/wpadverts-frontend-add.js', array( 'jquery'), "1.4.0" );
     wp_register_script('adverts-frontend-manage', ADVERTS_URL . '/assets/js/wpadverts-frontend-manage.js', array( 'jquery'), "1.3.5" );
     wp_register_script('adverts-swipebox', ADVERTS_URL . '/assets/js/jquery.swipebox.js', array( 'jquery', 'adverts-frontend' ), "1.4.5");
     

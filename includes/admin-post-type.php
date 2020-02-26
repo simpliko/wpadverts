@@ -186,7 +186,9 @@ function adverts_save_post_validator( $ID, $post ) {
         
         if ( !$valid ) {
             // filter the query URL to change the published message
-            add_filter( 'redirect_post_location', create_function( '$location','return add_query_arg("message", "21", $location);' ) );
+            add_filter( 'redirect_post_location', function ($location) {
+                return add_query_arg("message", "21", $location);
+            });
         } 
     }
 }

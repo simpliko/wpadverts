@@ -69,7 +69,7 @@ class Adverts_Taxonomies {
     public function tax_archive() {
         global $wp_query, $post;
 
-        if( ! is_tax( $this->get_supported_taxonomies() ) ) {
+        if( ! is_tax( $this->get_supported_taxonomies() ) || is_feed() ) {
             // Default theme archive for all other taxonomies.
             return;
         }

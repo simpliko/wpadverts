@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classified script, classifieds sc
 Requires PHP: 5.3
 Requires at least: 4.0
 Tested up to: 5.3
-Stable tag: 1.4.0
+Stable tag: 1.4.1
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -100,10 +100,20 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
+= 1.4.1 - 2020-03-05 =
+
+ * WARNING: If you are upgrading from version 1.3.7 or older please read the below article first.
+ * https://wpadverts.com/blog/wpadverts-1-4-0-release/
+ * FEATURE: Support for webp images (although requires additional plugin like wp-enable-webp).
+ * FIXED: Incompatibility with upcoming PHP7 version.
+ * FIXED: Incorrect data in the advert-category feed.
+ * FIXED: Pagination on advert-categort pages.
+ * FIXED: Invalid variable name passed to wpadverts_user_saved action.
+
 = 1.4.0 - 2020-02-06 =
 
  * WARNING: This is major update with potential backward-incompatible changes!
- * Before updating please read the update notices
+ * DO NOT UPDATE WITHOUT READING THE RELEASE NOTES BELOW!
  * https://wpadverts.com/blog/wpadverts-1-4-0-release/
 
 = 1.3.7 - 2019-11-06 =

@@ -1035,8 +1035,8 @@ function adverts_validate_upload_type( $file, $params = null ) {
     }
     
     if( in_array( "image", $a ) ) {
-        $allowed_types = array_merge( $allowed_types, array( "image/jpeg", "image/jpe", "image/jpg", "image/gif", "image/png" ) );
-        $allowed_ext = array_merge( $allowed_ext, array( "jpeg", "jpe", "jpg", "gif", "png" ) );
+        $allowed_types = array_merge( $allowed_types, array( "image/jpeg", "image/jpe", "image/jpg", "image/gif", "image/png", "image/webp" ) );
+        $allowed_ext = array_merge( $allowed_ext, array( "jpeg", "jpe", "jpg", "gif", "png", "webp" ) );
     }
 
     if( in_array( $ext, $allowed_ext) && ( in_array( $type, $allowed_types ) || ! $has_types ) ) {
@@ -1729,11 +1729,16 @@ function adverts_field_gallery($field, $form = null ) {
         $post_id = $form->get_value( "_post_id" );
         $post_id_nonce = $form->get_value( "_post_id_nonce" );
     } else {
+        include_once ADVERTS_PATH . "includes/class-checksum.php";
+
+        $integrity = new Adverts_Checksum();
+        $checksum_args = $integrity->get_integrity_keys( array( "backward-compat" => 1 ) );
+        
         $form_name = "advert";
-        $checksum = "";
-        $checksum_nonce = "";
+        $checksum = $checksum_args["checksum"];
+        $checksum_nonce = $checksum_args["nonce"];
         $post_id = adverts_request( "_post_id", adverts_request( "advert_id" ) );
-        $post_id_nonce = "";
+        $post_id_nonce = wp_create_nonce( sprintf( "wpadverts-publish-%d", $post_id ) );
     }
     
     $post = $post_id > 0 ? get_post( $post_id ) : null;
@@ -1742,10 +1747,10 @@ function adverts_field_gallery($field, $form = null ) {
         "button_class" => "adverts-button",
         "input_post_id" => "#_post_id",
         "input_post_id_nonce" => "#_post_id_nonce",
-        "_wpadverts_checksum" => $form->get_value( "_wpadverts_checksum" ),
-        "_wpadverts_checksum_nonce" => $form->get_value( "_wpadverts_checksum_nonce" ),
-        "_post_id" => $form->get_value( "_post_id" ),
-        "_post_id_nonce" => $form->get_value( "_post_id_nonce" ),
+        "_wpadverts_checksum" => $checksum,
+        "_wpadverts_checksum_nonce" => $checksum_nonce,
+        "_post_id" => $post_id,
+        "_post_id_nonce" => $post_id_nonce,
         "form_name" => $form_name,
         "field_name" => $field["name"]
     ));
@@ -2302,7 +2307,7 @@ function adverts_create_user_from_post_id( $ID, $update_post = false ) {
         }
         
         if( $user_id ) {
-            do_action( "wpadverts_user_saved", $user_id, $id );
+            do_action( "wpadverts_user_saved", $user_id, $ID );
         }
 
     } // end if
@@ -2419,7 +2424,7 @@ function adverts_get_attachment_mime( $attach ) {
 
     $known = array(
         "video" => array( "video/webm", "video/mp4", "video/ogv" ),
-        "image" => array( "image/jpeg", "image/jpe", "image/jpg", "image/gif", "image/png" )
+        "image" => array( "image/jpeg", "image/jpe", "image/jpg", "image/gif", "image/png", "image/webp" )
     );
     
     foreach( $known as $key => $mimes ) {

@@ -68,7 +68,10 @@ function shortcode_adverts_list( $atts ) {
     if($location) {
         $meta[] = array('key'=>'adverts_location', 'value'=>$location, 'compare'=>'LIKE');
     }
-    
+
+    if( is_string( $category) && $category == "current" && is_tax( "advert_category") ) {
+        $category = get_queried_object_id();
+    }
     if($category) {
         $taxonomy =  array(
             array(

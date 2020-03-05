@@ -105,10 +105,12 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
  * WARNING: If you are upgrading from version 1.3.7 or older please read the below article first.
  * https://wpadverts.com/blog/wpadverts-1-4-0-release/
  * FEATURE: Support for webp images (although requires additional plugin like wp-enable-webp).
+ * FEATURE: On advert-category pages the [adverts_list] supports category="current" param (useful when desigining category pages using Elementor).
  * FIXED: Incompatibility with upcoming PHP7 version.
  * FIXED: Incorrect data in the advert-category feed.
  * FIXED: Pagination on advert-categort pages.
  * FIXED: Invalid variable name passed to wpadverts_user_saved action.
+ * FIXED: Escaped quote characters in Polish translation.
 
 = 1.4.0 - 2020-02-06 =
 

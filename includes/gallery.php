@@ -69,6 +69,9 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
         ),
     );
     
+    // Filters the default Plupload settings.
+    $init = apply_filters( 'plupload_init', $init );
+
     wp_enqueue_script( 'image-edit' );
     wp_enqueue_style( 'jcrop' );
     wp_enqueue_style( 'adverts-upload' );

@@ -249,7 +249,7 @@ function adext_featured_order_create( $data ) {
 function adext_featured_post_state( $states ) {
     global $post;
 
-    if( $post->post_type == 'advert' && $post->menu_order > 0 ) {
+    if( $post && $post->post_type == 'advert' && $post->menu_order > 0 ) {
 
         $span = new Adverts_Html("span", array(
             "class" => "dashicons dashicons-flag",

@@ -563,8 +563,12 @@ function adext_payments_display_pending_state( $states ) {
     if($arg == 'advert-pending'){
         return $states;
     }
-     
-    if($post->post_status != 'advert-pending'){
+    
+    if( ! $post ) {
+        return $states;
+    }
+    
+    if( $post->post_status != 'advert-pending'){
         return $states;
     }
      

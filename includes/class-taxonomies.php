@@ -80,7 +80,7 @@ class Adverts_Taxonomies {
                 return;
             } 
         }
-        
+
         do_action( "adverts_tax_init" );
         
         $queried_object = get_queried_object();
@@ -88,7 +88,7 @@ class Adverts_Taxonomies {
         
         // Description handling.
         if ( ! empty( $queried_object->description ) ) { 
-            $prefix = '<div class="term-description">' . $queried_object->description . '</div>'; 
+            $prefix = '<div class="term-description">' . apply_filters( "adverts_tax_term_description", $queried_object->description ) . '</div>'; 
         } else {
             $prefix = '';
         }

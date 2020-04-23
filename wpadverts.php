@@ -5,7 +5,7 @@
  * Description: The lightweight WordPress classifieds plugin done right.
  * Author: Greg Winiarski
  * Text Domain: wpadverts
- * Version: 1.4.1
+ * Version: 1.4.3
  * 
  * Adverts is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -113,6 +113,7 @@ function adverts_init() {
     
     add_filter( 'adverts_form_load', 'adverts_form_load_checksum_fields', 9999 );
     
+    wp_register_style( 'wpadverts-autocomplete', ADVERTS_URL . '/assets/css/wpadverts-autocomplete.css', array(), "1.4.2" );
     wp_register_style( 'adverts-upload', ADVERTS_URL . '/assets/css/wpadverts-upload.css', array(), "1.3.5" );
     wp_register_style( 'adverts-icons', ADVERTS_URL . '/assets/css/wpadverts-glyphs.css', array(), "4.7.2" );
     wp_register_style( 'adverts-icons-animate', ADVERTS_URL . '/assets/css/animation.css', array(), "1.3.5" );
@@ -245,7 +246,7 @@ function adverts_init() {
         'adverts-autocomplete', 
         ADVERTS_URL . '/assets/js/wpadverts-autocomplete.js', 
         array( 'jquery' ), 
-        "1.3.5", 
+        "1.4.2", 
         true
     );
     
@@ -287,7 +288,14 @@ function adverts_init() {
     
     wp_localize_script( 'adverts-autocomplete', 'adverts_autocomplete_lang', array(
         "ajaxurl" => adverts_ajax_url(),
-        "no_results" => __( "No results found.", "wpadverts" )
+        "no_results" => __( "No results found.", "wpadverts" ),
+        "open" => __( "Open", "wpadverts" ),
+        "close" => __( "Close", "wpadverts" ),
+        "ok" => __( "OK", "wpadverts" ),
+        "cancel" => __( "Cancel", "wpadverts" ),
+        "selected" => __( "Selected", "wpadverts" ),
+        "max_choices" => __( "Cannot select more than %s items.", "wpadverts" ),
+        "search_placeholder" => __( "Type in the box above to see suggestions ...", "wpadverts" )
     ));
     
     wp_localize_script( 'adverts-gallery', 'adverts_gallery_lang', array(
@@ -332,7 +340,7 @@ function adverts_init() {
  */
 function adverts_init_frontend() {
     
-    wp_register_style( 'adverts-frontend', ADVERTS_URL . '/assets/css/wpadverts-frontend.css', array(), "1.4.0" );
+    wp_register_style( 'adverts-frontend', ADVERTS_URL . '/assets/css/wpadverts-frontend.css', array(), "1.4.2" );
     wp_register_style( 'adverts-swipebox', ADVERTS_URL . '/assets/css/swipebox.min.css', array(), "1.4.5" );
     
     wp_register_script('adverts-single', ADVERTS_URL . '/assets/js/wpadverts-single.js', array( 'jquery' ), "1.4.0" );
@@ -403,7 +411,7 @@ function adverts_init_admin() {
     
     wp_register_script('adverts-admin', ADVERTS_URL . '/assets/js/wpadverts-admin.js', array( 'jquery' ), "1.3.5", true);
     wp_register_script('adverts-admin-config-core', ADVERTS_URL . '/assets/js/wpadverts-admin-config-core.js', array( 'jquery' ), "1.3.5", true);
-    wp_register_style('adverts-admin', ADVERTS_URL . '/assets/css/wpadverts-admin.css', array(), "1.3.5" );
+    wp_register_style('adverts-admin', ADVERTS_URL . '/assets/css/wpadverts-admin.css', array(), "1.4.2" );
     
     wp_register_script( 'adverts-admin-updates', ADVERTS_URL . '/assets/js/wpadverts-admin-updates.js', array( 'jquery' ), "1.3.5", true );
     wp_register_style( 'adverts-admin-updates', ADVERTS_URL . '/assets/css/wpadverts-admin-updates.css', array(), "1.3.5" );

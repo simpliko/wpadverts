@@ -829,7 +829,7 @@ function adverts_show_contact() {
     $id = adverts_request("id");
     $post = get_post($id);
     
-    if( $post === null || $post->post_type != 'advert') {
+    if( $post === null || ! wpadverts_post_type( $post ) ) {
         echo json_encode( array( 
             'result' => 0,
             'error' => __("Post with given ID does not exist.", "wpadverts")
@@ -934,7 +934,7 @@ function adverts_delete() {
     }
     
     // check if post is an advert
-    if( $post->post_type != 'advert') {
+    if( ! wpadverts_post_type( $post ) ) {
         $result = array( 
             "result" => -3, 
             "error" => __( "This post is not an Advert.", "wpadverts" ) 

@@ -56,7 +56,7 @@ function adext_featured_meta_box() {
     global $post, $pagenow;
     
     // Do this for adverts only.
-    if($post->post_type != 'advert') {
+    if( ! wpadverts_post_type( $post ) ) {
         return;
     }
     

@@ -407,6 +407,8 @@ class Adverts_Shortcode_Adverts_Add {
             if( is_wp_error( $post_id ) ) {
                 return shortcode_adverts_flash( $adverts_flash );
             }
+
+            adverts_force_featured_image( $post_id );
             
             $this->set_post_id( $post_id );
             $post_id_nonce = $this->get_post_id_nonce();

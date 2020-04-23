@@ -4,8 +4,8 @@ Contributors: gwin
 Tags: classifieds, classified, classified ads, classified script, classifieds script, wp classified, wp classifieds
 Requires PHP: 5.3
 Requires at least: 4.0
-Tested up to: 5.3
-Stable tag: 1.4.1
+Tested up to: 5.4
+Stable tag: 1.4.3
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -99,6 +99,20 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.4.3 - 2020-04-23 = 
+
+ * FIXED: Contact information box does not load.
+ * FIXED: Delete option does not fire in [adverts_manage].
+
+= 1.4.2 - 2020-04-22 =
+
+ * FEATURE: First image on the list (when posting an Advert) is automatically selected as featured.
+ * FEATURE: Autocomplete script rewritten (will be used in next MAL version and with Categories in [adverts_add] after that). 
+ * FIXED: warnings in wp-admin / Appearance / Widgets
+ * API: Groundwork for for using WPAdverts with multiple Custom Post Types (not complete nor documented yet)
+ * API: adverts_plupload_default_settings filter applied on Gallery plupload settings
+ * API: adverts_tax_term_description filter applied on term descriptions
 
 = 1.4.1 - 2020-03-05 =
 

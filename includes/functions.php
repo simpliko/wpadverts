@@ -408,7 +408,7 @@ function adverts_get_main_image_id( $id ) {
 function adverts_the_content($content) {
     global $wp_query;
     
-    if (is_singular('advert') && in_the_loop() ) {
+    if ( is_singular( wpadverts_get_post_types() ) && in_the_loop() ) {
         ob_start();
         $post_id = get_the_ID();
         
@@ -3190,4 +3190,79 @@ function adverts_form_load_checksum_fields( $form ) {
     }
     
     return $form;
+}
+
+/**
+ * Sets featured image for $post_id
+ * 
+ * The function will select the first image on the list as featured 
+ * unless some featured image is already selected.
+ * 
+ * @since   1.4.2
+ * @param   int     $post_id    ID of a post for which we wish to force featured image
+ * @return  int                 1 if success less or equal to 0 on failure
+ */
+function adverts_force_featured_image( $post_id ) {
+    if( $post_id < 1 ) {
+        // No images uploaded
+        return -1;
+    } else if( $post_id > 0 && get_post_thumbnail_id( $post_id ) ) {
+        // Has main image selected
+        return -2;
+    } 
+    
+    $keys = get_post_meta( $post_id, '_adverts_attachments_order', true );
+    
+    if( $keys ) {
+        $keys = json_decode( $keys );
+    }
+    
+    if( is_array( $keys ) && isset( $keys[0] ) ) {
+        update_post_meta( $post_id, '_thumbnail_id', $keys[0] );
+        return 1;
+    }
+    
+    $children = get_children( array( 'post_parent' => $post_id ) );
+    foreach( $children as $child ) {
+        update_post_meta( $post_id, '_thumbnail_id', $child->ID );
+        return 1;
+    }
+    
+    return 0;
+}
+
+/**
+ * Checks if passed $post is supported WPAdverts post type
+ * 
+ * @since   1.4.2
+ * @param   mixed   $post   Either WP_Post object or post type string
+ * @return  boolean         True if the $post is supported WPAdverts post type, false otherwise
+ */
+function wpadverts_post_type( $post ) {
+    
+    $post_type = null;
+    
+    if( $post instanceof WP_Post ) {
+        $post_type = $post->post_type;
+    } elseif( is_string( $post ) ) {
+        $post_type = $post;
+    }
+    
+    if( in_array( $post_type, wpadverts_get_post_types() ) ) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
+ * Returns list of WPAdverts supported post types
+ * 
+ * @uses wpadverts_get_post_types filter
+ * 
+ * @since   1.4.2
+ * @return  array    List of supported WPAdverts post types
+ */
+function wpadverts_get_post_types() {
+    return apply_filters( "wpadverts_get_post_types", array( "advert" ) );
 }

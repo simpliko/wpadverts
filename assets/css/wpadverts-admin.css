@@ -455,3 +455,9 @@ input[type=text].adverts-multiselect-input.adverts-multiselect-open {
 .adverts-multiselect-options > label:hover {
     background-color: whitesmoke;
 }
+
+.wp-admin .wpadverts-autocomplete-spinner, 
+.wp-admin .wpadverts-autocomplete-openclose {
+    right: 12px;
+    top: 6px;
+}

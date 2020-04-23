@@ -2362,50 +2362,6 @@ input[type=text].adverts-multiselect-input.adverts-multiselect-open {
     vertical-align: text-top;
 }
 
-/* AUTOCOMPLETE */
-
-.adverts-form.adverts-form-aligned .adverts-control-group > div.adverts-autocomplete-holder {
-    width: 60%;
-}
-
-.adverts-form .adverts-autocomplete-holder > input {
-    width: 100%;
-}
-
-.adverts-autocomplete-options {
-    min-height: 25px;
-    max-height: 250px;
-    min-width: 200px;
-    border: 1px solid silver;
-    border-top: 0px solid transparent;
-    border-right: 1px solid silver;
-    display: none;
-    width:100%;
-    z-index:10000;
-    position: absolute;
-    background-color: white;
-    -moz-box-shadow:    0 4px 3px -3px  whitesmoke;
-    -webkit-box-shadow: 0 4px 3px -3px  whitesmoke;
-    box-shadow:         0 4px 3px -3px whitesmoke;
-}
-
-
-.adverts-autocomplete-options > .adverts-autocomplete-item {
-    padding: 2px 8px 2px 8px;
-    cursor: pointer;
-    height: 24px;
-    line-height: 24px;
-}
-
-.adverts-autocomplete-options > .adverts-autocomplete-item:hover {
-    background-color: whitesmoke;
-}
-
-.adverts-autocomplete-options > .adverts-autocomplete-none {
-    padding: 2px 8px 2px 8px;
-    font-style: italic;
-}
-
 ul.adverts-tabs {
     margin: 0px;
     padding: 0 10px 0;
@@ -2857,3 +2813,6 @@ ul.adverts-tabs li {
     margin-left: 4px;
 }
 
+.adverts-form input.wpadverts-autocomplete {
+    width: 100% !important;
+}

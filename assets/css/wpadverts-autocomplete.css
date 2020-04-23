@@ -1,0 +1,326 @@
+
+.adverts-form.adverts-form-aligned .adverts-control-group > div.wpadverts-autocomplete-holder {
+    width: 60%;
+}
+
+.adverts-form .wpadverts-autocomplete-holder > input {
+    width: 100%;
+}
+
+input[type=text].wpadverts-autocomplete-input-search {
+    width: 100%;
+    outline: none;
+}
+
+
+.wpadverts-autocomplete-input-wrap {
+    position: relative;
+}
+
+.wpadverts-autocomplete-input-wrap.wpadverts-autocomplete-pending {
+    background: silver;
+    cursor: not-allowed;
+}
+
+.wpadverts-autocomplete-input-wrap.wpadverts-autocomplete-pending .wpadverts-autocomplete {
+    opacity: 0.66;
+    cursor: not-allowed;
+}
+
+.wpadverts-autocomplete-spinner,
+.wpadverts-autocomplete-openclose {
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    cursor: pointer;
+}
+
+.wpadverts-autocomplete-options.wpadverts-ac-none {
+    display: none !important;
+}
+
+.wpadverts-autocomplete-search-results-wrap {
+    background: rgba(255,255,255, 0.66);
+    min-height: 100px;
+    max-height: 300px;
+    position: relative;
+    overflow-y: auto;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.wpadverts-autocomplete-search-results {
+    padding: 0px;
+    margin-bottom: 0px;
+    position: relative;
+    overflow-y: auto;
+}
+
+.wpadverts-autocomplete-search-results-placeholder {
+    font-size: 13px;
+    padding: 20px 12px;
+    height: 100%;
+    display: block;
+    color: #666;
+}
+
+.wpadverts-autocomplete-search-results-preload {
+    position:absolute;
+    min-height: 50px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255,255,255,0.6);
+    overflow: hidden;
+}
+
+.wpadverts-autocomplete-search-results-preload > span {
+    font-size: 32px;
+    margin: auto;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    top: 50%;
+    text-align: center;
+    color: #666;
+}
+
+.wpadverts-autocomplete-checked-wrap {
+    display:flex;
+    align-items: baseline;
+}
+
+.wpadverts-autocomplete-checked-wrap-label {
+
+    
+}
+
+.wpadverts-autocompleted-checked-wrap-label {
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.wpadverts-autocomplete-search-result {
+    padding: 2px 8px 2px 8px;
+    display: flex;
+    align-items: baseline;
+}
+
+.wpadverts-autocomplete-search-result:hover {
+    background: #f5f5f5;
+}
+
+.wpadverts-autocomplete-search-result-ckbox {
+    
+}
+
+.wpadverts-autocomplete-search-result-ckbox input[type=checkbox] {
+    display: inline-block;
+    vertical-align: middle;
+    height: 14px;
+    width: 14px;
+    margin: 3px 3px 3px 0px;
+}
+
+.wpadverts-autocomplete-search-result-label {
+    font-size:12px;
+    height: 24px;
+    line-height:24px;
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+} 
+
+input.wpadverts-autocomplete {
+    cursor: pointer;
+}
+
+.wpadverts-ac-checked {
+    font-size: 10px;
+    color: #4a4a4a;
+    display: inline-block;
+    background: #f5f5f5;
+    border-radius: 4px;
+    margin: 2px 4px;
+    height: 20px;
+    line-height: 20px;
+    padding: 2px 6px;
+    box-sizing: content-box;
+}
+
+.wpadverts-autocomplete-tag-dispose:hover {
+    color: #21759b;
+    cursor: pointer;
+}
+
+.wpadverts-autocomplete-buttons {
+    padding: 8px;
+    
+}
+
+.wpadverts-autocomplete-button {
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 0 8px 0 0;
+    background: #f5f5f5;
+    border-radius: 2px;
+    font-size: 14px;
+    line-height: 16px;
+    
+}
+
+.wpadverts-autocomplete-button:hover {
+    background: #f5f5f5;
+}
+
+
+
+.wpadverts-autocomplete-input-search {
+    font-size: 12px !important;
+    padding: 6px;
+}
+
+.wpadverts-autocomplete-level-1 > .wpadverts-autocomplete-search-result {
+    padding-left:16px;
+}
+
+.wpadverts-autocomplete-level-2 > .wpadverts-autocomplete-search-result {
+    padding-left:32px;
+}
+
+.wpadverts-autocomplete-level-3 > .wpadverts-autocomplete-search-result {
+    padding-left:48px;
+}
+
+.wpadverts-autocomplete-level-4 > .wpadverts-autocomplete-search-result {
+    padding-left:64px;
+}
+
+.wpadverts-autocomplete-level-5 > .wpadverts-autocomplete-search-result {
+    padding-left:70px;
+}
+
+.wpadverts-autocomplete-level-6 > .wpadverts-autocomplete-search-result {
+    padding-left:82px;
+}
+
+.wpadverts-autocomplete-arrow-open {
+    font-size: 14px;
+    line-height: 28px;
+    cursor: pointer;
+}
+
+.wpadverts-autocomplete-arrow-close {
+    font-size: 14px;
+    line-height: 28px;
+    cursor: pointer;
+}
+
+.wpadverts-autocomplete-arrow-open:hover,
+.wpadverts-autocomplete-arrow-close:hover {
+    color: #21759b;
+}
+
+.wpadverts-autocomplete-search-result-inner-load {
+    background:#fafafa;
+    font-size:11px;
+}
+
+.wpadverts-autocomplete-options {
+    flex-direction: column;
+    display: flex;
+    min-height: 25px;
+    box-sizing: border-box;
+    border-radius: 2px;
+    min-width: 200px;
+    border: 1px solid #b0c4de;
+    width: 100%;
+    z-index: 10000;
+    position: absolute;
+    background-color: white;
+    -moz-box-shadow: 0 4px 3px -3px whitesmoke;
+    -webkit-box-shadow: 0 4px 3px -3px whitesmoke;
+    margin-top: 1px;
+    box-shadow: 0px 0px 2px 1px #d3ced2;
+}
+
+.wpadverts-autocomplete-search-wrap {
+    padding: 8px 8px;
+    margin: 0px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.wpadverts-autocomplete-search-wrap > div:nth-child(2) {
+    margin: 8px 0 0 0;
+}
+
+.wpadverts-autocomplete-checked {
+    display: inline-block;
+}
+
+.wpadverts-autocomplete-options > .wpadverts-autocomplete-item {
+    padding: 2px 8px 2px 8px;
+    cursor: pointer;
+    height: 24px;
+    line-height: 24px;
+}
+
+.wpadverts-autocomplete-options > .wpadverts-autocomplete-item:hover {
+    background-color: whitesmoke;
+}
+
+.wpadverts-autocomplete-options > .wpadverts-autocomplete-none {
+    padding: 2px 8px 2px 8px;
+    font-style: italic;
+}
+
+.wpadverts-autocomplete-error {
+    background: #f14c4c;
+    padding: 0 8px 0 8px;
+    color: white;
+    display: flex;
+    font-size: 12px;
+}
+
+.wpadverts-autocomplete-error-msg {
+    flex-grow: 2;
+    line-height: 18px;
+    padding: 5px 6px;
+}
+
+.wpadverts-autocomplete-error-close {
+    
+}
+
+.wpadverts-autocomplete-error-close:hover {
+    cursor:pointer;
+    color: #21759b;
+}
+
+@media (max-width: 425px) {
+    .wpadverts-autocomplete-mobile-fullscreen .wpadverts-autocomplete-options {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        height: 100% !important;
+        box-sizing: border-box;
+        margin: 0;
+    }
+    .wpadverts-autocomplete-mobile-fullscreen .wpadverts-autocomplete-search-results-wrap {
+        max-height: 100%;
+        height: 100%;
+    }
+    .wpadverts-autocomplete-search-result-ckbox input[type=checkbox] {
+        width: 24px;
+        height: 24px;
+    }
+}
+

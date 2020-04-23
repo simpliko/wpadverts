@@ -32,11 +32,6 @@ function adverts_save_post($ID = false, $post = false) {
         return $ID;
     }
     
-    //$nonce = 'product_price_box_content_nonce';
-    //if ( !isset( $_POST[$nonce] ) || !wp_verify_nonce( $_POST[$nonce], basename( __FILE__ ) ) ) {
-        //return $ID;
-    //}
-    
     if( ! wp_verify_nonce( adverts_request( "_post_id_nonce" ), "wpadverts-publish-" . $ID ) ) {
         return $ID;
     }
@@ -49,7 +44,7 @@ function adverts_save_post($ID = false, $post = false) {
         return $ID;
     }
 
-    if ( !$post->post_type == 'advert' ) {
+    if ( ! wpadverts_post_type( $post->post_type ) ) {
         return $ID;
     }
 
@@ -138,6 +133,8 @@ function adverts_save_post($ID = false, $post = false) {
         }
     }
     
+    adverts_force_featured_image( $ID );
+    
 }
 
 /**
@@ -167,7 +164,7 @@ function adverts_save_post_validator( $ID, $post ) {
     }
     
     // Abort if not Adverts custom type
-    if ( $post->post_type != 'advert' ){
+    if ( ! wpadverts_post_type( $post->post_type ) ){
         return $ID;
     }
 
@@ -222,8 +219,14 @@ function adverts_post_updated_messages( $messages ) {
 function adverts_admin_head() {
     global $post_type, $post;
 
+    if( isset( $_GET['post_type'] ) ) {
+        $pt = $_GET['post_type'];
+    } else {
+        $pt = null;
+    }
+    
     // Make sure this is Adverts post type
-    if (is_object($post) && ( ( isset($_GET['post_type']) && $_GET['post_type'] == 'advert') || ($post_type == 'advert') ) ):  
+    if (is_object($post) && ( wpadverts_post_type( $pt ) || wpadverts_post_type( $post_type ) ) ):  
     ?>
 
     <script language="Javascript">
@@ -328,7 +331,7 @@ function adverts_expiry_meta_box() {
     global $post, $pagenow;
     
     // Do this for adverts only.
-    if($post->post_type != 'advert') {
+    if( ! wpadverts_post_type( $post->post_type ) ) {
         return;
     }
     
@@ -557,7 +560,7 @@ function adverts_data_box() {
         'adverts_data_box',
         __( 'Additional Information', "wpadverts" ),
         'adverts_data_box_content',
-        'advert',
+        wpadverts_get_post_types(),
         'normal',
         'low'
     );
@@ -574,7 +577,7 @@ function adverts_box_gallery() {
         'adverts_gallery',
         __( 'Gallery', "wpadverts" ),
         'adverts_data_box_gallery',
-        'advert',
+        wpadverts_get_post_types(),
         'normal',
         'high'
     );
@@ -709,7 +712,7 @@ function adverts_admin_load() {
 function adverts_admin_sort( $vars ) {
 
     /* Check if we're viewing the 'advert' post type. */
-    if ( isset( $vars['post_type'] ) && 'advert' == $vars['post_type'] ) {
+    if ( isset( $vars['post_type'] ) && wpadverts_post_type( $vars['post_type'] ) ) {
 
         /* Check if 'orderby' is set to 'duration'. */
         if ( isset( $vars['orderby'] ) && 'price' == $vars['orderby'] ) {
@@ -749,7 +752,7 @@ function adverts_admin_sort( $vars ) {
 function adverts_admin_script() {
     global $post_type;
     
-    if( 'advert' != $post_type ) {
+    if( ! wpadverts_post_type( $post_type) ) {
         return;
     }
     

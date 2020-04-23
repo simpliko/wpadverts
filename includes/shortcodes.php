@@ -486,6 +486,8 @@ function _adverts_manage_edit( $atts ) {
                     "icon" => "adverts-icon-attention-alt"
                 );
             } else {
+                adverts_force_featured_image( $post_id );
+                
                 $info[] = array(
                     "message" => __("Post has been updated.", "wpadverts"),
                     "icon" => "adverts-icon-ok"

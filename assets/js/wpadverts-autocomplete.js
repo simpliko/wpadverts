@@ -665,11 +665,16 @@ WPADVERTS.Autocomplete.Row.prototype.MaybeUnfold = function(item, checked) {
 
         if(self.AC._unfold[index].length === 0) {
             //delete self.AC._unfold[index];
+            
             if(self.checkbox) {
                 self.checkbox.attr("checked", "checked").change();
             } else if(self.checkmark) {
                 self.Selected();
             }
+            if(self.checkbox && self.Data.has_children) {
+                self.arrow.open.click();
+            }
+            
             self.AC.Close("save");
         } else {
             self.arrow.open.click();

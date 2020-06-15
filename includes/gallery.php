@@ -39,6 +39,7 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
         "_post_id_nonce" => "",
         "field_name" => "gallery",
         "form_name" => "advert",
+        "save" => array( "method" => "media-library" )
     ), $conf);
     
     $field_name = $conf["field_name"];
@@ -118,6 +119,40 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
 
             }
 
+        }
+        
+        if($conf["save"]["method"] == "file" ) {
+            $dirs = wp_upload_dir();
+            $basedir = $dirs["basedir"];
+            $baseurl = $dirs["baseurl"];
+            
+            $files = glob( $basedir . "/" . $conf["save"]["path"] . "/*" );
+
+            foreach( $files as $file ) {
+                $url = $baseurl . "/" . $conf["save"]["path"] . "/" . basename( $file );
+                $data[] = array(
+                    "post_id" => $post->post_parent,
+                    "post_id_nonce" => wp_create_nonce( "wpadverts-publish-" . $post->post_parent ),
+                    "attach_id" => uniqid(),
+                    "guid" => $url,
+                    "mime_type" => "image",
+                    "featured" => 0,
+                    "caption" => "",
+                    "content" => "",
+                    "sizes" => array(
+                        "adverts_upload_thumbnail" => array(
+                            "url" => null
+                        )
+                    ),
+                    "readable" => array(
+                        "name" => basename( $file ),
+                        "type" => "image",
+                        "uploaded" => "2020-01-01",
+                        "size" => size_format( 100 ),
+                        "length" => null
+                    )
+                );
+            }
         }
 
         $sizes = array();

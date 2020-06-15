@@ -60,6 +60,58 @@ class Adverts_Post {
         return $result;
     }
     
+    public static function get_form_data( $post, Adverts_Form $form ) {
+        $data = array();
+        $meta = get_post_meta( $post->ID, '', false );
+
+        foreach($form->get_fields() as $field) {
+            
+            $name = $field["name"];
+            $save_method = "default";
+            
+            if( isset( $field["save"]["method"] ) ) {
+                $save_method = $field["save"]["method"];
+            }
+            
+            if( $save_method == "taxonomy" ) {
+                $data[$name] = self::get_object_term_ids( $post->ID, $field["save"]["taxonomy"] );
+            } elseif( in_array( $save_method, array( "meta-single", "meta-multi" ) ) ) {
+                $data[$name] = self::get_object_meta_values( $post->ID, $field["save"]["meta"] );
+            } elseif( property_exists( "WP_Post", $name ) ) {
+                $data[$name] = $post->$name;
+            } elseif( taxonomy_exists( $name ) ) {
+                $data[$name] = self::get_object_term_ids( $post->ID, $name );
+            } elseif( isset( $meta[ $name ] ) ) {
+                $data[$name] = self::get_object_meta_values( $post->ID, $name );
+            } else {
+                $data[ $name ] = "";
+            }
+        }
+        
+        return $data;
+    }
+    
+    public static function get_object_meta_values( $post_id, $meta_name ) {
+        $meta = get_post_meta( $post_id, $meta_name, false );
+        
+        if( empty( $meta ) ) {
+            return "";
+        } else if( count( $meta ) === 1 ) {
+            return $meta[0];
+        } else {
+            return $meta;
+        }
+    }
+    
+    public static function get_object_term_ids( $post_id, $taxonomy ) {
+        $terms = array();
+        $list = wp_get_object_terms( $post_id, $taxonomy );
+        foreach( $list as $term ) {
+            $terms[] = $term->term_id;
+        }
+        return $terms;
+    }
+    
     /**
      * Saves data in DB
      * 
@@ -67,7 +119,7 @@ class Adverts_Post {
      * @param WP_Post $post
      * @param array $defaults
      */
-    public static function save(Adverts_Form $form, $post = null, $init = array() ) {
+    public static function save(Adverts_Form $form, $post = null, $init = array(), $skip_post = false ) {
         
         if(is_numeric($post)) {
             $post = get_post($post);
@@ -83,6 +135,7 @@ class Adverts_Post {
         $data = array();
         $meta = array();
         $taxo = array();
+        $custom = array();
         
         // Set default values
         
@@ -101,7 +154,9 @@ class Adverts_Post {
         // Merge defaults with data from the Adverts_Form
         
         foreach($form->get_fields() as $field) {
-            if(property_exists("WP_Post", $field["name"])) {
+            if(isset($field["save"]) && isset($field["save"]["method"]) && $field["save"]["method"] != "default" ) {
+                $custom[] = $field;
+            } elseif(property_exists("WP_Post", $field["name"])) {
                 $data[$field["name"]] = $field["value"];
             } elseif(taxonomy_exists($field["name"])) {
                 $taxo[$field["name"]] = $field["value"];
@@ -110,7 +165,9 @@ class Adverts_Post {
             }
         }
         
-        if($post && $post->ID > 0) {
+        if( $post && $skip_post === true ) {
+            $post_id = $post->ID;
+        } elseif($post && $post->ID > 0) {
             // Post already exists, update only.
             $data["ID"] = $post->ID;
             $post_id = wp_update_post( apply_filters( "adverts_update_post", $data ), true );
@@ -144,6 +201,9 @@ class Adverts_Post {
             wp_set_post_terms($post_id, $tax, $key);
         }
         
+        // Custom saving strategy (since 1.4.4)
+        self::_save_custom( $post_id, $custom );
+        
         if( self::$_tmp_guid ) {
             // After save tmp_guid filter is no longer needed, remove it.
             self::$_tmp_guid = null;
@@ -154,4 +214,33 @@ class Adverts_Post {
         
         return $post_id;
     }
+    
+    protected static function _save_custom( $post_id, $fields ) {
+        foreach( $fields as $field ) {
+            $s = $field["save"];
+            $name = $field["name"];
+            if( $field["save"]["method"] == "none" ) {
+                // skip saving
+            } else if( $s["method"] == "meta-single" ) {
+                if( isset( $s["meta"] ) ) {
+                    $name = $s["meta"];
+                }
+                adverts_save_single( $post_id, $name, $field["value"] );
+            } else if( $s["method"] == "meta-multi" ) {
+                if( isset( $s["meta"] ) ) {
+                    $name = $s["meta"];
+                }
+                adverts_save_multi( $post_id, $name, $field["value"] );
+            } else if( $s["method"] == "taxonomy" ) {
+                if( isset( $s["taxonomy"] ) ) {
+                    $name = $s["taxonomy"];
+                }
+                wp_set_post_terms( $post_id, $field["value"], $name );
+            } else if( $s["method"] == "callback" ) {
+                $params = array( "post_id" => $post_id, "field" => $field );
+                call_user_func_array( $s["callback"], $params );
+            }
+        }
+    }
+    
 }

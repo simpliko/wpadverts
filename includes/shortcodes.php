@@ -412,7 +412,7 @@ function _adverts_manage_edit( $atts ) {
         adverts_flash( $flash );
         return ob_get_clean();
     }
-    
+
     if( $post->post_author != get_current_user_id() ) {
         $flash["error"][] = array(
             "message" =>  __("You do not own this Ad.", "wpadverts"),
@@ -434,6 +434,8 @@ function _adverts_manage_edit( $atts ) {
         adverts_flash( $flash );
         return ob_get_clean();
     }
+    
+    $b = Adverts_Post::get_form_data($post, $form);
     
     foreach( $form->get_fields() as $f ) {
         $value = get_post_meta( $post_id, $f["name"], false );
@@ -468,6 +470,13 @@ function _adverts_manage_edit( $atts ) {
             }
         }
     }
+    
+    $bind = Adverts_Post::get_form_data($post, $form);
+    $bind["_adverts_action"] = "update";
+    $bind["_post_id"] = $post_id;
+    $bind["_post_id_nonce"] = wp_create_nonce( "wpadverts-publish-" . $post_id );
+    $bind["_wpadverts_checksum"] = $checksum_keys["checksum"];
+    $bind["_wpadverts_checksum_nonce"] = $checksum_keys["nonce"];
     
     $form->bind( $bind );
     

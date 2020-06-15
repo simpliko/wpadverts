@@ -519,33 +519,7 @@ class Adverts_Shortcode_Adverts_Add {
             $post = get_post( $post_id );
 
             // bind data by field name
-            foreach( $form->get_fields() as $f ) {
-                $value = get_post_meta( $post_id, $f["name"], false );
-                if( empty( $value ) ) {
-                    $bind[$f["name"]] = "";
-                } else if( count( $value ) == 1 ) {
-                    $bind[$f["name"]] = $value[0];
-                } else {
-                    $bind[$f["name"]] = $value;
-                }
-            }
-
-            $bind["post_title"] = $post->post_title;
-            $bind["post_content"] = $post->post_content;
-            $bind["advert_category"] = array();
-
-            $taxonomy_objects = get_object_taxonomies( $post->post_type, 'objects' );
-            foreach( $taxonomy_objects as $taxonomy_key => $taxonomy ) {
-                $terms = get_the_terms( $post_id, $taxonomy_key );
-                if( is_array( $terms ) ) {
-                    foreach( $terms as $term ) {
-                        if(!isset($bind[$taxonomy_key]) || !is_array($bind[$taxonomy_key])) {
-                            $bind[$taxonomy_key] = array();
-                        }
-                        $bind[$taxonomy_key][] = $term->term_id;
-                    }
-                }
-            }
+            $bind = Adverts_Post::get_form_data( $post, $form );
 
 
         } elseif( is_user_logged_in() ) {

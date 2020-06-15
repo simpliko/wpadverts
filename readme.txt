@@ -100,10 +100,23 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
+= 1.4.4 - 2020-06-15 =
+
+* FEATURE: Allow using Autocomplete field with any taxonomy.
+* FIXED: Preserve Ad author when approving ads using Quick Edit.
+* FIXED: Hardcoded Autocomplete phrases.
+* FIXED: Autocomplete field does not activate when selecting a top category.
+* FIXED: Indian Rupee will now use ₹ sign instead of INR code.
+* API: Form fields can now use a custom save method.
+* API: adverts_field_autocomplete can be used in the forms.
+* API: Saving Ad from wp-admin / Classifieds panel will now use Adverts_Post::save()
+* TRANSLATION: Updated Italian translation
+
 = 1.4.3 - 2020-04-23 = 
 
  * FIXED: Contact information box does not load.
  * FIXED: Delete option does not fire in [adverts_manage].
+ * API: Use wpadverts_post_type() with Featured module.
 
 = 1.4.2 - 2020-04-22 =
 

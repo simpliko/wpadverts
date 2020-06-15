@@ -1721,6 +1721,7 @@ function adverts_field_gallery($field, $form = null ) {
     include_once ADVERTS_PATH . "includes/gallery.php";
     
     wp_enqueue_script( 'adverts-gallery' );
+    $save = null;
     
     if( ! is_null( $form ) ) {
         $form_name = $form->get_scheme( "name" );
@@ -1728,6 +1729,11 @@ function adverts_field_gallery($field, $form = null ) {
         $checksum_nonce = $form->get_value( "_wpadverts_checksum_nonce" );
         $post_id = $form->get_value( "_post_id" );
         $post_id_nonce = $form->get_value( "_post_id_nonce" );
+        
+        if( isset( $field["save"] ) ) {
+            $save = $field["save"];
+        }
+        
     } else {
         include_once ADVERTS_PATH . "includes/class-checksum.php";
 
@@ -1752,7 +1758,8 @@ function adverts_field_gallery($field, $form = null ) {
         "_post_id" => $post_id,
         "_post_id_nonce" => $post_id_nonce,
         "form_name" => $form_name,
-        "field_name" => $field["name"]
+        "field_name" => $field["name"],
+        "save" => $save
     ));
 }
 
@@ -2127,7 +2134,7 @@ function adverts_currency_list( $currency = null, $get = null ) {
         array("code"=>"CHF", "sign"=>"", "label"=>__("Swiss Franc", "wpadverts")),
         array("code"=>"TWD", "sign"=>"", "label"=>__("Taiwan New Dollars", "wpadverts")),
         array("code"=>"THB", "sign"=>"฿", "label"=>__("Thai Baht", "wpadverts")),
-        array("code"=>"INR", "sign"=>"", "label"=>__("Indian Rupee", "wpadverts")),
+        array("code"=>"INR", "sign"=>"₹", "label"=>__("Indian Rupee", "wpadverts")),
         array("code"=>"TRY", "sign"=>"", "label"=>__("Turkish Lira", "wpadverts")),
         array("code"=>"RIAL", "sign"=>"", "label"=>__("Iranian Rial", "wpadverts")),
         array("code"=>"RUB", "sign"=>"", "label"=>__("Russian Rubles", "wpadverts")),
@@ -3265,4 +3272,49 @@ function wpadverts_post_type( $post ) {
  */
 function wpadverts_get_post_types() {
     return apply_filters( "wpadverts_get_post_types", array( "advert" ) );
+}
+
+/**
+ * Preserve Ad author
+ * 
+ * Function is executed via wp_insert_post_data filter. 
+ * 
+ * Checks if filter is run when using Quick Edit save on an WPAdverts supported
+ * post type and if so prevents the change of author.
+ * 
+ * @since   1.4.5
+ * @param   array   $data   Data to be saved in the database
+ * @param   array   $post   Post data
+ * @return  array           Data to be saved in the database
+ */
+function wpadverts_qe_preserve_author( $data, $post ) {
+    if( ! defined( "DOING_AJAX" ) || ! DOING_AJAX ) {
+        return $data;
+    }
+    if( adverts_request( "action" ) != "inline-save" ) {
+        return $data;
+    }
+    if( ! check_admin_referer( 'inlineeditnonce', '_inline_edit' ) ) {
+        return $data;
+    }
+    if( in_array( $data["post_type"], wpadverts_get_post_types() ) ) {
+        $data["post_author"] = get_post( $post["ID"] )->post_author;
+    }
+    return $data; 
+}
+
+/**
+ * Hides Author field in Quick Edit
+ * 
+ * The function adds a CSS rule to hide Author field in Quick Edit on WPAdverts
+ * supported custom post types
+ * 
+ * @since   1.4.5
+ * @return  void
+ */
+function wpadverts_qe_hide_author_field() {
+    if( in_array( adverts_request( "post_type" ), wpadverts_get_post_types() ) ) {
+        $tpl = '<style type="text/css">.inline-edit-%s .inline-edit-author {display: none !important; }</style>';
+        printf( $tpl, esc_attr( adverts_request( "post_type" ) ) );
+    }
 }

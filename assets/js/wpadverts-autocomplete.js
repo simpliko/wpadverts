@@ -160,6 +160,7 @@ WPADVERTS.Autocomplete.prototype.Load = function() {
     
     var data = {
         action: jQuery(this.input).data("ajax_action"),
+        taxonomy: jQuery(this.input).data("taxonomy"),
         parent: 0
     };
     
@@ -388,7 +389,7 @@ WPADVERTS.Autocomplete.prototype.CreateSearch = function() {
     var wrap = jQuery("<div></div>");
     
     this.ui.search = jQuery("<input type='text' />");
-    this.ui.search.attr("placeholder", "start typing here ...");
+    this.ui.search.attr("placeholder", adverts_autocomplete_lang.start_typing_here);
     this.ui.search.addClass("wpadverts-autocomplete-input-search");
     
     this.ui.search.on("keyup", jQuery.proxy(this.KeyUp, this));
@@ -413,6 +414,7 @@ WPADVERTS.Autocomplete.prototype.KeyUp = function(e) {
 
     var data = {
         action: jQuery(this.input).data("ajax_action"),
+        taxonomy: jQuery(this.input).data("taxonomy"),
         text: this.ui.search.val()
     };
 
@@ -664,18 +666,18 @@ WPADVERTS.Autocomplete.Row.prototype.MaybeUnfold = function(item, checked) {
         var click = self.AC._unfold[index].shift();
 
         if(self.AC._unfold[index].length === 0) {
-            //delete self.AC._unfold[index];
-            
+
             if(self.checkbox) {
                 self.checkbox.attr("checked", "checked").change();
             } else if(self.checkmark) {
                 self.Selected();
             }
-            if(self.checkbox && self.Data.has_children) {
-                self.arrow.open.click();
-            }
-            
+
+            self.AC.ui.spinner.hide();
+            self.AC.ui.openclose.show();
+            self.AC.ui.inputwrap.removeClass("wpadverts-autocomplete-pending");
             self.AC.Close("save");
+            
         } else {
             self.arrow.open.click();
         }
@@ -862,6 +864,7 @@ WPADVERTS.Autocomplete.Row.prototype.ArrowOpenClick = function() {
         
         var data = {
             action: jQuery(this.AC.input).data("ajax_action"),
+            taxonomy: jQuery(this.AC.input).data("taxonomy"),
             parent: this.row.data("value")
         };
 
@@ -964,6 +967,7 @@ jQuery(function($) {
             
             var data = {
                 action: $this.data("ajax_action"),
+                taxonomy: $this.data("taxonomy"),
                 text: text
             }
             

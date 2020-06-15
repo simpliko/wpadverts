@@ -30,7 +30,7 @@ module.exports = function(grunt) {
                     {
                         expand: true,
                         cwd:    './',
-                        src:    [ '**', '!node_modules/**', '!Gruntfile.js', '!package.json', '!.gitignore', '!nbproject/**' ],
+                        src:    [ '**', '!node_modules/**', '!Gruntfile.js', '!package.json', '!.gitignore', '!nbproject/**', '!tests/**', '!bin/**', '!.phpcs.xml.dist', '!.travis.yml', '!phpunit.xml.dist' ],
                         dest:   "<%= pkg.svn %>/trunk/"
                     }
                ] 

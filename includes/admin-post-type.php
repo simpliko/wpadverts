@@ -97,44 +97,37 @@ function adverts_save_post($ID = false, $post = false) {
         
     }
     
+    
     // Load form data
     $form_scheme = apply_filters( "adverts_form_scheme", Adverts::instance()->get("form"), array() );
 
+    add_filter( "adverts_form_load", "adverts_remove_taxonomy_fields" );
+    
     $form = new Adverts_Form();
     $form->load( $form_scheme );
     $form->bind( stripslashes_deep( $_POST ) );
-    
-    $meta = array();
-    
-    // Find meta fields in the form
-    foreach($form->get_fields() as $field) {
-        
-        $c1 = ! property_exists("WP_Post", $field["name"]);
-        $c2 = ! taxonomy_exists($field["name"]);
-        $c3 = isset( $field["value"] );
-        
-        if( $c1 && $c2 && $c3 ) {
-            $meta[$field["name"]] = array("field"=>$field, "value"=>$field["value"]);
-        }
-    }  
-    
-    // Save meta data values
-    $fields = Adverts::instance()->get("form_field");
-    foreach($meta as $key => $data) {
 
-        $field = $data["field"];
-        $field_type = $field["type"];
-        $value = $data["value"];
-
-        $callback_save = $fields[$field_type]["callback_save"];
-
-        if( is_callable( $callback_save ) ) {
-            call_user_func( $callback_save, $ID, $key, $value );
-        }
-    }
+    remove_filter( "adverts_form_load", "adverts_remove_taxonomy_fields" );
+    
+    Adverts_Post::save( $form, $post, array(), true );
     
     adverts_force_featured_image( $ID );
     
+}
+
+function adverts_remove_taxonomy_fields( $form ) {
+    
+    if( $form["name"] != "advert" ) {
+        return $form;
+    }
+    
+    foreach( $form["field"] as $k => $field ) {
+        if( $field["name"] == "advert_category" ) {
+            unset( $form["field"][$k] );
+        }
+    }
+    
+    return $form;
 }
 
 /**
@@ -411,27 +404,11 @@ function adverts_data_box_content( $post ) {
     $form->load( $form_scheme );
 
     // Get list of fields from post meta table
-    $bind = array();
-    foreach( $form->get_fields( array( "exclude"=>$exclude ) ) as $f ) {
-        $bind[$f["name"]] = get_post_meta( $post->ID, $f["name"], true );
-    }
-  
-    foreach( $form->get_fields( array( "exclude"=>$exclude ) ) as $f ) {
-        $value = get_post_meta( $post->ID, $f["name"], false );
-        if( empty( $value ) ) {
-            $bind[$f["name"]] = "";
-        } else if( count( $value) == 1 ) {
-            $bind[$f["name"]] = $value[0];
-        } else {
-            $bind[$f["name"]] = $value;
-        }
-    }
-  
-
     include_once ADVERTS_PATH . 'includes/class-checksum.php';
     $checksum = new Adverts_Checksum();
     $checksum_keys = $checksum->get_integrity_keys( array( "is-wp-admin" => true, "user-role" => wp_get_current_user()->roles[0]  ) );
 
+    $bind = Adverts_Post::get_form_data($post, $form);
     $bind["_wpadverts_checksum"] = $checksum_keys["checksum"];
     $bind["_wpadverts_checksum_nonce"] = $checksum_keys["nonce"];
     $bind["_post_id"] = $post->ID;

@@ -5,7 +5,7 @@
  * Description: The lightweight WordPress classifieds plugin done right.
  * Author: Greg Winiarski
  * Text Domain: wpadverts
- * Version: 1.4.3
+ * Version: 1.4.4
  * 
  * Adverts is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -246,7 +246,7 @@ function adverts_init() {
         'adverts-autocomplete', 
         ADVERTS_URL . '/assets/js/wpadverts-autocomplete.js', 
         array( 'jquery' ), 
-        "1.4.2", 
+        "1.4.4", 
         true
     );
     
@@ -295,7 +295,8 @@ function adverts_init() {
         "cancel" => __( "Cancel", "wpadverts" ),
         "selected" => __( "Selected", "wpadverts" ),
         "max_choices" => __( "Cannot select more than %s items.", "wpadverts" ),
-        "search_placeholder" => __( "Type in the box above to see suggestions ...", "wpadverts" )
+        "search_placeholder" => __( "Type in the box above to see suggestions ...", "wpadverts" ),
+        "start_typing_here" => __( "start typing here ...", "wpadverts" )
     ));
     
     wp_localize_script( 'adverts-gallery', 'adverts_gallery_lang', array(
@@ -411,7 +412,7 @@ function adverts_init_admin() {
     
     wp_register_script('adverts-admin', ADVERTS_URL . '/assets/js/wpadverts-admin.js', array( 'jquery' ), "1.3.5", true);
     wp_register_script('adverts-admin-config-core', ADVERTS_URL . '/assets/js/wpadverts-admin-config-core.js', array( 'jquery' ), "1.3.5", true);
-    wp_register_style('adverts-admin', ADVERTS_URL . '/assets/css/wpadverts-admin.css', array(), "1.4.2" );
+    wp_register_style('adverts-admin', ADVERTS_URL . '/assets/css/wpadverts-admin.css', array(), "1.4.4" );
     
     wp_register_script( 'adverts-admin-updates', ADVERTS_URL . '/assets/js/wpadverts-admin-updates.js', array( 'jquery' ), "1.3.5", true );
     wp_register_style( 'adverts-admin-updates', ADVERTS_URL . '/assets/css/wpadverts-admin-updates.css', array(), "1.3.5" );
@@ -435,6 +436,10 @@ function adverts_init_admin() {
     // Adverts category meta handlers
     add_action( 'edited_advert_category', 'adverts_save_category', 10, 2);
     add_action( 'advert_category_edit_form_fields', 'adverts_category_form_fields', 10, 2);
+    
+    // Preserve Ad author when editing Ad via Quick Edit
+    add_filter( "wp_insert_post_data", "wpadverts_qe_preserve_author", 10, 2 );
+    add_action( "admin_footer", "wpadverts_qe_hide_author_field" );
     
     // AJAX filters
     add_action('wp_ajax_adverts_author_suggest', 'adverts_author_suggest');

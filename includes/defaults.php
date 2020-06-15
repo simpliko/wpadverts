@@ -464,3 +464,7 @@ adverts_form_add_validator("upload_dimensions", array(
     ),
     "validate_empty" => false
 ));
+
+include_once ADVERTS_PATH . '/includes/class-field-autocomplete.php';
+
+new Adverts_Field_Autocomplete();

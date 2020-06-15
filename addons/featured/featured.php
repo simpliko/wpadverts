@@ -99,7 +99,7 @@ function adext_featured_post_data( $data, $postarr ) {
         return $data;
     }
         
-    if ( $data["post_type"] != 'advert' ) {
+    if ( ! wpadverts_post_type( $data["post_type"] ) ) {
         return $data;
     }
     
@@ -249,7 +249,7 @@ function adext_featured_order_create( $data ) {
 function adext_featured_post_state( $states ) {
     global $post;
 
-    if( $post && $post->post_type == 'advert' && $post->menu_order > 0 ) {
+    if( $post && wpadverts_post_type( $post->post_type ) && $post->menu_order > 0 ) {
 
         $span = new Adverts_Html("span", array(
             "class" => "dashicons dashicons-flag",

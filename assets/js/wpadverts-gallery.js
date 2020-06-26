@@ -232,6 +232,7 @@ WPADVERTS.File.Uploader.prototype.Plupload = function(init) {
     this.uploader.bind("BeforeUpload", jQuery.proxy(this.engine.BeforeUpload, this));
     this.uploader.bind('FilesAdded', jQuery.proxy(this.engine.FilesAdded, this));
     this.uploader.bind('FileUploaded', jQuery.proxy(this.engine.FileUploaded, this));
+    this.uploader.bind('UploadComplete', jQuery.proxy(this.engine.UploadComplete, this));
 };
 
 WPADVERTS.File.Uploader.Plupload = function(init) {
@@ -308,9 +309,13 @@ WPADVERTS.File.Uploader.Plupload.prototype.FileUploaded = function(up, file, res
     this.FileUploaded(file, result);
     
     if( typeof result.attach_id !== 'undefined' ) { 
-        this.SortableUpdate();
+        //this.SortableUpdate();
     }
 };
+
+WPADVERTS.File.Uploader.Plupload.prototype.UploadComplete = function(up, file, response) {
+    this.SortableUpdate();;
+}
 
 WPADVERTS.File.Singular = function(file, container, init) {
     this.file = file;

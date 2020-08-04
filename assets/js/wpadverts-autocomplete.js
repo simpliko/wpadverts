@@ -56,6 +56,17 @@ WPADVERTS.Autocomplete = function( item ) {
     var unfold = [];
     
     jQuery.each(ck, function(i, item) {
+        
+        var tmpClass = "wpadverts-ac-tmp--" + self.name + "--" + item.value;
+        if( jQuery( "." + tmpClass ).length === 0 ) {
+            var hidden = jQuery("<input type='hidden' />");
+            hidden.attr( "name", self.name + "[]" );
+            hidden.attr( "class", tmpClass );
+            hidden.attr( "value", item.value );
+            //self.input.after(hidden);
+            hidden.insertAfter(self.input);
+        }
+        
         var uinner = [];
         if(self.options.hierarchical) {
             jQuery.each(item.path, function(j, l) {
@@ -575,6 +586,9 @@ WPADVERTS.Autocomplete.Tag = function(ac, data) {
     this.tag.hide();
 
     this.dispose.on("click", jQuery.proxy( ac.TagDispose, ac, data ) );
+    
+    // remove tmp value
+    jQuery(".wpadverts-ac-tmp--" + ac.name + "--" + data.value ).remove();
 };
 
 WPADVERTS.Autocomplete.Tag.prototype.SetPending = function(isPending) {

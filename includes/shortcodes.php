@@ -151,7 +151,7 @@ function shortcode_adverts_list( $atts ) {
         $orderby["date"] = "desc"; 
     }
 
-    
+
     $args = apply_filters( "adverts_list_query", array( 
         'author' => $author,
         'post_type' => 'advert', 
@@ -331,7 +331,7 @@ function _adverts_manage_list( $atts ) {
     // Load ONLY current user data
     $loop = new WP_Query( array( 
         'post_type' => 'advert', 
-        'post_status' => apply_filters("adverts_sh_manage_list_statuses", array('publish', 'advert-pending', 'expired') ),
+        'post_status' => apply_filters("adverts_sh_manage_list_statuses", array('publish', 'advert-pending', 'pending', 'expired') ),
         'posts_per_page' => $posts_per_page, 
         'paged' => $paged,
         'author' => get_current_user_id()
@@ -423,7 +423,7 @@ function _adverts_manage_edit( $atts ) {
         return ob_get_clean();
     }
     
-    $slist = apply_filters("adverts_sh_manage_list_statuses", array( 'publish', 'expired', 'advert-pending', 'draft') );
+    $slist = apply_filters("adverts_sh_manage_list_statuses", array( 'publish', 'expired', 'pending', 'advert-pending', 'draft') );
     
     if( !in_array( $post->post_status, $slist ) ) {
         $flash["error"][] = array(
@@ -433,42 +433,6 @@ function _adverts_manage_edit( $atts ) {
         ob_start();
         adverts_flash( $flash );
         return ob_get_clean();
-    }
-    
-    $b = Adverts_Post::get_form_data($post, $form);
-    
-    foreach( $form->get_fields() as $f ) {
-        $value = get_post_meta( $post_id, $f["name"], false );
-        if( empty( $value ) ) {
-            $bind[$f["name"]] = "";
-        } else if( count( $value) == 1 ) {
-            $bind[$f["name"]] = $value[0];
-        } else {
-            $bind[$f["name"]] = $value;
-        }
-    }
-    
-    $bind["_adverts_action"] = "update";
-    $bind["_post_id"] = $post_id;
-    $bind["_post_id_nonce"] = wp_create_nonce( "wpadverts-publish-" . $post_id );
-    
-    $bind["post_title"] = $post->post_title;
-    $bind["post_content"] = $post->post_content;
-    $bind["advert_category"] = array();
-    $bind["_wpadverts_checksum"] = $checksum_keys["checksum"];
-    $bind["_wpadverts_checksum_nonce"] = $checksum_keys["nonce"];
-    
-    $taxonomy_objects = get_object_taxonomies( $post->post_type, 'objects' );
-    foreach( $taxonomy_objects as $taxonomy_key => $taxonomy ) {
-        $terms = get_the_terms( $post_id, $taxonomy_key );
-        if( is_array( $terms ) ) {
-            foreach( $terms as $term ) {
-                if(!isset($bind[$taxonomy_key]) || !is_array($bind[$taxonomy_key])) {
-                    $bind[$taxonomy_key] = array();
-                }
-                $bind[$taxonomy_key][] = $term->term_id;
-            }
-        }
     }
     
     $bind = Adverts_Post::get_form_data($post, $form);

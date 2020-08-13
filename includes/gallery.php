@@ -59,7 +59,7 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
         'filters'             => array(array('title' => __('Allowed Files'), 'extensions' => '*')),
         'multipart'           => true,
         'urlstream_upload'    => true,
-
+        
         // additional post data to send to our ajax hook
         'multipart_params'  => array(
             '_wpadverts_checksum_nonce'   => $conf["_wpadverts_checksum_nonce"],
@@ -121,7 +121,7 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
 
         }
         
-        if($conf["save"]["method"] == "file" ) {
+        if( isset( $conf["save"] ) && $conf["save"]["method"] == "file" ) {
             $dirs = wp_upload_dir();
             $basedir = $dirs["basedir"];
             $baseurl = $dirs["baseurl"];

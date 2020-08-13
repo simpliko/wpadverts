@@ -4,8 +4,8 @@ Contributors: gwin
 Tags: classifieds, classified, classified ads, classified script, classifieds script, wp classified, wp classifieds
 Requires PHP: 5.3
 Requires at least: 4.0
-Tested up to: 5.4
-Stable tag: 1.4.4
+Tested up to: 5.5
+Stable tag: 1.4.5
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -100,7 +100,19 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
-= 1.4.4 - 2020-06-15 =
+= 1.4.5 - 2020-08-13 =
+
+ * FEATURE: Added Nigerian Naira currency.
+ * FEATURE: Added signs for CZK, HUF, NOK, PHP and SEK currencies.
+ * FEATURE: Pending Ads will now show in [adverts_manage] panel.
+ * FIXED: Error when uploading more than one file to the gallery.
+ * FIXED: Notice in the gallery in [adverts_add] shortcode.
+ * FIXED: Autocomplete field will pre-render values to avoid having values unset when form is submitted before autocomplete field finishes loading.
+ * FIXED: Line breaks not shown in text editor when a page is not using blocks (WP 5.5 compatibility issue)
+ * FIXED: Removed duplicate bind code in [adverts_manage].
+ * API: adverts_field_textarea_tinymce_params filter allows settings tinyMCE params for textarea field.
+
+= 1.4.4 - 2020-06-16 =
 
 * FEATURE: Allow using Autocomplete field with any taxonomy.
 * FIXED: Preserve Ad author when approving ads using Quick Edit.

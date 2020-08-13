@@ -1473,11 +1473,11 @@ function adverts_field_textarea( $field ) {
         echo $html->render();
         
     } elseif($field["mode"] == "tinymce-mini") {
-    
-        $params = array(
-            "quicktags"=>false, 
-            "media_buttons"=>false, 
-            "teeny"=>false,
+        $params = apply_filters( "adverts_field_textarea_tinymce_params", array(
+            "wpautop" => true,
+            "quicktags" => false, 
+            "media_buttons" => false, 
+            "teeny" => false,
             "textarea_rows" => 8,
             'tinymce' => array(
                 'toolbar1' => 'bold,italic,strikethrough,bullist,numlist,blockquote,justifyleft,justifycenter,justifyright,link,unlink,spellchecker,wp_adv',
@@ -1486,11 +1486,11 @@ function adverts_field_textarea( $field ) {
                 'theme_advanced_buttons1' => 'bold,italic,strikethrough,bullist,numlist,blockquote,justifyleft,justifycenter,justifyright,link,unlink,spellchecker,wp_adv',
                 'theme_advanced_buttons2' => 'formatselect,justifyfull,forecolor,pastetext,pasteword,removeformat,charmap,outdent,indent,undo,redo',
              )
-        );
-
+        ), $field );
         wp_editor($field["value"], $field["name"], $params);
     } elseif($field["mode"] == "tinymce-full") {
-        wp_editor($field["value"], $field["name"]);
+        $params = apply_filters( "adverts_field_textarea_tinymce_params", array(), $field );
+        wp_editor($field["value"], $field["name"], $params );
     } else {
         echo "Parameter [mode] is missing in the form!";
     }
@@ -2117,24 +2117,25 @@ function adverts_currency_list( $currency = null, $get = null ) {
         array("code"=>"AUD", "sign"=>"$", "label"=>__("Australian Dollars", "wpadverts")),
         array("code"=>"BRL", "sign"=>"R$", "label"=>__("Brazilian Real", "wpadverts")),
         array("code"=>"CAD", "sign"=>"$", "label"=>__("Canadian Dollars", "wpadverts")),
-        array("code"=>"CZK", "sign"=>"", "label"=>__("Czech Koruna", "wpadverts")),
+        array("code"=>"CZK", "sign"=>"Kč", "label"=>__("Czech Koruna", "wpadverts")),
         array("code"=>"DKK", "sign"=>"", "label"=>__("Danish Krone", "wpadverts")),
         array("code"=>"HKD", "sign"=>"$", "label"=>__("Hong Kong Dollar", "wpadverts")),
-        array("code"=>"HUF", "sign"=>"", "label"=>__("Hungarian Forint", "wpadverts")),
+        array("code"=>"HUF", "sign"=>"Ft", "label"=>__("Hungarian Forint", "wpadverts")),
         array("code"=>"ILS", "sign"=>"₪", "label"=>__("Israeli Shekel", "wpadverts")),
+        array("code"=>"INR", "sign"=>"₹", "label"=>__("Indian Rupees", "wpadverts")),
         array("code"=>"JPY", "sign"=>"¥", "label"=>__("Japanese Yen", "wpadverts")),
         array("code"=>"MYR", "sign"=>"", "label"=>__("Malaysian Ringgits", "wpadverts")),
         array("code"=>"MXN", "sign"=>"$", "label"=>__("Mexican Peso", "wpadverts")),
+        array("code"=>"NGN", "sign"=>"₦", "label"=>__("Nigerian Naira", "wpadverts")),
         array("code"=>"NZD", "sign"=>"$", "label"=>__("New Zealand Dollar", "wpadverts")),
-        array("code"=>"NOK", "sign"=>"", "label"=>__("Norwegian Krone", "wpadverts")),
-        array("code"=>"PHP", "sign"=>"", "label"=>__("Philippine Pesos", "wpadverts")),
+        array("code"=>"NOK", "sign"=>"kr", "label"=>__("Norwegian Krone", "wpadverts")),
+        array("code"=>"PHP", "sign"=>"₱", "label"=>__("Philippine Pesos", "wpadverts")),
         array("code"=>"PLN", "sign"=>"zł", "label"=>__("Polish Zloty", "wpadverts")),
         array("code"=>"SGD", "sign"=>"$", "label"=>__("Singapore Dollar", "wpadverts")),
-        array("code"=>"SEK", "sign"=>"", "label"=>__("Swedish Krona", "wpadverts")),
+        array("code"=>"SEK", "sign"=>"kr", "label"=>__("Swedish Krona", "wpadverts")),
         array("code"=>"CHF", "sign"=>"", "label"=>__("Swiss Franc", "wpadverts")),
         array("code"=>"TWD", "sign"=>"", "label"=>__("Taiwan New Dollars", "wpadverts")),
         array("code"=>"THB", "sign"=>"฿", "label"=>__("Thai Baht", "wpadverts")),
-        array("code"=>"INR", "sign"=>"₹", "label"=>__("Indian Rupee", "wpadverts")),
         array("code"=>"TRY", "sign"=>"", "label"=>__("Turkish Lira", "wpadverts")),
         array("code"=>"RIAL", "sign"=>"", "label"=>__("Iranian Rial", "wpadverts")),
         array("code"=>"RUB", "sign"=>"", "label"=>__("Russian Rubles", "wpadverts")),

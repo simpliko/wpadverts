@@ -58,8 +58,11 @@ class Adverts_Field_Autocomplete {
             "checked" => json_encode( array() )
         ), $ac_args );
         
+        $checked = array();
+        
         if( $ac["taxonomy"] ) {
-            $ac["checked"] = json_encode( $this->get_checked_ids( $ids, $ac["taxonomy"] ) );
+            $checked = $this->get_checked_ids( $ids, $ac["taxonomy"] );
+            $ac["checked"] = json_encode( $checked );
         } 
 
         foreach( $ac as $k => $v ) {
@@ -68,7 +71,16 @@ class Adverts_Field_Autocomplete {
 
         $field["value"] = "";
 
-        return adverts_field_text( $field );
+        adverts_field_text( $field );
+        
+        foreach( $checked as $ck ) {
+            adverts_field_hidden( array(
+                "name" => $field["name"] . "[]",
+                "id" => "wpadverts-ac-tmp--" . $field["name"] . "--" . $ck["value"],
+                "class" => "wpadverts-ac-tmp--" . $field["name"] . "--" . $ck["value"],
+                "value" => $ck["value"]
+            ) );
+        }
     } 
 
     public function get_checked_ids( $ids, $taxonomy ) {

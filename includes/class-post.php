@@ -215,6 +215,16 @@ class Adverts_Post {
         return $post_id;
     }
     
+    /**
+     * Handles custom saving strategy
+     * 
+     * This function is executed when a field has $field["save"] param
+     * available.
+     * 
+     * @since   1.5.0
+     * @param   int     $post_id    Post ID
+     * @param   array   $fields     Form fields
+     */
     protected static function _save_custom( $post_id, $fields ) {
         foreach( $fields as $field ) {
             $s = $field["save"];
@@ -236,6 +246,8 @@ class Adverts_Post {
                     $name = $s["taxonomy"];
                 }
                 wp_set_post_terms( $post_id, $field["value"], $name );
+            } else if( $s["method"] == "file" ) {
+                adverts_save_files( $post_id, $name, $field, adverts_request( "wpadverts-form-upload-uniqid" ) );
             } else if( $s["method"] == "callback" ) {
                 $params = array( "post_id" => $post_id, "field" => $field );
                 call_user_func_array( $s["callback"], $params );

@@ -19,6 +19,7 @@ add_filter( 'cron_schedules', 'adverts_cron_5_min' );
 
 add_action( 'adverts_event_gc', 'adverts_event_gc' );
 add_action( 'adverts_event_expire_ads', 'adverts_event_expire_ads' );
+add_action( 'adverts_event_delete_tmp_files', 'adverts_event_delete_tmp_files' );
 
 /**
  * Schedules Adverts events
@@ -38,6 +39,11 @@ function adverts_setup_schedule() {
     // Schedule expired ads check, if not already scheduled
     if ( ! wp_next_scheduled( 'adverts_event_expire_ads' ) ) {
         wp_schedule_event( time(), '5minutes', 'adverts_event_expire_ads');
+    }
+    
+    // Schedule tmp file deletion, if not already scheduled
+    if( !wp_next_scheduled( 'adverts_event_delete_tmp_files' ) ) {
+        wp_schedule_event( time(), 'daily', 'adverts_event_delete_tmp_files' );
     }
 
 }
@@ -141,4 +147,46 @@ function adverts_event_expire_ads() {
         } // endforeach
     } // endif
     
+}
+
+/**
+ * Delete tmp files
+ * 
+ * Function deletes all files and directories in the adverts tmp folder
+ * if they are older the 7 days.
+ * 
+ * The delta (7 days) you can change using adverts_event_delete_tmp_files_delta filter
+ * 
+ * @see adverts_event_delete_tmp_files_delta filter
+ * 
+ * @since   1.5.0
+ * @return  void
+ */
+function adverts_event_delete_tmp_files( ) {
+
+    $source = adverts_get_tmp_dir();
+    
+    $directory_iterator = new RecursiveDirectoryIterator( $source, RecursiveDirectoryIterator::SKIP_DOTS );
+    $recursive_iterator = new RecursiveIteratorIterator( $directory_iterator, RecursiveIteratorIterator::CHILD_FIRST );
+    
+    $delta = apply_filters( "adverts_event_delete_tmp_files_delta", 3600 * 24 * 7 );
+    $min_time = current_time( 'timestamp', true ) - $delta;
+    
+    foreach ( $recursive_iterator as $item ) {
+        
+        if( $item->getMTime() > $min_time ) {
+            continue;
+        }
+        
+        if( $item->isDir() ) {
+            $dir_items = glob( $item->getRealPath() . "/*" );
+            if( empty( $dir_items ) ) {
+                rmdir( $item->getRealPath() );
+            }
+        } else if( $item->isFile() ) {
+            wp_delete_file( $item->getRealPath() );
+        }
+        
+       
+    }
 }

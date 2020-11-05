@@ -58,12 +58,21 @@ function adverts_gallery_upload() {
 
     $args = _adverts_ajax_verify_checksum();
     $post_id = _adverts_ajax_verify_post_id( _adverts_ajax_requires_post_id( $args ) );
-
-    $form_name = adverts_request( "form" );
+    
+    if( isset( $args["is-wp-admin"] ) && $args["is-wp-admin"] ) {
+        $form_name = adverts_request( "form" );
+        //$scheme_name = wpadverts_get_form( $form_name );
+    }  else {
+        $form_name = $args["form_name"];
+        //$scheme_name = $args["scheme_name"];
+    }
+    
     $field_name = adverts_request( "field_name" );
     
     include_once ADVERTS_PATH . '/includes/class-upload-helper.php';
     $v = new Adverts_Upload_Helper;
+    $v->set_form_name( $form_name );
+    $v->set_post_id( $post_id );
     
     if( $post_id > 0 ) {
         $form_params = array(
@@ -74,86 +83,122 @@ function adverts_gallery_upload() {
             "form_scheme_id" => isset( $args["form_scheme_id"] ) ? $args["form_scheme_id"]: null
         );
     }
-    $form_scheme = apply_filters( "adverts_form_scheme", Adverts::instance()->get("form"), $form_params );
+
+    $form_scheme = apply_filters( "adverts_form_scheme", wpadverts_get_form( $form_name ), $form_params );
     $form_scheme = apply_filters( "adverts_form_load", $form_scheme );
 
     foreach($form_scheme["field"] as $key => $field) {
         if($field["name"] == $field_name ) {
+            
+            $v->set_field( $field );
+            
             if(isset($field["validator"]) && is_array($field["validator"])) {
                 foreach($field["validator"] as $vcallback) {
                     $v->add_validator($vcallback);
                 }
             }
-            
+            break;
         }
     }
     
     add_filter( "adverts_gallery_upload_prefilter", array( $v, "check" ) );
 
+    $uid_name = "_uniqid";
+    
+    if( strlen( adverts_request( $uid_name ) ) > 0 ) {
+        $v->set_uniquid( adverts_request( $uid_name ) );
+    } else {
+        $v->set_uniquid( uniqid() );
+    }
+    
+    $status = $v->upload();
+    
     // you can use WP's wp_handle_upload() function:
-    $status = wp_handle_upload($_FILES['async-upload'], array('test_form'=>true, 'action' => 'adverts_gallery_upload'));
+    // $status = wp_handle_upload($_FILES['async-upload'], array('test_form'=>true, 'action' => 'adverts_gallery_upload'));
 
     if(isset($status['error'])) {
         echo json_encode($status);
         exit;
     }
-
-    // $filename should be the path to a file in the upload directory.
-    $filename = $status['file'];
-
-    // The ID of the post this attachment is for.
-    $parent_post_id = $post_id;
-
-    // Check the type of tile. We'll use this as the 'post_mime_type'.
-    $filetype = wp_check_filetype( basename( $filename ), null );
-
-    // Get the path to the upload directory.
-    $wp_upload_dir = wp_upload_dir();
-
-    // Prepare an array of post data for the attachment.
-    $attachment = array(
-        'guid'           => $wp_upload_dir['url'] . '/' . basename( $filename ), 
-        'post_mime_type' => $filetype['type'],
-        'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
-        'post_content'   => '',
-        'post_status'    => 'inherit'
-    );
-
-    // Create post if does not exist
-    if( $parent_post_id < 1 ) {
-        
-        add_filter("post_type_link", "__return_empty_string");
-        
-        $parent_post_id = wp_insert_post( apply_filters( "adverts_insert_post", array( 
-            'post_title'        => 'Adverts Auto Draft',
-            'post_content'      => '',
-            'post_status'       => adverts_tmp_post_status(),
-            'post_author'       => wp_get_current_user()->ID,
-            'post_type'         => isset( $args["post_type"] ) ? $args["post_type"] : "advert",
-            'comments_status'   => 'closed'
-        ) ) );
-        
-        remove_filter("post_type_link", "__return_empty_string");
+    
+    if( $post_id ) {
+        $post = get_post( $post_id );
+        $v->set_post_id( $post_id );
     } else {
-        _adverts_ajax_check_post_ownership( $parent_post_id );
+        $post = null;
     }
     
-    // Insert the attachment.
-    $attach_id = wp_insert_attachment( $attachment, $filename, $parent_post_id );
-    
-    if ( !is_wp_error( $attach_id ) ) {
-        wp_update_attachment_metadata( $attach_id, wp_generate_attachment_metadata( $attach_id, $filename ) );
+    if( isset( $args["ignore-post-id"] ) && $args["ignore-post-id"] ) {
+        echo json_encode( adverts_upload_file_data( $status, $post, $v->get_uniquid() ) );
+        exit;
     }
     
-    update_post_meta( $attach_id, "wpadverts_form", $form_name );
-    update_post_meta( $attach_id, "wpadverts_form_field", $field_name );
+    // create parent post if not exists ... else check post ownership
     
-    do_action( "adverts_attachment_uploaded", $attach_id );
-    
-    include_once ADVERTS_PATH . 'includes/gallery.php';
-    
-    echo json_encode( adverts_upload_item_data( $attach_id ) );
-    exit;
+    if( $v->is_file() ) {
+        // move to "id" folder
+        echo json_encode( adverts_upload_file_data( $status, $post, $v->get_uniquid() ) );
+        exit;
+        
+    } else {
+        
+        // $filename should be the path to a file in the upload directory.
+        $filename = $status['file'];
+
+        // The ID of the post this attachment is for.
+        $parent_post_id = $post_id;
+
+        // Check the type of tile. We'll use this as the 'post_mime_type'.
+        $filetype = wp_check_filetype( basename( $filename ), null );
+
+        // Get the path to the upload directory.
+        $wp_upload_dir = wp_upload_dir();
+
+        // Prepare an array of post data for the attachment.
+        $attachment = array(
+            'guid'           => $wp_upload_dir['url'] . '/' . basename( $filename ), 
+            'post_mime_type' => $filetype['type'],
+            'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
+            'post_content'   => '',
+            'post_status'    => 'inherit'
+        );
+
+        // Create post if does not exist
+        if( $parent_post_id < 1 ) {
+
+            add_filter("post_type_link", "__return_empty_string");
+
+            $parent_post_id = wp_insert_post( apply_filters( "adverts_insert_post", array( 
+                'post_title'        => 'Adverts Auto Draft',
+                'post_content'      => '',
+                'post_status'       => adverts_tmp_post_status(),
+                'post_author'       => wp_get_current_user()->ID,
+                'post_type'         => isset( $args["post_type"] ) ? $args["post_type"] : "advert",
+                'comments_status'   => 'closed'
+            ) ) );
+
+            remove_filter("post_type_link", "__return_empty_string");
+        } else {
+            _adverts_ajax_check_post_ownership( $parent_post_id );
+        }
+
+        // Insert the attachment.
+        $attach_id = wp_insert_attachment( $attachment, $filename, $parent_post_id );
+
+        if ( !is_wp_error( $attach_id ) ) {
+            wp_update_attachment_metadata( $attach_id, wp_generate_attachment_metadata( $attach_id, $filename ) );
+        }
+
+        update_post_meta( $attach_id, "wpadverts_form", $form_name );
+        update_post_meta( $attach_id, "wpadverts_form_field", $field_name );
+
+        do_action( "adverts_attachment_uploaded", $attach_id );
+
+        include_once ADVERTS_PATH . 'includes/gallery.php';
+
+        echo json_encode( adverts_upload_item_data( $attach_id ) );
+        exit;
+    }
 };
 
 /**
@@ -277,6 +322,79 @@ function adverts_gallery_delete() {
         echo json_encode( array( "result" => 0, "error" => __( "File could not be deleted.", "wpadverts" ) ) );
     }
     
+    exit;
+}
+
+/**
+ * Deletes one file (not media library item) uploaded to the gallery.
+ * 
+ * Action: adverts_gallery_delete_file
+ * 
+ * @since 1.4.7
+ * @return void
+ */
+function adverts_gallery_delete_file() {
+    
+    $args = _adverts_ajax_verify_checksum();
+    $post_id = _adverts_ajax_verify_post_id( false );
+
+    $uniqid = adverts_request( "uniqid" );
+    $filename = adverts_request( "filename" );
+    $field_name = adverts_request( "field_name" );
+    $field = null;
+    
+    if( isset( $args["is-wp-admin"] ) && $args["is-wp-admin"] ) {
+        $form_name = adverts_request( "form_name" );
+    } else {
+        $form_name = $args["form_name"];
+    }
+    
+    $form_scheme = apply_filters( "adverts_form_scheme", wpadverts_get_form( $form_name ), $args );
+    $form_scheme = apply_filters( "adverts_form_load", $form_scheme );
+
+    foreach($form_scheme["field"] as $field ) {
+        if( $field["name"] == $field_name ) {
+            break;
+        }
+    }
+    
+    if( $field === null ) {
+        echo json_encode( array( "result" => 0, "error" => __( "Incorrect field name.", "wpadverts" ) ) );
+        exit;
+    }
+    
+    include_once ADVERTS_PATH . '/includes/class-upload-helper.php';
+    
+    $v = new Adverts_Upload_Helper;
+    $v->set_field( $field );
+    $v->set_form_name( $form_name );
+    $v->set_uniquid( $uniqid );
+    $v->set_post_id( $post_id );
+
+    if( $v->get_post_id() ) {
+        $file = $v->get_path_dest() . "/" . sanitize_file_name( $filename );
+    } else {
+        $file = $v->get_path() . "/" . sanitize_file_name( $filename );
+    }
+    
+    if( ! file_exists( $file ) ) {
+        echo json_encode( array( "result" => 0, "error" => __( "File does not exist.", "wpadverts" ) ) );
+    } else {
+        
+        wp_delete_file( $file );
+        
+        do {
+            if( is_dir( $file ) ) {
+                rmdir( $file );
+            } else {
+                unlink( $file );
+            }
+            $file = dirname( $file );
+            $files = glob( $file . "/*" );
+        } while( empty( $files ) );
+        
+        echo json_encode( array( "result" => 1 ) );
+    }
     exit;
 }
 
@@ -891,6 +1009,81 @@ function adverts_delete_tmp() {
 }
 
 /**
+ * Deletes temporary files
+ * 
+ * This action is executed when user leaves a page with an uploaded file
+ * 
+ * No Priv
+ * Action: adverts_delete_tmp_files
+ * 
+ * @since 1.5.0
+ * @return void
+ */
+function adverts_delete_tmp_files() {
+    
+    ignore_user_abort(true);
+    
+    $args = _adverts_ajax_verify_checksum();
+    
+    $uniqid = adverts_request( "uniqid" );
+    $fields = array();
+    $field = null;
+    
+    $form_name = $args["form_name"];
+    $scheme_name = $args["scheme_name"];
+    
+    $form_scheme = apply_filters( "adverts_form_scheme", Adverts::instance()->get( $scheme_name ), $args );
+    $form_scheme = apply_filters( "adverts_form_load", $form_scheme );
+
+    $response = array();
+    
+    /* @todo: check if the fields are in the form */
+    foreach($form_scheme["field"] as $field ) {
+        if( $field["type"] == "adverts_field_gallery" && isset( $field["save"]["method"] ) && $field["save"]["method"] == "file" ) {
+            $fields[] = $field;
+        }
+    }
+
+    if( empty( $fields ) ) {
+        echo json_encode( array( "result" => -1  ) );
+        exit;
+    }
+    
+    include_once ADVERTS_PATH . '/includes/class-upload-helper.php';
+    
+    foreach( $fields as $field ) {
+        $v = new Adverts_Upload_Helper;
+        $v->set_field( $field );
+        $v->set_form_name( $form_name );
+        $v->set_uniquid( $uniqid );
+
+        $files_path = $v->get_path() . "/*";
+        $files_all = glob( $files_path );
+        
+        foreach( $files_all as $file ) {
+            
+            if( ! file_exists( $file ) ) {
+                continue;
+            }
+            
+            do {
+                if( is_dir( $file ) ) {
+                    rmdir( $file );
+                } else {
+                    wp_delete_file( $file );
+                }
+                $file = dirname( $file );
+                $files = glob( $file . "/*" );
+            } while( empty( $files ) );
+
+        } // endforeach
+    }
+    
+    echo json_encode( array( "result" => 1 ) );
+    exit;
+}
+
+/**
  * Delete Advert
  * 
  * This action is executed by ad poster in the frontend (from the [adverts_manage] shortcode).
@@ -908,6 +1101,11 @@ function adverts_delete() {
     $is_ajax = adverts_request( "ajax", false );
     $post = get_post($id);
     $result = null;
+    
+    //$action = sprintf( "wpadverts-delete-%d", $id );
+    //$nonce = adverts_request( "_ajax_nonce" );
+    //echo wp_create_nonce( $action )."<br/>";
+    //var_dump( wp_verify_nonce( $nonce, $action ) ); exit;
     
     // Check AJAX referer
     if( ! check_ajax_referer( sprintf( "wpadverts-delete-%d", $id ), '_ajax_nonce', false ) ) {

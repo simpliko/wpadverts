@@ -101,12 +101,26 @@ WPADVERTS.File.Uploader = function(setup) {
     
     this.PostID = null;
     this.PostIDNonce = null;
+    this.Type = "Media";
+    
+    if(typeof setup.conf.save.method != "undefined" && setup.conf.save.method === "file" ) {
+        this.Type = "File";
+    }
     
     if($(setup.conf.input_post_id).val()) {
         this.PostID = $(setup.conf.input_post_id).val();
     }
     if($(setup.conf.input_post_id_nonce).val()) {
         this.PostIDNonce = $(setup.conf.input_post_id_nonce).val();
+    }
+    if($("#"+setup.init.container).closest("form").find("#wpadverts-form-upload-uniqid").length === 0) {
+        var uploadid = $("<input type='hidden' name='wpadverts-form-upload-uniqid' id='wpadverts-form-upload-uniqid' />");
+        if(setup.conf.uniqid !== null) {
+            uploadid.val(setup.conf.uniqid);
+        } else if(this.PostID) {
+            uploadid.val(this.PostID);
+        }
+        $("#"+setup.init.container).closest("form").append(uploadid);
     }
 
     this.Item = {};
@@ -125,9 +139,12 @@ WPADVERTS.File.Uploader = function(setup) {
         var x = 0;
     });
     
-    this.sortable.sortable({
-        update: jQuery.proxy(this.SortableUpdate, this)
-    });
+    
+    if( this.setup.conf.save.method !== "file" ) {
+        this.sortable.sortable({
+            update: jQuery.proxy(this.SortableUpdate, this)
+        });
+    }
     
     this.Plupload(setup.init);
     
@@ -145,6 +162,11 @@ WPADVERTS.File.Uploader.prototype.GetKeys = function() {
 };
 
 WPADVERTS.File.Uploader.prototype.SortableUpdate = function(e) {
+    
+    if( this.setup.conf.save.method === "file" ) {
+        return;
+    }
+    
     var keys = this.GetKeys();
 
     if(typeof e !== "undefined") {
@@ -191,11 +213,14 @@ WPADVERTS.File.Uploader.prototype.SortableUpdateError = function(response) {
 WPADVERTS.File.Uploader.prototype.FileAdded = function(container, file) {
     var c = jQuery("<div></div>").addClass("adverts-gallery-upload-item").attr("id", file.id);
     var init = {
-        _ajax_nonce: this.setup.init.multipart_params._ajax_nonce
+        _ajax_nonce: this.setup.init.multipart_params._ajax_nonce,
+        field_name: this.Browser.uploader.setup.init.multipart_params.field_name
     };
     
     this.Item[file.id] = new WPADVERTS.File.Singular(file, c, init);
     this.Item[file.id].SetBrowser(this.Browser);
+    this.Item[file.id].Type = this.Type;
+    
     this.Item[file.id].render();
     
     this.ui.find(".adverts-gallery-uploads").append(c);
@@ -205,11 +230,15 @@ WPADVERTS.File.Uploader.prototype.FileUploaded = function(file, result) {
     this.Item[file.id].setResult(result);
     this.Item[file.id].render();
     
+    if(typeof result.uniqid !== "undefined" && jQuery("#wpadverts-form-upload-uniqid").val().length === 0) {
+        jQuery("#wpadverts-form-upload-uniqid").val(result.uniqid);
+    }
+    
     if(typeof result.post_id !== "undefined") {
         this.PostID = result.post_id;
     }
     
-    if( jQuery( this.setup.conf.input_post_id ).val().length === 0 ) {
+    if( jQuery( this.setup.conf.input_post_id ).length > 0 && jQuery( this.setup.conf.input_post_id ).val().length === 0 ) {
         jQuery( this.setup.conf.input_post_id ).val( this.PostID );
     }
     
@@ -217,7 +246,7 @@ WPADVERTS.File.Uploader.prototype.FileUploaded = function(file, result) {
         this.PostIDNonce = result.post_id_nonce;
     }
     
-    if( jQuery( this.setup.conf.input_post_id_nonce ).val().length === 0 ) {
+    if( jQuery( this.setup.conf.input_post_id_nonce ).length > 0 && jQuery( this.setup.conf.input_post_id_nonce ).val().length === 0 ) {
         jQuery( this.setup.conf.input_post_id_nonce ).val( this.PostIDNonce );
     }
 };
@@ -263,8 +292,12 @@ WPADVERTS.File.Uploader.Plupload.prototype.InitDragLeave = function() {
 };
 
 WPADVERTS.File.Uploader.Plupload.prototype.BeforeUpload = function(up,file) {
-    up.settings.multipart_params._post_id = this.PostID;
-    up.settings.multipart_params._post_id_nonce = this.PostIDNonce;
+    if(this.PostID !== null && this.PostIDNonce !== null) {
+        up.settings.multipart_params._post_id = this.PostID;
+        up.settings.multipart_params._post_id_nonce = this.PostIDNonce;
+    }
+    
+    up.settings.multipart_params._uniqid = jQuery("#wpadverts-form-upload-uniqid").val()
     
     var mp = up.settings.multipart_params;
     var form = this.ui.closest("form");
@@ -314,10 +347,14 @@ WPADVERTS.File.Uploader.Plupload.prototype.FileUploaded = function(up, file, res
 };
 
 WPADVERTS.File.Uploader.Plupload.prototype.UploadComplete = function(up, file, response) {
+    if( this.setup.conf.save.method === "file" ) {
+        return;
+    }
     this.SortableUpdate();;
 }
 
 WPADVERTS.File.Singular = function(file, container, init) {
+    this.type = "Media";
     this.file = file;
     this.container = container;
     this.init = init;
@@ -343,7 +380,8 @@ WPADVERTS.File.Singular.prototype.render = function() {
         file: this.file,
         result: this.result,
         mime: WPADVERTS.File.GetMime(this.result),
-        icon: WPADVERTS.File.GetIcon(this.result)
+        icon: WPADVERTS.File.GetIcon(this.result),
+        conf: this.browser.uploader.setup.conf
     };
     
     var tpl = template(data);
@@ -397,19 +435,38 @@ WPADVERTS.File.Singular.prototype.RemoveClicked = function(e) {
     
     this.spinner.css("display", "block");
 
-    jQuery.ajax({
-        url: adverts_gallery_lang.ajaxurl,
-        context: this,
-        type: "post",
-        dataType: "json",
-        data: {
+    var data = null;
+
+    if( typeof this.result.uniqid != "undefined" ) {
+        data = {
+            action: "adverts_gallery_delete_file",
+            field_name: this.init.field_name,
+            form_name: this.browser.uploader.setup.conf.form_name,
+            uniqid: this.result.uniqid,
+            _post_id: this.result.post_id,
+            _post_id_nonce: this.result.post_id_nonce,
+            _wpadverts_checksum_nonce: jQuery("#_wpadverts_checksum_nonce").val(),
+            _wpadverts_checksum: jQuery("#_wpadverts_checksum").val(),
+            filename: this.result.readable.name
+        };
+    } else {
+        data = {
             action: "adverts_gallery_delete",
+            field_name: this.init.field_name,
             _post_id: this.result.post_id,
             _post_id_nonce: this.result.post_id_nonce,
             _wpadverts_checksum_nonce: jQuery("#_wpadverts_checksum_nonce").val(),
             _wpadverts_checksum: jQuery("#_wpadverts_checksum").val(),
             attach_id: this.result.attach_id
-        },
+        };
+    }
+
+    jQuery.ajax({
+        url: adverts_gallery_lang.ajaxurl,
+        context: this,
+        type: "post",
+        dataType: "json",
+        data: data,
         success: jQuery.proxy(this.RemoveClickedSuccess, this),
         error: jQuery.proxy(this.RemoveClickedError, this)
     });            
@@ -1297,5 +1354,21 @@ jQuery(function($) {
     
     $.each(ADVERTS_PLUPLOAD_DATA, function(index, item) {
         WPADVERTS.File.Registered.push(new WPADVERTS.File.Uploader(item));
+    });
+});
+
+
+jQuery(function($) {
+    $("a.imprint").on("click", function(e) {
+        e.preventDefault();
+        
+        jQuery.each(WPADVERTS.File.Registered, function(i, item) {
+            var x= 0;
+           jQuery.each(item.Item, function(j, file) {
+               var x = 0;
+           }) 
+        });
+        
+        return false;
     });
 });

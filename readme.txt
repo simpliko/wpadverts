@@ -5,80 +5,104 @@ Tags: classifieds, classified, classified ads, classified script, classifieds sc
 Requires PHP: 5.3
 Requires at least: 4.0
 Tested up to: 5.5
-Stable tag: 1.4.5
+Stable tag: 1.5.0
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
 
 == Description ==
 
-WPAdverts is a lite weight plugin which allows to build beatufiul classifieds site in minutes. Plugin will work with ANY properly
-coded WordPress theme and you can use it on new or existing site.
+This is the popular classifieds plugin that experienced users stay with or come back to!
 
-When building Adverts we are focusing on ease of use, WordPress compatibility and extensibility, the plugin core is small but this
-is NOT a demo, this is a fully functional classifieds software with most crucial functionalities builtin.
+More than 10 years of experience led us to build WPAdverts around 3 key points:
 
-**Links**
+* FASTER
+* MORE FLEXIBLE
+* MORE FREEDOM!
 
-* [WordPress Classifieds Plugin](https://wpadverts.com/) - official site.
-* [View User Demo](https://demo.wpadverts.com/lite/) - see plugin frontend.
-* [View Admin Demo](https://demo.wpadverts.com/lite/wp-admin/) - see wp-admin panel.
-* [Documentation](https://wpadverts.com/documentation/) - mainly for users.
-* [Code Snippets](https://github.com/simpliko/wpadverts-snippets) - for programmers and developers.
+WPAdverts is a fast, lite-weight plugin that’s flawless on ANY device and fits with ANY theme! 
 
-**Noatble Features**
+It also plays nicely with other plugins, giving you the freedom to quickly create the classifieds site that YOU want, as a flexible foundation that can grow with you and your community.
 
-* Modern, responsive design.
-* Intuitive classified Ads browsing and searching ([adverts_list] shortcode).
-* Display classifieds categories grid ([adverts_categories] shortcode).
-* Allow (registered and/or anonymous) users to post classifieds ([adverts_add] shortcode).
-* Allow users to browse, edit and delete their ads ([adverts_manage] shortcode).
-* Payments Module to track user payments and transactions logs.
-* Bank Transfer payment gateway included.
-* Charge users for posting classifieds ads
-* Charge users for renewing expired ads
-* Easy to use drag and drop image upload.
-* Ads will automatically expire after set number of days.
-* Detailed user and developer documenation.
+ANY HOSTING? YES!
+ 
+There’s no need for expensive hosting with WPAdverts, because our crafty Wordpress-standards coding keeps your server-load low and your loading-times FAST!
+
+EASIER BY DESIGN
+
+Everything comes together like you’d expect.
+
+WPAdverts blends seamlessly with WordPress, making it super-simple and familiar; you’ll feel like a pro’ in approx’ 3 minutes!
+
+SPEEDY, EXPERT SUPPORT
+
+If you ever do get stuck you can rest assured of fast support by someone who really knows Wordpress!
+
+We also have extensive documentation and helper videos too.
+
+EXTENSIONS? OF COURSE!
+
+We DO NOT confuse or “nickel and dime” you at every step; instead we simply offer 3 value-packed packages. See pricing below.
+
+TAKE ACTION; TAKE CONTROL
+
+Note this is more than a demo; it’s a fully-functioning classifieds software with all critical functions built-in; you can start TODAY. 
+
+INSTALL
+
+Click the Installation tab at the top of this page to see how you install WPAdverts – or just click the blue Install Now button at the bottom of this page!
+
+Install WPAdverts now and you’ll understand our 5 star reviews and why people keep coming back, building their success upon success!
+
+
+**Quick Links**
+
+* [View User Demo](https://demo.wpadverts.com/lite/) – see plugin frontend (plain)
+* [View Admin Demo](https://demo.wpadverts.com/lite/wp-admin/) – see wp-admin panel
+* [WordPress Classifieds Plugin](https://wpadverts.com/) – official site
+* [WPAdverts Pricing](https://wpadverts.com/pricing/) – 3 affordable packs!
+
+**Notable Features**
+
+WPAdverts has ALL the classifieds features you’d expect, and some you might not:
+
+* Modern, responsive design for any device or screen size
+* Freedom to work with the very best of other plugins
+* Choose Grid or List Display – and allows your visitors to switch too!
+* You can allow both registered and/or anonymous users to post classifieds
+* Allows users to browse, edit and delete their own ads
+* Payments Module to track user payments and transactions logs
+* Bank Transfer payment gateway is included, for free
+* Charge users for renewing auto-expired ads
+* 12 translations available, see list below
+* Easy drag-and-drop image upload
+* Detailed documentation for both developers AND normal users!
+
+**Documentation**
+
+* [Documentation](https://wpadverts.com/docs/) – mainly for users
+* [Short-codes](https://wpadverts.com/docs/shortcodes/) – quick reference for users
+* [Code Snippets](https://github.com/simpliko/wpadverts-snippets) – for programmers and developers
 
 **Extensions**
 
-WPAdverts plugin can be extended with premium add-ons.
+WPAdverts plugin can be extended with premium add-ons to suit and your business, available in 3 convenient and affordable packs; Personal, Pro or Ultimate. 
+See all the extensions available at https://wpadverts.com/extensions/
 
-* [<strong>ALL EXTENSIONS BUNDLE</strong>](https://wpadverts.com/extensions/all-extensions-bundle/) <strong>one price, huge discount</strong>
-* [Custom Fields](https://wpadverts.com/extensions/custom-fields/)
-* [WooCommerce Integration](https://wpadverts.com/extensions/woocommerce-integration/)
-* [BuddyPress Integration](https://wpadverts.com/extensions/buddypress-integration/)
-* [Maps and Locations](https://wpadverts.com/extensions/maps-and-locations/)
-* [PayPal Payments Standard](https://wpadverts.com/extensions/paypal-payments-standard/)
-* [Restricted Categories](https://wpadverts.com/extensions/restricted-categories/)
-* [Fee Per Category](https://wpadverts.com/extensions/fee-per-category/)
-* [reCAPTCHA Integration](https://wpadverts.com/extensions/recaptcha/)
+**12 Available Translations**
 
-See all https://wpadverts.com/extensions/
+Brazilian, Croatian, French, Dutch, German, Italian, Polish, Portuguese, Russian, Slovak, Slovenian and Spanish.
+We’re not English native speakers, so if you find any typo, grammar mistake or etc. please report it on the support forum, thanks!
+Could you translate Adverts to your language? Please do help users by submitting your translation!
+Get Involved!
 
-**Available Translations**
+* Rate Adverts – If you find this plugin useful please do leave a [positive review](https://wordpress.org/support/view/plugin-reviews/wpadverts)  : )
+* Submit a Bug – If you find any issue please [submit a bug](https://github.com/simpliko/wpadverts/issues/new) on GitHub. 
 
-* Brazilian
-* British (UK)
-* Croatian
-* French
-* Dutch
-* German
-* Italian
-* Polish
-* Portugese
-* Russian
-* Slovak
-* Slovenian
-* Spanish
+Get started!
 
-**Get Involved**
+Click the blue button on the lower right-hand side of this page that says ‘Install Now’. It’s quick and easy!
 
-* Wording - I am not English native speaker, if you find any typo, grammer mistake or etc. please report it on support forum.
-* Translation - If you translated Adverts to your language feel free to submit translation.
-* Rate Adverts - If you find this plugin useful please leave [positive review](https://wordpress.org/support/view/plugin-reviews/wpadverts).
-* Submit a Bug - If you find some issue please [submit a bug](https://github.com/simpliko/wpadverts/issues/new) on GitHub.
 
 == Installation ==
 
@@ -99,6 +123,13 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.5.0 - 2020-11-11 =
+
+* FEATURE: File Uploads API
+* FEATURE: Attaching files to messages in Emails Module
+* FIXED: Error which duplicates "Post a Job" pages.
+* FIXED: Renewal selection page shows only 5 options.
 
 = 1.4.5 - 2020-08-13 =
 

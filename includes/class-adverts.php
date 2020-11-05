@@ -52,6 +52,16 @@ class Adverts {
     }
     
     /**
+     * Returns all saved data
+     * 
+     * @since   1.5.0
+     * @return  array
+     */
+    public function get_all() {
+        return $this->_data;
+    }
+    
+    /**
      * Sets adverts option
      * 
      * @param string $key

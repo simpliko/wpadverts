@@ -81,7 +81,12 @@ function adext_contact_form_content( $post_id ) {
     $email = get_post_meta( $post_id, "adverts_email", true );
     $phone = get_post_meta( $post_id, "adverts_phone", true );
     $message = null;
-    $form = new Adverts_Form( Adverts::instance()->get( "form_contact_form" ) );
+    
+    $form_scheme = apply_filters( "adverts_form_scheme", Adverts::instance()->get( "form_contact_form" ), array() );
+   
+    // adverts_form_load filter will add checksum fields
+    $form = new Adverts_Form( $form_scheme );
+    
     $actions_class = "adverts-field-actions";
     $buttons = array(
         array(
@@ -89,10 +94,12 @@ function adext_contact_form_content( $post_id ) {
             "name" => "adverts_contact_form",
             "type" => "submit",
             "value" => __( "Send Message", "wpadverts" ),
-            "class" => "adverts-button",
+            "class" => "adverts-button adverts-cancel-unload",
             "html" => null
         ),
     );
+    
+    wp_enqueue_script( 'adverts-form' );
     
     if( adverts_request( "adverts_contact_form" ) ) {
         
@@ -100,13 +107,21 @@ function adext_contact_form_content( $post_id ) {
         
         $form->bind( stripslashes_deep( $_POST ) );
         $valid = $form->validate();
-        
+
         if( $valid ) {
             
             //Adext_Contact_Form::instance()->send_message( get_post( $post_id ), $form );
             do_action( "adext_contact_form_send", $post_id, $form );
             
-            $form->bind( array() );
+            // delete uploaded files ($form)
+            $uniqid = sanitize_file_name( adverts_request( "wpadverts-form-upload-uniqid" ) );
+            adext_contact_form_delete_tmp_files( $form->get_scheme(), $uniqid );
+            
+            $bind = array();
+            $bind["_wpadverts_checksum"] = adverts_request( "_wpadverts_checksum" );
+            $bind["_wpadverts_checksum_nonce"] = adverts_request( "_wpadverts_checksum_nonce" );
+            
+            $form->bind( $bind );
             
             $flash["info"][] = array(
                 "message" => __( "Your message has been sent.", "wpadverts" ),
@@ -122,6 +137,8 @@ function adext_contact_form_content( $post_id ) {
         }
     } else {
         
+        $bind = array();
+        
         if( get_current_user_id() > 0 ) {
             $user = wp_get_current_user();
             /* @var $user WP_User */
@@ -130,10 +147,24 @@ function adext_contact_form_content( $post_id ) {
                 "message_name" => $user->display_name,
                 "message_email" => $user->user_email
             );
-            
-            $form->bind( $bind );
-            
         }
+        
+        include_once ADVERTS_PATH . '/includes/class-checksum.php';
+        
+        $checksum = new Adverts_Checksum();
+
+        $keys = $checksum->get_integrity_keys( array(
+            "ignore-post-id" => true,
+            "form_name" => "contact",
+            "scheme_name" => "form_contact_form",
+            "form_scheme_id" => ""
+        ) );
+
+        $bind["_wpadverts_checksum"] = $keys["checksum"];
+        $bind["_wpadverts_checksum_nonce"] = $keys["nonce"];
+
+        $form->bind( $bind );
+        
     }
     
     ?>
@@ -148,6 +179,53 @@ function adext_contact_form_content( $post_id ) {
     <?php endif; ?>
 
     <?php
+}
+
+function adext_contact_form_delete_tmp_files( $form_scheme, $uniqid ) {
+    
+    $fields = array();
+    
+    $form_name = $form_scheme["name"];
+    
+    foreach($form_scheme["field"] as $field ) {
+        if( $field["type"] == "adverts_field_gallery" && isset( $field["save"]["method"] ) && $field["save"]["method"] == "file" ) {
+            $fields[] = $field;
+        }
+    }
+
+    if( empty( $fields ) ) {
+        return;
+    }
+    
+    include_once ADVERTS_PATH . '/includes/class-upload-helper.php';
+    
+    foreach( $fields as $field ) {
+        $v = new Adverts_Upload_Helper;
+        $v->set_field( $field );
+        $v->set_form_name( $form_name );
+        $v->set_uniquid( $uniqid );
+
+        $files_path = $v->get_path() . "/*";
+        $files_all = glob( $files_path );
+        
+        foreach( $files_all as $file ) {
+            
+            if( ! file_exists( $file ) ) {
+                continue;
+            }
+            
+            do {
+                if( is_dir( $file ) ) {
+                    rmdir( $file );
+                } else {
+                    wp_delete_file( $file );
+                }
+                $file = dirname( $file );
+                $files = glob( $file . "/*" );
+            } while( empty( $files ) );
+
+        } // endforeach
+    }
 }
 
 /**

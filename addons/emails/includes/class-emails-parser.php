@@ -267,6 +267,8 @@ class Adext_Emails_Parser implements Adext_Emails_Parser_Interface {
             $mail_args["attachments"][$key] = $this->parse( $attachment );
         }
         
+        $mail_args["attachments"] = join( $mail_args["attachments"], "\n" );
+        
         $this->reset();
         
         //echo "<pre>";

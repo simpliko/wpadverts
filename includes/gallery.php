@@ -29,6 +29,12 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
         $button = "button";
     }
     
+    if( isset( $_POST["wpadverts-form-upload-uniqid"] ) ) {
+        $uniqid = $_POST["wpadverts-form-upload-uniqid"];
+    } else {
+        $uniqid = null;
+    }
+    
     $conf = shortcode_atts( array(
         "button_class" => "button-secondary",
         "input_post_id" => "#post_ID",
@@ -39,8 +45,10 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
         "_post_id_nonce" => "",
         "field_name" => "gallery",
         "form_name" => "advert",
-        "save" => array( "method" => "media-library" )
+        "save" => array( "method" => "media-library" ),
+        "uniqid" => $uniqid
     ), $conf);
+
     
     $field_name = $conf["field_name"];
     $form_name = $conf["form_name"];
@@ -69,6 +77,8 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
             'field_name'    => $field_name,
         ),
     );
+    
+    
     
     // Filters the default Plupload settings.
     $init = apply_filters( 'adverts_plupload_default_settings', $init );
@@ -101,57 +111,97 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
     <?php
         // Get data for uploaded items and format it as JSON.
         $data = array();
-        if($post) {
         
-            $children = get_children( array(
+        if( $post ) {
+            $post_parent = $post->post_parent;
+        } else {
+            $post_parent = 0;
+        }
+        
+        if( $post && ( ! isset( $conf["save"] ) || $conf["save"]["method"] == "media-library" ) ) {
+        
+            $att_search_meta = array(
+                array( 'key' => 'wpadverts_form', 'value' => $form_name ),
+                array( 'key' => 'wpadverts_form_field', 'value' => $field_name )
+            );
+            
+            if( $form_name == "advert" && $field_name == "gallery" ) {
+                $att_search_meta = array(
+                    "relation" => "OR",
+                    $att_search_meta,
+                    array(
+                        array( 'key' => 'wpadverts_form', 'compare' => 'NOT EXISTS' ),
+                        array( 'key' => 'wpadverts_form_field', 'compare' => 'NOT EXISTS' )
+                    )
+                );
+            }
+            
+            $att_search = array(
                 'post_parent' => $post->ID,
                 'post_type'   => 'attachment', 
                 'posts_per_page' => -1,
-                'post_status' => 'inherit' 
-            ) );
-
+                'post_status' => 'inherit',
+                'meta_query' => $att_search_meta
+            );
+            
+            $children = get_children( $att_search );
             // adverts_sort_images() is defined in functions.php
             require_once ADVERTS_PATH . "/includes/functions.php"; 
             $children = adverts_sort_images($children, $post->ID);
 
             foreach($children as $child) {
                 $data[] = adverts_upload_item_data( $child->ID );
-
             }
 
         }
         
         if( isset( $conf["save"] ) && $conf["save"]["method"] == "file" ) {
-            $dirs = wp_upload_dir();
-            $basedir = $dirs["basedir"];
-            $baseurl = $dirs["baseurl"];
             
-            $files = glob( $basedir . "/" . $conf["save"]["path"] . "/*" );
+            $uniqid = adverts_request( "wpadverts-form-upload-uniqid" );
+            $files = array();
+            
+            $field_tmp = array(
+                "name" => $field_name,
+                "save" => $conf["save"]
+            );
+            
+            include_once ADVERTS_PATH . '/includes/class-upload-helper.php';
+
+            $v = new Adverts_Upload_Helper;
+            $v->set_field( $field_tmp );
+            $v->set_form_name( $form_name );
+            
+            if( $uniqid ) {
+                $v->set_uniquid( $uniqid );
+                $path = $v->get_path();
+                $uid = $v->get_uri();
+                $files = glob( rtrim( $path, "/" ) . "/*" );
+            } 
+            
+            if( $post && empty( $files ) ) {
+                $v->set_post_id( $post->ID );
+                $path = $v->get_path_dest();
+                $uid = $v->get_uri_dest();
+                $files = glob( rtrim( $path, "/" ) . "/*" );
+            }
+            
+            if( ! is_array( $files ) ) {
+                $files = array();
+            }
+            
+
 
             foreach( $files as $file ) {
-                $url = $baseurl . "/" . $conf["save"]["path"] . "/" . basename( $file );
-                $data[] = array(
-                    "post_id" => $post->post_parent,
-                    "post_id_nonce" => wp_create_nonce( "wpadverts-publish-" . $post->post_parent ),
-                    "attach_id" => uniqid(),
-                    "guid" => $url,
-                    "mime_type" => "image",
-                    "featured" => 0,
-                    "caption" => "",
-                    "content" => "",
-                    "sizes" => array(
-                        "adverts_upload_thumbnail" => array(
-                            "url" => null
-                        )
-                    ),
-                    "readable" => array(
-                        "name" => basename( $file ),
-                        "type" => "image",
-                        "uploaded" => "2020-01-01",
-                        "size" => size_format( 100 ),
-                        "length" => null
-                    )
+                
+                $type = wp_check_filetype( $file );
+                
+                $f = array(
+                    "file" => $file,
+                    "url" => rtrim( $uid, "/" ) . "/" . basename( $file ),
+                    "type" => $type["type"]
                 );
+                
+                $data[] = adverts_upload_file_data($f, $post, $uniqid );
             }
         }
 
@@ -213,7 +263,7 @@ function adverts_gallery_modal() {
         <# } else { #>
             <div class="adverts-loader adverts-gallery-upload-update adverts-icon-spinner animate-spin" style="position: absolute; display: none"></div>
             
-            <# if( data.result.sizes.adverts_upload_thumbnail.url ) { #>
+            <# if( typeof data.result.sizes.adverts_upload_thumbnail != "undefined" ) { #>
             <img src="{{ data.result.sizes.adverts_upload_thumbnail.url }}" alt="" class="adverts-gallery-upload-item-img" />
             <# } else if( data.mime == "video" ) { #>
             <span class="adverts-gallery-upload-item-file">
@@ -239,7 +289,15 @@ function adverts_gallery_modal() {
 
 
             <div class="adverts-gallery-upload-actions">
+                <# if(data.conf.save.method == "file") { #>
+                    <# if(data.mime == "image" ) { #>
+                    <a href="{{ data.result.guid }}" target="_blank" class="adverts-button-view <?php echo $button ?> adverts-button-icon adverts-icon-eye" title="<?php _e("View", "wpadverts") ?>"></a>
+                    <# } else { #>
+                    <a href="{{ data.result.guid }}" target="_blank" class="adverts-button-download <?php echo $button ?> adverts-button-icon adverts-icon-download" title="<?php _e("Download", "wpadverts") ?>"></a>
+                    <# } #>
+                <# } else { #>
                 <a href="#" class="adverts-button-edit <?php echo $button ?> adverts-button-icon adverts-icon-pencil" title="<?php _e("Edit File", "wpadverts") ?>"></a>
+                <# } #>
                 <a href="#" class="adverts-button-remove <?php echo $button ?> adverts-button-icon adverts-icon-trash-1" title="<?php _e("Delete File", "wpadverts") ?>"></a>
             </div>
         <# } #>
@@ -641,6 +699,48 @@ function adverts_upload_item_data( $attach_id, $is_new = false ) {
     if( isset( $meta["length_formatted"] ) ) {
         $data["readable"]["length"] = $meta["length_formatted"];
     }
+    
+    return $data;
+}
+
+/**
+ * Formats information about specific uploaded file
+ * 
+ * @since   1.5.0
+ * @param   array       $file       File data
+ * @param   WP_Post     $post       WP_Post object
+ * @param   string      $uniqid     Uniqe ID generated for the upload
+ * @return  array
+ */
+function adverts_upload_file_data( $file, $post = null, $uniqid = null ) {
+    
+    if( $post ) {
+        $post_parent = $post->ID;
+        $post_parent_nonce = wp_create_nonce( "wpadverts-publish-" . $post->ID );
+    } else {
+        $post_parent = null;
+        $post_parent_nonce = "";
+    }
+    
+    $data = array(
+        "uniqid" => $uniqid,
+        "post_id" => $post_parent,
+        "post_id_nonce" => $post_parent_nonce,
+        "attach_id" => null,
+        "guid" => $file["url"],
+        "mime_type" => $file["type"],
+        "featured" => "",
+        "caption" => "",
+        "content" => "",
+        "sizes" => array(),
+        "readable" => array(
+            "name" => basename( $file["file"] ),
+            "type" => $file["type"],
+            "uploaded" => date_i18n( get_option( "date_format"), filemtime( $file["file"] ) ),
+            "size" => size_format( filesize( $file["file"] ) ),
+            "length" => null
+        )
+    );
     
     return $data;
 }

@@ -178,7 +178,7 @@ class Adverts_Shortcode_Adverts_Add {
     public function load_args_from_checksum() {
         include_once ADVERTS_PATH . 'includes/class-checksum.php';
         
-        $this->_checksum = new Adverts_Checksum( $this->_params );
+        $this->_checksum = new Adverts_Checksum( $this->_checksum_args );
         $this->_params = $this->get_checksum()->get_args_from_checksum();
     }
     
@@ -233,6 +233,8 @@ class Adverts_Shortcode_Adverts_Add {
 
         $this->_params = shortcode_atts(array(
             'name' => 'default',
+            'form_name' => 'advert',
+            'scheme_name' => 'form',
             'moderate' => false,
             'requires' => "",
             'requires_error' => "",
@@ -251,7 +253,7 @@ class Adverts_Shortcode_Adverts_Add {
         
         $checksum_args = array();
         $checksum_keys = array( 
-            "name", "moderate", "requires", 
+            "name", "form_name", "scheme_name", "moderate", "requires", 
             "skip_preview", "post_type", "form_scheme_id" 
         );
         foreach( $checksum_keys as $key ) {
@@ -259,6 +261,8 @@ class Adverts_Shortcode_Adverts_Add {
                 $checksum_args[$key] = $this->_params[$key];
             }
         }
+        
+        $this->_checksum_args = $checksum_args;
         $this->_checksum = new Adverts_Checksum( $checksum_args );
         
         extract( $this->_params );
@@ -294,7 +298,8 @@ class Adverts_Shortcode_Adverts_Add {
         $form = $this->get_form();
         
         // show post ad form page
-        wp_enqueue_script( 'adverts-frontend-add' );
+        //wp_enqueue_script( 'adverts-frontend-add' );
+        wp_enqueue_script( 'adverts-form' );
         
         $actions_class = "adverts-field-actions";
         
@@ -357,7 +362,8 @@ class Adverts_Shortcode_Adverts_Add {
             ) ) ) );
         }
         
-        wp_enqueue_script( 'adverts-frontend-add' );
+        //wp_enqueue_script( 'adverts-frontend-add' );
+        wp_enqueue_script( 'adverts-form' );
 
         $form->bind( (array)stripslashes_deep( $_POST ) );
         $valid = $form->validate();
@@ -473,10 +479,12 @@ class Adverts_Shortcode_Adverts_Add {
         
         // copied from functions.php ...
         
-        $post_id = wp_update_post( array(
-            "ID" => $post_id,
-            "post_status" => $moderate == "1" ? 'pending' : 'publish',
-        ));
+        if( absint( $post_id ) > 0 ) { 
+            $post_id = wp_update_post( array(
+                "ID" => $post_id,
+                "post_status" => $moderate == "1" ? 'pending' : 'publish',
+            ));
+        }
         
         $info[] = array(
             "message" => __("Thank you for submitting your ad!", "wpadverts"),

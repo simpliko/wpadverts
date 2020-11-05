@@ -377,6 +377,7 @@ function _adverts_manage_edit( $atts ) {
     
     $checksum_args = array(
         "requires-post-id" => 1,
+        "form_name" => "advert",
         "name" => $params["name"],
         "moderate" => $params["moderate"]
     );

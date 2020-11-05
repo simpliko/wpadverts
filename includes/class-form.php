@@ -381,6 +381,61 @@ class Adverts_Form
     }
     
     /**
+     * Returns all files uploaded to this form
+     * 
+     * @since   1.5.0
+     * @param   string  $uniqid     Unique ID generated for the form
+     * @return  void
+     */
+    public function get_files( $uniqid ) {
+        
+        include_once ADVERTS_PATH . '/includes/class-upload-helper.php';
+        
+        $files = array();
+        
+        foreach( $this->get_fields() as $field ) {
+            
+            if( $field["type"] != "adverts_field_gallery" ) {
+                continue;
+            }
+            
+            if( isset( $field["save"]["method"] ) && $field["save"]["method"] == "file" ) {
+                $v = new Adverts_Upload_Helper;
+                $v->set_field( $field );
+                $v->set_form_name( $this->get_scheme( "name" ) );
+                $v->set_uniquid( $uniqid );
+                
+                $files[ $field["name"] ] = array();
+                
+                $all_files = glob( $v->get_path() ) . "/*";
+                
+                if( ! is_array( $all_files ) ) {
+                    $all_files = array();
+                }
+                
+                foreach( $all_files as $f ) {
+                    $files[ $field["name"] ][] = $f;
+                }
+            } else if( ! isset( $field["save"]["method"] ) || $field["save"]["method"] == "media" ) {
+                include_once ADVERTS_PATH . "/includes/class-gallery-helper.php";
+                
+                $gh = new Adverts_Gallery_Helper( $uniqid );
+                $att = $gh->load_attachments();
+                
+                $files[ $field["name"] ] = array();
+                
+                foreach( $att as $at ) {
+                    $files[ $field["name"] ][] = get_attached_file( $at->ID ); 
+                }
+            }
+            
+        }
+        
+        return $files;
+            
+    }
+    
+    /**
      * Returns Layout Type
      * 
      * The forms can use either "stacked" or aligned" layout. This method will

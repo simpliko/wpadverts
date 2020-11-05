@@ -146,7 +146,8 @@ class Adext_Emails_Admin {
             "message_from" => $message["from"],
             "message_to" => $message["to"],
             "message_headers" => $message["headers"],
-            "message_body" => $message["body"]
+            "message_body" => $message["body"],
+            "message_attachments" => $message["attachments"]
         );
         
         $scheme = $this->edit_form( $message );
@@ -202,7 +203,8 @@ class Adext_Emails_Admin {
             "from" => $values["message_from"],
             "to" => $values["message_to"],
             "body" => $values["message_body"],
-            "headers" => array()
+            "headers" => array(),
+            "attachments" => adverts_request( "message_attachments" )
         );
         
         $x1 = 0;
@@ -282,6 +284,32 @@ class Adext_Emails_Admin {
     }
     
     /**
+     * Renders "Add Attachment" button
+     * 
+     * The button is being used when editing an email template in
+     * wp-admin / Classifieds / Options / Emails / Edit panel.
+     * 
+     * @since 1.5.0
+     * @return string   HTML for "Add Attachment" button
+     */
+    public function edit_form_add_attachment() {
+        include_once ADVERTS_PATH . "/includes/class-html.php";
+        
+        $icon_text = '<span class="dashicons dashicons-plus" style="vertical-align:middle"></span> ' . __( "Add Attachment", "wpadverts" );
+        
+        $a = new Adverts_Html( "a", array(
+            "href" => "#",
+            "class" => "button button-secondary adext-emails-add-attachment"
+        ), $icon_text );
+        
+        $wrap = new Adverts_Html( "div", array(
+            "class" => "adext-emails-attachments"
+        ), " " );
+        
+        return $wrap . " " . $a->render();  
+    }
+    
+    /**
      * Returns a form scheme for Edit email page
      * 
      * @since   1.3.0
@@ -356,7 +384,14 @@ class Adext_Emails_Admin {
                     "mode" => "plain-text",
                     "label" => __( "Body", "wpadverts" ),
                     "order" => 80,
-                )
+                ),
+                array(
+                    "name" => "message_attachments",
+                    "type" => "adverts_field_label",
+                    "label" => __( "Attachments", "wpadverts" ),
+                    "content" => $this->edit_form_add_attachment(),
+                    "order" => 100,
+                ),
             )
         );
     }

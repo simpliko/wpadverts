@@ -24,7 +24,7 @@
             <tbody>
             <?php echo adverts_form_layout_config($form) ?>
                 
-            <tr valign="top" class="<?php if(adverts_field_has_errors($field)): ?>adverts-field-error<?php endif; ?>">
+            <tr valign="top">
                 <th scope="row">&nbsp;</th>
                 <td>
                     <p class="submit">
@@ -67,8 +67,22 @@
     </tr>
 </script>
 
+<script type="type/text" id="tmpl-adext-email-edit-attachment-row">
+    <div class="adext-emails-edit-td" style="margin:5px 0 5px 0">
+        <input type="text" name="message_attachments[]" class="header-value adext-emails-full-width regular-text" value="{{ data.attachment }}" />
+        <a href="#" class="button button-secondary button-small adext-emails-edit-td-no"><span class="dashicons dashicons-no"></span></a>
+    </div>
+</script>
+
+
 <?php if( ! empty( $message["headers"] ) && is_array( $message["headers"] ) ): ?>
 <script type="text/javascript">
 var WPADVERTS_EMAIL_EDIT_HEADERS = <?php echo json_encode( $message["headers"] ) ?>;
+</script>
+<?php endif; ?>
+
+<?php if( ! empty( $message["attachments"] ) && is_array( $message["attachments"] ) ): ?>
+<script type="text/javascript">
+var WPADVERTS_EMAIL_EDIT_ATTACHMENTS = <?php echo json_encode( $message["attachments"] ) ?>;
 </script>
 <?php endif; ?>

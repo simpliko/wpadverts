@@ -88,6 +88,7 @@ class Adext_Emails {
         $this->_parser->add_function( "admin_edit_url", array( $this, "admin_edit_url" ) );
         $this->_parser->add_function( "complete_payment_url", array( $this, "complete_payment_url" ) );
         $this->_parser->add_function( "format_date", array( $this, "format_date" ) );
+        $this->_parser->add_function( "get_all_files", array( $this, "get_all_files" ) );
         
         add_filter( "wpadverts_messages_register", array( $this->messages, "load" ), 20 );
         add_filter( "wpadverts_message", array( $this->_parser, "compile" ), 10, 3 );
@@ -384,5 +385,16 @@ class Adext_Emails {
         }
         
         return date_i18n( get_option( 'date_format' ), $date );
+    }
+    
+    public function get_all_files( $data ) {
+        $files_list = array();
+        print_r($data);
+        foreach( $data as $file ) {
+            if( is_string( $file ) && file_exists( $file ) ) {
+                $files_list[] = $file;
+            }
+        }
+        return join( "\n", $files_list );
     }
 }

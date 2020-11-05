@@ -90,7 +90,9 @@ class Adext_Contact_Form_Emails_Integration {
     public function on_contact_form_sent( $post_id, $form ) {
         return Adext_Emails::instance()->messages->send_message( "contact-form::on_contact_form_sent", array( 
             "advert" => get_post( $post_id ),
-            "form" => $form->get_values()
+            "advert_files" => adverts_get_post_files( $post_id ),
+            "form" => $form->get_values(),
+            "form_files" => $form->get_files( adverts_request( "wpadverts-form-upload-uniqid" ) )
         ) );
     }
     

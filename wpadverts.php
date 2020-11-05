@@ -5,7 +5,7 @@
  * Description: The lightweight WordPress classifieds plugin done right.
  * Author: Greg Winiarski
  * Text Domain: wpadverts
- * Version: 1.4.5
+ * Version: 1.5.0
  * 
  * Adverts is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -110,6 +110,7 @@ function adverts_init() {
     add_filter( 'adverts_the_content', 'wpautop' );
     
     add_action( 'save_post_advert', 'adverts_create_hash', 10, 3 );
+    add_action( 'deleted_post', 'adverts_deleted_post', 10, 2 );
     
     add_filter( 'adverts_form_load', 'adverts_form_load_checksum_fields', 9999 );
     
@@ -117,6 +118,8 @@ function adverts_init() {
     wp_register_style( 'adverts-upload', ADVERTS_URL . '/assets/css/wpadverts-upload.css', array(), "1.3.5" );
     wp_register_style( 'adverts-icons', ADVERTS_URL . '/assets/css/wpadverts-glyphs.css', array(), "4.7.2" );
     wp_register_style( 'adverts-icons-animate', ADVERTS_URL . '/assets/css/animation.css', array(), "1.3.5" );
+    
+    wp_register_script('adverts-form', ADVERTS_URL . '/assets/js/wpadverts-form.js', array( 'jquery' ), "1.5.0" );
     
     load_plugin_textdomain("wpadverts", false, dirname(plugin_basename(__FILE__))."/languages/");
     
@@ -340,7 +343,7 @@ function adverts_init() {
  * @return void
  */
 function adverts_init_frontend() {
-    
+    ;
     wp_register_style( 'adverts-frontend', ADVERTS_URL . '/assets/css/wpadverts-frontend.css', array(), "1.4.2" );
     wp_register_style( 'adverts-swipebox', ADVERTS_URL . '/assets/css/swipebox.min.css', array(), "1.4.5" );
     
@@ -447,18 +450,21 @@ function adverts_init_admin() {
     add_action('wp_ajax_adverts_gallery_update', 'adverts_gallery_update');
     add_action('wp_ajax_adverts_gallery_update_order', 'adverts_gallery_update_order');
     add_action('wp_ajax_adverts_gallery_delete', 'adverts_gallery_delete');
+    add_action('wp_ajax_adverts_gallery_delete_file', 'adverts_gallery_delete_file');
     add_action('wp_ajax_adverts_gallery_image_stream', 'adverts_gallery_image_stream');
     add_action('wp_ajax_adverts_gallery_image_restore', 'adverts_gallery_image_restore');
     add_action('wp_ajax_adverts_gallery_image_save', 'adverts_gallery_image_save');
     add_action('wp_ajax_adverts_gallery_video_cover', 'adverts_gallery_video_cover');
     add_action('wp_ajax_adverts_show_contact', 'adverts_show_contact');
     add_action('wp_ajax_adverts_delete_tmp', 'adverts_delete_tmp');
+    add_action('wp_ajax_adverts_delete_tmp_files', 'adverts_delete_tmp_files');
     add_action('wp_ajax_adverts_delete', 'adverts_delete');
     
     add_action('wp_ajax_nopriv_adverts_gallery_upload', 'adverts_gallery_upload');
     add_action('wp_ajax_nopriv_adverts_gallery_update', 'adverts_gallery_update');
     add_action('wp_ajax_nopriv_adverts_gallery_update_order', 'adverts_gallery_update_order');
     add_action('wp_ajax_nopriv_adverts_gallery_delete', 'adverts_gallery_delete');
+    add_action('wp_ajax_nopriv_adverts_gallery_delete_file', 'adverts_gallery_delete_file');
     add_action('wp_ajax_nopriv_adverts_gallery_image_stream', 'adverts_gallery_image_stream');
     add_action('wp_ajax_nopriv_adverts_gallery_image_restore', 'adverts_gallery_image_restore');
     add_action('wp_ajax_nopriv_adverts_gallery_image_save', 'adverts_gallery_image_save');
@@ -466,6 +472,7 @@ function adverts_init_admin() {
     
     add_action('wp_ajax_nopriv_adverts_show_contact', 'adverts_show_contact');
     add_action('wp_ajax_nopriv_adverts_delete_tmp', 'adverts_delete_tmp');
+    add_action('wp_ajax_nopriv_adverts_delete_tmp_files', 'adverts_delete_tmp_files');
     
     add_filter( 'manage_edit-advert_columns', 'adverts_edit_columns' );
     add_action( 'manage_advert_posts_custom_column', 'adverts_manage_post_columns', 10, 2 );

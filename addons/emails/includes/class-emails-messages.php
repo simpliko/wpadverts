@@ -387,7 +387,10 @@ class Adext_Emails_Messages {
             return;
         }
         
-        return $this->send_message( "core::on_draft_to_publish_notify_user", array( "advert" => $post ) );
+        return $this->send_message( "core::on_draft_to_publish_notify_user", array( 
+            "advert" => $post,
+            "advert_files" => adverts_get_post_files( $post )
+        ) );
     }
     
     /**
@@ -406,7 +409,10 @@ class Adext_Emails_Messages {
             return;
         }
         
-        return $this->send_message( "core::on_draft_to_pending_notify_user", array( "advert" => $post ) );
+        return $this->send_message( "core::on_draft_to_pending_notify_user", array( 
+            "advert" => $post,
+            "advert_files" => adverts_get_post_files( $post )
+        ) );
     }
     
     /**
@@ -425,7 +431,10 @@ class Adext_Emails_Messages {
             return;
         }
         
-        return $this->send_message( "core::on_pending_to_publish_notify_user", array( "advert" => $post ) );
+        return $this->send_message( "core::on_pending_to_publish_notify_user", array( 
+            "advert" => $post,
+            "advert_files" => adverts_get_post_files( $post )
+        ) );
     }
     
     /**
@@ -444,7 +453,10 @@ class Adext_Emails_Messages {
             return;
         }
         
-        return $this->send_message( "core::on_pending_to_trash_notify_user", array( "advert" => $post ) );
+        return $this->send_message( "core::on_pending_to_trash_notify_user", array( 
+            "advert" => $post,
+            "advert_files" => adverts_get_post_files( $post )
+        ) );
     }
 
     /**
@@ -463,7 +475,10 @@ class Adext_Emails_Messages {
             return;
         }
         
-        return $this->send_message( "core::on_publish_to_expired_notify_user", array( "advert" => $post ) );
+        return $this->send_message( "core::on_publish_to_expired_notify_user", array( 
+            "advert" => $post,
+            "advert_files" => adverts_get_post_files( $post )
+        ) );
     }
     
     /**
@@ -485,6 +500,7 @@ class Adext_Emails_Messages {
         
         return $this->send_message( "core::on_draft_to_publish_notify_admin", array( 
             "advert" => $post,
+            "advert_files" => adverts_get_post_files( $post ),
             "admin_email" => Adext_Emails::admin_email(),
             "admin_edit_url" => admin_url( sprintf( 'post.php?post=%d&action=edit', $post->ID ) )
         ) );
@@ -509,6 +525,7 @@ class Adext_Emails_Messages {
         
         return $this->send_message( "core::on_draft_to_pending_notify_admin", array( 
             "advert" => $post,
+            "advert_files" => adverts_get_post_files( $post ),
             "admin_email" => Adext_Emails::admin_email(),
             "admin_edit_url" => admin_url( sprintf( 'post.php?post=%d&action=edit', $post->ID ) )
         ) );

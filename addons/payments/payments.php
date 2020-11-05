@@ -643,7 +643,7 @@ function adext_payments_action_complete( $post_id ) {
  * @return  void
  */
 function adext_payments_action_renew( $post_id ) {
-    
+
     if( get_post_field( "post_status", $post_id ) == "advert-pending" ) {
         return;
     }
@@ -714,7 +714,8 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
     $opts = array();
     $pricings = get_posts( array( 
         'post_type' => 'adverts-renewal',
-        'post_status' => 'draft'
+        'post_status' => 'draft',
+        'posts_per_page' => -1
     ) );
     
     $pricings = apply_filters( "wpadverts_filter_renewals", $pricings, $post->ID );

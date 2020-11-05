@@ -20,6 +20,62 @@ WPADVERTS.EMAILS.Edit.Headers.prototype.AddHeaderClicked = function( e ) {
     var row = new WPADVERTS.EMAILS.Edit.HeaderRow( {} ).InsertBefore( this.row );
 };
 
+WPADVERTS.EMAILS.Edit.Attachments = function( el ) {
+    this.button = el;
+    this.row = el.parent().find(".adext-emails-attachments");
+    
+    this.button.on( "click", jQuery.proxy( this.AddAttachmentClicked, this ) );
+};
+
+WPADVERTS.EMAILS.Edit.Attachments.prototype.AddAttachmentClicked = function( e ) {
+    e.preventDefault();
+    
+    // { header_name: "Content-Type", header_value: "text/html" }
+    var row = new WPADVERTS.EMAILS.Edit.AttachmentRow( {} ).InsertBefore( this.row );
+};
+
+WPADVERTS.EMAILS.Edit.AttachmentRow = function( data ) {
+    this._inserted = false;
+    this.tpl = null;
+    this.attachment = null;
+    
+    if( typeof data.attachment !== 'undefined' ) {
+        this.attachment = data.attachment;
+    } else {
+        data.attachment = "";
+    }
+    
+    data._mode = "edit";
+    
+    this.Render(data);
+};
+
+WPADVERTS.EMAILS.Edit.AttachmentRow.prototype.Render = function( data ) {
+    var template = wp.template( 'adext-email-edit-attachment-row' );
+    var tpl = jQuery( template( data ) );
+    
+    if(this._inserted === true) {
+        this.tpl.html(tpl.html());
+    } else {
+        this.tpl = tpl;
+    }
+    
+    this.tpl.find(".adext-emails-edit-td-no").on( "click", jQuery.proxy( this.RemoveHeaderClicked, this ) );
+};
+
+WPADVERTS.EMAILS.Edit.AttachmentRow.prototype.InsertBefore = function( el ) {
+    el.before( this.tpl );
+    this.tpl.fadeIn("slow");
+    this._inserted = true;
+    
+    return this;
+};
+
+WPADVERTS.EMAILS.Edit.AttachmentRow.prototype.RemoveHeaderClicked = function( e ) {
+    e.preventDefault();
+    this.tpl.remove();
+};
+
 WPADVERTS.EMAILS.Edit.HeaderRow = function( data ) {
     this._inserted = false;
     this.tpl = null;
@@ -117,6 +173,19 @@ jQuery(function($) {
             var row = $(".button.adext-emails-add-header").closest("tr");
             
             new WPADVERTS.EMAILS.Edit.HeaderRow( data ).InsertBefore( row ).OkHeader();
+        });
+    }
+    
+    new WPADVERTS.EMAILS.Edit.Attachments($(".button.adext-emails-add-attachment"));
+    
+    if( typeof WPADVERTS_EMAIL_EDIT_ATTACHMENTS !== 'undefined' ) {
+        $.each(WPADVERTS_EMAIL_EDIT_ATTACHMENTS, function(index, item) {
+            var data = {
+                attachment: item
+            }
+            var row = $(".adext-emails-attachments");
+            
+            new WPADVERTS.EMAILS.Edit.AttachmentRow( data ).InsertBefore( row );
         });
     }
     

@@ -1749,7 +1749,7 @@ function adverts_field_gallery($field, $form = null ) {
     
     $post = $post_id > 0 ? get_post( $post_id ) : null;
     
-    adverts_gallery_content($post, array( 
+    $conf = array( 
         "button_class" => "adverts-button",
         "input_post_id" => "#_post_id",
         "input_post_id_nonce" => "#_post_id_nonce",
@@ -1758,9 +1758,14 @@ function adverts_field_gallery($field, $form = null ) {
         "_post_id" => $post_id,
         "_post_id_nonce" => $post_id_nonce,
         "form_name" => $form_name,
-        "field_name" => $field["name"],
-        "save" => $save
-    ));
+        "field_name" => $field["name"]
+    );
+    
+    if( $save !== null ) {
+        $conf["save"] = $save;
+    }
+    
+    adverts_gallery_content($post, $conf);
 }
 
 /**
@@ -1785,6 +1790,35 @@ function adverts_save_single( $post_id, $key, $value ) {
     } else {
         update_post_meta( $post_id, $key, $value );
     }
+}
+
+/**
+ * Saves files from a temporary directory in a "final" directory.
+ * 
+ * This function is used to save files added to the file upload / gallery field.
+ * 
+ * @since 1.5.0
+ * @access public
+ * @param int $post_id Advert ID
+ * @param string $name Field name
+ * @param array $field File save options
+ * @param string $uniqid Uniqid  
+ * @return void
+ */
+function adverts_save_files( $post_id, $name, $field, $uniqid ) {
+    
+    include_once ADVERTS_PATH . '/includes/class-upload-helper.php';
+    include_once ADVERTS_PATH . "includes/class-checksum.php";
+
+    $checksum = new Adverts_Checksum();
+    $args = $checksum->get_args_from_checksum();
+    
+    $v = new Adverts_Upload_Helper;
+    $v->set_field( $field );
+    $v->set_form_name( $args["form_name"] );
+    $v->set_uniquid( $uniqid );
+    $v->set_post_id( $post_id );
+    $v->move_files();
 }
 
 /**
@@ -3182,11 +3216,13 @@ function adverts_skip_preview( $tpl ) {
 
 function adverts_form_load_checksum_fields( $form ) {
     
-    if( $form["name"] != "advert" ) {
+    if( $form["name"] == "advert" ) {
+        $checksum_fields = array( "_wpadverts_checksum", "_wpadverts_checksum_nonce", "_post_id_nonce" );
+    } else if( $form["name"] == "contact" ) {
+        $checksum_fields = array( "_wpadverts_checksum", "_wpadverts_checksum_nonce" );
+    } else {
         return $form;
     }
-    
-    $checksum_fields = array( "_wpadverts_checksum", "_wpadverts_checksum_nonce", "_post_id_nonce" );
     
     foreach( $checksum_fields as $field_name ) {
         $form["field"][] = array(
@@ -3318,4 +3354,301 @@ function wpadverts_qe_hide_author_field() {
         $tpl = '<style type="text/css">.inline-edit-%s .inline-edit-author {display: none !important; }</style>';
         printf( $tpl, esc_attr( adverts_request( "post_type" ) ) );
     }
+}
+
+/**
+ * Renames directory
+ * 
+ * The function is using default 'rename' function with a fallback to recurisve
+ * copy and delete in case the 'rename' function usage is limited on the server.
+ * 
+ * @see wpadverts_recursive_copy()
+ * @see wpadverts_recursive_delete()
+ * 
+ * @since   1.5.0 
+ * 
+ * @param   string      $old    Folder which will be moved
+ * @param   string      $new    New folder name
+ * @return  boolean
+ */
+function wpadverts_rename_dir( $old, $new ) {
+    
+    $old = rtrim( $old, "/" );
+    $new = rtrim( $new, "/" );
+    
+    if( ! is_dir( $old ) ) {
+        return false;
+    }
+    
+    $wpupload = wp_upload_dir();
+    $stat = @stat( $wpupload["basedir"] );
+    $perms = $stat['mode'] & 0007777;
+
+    $moved = @rename( $old, $new );
+    
+    if ( ! $moved ) {
+        if( ! wpadverts_recursive_copy( $old, $new, $perms ) ) {
+            wpadverts_recursive_delete( $new );
+            return false;
+        }
+        wpadverts_recursive_delete( $old );
+    } 
+        
+    chmod($new, $perms);
+    
+    $new_list = glob( $new );
+    
+    if( is_array( $new_list ) ) {
+        foreach( $new_list as $sub ) {
+            chmod( $sub, $perms );
+        }
+    }
+    
+    return $moved;
+}
+
+/**
+ * Recursively copies $source to $dest
+ * 
+ * The function will use RecursiveDirectoryIterator to copy the whole 
+ * $source folder (with all files and sub-folders inside) to $dest.
+ * 
+ * @since   1.5.0
+ * 
+ * @param   string    $source   Folder to copy
+ * @param   string    $dest     Destination folder
+ * @param   mixed     $perms    CHMOD to set on the created folders
+ * @return  boolean
+ */
+function wpadverts_recursive_copy( $source, $dest, $perms = 0755 ) {
+
+    if ( ! is_dir( $dest ) ) {
+        if ( ! mkdir( $dest, $perms, true ) ) {
+            return false;
+        }
+    }
+    $directoryIterator = new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS);
+    $recursiveIterator = new RecursiveIteratorIterator($directoryIterator, RecursiveIteratorIterator::SELF_FIRST);
+    foreach ( $recursiveIterator as $item ) {
+        if ($item->isDir()) {
+            if ( ! mkdir($dest . DIRECTORY_SEPARATOR . $recursiveIterator->getSubPathName(), $perms) ) {
+                return false;
+            }
+        } else {
+            if ( ! copy($item, $dest . DIRECTORY_SEPARATOR . $recursiveIterator->getSubPathName()) ) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+/**
+ * Recusrively deletes a directory.
+ * 
+ * The function will delete a $dirname and all files and sub-directoris inside it.
+ * 
+ * @since   1.5.0
+ * 
+ * @param   string      $dirname    Absolute path to directory to be deleted
+ * @return  boolean
+ */
+function wpadverts_recursive_delete( $dirname ) { 
+    if(is_dir($dirname)) {
+        $dir_handle = opendir($dirname);
+    } else {
+        return true;
+    }
+    
+    while($file = readdir($dir_handle)) {
+        if($file!="." && $file!="..") {
+            if(!is_dir($dirname."/".$file)) {
+                unlink ($dirname."/".$file);
+            } else {
+                wpadverts_recursive_delete($dirname."/".$file);
+            }
+        }
+    }
+    
+    closedir($dir_handle);
+    rmdir($dirname);
+    
+    return true;
+}
+
+/**
+ * Returns form scheme based on form name
+ * 
+ * The function searches in the forms added to Adverts::instance()->set()
+ * 
+ * @since   1.5.0
+ * @param   string      $form_name      Form name passed in $form["name"]
+ * @return  array                       Form scheme
+ */
+function wpadverts_get_form( $form_name ) {
+    
+    foreach( Adverts::instance()->get_all() as $k => $data ) {
+        if( is_array( $data ) && isset( $data["name"] ) && $data["name"] == $form_name && isset( $data["field"] ) ) {
+            return $data;
+        }
+    }
+    
+    return null;
+}
+
+/**
+ * Deletes the post files (other than the ones in Media Library)
+ * 
+ * This function is executed by "deleted_post" action
+ * 
+ * @see deleted_post action
+ * 
+ * @since   1.5.0
+ * @param   int         $post_id
+ * @param   WP_Post     $post
+ * @return  void
+ */
+function adverts_deleted_post( $post_id, $post ) {
+    
+    if( ! wpadverts_post_type( $post ) ) {
+        return;
+    }
+    
+    $form_name = "advert";
+    
+    include_once ADVERTS_PATH . '/includes/class-upload-helper.php';
+    
+    $v = new Adverts_Upload_Helper;
+    $v->set_form_name( $form_name );
+    $v->set_post_id( $post_id );
+    
+    $form_params = array(
+        "form_scheme_id" => get_post_meta( $post_id, "_wpacf_form_scheme_id", true )
+    );
+
+    $form_scheme = apply_filters( "adverts_form_scheme", wpadverts_get_form( $form_name ), $form_params );
+    $form_scheme = apply_filters( "adverts_form_load", $form_scheme );
+
+    foreach($form_scheme["field"] as $key => $field) {
+        
+        if( $field["type"] != "adverts_field_gallery" ) {
+            continue;
+        }
+        
+        if( ! isset( $field["save"] ) || $field["save"]["method"] != "file" ) {
+            continue;
+        }
+        
+        $v->set_field( $field );
+            
+        $files_path = $v->get_path_dest() . "/*";
+        $files_all = glob( $files_path );
+        
+        if( ! is_array( $files_all ) ) {
+            $files_all = array();
+        }
+        
+        foreach( $files_all as $file ) {
+            
+            if( ! file_exists( $file ) ) {
+                continue;
+            }
+            
+            do {
+                if( is_dir( $file ) ) {
+                    rmdir( $file );
+                } else {
+                    wp_delete_file( $file );
+                }
+                $file = dirname( $file );
+                $files = glob( $file . "/*" );
+            } while( empty( $files ) );
+            
+        }
+    }
+}
+
+/**
+ * Returns all files assigned to the $post
+ * 
+ * The function searches for file fields in the form_scheme and finds all files
+ * and media library items assigned to this $post
+ * 
+ * @since   1.5.0
+ * @param   mixed       $post   WP_Post|int Post id or WP_Post 
+ * @return  array               List of files assigned to this $post
+ */
+function adverts_get_post_files( $post ) {
+    $post_id = $post;
+
+    if( $post instanceof WP_Post ) {
+        $post_id = $post->ID;
+    }
+
+    include_once ADVERTS_PATH . '/includes/class-form.php';
+    include_once ADVERTS_PATH . '/includes/class-upload-helper.php';
+
+    $form_scheme = apply_filters( "adverts_form_scheme", Adverts::instance()->get("form"), array( "post_id" => $post_id ) );
+    $form = new Adverts_Form( $form_scheme );
+    
+    $files = array();
+
+    foreach( $form->get_fields() as $field ) {
+
+        if( $field["type"] != "adverts_field_gallery" ) {
+            continue;
+        }
+
+        if( isset( $field["save"]["method"] ) && $field["save"]["method"] == "file" ) {
+            $v = new Adverts_Upload_Helper;
+            $v->set_field( $field );
+            $v->set_form_name( $form->get_scheme( "name" ) );
+            $v->set_post_id( $post_id );
+
+            $files[ $field["name"] ] = array();
+
+            $all_files = glob( $v->get_path_dest() . "/*" ) ;
+
+            if( ! is_array( $all_files ) ) {
+                $all_files = array();
+            }
+
+            foreach( $all_files as $f ) {
+                $files[ $field["name"] ][] = $f;
+            }
+        } else if( ! isset( $field["save"]["method"] ) || $field["save"]["method"] == "media" ) {
+            include_once ADVERTS_PATH . "/includes/class-gallery-helper.php";
+
+            $gh = new Adverts_Gallery_Helper( $post_id );
+            $att = $gh->load_attachments();
+
+            $files[ $field["name"] ] = array();
+
+            foreach( $att as $at ) {
+                $files[ $field["name"] ][] = get_attached_file( $at->ID ); 
+            }
+        }
+
+    }
+
+    return $files;
+}
+
+/**
+ * Returns path to WPAdverts tmp directory
+ * 
+ * By default the tmp directory is WP_UPLOAD_DIR/wpadverts-tmp/
+ * 
+ * In the tmp directory WPAdverts is storing files which should be deleted 
+ * if the user will leave the form.
+ * 
+ * @since   1.5.0
+ * @return  string
+ */
+function adverts_get_tmp_dir() {
+    $dirs = wp_upload_dir();
+    $basedir = $dirs["basedir"];
+    $tmpdir = rtrim( $basedir, "/") . "/wpadverts-tmp";
+    
+    return apply_filters( "adverts_get_tmp_dir", $tmpdir );
 }

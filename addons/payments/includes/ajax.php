@@ -53,6 +53,9 @@ function adext_payments_ajax_render() {
             $pricing = get_post( $data["listing_id"] );
             $price = get_post_meta( $listing_id, "adverts_price", true );
             
+            
+            $price = get_post_meta( $payment_id, "_adverts_payment_total", true );
+            
             $data["price"] = $price;
             $data["form"] = $form->get_values();
             $data["payment_id"] = $payment_id;

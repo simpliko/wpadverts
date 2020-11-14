@@ -124,10 +124,11 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
-= 1.5.0 - 2020-11-11 =
+= 1.5.0 - 2020-11-17 =
 
 * FEATURE: File Uploads API
 * FEATURE: Attaching files to messages in Emails Module
+* FEATURE: {$advert_files} variable available in Emails which already support {$advert} variable
 * FIXED: Error which duplicates "Post a Job" pages.
 * FIXED: Renewal selection page shows only 5 options.
 

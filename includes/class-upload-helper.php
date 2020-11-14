@@ -349,7 +349,7 @@ class Adverts_Upload_Helper {
         $path = str_replace(
             array( "{basedir}", "{post_id}", "{field_name}", "{form_name}" ),
             array( $basedir, $this->get_post_id(), $field["name"], $this->get_form_name() ),
-            $field["save"]["move"]
+            $field["save"]["dest"]
         );
         
         return $path;
@@ -383,7 +383,7 @@ class Adverts_Upload_Helper {
         $uri = str_replace(
             array( "{basedir}", "{post_id}", "{field_name}", "{form_name}" ),
             array( $baseurl, $this->get_post_id(), $field["name"], $this->get_form_name() ),
-            $field["save"]["move"]
+            $field["save"]["dest"]
         ); 
         
         return $uri;

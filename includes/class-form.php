@@ -407,7 +407,7 @@ class Adverts_Form
                 
                 $files[ $field["name"] ] = array();
                 
-                $all_files = glob( $v->get_path() ) . "/*";
+                $all_files = glob( $v->get_path() . "/*" ) ;
                 
                 if( ! is_array( $all_files ) ) {
                     $all_files = array();

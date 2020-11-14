@@ -389,7 +389,13 @@ class Adext_Emails {
     
     public function get_all_files( $data ) {
         $files_list = array();
-        print_r($data);
+        
+        if( is_string( $data ) && ! empty( $data ) ) {
+            $data = array( $data );
+        } else if( ! is_array( $data ) ) {
+            $data = array();
+        }
+        
         foreach( $data as $file ) {
             if( is_string( $file ) && file_exists( $file ) ) {
                 $files_list[] = $file;

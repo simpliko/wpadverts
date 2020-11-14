@@ -166,6 +166,10 @@ function adverts_event_delete_tmp_files( ) {
 
     $source = adverts_get_tmp_dir();
     
+    if( ! is_dir( $source ) ) {
+        return;
+    }
+    
     $directory_iterator = new RecursiveDirectoryIterator( $source, RecursiveDirectoryIterator::SKIP_DOTS );
     $recursive_iterator = new RecursiveIteratorIterator( $directory_iterator, RecursiveIteratorIterator::CHILD_FIRST );
     
@@ -173,7 +177,7 @@ function adverts_event_delete_tmp_files( ) {
     $min_time = current_time( 'timestamp', true ) - $delta;
     
     foreach ( $recursive_iterator as $item ) {
-        
+
         if( $item->getMTime() > $min_time ) {
             continue;
         }

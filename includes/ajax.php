@@ -1060,6 +1060,10 @@ function adverts_delete_tmp_files() {
         $files_path = $v->get_path() . "/*";
         $files_all = glob( $files_path );
         
+        if( ! is_array( $files_all ) ) {
+            $files_all = array();
+        }
+        
         foreach( $files_all as $file ) {
             
             if( ! file_exists( $file ) ) {

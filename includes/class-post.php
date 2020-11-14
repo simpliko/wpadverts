@@ -136,7 +136,7 @@ class Adverts_Post {
         $meta = array();
         $taxo = array();
         $custom = array();
-        
+   
         // Set default values
         
         if(isset($init["post"]) && is_array($init["post"])) {

@@ -3579,6 +3579,33 @@ function adverts_deleted_post( $post_id, $post ) {
  * @return  array               List of files assigned to this $post
  */
 function adverts_get_post_files( $post ) {
+    $filtered = array();
+    
+    foreach( adverts_get_post_files_data( $post ) as $k => $files ) {
+        $filtered[$k] = array();
+        foreach( $files as $file ) {
+            $filtered[$k][] = $file["file"];
+        }
+    }
+
+    return $filtered;
+}
+
+/**
+ * Returns all files assigned to the $post
+ * 
+ * The function searches for file fields in the form_scheme and finds all files
+ * and media library items assigned to this $post
+ * 
+ * The returned array contains an associative array
+ * array( "file" => "/path/to/file.png", "url" => "https://example.com/file.png" )
+ * 
+ * 
+ * @since   1.5.0
+ * @param   mixed       $post   WP_Post|int Post id or WP_Post 
+ * @return  array               List of files assigned to this $post
+ */
+function adverts_get_post_files_data( $post ) {
     $post_id = $post;
 
     if( $post instanceof WP_Post ) {
@@ -3614,9 +3641,12 @@ function adverts_get_post_files( $post ) {
             }
 
             foreach( $all_files as $f ) {
-                $files[ $field["name"] ][] = $f;
+                $files[ $field["name"] ][] = array(
+                    "file" => $f,
+                    "url" => $v->get_uri_dest() . "/" . basename( $f ),
+                );
             }
-        } else if( ! isset( $field["save"]["method"] ) || $field["save"]["method"] == "media" ) {
+        } else if( ! isset( $field["save"]["method"] ) || $field["save"]["method"] == "media-library" ) {
             include_once ADVERTS_PATH . "/includes/class-gallery-helper.php";
 
             $gh = new Adverts_Gallery_Helper( $post_id );
@@ -3625,7 +3655,10 @@ function adverts_get_post_files( $post ) {
             $files[ $field["name"] ] = array();
 
             foreach( $att as $at ) {
-                $files[ $field["name"] ][] = get_attached_file( $at->ID ); 
+                $files[ $field["name"] ][] = array(
+                    "file" => get_attached_file( $at->ID ),
+                    "url" => wp_get_attachment_url( $at->ID )
+                );
             }
         }
 

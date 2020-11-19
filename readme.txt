@@ -4,7 +4,7 @@ Contributors: gwin
 Tags: classifieds, classified, classified ads, classified script, classifieds script, wp classified, wp classifieds
 Requires PHP: 5.3
 Requires at least: 4.0
-Tested up to: 5.5
+Tested up to: 5.6
 Stable tag: 1.5.0
 License: GNU Version 2 or Any Later Version
 
@@ -124,7 +124,7 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
-= 1.5.0 - 2020-11-17 =
+= 1.5.0 - 2020-11-23 =
 
 * FEATURE: File Uploads API
 * FEATURE: Attaching files to messages in Emails Module

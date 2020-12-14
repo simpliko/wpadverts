@@ -230,12 +230,16 @@ WPADVERTS.File.Uploader.prototype.FileUploaded = function(file, result) {
     this.Item[file.id].setResult(result);
     this.Item[file.id].render();
     
+    var GlobalPostID = null;
+    var GlobalPostIDNonce = null;
+    
     if(typeof result.uniqid !== "undefined" && jQuery("#wpadverts-form-upload-uniqid").val().length === 0) {
         jQuery("#wpadverts-form-upload-uniqid").val(result.uniqid);
     }
     
     if(typeof result.post_id !== "undefined") {
         this.PostID = result.post_id;
+        GlobalPostID = this.PostID;
     }
     
     if( jQuery( this.setup.conf.input_post_id ).length > 0 && jQuery( this.setup.conf.input_post_id ).val().length === 0 ) {
@@ -244,11 +248,17 @@ WPADVERTS.File.Uploader.prototype.FileUploaded = function(file, result) {
     
     if(typeof result.post_id_nonce !== "undefined") {
         this.PostIDNonce = result.post_id_nonce;
+        GlobalPostIDNonce = this.PostIDNonce
     }
     
     if( jQuery( this.setup.conf.input_post_id_nonce ).length > 0 && jQuery( this.setup.conf.input_post_id_nonce ).val().length === 0 ) {
         jQuery( this.setup.conf.input_post_id_nonce ).val( this.PostIDNonce );
     }
+    
+    jQuery.each(WPADVERTS.File.Registered, function(index, item) {
+        WPADVERTS.File.Registered[index].PostID = GlobalPostID;
+        WPADVERTS.File.Registered[index].PostIDNonce = GlobalPostIDNonce;
+    });
 };
 
 WPADVERTS.File.Uploader.prototype.Plupload = function(init) {
@@ -633,6 +643,12 @@ WPADVERTS.File.Browser.prototype.Render = function(result) {
         var timestamp = Date.now();
     }
     
+    var can_feature = false;
+    
+    if(typeof this.uploader.setup.conf.save.supports != "undefined" && this.uploader.setup.conf.save.supports.indexOf("featured") >= 0) {
+        can_feature = true;
+    }
+    
     var template = wp.template( "wpadverts-browser-attachment-view" );
     var mime = WPADVERTS.File.GetMime(result);
     var $ = jQuery;
@@ -640,7 +656,8 @@ WPADVERTS.File.Browser.prototype.Render = function(result) {
         mime: mime,
         icon: WPADVERTS.File.GetIcon(this.file),
         file: this.file,
-        timestamp: timestamp
+        timestamp: timestamp,
+        can_feature: can_feature
     };
     
     var tpl = template(data);
@@ -1354,21 +1371,5 @@ jQuery(function($) {
     
     $.each(ADVERTS_PLUPLOAD_DATA, function(index, item) {
         WPADVERTS.File.Registered.push(new WPADVERTS.File.Uploader(item));
-    });
-});
-
-
-jQuery(function($) {
-    $("a.imprint").on("click", function(e) {
-        e.preventDefault();
-        
-        jQuery.each(WPADVERTS.File.Registered, function(i, item) {
-            var x= 0;
-           jQuery.each(item.Item, function(j, file) {
-               var x = 0;
-           }) 
-        });
-        
-        return false;
     });
 });

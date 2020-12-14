@@ -263,11 +263,13 @@ class Adext_Emails_Parser implements Adext_Emails_Parser_Interface {
         foreach( $mail_args["headers"] as $key => $header ) {
             $mail_args["headers"][$key] = $this->parse( $header );
         }
-        foreach( $mail_args["attachments"] as $key => $attachment ) {
-            $mail_args["attachments"][$key] = $this->parse( $attachment );
+        if( isset( $mail_args["attachments"] ) && is_array( $mail_args["attachments"] ) ) {
+            foreach( $mail_args["attachments"] as $key => $attachment ) {
+                $mail_args["attachments"][$key] = $this->parse( $attachment );
+            }
+
+            $mail_args["attachments"] = join( "\n", $mail_args["attachments"] );
         }
-        
-        $mail_args["attachments"] = join( $mail_args["attachments"], "\n" );
         
         $this->reset();
         

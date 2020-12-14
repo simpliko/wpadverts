@@ -45,11 +45,10 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
         "_post_id_nonce" => "",
         "field_name" => "gallery",
         "form_name" => "advert",
-        "save" => array( "method" => "media-library" ),
+        "save" => array( "method" => "media-library", "supports" => array( "featured" ) ),
         "uniqid" => $uniqid
     ), $conf);
 
-    
     $field_name = $conf["field_name"];
     $form_name = $conf["form_name"];
     
@@ -147,7 +146,7 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
             $children = get_children( $att_search );
             // adverts_sort_images() is defined in functions.php
             require_once ADVERTS_PATH . "/includes/functions.php"; 
-            $children = adverts_sort_images($children, $post->ID);
+            $children = adverts_sort_images($children, $post->ID, $field_name);
 
             foreach($children as $child) {
                 $data[] = adverts_upload_item_data( $child->ID );
@@ -395,7 +394,7 @@ function adverts_gallery_modal() {
         <div class="wpadverts-attachment-info">
             <form action="" method="post" class="adverts-form adverts-form-aligned">
                 <fieldset>
-                    <# if( data.mime == "video" || data.mime == "image" ) { #>
+                    <# if( data.can_feature && ( data.mime == "video" || data.mime == "image" ) ) { #>
                     <div class="adverts-control-group">
                         <label for="adverts_featured"><?php _e("Featured", "wpadverts") ?></label>
                         <input type="checkbox" id="adverts_featured" name="adverts_featured" value="1" <# if(data.file.featured) { #>checked="checked"<# } #> />

@@ -1373,7 +1373,7 @@ function adverts_field_select( $field ) {
     }
 
     if(isset($field["options_callback"]) && !empty($field["options_callback"])) {
-        $opt = call_user_func( $field["options_callback"] );
+        $opt = call_user_func( $field["options_callback"], $field );
     } elseif(isset($field["options"])) {
         $opt = $field["options"];
     } else {
@@ -1528,7 +1528,7 @@ function adverts_field_checkbox( $field ) {
     }
     
     if(isset($field["options_callback"]) && !empty($field["options_callback"])) {
-        $opt = call_user_func( $field["options_callback"] );
+        $opt = call_user_func( $field["options_callback"], $field );
     } elseif(isset($field["options"])) {
         $opt = $field["options"];
     } else {
@@ -1624,7 +1624,7 @@ function adverts_field_radio( $field ) {
     }
     
     if(isset($field["options_callback"]) && !empty($field["options_callback"])) {
-        $opt = call_user_func( $field["options_callback"] );
+        $opt = call_user_func( $field["options_callback"], $field );
     } elseif(isset($field["options"])) {
         $opt = $field["options"];
     } else {
@@ -2087,6 +2087,11 @@ function adverts_walk_category_dropdown_tree() {
  */
 function adverts_taxonomies( $taxonomy = 'advert_category' ) {
     
+    if( is_array( $taxonomy ) ) {
+        // DUMB backward compatibility for forms
+        $taxonomy = 'advert_category';
+    }
+    
     $args = array(
         'taxonomy'     => $taxonomy,
         'hierarchical' => true,
@@ -2383,7 +2388,7 @@ function _adverts_create_user_from_post_id( $user_id, $post_id ) {
     // Generate the password and create the user
     $password = wp_generate_password( 12, false );
     $user_id = wp_create_user( $email_address, $password, $email_address );
-
+    
     // Set the nickname
     wp_update_user(
         array(
@@ -2392,7 +2397,7 @@ function _adverts_create_user_from_post_id( $user_id, $post_id ) {
             'display_name'=>    $full_name
         )
     );
-
+    
     // Set the role
     $user = new WP_User( $user_id );
     $user->set_role( 'subscriber' );
@@ -2439,8 +2444,14 @@ function adverts_css_classes( $classes, $post_id ) {
  * @param integer $post_id  WP_Post ID
  * @return images[]         Sorted array of images (or default order if none defined)
  */
-function adverts_sort_images($images, $post_id) {
-    $images_order = json_decode(get_post_meta($post_id, '_adverts_attachments_order', true));
+function adverts_sort_images($images, $post_id, $field_name = null) {
+    $meta_key = '_adverts_attachments_order';
+    
+    if( $field_name !== null && $field_name != "gallery" ) {
+        $meta_key .= "__" . $field_name;
+    }
+    
+    $images_order = json_decode(get_post_meta($post_id, $meta_key, true));
 
     if ( !is_null($images_order) ) {
         include_once ADVERTS_PATH . 'includes/class-sort-images.php';
@@ -3262,13 +3273,29 @@ function adverts_force_featured_image( $post_id ) {
     }
     
     if( is_array( $keys ) && isset( $keys[0] ) ) {
-        update_post_meta( $post_id, '_thumbnail_id', $keys[0] );
+        $forced_thumbnail_id = apply_filters( "adverts_force_featured_image", $keys[0], $post_id );
+        update_post_meta( $post_id, '_thumbnail_id', $forced_thumbnail_id );
         return 1;
     }
     
-    $children = get_children( array( 'post_parent' => $post_id ) );
+    $children = get_children( array( 
+        'post_parent' => $post_id,
+        'meta_query' => array(
+            "relation" => "OR",
+            array(
+                array( 'key' => 'wpadverts_form', 'value' => 'advert' ),
+                array( 'key' => 'wpadverts_form_field', 'value' => 'gallery' )
+            ),
+            array(
+                array( 'key' => 'wpadverts_form', 'compare' => 'NOT EXISTS' ),
+                array( 'key' => 'wpadverts_form_field', 'compare' => 'NOT EXISTS' )
+            )
+        )
+    ) );
+    
     foreach( $children as $child ) {
-        update_post_meta( $post_id, '_thumbnail_id', $child->ID );
+        $forced_thumbnail_id = apply_filters( "adverts_force_featured_image", $child->ID, $post_id );
+        update_post_meta( $post_id, '_thumbnail_id', $forced_thumbnail_id );
         return 1;
     }
     
@@ -3508,7 +3535,11 @@ function wpadverts_get_form( $form_name ) {
  * @param   WP_Post     $post
  * @return  void
  */
-function adverts_deleted_post( $post_id, $post ) {
+function adverts_deleted_post( $post_id, $post = null ) {
+    
+    if( $post === null ) {
+        $post = get_post( $post_id );
+    }
     
     if( ! wpadverts_post_type( $post ) ) {
         return;
@@ -3684,4 +3715,23 @@ function adverts_get_tmp_dir() {
     $tmpdir = rtrim( $basedir, "/") . "/wpadverts-tmp";
     
     return apply_filters( "adverts_get_tmp_dir", $tmpdir );
+}
+
+/**
+ * Returns URL to WPAdverts tmp directory
+ * 
+ * By default the tmp directory is wp_upload_dir()[baseurl]/wpadverts-tmp/
+ * 
+ * In the tmp directory WPAdverts is storing files which should be deleted 
+ * if the user will leave the form.
+ * 
+ * @since   1.5.1
+ * @return  string
+ */
+function adverts_get_tmp_url() {
+    $dirs = wp_upload_dir();
+    $baseurl = $dirs["baseurl"];
+    $tmpurl = rtrim( $baseurl, "/") . "/wpadverts-tmp";
+    
+    return apply_filters( "adverts_get_tmp_url", $tmpurl );
 }

@@ -123,7 +123,7 @@ class Adverts_Gallery_Helper {
         }
 
         $attach += $children;
-        $attach = adverts_sort_images($attach, $post_id);
+        $attach = adverts_sort_images($attach, $post_id, $field_name);
 
         return apply_filters( "adverts_get_post_attachments", $attach, $post_id );
     }

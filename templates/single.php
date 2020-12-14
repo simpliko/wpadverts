@@ -18,7 +18,7 @@
             <?php echo get_avatar( $id_or_email, 48 ) ?>
         </div>
         <div class="adverts-single-author-name">
-            <?php echo apply_filters( "adverts_tpl_single_posted_by", sprintf( __("by <strong>%s</strong>", "wpadverts"), get_post_meta($post_id, 'adverts_person', true) ), $post_id ) ?><br/>
+            <?php echo apply_filters( "adverts_tpl_single_posted_by", sprintf( __("by <strong>%s</strong>", "wpadverts"), esc_html( get_post_meta($post_id, 'adverts_person', true) ) ), $post_id ) ?><br/>
             <?php printf( __('Published: %1$s (%2$s ago)', "wpadverts"), date_i18n( get_option( 'date_format' ), get_post_time( 'U', false, $post_id ) ), human_time_diff( get_post_time( 'U', false, $post_id ), current_time('timestamp') ) ) ?>
         </div>
     </div>

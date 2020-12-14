@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classified script, classifieds sc
 Requires PHP: 5.3
 Requires at least: 4.0
 Tested up to: 5.6
-Stable tag: 1.5.0
+Stable tag: 1.5.1
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -24,31 +24,31 @@ WPAdverts is a fast, lite-weight plugin that’s flawless on ANY device and fits
 
 It also plays nicely with other plugins, giving you the freedom to quickly create the classifieds site that YOU want, as a flexible foundation that can grow with you and your community.
 
-ANY HOSTING? YES!
+= ANY HOSTING? YES! =
  
 There’s no need for expensive hosting with WPAdverts, because our crafty Wordpress-standards coding keeps your server-load low and your loading-times FAST!
 
-EASIER BY DESIGN
+= EASIER BY DESIGN =
 
 Everything comes together like you’d expect.
 
 WPAdverts blends seamlessly with WordPress, making it super-simple and familiar; you’ll feel like a pro’ in approx’ 3 minutes!
 
-SPEEDY, EXPERT SUPPORT
+= SPEEDY, EXPERT SUPPORT =
 
 If you ever do get stuck you can rest assured of fast support by someone who really knows Wordpress!
 
 We also have extensive documentation and helper videos too.
 
-EXTENSIONS? OF COURSE!
+= EXTENSIONS? OF COURSE! =
 
 We DO NOT confuse or “nickel and dime” you at every step; instead we simply offer 3 value-packed packages. See pricing below.
 
-TAKE ACTION; TAKE CONTROL
+= TAKE ACTION; TAKE CONTROL =
 
 Note this is more than a demo; it’s a fully-functioning classifieds software with all critical functions built-in; you can start TODAY. 
 
-INSTALL
+= INSTALL =
 
 Click the Installation tab at the top of this page to see how you install WPAdverts – or just click the blue Install Now button at the bottom of this page!
 
@@ -123,6 +123,15 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.5.1 - 2020-12-14 =
+
+* FIXED: File Upload API mixing additional file fields order.
+* FIXED: File Upload API uses additional uploaded files as featured images.
+* FIXED: Removed no longer used script from wpadverts-gallery.js
+* FIXED: Emails Module generates a warning when using PHP7.4+
+* FIXED: Some user entered texts not escaped properly (undisclosed details for security)
+* FIXED: Fatal error when deleting Advert (if using WP older than 5.5)
 
 = 1.5.0 - 2020-11-23 =
 

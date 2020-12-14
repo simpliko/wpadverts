@@ -365,7 +365,7 @@ class Adverts_Upload_Helper {
         
         $uri = str_replace(
             array( "{tmpdir}", "{basedir}", "{uniqid}", "{field_name}", "{form_name}" ),
-            array( adverts_get_tmp_dir(), $baseurl, $this->_uniqid, $field["name"], $this->get_form_name() ),
+            array( adverts_get_tmp_url(), $baseurl, $this->_uniqid, $field["name"], $this->get_form_name() ),
             $field["save"]["path"]
         ); 
         

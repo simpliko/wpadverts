@@ -288,7 +288,15 @@ function adverts_gallery_update_order() {
 
     $clean_ordered_keys_json = json_encode( $clean_ordered_keys );
 
-    update_post_meta( $post_id, '_adverts_attachments_order', $clean_ordered_keys_json );
+    $meta_key = '_adverts_attachments_order';
+    $field_name = adverts_request( "field_name" );
+    
+    if( $field_name != "gallery" ) {
+        $meta_key .= "__" . $field_name;
+    }
+    
+    
+    update_post_meta( $post_id, $meta_key, $clean_ordered_keys_json );
 
     echo json_encode( array( "result" => 1 ) );
     exit;
@@ -371,30 +379,37 @@ function adverts_gallery_delete_file() {
     $v->set_uniquid( $uniqid );
     $v->set_post_id( $post_id );
 
+    $file = null;
+    $file_dest = null;
+    $file_tmp = null;
+    
     if( $v->get_post_id() ) {
-        $file = $v->get_path_dest() . "/" . sanitize_file_name( $filename );
-    } else {
-        $file = $v->get_path() . "/" . sanitize_file_name( $filename );
+        $file_dest = $v->get_path_dest() . "/" . sanitize_file_name( $filename );
+    } 
+    if( $v->get_uniquid() ) {
+        $file_tmp = $v->get_path() . "/" . sanitize_file_name( $filename );
     }
     
-    if( ! file_exists( $file ) ) {
-        echo json_encode( array( "result" => 0, "error" => __( "File does not exist.", "wpadverts" ) ) );
+    if( file_exists( $file_dest ) ) {
+        $file = $file_dest;
+    } else if( file_exists( $file_tmp ) ) {
+        $file = $file_tmp;
     } else {
-        
-        wp_delete_file( $file );
-        
-        do {
-            if( is_dir( $file ) ) {
-                rmdir( $file );
-            } else {
-                unlink( $file );
-            }
-            $file = dirname( $file );
-            $files = glob( $file . "/*" );
-        } while( empty( $files ) );
-        
-        echo json_encode( array( "result" => 1 ) );
+        echo json_encode( array( "result" => 0, "error" => __( "File does not exist.", "wpadverts" ) ) );
+        exit;
     }
+
+    do {
+        if( is_dir( $file ) ) {
+            rmdir( $file );
+        } else {
+            wp_delete_file( $file );
+        }
+        $file = dirname( $file );
+        $files = glob( $file . "/*" );
+    } while( empty( $files ) );
+
+    echo json_encode( array( "result" => 1 ) );
     exit;
 }
 

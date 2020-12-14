@@ -5,7 +5,7 @@
 
 <?php adverts_flash( $adverts_flash ) ?>
 
-<form action="" method="post" class="adverts-form adverts-form-aligned">
+<form action="" method="post" class="adverts-form <?php echo $form->get_layout() ?>">
     <fieldset>
         
         <?php foreach($form->get_fields( array( "type" => array( "adverts_field_hidden" ) ) ) as $field): ?>

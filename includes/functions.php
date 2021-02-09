@@ -1764,7 +1764,7 @@ function adverts_field_gallery($field, $form = null ) {
     if( $save !== null ) {
         $conf["save"] = $save;
     }
-    
+
     adverts_gallery_content($post, $conf);
 }
 
@@ -2158,11 +2158,13 @@ function adverts_currency_list( $currency = null, $get = null ) {
         array("code"=>"CAD", "sign"=>"$", "label"=>__("Canadian Dollars", "wpadverts")),
         array("code"=>"CZK", "sign"=>"Kč", "label"=>__("Czech Koruna", "wpadverts")),
         array("code"=>"DKK", "sign"=>"", "label"=>__("Danish Krone", "wpadverts")),
+        array("code"=>"EGP", "sign"=>"ج.م", "label"=>__("Egyptian Pound", "wpadverts")),
         array("code"=>"HKD", "sign"=>"$", "label"=>__("Hong Kong Dollar", "wpadverts")),
         array("code"=>"HUF", "sign"=>"Ft", "label"=>__("Hungarian Forint", "wpadverts")),
         array("code"=>"ILS", "sign"=>"₪", "label"=>__("Israeli Shekel", "wpadverts")),
         array("code"=>"INR", "sign"=>"₹", "label"=>__("Indian Rupees", "wpadverts")),
         array("code"=>"JPY", "sign"=>"¥", "label"=>__("Japanese Yen", "wpadverts")),
+        array("code"=>"KWD", "sign"=>"ر.س", "label"=>__("Kuwaiti Dinar", "wpadverts")),
         array("code"=>"MYR", "sign"=>"", "label"=>__("Malaysian Ringgits", "wpadverts")),
         array("code"=>"MXN", "sign"=>"$", "label"=>__("Mexican Peso", "wpadverts")),
         array("code"=>"NGN", "sign"=>"₦", "label"=>__("Nigerian Naira", "wpadverts")),
@@ -2178,8 +2180,11 @@ function adverts_currency_list( $currency = null, $get = null ) {
         array("code"=>"TRY", "sign"=>"", "label"=>__("Turkish Lira", "wpadverts")),
         array("code"=>"RIAL", "sign"=>"", "label"=>__("Iranian Rial", "wpadverts")),
         array("code"=>"RUB", "sign"=>"", "label"=>__("Russian Rubles", "wpadverts")),
+        array("code"=>"SAR", "sign"=>"ر.س", "label"=>__("Saudi Riyal", "wpadverts")),
         array("code"=>"ZAR", "sign"=>"R", "label"=>__("South African Rand", "wpadverts")),
         array("code"=>"LKR", "sign"=>"Rs. ", "label"=>__("Sri Lankan Rupees", "wpadverts")),
+        array("code"=>"AED", "sign"=>"ر.إ", "label"=>__("UAE Dirham", "wpadverts")),
+        array("code"=>"QAR", "sign"=>"ر.ق", "label"=>__("Qatari Riyal", "wpadverts")),
     ));
     
     if( $currency == null ) {
@@ -3578,7 +3583,7 @@ function adverts_deleted_post( $post_id, $post = null ) {
         if( ! is_array( $files_all ) ) {
             $files_all = array();
         }
-        
+
         foreach( $files_all as $file ) {
             
             if( ! file_exists( $file ) ) {

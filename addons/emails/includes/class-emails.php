@@ -375,16 +375,23 @@ class Adext_Emails {
      * To format a date the default date_format option is used.
      * 
      * @since   1.3.0
-     * @param   mixed   $date   Date or timestamp
-     * @return  string          Formatted date
+     * @since   1.5.3   $format param
+     * 
+     * @param   mixed   $date       Date or timestamp
+     * @param   string  $format     Date format. If null default WP format will be used
+     * @return  string              Formatted date
      */
-    public function format_date( $date ) {
+    public function format_date( $date, $format = null ) {
         
         if( ! is_numeric( $date ) ) {
             $date = strtotime( $date );
         }
         
-        return date_i18n( get_option( 'date_format' ), $date );
+        if( $format === null ) {
+            $format = get_option( 'date_format' );
+        }
+        
+        return date_i18n( $format, $date );
     }
     
     public function get_all_files( $data ) {

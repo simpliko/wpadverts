@@ -1798,6 +1798,13 @@ https://github.com/yui/pure/blob/master/LICENSE.md
     padding: 0;
 }
 
+.adverts-form .adverts-field-select > select[readonly] {
+    cursor:not-allowed;
+}
+.adverts-form .adverts-field-select > select[readonly] option {
+    display: none;
+}
+
 .adverts-list-sort-options.adverts-multiselect-options {
     width:auto;
     border: 1px solid silver;

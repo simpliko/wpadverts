@@ -279,7 +279,7 @@ class Adverts_Upload_Helper {
             return false;
         }
         
-        $name = $file["name"];
+        $name = sanitize_file_name( $file["name"] );
         
         $actual_name = pathinfo( $name, PATHINFO_FILENAME );
         $original_name = $actual_name;

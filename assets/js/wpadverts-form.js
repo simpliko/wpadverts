@@ -115,7 +115,8 @@ WPADVERTS.Form.Handler.prototype.GetUploadId = function() {
 WPADVERTS.Form.Handler.prototype.Discard = function() {
     if( this.HasPostId() && this.GetPostId() > 0 ) {
         this.DiscardPost();
-    } else if( this.HasUploadId() && this.GetUploadId() ) {
+    } 
+    if( this.HasUploadId() && this.GetUploadId() ) {
         this.DiscardUpload();
     }
 };

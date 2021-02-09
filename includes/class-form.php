@@ -133,7 +133,7 @@ class Adverts_Form
             $name = $field["name"];
             
             foreach( $field["validator"] as $v ) {
-
+                
                 $v = array_merge($this->get_validator( $v["name"] ), $v);
                 
                 if(isset($this->_form[$name]["value"])) {

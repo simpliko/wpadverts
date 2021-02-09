@@ -360,14 +360,15 @@ function adverts_gallery_delete_file() {
     $form_scheme = apply_filters( "adverts_form_scheme", wpadverts_get_form( $form_name ), $args );
     $form_scheme = apply_filters( "adverts_form_load", $form_scheme );
 
-    foreach($form_scheme["field"] as $field ) {
-        if( $field["name"] == $field_name ) {
+    foreach($form_scheme["field"] as $f ) {
+        if( $f["name"] == $field_name ) {
+            $field = $f;
             break;
         }
     }
     
     if( $field === null ) {
-        echo json_encode( array( "result" => 0, "error" => __( "Incorrect field name.", "wpadverts" ) ) );
+        echo json_encode( array( "result" => 0, "error" => __( "Incorrect field name.", "wpadverts" ) )  );
         exit;
     }
     
@@ -395,7 +396,7 @@ function adverts_gallery_delete_file() {
     } else if( file_exists( $file_tmp ) ) {
         $file = $file_tmp;
     } else {
-        echo json_encode( array( "result" => 0, "error" => __( "File does not exist.", "wpadverts" ) ) );
+        echo json_encode( array( "result" => 0, "error" => __( "File does not exist.", "wpadverts" ), "args" => array() ) );
         exit;
     }
 

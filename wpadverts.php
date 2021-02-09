@@ -5,7 +5,7 @@
  * Description: The lightweight WordPress classifieds plugin done right.
  * Author: Greg Winiarski
  * Text Domain: wpadverts
- * Version: 1.5.1
+ * Version: 1.5.2
  * 
  * Adverts is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -119,7 +119,7 @@ function adverts_init() {
     wp_register_style( 'adverts-icons', ADVERTS_URL . '/assets/css/wpadverts-glyphs.css', array(), "4.7.2" );
     wp_register_style( 'adverts-icons-animate', ADVERTS_URL . '/assets/css/animation.css', array(), "1.3.5" );
     
-    wp_register_script('adverts-form', ADVERTS_URL . '/assets/js/wpadverts-form.js', array( 'jquery' ), "1.5.0" );
+    wp_register_script('adverts-form', ADVERTS_URL . '/assets/js/wpadverts-form.js', array( 'jquery' ), "1.5.2" );
     
     load_plugin_textdomain("wpadverts", false, dirname(plugin_basename(__FILE__))."/languages/");
     

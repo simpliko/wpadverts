@@ -1,0 +1,2865 @@
+# Translation of Plugins - WPAdverts &#8211; Classifieds Plugin - Stable (latest release) in Greek
+# This file is distributed under the same license as the Plugins - WPAdverts &#8211; Classifieds Plugin - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2020-12-19 09:49+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 2.4.2\n"
+"Language: el_GR\n"
+"Project-Id-Version: Plugins - WPAdverts &#8211; Classifieds Plugin - Stable (latest release)\n"
+"POT-Creation-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+
+#: includes/ajax.php:398
+msgid "File does not exist."
+msgstr "Το αρχείο δεν υπάρχει."
+
+#: includes/ajax.php:370
+msgid "Incorrect field name."
+msgstr "Λάθος όνομα πεδίου."
+
+#: addons/emails/includes/class-emails-admin.php:391
+msgid "Attachments"
+msgstr "Συνημμένα"
+
+#: addons/emails/includes/class-emails-admin.php:298
+msgid "Add Attachment"
+msgstr "Προσθήκη Συνημμένου"
+
+#: includes/functions.php:2168
+msgid "Nigerian Naira"
+msgstr "Νάιρα Νιγηρίας"
+
+#: wpadverts.php:302
+msgid "start typing here ..."
+msgstr "αρχίστε να πληκτρολογείτε εδώ ..."
+
+#: wpadverts.php:301
+msgid "Type in the box above to see suggestions ..."
+msgstr "Πληκτρολογήστε στο παραπάνω πλαίσιο για να δείτε τι προτείνεται ..."
+
+#: wpadverts.php:300
+msgid "Cannot select more than %s items."
+msgstr "Δεν είναι δυνατή η επιλογή περισσότερων από %s αντικειμένων."
+
+#: wpadverts.php:299
+msgid "Selected"
+msgstr "Επιλεγμένο"
+
+#: wpadverts.php:295
+msgid "Open"
+msgstr "Άνοιγμα"
+
+#: admin/options.php:55
+msgid "Enable"
+msgstr "Ενεργοποίηση"
+
+#: admin/options.php:53
+msgid "Disable"
+msgstr "Απενεργοποίηση"
+
+#: admin/options.php:44
+msgid "Get This Addon"
+msgstr "Λήψη Αυτού του Πρόσθετου"
+
+#: admin/options.php:40
+msgid "Addon Uploaded but Inactive"
+msgstr "Το πρόσθετο Μεταφορτώθηκε αλλά είναι Ανενεργό"
+
+#: admin/options.php:37
+msgid "Addon Uploaded and Activated"
+msgstr "Το Πρόσθετο Ανέβηκε και είναι Ενεργοποιημένο"
+
+#: admin/options.php:30 admin/options.php:38 admin/options.php:52
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
+#: admin/options.php:29
+msgid "Cannot be disabled"
+msgstr "Δεν μπορεί να απενεργοποιηθεί"
+
+#: addons/core/admin/options.php:15 addons/core/admin/options-gallery.php:15
+msgid "Core Options"
+msgstr "Βασικές Επιλογές"
+
+#: addons/core/includes/admin-pages.php:619
+msgid "crop image"
+msgstr "περικοπή εικόνας"
+
+#: addons/core/includes/admin-pages.php:616
+msgid "max. height"
+msgstr "μεγ. ύψος"
+
+#: addons/core/includes/admin-pages.php:611
+msgid "max. width"
+msgstr "μεγ. πλάτος"
+
+#: addons/core/includes/admin-pages.php:541
+msgid "This image size is being used in gallery thumbnails."
+msgstr "Αυτό το μέγεθος εικόνας χρησιμοποιείται σε μικρογραφίες συλλογής εικόνων."
+
+#: addons/core/includes/admin-pages.php:540
+msgid "Upload Thumbnail"
+msgstr "Μεταφόρτωση Μικρογραφίας"
+
+#: addons/core/includes/admin-pages.php:534
+msgid "This image size is being used in the [adverts_list] shortcode."
+msgstr "Αυτό το μέγεθος εικόνας χρησιμοποιείται στον σύντομο κώδικα [adverts_list]."
+
+#: addons/core/includes/admin-pages.php:533
+msgid "Adverts List"
+msgstr "Κατάλογος Αγγελιών"
+
+#: addons/core/includes/admin-pages.php:527
+msgid "This image size is being used in the image slider on Advert details pages."
+msgstr "Αυτό το μέγεθος εικόνας χρησιμοποιείται στην κύλιση εικόνων στις σελίδες λεπτομερειών της Αγγελίας."
+
+#: addons/core/includes/admin-pages.php:526
+msgid "Adverts Gallery"
+msgstr "Συλλογή Εικόνων"
+
+#: addons/core/includes/admin-pages.php:519
+#: addons/core/includes/admin-pages.php:520
+msgid "Image Sizes"
+msgstr "Μεγέθη Εικόνων"
+
+#: addons/core/includes/admin-pages.php:513
+msgid "Cabability required to edit images in the Gallery."
+msgstr "Ιδιότητα που απαιτείται για την επεξεργασία εικόνων στην Συλλογή."
+
+#: addons/core/includes/admin-pages.php:509
+msgid "Image Editor Capability"
+msgstr "Δυνατότητα Επεξεργασίας Εικόνων"
+
+#: addons/core/includes/admin-pages.php:502
+#: addons/core/includes/admin-pages.php:503
+msgid "Gallery Upload"
+msgstr "Μεταφόρτωση Συλλογής Εικόνων"
+
+#: addons/core/includes/admin-pages.php:496
+msgid "How images should be displayed in the gallery."
+msgstr "Πώς πρέπει να εμφανίζονται οι εικόνες στη συλλογή."
+
+#: addons/core/includes/admin-pages.php:494
+msgid "Fill"
+msgstr "Συμπλήρωση"
+
+#: addons/core/includes/admin-pages.php:493
+msgid "Cover"
+msgstr "Εξώφυλλο"
+
+#: addons/core/includes/admin-pages.php:492
+msgid "Contain"
+msgstr "Περιεχόμενο"
+
+#: addons/core/includes/admin-pages.php:488
+msgid "Image Fit"
+msgstr "Ταίριασμα Εικόνας"
+
+#: addons/core/includes/admin-pages.php:481
+msgid "Allow opening Gallery images in a Lightbox."
+msgstr "Να επιτρέπεται το άνοιγμα εικόνων της Συλλογής σε ένα Lightbox."
+
+#: addons/core/includes/admin-pages.php:479
+msgid "Lightbox"
+msgstr "Lightbox"
+
+#: addons/core/includes/admin-pages.php:473
+msgid "Number of thumbnails to scroll when clicking Previous or Next buttons."
+msgstr "Αριθμός μικρογραφιών για κύλιση όταν κάνετε κλικ στα κουμπιά Προηγούμενο ή Επόμενο."
+
+#: addons/core/includes/admin-pages.php:472
+msgid "Scrolling Thumbnails"
+msgstr "Κύλιση Μικρογραφιών"
+
+#: addons/core/includes/admin-pages.php:466
+msgid "Number of thumbnails to show below gallery."
+msgstr "Αριθμός μικρογραφιών για εμφάνιση κάτω από τη συλλογή."
+
+#: addons/core/includes/admin-pages.php:465
+msgid "Visible Thumbnails"
+msgstr "Ορατές Μικρογραφίες"
+
+#: addons/core/includes/admin-pages.php:457
+msgid "Thumbnails Slider"
+msgstr "Γραμμή Κύλισης Μικρογραφιών"
+
+#: addons/core/includes/admin-pages.php:456
+msgid "Next and Previous Buttons"
+msgstr "Κουμπιά Επόμενο και Προηγούμενο"
+
+#: addons/core/includes/admin-pages.php:454
+msgid "Gallery Pagination"
+msgstr "Σελιδοποίηση Συλλογής"
+
+#: addons/core/includes/admin-pages.php:447
+#: addons/core/includes/admin-pages.php:448
+msgid "Advert Details Pages"
+msgstr "Σελίδες Λεπτομερειών Αγγελίας"
+
+#: addons/core/includes/admin-pages.php:433
+msgid "Cabability (or Role) required to always see expired Ads details pages."
+msgstr "Απαιτούμενη δυνατότητα (ή ρόλος) για να βλέπετε πάντα τις αγγελίες που έχουν λήξει στις σελίδες λεπτομερειών."
+
+#: addons/core/includes/admin-pages.php:429
+msgid "Always Visible For"
+msgstr "Πάντα Ορατό Για"
+
+#: addons/core/includes/admin-pages.php:422
+msgid "Redirect URL"
+msgstr "Ανακατεύθυνση URL"
+
+#: addons/core/includes/admin-pages.php:415
+msgid "<strong>200</strong> — Show Ad details page with contact options disabled."
+msgstr "<strong>200</strong> - Εμφάνιση σελίδας λεπτομερειών Αγγελίας με απενεργοποιημένες τις επιλογές επαφών."
+
+#: addons/core/includes/admin-pages.php:414
+msgid "<strong>301</strong> — Redirect to a different page ..."
+msgstr "<strong>301</strong> — Ανακατεύθυνση σε διαφορετική σελίδα ..."
+
+#: addons/core/includes/admin-pages.php:413
+msgid "<strong>404</strong> — Show 'Page Not Found' Error"
+msgstr "<strong>404</strong> — Εμφάνιση σφάλματος «Η σελίδα δεν βρέθηκε»"
+
+#: addons/core/includes/admin-pages.php:410
+msgid "Expired Ad HTTP Status"
+msgstr "Κατάσταση HTTP Αγγελίας που έχει λήξει"
+
+#: addons/core/includes/admin-pages.php:403
+#: addons/core/includes/admin-pages.php:404
+msgid "Expired Ads Handling"
+msgstr "Χειρισμός Αγγελιών που έχουν Λήξει"
+
+#: addons/core/includes/admin-pages.php:397
+msgid "Thousands Separator"
+msgstr "Διαχωριστικό Χιλιάδων"
+
+#: addons/core/includes/admin-pages.php:391
+msgid "Decimal Separator"
+msgstr "Διαχωριστικό Δεκαδικών"
+
+#: addons/core/includes/admin-pages.php:381
+msgid "Decimal Places"
+msgstr "Δεκαδικά Ψηφία"
+
+#: addons/core/includes/admin-pages.php:374
+msgid "Suffix - 10$"
+msgstr "Επίθημα - 10$"
+
+#: addons/core/includes/admin-pages.php:373
+msgid "Prefix - $10"
+msgstr "Πρόθεμα - $10"
+
+#: addons/core/includes/admin-pages.php:371
+msgid "Currency Position"
+msgstr "Θέση Nομίσματος"
+
+#: addons/core/includes/admin-pages.php:364
+msgid "Currency"
+msgstr "Νόμισμα"
+
+#: addons/core/includes/admin-pages.php:357
+#: addons/core/includes/admin-pages.php:358
+msgid "Currency Settings"
+msgstr "Ρυθμίσεις Νομίσματος"
+
+#: addons/core/includes/admin-pages.php:350
+msgid "Allow users to switch between grid and list view."
+msgstr "Επιτρέψτε στους χρήστες να κάνουν εναλλαγή μεταξύ προβολής πλέγματος και λίστας."
+
+#: addons/core/includes/admin-pages.php:347
+msgid "Switch Views"
+msgstr "Εναλλαγή Προβολών"
+
+#: addons/core/includes/admin-pages.php:335
+msgid "Posts Per Page"
+msgstr "Αναρτήσεις Ανά Σελίδα"
+
+#: addons/core/includes/admin-pages.php:321
+msgid "Columns"
+msgstr "Στήλες"
+
+#: addons/core/includes/admin-pages.php:311
+msgid "List (1 column)"
+msgstr "Κατάλογος (1 στήλη)"
+
+#: addons/core/includes/admin-pages.php:310
+msgid "Grid (2 or more columns)"
+msgstr "Πλέγμα (2 ή παραπάνω στήλες)"
+
+#: addons/core/includes/admin-pages.php:307
+msgid "Display Ads As"
+msgstr "Εμφάνιση Αγγελιών Ως"
+
+#: addons/core/includes/admin-pages.php:298
+msgid "Disabled"
+msgstr "Απενεργοποιημένο"
+
+#: addons/core/includes/admin-pages.php:297
+msgid "Enabled"
+msgstr "Ενεργοποιημένο"
+
+#: addons/core/includes/admin-pages.php:294
+msgid "Search Bar"
+msgstr "Μπάρα Αναζήτησης"
+
+#: addons/core/includes/admin-pages.php:288
+#: addons/core/includes/admin-pages.php:289
+msgid "Defaults Values For [adverts_list]"
+msgstr "Προεπιλεγμένες Τιμές Για [adverts_list]"
+
+#: addons/core/includes/admin-pages.php:281
+msgid "Do not show Advert images (and other files) in Media Library."
+msgstr "Να μην εμφανίζονται εικόνες Αγγελιών (και άλλα αρχεία) στη Βιβλιοθήκη Πολυμέσων."
+
+#: addons/core/includes/admin-pages.php:278
+msgid "Media Library"
+msgstr "Βιβλιοθήκη Πολυμέσων"
+
+#: addons/core/includes/admin-pages.php:272
+msgid "The text to display instead of price if item price was not provided."
+msgstr "Το κείμενο που θα εμφανίζεται αντί της τιμής εάν δεν παρέχεται η τιμή του αντικειμένου."
+
+#: addons/core/includes/admin-pages.php:271
+msgid "Empty Price Text"
+msgstr "Κείμενο Κενής Τιμής"
+
+#: addons/core/includes/admin-pages.php:261
+msgid "Number of days Ad will be visible by default."
+msgstr "Ο προεπιλεγμένος αριθμός των ημερών θα είναι ορατή η Αγγελία."
+
+#: addons/core/includes/admin-pages.php:260
+msgid "Default Visibility"
+msgstr "Προεπιλεγμένη Ορατότητα"
+
+#: addons/core/includes/admin-pages.php:251
+msgid "Select page on which the main [adverts_list] shortcode is being used."
+msgstr "Επιλέξτε σελίδα στην οποία χρησιμοποιείται ο κύριος σύντομος κωδικός [adverts_list]."
+
+#: addons/core/includes/admin-pages.php:250
+msgid "Default Ads List Page"
+msgstr "Προεπιλεγμένη Σελίδα Λίστας Αγγελιών"
+
+#: addons/core/includes/admin-pages.php:243
+#: addons/core/includes/admin-pages.php:244
+msgid "Common Settings"
+msgstr "Κοινές Ρυθμίσεις"
+
+#: addons/featured/admin/options.php:22
+msgid "View Documentation"
+msgstr "Προβολή Τεκμηρίωσης"
+
+#: addons/featured/featured.php:161
+msgid "Feature this ad - it will be styled differently and sticky"
+msgstr "Εμφάνιση αυτής της αγγελίας - θα έχει διαφορετικό στιλ και μόνιμη εμφάνιση"
+
+#: addons/featured/featured.php:71
+msgid "Display this listing as featured."
+msgstr "Εμφάνιση αυτής της καταχώρισης όπως εμφανίζεται."
+
+#: addons/payments/admin/payment-history-edit.php:142
+msgid "Payment Log"
+msgstr "Μητρώο Πληρωμών"
+
+#: addons/payments/admin/payment-history-edit.php:124
+msgid "Customer Details"
+msgstr "Λεπτομέρειες Πελάτη"
+
+#: addons/payments/admin/payment-history-edit.php:116
+msgid "Secure Complete Payment URL"
+msgstr "Ασφαλής Διεύθυνση URL Ολοκλήρωσης Πληρωμής"
+
+#: addons/payments/admin/payment-history-edit.php:109
+msgid "Purchase Details"
+msgstr "Λεπτομέρειες Αγοράς"
+
+#: addons/payments/admin/payment-history-edit.php:92
+msgid "Update Payment"
+msgstr "Ενημέρωση Πληρωμής"
+
+#: addons/payments/admin/payment-history-edit.php:81
+msgid "Paid"
+msgstr "Πληρωτέος"
+
+#: addons/payments/admin/payment-history-edit.php:74
+msgid "To Pay"
+msgstr "Προς Πληρωμή"
+
+#: addons/payments/admin/payment-history-edit.php:53
+msgid "User IP"
+msgstr "IP Χρήστη"
+
+#: addons/payments/admin/payment-history-edit.php:46
+msgid "Created"
+msgstr "Δημιουργήθηκε"
+
+#: addons/payments/admin/payment-history-edit.php:35
+msgid "Gateway"
+msgstr "Πύλη"
+
+#: addons/payments/admin/payment-history-edit.php:30
+msgid "Payment"
+msgstr "Πληρωμή"
+
+#: addons/payments/admin/payment-history-edit.php:16
+msgid "Payment History Edit"
+msgstr "Επεξεργασία Ιστορικού Πληρωμών"
+
+#: addons/payments/admin/pricing-list.php:89
+msgid "1 day"
+msgid_plural "%s days"
+msgstr[0] "1 ημέρα"
+msgstr[1] "%s ημέρες"
+
+#: addons/payments/admin/pricing-list.php:72
+msgid "New Post"
+msgstr "Νέα Ανάρτηση"
+
+#: addons/payments/admin/payment-history-list.php:176
+msgid "Items: <strong>%d</strong>. Revenue <strong>%s</strong>."
+msgstr "Αντικείμενα: <strong>%d</strong>. Έσοδα <strong>%s</strong>."
+
+#: addons/payments/admin/payment-history-list.php:166
+msgid "Next automatic cleanup <strong>%s</strong>."
+msgstr "Επόμενη αυτόματη εκκαθάριση <strong>%s</strong>."
+
+#: addons/payments/admin/payment-history-list.php:164
+msgid "Automatic cleanup was never run."
+msgstr "Η αυτόματη εκκαθάριση δεν εκτελέστηκε ποτέ."
+
+#: addons/payments/admin/payment-history-list.php:160
+msgid "Cleanup Now"
+msgstr "Εκκαθάριση Τώρα"
+
+#: addons/payments/admin/pricing-list.php:105
+#: addons/payments/admin/payment-history-list.php:141
+msgid "&raquo;"
+msgstr "&raquo;"
+
+#: addons/payments/admin/pricing-list.php:104
+#: addons/payments/admin/payment-history-list.php:140
+msgid "&laquo;"
+msgstr "&laquo;"
+
+#: addons/payments/admin/payment-history-list.php:96
+#: addons/payments/admin/payment-history-list.php:98
+msgid "View Order"
+msgstr "Προβολή Παραγγελίας"
+
+#: addons/payments/admin/payment-history-list.php:83
+#: addons/payments/admin/payment-history-edit.php:62
+msgid "Status"
+msgstr "Κατάσταση"
+
+#: addons/payments/admin/pricing-list.php:48
+#: addons/payments/admin/payment-history-list.php:82
+msgid "Type"
+msgstr "Τύπος"
+
+#: addons/payments/admin/payment-history-list.php:81
+msgid "Amount"
+msgstr "Ποσό"
+
+#: addons/payments/admin/payment-history-list.php:77
+msgid "ID"
+msgstr "ID"
+
+#: addons/payments/admin/payment-history-list.php:64
+msgid "Hide Free"
+msgstr "Απόκρυψη Δωρεάν"
+
+#: addons/payments/admin/payment-history-list.php:63
+msgid "All Payments"
+msgstr "Όλες οι Πληρωμές"
+
+#: addons/payments/admin/payment-history-list.php:55
+msgid "Last month"
+msgstr "Προηγούμενος μήνας"
+
+#: addons/payments/admin/payment-history-list.php:54
+msgid "This month"
+msgstr "Αυτό το μήνα"
+
+#: addons/payments/admin/payment-history-list.php:53
+msgid "All dates"
+msgstr "Όλες οι ημερομηνίες"
+
+#: addons/payments/admin/pricing-list.php:36
+#: addons/payments/admin/pricing-list.php:118
+#: addons/payments/admin/payment-history-list.php:47
+#: addons/payments/admin/payment-history-list.php:157
+msgid "Apply"
+msgstr "Εφαρμογή"
+
+#: addons/payments/admin/payment-history-list.php:42
+#: addons/payments/admin/payment-history-list.php:153
+msgid "Set status: %s"
+msgstr "Ορισμός κατάστασης: %s"
+
+#: addons/payments/admin/pricing-list.php:32
+#: addons/payments/admin/pricing-list.php:115
+#: addons/payments/admin/payment-history-list.php:40
+#: addons/payments/admin/payment-history-list.php:151
+msgid "Bulk Actions"
+msgstr "Μαζικές Ενέργειες"
+
+#: addons/payments/admin/pricing-list.php:19
+#: addons/payments/admin/pricing-edit.php:19
+msgid "Add New"
+msgstr "Προσθήκη Νέου"
+
+#: addons/payments/admin/options.php:16
+#: addons/payments/admin/pricing-list.php:18
+#: addons/payments/admin/pricing-edit.php:18
+msgid "Pricing"
+msgstr "Τιμολόγηση"
+
+#: addons/payments/payments.php:1274
+msgid "Ad [%d] no longer exists."
+msgstr "Η αγγελία [%d] δεν υπάρχει πλέον."
+
+#: addons/payments/payments.php:1266
+msgid "Purchased Item"
+msgstr "Αγορασμένο Αντικείμενο"
+
+#: addons/payments/payments.php:1261
+msgid "Listing [%d] no longer exists."
+msgstr "Η καταχώριση [%d] δεν υπάρχει πλέον."
+
+#: addons/payments/payments.php:1254
+msgid "Listing Type"
+msgstr "Τύπος Καταχώρησης"
+
+#: addons/payments/payments.php:1247
+msgid "Purchase Type"
+msgstr "Τύπος Αγοράς"
+
+#: addons/payments/payments.php:1224 addons/payments/admin/pricing-list.php:74
+msgid "Renewal"
+msgstr "Ανανέωση"
+
+#: addons/payments/payments.php:1222
+msgid "Posting"
+msgstr "Δημοσίευση"
+
+#: addons/payments/payments.php:1027
+msgid "Inactive — Waiting for payment."
+msgstr "Ανενεργό - Αναμονή πληρωμής."
+
+#: addons/payments/payments.php:899
+#: addons/payments/admin/payment-history-list.php:16
+msgid "Payment History"
+msgstr "Ιστορικό Πληρωμών"
+
+#: addons/payments/payments.php:898
+msgid "Adverts Payment History"
+msgstr "Ιστορικό Πληρωμών Αγγελιών"
+
+#: addons/payments/payments.php:863
+msgid "Select renewal option and click \"Renew\" button."
+msgstr "Επιλέξτε την επιλογή ανανέωσης και κάντε κλικ στο κουμπί \"Ανανέωση\"."
+
+#: addons/payments/payments.php:845
+msgid "Free Renewal automatically marked as completed."
+msgstr "Η Δωρεάν Ανανέωση επισημαίνεται αυτόματα ως ολοκληρωμένη."
+
+#: addons/payments/payments.php:833
+msgid "Ad <strong>%s</strong> renewed. <a href=\"%s\">Go back to Ads list</a>."
+msgstr "Η αγγελία <strong>%s</strong> ανανεώθηκε. <a href=\"%s\">Επιστροφή στον κατάλογο των αγγελιών</a>."
+
+#: addons/payments/payments.php:830
+msgid "Free Renewals cannot be used more than once every %d days."
+msgstr "Οι Δωρεάν Ανανεώσεις δεν μπορούν να χρησιμοποιηθούν περισσότερες από μία φορά κάθε %d ημέρες."
+
+#: addons/payments/payments.php:799 addons/payments/payments.php:862
+msgid "Renew <strong>%s</strong> or <a href=\"%s\">cancel and go back</a>."
+msgstr "Ανανέωση <strong>%s</strong> ή <a href=\"%s\">ακύρωση και επιστροφή</a>."
+
+#: addons/payments/payments.php:776
+msgid "Renew"
+msgstr "Ανανέωση"
+
+#: addons/payments/payments.php:700
+msgid "Cannot renew Ads with status 'pending', <a href=\"%s\">cancel and go back</a>."
+msgstr "Δεν είναι δυνατή η ανανέωση των Αγγελιών με κατάσταση «σε εκκρεμότητα», <a href=\"%s\"> ακύρωση και επιστροφή </a>."
+
+#: addons/payments/payments.php:669
+msgid "Renew Ad"
+msgstr "Ανανέωση Αγγελίας"
+
+#: addons/payments/payments.php:482
+msgid "<p><strong>Your Payment Is Required</strong><p>Please complete payment for the <em>'%s'</em> Ad posting to have it published.</p>"
+msgstr "<p><strong>Απαιτείται η Πληρωμή σας</strong><p>Παρακαλώ ολοκληρώστε την πληρωμή για την <em>'%s'</em> δημοσίευση Αγγελίας για τη δημοσίευσή της.</p>"
+
+#: addons/payments/payments.php:417
+msgid "Visible 1 day"
+msgid_plural "Visible %d days"
+msgstr[0] "Ορατή 1 ημέρα"
+msgstr[1] "Ορατή %d ημέρες"
+
+#: addons/payments/payments.php:339
+msgid "Listing"
+msgstr "Καταχώρηση"
+
+#: addons/payments/payments.php:328 addons/payments/payments.php:383
+#: addons/payments/payments.php:734 addons/payments/admin/pricing-list.php:83
+msgid "Free"
+msgstr "Δωρεάν"
+
+#: addons/payments/payments.php:305 addons/payments/payments.php:711
+msgid "Listing Information"
+msgstr "Πληροφορίες Καταχώρησης"
+
+#: addons/payments/payments.php:110
+msgctxt "post"
+msgid "Pending"
+msgstr "Σε Εκκρεμότητα"
+
+#: addons/payments/payments.php:106
+msgid "Refunded <span class=\"count\">(%s)</span>"
+msgid_plural "Refunded <span class=\"count\">(%s)</span>"
+msgstr[0] "Επιστροφή Χρημάτων <span class=\"count\">(%s)</span>"
+msgstr[1] "Επιστροφή Χρημάτων <span class=\"count\">(%s)</span>"
+
+#: addons/payments/payments.php:101
+msgctxt "refunded status payment"
+msgid "Refunded"
+msgstr "Επιστροφή Χρημάτων"
+
+#: addons/payments/payments.php:97 addons/payments/payments.php:112
+msgid "Pending <span class=\"count\">(%s)</span>"
+msgid_plural "Pending <span class=\"count\">(%s)</span>"
+msgstr[0] "Σε Εκκρεμότητα <span class=\"count\">(%s)</span>"
+msgstr[1] "Σε Εκκρεμότητα <span class=\"count\">(%s)</span>"
+
+#: addons/payments/payments.php:92
+msgctxt "pending status payment"
+msgid "Pending"
+msgstr "Σε Εκκρεμότητα"
+
+#: addons/payments/payments.php:88
+msgid "Failed <span class=\"count\">(%s)</span>"
+msgid_plural "Failed <span class=\"count\">(%s)</span>"
+msgstr[0] "Αποτυχία <span class=\"count\">(%s)</span>"
+msgstr[1] "Αποτυχία <span class=\"count\">(%s)</span>"
+
+#: addons/payments/payments.php:83
+msgctxt "failed status payment"
+msgid "Failed"
+msgstr "Απέτυχε"
+
+#: addons/payments/payments.php:74
+msgctxt "completed status payment"
+msgid "Completed"
+msgstr "Ολοκληρώθηκε"
+
+#: addons/payments/payments.php:70 addons/payments/payments.php:79
+msgid "Unread <span class=\"count\">(%s)</span>"
+msgid_plural "Unread <span class=\"count\">(%s)</span>"
+msgstr[0] "Αδιάβαστο <span class=\"count\">(%s)</span>"
+msgstr[1] "Αδιάβαστο <span class=\"count\">(%s)</span>"
+
+#: addons/payments/payments.php:65
+msgctxt "temporary status payment"
+msgid "Temporary"
+msgstr "Προσωρινό"
+
+#: addons/payments/templates/add-payment.php:44
+msgid "Place Order"
+msgstr "Αποστολή Παραγγελίας"
+
+#: addons/payments/templates/add-payment.php:27
+msgid "No Payment Gateway Enabled!"
+msgstr "Δεν έχει ενεργοποιηθεί η Πύλη Πληρωμής!"
+
+#: addons/payments/templates/add-payment.php:15
+msgid "Total"
+msgstr "Σύνολο"
+
+#: addons/payments/includes/shortcodes.php:104
+msgid "The payment has been already approved and your Ad should be published soon."
+msgstr "Η πληρωμή έχει ήδη εγκριθεί και η Αγγελία σας θα δημοσιευτεί σύντομα."
+
+#: addons/payments/includes/shortcodes.php:95
+msgid "<p><strong>Your Payment Is Required</strong><p>Please complete payment for the <em>'%s'</em> Ad posting.</p>"
+msgstr "<p><strong>Απαιτείται η Πληρωμή σας</strong><p>Παρακαλώ ολοκληρώστε την πληρωμή για την <em>'%s'</em> Δημοσίευση Αγγελίας.</p>"
+
+#: addons/payments/includes/shortcodes.php:84
+msgid "This payment has already been paid."
+msgstr "Αυτή η πληρωμή έχει ήδη ολοκληρωθεί."
+
+#: addons/payments/includes/shortcodes.php:76
+msgid "The provided hash is not assigned to any of the payment objects."
+msgstr "Η παρεχόμενη διευθέτηση πληρωμής δεν έχει εκχωρηθεί σε κανένα από τα αντικείμενα πληρωμής."
+
+#: addons/payments/includes/shortcodes.php:68
+msgid "The payment does not exist or the payment hash is incorrect."
+msgstr "Η πληρωμή δεν υπάρχει ή η διευθέτηση της πληρωμής είναι λανθασμένη."
+
+#: addons/payments/includes/shortcodes.php:56
+msgid "The provided payment hash could not be found."
+msgstr "Δεν ήταν δυνατή η εύρεση της παρεχόμενης διευθέτησης πληρωμής."
+
+#: addons/payments/includes/class-emails-integration.php:255
+msgid ""
+"Hello,\n"
+"Ad titled '{$advert.post_title}' has been renewed and is pending approval.\n"
+"\n"
+"You can view the Ad here:\n"
+"{$advert.ID|get_permalink}\n"
+"\n"
+"You can edit the Ad here:\n"
+"{$advert|admin_edit_url}"
+msgstr ""
+"Χαίρετε,\n"
+"Η Αγγελία με τίτλο '{$advert.post_title}' ανανεώθηκε και εκκρεμεί έγκριση.\n"
+"\n"
+"Μπορείτε να δείτε την Αγγελία εδώ:\n"
+"{$advert.ID|get_permalink}\n"
+"\n"
+"Μπορείτε να επεξεργαστείτε την Αγγελία εδώ:\n"
+"{$ διαφήμιση|admin_edit_url}"
+
+#: addons/payments/includes/class-emails-integration.php:254
+msgid "Expired Ad has been renewed (action required)."
+msgstr "Η Αγγελία που έληξε έχει ανανεωθεί (απαιτείται ενέργεια)."
+
+#: addons/payments/includes/class-emails-integration.php:240
+msgid ""
+"Hello,\n"
+"Ad titled '%s' has been renewed and published.\n"
+"\n"
+"You can view the Ad here:\n"
+"{$advert.ID|get_permalink}\n"
+"\n"
+"You can edit the Ad here:\n"
+"{$advert|admin_edit_url}"
+msgstr ""
+"Χαίρετε,\n"
+"Η Αγγελία με τίτλο '%s' ανανεώθηκε και δημοσιεύθηκε.\n"
+"\n"
+"Μπορείτε να δείτε τη Διαφήμιση εδώ:\n"
+"{$advert.ID|get_permalink}\n"
+"\n"
+"Μπορείτε να επεξεργαστείτε την Αγγελία εδώ:\n"
+"{$διαφήμιση|admin_edit_url}"
+
+#: addons/payments/includes/class-emails-integration.php:239
+msgid "Expired Ad has been renewed."
+msgstr "Η Αγγελία που έληξε έχει ανανεωθεί."
+
+#: addons/payments/includes/class-emails-integration.php:224
+msgid "New Ad has been paid and published"
+msgstr "Η νέα Αγγελία έχει πληρωθεί και δημοσιευτεί"
+
+#: addons/payments/includes/class-emails-integration.php:210
+msgid ""
+"Hello,\n"
+"the payment for Ad '{$advert.post_title}' has been completed.\n"
+"\n"
+"You can view the payment details here:\n"
+"{$payment|admin_edit_url}"
+msgstr ""
+"Χαίρετε,\n"
+"H πληρωμή για την Αγγελία '{$advert.post_title}' έχει ολοκληρωθεί.\n"
+"\n"
+"Μπορείτε να δείτε τα στοιχεία πληρωμής εδώ:\n"
+"{$payment|admin_edit_url}"
+
+#: addons/payments/includes/class-emails-integration.php:195
+msgid ""
+"Hello,\n"
+"new Ad titled '{$advert.post_title}' (ID {$advert.ID}) has been posted and is pending payment.\n"
+"\n"
+"You will be notified again when the payment will be processed.\n"
+"\n"
+"You can edit the Ad here:\n"
+"{$advert|admin_edit_url}"
+msgstr ""
+"Χαίρετε,\n"
+"Δημοσιεύτηκε νέα Αγγελία με τίτλο '{$ advert.post_title} (ID {$ advert.ID}) και εκκρεμεί η πληρωμή.\n"
+"\n"
+"Θα ειδοποιηθείτε ξανά όταν θα γίνει η επεξεργασία της πληρωμής.\n"
+"\n"
+"Μπορείτε να επεξεργαστείτε την Αγγελία εδώ:\n"
+"{$advert|admin_edit_url}"
+
+#: addons/payments/includes/class-emails-integration.php:194
+msgid "New Ad has been saved (waiting for payment)."
+msgstr "Η νέα Αγγελία έχει αποθηκευτεί (αναμένεται η πληρωμή)."
+
+#: addons/payments/includes/class-emails-integration.php:180
+msgid ""
+"Hello,\n"
+"your Ad titled '{$post.post_title}' has been renewed and is pending moderation.\n"
+"\n"
+"Once the administrator will approve or reject your Ad you will be notified by email."
+msgstr ""
+"Χαίρετε,\n"
+"Η Αγγελία σας με τίτλο '{$post.post_title}' έχει ανανεωθεί και εκκρεμεί εποπτεία.\n"
+"\n"
+"Μόλις ο διαχειριστής εγκρίνει ή απορρίψει την Αγγελία σας, θα ειδοποιηθείτε μέσω email."
+
+#: addons/payments/includes/class-emails-integration.php:179
+msgid "Your expired Ad has been renewed and is panding approval."
+msgstr "Η Αγγελία σας που έχει λήξει έχει ανανεωθεί και εκκρεμεί έγκριση."
+
+#: addons/payments/includes/class-emails-integration.php:165
+msgid ""
+"Hello\n"
+"your Ad titled '{$advert.post_title}' has been renewed and is visible on site again.\n"
+"\n"
+"To view your Ad you can use the link below:\n"
+"{$advert.ID|get_permalink}"
+msgstr ""
+"Χαίρετε\n"
+"η Αγγελία σας με τίτλο '{$advert.post_title}' έχει ανανεωθεί και είναι ορατή ξανά στον ιστότοπο.\n"
+"\n"
+"Για να δείτε την Αγγελία σας μπορείτε να χρησιμοποιήσετε τον παρακάτω σύνδεσμο:\n"
+"{$advert.ID|get_permalink}"
+
+#: addons/payments/includes/class-emails-integration.php:164
+msgid "Your expired Ad has been renewed and published."
+msgstr "Η Αγγελία σας που έχει λήξει ανανεώθηκε και δημοσιεύθηκε."
+
+#: addons/payments/includes/class-emails-integration.php:150
+msgid ""
+"Hello,\n"
+"your Ad titled '{$advert.post_title}' has been approved.\n"
+"\n"
+"To view your Ad you can use the link below:\n"
+"{$advert.ID|get_permalink}"
+msgstr ""
+"Χαίρετε,\n"
+"Η Αγγελία σας με τίτλο {$advert.post_title}' εγκρίθηκε\n"
+"\n"
+"Για να δείτε την Αγγελία σας μπορείτε να χρησιμοποιήσετε τον παρακάτω σύνδεσμο:\n"
+"{$advert.ID|get_permalink}"
+
+#: addons/payments/includes/class-emails-integration.php:149
+msgid "Your Ad has been paid and published."
+msgstr "Η διαφήμισή σας έχει πληρωθεί και δημοσιευτεί."
+
+#: addons/payments/includes/class-emails-integration.php:135
+msgid ""
+"Hello,\n"
+"your order {$payment|payment_order_id} has been proccessed and marked as completed."
+msgstr ""
+"Χαίρετε,\n"
+"Η παραγγελία σας {$payment|payment_order_id} έχει επεξεργαστεί και επισημάνθηκε ως ολοκληρωμένη."
+
+#: addons/payments/includes/class-emails-integration.php:134
+#: addons/payments/includes/class-emails-integration.php:209
+msgid "Payment Completed ({$payment|payment_order_id})."
+msgstr "Η πληρωμή ολοκληρώθηκε ({$payment|payment_order_id})."
+
+#: addons/payments/includes/class-emails-integration.php:120
+msgid ""
+"Hello,\n"
+"we have received your order {$payment|payment_order_id} and we are processing your payment.\n"
+"\n"
+"Created By: {$payment|meta:adverts_person}\n"
+"Order Date: {$payment.post_date|format_date}\n"
+"To Pay: {$payment|payment_to_pay}\n"
+"\n"
+"If you were unable to finish the payment on site you can do it using the link below.\n"
+"{$payment|payment_complete_url}"
+msgstr ""
+"Χαίρετε,\n"
+"Λάβαμε την παραγγελία σας {$payment|payment_order_id} και επεξεργαζόμαστε την πληρωμή σας.\n"
+"\n"
+"Δημιουργήθηκε από: {$payment|meta:adverts_person}\n"
+"Ημερομηνία παραγγελίας: {$payment.post_date|format_date}\n"
+"Για να πληρώσετε: {$payment|payment_to_pay}\n"
+"\n"
+"Εάν δεν καταφέρατε να ολοκληρώσετε την πληρωμή στον ιστότοπο, μπορείτε να το κάνετε χρησιμοποιώντας τον παρακάτω σύνδεσμο.\n"
+"{$payment|payment_complete_url}"
+
+#: addons/payments/includes/class-emails-integration.php:119
+msgid "Payment Pending ({$payment|payment_order_id})."
+msgstr "Εκκρεμεί Πληρωμή ({$payment|payment_order_id})."
+
+#: addons/payments/includes/class-emails-integration.php:105
+msgid ""
+"Hello,\n"
+"your Ad titled '{$advert.post_title}' has been saved and is pending payment.\n"
+"\n"
+"We will notify you once the payment will be processed."
+msgstr ""
+"Χαίρετε,\n"
+"Η Αγγελία σας με τίτλο '{$advert.post_title}' έχει αποθηκευτεί και εκκρεμεί πληρωμή.\n"
+"\n"
+"Θα σας ειδοποιήσουμε μόλις ολοκληρωθεί η επεξεργασία της πληρωμής."
+
+#: addons/payments/includes/class-emails-integration.php:104
+msgid "Your Ad has been saved (waiting for payment)."
+msgstr "Η Αγγελία σας έχει αποθηκευτεί (αναμονή πληρωμής)."
+
+#: addons/payments/includes/admin-pages.php:812
+msgid "Number of days the Ad will be visible."
+msgstr "Αριθμός ημερών που θα είναι ορατή η Αγγελία.."
+
+#: addons/payments/includes/admin-pages.php:811
+#: addons/payments/admin/pricing-list.php:50
+msgid "Visible"
+msgstr "Ορατή"
+
+#: addons/payments/includes/admin-pages.php:777
+msgid "Advert Renewal"
+msgstr "Ανανέωση Αγγελίας"
+
+#: addons/payments/includes/admin-pages.php:776
+msgid "New Advert Posting"
+msgstr "Νέα δημοσίευση Αγγελίας"
+
+#: addons/payments/includes/admin-pages.php:772
+msgid "Pricing Type"
+msgstr "Τύπος Τιμολόγησης"
+
+#: addons/payments/includes/admin-pages.php:759
+msgid "Select page where user can complete payments. This should be a page with [adverts_payments_checkout] shortcode."
+msgstr "Επιλέξτε τη σελίδα όπου ο χρήστης μπορεί να ολοκληρώσει τις πληρωμές. Αυτή θα πρέπει να είναι μια σελίδα με σύντομο κώδικα [adverts_payments_checkout]."
+
+#: addons/payments/includes/admin-pages.php:756
+msgid "Complete Payment Page"
+msgstr "Σελίδα Ολοκλήρωσης Πληρωμής"
+
+#: addons/payments/includes/admin-pages.php:748
+msgid "Default Pricing"
+msgstr "Προεπιλεγμένη Τιμολόγηση"
+
+#: addons/payments/includes/admin-pages.php:739
+msgid "Default Payment Gateway"
+msgstr "Προεπιλεγμένη Πύλη Πληρωμής"
+
+#: addons/payments/includes/admin-pages.php:617
+#: addons/payments/includes/admin-pages.php:649
+msgid "Pending Payment"
+msgstr "Εκκρεμής Πληρωμή"
+
+#: addons/payments/includes/admin-pages.php:609
+msgid "Abandoned"
+msgstr "Εγκαταλειμμένο"
+
+#: addons/payments/includes/admin-pages.php:604
+msgid "View order"
+msgstr "Εμφάνιση παραγγελίας"
+
+#: addons/payments/includes/admin-pages.php:482
+msgid "%1$s %2$d"
+msgstr "%1$s %2$d"
+
+#: addons/payments/includes/admin-pages.php:453
+msgid "No temporary payments to delete at this time."
+msgstr "Δεν υπάρχουν προσωρινές πληρωμές προς διαγραφή αυτήν τη στιγμή."
+
+#: addons/payments/includes/admin-pages.php:450
+msgid "Deleted %d temporary payment."
+msgid_plural "Deleted %d temporary payments"
+msgstr[0] "Διαγραμμένη %d προσωρινή πληρωμή."
+msgstr[1] "Διαγραμμένες %d προσωρινές πληρωμές"
+
+#: addons/payments/includes/admin-pages.php:441
+msgid "Status for selected Payments was changed to: %s"
+msgstr "Η κατάσταση για τις επιλεγμένες πληρωμές άλλαξε σε: %s"
+
+#: addons/payments/includes/admin-pages.php:391
+#: addons/payments/includes/admin-pages.php:423
+msgid "1 Payment deleted."
+msgid_plural "%s Payments deleted."
+msgstr[0] "1 Πληρωμή διαγράφηκε."
+msgstr[1] "%s Πληρωμές διαγράφηκαν."
+
+#: addons/payments/includes/admin-pages.php:384
+msgid "Adverts Payment with given ID does not exist."
+msgstr "Η Πληρωμή Αγγελίας με το δεδομένο ID δεν υπάρχει."
+
+#: addons/payments/includes/admin-pages.php:370
+msgid "Payment updated."
+msgstr "Η πληρωμή ενημερώθηκε."
+
+#: addons/payments/includes/admin-pages.php:358
+msgid "<strong>%1$s</strong> changed payment status to <strong>%2$s</strong>"
+msgstr "<strong>%1$s</strong> άλλαξε την κατάσταση πληρωμής σε <strong>%2$s</strong>"
+
+#: addons/payments/includes/admin-pages.php:327
+msgid "Payment Method [%s] assigned to this Payment does not exist or was disabled."
+msgstr "Ο Τρόπος Πληρωμής [%s] που έχει εκχωρηθεί σε αυτήν την Πληρωμή δεν υπάρχει ή απενεργοποιήθηκε."
+
+#: addons/payments/includes/admin-pages.php:293
+msgid "User ID"
+msgstr "ID Χρήστη"
+
+#: addons/payments/includes/admin-pages.php:278
+msgid "Payment #%d does not exist or was deleted."
+msgstr "Η πληρωμή #%d δεν υπάρχει ή διαγράφηκε."
+
+#: addons/payments/includes/admin-pages.php:238
+msgid "1 Pricing deleted."
+msgid_plural "%s Pricings deleted."
+msgstr[0] "1 Τιμολόγηση διαγράφηκε."
+msgstr[1] "%s Τιμολογήσεις διαγράφηκαν."
+
+#: addons/payments/includes/admin-pages.php:218
+msgid "Pricing deleted."
+msgstr "Η Τιμολόγηση διαγράφηκε."
+
+#: addons/payments/includes/admin-pages.php:211
+msgid "Adverts Pricing with given ID does not exist."
+msgstr "Δεν υπάρχει Τιμολόγηση Αγγελιών με το δεδομένο ID."
+
+#: addons/payments/includes/admin-pages.php:198
+msgid "Pricing updated."
+msgstr "Η τιμολόγηση ενημερώθηκε."
+
+#: addons/payments/includes/admin-pages.php:169
+msgid "Update Pricing"
+msgstr "Ενημέρωση Τιμολόγησης"
+
+#: addons/payments/includes/admin-pages.php:168
+msgid "Edit Pricing"
+msgstr "Επεξεργασία Τιμολόγησης"
+
+#: addons/payments/includes/admin-pages.php:154
+msgid "New pricing has been added."
+msgstr "Προστέθηκε νέα τιμολόγηση."
+
+#: addons/payments/includes/admin-pages.php:150
+#: addons/payments/includes/admin-pages.php:196
+#: addons/payments/includes/admin-pages.php:368
+msgid "There was an error while saving pricing in database."
+msgstr "Παρουσιάστηκε σφάλμα κατά την αποθήκευση των τιμών στη βάση δεδομένων."
+
+#: addons/payments/includes/admin-pages.php:128
+#: addons/payments/includes/admin-pages.php:129
+msgid "Add Pricing"
+msgstr "Προσθέστε Τιμή"
+
+#: addons/payments/includes/admin-pages.php:89
+msgid "Create at least one <a href='%s'>Pricing</a> before selecting default."
+msgstr "Δημιουργήστε τουλάχιστον μία <a href='%s'> Τιμολόγηση </a> πριν επιλέξετε την προεπιλογή."
+
+#: addons/payments/includes/admin-pages.php:76
+msgid "Enable at least one <a href='%s'>Payment Gateway</a> before selecting default."
+msgstr "Ενεργοποιήστε τουλάχιστον μία <a href='%s'> Πύλη Πληρωμής </a> πριν επιλέξετε την προεπιλογή."
+
+#: addons/payments/payments.php:628 addons/payments/includes/ajax.php:100
+msgid "Complete Payment"
+msgstr "Ολοκλήρωση Πληρωμής"
+
+#: addons/emails/admin/emails-edit.php:50
+msgid "Header Name"
+msgstr "Όνομα Κεφαλίδας"
+
+#: addons/emails/admin/emails-list.php:102
+msgid "Read when this message is sent ..."
+msgstr "Διαβάστε όταν αποστέλλεται αυτό το μήνυμα ..."
+
+#: addons/emails/admin/emails-list.php:95
+msgid "Other"
+msgstr "Άλλα"
+
+#: addons/emails/admin/emails-list.php:79
+msgid "Module / %s"
+msgstr "Μικροεφαρμογή / %s"
+
+#: addons/emails/admin/emails-list.php:78
+msgid "Unknown"
+msgstr "Άγνωστο"
+
+#: addons/emails/admin/emails-list.php:54
+msgid "Message Enabled"
+msgstr "Το μήνυμα Ενεργοποιήθηκε"
+
+#: addons/emails/admin/emails-list.php:52
+msgid "Code"
+msgstr "Κωδικός"
+
+#: addons/emails/admin/emails-list.php:51
+msgid "Recipient"
+msgstr "Παραλήπτης"
+
+#: addons/emails/admin/emails-list.php:50
+msgid "Email Subject"
+msgstr "Θέμα email"
+
+#: addons/emails/admin/emails-list.php:40
+#: addons/emails/admin/emails-list.php:135
+#: addons/payments/admin/payment-history-list.php:67
+msgid "Filter"
+msgstr "Φίλτρο"
+
+#: addons/emails/admin/emails-list.php:37
+#: addons/emails/admin/emails-list.php:93
+msgid "Administrator"
+msgstr "Διαχειριστής"
+
+#: addons/emails/admin/emails-list.php:36
+#: addons/emails/admin/emails-list.php:91
+#: addons/payments/admin/payment-history-list.php:78
+msgid "User"
+msgstr "Χρήστης"
+
+#: addons/emails/admin/emails-list.php:35
+msgid "Filter By Recipient"
+msgstr "Φιλτράρισμα βάση του Παραλήπτη"
+
+#: addons/emails/admin/emails-list.php:29
+#: addons/emails/admin/emails-list.php:128
+msgid "Filter By Module"
+msgstr "Φιλτράρισμα βάση της Μικροεφαρμογής"
+
+#: addons/emails/admin/options.php:15 addons/emails/admin/emails-list.php:16
+#: addons/emails/admin/emails-edit.php:16
+msgid "Email Templates"
+msgstr "Πρότυπα μηνυμάτων ηλεκτρονικού ταχυδρομείου"
+
+#: addons/emails/includes/class-field-name-email.php:97
+msgid "Last Name"
+msgstr "Επώνυμο"
+
+#: addons/emails/includes/class-field-name-email.php:82
+msgid "First Name"
+msgstr "Όνομα"
+
+#: addons/emails/includes/class-field-name-email.php:68
+msgid "Email Address (e.g. user@example.com)"
+msgstr "Διεύθυνση ηλεκτρονικού ταχυδρομείου (π.χ. user@example.com)"
+
+#: addons/emails/includes/class-field-name-email.php:64
+msgid "Full Name"
+msgstr "Ονοματεπώνυμο"
+
+#: addons/emails/includes/class-emails-admin.php:421
+msgid "Send emails as HTML"
+msgstr "Αποστολή email σαν HTML"
+
+#: addons/emails/includes/class-emails-admin.php:412
+msgid "Send Admin Notifications To"
+msgstr "Αποστολή Ειδοποιήσεων Διαχειριστή σε"
+
+#: addons/emails/includes/class-emails-admin.php:385
+msgid "Body"
+msgstr "Κείμενο"
+
+#: addons/emails/includes/class-emails-admin.php:366
+msgid "To"
+msgstr "Προς"
+
+#: addons/emails/includes/class-emails-admin.php:359
+msgid "From"
+msgstr "Από"
+
+#: addons/emails/includes/class-emails-admin.php:345
+msgid "Enable sending this message."
+msgstr "Ενεργοποίηση αποστολής αυτού του μηνύματος."
+
+#: addons/emails/includes/class-emails-admin.php:343
+msgid "Is Active"
+msgstr "Είναι Ενεργό"
+
+#: addons/emails/includes/class-emails-admin.php:336
+msgid "Email Name"
+msgstr "Όνομα email"
+
+#: addons/emails/includes/class-emails-admin.php:276
+msgid "Add Header"
+msgstr "Προσθήκη Επικεφαλίδας"
+
+#: addons/emails/includes/class-emails-admin.php:167
+msgid "Email template has been saved."
+msgstr "Το πρότυπο email έχει αποθηκευτεί."
+
+#: addons/emails/includes/class-emails-admin.php:157
+msgid "Update Message Template"
+msgstr "Ενημέρωση Προτύπου Μηνύματος"
+
+#: addons/emails/includes/class-emails-messages.php:217
+msgid ""
+"Hello,\n"
+"New Ad titled '{$advert.post_title}' has been saved and is pending moderation.\n"
+"\n"
+"You can edit the Ad here:\n"
+"{$advert|admin_edit_url}\n"
+"\n"
+"Please either Publish or Trash it then the owner will be notified."
+msgstr ""
+"Χαίρετε,\n"
+"Η νέα Αγγελία με τίτλο '{$advert.post_title}' έχει αποθηκευτεί και εκκρεμεί εποπτεία.\n"
+"\n"
+"Μπορείτε να επεξεργαστείτε την Αγγελία εδώ:\n"
+"{$advert|admin_edit_url}\n"
+"\n"
+"Παρακαλώ όπως τη Δημοσιεύσετε ή την Απορρίψετε και τότε ο κάτοχος θα ειδοποιηθεί."
+
+#: addons/emails/includes/class-emails-messages.php:216
+msgid "New Ad is pending (action required)."
+msgstr "Εκκρεμεί νέα Αγγελία (απαιτείται ενέργεια)."
+
+#: addons/emails/includes/class-emails-messages.php:203
+#: addons/payments/includes/class-emails-integration.php:225
+msgid ""
+"Hello,\n"
+"new Ad titled '{$advert.post_title}' has been published.\n"
+"\n"
+"You can view the Ad here:\n"
+"{$advert.ID|get_permalink}\n"
+"\n"
+"You can edit the Ad here:\n"
+"{$advert|admin_edit_url}"
+msgstr ""
+"Χαίρετε,\n"
+"Δημοσιεύτηκε νέα Αγγελία με τίτλο '{$advert.post_title}'.\n"
+"\n"
+"Μπορείτε να δείτε την Αγγελία εδώ:\n"
+"{$advert.ID|get_permalink}\n"
+"\n"
+"Μπορείτε να επεξεργαστείτε την Αγγελία εδώ:\n"
+"{$advert|admin_edit_url}"
+
+#: addons/emails/includes/class-emails-messages.php:202
+msgid "New Ad has been published."
+msgstr "Η Νέα Αγγελία δημοσιεύθηκε."
+
+#: addons/emails/includes/class-emails-messages.php:189
+msgid ""
+"Hello,\n"
+"your Ad titled '{$advert.post_title}' has expired and is no longer available on site."
+msgstr ""
+"Χαίρετε,\n"
+"Η Αγγελία σας σας με τίτλο '{$advert.post_title}' έχει λήξει και δεν είναι πλέον διαθέσιμη σε αυτόν τον ιστότοπο."
+
+#: addons/emails/includes/class-emails-messages.php:188
+msgid "Your Ad has expired."
+msgstr "Η Αγγελία σας έχει λήξει."
+
+#: addons/emails/includes/class-emails-messages.php:175
+msgid ""
+"Hello,\n"
+"we are sorry to inform you that your Ad titled '{$advert.post_title}' has been rejected by the administrator and will not be published."
+msgstr ""
+"Χαίρετε,\n"
+"Λυπούμαστε που σας ενημερώνουμε ότι η Αγγελία σας με τίτλο '{$advert.post_title}' έχει απορριφθεί από τον διαχειριστή και δεν θα δημοσιευτεί."
+
+#: addons/emails/includes/class-emails-messages.php:174
+msgid "Your Ad has been rejected by administrator."
+msgstr "Η Αγγελία σας έχει απορριφθεί από τον διαχειριστή."
+
+#: addons/emails/includes/class-emails-messages.php:161
+msgid ""
+"Hello,\n"
+"your Ad titled '{$advert.post_title} has been approved.\n"
+"\n"
+"To view your Ad you can use the link below:\n"
+"{$advert.ID|get_permalink}"
+msgstr ""
+"Χαίρετε,\n"
+"Η Αγγελία σας με τίτλο '{$advert.post_title}' έχει εγκριθεί.\n"
+"\n"
+"Για να δείτε την Αγγελία σας μπορείτε να χρησιμοποιήσετε τον παρακάτω σύνδεσμο:\n"
+"{$advert.ID|get_permalink}"
+
+#: addons/emails/includes/class-emails-messages.php:160
+msgid "Your Ad has been approved by administrator."
+msgstr "Η Αγγελία σας έχει εγκριθεί από τον διαχειριστή."
+
+#: addons/emails/includes/class-emails-messages.php:147
+msgid ""
+"Hello,\n"
+"your Ad titled '{$advert.post_title}' has been saved and is pending moderation.\n"
+"\n"
+"Once the administrator will approve or reject your Ad you will be notified by email."
+msgstr ""
+"Χαίρετε,\n"
+"Η Αγγελία σας με τίτλο '{$advert.post_title}' έχει αποθηκευτεί και εκκρεμεί εποπτεία.\n"
+"\n"
+"Μόλις ο διαχειριστής εγκρίνει ή απορρίψει την Αγγελία σας, θα ειδοποιηθείτε μέσω email."
+
+#: addons/emails/includes/class-emails-messages.php:146
+msgid "Your Ad has been saved (pending moderation)."
+msgstr "Η Αγγελία σας έχει αποθηκευτεί (εκκρεμεί εποπτεία)."
+
+#: addons/emails/includes/class-emails-messages.php:133
+msgid ""
+"Hello,\n"
+"your Ad titled '{$advert.post_title}' has been published.\n"
+"\n"
+"To view your Ad you can use the link below:\n"
+"{$advert.ID|get_permalink}"
+msgstr ""
+"Χαίρετε,\n"
+"Η Αγγελία σας με τίτλο '{$advert.post_title}' έχει δημοσιευτεί.\n"
+"\n"
+"Για να δείτε την Αγγελία σας μπορείτε να χρησιμοποιήσετε τον παρακάτω σύνδεσμο:\n"
+"{$advert.ID|get_permalink}"
+
+#: addons/emails/includes/class-emails-messages.php:132
+msgid "Your Ad has been published."
+msgstr "Η Αγγελία σας έχει δημοσιευτεί."
+
+#: addons/emails/includes/class-emails-admin.php:353
+#: addons/contact-form/contact-form.php:411
+msgid "Subject"
+msgstr "Θέμα"
+
+#: addons/contact-form/contact-form.php:400
+msgid "Your Email"
+msgstr "Το email σας"
+
+#: addons/contact-form/contact-form.php:390
+msgid "Your Name"
+msgstr "Το όνομά σας"
+
+#: addons/contact-form/contact-form.php:127
+msgid "Your message has been sent."
+msgstr "Το μήνυμά σας στάλθηκε."
+
+#: addons/contact-form/contact-form.php:55
+#: addons/contact-form/contact-form.php:96
+msgid "Send Message"
+msgstr "Αποστολή Μηνύματος"
+
+#: addons/contact-form/includes/class-emails-integration.php:70
+msgid ""
+"{$form.message_body}\n"
+"\n"
+"URL: {$advert.ID|get_permalink}\n"
+"Price: {$advert.ID|adverts_get_the_price}"
+msgstr ""
+"{$form.message_body}\n"
+"\n"
+"URL: {$advert.ID|get_permalink}\n"
+"Τιμή: {$advert.ID|adverts_get_the_price}"
+
+#: addons/contact-form/includes/class-emails-integration.php:69
+msgid "[{$advert.post_title}] {$form.message_subject}."
+msgstr "[{$advert.post_title}] {$form.message_subject}."
+
+#: addons/contact-form/includes/admin-pages.php:89
+msgid "From Email"
+msgstr "Email Αποστολέα"
+
+#: addons/contact-form/includes/admin-pages.php:82
+msgid "From Name"
+msgstr "Όνομα Αποστολέα"
+
+#: addons/contact-form/includes/admin-pages.php:73
+msgid "Show phone number next to contact button."
+msgstr "Εμφάνιση του αριθμού τηλεφώνου δίπλα στο κουμπί επαφής."
+
+#: addons/bank-transfer/admin/options.php:15
+msgid "Payment Gateway / Bank Transfer"
+msgstr "Πύλη Πληρωμής / Μεταφορά μέσω Τράπεζας"
+
+#: addons/bank-transfer/includes/admin-pages.php:73
+msgid "User will see this message when asked to make payment, make sure that instructions here will make it as easy as possible to make a payment.<br/>Allowed variables:<br/>- {total} - total amount to pay (for example $10.00)<br/>- {order_number} - unique order number<br/>To revert to default message remove whole text from editor and save the form."
+msgstr "Ο χρήστης θα δει αυτό το μήνυμα όταν του ζητηθεί να πραγματοποιήσει την πληρωμή, βεβαιωθείτε ότι οι οδηγίες εδώ θα κάνουν όσο το δυνατόν πιο εύκολη την πραγματοποίηση της πληρωμής.<br/>Επιτρεπόμενες μεταβλητές:<br/> - {total} - συνολικό ποσό πληρωμής (για παράδειγμα 10,00 €)<br/>- {order_number} - μοναδικός αριθμός παραγγελίας<br/>Για να επιστρέψετε στο προεπιλεγμένο μήνυμα αφαιρέστε ολόκληρο το κείμενο από το πρόγραμμα επεξεργασίας και αποθηκεύστε τη φόρμα."
+
+#: addons/bank-transfer/includes/admin-pages.php:70
+#: addons/contact-form/contact-form.php:422
+msgid "Message"
+msgstr "Μήνυμα"
+
+#: addons/bank-transfer/includes/admin-pages.php:61
+msgid "Payment gateway name visible in the frontend when making a payment."
+msgstr "Το όνομα της Πύλης Πληρωμής είναι ορατό στην διεπαφή κατά την εκτέλεση μιας πληρωμής."
+
+#: addons/bank-transfer/includes/admin-pages.php:60
+msgid "Payment Name"
+msgstr "Όνομα Πληρωμής"
+
+#: addons/emails/includes/class-emails-admin.php:81
+#: addons/emails/includes/class-emails-admin.php:169
+#: addons/core/includes/admin-pages.php:74
+#: addons/core/includes/admin-pages.php:149
+#: addons/bank-transfer/includes/admin-pages.php:43
+#: addons/payments/includes/admin-pages.php:45
+#: addons/payments/includes/admin-pages.php:158
+#: addons/payments/includes/admin-pages.php:201
+#: addons/payments/includes/admin-pages.php:373
+#: addons/contact-form/contact-form.php:133
+#: addons/contact-form/includes/admin-pages.php:52
+msgid "There are errors in your form."
+msgstr "Υπάρχουν λάθη στη φόρμα σας."
+
+#: addons/emails/includes/class-emails-admin.php:79
+#: addons/core/includes/admin-pages.php:72
+#: addons/core/includes/admin-pages.php:147
+#: addons/bank-transfer/includes/admin-pages.php:41
+#: addons/payments/includes/admin-pages.php:43
+#: addons/contact-form/includes/admin-pages.php:50
+msgid "Settings updated."
+msgstr "Οι ρυθμίσεις ενημερώθηκαν."
+
+#: addons/emails/includes/class-emails-admin.php:61
+#: addons/core/includes/admin-pages.php:42
+#: addons/core/includes/admin-pages.php:93
+#: addons/bank-transfer/includes/admin-pages.php:32
+#: addons/payments/includes/admin-pages.php:35
+#: addons/contact-form/includes/admin-pages.php:37
+msgid "Update Options"
+msgstr "Ενημέρωση Επιλογών"
+
+#: templates/categories-all.php:40
+msgid "<em>View All &raquo;</em>"
+msgstr "<em>Εμφάνιση Όλων &raquo;</em>"
+
+#: templates/manage.php:89
+msgid "You do not have any Ads posted yet."
+msgstr "Δεν έχετε καμία Αγγελία προς το παρόν."
+
+#: templates/manage.php:73
+msgid "More"
+msgstr "Περισσότερα"
+
+#: templates/manage.php:64
+msgid "Yes"
+msgstr "Ναι"
+
+#: templates/manage.php:62
+msgid "Are you sure?"
+msgstr "Είστε σίγουρος/η;"
+
+#: templates/manage.php:56 templates/manage.php:57
+#: addons/payments/admin/pricing-list.php:33
+#: addons/payments/admin/pricing-list.php:66
+#: addons/payments/admin/pricing-list.php:116
+#: addons/payments/admin/payment-history-list.php:44
+#: addons/payments/admin/payment-history-list.php:99
+#: addons/payments/admin/payment-history-list.php:155
+msgid "Delete"
+msgstr "Διαγραφή"
+
+#: templates/manage.php:54 includes/gallery.php:293
+msgid "View"
+msgstr "Προβολή"
+
+#: templates/manage.php:39
+msgid "Expires %s"
+msgstr "Λήγει στις %s"
+
+#: templates/manage.php:26
+msgid "Inactive — This Ad expired."
+msgstr "Ανενεργή - Αυτή η Αγγελία έληξε."
+
+#: templates/manage.php:22
+msgid "Inactive — This Ad is in moderation."
+msgstr "Ανενεργή - Αυτή η Αγγελία είναι υπό εποπτεία."
+
+#: templates/add-preview.php:9
+msgid "Edit Listing"
+msgstr "Επεξεργασία Καταχώρησης"
+
+#: templates/manage-edit.php:3
+msgid "View Ad"
+msgstr "Προβολή Αγγελίας"
+
+#: templates/manage-edit.php:2
+msgid "Go Back"
+msgstr "Επιστροφή"
+
+#: templates/list.php:91
+msgid "Filter Results"
+msgstr "Φιλτράρισμα Αποτελεσμάτων"
+
+#: templates/list.php:87
+msgid "SEARCH"
+msgstr "ΑΝΑΖΗΤΗΣΗ"
+
+#: templates/list.php:85
+msgid "Advanced Search"
+msgstr "Προχωρημένη Αναζήτηση"
+
+#: templates/list.php:51
+msgid "List"
+msgstr "Κατάλογος"
+
+#: templates/list.php:50
+msgid "Grid"
+msgstr "Πλέγμα"
+
+#: templates/add-save.php:7
+msgid "Your ad has been published. You can view it here \"<a href=\"%1$s\">%2$s</a>\"."
+msgstr "Η Αγγελία σας έχει δημοσιευτεί. Μπορείτε να τη δείτε εδώ \"<a href=\"%1$s\">%2$s</a>\"."
+
+#: templates/add-save.php:5
+msgid "Your ad has been put into moderation, please wait for admin to approve it."
+msgstr "Η Αγγελία σας έχει τεθεί υπό εποπτεία, παρακαλώ περιμένετε να την εγκρίνει ο διαχειριστής."
+
+#: templates/single.php:22
+msgid "Published: %1$s (%2$s ago)"
+msgstr "Δημοσιεύθηκε: %1$s (πριν από %2$s)"
+
+#: templates/single.php:21
+msgid "by <strong>%s</strong>"
+msgstr "από <strong>%s</strong>"
+
+#: wpadverts.php:525
+msgid "Module activated successfully."
+msgstr "Η Μικροεφαρμογή ενεργοποιήθηκε επιτυχώς."
+
+#: wpadverts.php:310
+msgid "Main"
+msgstr "Κύριο"
+
+#: wpadverts.php:309
+msgid "View Full Image"
+msgstr "Προβολή Πλήρους εικόνας"
+
+#: wpadverts.php:308
+msgid "Delete Image"
+msgstr "Διαγραφή Εικόνας"
+
+#: wpadverts.php:294
+msgid "No results found."
+msgstr "Δεν βρέθηκαν απότελέσματα."
+
+#: wpadverts.php:289
+msgid "Select options ..."
+msgstr "Ορίστε επιλογές ..."
+
+#: wpadverts.php:209
+msgid "Categories"
+msgstr "Κατηγορίες"
+
+#: wpadverts.php:208
+msgctxt "taxonomy singular name"
+msgid "Advert Category"
+msgstr "Κατηγορία Αγγελίας"
+
+#: wpadverts.php:207
+msgctxt "taxonomy general name"
+msgid "Adverts Categories"
+msgstr "Κατηγορίες Αγγελιών"
+
+#: wpadverts.php:185
+msgid "Classifieds"
+msgstr "Αγγελίες"
+
+#: wpadverts.php:183
+msgid "No Classifieds found in the Trash"
+msgstr "Δεν βρέθηκαν Αγγελίες στον Κάδο Απορριμμάτων"
+
+#: wpadverts.php:182
+msgid "No Classifieds found"
+msgstr "Δεν βρέθηκαν Αγγελίες"
+
+#: wpadverts.php:181
+msgid "Search Classifieds"
+msgstr "Αναζήτηση Αγγελίας"
+
+#: wpadverts.php:180
+msgid "View Classified"
+msgstr "Προβολή Αγγελίας"
+
+#: wpadverts.php:179
+msgid "All Classifieds"
+msgstr "Όλες οι Αγγελίες"
+
+#: wpadverts.php:178
+msgid "New Classified"
+msgstr "Νέα Αγγελία"
+
+#: wpadverts.php:177
+msgid "Edit Classified"
+msgstr "Επεξεργασία Αγγελίας"
+
+#: wpadverts.php:176
+msgid "Add New Classified"
+msgstr "Προσθήκη Νέας Αγγελίας"
+
+#: wpadverts.php:175
+msgctxt "classified"
+msgid "Add New"
+msgstr "Προσθήκη Νέας"
+
+#: wpadverts.php:174
+msgctxt "post type singular name"
+msgid "Classified"
+msgstr "Αγγελία"
+
+#: wpadverts.php:173
+msgctxt "post type general name"
+msgid "Classifieds"
+msgstr "Αγγελίες"
+
+#: wpadverts.php:169
+msgid "Temporary <span class=\"count\">(%s)</span>"
+msgid_plural "Temporary <span class=\"count\">(%s)</span>"
+msgstr[0] "Προσωρινή <span class=\"count\">(%s)</span>"
+msgstr[1] "Προσωρινές <span class=\"count\">(%s)</span>"
+
+#: wpadverts.php:165
+msgctxt "post"
+msgid "Temporary"
+msgstr "Προσωρινή"
+
+#: wpadverts.php:161
+msgid "Expired <span class=\"count\">(%s)</span>"
+msgid_plural "Expired <span class=\"count\">(%s)</span>"
+msgstr[0] "Έχει λήξει <span class=\"count\">(%s)</span>"
+msgstr[1] "Έχουν λήξει <span class=\"count\">(%s)</span>"
+
+#: wpadverts.php:158
+msgctxt "post"
+msgid "Expired"
+msgstr "Έχει λήξει"
+
+#: includes/shortcodes.php:473
+msgid "Cannot update. There are errors in your form."
+msgstr "Δεν είναι δυνατή η ενημέρωση. Υπάρχουν σφάλματα στη φόρμα σας."
+
+#: includes/shortcodes.php:466
+msgid "Post has been updated."
+msgstr "Η Δημοσίευση έχει ενημερωθεί."
+
+#: includes/shortcodes.php:431
+msgid "Incorrect post status [%s]."
+msgstr "Λανθασμένη κατάσταση ανάρτησης [%s]."
+
+#: includes/shortcodes.php:419
+msgid "You do not own this Ad."
+msgstr "Δεν σας ανήκει αυτή η Αγγελία."
+
+#: includes/shortcodes.php:409
+msgid "Ad does not exist."
+msgstr "Η Αγγελία δεν υπάρχει."
+
+#: includes/shortcodes.php:118 includes/shortcodes.php:148
+msgid "Sort By: %s - %s"
+msgstr "Ταξινόμηση βάση: %s - %s"
+
+#: includes/shortcodes.php:111
+msgid "From Z to A"
+msgstr "Από το Ω στο Α"
+
+#: includes/shortcodes.php:110
+msgid "From A to Z"
+msgstr "Από το Α στο Ω"
+
+#: includes/shortcodes.php:104
+msgid "Most Expensive First"
+msgstr "Το Ακριβότερο Πρώτο"
+
+#: includes/shortcodes.php:103
+msgid "Cheapest First"
+msgstr "Το Φθηνότερο Πρώτο"
+
+#: includes/shortcodes.php:97
+msgid "Oldest First"
+msgstr "Το Παλαιότερο Πρώτο"
+
+#: includes/shortcodes.php:96 includes/shortcodes.php:118
+msgid "Newest First"
+msgstr "Το Νεότερο Πρώτο"
+
+#: includes/class-shortcode-adverts-add.php:574 includes/shortcodes.php:277
+msgid "Only logged in users can access this page. <a href=\"%1$s\">Login</a> or <a href=\"%2$s\">Register</a>."
+msgstr "Μόνο συνδεδεμένοι χρήστες έχουν πρόσβαση σε αυτήν τη σελίδα. <a href=\"%1$s\">Είσοδος</a> or <a href=\"%2$s\">Εγγραφή</a>."
+
+#: includes/class-shortcode-adverts-add.php:490
+msgid "Thank you for submitting your ad!"
+msgstr "Σας ευχαριστούμε για την υποβολή της Αγγελίας σας!"
+
+#: includes/class-shortcode-adverts-add.php:433
+msgid "There are errors in your form. Please correct them before proceeding."
+msgstr "Υπάρχουν σφάλματα στη φόρμα σας. Διορθώστε τα πριν συνεχίσετε."
+
+#: includes/class-shortcode-adverts-add.php:360
+#: includes/class-shortcode-adverts-add.php:470
+msgid "Could not validate. Refresh your session and make sure you are using cookies."
+msgstr "Δεν ήταν δυνατή η επικύρωση. Ανανεώστε τη συνεδρία σας και βεβαιωθείτε ότι χρησιμοποιείτε cookies."
+
+#: templates/add-preview.php:16 includes/class-shortcode-adverts-add.php:310
+#: includes/class-shortcode-adverts-add.php:441
+msgid "Publish Listing"
+msgstr "Δημοσίευση Καταχώρισης"
+
+#: templates/manage-edit.php:52 addons/payments/includes/admin-pages.php:653
+#: includes/class-updates-manager.php:332
+msgid "Update"
+msgstr "Ενημέρωση"
+
+#: includes/class-updates-manager.php:320
+msgid "Activate your License in order to enable automatic updates."
+msgstr "Ενεργοποιήστε την Άδειά σας για να ενεργοποιήσετε τις αυτόματες ενημερώσεις."
+
+#: includes/class-updates-manager.php:317 admin/options.php:41
+msgid "Activate"
+msgstr "Ενεργοποίηση"
+
+#: includes/class-updates-manager.php:316
+#: includes/class-updates-manager.php:331
+msgid "License ..."
+msgstr "Κλειδί Άδειας Χρήσης ..."
+
+#: includes/class-updates-manager.php:150
+msgid "Cannot connect to remote server. Please try again later."
+msgstr "Δεν είναι δυνατή η σύνδεση στον απομακρυσμένο διακομιστή. Παρακαλώ προσπάθησε ξανά αργότερα."
+
+#: includes/class-updates-manager.php:116
+msgid "License"
+msgstr "Άδεια Χρήσης"
+
+#: includes/functions.php:3145
+msgid "This post does not belong to you."
+msgstr "Αυτή η ανάρτηση δεν ανήκει σε εσάς."
+
+#: includes/functions.php:3137
+msgid "This post cannot be edited by annonymous users."
+msgstr "Δεν είναι δυνατή η επεξεργασία αυτής της ανάρτησης από ανώνυμους χρήστες."
+
+#: includes/functions.php:3118
+msgid "This post does not exist."
+msgstr "Αυτή η ανάρτηση δεν υπάρχει."
+
+#: includes/functions.php:3088
+msgid "Post ID not provided."
+msgstr "Δεν παρέχεται το ID της ανάρτησης."
+
+#: includes/functions.php:3080
+msgid "It seems you are not the post %d author. Please refresh the page and try again."
+msgstr "Φαίνεται ότι δεν είστε ο συντάκτης της ανάρτησης %d. Ανανεώστε τη σελίδα και δοκιμάστε ξανά."
+
+#: includes/class-shortcode-adverts-add.php:341 includes/functions.php:3024
+msgid "Checksum does not exist. Please refresh the page and try again."
+msgstr "Η άθροισμα του αιτήματος δεν υπάρχει. Παρακαλούμε ανανεώστε τη σελίδα και δοκιμάστε ξανά."
+
+#: includes/class-shortcode-adverts-add.php:339 includes/functions.php:3022
+msgid "Could not verify the request checksum. Please refresh the page and try again."
+msgstr "Δεν ήταν δυνατή η επαλήθευση του αθροίσματος του αιτήματος. Ανανεώστε τη σελίδα και δοκιμάστε ξανά."
+
+#: includes/functions.php:2901
+msgid "<strong>This Ad expired and is no longer available.</strong><br/>See our other active <a href=\"%s\">classified ads</a>."
+msgstr "<strong>Αυτή η Αγγελία έληξε και δεν είναι πλέον διαθέσιμη.</strong><br/>Δείτε τις άλλες ενεργές <a href=\"%s\">αγγελίες</a>."
+
+#: includes/functions.php:2896
+msgid "<strong>Visible To Administrators Only</strong><br/>This Ad expired, but as a user with <em>%s</em> capability you can see this page."
+msgstr "<strong>Ορατό μόνο στους διαχειριστές</strong><br/>Αυτή η διαφήμιση έληξε, αλλά ως χρήστης με δυνατότητα <em>%s</em> μπορείτε να δείτε αυτήν τη σελίδα."
+
+#: includes/functions.php:2828
+msgid "Pending Ads"
+msgstr "Εκκρεμείς Αγγελίες"
+
+#: addons/contact-form/contact-form.php:63 includes/functions.php:2652
+msgid "Phone"
+msgstr "Τηλέφωνο"
+
+#: includes/functions.php:2624
+msgid "Show Contact Information"
+msgstr "Προβολή των Στοιχείων Επικοινωνίας"
+
+#: includes/functions.php:2182
+msgid "Sri Lankan Rupees"
+msgstr "Ρουπία της Σρι Λάνκα"
+
+#: includes/functions.php:2181
+msgid "South African Rand"
+msgstr "Ραντ Νοτίου Αφρικής"
+
+#: includes/functions.php:2180
+msgid "Russian Rubles"
+msgstr "Ρούβλι Ρωσίας"
+
+#: includes/functions.php:2179
+msgid "Iranian Rial"
+msgstr "Ριάλ Ιράν"
+
+#: includes/functions.php:2178
+msgid "Turkish Lira"
+msgstr "Λίρα Τουρκίας"
+
+#: includes/functions.php:2164
+msgid "Indian Rupees"
+msgstr "Ρούπι Ινδίας"
+
+#: includes/functions.php:2177
+msgid "Thai Baht"
+msgstr "Μπατ Ταϊλάνδης"
+
+#: includes/functions.php:2176
+msgid "Taiwan New Dollars"
+msgstr "Νέο Δολάριο Ταϊβάν"
+
+#: includes/functions.php:2175
+msgid "Swiss Franc"
+msgstr "Ελβετικό φράγκο"
+
+#: includes/functions.php:2174
+msgid "Swedish Krona"
+msgstr "Σουηδική κορώνα"
+
+#: includes/functions.php:2173
+msgid "Singapore Dollar"
+msgstr "Δολάριο Σιγκαπούρης"
+
+#: includes/functions.php:2172
+msgid "Polish Zloty"
+msgstr "Πολωνικό ζλότι"
+
+#: includes/functions.php:2171
+msgid "Philippine Pesos"
+msgstr "Πέσο Φιλιππίνων"
+
+#: includes/functions.php:2170
+msgid "Norwegian Krone"
+msgstr "Νορβηγική κορώνα"
+
+#: includes/functions.php:2169
+msgid "New Zealand Dollar"
+msgstr "Δολάριο Νέας Ζηλανδίας"
+
+#: includes/functions.php:2167
+msgid "Mexican Peso"
+msgstr "Πέσο Μεξικού"
+
+#: includes/functions.php:2166
+msgid "Malaysian Ringgits"
+msgstr "Ρινγκτ Μαλαισίας"
+
+#: includes/functions.php:2165
+msgid "Japanese Yen"
+msgstr "Γιεν Ιαπωνίας"
+
+#: includes/functions.php:2163
+msgid "Israeli Shekel"
+msgstr "Israeli Shekel"
+
+#: includes/functions.php:2162
+msgid "Hungarian Forint"
+msgstr "Φιορίνι Ουγγαρίας"
+
+#: includes/functions.php:2161
+msgid "Hong Kong Dollar"
+msgstr "Δολάριο Χονγκ Κονγκ"
+
+#: includes/functions.php:2160
+msgid "Danish Krone"
+msgstr "Κορώνα Δανίας"
+
+#: includes/functions.php:2159
+msgid "Czech Koruna"
+msgstr "Κορώνα Τσεχίας"
+
+#: includes/functions.php:2158
+msgid "Canadian Dollars"
+msgstr "Δολάριο Καναδά"
+
+#: includes/functions.php:2157
+msgid "Brazilian Real"
+msgstr "Ρεάλ Βραζιλίας"
+
+#: includes/functions.php:2156
+msgid "Australian Dollars"
+msgstr "Δολάριο Αυστραλίας"
+
+#: includes/functions.php:2155
+msgid "Pounds Sterling"
+msgstr "Pounds Sterling"
+
+#: includes/functions.php:2154
+msgid "Euros"
+msgstr "Ευρώ"
+
+#: includes/functions.php:2153
+msgid "US Dollars"
+msgstr "Δολάριο ΗΠΑ"
+
+#: includes/functions.php:1978
+msgid "Your are being redirected to Edit page. <a href=\"%s\">Click here</a> if it is taking to long. "
+msgstr "Ανακατευθύνεστε στη σελίδα Επεξεργασία. <a href=\"%s\">Κάντε κλικ εδώ</a> εάν χρειάζεται πολύς χρόνος. "
+
+#: includes/functions.php:1977
+msgid "Redirecting"
+msgstr "Ανακατεύθυνση"
+
+#: includes/functions.php:1693
+msgid "Create an account for me so I can manage all my ads from one place (password will be emailed to you) or <a href=\"%s\">Sign In</a>"
+msgstr "Δημιουργήστε έναν λογαριασμό για να μπορείτε να διαχειριστείτε όλες τις Αγγελίες σας από ένα μέρος (ο κωδικός πρόσβασης θα σας αποσταλεί μέσω ηλεκτρονικού ταχυδρομείου) ή <a href=\"%s\">Σύνδεση</a>"
+
+#: includes/functions.php:1688
+msgid "You are posting as <strong>%1$s</strong>. <br/>If you want to use a different account, please <a href=\"%2$s\">logout</a>."
+msgstr "Δημοσιεύετε ως <strong>%1$s</strong>.<br/>Εάν θέλετε να χρησιμοποιήσετε διαφορετικό λογαριασμό, παρακαλώ <a href=\"%2$s\">αποσυνδεθείτε</a>."
+
+#: includes/functions.php:448
+msgid "Category: %s"
+msgstr "Κατηγορία: %s"
+
+#: includes/functions.php:268
+msgid "Uploaded file is NOT an image"
+msgstr "Το μεταφορτωμένο αρχείο ΔΕΝ είναι εικόνα"
+
+#: includes/events.php:64
+msgid "Every 5 minutes"
+msgstr "Κάθε 5 λεπτά"
+
+#: includes/admin-pages.php:352
+msgid "Filter Icons ..."
+msgstr "Φιλτράρισμα Εικονιδίων ..."
+
+#: includes/admin-pages.php:349
+msgid "Category Icon"
+msgstr "Εικονίδιο Κατηγορίας"
+
+#: includes/admin-pages.php:264
+msgid "Module [%s] does not exist."
+msgstr "Η Μικροεφαρμογή [%s] δεν υπάρχει."
+
+#: includes/admin-pages.php:207
+msgid "Charge users for Ad postings using credit cards (and some other payment gateways)."
+msgstr "Χρέωση χρηστών για καταχωρίσεις Αγγελιών χρησιμοποιώντας πιστωτικές κάρτες (και ορισμένες άλλες πύλες πληρωμής)."
+
+#: includes/admin-pages.php:206
+msgid "Stripe"
+msgstr "Γραμμή"
+
+#: includes/admin-pages.php:200
+msgid "PayPal Payments Standard, allow users to pay for ads via PayPal."
+msgstr "Το PayPal Payments Standard, επιτρέπει στους χρήστες να πληρώνουν για Αγγελίες μέσω PayPal."
+
+#: includes/admin-pages.php:199
+msgid "PayPal Standard"
+msgstr "PayPal Standard"
+
+#: includes/admin-pages.php:194
+msgid "Allow users to pay for ad posting using direct bank transfer or cash payments."
+msgstr "Επιτρέψτε στους χρήστες να πληρώνουν για την ανάρτηση των Αγγελιών χρησιμοποιώντας απευθείας τραπεζική μεταφορά ή πληρωμές σε μετρητά."
+
+#: addons/bank-transfer/bank-transfer.php:42 includes/admin-pages.php:193
+msgid "Bank Transfer"
+msgstr "Πληρωμή μέσω Τράπεζας"
+
+#: includes/admin-pages.php:190
+msgid "Payment Gateways"
+msgstr "Πύλες Πληρωμής"
+
+#: includes/admin-pages.php:182
+msgid "Allow users and administrators to mark the Ads as sold."
+msgstr "Επιτρέψτε στους χρήστες και τους διαχειριστές να επισημάνουν τις Αγγελίες ως πωλημένες."
+
+#: includes/admin-pages.php:181
+msgid "Mark As Sold"
+msgstr "Επισήμανση ως Πωλημένο"
+
+#: includes/admin-pages.php:175
+msgid "Set custom icons (small and big) for each category."
+msgstr "Ορίστε προσαρμοσμένα εικονίδια (μικρά και μεγάλα) για κάθε κατηγορία."
+
+#: includes/admin-pages.php:174
+msgid "Category Icons"
+msgstr "Εικονίδια Κατηγορίας"
+
+#: includes/admin-pages.php:168
+msgid "Google Analytics integration, allows users to view their Ads stats in past 30 days."
+msgstr "Η ενσωμάτωση του Google Analytics επιτρέπει στους χρήστες να βλέπουν τα στατιστικά για τις Αγγελίες τους για τις τελευταίες 30 ημέρες."
+
+#: includes/admin-pages.php:167
+msgid "Analytics"
+msgstr "Στατιστικά"
+
+#: includes/admin-pages.php:161
+msgid "Protect your forms from SPAM using easy easy for humans and hard for bots captcha."
+msgstr "Προστατέψτε τις φόρμες σας από τα SPAM χρησιμοποιώντας ένα captcha εύκολο για τον άνθρωπο και δύσκολο για τα bots."
+
+#: includes/admin-pages.php:160
+msgid "reCAPTCHA"
+msgstr "reCAPTCHA"
+
+#: includes/admin-pages.php:154
+msgid "Set fee for Ads posting per category or allow to post for free in some categories."
+msgstr "Ορίστε την χρέωση για την ανάρτηση των Αγγελιών ανά κατηγορία ή επιτρέψτε την δωρεάν ανάρτηση σε ορισμένες κατηγορίες."
+
+#: includes/admin-pages.php:153
+msgid "Fee Per Category"
+msgstr "Δωρεάν Ανά Κατηγορία"
+
+#: includes/admin-pages.php:147
+msgid "Locations Taxonomy, Google Maps integration and more."
+msgstr "Ταξινόμηση Τοποθεσιών, ενσωμάτωση των Χαρτών Google και άλλα."
+
+#: includes/admin-pages.php:146
+msgid "Maps And Locations"
+msgstr "Χάρτες Και Τοποθεσίες"
+
+#: includes/admin-pages.php:141
+msgid "Display contact form on Ad details pages instead of just the contact information."
+msgstr "Εμφάνιση της φόρμας επικοινωνίας στις σελίδες λεπτομερειών της Αγγελίας αντί για τα στοιχεία επικοινωνίας."
+
+#: addons/contact-form/includes/class-emails-integration.php:44
+#: addons/contact-form/admin/options.php:15 includes/admin-pages.php:140
+msgid "Contact Form"
+msgstr "Φόρμα Επικοινωνίας"
+
+#: includes/admin-pages.php:135
+msgid "Allow users to post Ads displayed always at the top of the list."
+msgstr "Να επιτρέπεται στους χρήστες να δημοσιεύουν Αγγελίες που εμφανίζονται πάντα στην κορυφή της λίστας."
+
+#: addons/featured/admin/options.php:15 includes/admin-pages.php:134
+msgid "Featured Ads"
+msgstr "Επιλεγμένες Αγγελίες"
+
+#: includes/admin-pages.php:131
+msgid "Features"
+msgstr "Δυνατότητες"
+
+#: includes/admin-pages.php:124
+msgid "Emails module sends transactional emails to users and allows editing the email templates content."
+msgstr "Η Μικροεφαρμογή ηλεκτρονικού ταχυδρομείου στέλνει email συναλλαγών στους χρήστες και επιτρέπει την επεξεργασία του περιεχομένου των προτύπων email."
+
+#: includes/admin-pages.php:123
+msgid "Emails"
+msgstr "Emails"
+
+#: includes/admin-pages.php:117
+msgid "Using Authors module users can create their profiles with list of authors ads."
+msgstr "Χρησιμοποιώντας τη Μικροεφαρμογή Συντακτών οι χρήστες μπορούν να δημιουργήσουν τα προφίλ τους με μια λίστα Συντακτών Αγγελιών."
+
+#: includes/admin-pages.php:116
+msgid "Authors"
+msgstr "Συντάκτες"
+
+#: includes/admin-pages.php:110
+msgid "Allow users to edit: Add, Search and Contact forms using easy to use drag and drop editor."
+msgstr "Επιτρέψτε στους χρήστες να επεξεργάζονται: Προσθήκη, Αναζήτηση και φόρμες Επαφών χρησιμοποιώντας ένα εύχρηστο πρόγραμμα επεξεργασίας μεταφοράς και απόθεσης."
+
+#: includes/admin-pages.php:109
+msgid "Custom Fields"
+msgstr "Προσαρμοσμένα Πεδία"
+
+#: includes/admin-pages.php:103
+msgid "Integrate user Ads with BuddyPress profiles, registration and private messages."
+msgstr "Ενσωμάτωση Αγγελιών χρήστη με προφίλ BuddyPress, εγγραφή και ιδιωτικά μηνύματα."
+
+#: includes/admin-pages.php:102
+msgid "BuddyPress Integration"
+msgstr "Ενσωμάτωση BuddyPress"
+
+#: includes/admin-pages.php:96
+msgid "Use WooCommerce to charge users for posting classifieds."
+msgstr "Χρησιμοποιήστε το WooCommerce για να χρεώσετε τους χρήστες για ανάρτηση αγγελιών."
+
+#: includes/admin-pages.php:95
+msgid "WooCommerce Payments"
+msgstr "Πληρωμές WooCommerce"
+
+#: includes/admin-pages.php:90
+msgid "Charge users for posting classified ads on your site."
+msgstr "Χρέωση των χρηστών για την ανάρτηση Αγγελιών στον ιστότοπό σας."
+
+#: addons/payments/includes/class-emails-integration.php:78
+#: includes/admin-pages.php:89
+msgid "Payments"
+msgstr "Πληρωμές"
+
+#: includes/admin-pages.php:84
+msgid "Here you can configure most basic Adverts options, applicable on any site."
+msgstr "Εδώ μπορείτε να διαμορφώσετε τις περισσότερες βασικές επιλογές των Αγγελιών, που ισχύουν σε οποιονδήποτε ιστότοπο."
+
+#: addons/emails/includes/class-emails.php:368 includes/admin-pages.php:83
+msgid "Core"
+msgstr "Βασικός"
+
+#: includes/admin-pages.php:80
+msgid "Modules"
+msgstr "Μικροεφαρμογές"
+
+#: addons/emails/admin/options.php:16 addons/emails/admin/emails-list.php:17
+#: addons/emails/admin/emails-edit.php:17 addons/payments/admin/options.php:15
+#: addons/payments/admin/pricing-list.php:16
+#: addons/payments/admin/pricing-edit.php:16 includes/admin-pages.php:38
+msgid "Options"
+msgstr "Ρυθμίσεις"
+
+#: includes/admin-pages.php:37
+msgid "Adverts Options"
+msgstr "Ρυθμίσεις Αγγελιών"
+
+#: includes/admin-post-type.php:749
+msgid "Start typing user name, email or login below, some suggestions will appear."
+msgstr "Ξεκινήστε να πληκτρολογείτε το όνομα χρήστη, το email ή τη σύνδεση παρακάτω, θα εμφανιστούν κάποιες προτάσεις."
+
+#: includes/admin-post-type.php:748
+msgid "Expired:"
+msgstr "Έληξε:"
+
+#: includes/admin-post-type.php:747
+msgid "Expires:"
+msgstr "Λήγει:"
+
+#: includes/admin-post-type.php:639
+msgid "None"
+msgstr "Κανένα"
+
+#: includes/admin-post-type.php:624
+msgid "%s ago"
+msgstr "πριν από %s"
+
+#: includes/admin-post-type.php:622
+msgid "in %s"
+msgstr "σε %s"
+
+#: templates/manage.php:39 includes/admin-post-type.php:619
+msgid "Y/m/d"
+msgstr "Ε/μ/η"
+
+#: includes/admin-post-type.php:611
+msgid "Y/m/d g:i:s A"
+msgstr "Ε/μ/η g:i:s A"
+
+#: includes/admin-post-type.php:606
+msgid "Never"
+msgstr "Ποτέ"
+
+#: addons/payments/admin/payment-history-list.php:80
+#: includes/admin-post-type.php:579
+msgid "Date"
+msgstr "Ημερομηνία"
+
+#: includes/admin-post-type.php:578
+msgid "Expires"
+msgstr "Λήγει"
+
+#: includes/admin-post-type.php:577
+msgid "Author"
+msgstr "Συντάκτης"
+
+#: includes/admin-post-type.php:538
+msgid "Additional Information"
+msgstr "Επιπλέον Πληροφορίες"
+
+#: includes/admin-post-type.php:506 includes/admin-post-type.php:746
+msgid "Expired"
+msgstr "Έληξε"
+
+#: includes/admin-post-type.php:447
+msgid "(required)"
+msgstr "(απαιτείται)"
+
+#: includes/admin-post-type.php:377
+msgid "Edit date and time"
+msgstr "Ρύθμιση ημερομηνίας και ώρας"
+
+#: templates/manage.php:55 addons/payments/admin/pricing-list.php:63
+#: addons/payments/admin/pricing-list.php:65 includes/admin-post-type.php:377
+msgid "Edit"
+msgstr "Επεξεργασία"
+
+#: includes/admin-post-type.php:366
+msgid "Expires: <b>%s</b>"
+msgstr "Λήγει στις: <b>%s</b>"
+
+#: includes/admin-post-type.php:364
+msgid "Expired: <b>%s</b>"
+msgstr "Έληξε στις: <b>%s</b>"
+
+#: includes/admin-post-type.php:331
+msgid "M j, Y @ G:i"
+msgstr "M j, Y @ G:i"
+
+#: wpadverts.php:297 wpadverts.php:387 includes/admin-post-type.php:309
+msgid "OK"
+msgstr "Εντάξει"
+
+#: addons/payments/payments.php:419 includes/admin-post-type.php:291
+#: includes/admin-post-type.php:343 includes/admin-post-type.php:351
+msgid "Never Expires"
+msgstr "Δεν λήγει ποτέ"
+
+#: includes/admin-post-type.php:286
+msgid "%1$s %2$s, %3$s @ %4$s : %5$s"
+msgstr "%1$s %2$s, %3$s @ %4$s : %5$s"
+
+#. translators: 1: month number (01, 02, etc.), 2: month abbreviation
+#: includes/admin-post-type.php:274
+msgid "%1$s-%2$s"
+msgstr "%1$s-%2$s"
+
+#: includes/admin-post-type.php:196
+msgid "Post updated, but some required data is not filled properly."
+msgstr "Η ανάρτηση ενημερώθηκε, αλλά ορισμένα απαιτούμενα δεδομένα δεν συμπληρώθηκαν σωστά."
+
+#: includes/admin-post-type.php:91
+msgid "Whoops, the provided date is invalid."
+msgstr "Ώπα, η ημερομηνία αυτή είναι εσφαλμένη."
+
+#: includes/gallery.php:780
+msgid "Image resized to %d x %d - the image visible in upload preview."
+msgstr "Η εικόνα άλλαξε μέγεθος σε %d x %d - η εικόνα είναι ορατή στην προεπισκόπηση φόρτωσης."
+
+#: includes/gallery.php:779
+msgid "Thumbnail"
+msgstr "Μικρογραφία"
+
+#: includes/gallery.php:775
+msgid "Image resized to %d x %d - used on the classifieds list."
+msgstr "Η εικόνα άλλαξε μέγεθος σε %d x %d - που χρησιμοποιείται στον κατάλογο των Αγγελιών."
+
+#: includes/gallery.php:774
+msgid "Classifieds List"
+msgstr "Κατάλογος Αγγελιών"
+
+#: includes/gallery.php:770
+msgid "Image resized to %d x %d - used in the images slider on classified details page."
+msgstr "Η εικόνα άλλαξε μέγεθος σε %d x %d - που χρησιμοποιείται στο slider εικόνων στη σελίδα λεπτομερειών αγγελίας."
+
+#: includes/gallery.php:769
+msgid "Gallery - Slider"
+msgstr "Γκαλερί - Slider"
+
+#: includes/gallery.php:765
+msgid "Image in original size - used on classified details page in the gallery."
+msgstr "Εικόνα στο αρχικό μέγεθος - χρησιμοποιείται στη σελίδα λεπτομερειών αγγελίας στη συλλογή."
+
+#: includes/gallery.php:764
+msgid "Gallery - Full Size"
+msgstr "Γκαλερί - Πλήρες Μέγεθος"
+
+#: wpadverts.php:296 includes/gallery.php:590
+msgid "Close"
+msgstr "Κλείσιμο"
+
+#: includes/gallery.php:568
+msgid "Selection:"
+msgstr "Επιλογή:"
+
+#: includes/gallery.php:567
+msgid "Zoom:"
+msgstr "Μεγένθυση:"
+
+#: includes/gallery.php:565
+msgid "Recommended size:"
+msgstr "Προτεινόμενο μέγεθος:"
+
+#: includes/gallery.php:563
+msgid "Current size:"
+msgstr "Τρέχον μέγεθος:"
+
+#: includes/gallery.php:562
+msgid "Original size:"
+msgstr "Αρχικό μέγεθος:"
+
+#: includes/gallery.php:549
+msgid "Apply changes to all image sizes"
+msgstr "Εφαρμόστε τις αλλαγές σε όλα τα μεγέθη των εικόνων"
+
+#: includes/gallery.php:540
+msgid "Restore"
+msgstr "Επαναφορά"
+
+#: includes/gallery.php:540
+msgid "Restore original image"
+msgstr "Επαναφορά αρχικής εικόνας"
+
+#: includes/gallery.php:537
+msgid "Save"
+msgstr "Αποθήκευση"
+
+#: includes/gallery.php:537
+msgid "Save Image"
+msgstr "Αποθήκευση εικόνας"
+
+#: includes/gallery.php:535
+msgid "Actions"
+msgstr "Ενέργειες"
+
+#: includes/gallery.php:531
+msgid "Scale"
+msgstr "Κλίμακα"
+
+#: includes/gallery.php:527
+msgid "Image Size"
+msgstr "Μέγεθος Εικόνας"
+
+#: includes/gallery.php:522
+msgid "Undo"
+msgstr "Αναίρεση"
+
+#: includes/gallery.php:521
+msgid "Flip Horizontally"
+msgstr "Οριζόντια Αναστροφή"
+
+#: includes/gallery.php:520
+msgid "Flip Vertically"
+msgstr "Κατακόρυφη Αναστροφή"
+
+#: includes/gallery.php:519
+msgid "Rotate -90 degrees"
+msgstr "Περιστροφή -90 μοίρες"
+
+#: includes/gallery.php:518
+msgid "Rotate 90 degrees"
+msgstr "Περιστροφή 90 μοίρες"
+
+#: includes/gallery.php:517
+msgid "Crop"
+msgstr "Περικοπή"
+
+#: includes/gallery.php:516
+msgid "Image Manipulation"
+msgstr "Χειρισμός Εικόνας"
+
+#: includes/gallery.php:495
+msgid "Length:"
+msgstr "Μήκος:"
+
+#: includes/gallery.php:491
+msgid "Dimensions:"
+msgstr "Διαστάσεις:"
+
+#: includes/gallery.php:487
+msgid "File size:"
+msgstr "Μέγεθος αρχείου:"
+
+#: includes/gallery.php:483
+msgid "Uploaded on:"
+msgstr "Μεταφορτώθηκε στις:"
+
+#: includes/gallery.php:479
+msgid "File type:"
+msgstr "Τύπος αρχείου:"
+
+#: includes/gallery.php:475
+msgid "File name:"
+msgstr "Όνομα αρχείου:"
+
+#: wpadverts.php:298 templates/manage.php:65
+#: includes/class-updates-manager.php:333 includes/gallery.php:460
+#: includes/gallery.php:538 includes/admin-post-type.php:310
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+#: includes/gallery.php:459
+msgid "Save Thumbnail"
+msgstr "Αποθήκευση Μικρογραφίας"
+
+#: includes/gallery.php:455
+msgid "Capture ..."
+msgstr "Στιγμιότυπο ..."
+
+#: includes/gallery.php:450
+msgid "Create Image"
+msgstr "Δημιουργία Εικόνας"
+
+#: includes/gallery.php:450
+msgid "Create thumbnail from full size image."
+msgstr "Δημιουργήστε μικρογραφία από εικόνα πλήρους μεγέθους."
+
+#: wpadverts.php:307 includes/gallery.php:449
+msgid "Edit Image"
+msgstr "Επεξεργασία εικόνας"
+
+#: includes/gallery.php:433
+msgid "Scroll the video to a selected place and click 'Capture' button to create video cover."
+msgstr "Μετακινηθείτε στο βίντεο σε ένα επιλεγμένο σημείο και κάντε κλικ στο κουμπί \"Λήψη\" για να δημιουργήσετε ένα εξώφυλλο για το βίντεο."
+
+#: templates/add.php:47 includes/class-shortcode-adverts-add.php:313
+#: includes/class-shortcode-adverts-add.php:443 includes/gallery.php:430
+msgid "Preview"
+msgstr "Προεπισκόπηση"
+
+#: includes/gallery.php:419
+msgid "Update Description"
+msgstr "Ενημέρωση Περιγραφής"
+
+#: includes/gallery.php:401
+msgid "Use this image as main image"
+msgstr "Χρησιμοποιήστε αυτήν την εικόνα ως κύρια εικόνα"
+
+#: includes/gallery.php:355
+msgid "In 'Preview' select 'Video' and click 'Capture ...' button to generate thumbnails."
+msgstr "Στην «Προεπισκόπηση» επιλέξτε «Βίντεο» και κάντε κλικ στο κουμπί «Στιγμιότυπο...» για να δημιουργήσετε μικρογραφίες."
+
+#: includes/gallery.php:351
+msgid "This video does not have thumbnails yet. "
+msgstr "Αυτό το βίντεο δεν έχει μικρογραφίες ακόμη. "
+
+#: includes/gallery.php:312
+msgid "Attachment Details"
+msgstr "Λεπτομέρειες Συνημμένου"
+
+#: includes/gallery.php:300
+msgid "Delete File"
+msgstr "Διαγραφή Αρχείου"
+
+#: includes/gallery.php:298
+msgid "Edit File"
+msgstr "Επεξεργασία Αρχείου"
+
+#: includes/gallery.php:285 includes/gallery.php:433
+msgid "Video"
+msgstr "Βίντεο"
+
+#: addons/featured/featured.php:256 addons/featured/featured.php:292
+#: addons/featured/featured.php:315 includes/gallery.php:281
+#: includes/gallery.php:399
+msgid "Featured"
+msgstr "Επιλεγμένα"
+
+#: includes/gallery.php:99
+msgid "browse files ..."
+msgstr "εξερεύνηση αρχείων ..."
+
+#: includes/gallery.php:98
+msgid "Drop files here to add them."
+msgstr "Αποθέστε εδώ αρχεία για να τα προσθέσετε."
+
+#: includes/gallery.php:66
+msgid "Allowed Files"
+msgstr "Επιτρεπόμενα Αρχεία"
+
+#: includes/class-upload-helper.php:122 includes/class-form.php:174
+msgid "Invalid value."
+msgstr "Μη έγκυρη τιμή."
+
+#: includes/ajax.php:1188
+msgid "Advert <strong>%s</strong> deleted."
+msgstr "Η Αγγελία <strong>%s</strong> διαγράφηκε."
+
+#: includes/functions.php:3163 includes/ajax.php:1157
+msgid "This post is not an Advert."
+msgstr "Αυτή η ανάρτηση δεν είναι Αγγελία."
+
+#: includes/ajax.php:1149
+msgid "Post you are trying to delete does not belong to you."
+msgstr "Η ανάρτηση που προσπαθείτε να διαγράψετε δεν ανήκει σε εσάς."
+
+#: includes/ajax.php:1141
+msgid "Post you are trying to delete does not exist."
+msgstr "Οι αναρτήσεις που προσπαθείτε να διαγράψετε δεν υπάρχουν."
+
+#: includes/ajax.php:1133
+msgid "Invalid Session. Please refresh the page and try again."
+msgstr "Μη έγκυρη περίοδος σύνδεσης. Ανανεώστε τη σελίδα και προσπαθήστε ξανά."
+
+#: includes/ajax.php:968 includes/ajax.php:1003
+msgid "Post with given ID does not exist."
+msgstr "Η καταχώρηση με το δεδομένο ID δεν υπάρχει."
+
+#: includes/ajax.php:853
+msgid "Could not write file %s"
+msgstr "Αδύνατη η εγγραφή στο αρχείο %s"
+
+#: includes/ajax.php:434 includes/ajax.php:521 includes/ajax.php:592
+#: includes/ajax.php:810
+msgid "You cannot edit images."
+msgstr "Δεν μπορείτε να επεξεργαστείτε εικόνες."
+
+#: includes/ajax.php:330
+msgid "File could not be deleted."
+msgstr "Δεν ήταν δυνατή η διαγραφή του αρχείου."
+
+#: includes/ajax.php:326
+msgid "Incorrect attachment ID."
+msgstr "Εσφαλμένο ID συνημμένου."
+
+#: includes/ajax.php:324
+msgid "Attachment does not exist."
+msgstr "Το συνημμένο δεν υπάρχει."
+
+#: includes/ajax.php:232 includes/ajax.php:450 includes/ajax.php:536
+#: includes/ajax.php:612 includes/ajax.php:823
+msgid "Incorrect Post or Attachment ID."
+msgstr "Εσφαλμένο ID Ανάρτησης ή Συνημμένου."
+
+#: includes/defaults.php:463
+msgid "The image max. height should be %max_height%."
+msgstr "Το μέγιστο ύψος της εικόνας πρέπει να είναι %max_height%."
+
+#: includes/defaults.php:462
+msgid "The image min. height should be %min_height%."
+msgstr "Το ελάχιστο ύψος της εικόνας πρέπει να είναι %min_height%."
+
+#: includes/defaults.php:461
+msgid "The image max. width should be %max_width%."
+msgstr "Το μέγιστο πλάτος της εικόνας πρέπει να είναι %max_width%."
+
+#: includes/defaults.php:460
+msgid "The image min. width should be %min_width%."
+msgstr "Το ελάχιστο πλάτος της εικόνας πρέπει να είναι %min_width%."
+
+#: includes/defaults.php:459
+msgid "Cannot validate uploaded image width and height."
+msgstr "Δεν είναι δυνατή η επικύρωση του μεταφορτωμένου πλάτους και ύψους της εικόνας."
+
+#: includes/defaults.php:457
+msgid "The file size is incorrect."
+msgstr "Το μέγεθος του αρχείου είναι λανθασμένο."
+
+#: includes/defaults.php:455
+msgid "Upload Dimensions"
+msgstr "Διαστάσεις Μεταφόρτωσης"
+
+#: includes/defaults.php:446
+msgid "This file type is not allowed."
+msgstr "Ο τύπος αρχείου δεν επιτρέπεται."
+
+#: includes/defaults.php:435
+msgid "The min. allowed file size is %min%."
+msgstr "Το ελάχιστο επιτρεπόμενο μέγεθος αρχείου είναι %min%."
+
+#: includes/defaults.php:434
+msgid "The max. allowed file size is %max%."
+msgstr "Το μέγιστο επιτρεπόμενο μέγεθος αρχείου είναι %max%."
+
+#: includes/defaults.php:430 includes/defaults.php:444
+msgid "Upload Type"
+msgstr "Τύπος Μεταφόρτωσης"
+
+#: includes/defaults.php:420
+msgid "You need to upload at least %min% files."
+msgstr "Πρέπει να ανεβάσετε τουλάχιστον %min% αρχεία."
+
+#: includes/defaults.php:419
+msgid "You cannot upload more than %max% files."
+msgstr "Δεν μπορείτε να ανεβάσετε περισσότερα από %max% αρχεία."
+
+#: includes/defaults.php:415
+msgid "Upload Limit"
+msgstr "Όριο Μεταφόρτωσης"
+
+#: includes/defaults.php:406
+msgid "One or more selected values are not available in the options list."
+msgstr "Μία ή περισσότερες επιλεγμένες τιμές δεν είναι διαθέσιμες στη λίστα επιλογών."
+
+#: includes/defaults.php:404
+msgid "Verify Choices"
+msgstr "Επαλήθευση Επιλογών"
+
+#: includes/defaults.php:395
+msgid "You cannot select more than %max_choices% items."
+msgstr "Δεν μπορείτε να επιλέξετε περισσότερα από %max_choices% αντικείμενα."
+
+#: includes/defaults.php:393
+msgid "Max Choices"
+msgstr "Μέγιστος Αριθμός Επιλογών"
+
+#: includes/defaults.php:384
+msgid "Text cannot be longer than %max% characters."
+msgstr "Το κείμενο δεν μπορεί να υπερβαίνει τους %max% χαρακτήρες."
+
+#: includes/defaults.php:383
+msgid "Text needs to be at least %min% characters long."
+msgstr "Το κείμενο πρέπει να έχει μήκος τουλάχιστον %min% χαρακτήρες."
+
+#: includes/defaults.php:381
+msgid "Incorrect string length."
+msgstr "Λανθασμένο μήκος συμβολοσειράς."
+
+#: includes/defaults.php:379
+msgid "String Length"
+msgstr "Μήκος Συμβολοσειράς"
+
+#: includes/defaults.php:371
+msgid "Provided value is not a number."
+msgstr "Η παρεχόμενη τιμή δεν είναι αριθμός."
+
+#: includes/defaults.php:369
+msgid "Is Number"
+msgstr "Είναι Αριθμός"
+
+#: includes/defaults.php:361
+msgid "Provided value is not an integer."
+msgstr "Η παρεχόμενη τιμή δεν είναι ακέραιος."
+
+#: includes/defaults.php:359
+msgid "Is Integer"
+msgstr "Είναι Ακέραιος"
+
+#: includes/defaults.php:351
+msgid "Provided URL is invalid."
+msgstr "Η παρεχόμενη διεύθυνση URL δεν είναι έγκυρη."
+
+#: includes/defaults.php:349
+msgid "URL"
+msgstr "URL"
+
+#: includes/defaults.php:341
+msgid "Cannot create account. User with this email address already exists."
+msgstr "Δεν είναι δυνατή η δημιουργία λογαριασμού. Υπάρχει ήδη χρήστης με αυτήν τη διεύθυνση ηλεκτρονικού ταχυδρομείου."
+
+#: includes/defaults.php:331
+msgid "Provided email address is invalid."
+msgstr "Η διεύθυνση ηλεκτρονικού ταχυδρομείου δεν είναι έγκυρη."
+
+#: includes/defaults.php:320
+msgid "Field cannot be empty."
+msgstr "Το πεδίο δεν μπορεί να είναι κενό."
+
+#: includes/defaults.php:318
+msgid "Is Required"
+msgstr "Απαιτείται"
+
+#: includes/defaults.php:308
+msgid "Number - converts string to a number."
+msgstr "Αριθμός - μετατρέπει τη συμβολοσειρά σε αριθμό."
+
+#: includes/defaults.php:301
+msgid "Integer - converts string to absolute integer."
+msgstr "Ακέραιος - μετατρέπει τη συμβολοσειρά σε απόλυτο ακέραιο."
+
+#: includes/defaults.php:294
+msgid "URL - converts string to a valid URL (if possible)."
+msgstr "URL - μετατρέπει τη συμβολοσειρά σε έγκυρη διεύθυνση URL (εάν είναι δυνατόν)."
+
+#: includes/defaults.php:287
+msgid "Money - converts string formatted as price to float."
+msgstr "Νόμισμα - μετατρέπει τη συμβολοσειρά που έχει διαμορφωθεί ως νομισματική τιμή."
+
+#: includes/defaults.php:181
+msgid "Location ..."
+msgstr "Τοποθεσία ..."
+
+#: includes/defaults.php:169
+msgid "Keyword ..."
+msgstr "Λέξη-κλειδί ..."
+
+#: addons/payments/includes/admin-pages.php:796 includes/defaults.php:132
+#: includes/gallery.php:411
+msgid "Description"
+msgstr "Περιγραφή"
+
+#: addons/core/admin/options.php:16 addons/core/admin/options-gallery.php:16
+#: includes/defaults.php:120 includes/admin-post-type.php:555
+msgid "Gallery"
+msgstr "Συλλογή Εικόνων"
+
+#: includes/defaults.php:90
+msgid "Item Information"
+msgstr "Πληροφορίες Αντικειμένου"
+
+#: addons/contact-form/includes/admin-pages.php:69 includes/defaults.php:78
+msgid "Phone Number"
+msgstr "Αριθμός Τηλεφώνου"
+
+#: addons/bank-transfer/bank-transfer.php:73
+#: addons/payments/includes/admin-pages.php:682
+#: addons/payments/admin/payment-history-list.php:79 includes/defaults.php:66
+#: includes/defaults.php:329 includes/defaults.php:339
+#: includes/functions.php:2657
+msgid "Email"
+msgstr "Email"
+
+#: addons/bank-transfer/bank-transfer.php:63
+#: addons/payments/includes/admin-pages.php:672 includes/defaults.php:56
+msgid "Contact Person"
+msgstr "Άτομο Επικοινωνίας"
+
+#: includes/defaults.php:50
+msgid "Account"
+msgstr "Λογαριασμός"
+
+#: includes/defaults.php:44
+msgid "Contact Information"
+msgstr "Πληροφορίες Επικοινωνίας"
+
+#: templates/list.php:104 includes/class-widget-ads.php:542
+msgid "There are no ads matching your search criteria."
+msgstr "Δεν υπάρχουν Αγγελίες που να ταιριάζουν με τα κριτήρια αναζήτησής σας."
+
+#: includes/class-widget-ads.php:176
+msgid "Regular Only"
+msgstr "Μόνο Κανονικές"
+
+#: includes/class-widget-ads.php:175
+msgid "Featured Only"
+msgstr "Μόνο Επιλεγμένες"
+
+#: addons/payments/admin/payment-history-list.php:23
+#: includes/class-widget-ads.php:174
+msgid "All"
+msgstr "Όλες"
+
+#: includes/class-widget-ads.php:171
+msgid "Ads Types"
+msgstr "Τύποι Αγγελιών"
+
+#: includes/class-widget-ads.php:160
+msgid "Ascending"
+msgstr "Αύξουσα"
+
+#: includes/class-widget-ads.php:155
+msgid "Descending"
+msgstr "Φθίνουσα"
+
+#: includes/class-widget-ads.php:149
+msgid "Order"
+msgstr "Ταξινόμηση"
+
+#: includes/class-widget-ads.php:143
+msgid "Random"
+msgstr "Τυχαία"
+
+#: addons/payments/includes/admin-pages.php:802
+#: addons/payments/admin/pricing-list.php:49 includes/defaults.php:142
+#: includes/shortcodes.php:101 includes/class-widget-ads.php:138
+#: includes/admin-post-type.php:576
+msgid "Price"
+msgstr "Τιμή"
+
+#: includes/shortcodes.php:94 includes/shortcodes.php:117
+#: includes/shortcodes.php:118 includes/class-widget-ads.php:128
+msgid "Publish Date"
+msgstr "Ημερομηνία Δημοσίευσης"
+
+#: includes/class-widget-ads.php:122
+msgid "Sort By"
+msgstr "Ταξινόμηση Κατά"
+
+#: includes/class-widget-ads.php:116
+msgid "Price Max."
+msgstr "Μέγιστη Τιμή."
+
+#: includes/class-widget-ads.php:110
+msgid "Price Min."
+msgstr "Ελάχιστη Τιμή."
+
+#: templates/single.php:43 includes/defaults.php:105
+#: includes/class-widget-ads.php:103
+msgid "Category"
+msgstr "Κατηγορία"
+
+#: templates/single.php:58 includes/defaults.php:154
+#: includes/class-widget-ads.php:98
+msgid "Location"
+msgstr "Tοποθεσία"
+
+#: includes/class-widget-ads.php:93
+msgid "Keyword"
+msgstr "Λέξη-κλειδί"
+
+#: includes/class-widget-ads.php:88
+msgid "Show images on the list."
+msgstr "Εμφάνιση εικόνων στη λίστα."
+
+#: includes/class-widget-ads.php:82
+msgid "Count"
+msgstr "Πλήθος"
+
+#: includes/class-widget-ads.php:52
+msgid "Displays list of recent ads."
+msgstr "Εμφανίζει τη λίστα των πρόσφατων αγγελιών."
+
+#: includes/class-widget-ads.php:35 includes/class-widget-ads.php:50
+msgid "WPAdverts Ads"
+msgstr "Αγγελίες WPAdverts"
+
+#: includes/class-gallery-helper.php:456 includes/class-gallery-helper.php:545
+msgid "Next"
+msgstr "Επόμενη"
+
+#: includes/class-gallery-helper.php:452 includes/class-gallery-helper.php:512
+msgid "Previous"
+msgstr "Προηγούμενη"
+
+#: includes/class-gallery-helper.php:448
+msgid "Total Files"
+msgstr "Σύνολο Αρχείων"
+
+#: includes/class-gallery-helper.php:443
+msgid "Show Thumbnails ..."
+msgstr "Εμφάνιση Μικρογραφιών ..."
+
+#: includes/class-gallery-helper.php:355
+msgid "Your browser cannot play this video. Please use a different browser or download the video and play on your device."
+msgstr "Το πρόγραμμα περιήγησής σας δεν μπορεί να παίξει αυτό το βίντεο. Χρησιμοποιήστε διαφορετικό πρόγραμμα περιήγησης ή κατεβάστε το βίντεο για να παίξει στη συσκευή σας."
+
+#: includes/class-gallery-helper.php:314
+msgid "Full Screen"
+msgstr "Πλήρης Οθόνη"
+
+#: includes/class-gallery-helper.php:309
+msgid "Volume Up"
+msgstr "Αύξηση Έντασης"
+
+#: includes/class-gallery-helper.php:306
+msgid "Volume Down"
+msgstr "Ελάττωση Έντασης"
+
+#: includes/class-gallery-helper.php:297
+msgid "Replay"
+msgstr "Επανάληψη"
+
+#: includes/class-gallery-helper.php:296
+msgid "Pause"
+msgstr "Παύση"
+
+#: includes/class-gallery-helper.php:295
+msgid "Play"
+msgstr "Παίξιμο"
+
+#: includes/gallery.php:389 includes/class-gallery-helper.php:246
+#: includes/class-gallery-helper.php:406
+msgid "Download File"
+msgstr "Λήψη Αρχείου"
+
+#: includes/gallery.php:295 includes/class-gallery-helper.php:212
+#: includes/class-gallery-helper.php:356
+msgid "Download"
+msgstr "Λήψη"
+
+#: templates/categories-all.php:52 templates/categories-top.php:24
+#: includes/class-widget-categories.php:326
+#: includes/class-widget-categories.php:393
+msgid "No categories found."
+msgstr "Δεν βρέθηκαν κατηγορίες."
+
+#: includes/class-widget-categories.php:275
+msgid "Go Up (Home)"
+msgstr "Μετάβαση Επάνω (Αρχική)"
+
+#: includes/class-widget-categories.php:273
+msgid "Go Up (%s)"
+msgstr "Μετάβαση Κάτω (%s)"
+
+#: includes/class-widget-categories.php:134
+msgid "Show multiple category levels"
+msgstr "Εμφάνιση πολλαπλών επιπέδων κατηγορίας"
+
+#: includes/class-widget-categories.php:120
+msgid "Show top categories only"
+msgstr "Εμφάνιση μόνο κορυφαίων κατηγοριών"
+
+#: includes/class-widget-categories.php:106
+msgid "Show post counts"
+msgstr "Προβολή αριθμού αναρτήσεων"
+
+#: includes/class-widget-categories.php:92
+msgid "Hide empty"
+msgstr "Απόκρυψη κενών"
+
+#: addons/payments/includes/admin-pages.php:787
+#: addons/payments/admin/pricing-list.php:47 includes/defaults.php:96
+#: includes/gallery.php:406 includes/shortcodes.php:108
+#: includes/class-widget-ads.php:77 includes/class-widget-ads.php:133
+#: includes/class-widget-categories.php:76 includes/admin-post-type.php:575
+msgid "Title"
+msgstr "Τίτλος"
+
+#: includes/class-widget-categories.php:43
+msgid "Displays list of available categories."
+msgstr "Προβολή λίστας όλων των διαθέσιμων κατηγοριών."
+
+#: includes/class-widget-categories.php:31
+#: includes/class-widget-categories.php:41
+msgid "Advert Categories"
+msgstr "Κατηγορίες Αγγελιών"
+
+#. Author of the plugin
+msgid "Greg Winiarski"
+msgstr "Greg Winiarski"
+
+#. Description of the plugin
+msgid "The lightweight WordPress classifieds plugin done right."
+msgstr "The lightweight WordPress classifieds plugin done right."
+
+#. Plugin URI of the plugin
+msgid "https://wpadverts.com/"
+msgstr "https://wpadverts.com/"
+
+#. Plugin Name of the plugin
+msgid "WP Adverts"
+msgstr "WP Adverts"

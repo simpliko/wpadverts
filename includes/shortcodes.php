@@ -442,7 +442,7 @@ function _adverts_manage_edit( $atts ) {
     $bind["_post_id_nonce"] = wp_create_nonce( "wpadverts-publish-" . $post_id );
     $bind["_wpadverts_checksum"] = $checksum_keys["checksum"];
     $bind["_wpadverts_checksum_nonce"] = $checksum_keys["nonce"];
-    
+
     $form->bind( $bind );
     
     if($action == "update") {

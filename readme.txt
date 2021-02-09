@@ -4,8 +4,8 @@ Contributors: gwin
 Tags: classifieds, classified, classified ads, classified script, classifieds script, wp classified, wp classifieds
 Requires PHP: 5.3
 Requires at least: 4.0
-Tested up to: 5.6
-Stable tag: 1.5.1
+Tested up to: 5.7
+Stable tag: 1.5.2
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -123,6 +123,16 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.5.2 - 2021-02-09 =
+
+* TRANSLATION: Arabic.
+* TRANSLATION: Greek.
+* FEATURE: New currencies: Egyptian Pound, Kuwaiti Dinar, Saudi Riyal, UAE Dirham, Qatari Riyal.
+* FEATURE: {format_date} function in email templates now accepts a second argument, that is the date format to use.
+* FEATURE: Users cannot open dropdown fields marked as readonly.
+* FIXED: Bug in Files API that does not allow deleting files.
+* FIXED: Sanitize file name before saving it on the server.
 
 = 1.5.1 - 2020-12-14 =
 

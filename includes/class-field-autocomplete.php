@@ -38,7 +38,7 @@ class Adverts_Field_Autocomplete {
         if(! is_array( $ids ) ) {
             $ids = explode(",", $ids);
         }
-        
+
         if( ! isset( $field["autocomplete"] ) || ! is_array( $field["autocomplete"] ) ) {
             $ac_args = array();
         } else {

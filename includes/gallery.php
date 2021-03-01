@@ -142,7 +142,7 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
                 'post_status' => 'inherit',
                 'meta_query' => $att_search_meta
             );
-            
+
             $children = get_children( $att_search );
             // adverts_sort_images() is defined in functions.php
             require_once ADVERTS_PATH . "/includes/functions.php"; 
@@ -216,7 +216,7 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
             "sizes" => $sizes
         );
 
-        
+
     ?>
     
     
@@ -262,7 +262,7 @@ function adverts_gallery_modal() {
         <# } else { #>
             <div class="adverts-loader adverts-gallery-upload-update adverts-icon-spinner animate-spin" style="position: absolute; display: none"></div>
             
-            <# if( typeof data.result.sizes.adverts_upload_thumbnail != "undefined" ) { #>
+            <# if( typeof data.result.sizes.adverts_upload_thumbnail != "undefined" && data.result.sizes.adverts_upload_thumbnail.url !== null ) { #>
             <img src="{{ data.result.sizes.adverts_upload_thumbnail.url }}" alt="" class="adverts-gallery-upload-item-img" />
             <# } else if( data.mime == "video" ) { #>
             <span class="adverts-gallery-upload-item-file">

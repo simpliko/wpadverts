@@ -106,6 +106,12 @@ class Adverts_Post {
     public static function get_object_term_ids( $post_id, $taxonomy ) {
         $terms = array();
         $list = wp_get_object_terms( $post_id, $taxonomy );
+        
+        if( $list instanceof WP_Error ) {
+            // nothing to do here
+            return array();
+        } 
+        
         foreach( $list as $term ) {
             $terms[] = $term->term_id;
         }

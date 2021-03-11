@@ -311,7 +311,7 @@ class Adverts_Updates_Manager
 
         <?php if(!$this->license): ?>
         <tr class="tr plugin-update-tr adverts-update-row adverts-update-row-license" data-slug="<?php echo $this->slug ?>">
-            <td class="plugin-update" colspan="3">
+            <td class="plugin-update" colspan="4">
                 <div class="adverts-update-notice adverts-update-activate">
                     <input type="text" name="license" placeholder="<?php _e("License ...", "wpadverts") ?>" />
                     <a href="#" class="button-secondary adverts-update-activate-button"><?php _e("Activate") ?></a>

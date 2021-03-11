@@ -5,7 +5,7 @@
  * Description: The lightweight WordPress classifieds plugin done right.
  * Author: Greg Winiarski
  * Text Domain: wpadverts
- * Version: 1.5.2
+ * Version: 1.5.3
  * 
  * Adverts is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -66,7 +66,8 @@ $adverts_namespace['config'] = array(
         'expired_ad_redirect_url' => '',
         'expired_ad_public_cap' => 'edit_pages',
         'empty_price' => '',
-        'hide_images_in_media_library' => 0
+        'hide_images_in_media_library' => 0,
+        'adverts_manage_moderate' => 0
         
     )
 );
@@ -187,7 +188,7 @@ function adverts_init() {
     
     $args = array(
         'labels'        => $labels,
-        'description'   => 'Holds our products and product specific data',
+        'description'   => '',
         'public'        => true,
         'menu_icon'     => 'dashicons-megaphone',
         'menu_position' => 5,
@@ -201,6 +202,9 @@ function adverts_init() {
         )
     );
   
+    include_once ADVERTS_PATH . "/includes/class-types.php";
+    $adverts_types = new Adverts_Types();
+    
     register_post_type( 'advert', apply_filters( 'adverts_post_type', $args, 'advert') ); 
     
     $labels = array(
@@ -216,7 +220,11 @@ function adverts_init() {
         'rewrite' => array('slug' => 'advert-category')
     );
     
-    register_taxonomy( 'advert_category', 'advert', apply_filters('adverts_register_taxonomy', $args, 'advert_category') );
+    register_taxonomy( 
+        'advert_category', 
+        apply_filters('adverts_register_taxonomy_post_type', 'advert', 'advert_category' ), 
+        apply_filters('adverts_register_taxonomy', $args, 'advert_category') 
+    );
     
     include_once ADVERTS_PATH . 'includes/class-adverts.php';
     include_once ADVERTS_PATH . 'includes/class-taxonomies.php';
@@ -344,7 +352,7 @@ function adverts_init() {
  */
 function adverts_init_frontend() {
     ;
-    wp_register_style( 'adverts-frontend', ADVERTS_URL . '/assets/css/wpadverts-frontend.css', array(), "1.4.2" );
+    wp_register_style( 'adverts-frontend', ADVERTS_URL . '/assets/css/wpadverts-frontend.css', array(), "1.5.3" );
     wp_register_style( 'adverts-swipebox', ADVERTS_URL . '/assets/css/swipebox.min.css', array(), "1.4.5" );
     
     wp_register_script('adverts-single', ADVERTS_URL . '/assets/js/wpadverts-single.js', array( 'jquery' ), "1.4.0" );
@@ -418,7 +426,9 @@ function adverts_init_admin() {
     wp_register_style('adverts-admin', ADVERTS_URL . '/assets/css/wpadverts-admin.css', array(), "1.4.4" );
     
     wp_register_script( 'adverts-admin-updates', ADVERTS_URL . '/assets/js/wpadverts-admin-updates.js', array( 'jquery' ), "1.3.5", true );
-    wp_register_style( 'adverts-admin-updates', ADVERTS_URL . '/assets/css/wpadverts-admin-updates.css', array(), "1.3.5" );
+    wp_register_style( 'adverts-admin-updates', ADVERTS_URL . '/assets/css/wpadverts-admin-updates.css', array(), "1.5.3" );
+    
+    wp_register_script( 'adverts-types-post', ADVERTS_URL . '/assets/js/wpadverts-types-post.js', array( 'jquery' ), "1.6.0", true );
     
     add_filter( 'display_post_states', 'adverts_display_expired_state' );
     add_action( 'post_submitbox_misc_actions', 'adverts_expiry_meta_box' );

@@ -14,6 +14,7 @@
     <h2 class="nav-tab-wrapper">
         <a href="<?php esc_attr_e( remove_query_arg( array( 'adaction' ) ) ) ?>" class="nav-tab nav-tab-active"><?php _e("Core Options", "wpadverts") ?></a>
         <a href="<?php esc_attr_e( add_query_arg( array('adaction' => 'gallery') ) ) ?>" class="nav-tab "><?php _e("Gallery", "wpadverts") ?></a>
+        <a href="<?php esc_attr_e( add_query_arg( array('adaction' => 'types') ) ) ?>" class="nav-tab "><?php _e("Types", "wpadverts") ?></a>
     </h2>
 
     <?php adverts_admin_flash() ?>

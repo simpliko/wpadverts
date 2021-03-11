@@ -2823,3 +2823,21 @@ ul.adverts-tabs li {
 .adverts-form input.wpadverts-autocomplete {
     width: 100% !important;
 }
+
+.adverts-moderation-notice {
+    display: flex;
+    width: 100% !important;
+    background: aliceblue;
+    padding: 15px 15px !important;
+    margin: 0 0 10px 0;
+    color: #464b4e;
+    box-sizing: border-box !important;
+    border-radius: 12px;
+}
+
+.adverts-moderation-notice .adverts-icon-attention {
+    margin-right: 12px;
+    margin-top: 6px;
+    font-size: 22px;
+    opacity: 0.8;
+}

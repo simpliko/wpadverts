@@ -93,3 +93,7 @@ body .plugin-title .adverts-license-link > span.dashicons:before {
     font-size: 16px;
     color: #0073aa
 }
+
+a.button-secondary.adverts-update-activate-button {
+    text-decoration: none;
+}

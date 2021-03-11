@@ -452,7 +452,13 @@ function _adverts_manage_edit( $atts ) {
 
         if($valid) {
             
-            $post_id = Adverts_Post::save( $form, $post_id );
+            $init = array();
+            
+            if( adverts_config( "adverts_manage_moderate") == "1" ) {
+                $init["post"] = array( "post_status" => "pending" );
+            }
+            
+            $post_id = Adverts_Post::save( $form, $post_id, $init );
 
             if(is_wp_error($post_id)) {
                 $error[] = array(

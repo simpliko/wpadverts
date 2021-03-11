@@ -24,6 +24,10 @@ function adext_core_page_options() {
     
     if(adverts_request( "adaction" ) == "gallery" ) {
         _adext_core_page_options_gallery();
+    } else if( adverts_request( "adaction") == "types" ) {
+        include_once ADVERTS_PATH . "/includes/class-types-admin.php";
+        $admin_types = new Adverts_Types_Admin();
+        $admin_types->render();
     } else {
         _adext_core_page_options_main();
     }
@@ -64,7 +68,7 @@ function _adext_core_page_options_main() {
             } else {
                 $data['hide_images_in_media_library'] = 0;
             }
-            
+            $data["adverts_manage_moderate"] = $form->get_value( "adverts_manage_moderate", 0 );
             $data["module"] = adverts_config( 'config.module' );
             $data["license"] = adverts_config( 'config.license' );
 
@@ -279,6 +283,15 @@ Adverts::instance()->set("form_core_config", array(
             "order" => 10,
             "options" => array(
                 array( "value" => "1", "text" => __( "Do not show Advert images (and other files) in Media Library.", "wpadverts" ) ),
+            )
+        ),
+        array(
+            "name" => "adverts_manage_moderate",
+            "type" => "adverts_field_checkbox",
+            "label" => __( "Adverts Manage Moderation", "wpadverts" ),
+            "order" => 10,
+            "options" => array(
+                array( "value" => "1", "text" => __( "Set Ad status to 'pending' when user updates his Ad from page with [adverts_manage] shortcode.", "wpadverts" ) ),
             )
         ),
         array(

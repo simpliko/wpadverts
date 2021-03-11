@@ -1545,7 +1545,7 @@ function adverts_field_checkbox( $field ) {
         }
         
         $id = apply_filters( "adverts_form_field_option_id", $id.'_'.$i, $v, $field, $i );
-        
+
         $checkbox = new Adverts_Html("input", array(
             "type" => "checkbox",
             "name" => $field["name"].'[]',
@@ -2014,7 +2014,7 @@ function adverts_form_layout_config(Adverts_Form $form, $options = array()) {
             </th>
         </tr>
         <?php else: ?>
-        <tr valign="top" class="<?php if(adverts_field_has_errors($field)): ?>adverts-field-error<?php endif; ?>">
+        <tr valign="top" class="<?php if(adverts_field_has_errors($field)): ?>adverts-field-error<?php endif; ?> <?php echo "wpadverts-fcl-tr-".$field["name"] ?>">
             <th scope="row">
                 <?php $label_for = isset( $field["attr"]["id"] ) ? $field["attr"]["id"] : $field["name"] ?>
                 <label <?php if(!in_array($field['type'], $a)): ?>for="<?php echo esc_attr( $label_for ) ?>"<?php endif; ?>>

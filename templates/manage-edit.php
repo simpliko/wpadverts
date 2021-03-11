@@ -47,8 +47,19 @@
         </div>
         <?php endforeach; ?>
         
-        <div  class="adverts-control-group <?php echo isset($actions_class) ? $actions_class : '' ?>">
 
+        
+        <div  class="adverts-control-group <?php echo isset($actions_class) ? $actions_class : '' ?>">
+            
+            <?php if( adverts_config( "adverts_manage_moderate" ) == "1" ): ?>
+            <div class="adverts-moderation-notice" style="width: 100%">
+                <span class="adverts-icon-attention"></span>
+                <span>
+                <?php _e( "<strong>Important Note.</strong> After submitting changes your Ad will be held for moderation. It will become active again once the Administrator will approve it.", "wpadverts" ) ?>
+                </span>
+            </div>
+            <?php endif; ?>
+            
             <input type="submit" name="submit" value="<?php _e("Update", "wpadverts") ?>" style="font-size:1.2em" />
         </div>
         

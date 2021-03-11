@@ -1,3 +1,5 @@
+<?php wp_enqueue_style( 'media-views' ) ; ?>
+
 <div class="wrap">
     
     <h2 class="nav-tab-wrapper">

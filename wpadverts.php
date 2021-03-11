@@ -204,7 +204,7 @@ function adverts_init() {
   
     include_once ADVERTS_PATH . "/includes/class-types.php";
     $adverts_types = new Adverts_Types();
-    
+
     register_post_type( 'advert', apply_filters( 'adverts_post_type', $args, 'advert') ); 
     
     $labels = array(

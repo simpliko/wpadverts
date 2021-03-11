@@ -297,6 +297,7 @@ class Adverts_Types_Admin {
         $values = $form_simple->get_values();
         $values["__connect_to"] = $form_simple->get_value( "__connect_to", array() );
         $values["hierarchical"] = isset( $values["hierarchical"] ) ? $values["hierarchical"] : 0;
+        $values["menu_position"] = $values["menu_position"];
         
         $rewrite_slug = trim( $form_simple->get_value( "rewrite_slug", $taxonomy->name ) );
         $rewrite_h = absint( $form_simple->get_value( "rewrite_hierarchical", 0 ) );
@@ -390,7 +391,7 @@ class Adverts_Types_Admin {
                         "type" => "number",
                         "min" => 0,
                         "max" => 10000,
-                        "step" => "0.1"
+                        "step" => 1
                     )
                 ),
                 array(

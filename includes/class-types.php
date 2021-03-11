@@ -20,7 +20,7 @@ class Adverts_Types {
     }
     
     public function register_post_type( $args, $post_type ) {
-        
+
         self::$_cpt_defaults[$post_type] = $args;
         
         $option = get_option( "wpadverts_post_types" );
@@ -37,6 +37,7 @@ class Adverts_Types {
         
         $args = array_merge( $args, $option[ $post_type ] );
         $args["labels"] = $labels;
+        $args["menu_position"] = absint( $args["menu_position"] );
 
         return $args;
     }

@@ -124,10 +124,11 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
-= 1.5.3 - 2021-02-22 =
+= 1.5.3 - 2021-03-23 =
 
 * FEATURE: Data Types editor in wp-admin / Classifieds / Options / Core / Types panel, allows customizing post types and taxonomies.
-* FEATURE: in wp-admin / Classifieds / Options / Core panel you can enable option to moderate ads updated in [adverts_manage]
+* FEATURE: in wp-admin / Classifieds / Options / Core panel you can enable option to moderate ads updated in [adverts_manage].
+* FIXED: Removed max_file_size option from the plUpload (it sometimes conflicted with the max file size settings in WPAdverts).
 
 = 1.5.2 - 2021-02-09 =
 

@@ -59,7 +59,7 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
         'drop_element'        => 'adverts-drag-drop-area-'.$field_name,
         'file_data_name'      => 'async-upload',            
         'multiple_queues'     => true,
-        'max_file_size'       => wp_max_upload_size().'b',
+        'max_file_size'       => '0',
         'url'                 => adverts_ajax_url(),
         'flash_swf_url'       => includes_url('js/plupload/plupload.flash.swf'),
         'silverlight_xap_url' => includes_url('js/plupload/plupload.silverlight.xap'),

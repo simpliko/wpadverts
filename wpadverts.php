@@ -338,6 +338,12 @@ function adverts_init() {
         
         delete_option( "adverts_delayed_install" );
     }
+        
+    include_once ADVERTS_PATH . "/blocks/class-block-manager.php";
+    $block_manager = new Adverts_Block_Manager( ADVERTS_PATH . "blocks/" );
+    $block_manager->register();
+    
+    Adverts::instance()->set( "block_manager", $block_manager );
     
     do_action("adverts_core_initiated");
 }

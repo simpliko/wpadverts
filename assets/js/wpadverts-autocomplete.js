@@ -539,7 +539,7 @@ WPADVERTS.Autocomplete.prototype.TagDispose = function(data, e) {
     this.HandleToolbar();
     this.HandleHidden();
     
-    jQuery(".wpadverts-autocomplete-search-result-ckbox input[type='checkbox'][value='"+data.value+"']").attr("checked", false).change();
+    jQuery(".wpadverts-autocomplete-search-result-ckbox input[type='checkbox'][value='"+data.value+"']").attr("checked", false).prop("checked", false).change();
     jQuery(".wpadverts-autocomplete-search-result-ckbox span#"+this.name+"__"+data.value).hide();
     
     if(!this.options.multi) {
@@ -564,7 +564,7 @@ WPADVERTS.Autocomplete.Tag = function(ac, data) {
     this.dispose.addClass("wpadverts-autocomplete-tag-dispose");
     
 
-    this.hidden = jQuery("<input type=\"hidden\" />");
+    this.hidden = jQuery("<input type='hidden' />");
     this.hidden.data( "label", data.label );
     this.hidden.val(data.value);
         

@@ -334,12 +334,12 @@ function adverts_get_the_price( $post_id = null, $price = null ) {
  * @param   int     $id     Post ID
  * @return  mixed           Image URL or NULL
  */
-function adverts_get_main_image( $id ) {
+function adverts_get_main_image( $id, $type = 'adverts-list' ) {
     
     $thumb_id =  adverts_get_main_image_id( $id );
     
     if( $thumb_id !== null ) {
-        $image = wp_get_attachment_image_src( $thumb_id, 'adverts-list' );
+        $image = wp_get_attachment_image_src( $thumb_id, $type );
         
         if(isset( $image[0] ) ) {
             return $image[0];
@@ -3086,7 +3086,7 @@ function _adverts_ajax_verify_post_id( $is_required = false ) {
         ) );
         exit;
     }
-    
+
     if( $is_required && $post_id < 1 ) {
         echo json_encode( array( 
             "result" => 0, 

@@ -170,7 +170,7 @@ class Adverts_Post {
                 $meta[$field["name"]] = array("field"=>$field, "value"=>$field["value"]);
             }
         }
-        
+
         if( $post && $skip_post === true ) {
             $post_id = $post->ID;
         } elseif($post && $post->ID > 0) {

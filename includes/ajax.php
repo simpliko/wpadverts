@@ -117,6 +117,13 @@ function adverts_gallery_upload() {
     // $status = wp_handle_upload($_FILES['async-upload'], array('test_form'=>true, 'action' => 'adverts_gallery_upload'));
 
     if(isset($status['error'])) {
+        
+        if( $post_id > 0 ) {
+            $status["post_id"] = $post_id;
+            $status["post_id_nonce"] = adverts_request( "_post_id_nonce" );
+        }
+        
+        
         echo json_encode($status);
         exit;
     }

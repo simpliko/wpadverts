@@ -4,8 +4,21 @@
   "description": "",
   "svn": "/home/greg/svn/wpadverts",
   "devDependencies": {
+    "@wordpress/scripts": "14.0.1",
+    "autoprefixer": "^10.2.5",
     "grunt-checktextdomain": "^1.0.1",
     "grunt-contrib-copy": "^1.0.0",
-    "grunt-wp-i18n": "^0.5.4"
+    "grunt-wp-i18n": "^0.5.4",
+    "postcss": "^8.2.8",
+    "tailwindcss": "^2.0.4"
+  },
+  "scripts": {
+    "start": "wp-scripts start --config blocks.webpack.js",
+    "build": "wp-scripts build --config blocks.webpack.js",
+    "build:list": "wp-scripts build blocks/list/src/index.js --output-path=blocks/list/build",
+    "postcss:watch": "postcss ./assets/css/tailwind.css -o compiled.css --watch"
+  },
+  "dependencies": {
+    "@wordpress/components": "^13.0.0"
   }
 }

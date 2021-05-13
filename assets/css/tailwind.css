@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    .advert-is-featured {
+        @apply atw-bg-blue-50 hover:atw-bg-blue-100 !important
+    }
+    
+    .widget {
+      @apply atw-my-4;
+    }
+    
+    .wpa-widget-title {
+      @apply atw-text-xl atw-font-bold 
+    }
+    
+    .wpa-block-list .wpa-results.wpa-list-view  {
+        
+    }
+    
+    .wpadverts-block-list .wpa-results.wpa-list-viev {
+        @apply atw-grid-cols-1;
+    }
+    
+    .wpadverts-block-list .wpa-results.wpa-grid-view {
+        @apply atw-grid-cols-2 atw-gap-x-4 atw-gap-y-4
+    }
+    
+    .wpadverts-block-list .wpa-results.wpa-list-view .wpa-result-item {
+        @apply atw-py-4;
+    }
+    
+    .wpadverts-block-list .wpa-results.wpa-grid-view .wpa-result-item {
+        @apply atw-flex-col atw-py-0 atw-border-none;
+    }
+    
+    .wpadverts-block-list .wpa-results .wpa-picture-list,
+    .wpadverts-block-list .wpa-results .wpa-picture-grid {
+        @apply atw-hidden;
+    }
+    
+    .wpadverts-block-list .wpa-results.wpa-list-view .wpa-picture-list {
+        @apply atw-block;
+    }
+    
+    .wpadverts-block-list .wpa-results.wpa-grid-view .wpa-picture-grid {
+        @apply atw-block;
+    }
+    
+    .wpadverts-block-list .wpa-results.wpa-list-view .wpa-result-details {
+        @apply atw-flex-row
+        
+    }
+    .wpadverts-block-list .wpa-results.wpa-grid-view .wpa-result-details {
+        @apply atw-flex-col atw-px-2 atw-pt-4 atw-pb-2
+        
+    }
+    
+    .wpadverts-block-list .wpa-results.wpa-list-view .wpa-detail-left {
+        @apply atw-self-center
+    }
+   
+    .wpadverts-blocks .wpadverts-form.wpa-form-solid input[type=text] {
+        @apply atw-outline-none atw-rounded-lg atw-box-border atw-bg-gray-100 atw-border-transparent focus:atw-ring-2 focus:atw-ring-blue-300 atw-py-3 atw-px-3;
+    }
+    
+    .wpadverts-blocks .wpadverts-form.wpa-form-solid input[type=checkbox],
+    .wpadverts-blocks .wpadverts-form.wpa-form-solid input[type=radio] {
+        @apply atw-appearance-none focus:atw-ring-2 focus:atw-ring-blue-300 atw-w-5 atw-h-5 atw-bg-gray-100 atw-text-base atw-outline-none atw-box-border atw-bg-white atw-border atw-border-solid atw-border-gray-200 atw-rounded atw-p-0 atw-m-0;
+    }
+    .wpadverts-blocks .wpadverts-form.wpa-form-solid input[type=radio] {
+        @apply atw-rounded-full;
+    }
+    
+    .wpadverts-blocks .wpadverts-form.wpa-form-solid select {
+        @apply atw-bg-no-repeat atw-bg-right atw-appearance-none atw-placeholder-gray-500 atw-text-gray-500
+    }
+    
+}

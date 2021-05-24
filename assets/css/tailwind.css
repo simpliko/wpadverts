@@ -2,7 +2,89 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+@layer components {
+    
+    .wpadverts-blocks i {
+        @apply atw-not-italic !important;
+    }
+    
+    /* FORM STYLES */
+    
+    /* Solid */
+    .wpadverts-form.wpa-solid input[type=text] {
+        @apply atw-outline-none atw-box-border atw-bg-gray-100 atw-border-transparent
+    }
+    .wpadverts-form.wpa-solid select {
+        @apply atw-outline-none atw-box-border atw-bg-gray-100 atw-border-transparent atw-bg-right atw-bg-no-repeat atw-appearance-none atw-placeholder-gray-500 atw-text-gray-500;
+        
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  
+    }
+    .wpadverts-form.wpa-solid input[type=checkbox],
+    .wpadverts-form.wpa-solid input[type=radio] {
+        @apply atw-appearance-none atw-w-5 atw-h-5 atw-bg-gray-100 atw-text-base atw-outline-none atw-box-border atw-bg-white atw-border atw-border-solid atw-border-gray-200 atw-rounded atw-p-0 atw-m-0;
+
+    }
+    .wpadverts-form.wpa-solid input[type=radio] {
+        @apply atw-rounded-full;
+    }
+    /* Simple */
+    .wpadverts-form.wpa-simple input[type=text] {
+        @apply atw-outline-none atw-box-border atw-bg-white atw-border-gray-300 atw-shadow-sm 
+    }
+    .wpadverts-form.wpa-simple select {
+        @apply atw-appearance-none atw-outline-none atw-box-border atw-bg-white atw-border-gray-300 atw-bg-right atw-bg-no-repeat atw-shadow-sm  atw-placeholder-gray-500 atw-text-gray-500;
+        
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  
+    }
+    .wpadverts-form.wpa-simple input[type=checkbox],
+    .wpadverts-form.wpa-simple input[type=radio] {
+        @apply atw-appearance-none atw-w-5 atw-h-5 atw-bg-white atw-border-gray-300 atw-text-base atw-outline-none atw-box-border atw-bg-white atw-border atw-border-solid atw-border-gray-200 atw-rounded atw-p-0 atw-m-0;
+
+    }
+    .wpadverts-form.wpa-simple input[type=radio] {
+        @apply atw-rounded-full;
+    }
+    /* FORM FOCUS */
+    .wpadverts-form.wpa-focus-simple input,
+    .wpadverts-form.wpa-focus-simple select {
+        @apply focus:atw-ring focus:atw-ring-opacity-50 focus:atw-border-primary-light focus:atw-ring-primary-light ;
+    }
+    
+    /* FORM PADDING */
+    .wpadverts-form.wpa-padding-sm button {
+        @apply atw-py-2;
+    }
+    .wpadverts-form.wpa-padding-sm input,
+    .wpadverts-form.wpa-padding-sm select {
+        @apply atw-py-2 atw-px-2;
+    }
+    
+    .wpadverts-form.wpa-padding-md button {
+        @apply atw-py-3;
+    }
+    .wpadverts-form.wpa-padding-md input,
+    .wpadverts-form.wpa-padding-md select {
+        @apply atw-py-3 atw-px-3;
+    }
+    
+
+    
+    /* FORM ROUNDING */
+    .wpadverts-form.wpa-mood-simple input[type=text], 
+    .wpadverts-form.wpa-mood-simple select {
+        @apply atw-rounded-lg;
+    }
+    .wpadverts-form.wpa-mood-playful input[type=text], 
+    .wpadverts-form.wpa-mood-playful select {
+        @apply atw-rounded-full;
+    }
+    .wpadverts-form.wpa-mood-elegant input[type=text], 
+    .wpadverts-form.wpa-mood-elegnat select {
+        @apply atw-rounded-none;
+    }
+    
     .advert-is-featured {
         @apply atw-bg-blue-50 hover:atw-bg-blue-100 !important
     }
@@ -14,6 +96,8 @@
     .wpa-widget-title {
       @apply atw-text-xl atw-font-bold 
     }
+    
+    /* Block / List: switch views */
     
     .wpa-block-list .wpa-results.wpa-list-view  {
         
@@ -49,7 +133,7 @@
     }
     
     .wpadverts-block-list .wpa-results.wpa-list-view .wpa-result-details {
-        @apply atw-flex-row
+        @apply atw-flex-row atw-place-content-center
         
     }
     .wpadverts-block-list .wpa-results.wpa-grid-view .wpa-result-details {
@@ -60,21 +144,21 @@
     .wpadverts-block-list .wpa-results.wpa-list-view .wpa-detail-left {
         @apply atw-self-center
     }
-   
-    .wpadverts-blocks .wpadverts-form.wpa-form-solid input[type=text] {
-        @apply atw-outline-none atw-rounded-lg atw-box-border atw-bg-gray-100 atw-border-transparent focus:atw-ring-2 focus:atw-ring-blue-300 atw-py-3 atw-px-3;
+    
+    .wpadverts-block-list .wpa-results.wpa-list-view .wpa-result-title {
+        @apply atw-flex-none 
     }
     
-    .wpadverts-blocks .wpadverts-form.wpa-form-solid input[type=checkbox],
-    .wpadverts-blocks .wpadverts-form.wpa-form-solid input[type=radio] {
-        @apply atw-appearance-none focus:atw-ring-2 focus:atw-ring-blue-300 atw-w-5 atw-h-5 atw-bg-gray-100 atw-text-base atw-outline-none atw-box-border atw-bg-white atw-border atw-border-solid atw-border-gray-200 atw-rounded atw-p-0 atw-m-0;
-    }
-    .wpadverts-blocks .wpadverts-form.wpa-form-solid input[type=radio] {
-        @apply atw-rounded-full;
+    .wpadverts-block-list .wpa-results.wpa-grid-view .wpa-result-title {
+        @apply atw-flex-grow;
     }
     
-    .wpadverts-blocks .wpadverts-form.wpa-form-solid select {
-        @apply atw-bg-no-repeat atw-bg-right atw-appearance-none atw-placeholder-gray-500 atw-text-gray-500
+    .wpadverts-block-list .js-wpa-view-list.wpa-selected i,
+    .wpadverts-block-list .js-wpa-view-grid.wpa-selected i {
+        @apply atw-text-gray-700;
     }
+    
+    /* END: Block / List: switch views */
+
     
 }

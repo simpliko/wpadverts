@@ -10,19 +10,21 @@ OPTIONS:
 
 
 
-$form_mood = "simple";
-$form_mood_arr = array( "simple" => "atw-rounded-lg", "playful" => "atw-rounded-full", "elegant" => "atw-rounded-none") ;
+$form_mood = "none";
+$form_mood_arr = array( "none" => "", "simple" => "atw-rounded-lg", "playful" => "atw-rounded-full", "elegant" => "atw-rounded-none") ;
 
-$form_style = "solid";
+$form_style = "none";
 $form_style_arr = array(
+    "none" => "",
     "unstyled" => "atw-outline-none atw-box-border",
     "simple" => "atw-outline-none atw-box-border atw-border-gray-300 atw-shadow-sm focus:atw-border-indigo-300 focus:atw-ring focus:atw-ring-indigo-200 focus:atw-ring-opacity-50",
     "underline" => array(),
     "solid" => "atw-outline-none atw-box-border atw-bg-gray-100 atw-border-transparent focus:atw-ring-2 focus:atw-ring-blue-300"
 );
 
-$form_padding = "small";
+$form_padding = "none";
 $form_padding_arr = array(
+    "none" => "",
     "small" => "atw-py-3 atw-px-3",
     "medium" => "atw-py-6 atw-px-6"
 );
@@ -153,10 +155,19 @@ function adverts_field_radio_block( $field, $form = null ) {
  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='gray' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='4'/%3e%3c/svg%3e");
   }
   
-  .wpadverts-blocks select {
+  .wpadverts-form.wpa-solid select {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
   
   }
+  
+
+
+.wpadverts-blocks {
+    --wpa-color-primary-light: 147, 197, 253; /*165, 180, 252;*/
+    --wpa-color-primary-main: 29, 78, 216; /*67, 56, 202;*/
+    --wpa-color-primary-dark: 30, 58, 138; /*49, 46, 129;*/
+}
+  
 </style>
 
 <script type="text/javascript">
@@ -171,83 +182,33 @@ jQuery(function($) {
         }
         return false;
     });
+    
     $("#js-wpa-sort").on("click", function(e) {
         e.preventDefault();
         $("#js-wpa-sort-options").toggle();
         return false;
     });
+    
     $(".js-wpa-view-list").on("click", function(e) {
         e.preventDefault(); 
+        
+        $(".js-wpa-view-list").addClass("wpa-selected");
+        $(".js-wpa-view-grid").removeClass("wpa-selected");
         
         var results = $(".wpa-results");
         results.addClass("wpa-list-view");
         results.removeClass("wpa-grid-view");
         
-        // done !
-        
-        //var alist = $(".wpa-block-list-results");
-
-        //alist.removeClass( "atw-grid-cols-2" );
-        //alist.addClass( "atw-grid-cols-1" );
-        //alist.removeClass( "atw-gap-x-4" );
-        //alist.removeClass( "atw-gap-y-4" );
-        
-        //var imagel = $(".wpa-block-list-view-list");
-        //var imageg = $(".wpa-block-list-view-grid");
-        
-        //imagel.removeClass("atw-hidden");
-        //imageg.addClass("atw-hidden");
-        
-        //var ritem = $(".wpa-block-list-result-item");
-        
-        //ritem.removeClass("atw-flex-col");
-        //ritem.removeClass("atw-py-0");
-        //ritem.removeClass("atw-pb-2");
-        //ritem.removeClass("atw-border-none");
-        
-        //ritem.addClass("atw-py-4");
-        
-        var rtitle = $(".wpa-block-list-result-title");
-        
-        rtitle.removeClass("atw-flex-grow");
-        rtitle.addClass("atw-flex-none");
-        
-        var rdetails = $(".wpa-block-list-result-details");
-        rdetails.addClass("atw-place-content-center");
-        
     });
     $(".js-wpa-view-grid").on("click", function(e) {
         e.preventDefault(); 
         
+        $(".js-wpa-view-list").removeClass("wpa-selected");
+        $(".js-wpa-view-grid").addClass("wpa-selected");
+        
         var results = $(".wpa-results");
         results.removeClass("wpa-list-view");
         results.addClass("wpa-grid-view");
-        
-        //var alist = $(".wpa-results");
-        
-        //alist.addClass( "atw-grid-cols-2" );
-        //alist.removeClass( "atw-grid-cols-1" );
-        //alist.addClass( "atw-gap-x-4" );
-        //alist.addClass( "atw-gap-y-4" );
-        
-        //var imagel = $(".wpa-block-list-view-list");
-        //var imageg = $(".wpa-block-list-view-grid");
-        
-        //imagel.addClass("atw-hidden");
-        //imageg.removeClass("atw-hidden");
-        
-        //var ritem = $(".wpa-result-item");
-        
-        //ritem.addClass("atw-flex-col atw-py-0 atw-pb-2 atw-border-none");
-        //ritem.removeClass("atw-py-4");
-        
-        var rtitle = $(".wpa-block-list-result-title");
-        
-        rtitle.addClass("atw-flex-grow");
-        rtitle.removeClass("atw-flex-none");
-        
-        var rdetails = $(".wpa-block-list-result-details");
-        rdetails.removeClass("atw-place-content-center");
     });
     
     $(".js-wpa-view-list").click();
@@ -256,14 +217,14 @@ jQuery(function($) {
 
 <div class="wpadverts-blocks wpadverts-block-list atw-flex atw-flex-col">
 
-    <form action="" method="get" class="wpadverts-form wpa-form-solid atw-block atw-py-0">
+    <form action="" method="get" class="wpadverts-form wpa-solid wpa-focus-simple wpa-padding-md wpa-mood-simple atw-block atw-py-0">
         
         <?php foreach($form->get_fields( array( "type" => array( "adverts_field_hidden" ) ) ) as $field): ?>
         <?php call_user_func( adverts_field_get_renderer($field), $field, $form ) ?>
         <?php endforeach; ?>
         
         
-        <div class="atw-flex atw-flex-col md:atw-flex-row -atw-space-y-1">
+        <div class="atw-flex atw-flex-col md:atw-flex-row">
             
             <div class="md:atw-flex-grow atw--mx-1">
                 <?php if( !empty( $fields_visible ) ): ?>
@@ -276,9 +237,7 @@ jQuery(function($) {
                         <span class="atw-block atw-w-full atw-box-border atw-px-2 atw-py-0 atw-pb-1 atw-text-base atw-text-gray-600 adverts-search-input-label"><?php echo esc_html( $field["label"] ) ?></span>
                         <?php endif; ?>
                         <?php $field["class"] = isset( $field["class"] ) ?  $field["class"] : ""; ?>
-                        <?php //$field["class"] .= stripos( $field['adverts_list_classes'], "advert-input-type-half-left" ) !== false ? " -atw-pr-1 " : "" ?>
-                        <?php //$field["class"] .= stripos( $field['adverts_list_classes'], "advert-input-type-half-right" ) !== false ? " -atw-pl-1 " : "" ?>
-                        <?php $field["class"] .= " atw-text-base atw-w-full $cl_form_style $cl_form_mood $cl_form_padding "; ?>
+                        <?php $field["class"] .= " atw-text-base atw-w-full  "; ?>
                         <div class="atw-block atw-w-full">
                             <?php $r = adverts_field_get_renderer($field); ?>
                             <?php $r = function_exists( $r . "_block" ) ? $r . "_block" : $r; ?>
@@ -312,7 +271,7 @@ jQuery(function($) {
                  
                 <?php if( ! empty( $fields_hidden ) ): ?>
                 <div class="atw-flex-auto atw-pr-2">
-                <button id="js-wpa-filter" class="atw-w-full atw-text-base atw-outline-none atw-border-1 atw-border-solid atw-border-gray-300 atw-bg-white hover:atw-bg-blue-700 atw-text-gray-500 atw-font-semibold atw-py-3 atw-px-4 atw-rounded-lg">
+                <button id="js-wpa-filter" class="atw-w-full atw-text-base atw-outline-none atw-border-1 atw-border-solid atw-border-gray-300 atw-bg-white hover:atw-bg-blue-700 atw-text-gray-500 atw-font-semibold -atw-py-3 atw-px-4 atw-rounded-lg">
                     <i class="fas fa-sliders-h atw-text-gray-500 atw-text-base "></i>
                     <span class="md:atw-hidden">Filters</span>
                 </button> 
@@ -321,7 +280,7 @@ jQuery(function($) {
                 <?php endif; ?>
                 
                 <div class="atw-flex-auto">
-                <button class="atw-w-full atw-text-base atw-outline-none atw-border atw-border-solid atw-border-blue-500 atw-bg-blue-500 hover:atw-bg-blue-700 atw-text-white atw-font-semibold atw-py-3 atw-px-4 atw-rounded-lg">
+                <button class="atw-w-full atw-text-base atw-outline-none atw-border atw-border-solid atw-border-primary-main atw-bg-primary-main hover:atw-bg-blue-700 atw-text-white atw-font-semibold atw-py-3 atw-px-4 atw-rounded-lg">
                     <i class="fas fa-search atw-text-white atw-text-base "></i> 
                     <span class="md:atw-hidden">Search</span>
                 </button>
@@ -343,10 +302,10 @@ jQuery(function($) {
                 <?php if( $switch_views ): ?>
                 <div class="atw-flex atw-align-baseline atw-leading-none atw-space-x-2">
                     <div class="atw-align-baseline">
-                        <a href="#" class="js-wpa-view-list"><i class="fas fa-th-list atw-text-gray-500 atw-text-2xl atw-leading-1 atw-align-baseline atw-block atw-transition atw-duration-100 hover:atw-text-blue-500"></i></a>
+                        <a href="#" class="js-wpa-view-list"><i class="fas fa-th-list atw-text-gray-400 atw-text-2xl atw-leading-1 atw-align-baseline atw-block atw-transition atw-duration-100 hover:atw-text-blue-500"></i></a>
                     </div>
                     <div class="atw-align-baseline">
-                        <a href="#" class="js-wpa-view-grid"><i class="fas fa-th-large atw-text-gray-500 atw-text-2xl atw-leading-1 atw-align-baseline"></i></a>
+                        <a href="#" class="js-wpa-view-grid"><i class="fas fa-th-large atw-text-gray-400 atw-text-2xl atw-leading-1 atw-align-baseline"></i></a>
                     </div>
                 </div>
                 <?php endif; ?>
@@ -408,13 +367,21 @@ jQuery(function($) {
 
 
     <?php if( $show_results ): ?>
-    <div class="wpa-block-list-results wpa-results atw-grid atw-p-0 atw-m-0">
+    <div class="wpa-block-list-results wpa-results wpa-list-view atw-grid atw-p-0 atw-m-0 ">
         <?php if( $loop->have_posts() ): ?>
         <?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
         <?php include apply_filters( "adverts_template_load", $this->path . '/templates/list-item.php' ) ?>
         <?php endwhile; ?>
         <?php else: ?>
-        <div class="adverts-list-empty"><em><?php _e("There are no ads matching your search criteria.", "wpadverts") ?></em></div>
+        <div class="atw-flex atw-flex-col  atw-items-center atw-mb-8 atw-p-8 atw-border-b-2 atw-border-t-2 atw-border-solid atw-border-gray-100 ">
+            <div class="atw-flex atw-justify-center atw-shadow-inner atw-h-12 atw-w-12 atw-rounded atw-p-4 atw-bg-gray-50 atw-text-center atw-items-center">
+                <i class="fas fa-search atw-text-4xl atw-text-center atw-text-gray-500"></i>
+            </div>
+            <div class="">
+                <span class="atw-inline-block atw-w-full atw-text-center atw-text-lg atw-font-bold atw-p-0 atw-pt-2 atw-text-gray-700">No results found.</span>
+                <span class="atw-inline-block atw-w-full atw-text-center ate-text-base atw-p-0">There aren't any results matching your search query.</span>
+            </div>
+        </div>
         <?php endif; ?>
         <?php wp_reset_query(); ?>
     </div>

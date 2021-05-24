@@ -1,10 +1,10 @@
 
 <?php $image_id = adverts_get_main_image_id( get_the_ID() ) ?>
 
-<div class="wpa-result-item atw-flex atw-border-solid atw-px-0 atw-border-t atw-border-gray-100 hover:atw-bg-gray-50 atw-relative <?php echo adverts_css_classes( '', get_the_ID() ) ?>">
+<div class="wpa-result-item atw-flex atw-border-solid atw-px-0 atw-border-0 atw-border-t atw-border-gray-100 hover:atw-bg-gray-50 atw-relative <?php echo adverts_css_classes( '', get_the_ID() ) ?>">
     <div class="atw-flex atw-flex-none atw-items-center">
         
-        <div class="wpa-picture-list wpa-block-list-view-list atw-flex atw-pr-4">
+        <div class="wpa-picture-list wpa-block-list-view-list atw-flex atw-pr-4 ">
             <div class="atw-flex atw-items-center atw-box-border atw-w-20 atw-h-20 atw-bg-gray-50 atw-border atw-border-solid atw-rounded atw-border-gray-300 ">
             <?php if($image_id): ?>
                 <?php $image = get_post( $image_id ) ?>
@@ -36,7 +36,7 @@
     
         <div class="wpa-detail-left atw-flex atw-flex-col atw-flex-1  ">
 
-            <div class="wpa-block-list-result-title atw-mb-1 atw-leading-snug atw-flex-grow">
+            <div class="wpa-result-title atw-mb-1 atw-leading-snug">
                 <a href="<?php the_permalink() ?>" title="<?php echo esc_attr( get_the_title() ) ?>" class="atw-inline-block atw-no-underline ">
                     <span class="atw-inline-block atw-max-h-16 atw-text-gray-700 atw-text-lg atw-leading-tight atw-font-semibold "><?php echo esc_html( get_the_title() ) ?></span>
                     <?php do_action( "adverts_list_after_title", get_the_ID() ) ?>
@@ -64,7 +64,7 @@
         <div class="wpa-detail-right atw-flex atw-items-center ">
             <?php $price = get_post_meta( get_the_ID(), "adverts_price", true ) ?>
             <?php if( $price ): ?>
-            <div class="atw-text-base atw-font-bold atw-text-red-700 -atw-bg-red-500 atw-text-white atw-text-lg "><?php echo esc_html( adverts_get_the_price( get_the_ID(), $price ) ) ?></div>
+            <div class="atw-text-base atw-font-bold atw-text-red-700 -atw-bg-red-500 atw-text-lg -atw-text-primary-main "><?php echo esc_html( adverts_get_the_price( get_the_ID(), $price ) ) ?></div>
             <?php elseif( adverts_config( 'empty_price' ) ): ?>
             <div class="md:atw-text-lg atw-font-bold atw-text-red-800"><?php echo esc_html( adverts_empty_price( get_the_ID() ) ) ?></div>
             <?php endif; ?>

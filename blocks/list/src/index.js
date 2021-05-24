@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 import { useBlockProps, RichText, BlockControls, AlignmentToolbar, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, PanelRow, FormToggle } from '@wordpress/components';
+import { PanelBody, PanelRow, FormToggle, RadioControl } from '@wordpress/components';
 import ServerSideRender from '@wordpress/server-side-render';
 
 const blockStyle = {
@@ -27,10 +27,30 @@ registerBlockType( 'wpadverts/list', {
             props.setAttributes( { alignment: newAlignment === undefined ? 'none' : newAlignment } );
         };
  
+        const option = "list";
+ 
         return (
             <div {...blockProps}>
                 {
                     <InspectorControls>
+                    
+                        <PanelBody title="Display Settings">
+                            <PanelRow>
+                                <RadioControl
+                                label="List Type"
+                                help=""
+                                selected={ option }
+                                options={ [
+                                    { label: 'List', value: 'list' },
+                                    { label: 'Grid', value: 'grid' },
+                                ] }
+                                onChange={ ( option ) => {
+                                    onChangeContent();
+                                } }
+                                />
+                            </PanelRow>
+                        </PanelBody>
+                    
                         <PanelBody title="Test">
                            <PanelRow>
                                     <FormToggle
@@ -40,6 +60,7 @@ registerBlockType( 'wpadverts/list', {
                                  />
                            </PanelRow>
                         </PanelBody>
+                        
                     </InspectorControls>
                 }
                 <ServerSideRender

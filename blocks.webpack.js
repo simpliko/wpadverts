@@ -9,7 +9,7 @@ module.exports = {
     },
     
     output: {
-        filename: 'index.js',
+        filename: '[name].js',
         path: path.resolve( process.cwd(), 'blocks/list/build' ),
     },
     
@@ -20,3 +20,4 @@ module.exports = {
         ]
     }
 };
+

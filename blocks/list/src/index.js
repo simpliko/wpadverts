@@ -1,8 +1,42 @@
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
-import { useBlockProps, RichText, BlockControls, AlignmentToolbar, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, PanelRow, FormToggle, RadioControl } from '@wordpress/components';
+
+import { useBlockProps, RichText, BlockControls, AlignmentToolbar, InspectorControls , PanelColorSettings } from '@wordpress/block-editor';
+import { PanelBody, PanelRow, FormToggle, RadioControl, Toolbar, ToolbarDropdownMenu, ColorPalette} from '@wordpress/components';
 import ServerSideRender from '@wordpress/server-side-render';
+
+import Edit from './edit';
+
+registerBlockType( 'wpadverts/list', {
+    title: __( 'Classifieds List', 'wpadverts' ),
+    icon: 'universal-access-alt',
+    category: 'design',
+    example: {},
+    attributes: {
+        content: {
+            type: "string"
+        },
+        color: {
+            type: "string"
+        },
+        form_style: {
+            type: "string",
+            default: "wpa-solid"
+        }
+    },
+    edit: Edit,
+    save: ( { attributes } ) => {
+        return null;
+
+        const { content } = attributes;
+        return <RichText.Content
+            tagName="p"
+            value={ attributes.content }
+        />
+    }
+});
+
+/*
 
 const blockStyle = {
 	backgroundColor: '#900',
@@ -77,3 +111,6 @@ registerBlockType( 'wpadverts/list', {
         return <div { ...blockProps }>Hello World, step 1 (from the frontend).</div>;
     },
 } );
+ * 
+ * 
+ */

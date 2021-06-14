@@ -390,17 +390,25 @@ function adverts_payments_field_payment($field) {
         }
         
         if( isset( $option['disabled'] ) && $option['disabled'] ) {
-            $disabled = true;
+            $is_disabled = true;
         } else {
-            $disabled = false;
+            $is_disabled = false;
+        }
+        
+        $is_disabled = apply_filters( "adext_payments_option_is_disabled", $is_disabled, $option );
+
+        if( $is_disabled ) {
+            $disabled = 'disabled="disabled"';
+        } else {
+            $disabled = '';
         }
         
         ?>
 
-        <div class="adverts-listing-type-x <?php if($disabled): ?>adverts-listing-type-x-disabled<?php endif; ?>">
+        <div class="adverts-listing-type-x <?php if($is_disabled): ?>adverts-listing-type-x-disabled<?php endif; ?>">
 
             <label class="adverts-cute-input adverts-cute-radio " for="<?php echo esc_attr( $field["name"] . "_" . $option["value"] ) ?>">
-                <input name="<?php echo esc_attr( $field["name"] ) ?>" class="adverts-listing-type-input" id="<?php echo esc_attr( $field["name"] . "_" . $option["value"] ) ?>" type="radio" value="<?php echo $post->ID ?>" <?php checked($post->ID, $field["value"]) ?> <?php disabled( $disabled) ?> />
+                <input name="<?php echo esc_attr( $field["name"] ) ?>" class="adverts-listing-type-input" id="<?php echo esc_attr( $field["name"] . "_" . $option["value"] ) ?>" type="radio" value="<?php echo $post->ID ?>" <?php checked($post->ID, $field["value"]) ?> <?php disabled( $is_disabled ) ?> />
                 <div class="adverts-cute-input-indicator"></div>
             </label>
 
@@ -503,8 +511,7 @@ function adext_payments_action_payment($content, Adverts_Form $form ) {
     $listing_id = get_post_meta( $post_id, "payments_listing_type", true );
     $listing = get_post( $listing_id );
     
-    $price = get_post_meta($listing_id, 'adverts_price', true);
-    
+
     $payment_id = adext_post_get_payment( $post_id, $listing_id, "pending" );
     
     if( ! $payment_id  ) {
@@ -524,7 +531,8 @@ function adext_payments_action_payment($content, Adverts_Form $form ) {
     }
     
     $payment = get_post( $payment_id );
-    
+    $price = get_post_meta($payment_id, '_adverts_payment_total', true);
+
     ob_start();
     include ADVERTS_PATH . 'addons/payments/templates/add-payment.php';
     return ob_get_clean();

@@ -54,19 +54,19 @@
     
     /* FORM PADDING */
     .wpadverts-form.wpa-padding-sm button {
-        @apply atw-py-2;
+        @apply atw-py-2 atw-leading-loose;
     }
     .wpadverts-form.wpa-padding-sm input,
     .wpadverts-form.wpa-padding-sm select {
-        @apply atw-py-2 atw-px-2;
+        @apply atw-py-2 atw-px-2 atw-leading-loose;
     }
     
     .wpadverts-form.wpa-padding-md button {
-        @apply atw-py-3;
+        @apply atw-py-3 atw-leading-loose;
     }
     .wpadverts-form.wpa-padding-md input,
     .wpadverts-form.wpa-padding-md select {
-        @apply atw-py-3 atw-px-3;
+        @apply atw-py-3 atw-px-3 atw-leading-loose;
     }
     
 

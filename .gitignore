@@ -1,2 +1,12 @@
+# Editors
 nbproject
 node_modules
+
+# Compiled Blocks
+blocks/*/build/**
+ 
+# Compiled Tailwind CSS
+compiled.css
+
+babelrc.js.save
+

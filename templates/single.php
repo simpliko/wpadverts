@@ -22,7 +22,7 @@
             <?php printf( __('Published: %1$s (%2$s ago)', "wpadverts"), date_i18n( get_option( 'date_format' ), get_post_time( 'U', false, $post_id ) ), human_time_diff( get_post_time( 'U', false, $post_id ), current_time('timestamp') ) ) ?>
         </div>
     </div>
-    
+    <?php var_dump(get_post_meta( $post_id, "adverts_price", true)) ?>
     <?php if( get_post_meta( $post_id, "adverts_price", true) ): ?>
     <div class="adverts-single-price">
         <span class="adverts-price-box"><?php echo esc_html( adverts_get_the_price( $post_id ) ) ?></span>

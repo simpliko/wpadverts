@@ -1,6 +1,6 @@
 <?php
 
-class Adverts_Block_List {
+class Adverts_Block_Search {
     
     public $path = null;
     
@@ -11,7 +11,7 @@ class Adverts_Block_List {
     public function init() {
         
         $package = "wpadverts";
-        $module = "list";
+        $module = "search";
         
         $js_handler = sprintf( "block-%s-%s", $package, $module );
         
@@ -34,16 +34,25 @@ class Adverts_Block_List {
             'render_callback' => array( $this, "render" ),
             'style' => 'wpadverts-blocks',
             'attributes' => array(
-                'content' => array(
-                    'type' => 'string'
+                "content" => array(
+                    "type" => "string"
                 ),
-                'color' => array(
-                    'type' => 'string'
+                "form_style" => array(
+                    "type" => "string",
+                    "default" => "wpa-solid"
+                ),                
+                "form_input_padding" => array(
+                    "type" => "string",
+                    "default" => "wpa-padding-sm"
+                ),                
+                "form_input_corners" => array(
+                    "type" => "string",
+                    "default" => "wpa-mood-simple"
+                ),                
+                "form_input_focus" => array(
+                    "type" => "string",
+                    "default" => "wpa-focus-simple"
                 ),
-                'form_style' => array(
-                    'type' => 'string',
-                    'default' => 'wpa-solid'
-                )
             )
         ) );
 
@@ -231,21 +240,7 @@ class Adverts_Block_List {
             if( isset( $field['meta']["search_group"] ) ) {
                 $search_group = $field['meta']['search_group'];
             }
-            /*
-            if( isset( $field['meta']['search_type'] ) ) {
-                $search_type = $field['meta']['search_type'];
-            }
 
-            $counter[ $search_group . '-' . $search_type ]++;
-
-            if( $search_type == 'full' ) {
-                $field['adverts_list_classes'] = 'advert-input-type-full';
-            } else if( $counter[ $search_group . '-' . $search_type ] % 2 == 0 ) {
-                $field['adverts_list_classes'] = 'advert-input-type-half advert-input-type-half-right';
-            } else {
-                $field['adverts_list_classes'] = 'advert-input-type-half advert-input-type-half-left';
-            }
-*/
             if( $search_group == "visible" ) {
                 $fields_visible[] = $field;
             } else {
@@ -254,7 +249,7 @@ class Adverts_Block_List {
         }
     
         
-        $template = dirname( __FILE__ ) . "/templates/list.php";
+        $template = dirname( __FILE__ ) . "/templates/search.php";
         ob_start();
         include $template;
         return ob_get_clean();

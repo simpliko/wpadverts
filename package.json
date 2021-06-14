@@ -4,6 +4,8 @@
   "description": "",
   "svn": "/home/greg/svn/wpadverts",
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@wordpress/element": "^2.20.0",
     "@wordpress/scripts": "14.0.1",
     "autoprefixer": "^10.2.5",
     "grunt-checktextdomain": "^1.0.1",
@@ -16,8 +18,11 @@
     "start": "wp-scripts start --config blocks.webpack.js",
     "build": "wp-scripts build --config blocks.webpack.js",
     "build:list": "wp-scripts build blocks/list/src/index.js --output-path=blocks/list/build",
-    "watch:build/list": "wp-scripts build blocks/list/src/index.js --output-path=blocks/list/build --watch",
-    "postcss:watch": "postcss ./assets/css/tailwind.css -o compiled.css --watch"
+    "watch:build/list": "wp-scripts build blocks/list/src/index.js --output-path=blocks/list/build --watch --webpack--devtool=source-map",
+    "postcss:watch": "postcss ./assets/css/tailwind.css -o compiled.css --watch",
+        
+    "start/list": "wp-scripts start blocks/list/src/index.js --output-path=blocks/list/build --webpack--devtool=source-map",
+    "start/search": "wp-scripts start blocks/search/src/index.js --output-path=blocks/search/build --webpack--devtool=source-map"
   },
   "dependencies": {
     "@wordpress/components": "^13.0.0"

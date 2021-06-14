@@ -3740,3 +3740,7 @@ function adverts_get_tmp_url() {
     
     return apply_filters( "adverts_get_tmp_url", $tmpurl );
 }
+
+// Do not add anything below ..
+
+include_once ADVERTS_PATH . '/includes/functions-blocks.php';

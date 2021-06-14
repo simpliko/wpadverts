@@ -8,8 +8,6 @@ OPTIONS:
 
 */
 
-
-
 $form_mood = "none";
 $form_mood_arr = array( "none" => "", "simple" => "atw-rounded-lg", "playful" => "atw-rounded-full", "elegant" => "atw-rounded-none") ;
 
@@ -40,109 +38,6 @@ $cl_form_padding = $form_padding_arr[ $form_padding ];
 $switch_views = $allow_sorting = true;
 $sort_current_title = "Publish Date";
 
-function _get_field_width( $field ) {
-    $arr = array(
-        "full" => "atw-w-full",
-        "half" => "atw-w-full md:atw-w-2/4",
-        "third" => "atw-w-full md:atw-w-1/3",
-        "fourth" => "atw-w-full md:atw-w-1/4"
-    );
-    
-    return $arr[ $field['meta']['search_type'] ];
-}
-
-function adverts_field_checkbox_block( $field, $form = null, $type = "checkbox" ) {
-    
-    $opts = "";
-    $i = 1;
-    
-    if( !isset( $field["rows"] ) ) {
-        $field["rows"] = 1;
-    }
-    
-    if( !isset( $field["value"] ) ) {
-        $value = array();
-    } elseif( !is_array( $field["value"] ) ) {
-        $value = (array)$field["value"];
-    } else {
-        $value = $field["value"];
-    }
-    
-    if(isset($field["options_callback"]) && !empty($field["options_callback"])) {
-        $opt = call_user_func( $field["options_callback"], $field );
-    } elseif(isset($field["options"])) {
-        $opt = $field["options"];
-    } else {
-        trigger_error("You need to specify options source for field [{$field['name']}].", E_USER_ERROR);
-        $opt = array();
-    }
-
-    foreach($opt as $v) {
-        
-        if( isset( $v["id"] ) ) {
-            $id = $v["id"];
-        } else {
-            $id = $field["name"];
-        }
-        
-        $id = apply_filters( "adverts_form_field_option_id", $id.'_'.$i, $v, $field, $i );
-
-        $checkbox = new Adverts_Html("input", array(
-            "type" => $type,
-            "name" => $field["name"].'[]',
-            "id" => $id,
-            "value" => $v["value"],
-            "class" => " atw-flex-none atw-self-center",
-            "checked" => in_array($v["value"], $value) ? "checked" : null
-        ));
-
-        $label = new Adverts_Html("label", array(
-            "for" => $id,
-            "class" => "atw-flex-1 atw-inline-block atw-py-0 atw-px-2 atw-text-sm atw-text-gray-700 atw-align-baseline atw-truncate atw-cursor-pointer"
-        ),  $v["text"]);
-        
-        if( isset( $field["class"] ) ) {
-            $class = $field["class"];
-        } else {
-            $class = null;
-        }
-        
-        if( isset( $v["depth"] ) ) {
-            $depth = $v["depth"];
-        } else {
-            $depth = 0;
-        }
-
-        if( $field["rows"] == 1 ) {
-            $padding = str_repeat("&nbsp; &nbsp;", $depth * 2);
-        } else {
-            $padding = "";
-        }
-        
-        $wrap = new Adverts_Html("div", array(
-            "class" => "atw-flex atw-flex-row atw-flex-grow atw-align-baseline",
-        ), $padding . $checkbox->render() . $label->render() );
-        
-        $opts .= $wrap->render();
-        
-        $i++;
-    }
-    
-    //$field["rows"] = 3;
-
-    $wrap_classes = array();
-    if( absint( $field["rows"] ) >= 1 ) {
-        $wrap_classes[] = sprintf( "atw-grid atw-grid-cols-%d atw-gap-3", absint( $field["rows"] ) );
-    } else {
-        $wrap_classes[] = "atw-flex atw-flex-wrap atw-flex-row atw-content-evenly";
-    }
-    
-    echo Adverts_Html::build("div", array("class"=> join( " ", $wrap_classes ) ), $opts);
-}
-
-function adverts_field_radio_block( $field, $form = null ) {
-    adverts_field_checkbox_block($field, $form, "radio");
-}
 
 ?>
 <link href="/wpadverts/wp-content/plugins/wpadverts/assets/css/all.min.css" rel="stylesheet">
@@ -216,82 +111,6 @@ jQuery(function($) {
 </script>
 
 <div class="wpadverts-blocks wpadverts-block-list atw-flex atw-flex-col">
-
-    <form action="" method="get" class="wpadverts-form wpa-solid wpa-focus-simple wpa-padding-md wpa-mood-simple atw-block atw-py-0">
-        
-        <?php foreach($form->get_fields( array( "type" => array( "adverts_field_hidden" ) ) ) as $field): ?>
-        <?php call_user_func( adverts_field_get_renderer($field), $field, $form ) ?>
-        <?php endforeach; ?>
-        
-        
-        <div class="atw-flex atw-flex-col md:atw-flex-row">
-            
-            <div class="md:atw-flex-grow atw--mx-1">
-                <?php if( !empty( $fields_visible ) ): ?>
-                <div class="atw-flex atw-flex-wrap atw-items-end atw-justify-between atw-py-0 atw-px-0">
-                    <?php foreach( $fields_visible as $field ): ?>
-                    <?php $width = _get_field_width( $field ) ?>
-                    <?php $pr = $pl = ""; ?>
-                    <div class="atw-relative atw-items-end atw-box-border atw-pb-3 atw-px-1 <?php echo esc_attr( $width ) ?>">
-                        <?php if( isset( $field["label"] ) && ! empty( $field["label"] ) ): ?>
-                        <span class="atw-block atw-w-full atw-box-border atw-px-2 atw-py-0 atw-pb-1 atw-text-base atw-text-gray-600 adverts-search-input-label"><?php echo esc_html( $field["label"] ) ?></span>
-                        <?php endif; ?>
-                        <?php $field["class"] = isset( $field["class"] ) ?  $field["class"] : ""; ?>
-                        <?php $field["class"] .= " atw-text-base atw-w-full  "; ?>
-                        <div class="atw-block atw-w-full">
-                            <?php $r = adverts_field_get_renderer($field); ?>
-                            <?php $r = function_exists( $r . "_block" ) ? $r . "_block" : $r; ?>
-                            <?php call_user_func( $r, $field, $form ) ?>
-                        </div>
-                    </div>
-                    <?php endforeach; ?>
-                </div>
-                <?php endif; ?>
-
-                <?php if( !empty( $fields_hidden ) ): ?>
-                <div id="js-wpa-filters-wrap" class="atw-hidden atw-flex atw-flex-wrap atw-items-end atw-justify-between atw-py-0 atw-px-0">
-                    <?php foreach( $fields_hidden as $field ): ?>
-                    <?php $width = _get_field_width( $field ) ?>
-                    <div class="atw-relative atw-items-end atw-box-border atw-pb-3 atw-px-1 <?php echo esc_attr( $width ) ?>">
-                        <?php if( isset( $field["label"] ) && ! empty( $field["label"] ) ): ?>
-                        <span class="atw-block atw-w-full atw-box-border atw-px-2 atw-py-0 atw-pb-1 atw-text-base atw-text-gray-700 adverts-search-input-label"><?php echo esc_html( $field["label"] ) ?></span>
-                        <?php endif; ?>
-                        <?php $field["class"] = isset( $field["class"] ) ?  $field["class"] : ""; ?>
-                        <?php $field["class"] .= " atw-text-base atw-w-full $cl_form_style $cl_form_mood $cl_form_padding "; ?>
-                        <div class="atw-block atw-w-full">
-                            <?php call_user_func( adverts_field_get_renderer($field), $field, $form ) ?>
-                        </div>
-                    </div>
-                    <?php endforeach; ?>
-                </div>
-                <?php endif; ?>
-            </div>
-            
-            <div class="atw-flex <?php echo ( empty( $fields_hidden ) ? "atw-grid-cols-1" : "atw-grid-cols-2" ) ?> atw-gap-2 atw-pb-3 md:atw-flex-none md:atw-ml-2 ">
-                 
-                <?php if( ! empty( $fields_hidden ) ): ?>
-                <div class="atw-flex-auto atw-pr-2">
-                <button id="js-wpa-filter" class="atw-w-full atw-text-base atw-outline-none atw-border-1 atw-border-solid atw-border-gray-300 atw-bg-white hover:atw-bg-blue-700 atw-text-gray-500 atw-font-semibold -atw-py-3 atw-px-4 atw-rounded-lg">
-                    <i class="fas fa-sliders-h atw-text-gray-500 atw-text-base "></i>
-                    <span class="md:atw-hidden">Filters</span>
-                </button> 
-                </div>
-                
-                <?php endif; ?>
-                
-                <div class="atw-flex-auto">
-                <button class="atw-w-full atw-text-base atw-outline-none atw-border atw-border-solid atw-border-primary-main atw-bg-primary-main hover:atw-bg-blue-700 atw-text-white atw-font-semibold atw-py-3 atw-px-4 atw-rounded-lg">
-                    <i class="fas fa-search atw-text-white atw-text-base "></i> 
-                    <span class="md:atw-hidden">Search</span>
-                </button>
-                </div>
-
-            </div>
-            
-        </div>
-        
-        
-    </form>
     
     <div class="atw-flex atw-flex-col md:atw-flex-row-reverse md:atw-justify-between">
     

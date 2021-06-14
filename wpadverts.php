@@ -377,7 +377,7 @@ function adverts_init_frontend() {
     // add_filter('posts_results', 'adverts_posts_results', 10, 2 );
     // add_filter('template_include', 'adverts_template_include'); 
     
-    add_action('template_redirect', 'adverts_disable_default_archive');
+    //add_action('template_redirect', 'adverts_disable_default_archive');
     
     add_filter('post_thumbnail_html', 'adverts_post_thumbnail_html');
     add_action('adverts_new_user_notification', 'wp_new_user_notification', 10, 3 );

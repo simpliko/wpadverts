@@ -22,7 +22,14 @@
     "postcss:watch": "postcss ./assets/css/tailwind.css -o compiled.css --watch",
         
     "start/list": "wp-scripts start blocks/list/src/index.js --output-path=blocks/list/build --webpack--devtool=source-map",
-    "start/search": "wp-scripts start blocks/search/src/index.js --output-path=blocks/search/build --webpack--devtool=source-map"
+    "start/search": "wp-scripts start blocks/search/src/index.js --output-path=blocks/search/build --webpack--devtool=source-map",
+      
+    "build/list": "wp-scripts build blocks/list/src/index.js --output-path=blocks/list/build",
+    "build/search": "wp-scripts build blocks/search/src/index.js --output-path=blocks/search/build",
+     
+    "build/css": "postcss ./assets/css/tailwind.css -o compiled.css",
+     
+    "build-all": "npm run build/list && npm run build/search && npm run build/css"
   },
   "dependencies": {
     "@wordpress/components": "^13.0.0"

@@ -32,6 +32,13 @@ registerBlockType( 'wpadverts/search', {
             type: "string",
             default: "wpa-focus-simple"
         },
+        primary_button: {
+            type: "object",
+            default: {
+                desktop: "icon",
+                text: ""
+            }
+        },
     },
     edit: Edit,
     save: ( { attributes } ) => {

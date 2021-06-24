@@ -27,12 +27,20 @@ class Adverts_Block_List {
             $asset_file['version']
         );
 
+        wp_register_script(
+            "wpadverts-block-list-and-search",
+            ADVERTS_PATH . '/assets/js/block-list-and-search.js',
+            array( 'jquery' ),
+            '2.0.0'
+        );
+        
         register_block_type( sprintf( "%s/%s", $package, $module ), array(
             'apiVersion' => 2,
             'editor_style' => 'wpadverts-blocks',
             'editor_script' => $js_handler,
             'render_callback' => array( $this, "render" ),
             'style' => 'wpadverts-blocks',
+            'script' => 'wpadverts-block-list-and-search',
             'attributes' => array(
                 'content' => array(
                     'type' => 'string'

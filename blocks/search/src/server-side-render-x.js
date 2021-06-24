@@ -15,6 +15,7 @@ const { Placeholder, Spinner } = wp.components;
 export function rendererPath(block, attributes = null, urlQueryArgs = {}) {
 	return addQueryArgs(`/wp/v2/block-renderer/${block}`, {
 		context: 'edit',
+		payload: '0',
 		...(null !== attributes ? { attributes } : {}),
 		...urlQueryArgs,
 	});
@@ -62,10 +63,20 @@ export class ServerSideRenderX extends Component {
 		}
 		const { block, attributes = null, urlQueryArgs = {} } = props;
 
-		const path = rendererPath(block, attributes, urlQueryArgs);
+		if(this.props.method == "post" ) {
+			var method = "POST";
+			var atts = {};
+			var data = { uses_payload: true, ...attributes };;
+		} else {
+			var method = "GET";
+			var atts = attributes;
+			var data = null;
+		}
+
+		const path = rendererPath(block, atts, urlQueryArgs);
 		// Store the latest fetch request so that when we process it, we can
 		// check if it is the current request, to avoid race conditions on slow networks.
-		const fetchRequest = (this.currentFetchRequest = apiFetch({ path })
+		const fetchRequest = (this.currentFetchRequest = apiFetch({ path, method, data })
 			.then((response) => {
 				if (
 					this.isStillMounted &&

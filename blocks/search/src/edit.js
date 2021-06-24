@@ -2,10 +2,30 @@ import { Component } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 import { RichText, BlockControls, InspectorControls , PanelColorSettings } from '@wordpress/block-editor';
-import { Disabled, PanelBody, Toolbar, ToolbarDropdownMenu, ColorPalette, DropdownMenu, SelectControl, Tooltip } from '@wordpress/components';
+import { 
+    ButtonGroup, 
+    Button, 
+    Disabled, 
+    Flex,
+    FlexItem,
+    FlexBlock,
+    Panel, 
+    PanelBody, 
+    Text,
+    TextControl, 
+    Toolbar, 
+    ToolbarDropdownMenu, 
+    ColorPicker,
+    ColorPalette, 
+    DropdownMenu,
+    SelectControl, 
+    Tooltip 
+} from '@wordpress/components';
 
-import ServerSideRender from '@wordpress/server-side-render';
+//import ServerSideRender from '@wordpress/server-side-render';
 import ServerSideRenderX from './server-side-render-x';
+
+import PartialButtons from './partial-buttons';
 
 
 class Edit extends Component {
@@ -23,11 +43,16 @@ class Edit extends Component {
     }    
     
     onFormInputCornersChange = ( form_input_corners ) => {
+        console.log( "Corners Change" )
         this.props.setAttributes( { form_input_corners } );
     }    
     
     onFormInputFocusChange = ( form_input_focus ) => {
         this.props.setAttributes( { form_input_focus } );
+    }
+
+    onPartialPrimaryButtonChange = ( primary_button ) => {
+        this.props.setAttributes( { primary_button: { ...primary_button } } ); 
     }
 
     render() {
@@ -40,12 +65,17 @@ class Edit extends Component {
             form_style, 
             form_input_padding, 
             form_input_corners,
-            form_input_focus
+            form_input_focus,
+            primary_button,
+            dataText
         } = attributes;
+
+        //console.log("Render Again...");
+        //console.log(this.props.attributes);
 
         return (
             <>
-                <InspectorControls>
+                <InspectorControls className="wpa-admin">
                     <PanelBody title="Form Styling">
 
               
@@ -116,6 +146,31 @@ class Edit extends Component {
     
                     </PanelBody>
 
+                    <PartialButtons 
+                        title="Primary Button"
+                        onChange={ this.onPartialPrimaryButtonChange }
+                        data={ primary_button }
+                    />
+
+                    <PanelBody title="Buttons">
+
+                        <Flex justify="space-between">
+                            <FlexItem>Buttons Position</FlexItem>
+                            
+                            <FlexBlock className="wpa-content-right">
+                                <ButtonGroup className="wpa-text-right">
+                                    <Button variant="primary" isSmall={true} >Right</Button>
+                                    <Button variant="secondary" isSmall={true} >Bottom</Button>
+                                </ButtonGroup>
+                            </FlexBlock>
+                        </Flex>
+
+
+                        <Panel title="Button Secondary">
+                            <h4>Button Secondary</h4>
+                        </Panel>
+                    </PanelBody>
+
                 </InspectorControls>
 
                 <BlockControls>
@@ -140,12 +195,13 @@ class Edit extends Component {
                         />
                     </Toolbar>
                 </BlockControls>
-
+           
                 <Disabled>
                     <ServerSideRenderX
                         block="wpadverts/search"
                         attributes={ this.props.attributes }
                         spinnerLocation={{right: 0, top: 10, unit: 'px'}}
+                        method="get"
                     />
                 </Disabled>
             </>

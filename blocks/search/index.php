@@ -20,6 +20,13 @@ class Adverts_Block_Search {
 
         $this->path = dirname(__FILE__);
         
+        wp_register_style(
+            'wpadverts-blocks-editor-search',
+            ADVERTS_URL . '/assets/css/blocks-editor-search.css',
+            array( 'wp-edit-blocks' ),
+            filemtime( ADVERTS_PATH . '/compiled.css' )
+        );
+        
         wp_register_script(
             $js_handler,
             plugins_url( 'build/index.js', __FILE__ ),
@@ -29,7 +36,7 @@ class Adverts_Block_Search {
 
         register_block_type( sprintf( "%s/%s", $package, $module ), array(
             'apiVersion' => 2,
-            'editor_style' => 'wpadverts-blocks',
+            'editor_style' => 'wpadverts-blocks-editor-search',
             'editor_script' => $js_handler,
             'render_callback' => array( $this, "render" ),
             'style' => 'wpadverts-blocks',
@@ -53,12 +60,34 @@ class Adverts_Block_Search {
                     "type" => "string",
                     "default" => "wpa-focus-simple"
                 ),
+                "primary_button" => array(
+                    "type" => "object",
+                    "default" => array(
+                        "desktop" => "icon",
+                        "text" => ""
+                    )
+                ),                
+                "dataText" => array(
+                    "type" => "string",
+                    "default" => "test"
+                )
             )
         ) );
 
     }
     
+    public function handlePayload( $atts ) {
+        if( adverts_request( "payload" ) == "1" ) {
+            $request_body = file_get_contents('php://input');
+            return json_decode( $request_body, true );
+        } else {
+            return $atts;
+        }
+    }
+
     public function render( $atts = array() ) {
+
+        $atts = $this->handlePayload( $atts );
 
         $params = shortcode_atts(array(
             'name' => 'default',
@@ -251,6 +280,7 @@ class Adverts_Block_Search {
         
         $template = dirname( __FILE__ ) . "/templates/search.php";
         ob_start();
+        
         include $template;
         return ob_get_clean();
     }

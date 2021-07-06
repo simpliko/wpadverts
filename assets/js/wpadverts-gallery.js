@@ -170,7 +170,7 @@ WPADVERTS.File.Uploader.prototype.SortableUpdate = function(e) {
     var keys = this.GetKeys();
 
     if(typeof e !== "undefined") {
-        this.ui.find(".adverts-gallery-upload-update.adverts-icon-spinner.animate-spin").fadeIn();
+        this.ui.find(".adverts-gallery-upload-update .adverts-icon-spinner.animate-spin").fadeIn();
     }
 
     if(typeof this.PostID === 'undefined') {
@@ -199,14 +199,14 @@ WPADVERTS.File.Uploader.prototype.SortableUpdate = function(e) {
 
 WPADVERTS.File.Uploader.prototype.SortableUpdateSuccess = function(response) {
     if (response.result == 1) {
-        this.ui.find(".adverts-gallery-upload-update.adverts-icon-spinner.animate-spin").fadeOut();
+        this.ui.find(".adverts-gallery-upload-update .adverts-icon-spinner.animate-spin").fadeOut();
     } else {
         WPADVERTS.File.BrowserError(response);
     }
 };
 
 WPADVERTS.File.Uploader.prototype.SortableUpdateError = function(response) {
-    this.ui.find(".adverts-gallery-upload-update.adverts-icon-spinner.animate-spin").fadeOut();
+    this.ui.find(".adverts-gallery-upload-update .adverts-icon-spinner.animate-spin").fadeOut();
     WPADVERTS.File.BrowserError(response);
 };
 
@@ -271,6 +271,7 @@ WPADVERTS.File.Uploader.prototype.Plupload = function(init) {
     this.uploader.bind("BeforeUpload", jQuery.proxy(this.engine.BeforeUpload, this));
     this.uploader.bind('FilesAdded', jQuery.proxy(this.engine.FilesAdded, this));
     this.uploader.bind('FileUploaded', jQuery.proxy(this.engine.FileUploaded, this));
+    this.uploader.bind('UploadProgress', jQuery.proxy(this.engine.UploadProgress, this));
     this.uploader.bind('UploadComplete', jQuery.proxy(this.engine.UploadComplete, this));
 };
 
@@ -332,6 +333,7 @@ WPADVERTS.File.Uploader.Plupload.prototype.FileAdded = function(index, file) {
     
     if (max > hundredmb && file.size > hundredmb && up.runtime != 'html5'){
         // file size error?
+        this.FileAdded(up.settings.container, file);
     } else {
         // a file was added, you may want to update your DOM here...
         //adverts_upload_files_added(up.settings.container, file);
@@ -354,6 +356,15 @@ WPADVERTS.File.Uploader.Plupload.prototype.FileUploaded = function(up, file, res
     if( typeof result.attach_id !== 'undefined' ) { 
         //this.SortableUpdate();
     }
+};
+
+WPADVERTS.File.Uploader.Plupload.prototype.UploadProgress = function(up, file) {
+
+    var id = "#" + file.id;
+    var percent = file.percent;
+    jQuery(id).find(".adverts-gallery-upload-item-percent").css("width", percent + "%");
+    jQuery(id).find(".adverts-gallery-upload-item-percent-text").text( percent + "%" );
+    var x = 0;
 };
 
 WPADVERTS.File.Uploader.Plupload.prototype.UploadComplete = function(up, file, response) {

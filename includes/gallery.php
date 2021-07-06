@@ -254,7 +254,13 @@ function adverts_gallery_modal() {
     
     <script type="text/html" id="tmpl-wpadverts-uploaded-file">
         <# if(data.result === null) { #>
-            <div class="adverts-gallery-upload-update adverts-icon-spinner animate-spin"></div>
+            <div class="adverts-gallery-upload-update">
+                <div class="adverts-icon-spinner animate-spin"></div>
+                <div class="adverts-gallery-upload-item-percent-wrap">
+                    <div class="adverts-gallery-upload-item-percent"></div>
+                    <div class="adverts-gallery-upload-item-percent-text">0%</div>
+                </div>
+            </div>
         <# } else if(typeof data.result.error != "undefined") { #>
             <div class="adverts-gallery-upload-update adverts-icon-attention">
                 <span class="adverts-gallery-upload-failed">{{ data.result.error }}</span>

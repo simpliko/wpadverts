@@ -248,10 +248,14 @@ class Adverts_Post {
                 }
                 adverts_save_multi( $post_id, $name, $field["value"] );
             } else if( $s["method"] == "taxonomy" ) {
+                $terms = array();
                 if( isset( $s["taxonomy"] ) ) {
                     $name = $s["taxonomy"];
                 }
-                wp_set_post_terms( $post_id, $field["value"], $name );
+                if( is_array( $field["value"] ) ) {
+                    $terms = array_map( "intval", $field["value"] );
+                }
+                wp_set_post_terms( $post_id, $terms, $name );
             } else if( $s["method"] == "file" ) {
                 adverts_save_files( $post_id, $name, $field, adverts_request( "wpadverts-form-upload-uniqid" ) );
             } else if( $s["method"] == "callback" ) {

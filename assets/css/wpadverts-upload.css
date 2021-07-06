@@ -130,6 +130,43 @@
     line-height: 105px;
 }
 
+.adverts-gallery-upload-update .adverts-icon-spinner {
+    font-size: 48px;
+}
+
+.adverts-gallery-upload-item-percent-wrap {
+    margin: 0px;
+    position: absolute;
+    bottom: 8px;
+    left: 4px;
+    right: 4px;
+    background: #ddd;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    border-radius: 4px;
+    height: 20px;
+}
+
+.adverts-gallery-upload-item-percent {
+    position: absolute;
+    width: 0;
+    height: 100%;
+    background-color:#5988dc;
+    z-index: 10;
+    border-radius: 4px;
+}
+
+.adverts-gallery-upload-item-percent-text {
+    text-align: center;
+    color: white;
+    z-index: 11;
+    font-weight: bold;
+    width: 100%;
+    position: absolute;
+}
+
 .adverts-gallery-upload-failed {
     font-family: Arial;
     font-size: 10px;

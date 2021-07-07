@@ -588,7 +588,7 @@ function adverts_activate() {
     
     $aid = wp_insert_post(array(
         'post_type' => 'page',
-        'post_status' => 'publish',
+        'post_status' => 'draft',
         'post_title' => 'Add',
         'post_parent' => $hid,
         'comment_status' => 'closed',

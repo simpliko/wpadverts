@@ -170,7 +170,7 @@ WPADVERTS.File.Uploader.prototype.SortableUpdate = function(e) {
     var keys = this.GetKeys();
 
     if(typeof e !== "undefined") {
-        this.ui.find(".adverts-gallery-upload-update .adverts-icon-spinner.animate-spin").fadeIn();
+        this.ui.find(".adverts-gallery-upload-update.adverts-icon-spinner.animate-spin").fadeIn();
     }
 
     if(typeof this.PostID === 'undefined') {
@@ -199,14 +199,14 @@ WPADVERTS.File.Uploader.prototype.SortableUpdate = function(e) {
 
 WPADVERTS.File.Uploader.prototype.SortableUpdateSuccess = function(response) {
     if (response.result == 1) {
-        this.ui.find(".adverts-gallery-upload-update .adverts-icon-spinner.animate-spin").fadeOut();
+        this.ui.find(".adverts-gallery-upload-update.adverts-icon-spinner.animate-spin").fadeOut();
     } else {
         WPADVERTS.File.BrowserError(response);
     }
 };
 
 WPADVERTS.File.Uploader.prototype.SortableUpdateError = function(response) {
-    this.ui.find(".adverts-gallery-upload-update .adverts-icon-spinner.animate-spin").fadeOut();
+    this.ui.find(".adverts-gallery-upload-update.adverts-icon-spinner.animate-spin").fadeOut();
     WPADVERTS.File.BrowserError(response);
 };
 

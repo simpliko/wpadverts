@@ -127,7 +127,9 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 = 1.5.4 - 2021-07-07 =
 
 * FEATURE: Progress bar is now being displayed when uploading a file.
+* FEATURE: On installation the page with [adverts_add] shortcode will have status set to 'draft' instead of 'publish' (to prevent spam)
 * FIXED: Custom taxonomy data incorrectly saved when working with non-hierarchical taxonomy. 
+* FIXED: If file is bigger than max allowed file size in server settings an error message should be shown.
 
 = 1.5.3 - 2021-03-23 =
 

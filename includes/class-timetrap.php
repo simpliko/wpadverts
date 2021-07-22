@@ -70,9 +70,9 @@ class WPAdverts_Timetrap {
 
         if( $form["name"] == "advert" ) {
             add_filter( "adverts_add_form_bind", array( $this, "bind_add" ) );
-        } else {
-            add_filter( "adverts_form_bind", array( $this, "bind" ) );
         }
+        
+        add_filter( "adverts_form_bind", array( $this, "bind" ) );
 
         return $form;
     }

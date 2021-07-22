@@ -42,8 +42,14 @@ function adext_contact_form_page_options() {
 
         if($valid) {
             $form_data = $form->get_values();
+            
             if(!isset($form_data['show_phone'])) {
                 $form_data['show_phone'] = 0;
+            }
+            if(!isset($form_data['reveal_on_click'])) {
+                $form_data['reveal_on_click'] = "0";
+            } else {
+                $form_data['reveal_on_click'] = "1";
             }
             
             update_option("adext_contact_form_config", $form_data);
@@ -71,6 +77,19 @@ Adverts::instance()->set("form_contact_form_config", array(
                 array(
                     "value" => "1",
                     "text" => __( "Show phone number next to contact button.", "wpadverts" )
+                )
+            ),
+            "order" => 10,
+            "class" => "",
+        ),
+        array(
+            "name" => "reveal_on_click",
+            "type" => "adverts_field_checkbox",
+            "label" => "",
+            "options" => array(
+                array(
+                    "value" => "1",
+                    "text" => __( "User needs to click a link to reveal a phone number.", "wpadverts" )
                 )
             ),
             "order" => 10,

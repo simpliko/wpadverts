@@ -1,12 +1,12 @@
 <?php
 /**
- * Displays Core Options Page
+ * Displays SPAM Options Page
  * 
- * This file is a template for wp-admin / Classifieds / Options / Core panel. 
+ * This file is a template for wp-admin / Classifieds / Options / Core / Spam panel. 
  * 
- * It is being loaded by adext_core_page_options function.
+ * It is being loaded by Adverts_Moderate_Admin::render() function.
  * 
- * @see adext_core_page_options()
+ * @see Adverts_Moderate_Admin::render()
  * @since 0.1
  */
 ?>

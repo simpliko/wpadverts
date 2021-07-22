@@ -806,6 +806,37 @@ function adverts_string_length( $data, $params = null ) {
     return true;
 }
 
+function adverts_is_spam( $data, $params = null ) {
+    
+    if( $params["max_links"] !== "" ) {
+        $max_links = $params["max_links"];
+        
+        $count_http = substr_count( $data, "http://" );
+        $count_https = substr_count( $data, "https://" );
+        
+        $total = $count_http + $count_https;
+        
+        if( $total > $max_links ) {
+            return "too_many_links";
+        }
+    }
+    
+    $phrases_trash = trim( $params["bad_words"] );
+    
+    if( ! empty( $phrases_trash ) ) {
+        $trash_arr = array_map( "trim", explode( "\n", $phrases_trash ) );
+        
+        foreach( $trash_arr as $trash_phrase ) {
+            if( stripos( $data, $trash_phrase ) !== false ) {
+                return "bad_words";
+            }
+        }
+        
+    }
+    
+    return true;
+}
+
 /**
  * Max choices VALIDATOR
  * 
@@ -3739,4 +3770,60 @@ function adverts_get_tmp_url() {
     $tmpurl = rtrim( $baseurl, "/") . "/wpadverts-tmp";
     
     return apply_filters( "adverts_get_tmp_url", $tmpurl );
+}
+
+/**
+ * Applies is_spam validator to fields
+ * 
+ * By default this function applies the is_spam validators to [adverts_add] post_content 
+ * and contact form message_body fields.
+ * 
+ * The validator will return an error if the field value has more then max allowed number
+ * of links or if it contains spam phrases. This settings you can define from 
+ * wp-admin / Classifieds / Options / Core / Spam panel.
+ * 
+ * You can apply the validator to different form and fields using the adverts_discard_spam_content filter.
+ * 
+ * The function is executed by adverts_form_load filter registered in adverts_init_frontend() function.
+ * 
+ * @uses    adverts_form_load filter
+ * @uses    adverts_discard_spam_content filter
+ * 
+ * @since   1.5.5
+ * @param   array   $form   Form scheme
+ * @return  array
+ */
+function adverts_discard_spam_content( $form ) {
+    
+    $arr = apply_filters( "adverts_discard_spam_content", array(
+        "advert" => array( "post_content" ),
+        "contact" => array( "message_body" )
+    ), $form );
+    
+    if( ! array_key_exists( $form["name"], $arr ) ) {
+        return $form;
+    }
+    
+    $fields = $arr[ $form["name"] ];
+    
+    foreach( $form["field"] as $k => $field ) {
+        
+        if( in_array( $field["name"], $fields ) ) {
+            
+            if( ! isset( $field["validator"] ) ) {
+                $form["field"][$k]["validator"] = array();
+            }
+            
+            $form["field"][$k]["validator"][] = array(
+                "name" => "is_spam",
+                "params" => array(
+                    "max_links" => adverts_config( "moderate.max_links" ),
+                    "bad_words" => adverts_config( "moderate.phrases_trash" ),
+                )
+            );
+        }
+        
+    }
+    
+    return $form;
 }

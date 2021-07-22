@@ -408,6 +408,20 @@ adverts_form_add_validator("verify_choices", array(
     "validate_empty" => false
 ));
 
+// Register "is_spam" validator
+/** @see adverts_is_spam() */
+adverts_form_add_validator("is_spam", array(
+    "callback" => "adverts_is_spam",
+    "label" => __( "Spam", "wpadverts" ),
+    "params" => array(),
+    "default_error" => __( "Provided text is invalid.", "wpadverts" ),
+    "message" => array(
+        "too_many_links" => __( "Text cannot have more than %max_links% links.", "wpadverts" ),
+        "bad_words" => __( "Text contains phrases that are considered SPAM.", "wpadverts" )
+    ),
+    "validate_empty" => false
+));
+
 // Register "upload_limit" validator
 /** @see adverts_validate_upload_limit() */
 adverts_form_add_validator("upload_limit", array(

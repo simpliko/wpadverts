@@ -5,7 +5,7 @@
  * Description: The lightweight WordPress classifieds plugin done right.
  * Author: Greg Winiarski
  * Text Domain: wpadverts
- * Version: 1.5.4
+ * Version: 1.5.5
  * 
  * Adverts is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -88,6 +88,23 @@ $adverts_namespace['gallery'] = array(
             "adverts-upload-thumbnail" => array( 'enabled' => 1, 'width' => 150, 'height' => 105, 'crop' => true ),
             //"adverts-gallery-thumbnail"
         ),
+    )
+);
+
+$adverts_namespace['moderate'] = array(
+    "option_name" => "adverts_moderate",
+    "default" => array(
+        "max_links" => "",
+        "phrases_moderate" => "",
+        "phrases_trash" => "",
+        
+        "honeypot_enabled" => "1",
+        "honeypot_title" => "Website Address",
+        "honeypot_name" => "website_address",
+        
+        "timetrap_enabled" => "1",
+        "timetrap_delta" => "5",
+        "timetrap_salt" => ""
     )
 );
 
@@ -356,7 +373,7 @@ function adverts_init_frontend() {
     wp_register_style( 'adverts-swipebox', ADVERTS_URL . '/assets/css/swipebox.min.css', array(), "1.4.5" );
     
     wp_register_script('adverts-single', ADVERTS_URL . '/assets/js/wpadverts-single.js', array( 'jquery' ), "1.4.0" );
-    wp_register_script('adverts-frontend', ADVERTS_URL . '/assets/js/wpadverts-frontend.js', array( 'jquery' ), "1.3.5" );
+    wp_register_script('adverts-frontend', ADVERTS_URL . '/assets/js/wpadverts-frontend.js', array( 'jquery' ), "1.5.5" );
     wp_register_script('adverts-frontend-add', ADVERTS_URL . '/assets/js/wpadverts-frontend-add.js', array( 'jquery'), "1.4.0" );
     wp_register_script('adverts-frontend-manage', ADVERTS_URL . '/assets/js/wpadverts-frontend-manage.js', array( 'jquery'), "1.3.5" );
     wp_register_script('adverts-swipebox', ADVERTS_URL . '/assets/js/jquery.swipebox.js', array( 'jquery', 'adverts-frontend' ), "1.4.5");
@@ -399,6 +416,19 @@ function adverts_init_frontend() {
         add_action("wp_head", "adverts_css_rem_fix");
     }
 
+    if( adverts_config( "moderate.honeypot_enabled" ) == "1" ) {
+        include_once ADVERTS_PATH . 'includes/class-honeypot.php';
+        $wpadverts_honeypot = new WPAdverts_Honeypot();
+        $wpadverts_honeypot->register_field_and_validator();
+    }
+    
+    if(adverts_config( "moderate.timetrap_enabled" ) == "1" ) {
+        include_once ADVERTS_PATH . 'includes/class-timetrap.php';
+        $wpadverts_timetrap = new WPAdverts_Timetrap();
+        $wpadverts_timetrap->register_field_and_validator();
+    }
+    
+    add_filter( 'adverts_form_load', 'adverts_discard_spam_content', 10, 2 );
 }
 
 /**

@@ -17,6 +17,7 @@ $adverts_namespace['contact_form'] = array(
     'option_name' => 'adext_contact_form_config',
     'default' => array(
         'show_phone' => '1',
+        'reveal_on_click' => '0',
         'from_name' => '',
         'from_email' => ''
     )
@@ -48,6 +49,11 @@ function adext_contact_form( $post_id ) {
     $email = get_post_meta( $post_id, "adverts_email", true );
     $phone = get_post_meta( $post_id, "adverts_phone", true );
     
+    if( $phone ) {
+        $ph1 = substr( $phone, 0, 3 );
+        $ph2 = substr( $phone, 3 );
+    }
+    
     ?>
     <div class="adverts-single-actions">
         <?php if( adext_contact_form_get_to( $post_id ) ): ?>
@@ -59,12 +65,27 @@ function adext_contact_form( $post_id ) {
         <?php endif; ?>
         
         <?php if( adverts_config( "contact_form.show_phone") == "1" && ! empty( $phone ) ): ?>
-        <span class="adverts-button" style="background-color: transparent; cursor: auto">
-            <?php esc_html_e( "Phone", "wpadverts" ) ?>
-            <a href="tel:<?php echo esc_html( $phone ) ?>"><?php echo esc_html( $phone ) ?></a>
-            <span class="adverts-icon-phone"></span>
-        </span>
+            <?php if( adverts_config( "contact_form.reveal_on_click" ) == "1" ): ?>
+            <span class="adverts-button wpadverts-reveal-phone" style="background-color: transparent; cursor: auto">
+                <strong class="wpadverts-reveal-wrap">
+                    <span class="wpadverts-reveal-partial-1"><?php echo esc_html( $ph1 ) ?></span>
+                    ...
+                    <a href="#" class="wpadverts-reveal-button" style="font-weight: normal; font-size:0.9rem"><?php echo esc_html_e( "show phone", "wpadverts" ) ?></a>
+                </strong>
+                <a href="#" class="wpadverts-reveal-final" data-partial="<?php echo $ph2 ?>" style="display: none"></a>
+                <span class="adverts-icon-phone"></span>
+            </span>
+            <?php else: ?>
+            <span class="adverts-button" style="background-color: transparent; cursor: auto">
+                <?php esc_html_e( "Phone", "wpadverts" ) ?>
+                <a href="tel:<?php echo esc_html( $phone ) ?>"><?php echo esc_html( $phone ) ?></a>
+                <span class="adverts-icon-phone"></span>
+            </span>
+            <?php endif; ?>
+
         <?php endif; ?>
+
+
     </div>
     <?php
     

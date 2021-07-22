@@ -1,21 +1,21 @@
 <?php
 /**
- * Displays Core Options Page
+ * Displays SPAM Options Page
  * 
- * This file is a template for wp-admin / Classifieds / Options / Core / Gallery panel. 
+ * This file is a template for wp-admin / Classifieds / Options / Core / Spam panel. 
  * 
- * It is being loaded by _adext_core_page_options_gallery() function.
+ * It is being loaded by Adverts_Moderate_Admin::render() function.
  * 
- * @see _adext_core_page_options_gallery()
- * @since 1.2
+ * @see Adverts_Moderate_Admin::render()
+ * @since 0.1
  */
 ?>
 <div class="wrap">
     <h2 class="nav-tab-wrapper">
         <a href="<?php esc_attr_e( remove_query_arg( array( 'adaction' ) ) ) ?>" class="nav-tab"><?php _e("Core Options", "wpadverts") ?></a>
-        <a href="<?php esc_attr_e( add_query_arg( array('adaction' => 'gallery') ) ) ?>" class="nav-tab nav-tab-active"><?php _e("Gallery", "wpadverts") ?></a>
+        <a href="<?php esc_attr_e( add_query_arg( array('adaction' => 'gallery') ) ) ?>" class="nav-tab "><?php _e("Gallery", "wpadverts") ?></a>
         <a href="<?php esc_attr_e( add_query_arg( array('adaction' => 'types') ) ) ?>" class="nav-tab "><?php _e("Types", "wpadverts") ?></a>
-        <a href="<?php esc_attr_e( add_query_arg( array('adaction' => 'moderate') ) ) ?>" class="nav-tab "><?php _e("Spam", "wpadverts") ?></a>
+        <a href="<?php esc_attr_e( add_query_arg( array('adaction' => 'moderate') ) ) ?>" class="nav-tab nav-tab-active"><?php _e("Spam", "wpadverts") ?></a>
     </h2>
 
     <?php adverts_admin_flash() ?>
@@ -28,7 +28,7 @@
         </table>
 
         <p class="submit">
-            <input type="submit" value="<?php echo esc_attr($button_text) ?>" class="button-primary" name="Submit"/>
+            <input type="submit" value="<?php echo esc_attr($button_text) ?>" class="button-primary" name="Submit" />
         </p>
 
     </form>

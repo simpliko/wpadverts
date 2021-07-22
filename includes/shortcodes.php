@@ -555,6 +555,8 @@ function shortcode_adverts_flash( $data ) {
  */
 function adverts_flash( $data ) {
 
+    $data = apply_filters( "adverts_flash_data", $data );
+    
     ?>
 
     <?php foreach(array_keys($data) as $key): ?>

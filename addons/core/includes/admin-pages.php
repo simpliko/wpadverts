@@ -28,6 +28,10 @@ function adext_core_page_options() {
         include_once ADVERTS_PATH . "/includes/class-types-admin.php";
         $admin_types = new Adverts_Types_Admin();
         $admin_types->render();
+    } else if( adverts_request( "adaction") == "moderate" ) {
+        include_once ADVERTS_PATH . "/includes/class-moderate-admin.php";
+        $admin_moderate = new Adverts_Moderate_Admin();
+        $admin_moderate->render();
     } else {
         _adext_core_page_options_main();
     }

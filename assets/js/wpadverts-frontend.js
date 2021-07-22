@@ -187,4 +187,21 @@ jQuery(function($) {
         });
     }
     
+    if($(".wpadverts-reveal-phone").length > 0) {
+        $(".wpadverts-reveal-phone .wpadverts-reveal-button").on("click", function(e) {
+            e.preventDefault();
+            
+            var p1 = $(".wpadverts-reveal-partial-1").text();
+            var p2 = $(".wpadverts-reveal-final").data("partial");
+            var p = p1 + p2;
+            
+            $(".wpadverts-reveal-wrap").hide();
+            $(".wpadverts-reveal-final").attr("href", "tel:"+p);
+            $(".wpadverts-reveal-final").text(p);
+            $(".wpadverts-reveal-final").fadeIn("fast");
+            
+            
+        });
+    }
+    
 });

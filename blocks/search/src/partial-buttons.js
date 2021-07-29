@@ -16,11 +16,14 @@ class PartialButtons extends Component {
 
 	constructor( props ) {
 		super(props);
-		this.state = {
-            desktop: props.data.desktop,
-            text: null
+        this.data = {
+            text: "",
+            desktop: "",
+            mobile: "",
+            color_primary: "",
+            color_secondary: "",
+            ...props.data
         };
-        this.data = {...props.data};
     }
     
     shouldComponentUpdate(nextProps) {
@@ -29,7 +32,7 @@ class PartialButtons extends Component {
 
     onTextChange = ( text ) => {
         this.data.text = text;
-        this.props.onChange( this.props.data );
+        this.props.onChange( this.data );
     }
 
     onDesktopClick = ( desktop ) => {
@@ -38,11 +41,30 @@ class PartialButtons extends Component {
         this.props.onChange( this.data );
     }
 
-    render( ) {
+    onMobileClick = ( mobile ) => {
+        this.data.mobile = mobile;
+        this.props.onChange( this.data );
+    }
 
+    onPrimaryColorChange = ( color_primary ) => {
+        this.data.color_primary = color_primary;
+        this.props.onChange( this.data );
+    }
+
+    onSecondaryColorChange = ( color_secondary ) => {
+        this.data.color_secondary = color_secondary;
+        this.props.onChange( this.data );
+    }
+
+    render( ) {
+        console.log(this.props);
         const {
             desktop,
-            text
+            mobile,
+            text,
+            color_primary,
+            color_secondary
+            
         } = this.data;
 
         return (
@@ -67,9 +89,9 @@ class PartialButtons extends Component {
                             
                             <FlexBlock className="wpa-content-right">
                                 <ButtonGroup>
-                                    <Button variant="secondary" isSmall={true} >Icon</Button>
-                                    <Button variant="secondary" isSmall={true} >Text</Button>
-                                    <Button variant="primary" isSmall={true} >Icon and Text</Button>
+                                    <Button variant="secondary" isPressed={'icon'===mobile ? true : false} isSmall={true} onClick={(e) => this.onMobileClick( 'icon' ) } >Icon</Button>
+                                    <Button variant="secondary" isPressed={'text'===mobile ? true : false} isSmall={true} onClick={(e) => this.onMobileClick( 'text' ) } >Text</Button>
+                                    <Button variant="secondary" isPressed={'icon-and-text'===mobile ? true : false} isSmall={true} onClick={(e) => this.onMobileClick( 'icon-and-text' ) } >Icon and Text</Button>
                                 </ButtonGroup>
                             </FlexBlock>
                         </Flex>
@@ -78,7 +100,7 @@ class PartialButtons extends Component {
                         <TextControl
                             label="Button Text"
                             placeholder="Search"
-                            
+                            value={ text }
                             onChange={this.onTextChange}
                         />
 
@@ -86,13 +108,15 @@ class PartialButtons extends Component {
                         <p>Text Color</p>
 
                         <ColorPalette
+                            disableCustomColors="false"
                             colors={ [
                                 { name: 'red', color: '#f00' },
                                 { name: 'white', color: '#fff' },
                                 { name: 'blue', color: '#00f' },
+                                { name: 'yellow', color: '#0ff' }
                             ] }
-                            value="#ccc"
-                            onChange={ ( color ) => alert( color ) }
+                            value={color_primary}
+                            onChange={this.onPrimaryColorChange}
                         />
 
                         <p>Background Color</p>
@@ -103,8 +127,8 @@ class PartialButtons extends Component {
                                 { name: 'white', color: '#fff' },
                                 { name: 'blue', color: '#00f' },
                             ] }
-                            value="#ccc"
-                            onChange={ ( color ) => alert( color ) }
+                            value={color_secondary}
+                            onChange={this.onSecondaryColorChange}
                         />
                         
 

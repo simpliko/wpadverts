@@ -8,33 +8,7 @@ OPTIONS:
 
 */
 
-$form_mood = "none";
-$form_mood_arr = array( "none" => "", "simple" => "atw-rounded-lg", "playful" => "atw-rounded-full", "elegant" => "atw-rounded-none") ;
 
-$form_style = "none";
-$form_style_arr = array(
-    "none" => "",
-    "unstyled" => "atw-outline-none atw-box-border",
-    "simple" => "atw-outline-none atw-box-border atw-border-gray-300 atw-shadow-sm focus:atw-border-indigo-300 focus:atw-ring focus:atw-ring-indigo-200 focus:atw-ring-opacity-50",
-    "underline" => array(),
-    "solid" => "atw-outline-none atw-box-border atw-bg-gray-100 atw-border-transparent focus:atw-ring-2 focus:atw-ring-blue-300"
-);
-
-$form_padding = "none";
-$form_padding_arr = array(
-    "none" => "",
-    "small" => "atw-py-3 atw-px-3",
-    "medium" => "atw-py-6 atw-px-6"
-);
-
-$form_focus = array(
-    
-);
-
-$cl_form_mood = $form_mood_arr[ $form_mood ];
-$cl_form_style = $form_style_arr[ $form_style ];
-$cl_form_padding = $form_padding_arr[ $form_padding ];
-    
 $switch_views = $allow_sorting = true;
 $sort_current_title = "Publish Date";
 
@@ -45,6 +19,8 @@ $form_styles = join( " ", array(
     $atts["form_input_focus"]
 ) );
 
+$c = $atts["primary_button"]["color_secondary"];
+//echo "<pre>"; print_r( hexdec( $c )); echo "</pre>";
 ?>
 <link href="/wpadverts/wp-content/plugins/wpadverts/assets/css/all.min.css" rel="stylesheet">
 
@@ -65,7 +41,7 @@ $form_styles = join( " ", array(
 
 .wpadverts-blocks {
     --wpa-color-primary-light: 147, 197, 253; /*165, 180, 252;*/
-    --wpa-color-primary-main: 29, 78, 216; /*67, 56, 202;*/
+    --wpa-color-primary-main: 255, 0, 0; /*67, 56, 202;*/
     --wpa-color-primary-dark: 30, 58, 138; /*49, 46, 129;*/
 }
   

@@ -234,6 +234,7 @@ function adverts_init() {
         'labels' => $labels,
         'hierarchical' => true,
         'query_var' => true,
+        'show_in_rest' => true,
         'rewrite' => array('slug' => 'advert-category')
     );
     
@@ -528,6 +529,12 @@ function adverts_init_admin() {
     add_action( 'load-edit.php', 'adverts_admin_load' );
 }
 
+function adverts_rest_api_init() {
+    include_once ADVERTS_PATH . '/includes/class-rest-blocks.php';
+
+    $adverts_rest_blocks = new Adverts_Rest_Blocks();
+}
+
 /**
  * Registers Adverts Widgets
  * 
@@ -658,6 +665,7 @@ register_activation_hook( __FILE__, 'adverts_activate' );
 
 // Run Adverts
 add_action( 'init', 'adverts_init', 5 );
+add_action( 'rest_api_init', 'adverts_rest_api_init' );
 add_action( 'widgets_init', 'adverts_widgets_init' );
 
 if(is_admin() ) {

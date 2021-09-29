@@ -35,10 +35,21 @@ $cl_form_mood = $form_mood_arr[ $form_mood ];
 $cl_form_style = $form_style_arr[ $form_style ];
 $cl_form_padding = $form_padding_arr[ $form_padding ];
     
-$switch_views = $allow_sorting = true;
+
+$show_results_counter = ( isset( $atts['show_results_counter'] ) && $atts['show_results_counter'] ) ? true : false;
+$allow_sorting = ( isset( $atts['allow_sorting'] ) && $atts['allow_sorting'] ) ? true : false;
+$switch_views = ( isset( $atts['switch_views'] ) && $atts['switch_views'] ) ? true : false;
+$show_pagination = ( isset( $atts['show_pagination'] ) && $atts['show_pagination'] ) ? true : false;
+
+if( $switch_views && adverts_request( "display" ) ) {
+    $atts['display'] = adverts_request( "display" );
+}
+
+$display = ( isset( $atts["display"] ) && $atts["display"] === "grid" ) ? "wpa-grid-view" : "wpa-list-view";
+
 $sort_current_title = "Publish Date";
 
-
+echo "<pre>"; print_r($atts);echo "</pre>";
 ?>
 <link href="/wpadverts/wp-content/plugins/wpadverts/assets/css/all.min.css" rel="stylesheet">
 
@@ -65,6 +76,40 @@ $sort_current_title = "Publish Date";
   
 </style>
 
+<script type="text/javascript">
+jQuery(function($) {
+    $("#js-wpa-sort").on("click", function(e) {
+        e.preventDefault();
+        $("#js-wpa-sort-options").toggle();
+        return false;
+    });
+    
+    $(".js-wpa-view-list").on("click", function(e) {
+        e.preventDefault(); 
+        
+        $(".js-wpa-view-list").addClass("wpa-selected");
+        $(".js-wpa-view-grid").removeClass("wpa-selected");
+        
+        var results = $(".wpa-results");
+        results.addClass("wpa-list-view");
+        results.removeClass("wpa-grid-view");
+        
+    });
+    $(".js-wpa-view-grid").on("click", function(e) {
+        e.preventDefault(); 
+        
+        $(".js-wpa-view-list").removeClass("wpa-selected");
+        $(".js-wpa-view-grid").addClass("wpa-selected");
+        
+        var results = $(".wpa-results");
+        results.removeClass("wpa-list-view");
+        results.addClass("wpa-grid-view");
+    });
+    
+});
+
+</script>
+
 <div class="wpadverts-blocks wpadverts-block-list atw-flex atw-flex-col">
     
     <div class="atw-flex atw-flex-col md:atw-flex-row-reverse md:atw-justify-between">
@@ -76,10 +121,10 @@ $sort_current_title = "Publish Date";
                 <?php if( $switch_views ): ?>
                 <div class="atw-flex atw-align-baseline atw-leading-none atw-space-x-2">
                     <div class="atw-align-baseline">
-                        <a href="#" class="js-wpa-view-list"><i class="fas fa-th-list atw-text-gray-400 atw-text-2xl atw-leading-1 atw-align-baseline atw-block atw-transition atw-duration-100 hover:atw-text-blue-500"></i></a>
+                        <a href="#" class="js-wpa-view-list <?php echo $display == "wpa-list-view" ? "wpa-selected" : "" ?>"><i class="fas fa-th-list atw-text-gray-400 atw-text-2xl atw-leading-1 atw-align-baseline atw-block atw-transition atw-duration-100 hover:atw-text-blue-500"></i></a>
                     </div>
                     <div class="atw-align-baseline">
-                        <a href="#" class="js-wpa-view-grid"><i class="fas fa-th-large atw-text-gray-400 atw-text-2xl atw-leading-1 atw-align-baseline"></i></a>
+                        <a href="#" class="js-wpa-view-grid <?php echo $display == "wpa-grid-view" ? "wpa-selected" : "" ?>"><i class="fas fa-th-large atw-text-gray-400 atw-text-2xl atw-leading-1 atw-align-baseline"></i></a>
                     </div>
                 </div>
                 <?php endif; ?>
@@ -126,6 +171,7 @@ $sort_current_title = "Publish Date";
         </div>
 
 
+        <?php if( $show_results_counter ): ?>
         <div class="atw-flex atw-flex-grow atw-pb-3">
 
             <div class="">
@@ -136,12 +182,13 @@ $sort_current_title = "Publish Date";
             </div>
 
         </div>
+        <?php endif; ?>
         
     </div>
 
 
     <?php if( $show_results ): ?>
-    <div class="wpa-block-list-results wpa-results wpa-list-view atw-grid atw-p-0 atw-m-0 ">
+    <div class="wpa-block-list-results wpa-results atw-grid atw-p-0 atw-m-0 <?php echo $display ?>">
         <?php if( $loop->have_posts() ): ?>
         <?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
         <?php include apply_filters( "adverts_template_load", $this->path . '/templates/list-item.php' ) ?>

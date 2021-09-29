@@ -9,28 +9,26 @@ import Edit from './edit';
 
 registerBlockType( 'wpadverts/search', {
     title: __( 'Classifieds Search', 'wpadverts' ),
-    icon: 'universal-access-alt',
+    icon: 'megaphone',
     category: 'design',
     example: {},
     attributes: {
         content: {
             type: "string"
         },
-        form_style: {
+        post_type: {
             type: "string",
-            default: "wpa-solid"
+            default: ""  
         },
-        form_input_padding: {
+        form_scheme: {
             type: "string",
-            default: "wpa-padding-sm"
-        },        
-        form_input_corners: {
-            type: "string",
-            default: "wpa-mood-simple"
-        },        
-        form_input_focus: {
-            type: "string",
-            default: "wpa-focus-simple"
+            default: ""
+        },
+        form: {
+            type: "object",
+            default: {
+
+            }
         },
         primary_button: {
             type: "object",
@@ -39,6 +37,16 @@ registerBlockType( 'wpadverts/search', {
                 text: ""
             }
         },
+        secondary_button: {
+            type: "object",
+            default: {
+
+            }
+        },
+        buttons_pos: {
+            type: "string",
+            default: "wpa-flex-row"
+        }
     },
     edit: Edit,
     save: ( { attributes } ) => {

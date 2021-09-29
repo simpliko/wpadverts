@@ -382,7 +382,7 @@ class Adext_Payments_Emails_Integration {
         if( $post->post_type !== "advert" ) {
             return;
         }
-        
+
         return Adext_Emails::instance()->messages->send_message( "payments::on_payment_pending_notify_admin", array( 
             "advert" => $post
         ) );

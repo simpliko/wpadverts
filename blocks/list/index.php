@@ -42,22 +42,98 @@ class Adverts_Block_List {
             'style' => 'wpadverts-blocks',
             'script' => 'wpadverts-block-list-and-search',
             'attributes' => array(
-                'content' => array(
+                'post_type' => array(
                     'type' => 'string'
                 ),
-                'color' => array(
-                    'type' => 'string'
+                'query' => array(
+                    'type' => 'object',
+                    'default' => null
+                ),
+                'form_scheme' => array(
+                    'type' => 'string',
+                    'default' => ''
                 ),
                 'form_style' => array(
                     'type' => 'string',
                     'default' => 'wpa-solid'
-                )
+                ),
+                'show_results_counter' => array(
+                    'type' => 'boolean',
+                    'default' => true
+                ),
+                'switch_views' => array(
+                    'type' => 'boolean',
+                    'default' => true
+                ),
+                'allow_sorting' => array(
+                    'type' => 'boolean',
+                    'default' => true
+                ),
+                'show_pagination' => array(
+                    'type' => 'boolean',
+                    'default' => true
+                ),
+                'posts_per_page' => array(
+                    'type' => 'integer',
+                    'default' => 20
+                ),
+                'display' => array(
+                    'type' => 'string',
+                    'default' => 'grid'
+                ),
+                'order_by' => array(
+                    'type' => 'string',
+                    'default' => 'date-desc'
+                ),
+                'order_by_featured' => array(
+                    'type' => 'boolean',
+                    'default' => true
+                ),
+                'list_type' => array(
+                    'type' => 'string',
+                    'default' => 'all'
+                ),
+                'list_img_width' => array(
+                    'type' => 'string',
+                    'default' => ''
+                ),                
+                'list_img_height' => array(
+                    'type' => 'string',
+                    'default' => ''
+                ),                
+                'list_img_fit' => array(
+                    'type' => 'string',
+                    'default' => 'contain'
+                ),                
+                'list_img_source' => array(
+                    'type' => 'string',
+                    'default' => 'adverts-list'
+                ),                
+                'grid_columns' => array(
+                    'type' => 'integer',
+                    'default' => 2
+                ),                
+                'grid_img_height' => array(
+                    'type' => 'string',
+                    'default' => ''
+                ),                
+                'grid_img_fit' => array(
+                    'type' => 'string',
+                    'default' => 'contain'
+                ),                
+                'grid_img_source' => array(
+                    'type' => 'string',
+                    'default' => 'adverts-list'
+                ),
             )
         ) );
 
     }
     
     public function render( $atts = array() ) {
+
+        $atts = $this->handlePayload( $atts );
+
 
         $params = shortcode_atts(array(
             'name' => 'default',
@@ -78,6 +154,10 @@ class Adverts_Block_List {
 
         extract( $params );
 
+        if( isset( $atts["query"] ) && isset( $atts["query"]["author" ] ) ) {
+            $author = intval( $atts["query"]["author"] );
+        }
+
         if( is_numeric( $redirect_to ) ) {
             $action = get_permalink( $redirect_to );
         } else {
@@ -95,17 +175,12 @@ class Adverts_Block_List {
             $meta[] = array('key'=>'adverts_location', 'value'=>$location, 'compare'=>'LIKE');
         }
 
-        if( is_string( $category) && $category == "current" && is_tax( "advert_category") ) {
-            $category = get_queried_object_id();
-        }
-        if($category) {
-            $taxonomy =  array(
-                array(
-                    'taxonomy' => 'advert_category',
-                    'field'    => 'term_id',
-                    'terms'    => $category,
-                ),
-            );
+        $taxonomy = $this->_get_tax_query( $atts );
+
+        if( isset( $atts["order_by_featured"] ) && $atts["order_by_featured"] ) {
+            add_filter( 'adverts_list_query', 'adext_featured_adverts_list_query', 10, 2 );
+        } else {
+            remove_filter( 'adverts_list_query', 'adext_featured_adverts_list_query', 10, 2 );
         }
 
         if($allow_sorting && adverts_request("adverts_sort")) {
@@ -277,5 +352,77 @@ class Adverts_Block_List {
         );
 
         return $arr[ $field['meta']['search_type'] ];
+    }
+
+    public function handlePayload( $atts ) {
+        if( adverts_request( "payload" ) == "1" ) {
+            $request_body = file_get_contents('php://input');
+            return json_decode( $request_body, true );
+        } else {
+            return $atts;
+        }
+    }
+
+    protected function _get_tax_query( $atts ) {
+
+        $category = null;
+        $tax_query = array();
+
+        $taxonomies = get_object_taxonomies( $atts["post_type"] );
+
+        if( ! isset( $atts["query"] ) ) {
+            return $tax_query;
+        }
+
+        if( isset( $atts["query"]["term_autodetect"] ) && is_tax( $taxonomies ) ) {
+
+            $tax_query[] = array(
+                'taxonomy' => get_queried_object()->taxonomy,
+                'field'    => 'term_id',
+                'terms'    => get_queried_object_id(),
+            );
+
+            return $tax_query;
+        }
+
+        foreach( $taxonomies as $taxonomy ) {
+            
+            if( ! isset( $atts["query"][$taxonomy] ) ) {
+                continue;
+            }
+
+            $terms = array_map( "trim", explode( ",", $atts["query"][$taxonomy] ) );
+
+            if( $this->uses_ids( $terms ) ) {
+                $field = "term_id";
+            } else {
+                $field = "slug";
+            }
+
+            if( stripos( $terms[0], "-" ) === 0 ) {
+                $operator = "NOT IN";
+                $terms[0] = substr( $terms[0], 1 );
+            } else {
+                $operator = "IN";
+            }
+
+            $tax_query[] = array(
+                'taxonomy' => $taxonomy,
+                'field'    => $field,
+                'terms'    => $terms,
+                'operator' => $operator
+            );
+        }
+
+        return $tax_query;
+    }
+
+    protected function uses_ids( $arr ) {
+        foreach( $arr as $item ) {
+            if( ! is_numeric( $item ) ) {
+                return false;
+            }
+        }
+        return true;
     }
 }

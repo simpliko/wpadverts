@@ -8,27 +8,66 @@
         @apply atw-not-italic !important;
     }
     
+    .wpadverts-form .wpa-w-full input[type=text],
+    .wpadverts-form .wpa-w-full select {
+        @apply atw-w-full atw-max-w-full;
+    }
+
     /* FORM STYLES */
     
-    /* Solid */
-    .wpadverts-form.wpa-solid input[type=text] {
-        @apply atw-outline-none atw-box-border atw-bg-gray-100 atw-border-transparent
+    .wpadverts-form input[type=text],
+    .wpadverts-form textarea {
+        @apply atw-outline-none atw-box-border atw-leading-loose atw-border-solid atw-bg-right atw-bg-no-repeat
     }
-    .wpadverts-form.wpa-solid select {
-        @apply atw-outline-none atw-box-border atw-bg-gray-100 atw-border-transparent atw-bg-right atw-bg-no-repeat atw-appearance-none atw-placeholder-gray-500 atw-text-gray-500;
+
+    .wpadverts-form select {
+        @apply atw-outline-none atw-box-border atw-leading-loose atw-border-solid atw-bg-right atw-bg-no-repeat atw-appearance-none;
         
         background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-  
+    }
+
+    .wpadverts-form input[type=checkbox],
+    .wpadverts-form input[type=radio] {
+        @apply atw-appearance-none atw-box-border atw-border-solid atw-w-5 atw-h-5 atw-text-base atw-outline-none atw-p-0 atw-m-0 atw-leading-loose;
+    }
+
+    /* Flat */
+
+    .wpadverts-form.wpa-flat input[type=text] {
+        @apply  atw-bg-white  atw-border-form-gray-300 atw-placeholder-form-gray-500 atw-text-form-gray-700
+    }
+    .wpadverts-form.wpa-flat select {
+        @apply atw-bg-white atw-border-form-gray-300 atw-placeholder-form-gray-500 atw-text-form-gray-700;
+   }
+    .wpadverts-form.wpa-flat input[type=checkbox],
+    .wpadverts-form.wpa-flat input[type=radio] {
+        @apply atw-bg-white  atw-border-form-gray-300 atw-p-0;
+
+    }
+    .wpadverts-form.wpa-flat input[type=radio] {
+        @apply atw-rounded-full;
+    }
+
+    /* Solid */
+    
+    .wpadverts-form.wpa-solid input[type=text] {
+        @apply atw-bg-form-gray-100 atw-border-form-gray-100 atw-placeholder-form-gray-500 atw-text-form-gray-500
+ 
+    }
+    .wpadverts-form.wpa-solid select {
+        @apply atw-bg-form-gray-100 atw-border-form-gray-100 atw-placeholder-form-gray-500 atw-text-form-gray-500;
     }
     .wpadverts-form.wpa-solid input[type=checkbox],
     .wpadverts-form.wpa-solid input[type=radio] {
-        @apply atw-appearance-none atw-w-5 atw-h-5 atw-bg-gray-100 atw-text-base atw-outline-none atw-box-border atw-bg-white atw-border atw-border-solid atw-border-gray-200 atw-rounded atw-p-0 atw-m-0;
+        @apply atw-bg-form-gray-100 atw-border-gray-100;
 
     }
     .wpadverts-form.wpa-solid input[type=radio] {
         @apply atw-rounded-full;
     }
+
     /* Simple */
+
     .wpadverts-form.wpa-simple input[type=text] {
         @apply atw-outline-none atw-box-border atw-bg-white atw-border-gray-300 atw-shadow-sm 
     }
@@ -46,7 +85,101 @@
     .wpadverts-form.wpa-simple input[type=radio] {
         @apply atw-rounded-full;
     }
+
+    /* FORM CORNERS */
+
+    .wpadverts-form.wpa-rounded-none input[type=text],
+    .wpadverts-form.wpa-rounded-none select,
+    .wpadverts-form.wpa-rounded-none textarea {
+        @apply atw-rounded-none;
+    }    
+    .wpadverts-form.wpa-rounded-sm input[type=text],
+    .wpadverts-form.wpa-rounded-sm select,
+    .wpadverts-form.wpa-rounded-sm textarea {
+        @apply atw-rounded-sm;
+    }        
+    .wpadverts-form.wpa-rounded input[type=text],
+    .wpadverts-form.wpa-rounded select,
+    .wpadverts-form.wpa-rounded textarea {
+        @apply atw-rounded;
+    }    
+    .wpadverts-form.wpa-rounded-md input[type=text],
+    .wpadverts-form.wpa-rounded-md select,
+    .wpadverts-form.wpa-rounded-md textarea {
+        @apply atw-rounded-md;
+    }    
+    .wpadverts-form.wpa-rounded-lg input[type=text],
+    .wpadverts-form.wpa-rounded-lg select,
+    .wpadverts-form.wpa-rounded-lg textarea {
+        @apply atw-rounded-lg;
+    }    
+    .wpadverts-form.wpa-rounded-xl input[type=text],
+    .wpadverts-form.wpa-rounded-xl select,
+    .wpadverts-form.wpa-rounded-xl textarea {
+        @apply atw-rounded-xl;
+    }    
+    .wpadverts-form.wpa-rounded-2xl input[type=text],
+    .wpadverts-form.wpa-rounded-2xl select,
+    .wpadverts-form.wpa-rounded-2xl textarea {
+        @apply atw-rounded-2xl;
+    }
+
+    /* FORM SHADOWS */
+
+    .wpadverts-form.wpa-shadow-none input,
+    .wpadverts-form.wpa-shadow-none select,
+    .wpadverts-form.wpa-shadow-none textarea {
+        @apply atw-shadow-none;
+    }
+    .wpadverts-form.wpa-shadow-sm input,
+    .wpadverts-form.wpa-shadow-sm select,
+    .wpadverts-form.wpa-shadow-sm textarea {
+        @apply atw-shadow-sm;
+    }
+    .wpadverts-form.wpa-shadow-md input,
+    .wpadverts-form.wpa-shadow-md select,
+    .wpadverts-form.wpa-shadow-md textarea {
+        @apply atw-shadow-md;
+    }
+    .wpadverts-form.wpa-shadow-inner input,
+    .wpadverts-form.wpa-shadow-inner select,
+    .wpadverts-form.wpa-shadow-inner textarea {
+        @apply atw-shadow-inner;
+    }
+
+    /* FORM BORDER */
+
+    .wpadverts-form.wpa-border-none input[type=text],
+    .wpadverts-form.wpa-border-none input[type=checkbox],
+    .wpadverts-form.wpa-border-none input[type=radio],
+    .wpadverts-form.wpa-border-none select,
+    .wpadverts-form.wpa-border-none textarea {
+        @apply atw-border-0;
+    }
+    .wpadverts-form.wpa-border-thin input[type=text],
+    .wpadverts-form.wpa-border-thin input[type=checkbox],
+    .wpadverts-form.wpa-border-thin input[type=radio],
+    .wpadverts-form.wpa-border-thin select,
+    .wpadverts-form.wpa-border-thin textarea {
+        @apply atw-border;
+    }
+    .wpadverts-form.wpa-border-thick input[type=text],
+    .wpadverts-form.wpa-border-thick input[type=checkbox],
+    .wpadverts-form.wpa-border-thick input[type=radio],
+    .wpadverts-form.wpa-border-thick select,
+    .wpadverts-form.wpa-border-thick textarea {
+        @apply atw-border-2;
+    }    
+    .wpadverts-form.wpa-border-thick-x2 input[type=text],
+    .wpadverts-form.wpa-border-thick-x2 input[type=checkbox],
+    .wpadverts-form.wpa-border-thick-x2 input[type=radio],
+    .wpadverts-form.wpa-border-thick-x2 select,
+    .wpadverts-form.wpa-border-thick-x2 textarea {
+        @apply atw-border-4;
+    }
+
     /* FORM FOCUS */
+
     .wpadverts-form.wpa-focus-simple input,
     .wpadverts-form.wpa-focus-simple select {
         @apply focus:atw-ring focus:atw-ring-opacity-50 focus:atw-border-primary-light focus:atw-ring-primary-light ;
@@ -54,7 +187,7 @@
     
     /* FORM PADDING */
     
-    .wpadverts-form.wpa-padding-sm button {
+    .wpadverts-form.wpa-padding-sm .button {
         @apply atw-py-2 atw-leading-loose;
     }
     .wpadverts-form.wpa-padding-sm input,
@@ -62,7 +195,7 @@
         @apply atw-py-2 atw-px-2 atw-leading-loose;
     }
     
-    .wpadverts-form.wpa-padding-md button {
+    .wpadverts-form.wpa-padding-md .button {
         @apply atw-py-3 atw-leading-loose;
     }
     .wpadverts-form.wpa-padding-md input,
@@ -86,6 +219,17 @@
         @apply atw-rounded-none;
     }
     
+
+    /* BUTTONS */
+
+    /* Button Primary */
+
+    .atw-btn-primary-text {
+         
+    }
+
+    /* END BUTTONS */
+
     .advert-is-featured {
         @apply atw-bg-blue-50 hover:atw-bg-blue-100 !important
     }

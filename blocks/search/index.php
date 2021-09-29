@@ -44,13 +44,13 @@ class Adverts_Block_Search {
                 "content" => array(
                     "type" => "string"
                 ),
-                "form_style" => array(
+                "post_type" => array(
                     "type" => "string",
-                    "default" => "wpa-solid"
+                    "default" => ""
                 ),                
-                "form_input_padding" => array(
+                "form_scheme" => array(
                     "type" => "string",
-                    "default" => "wpa-padding-sm"
+                    "default" => ""
                 ),                
                 "form_input_corners" => array(
                     "type" => "string",
@@ -60,16 +60,29 @@ class Adverts_Block_Search {
                     "type" => "string",
                     "default" => "wpa-focus-simple"
                 ),
+                "form" => array(
+                    "type" => "object",
+                    "default" => array(
+                        "style" => "",
+                        "shadow" => "",
+                        "rounded" => "",
+                        "border" => "",
+                        "px" => "",
+                        "py" => ""
+                    )
+                ),
                 "primary_button" => array(
                     "type" => "object",
                     "default" => array(
                         "desktop" => "icon",
+                        "mobile" => "text-and-icon",
+
                         "text" => ""
                     )
                 ),                
-                "dataText" => array(
+                "buttons_pos" => array(
                     "type" => "string",
-                    "default" => "test"
+                    "default" => "atw-flex-row"
                 )
             )
         ) );
@@ -207,7 +220,6 @@ class Adverts_Block_Search {
             $orderby["date"] = "desc"; 
         }
 
-
         $args = apply_filters( "adverts_list_query", array( 
             'author' => $author,
             'post_type' => 'advert', 
@@ -293,6 +305,7 @@ class Adverts_Block_Search {
             "fourth" => "atw-w-full md:atw-w-1/4"
         );
 
-        return $arr[ $field['meta']['search_type'] ];
+        return $arr[ $field['meta']['search_type'] ] . " wpa-w-" . $field['meta']['search_type'];
     }
+
 }

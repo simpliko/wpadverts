@@ -38,5 +38,5 @@ jQuery(function($) {
         results.addClass("wpa-grid-view");
     });
     
-    $(".js-wpa-view-list").click();
+    //$(".js-wpa-view-list").click();
 });

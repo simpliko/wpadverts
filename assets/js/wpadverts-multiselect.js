@@ -53,10 +53,17 @@ jQuery(function($) {
               label.addClass("adverts-option-depth-0");
           }
           
+          var disabled = false;
+          if(o.is(":disabled")) {
+              label.css("color", "silver");
+              disabled = "disabled";
+          }
+
           var checkbox = $('<input type="checkbox" />');
           checkbox.attr("id", input.attr("id")+"-"+i);
           checkbox.attr("value", o.attr("value"));
           checkbox.attr("name", $this.attr("name"));
+          checkbox.attr("disabled", disabled);
           checkbox.data("wpjb-owner", input.attr("id"));
           checkbox.change(function() {
               var owner = $("#"+$(this).data("wpjb-owner"));

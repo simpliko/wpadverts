@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classified script, classifieds sc
 Requires PHP: 5.3
 Requires at least: 4.0
 Tested up to: 5.8
-Stable tag: 1.5.5
+Stable tag: 1.5.6
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -123,6 +123,13 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.5.6 - 2021-10-05 =
+
+* Feature: Multiselect dropdown supports now "disabled" options (if you are disabing options with Restricted Categories extension you need to update the Restricted Categories plugin as well to see the effect)
+* Feature: adverts_manage_query filter added to [adverts_manage] WP_Query, allows filtering the ads visible on the list
+* Fixed: When uploader returns a "file too big" error WPAdverts incorrectly shows a popup window.
+* Note from dev: Not many updates i am afraid, most of my work goes into version 2.0 that i am hoping to release this year.
 
 = 1.5.5 - 2021-07-22 =
 

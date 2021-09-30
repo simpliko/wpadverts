@@ -329,13 +329,13 @@ function _adverts_manage_list( $atts ) {
     ), $atts));
     
     // Load ONLY current user data
-    $loop = new WP_Query( array( 
+    $loop = new WP_Query( apply_filters( "adverts_manage_query", array( 
         'post_type' => 'advert', 
         'post_status' => apply_filters("adverts_sh_manage_list_statuses", array('publish', 'advert-pending', 'pending', 'expired') ),
         'posts_per_page' => $posts_per_page, 
         'paged' => $paged,
         'author' => get_current_user_id()
-    ) );
+    ) ) );
 
     $baseurl = apply_filters( "adverts_manage_baseurl", get_the_permalink() );
     $paginate_base = $baseurl . '%_%';

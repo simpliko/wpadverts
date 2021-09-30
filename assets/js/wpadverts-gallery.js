@@ -173,7 +173,7 @@ WPADVERTS.File.Uploader.prototype.SortableUpdate = function(e) {
         this.ui.find(".adverts-gallery-upload-update.adverts-icon-spinner.animate-spin").fadeIn();
     }
 
-    if(typeof this.PostID === 'undefined') {
+    if(typeof this.PostID === 'undefined' || this.PostID === null) {
         return;
     }
 

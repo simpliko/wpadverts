@@ -48,11 +48,11 @@ class Adverts_Walker_Category_Options extends Walker {
                     $output = array();
                 }
                 
-                $output[] = array(
+                $output[] = apply_filters( "adverts_taxonomy_walker_option", array(
                     "value" => esc_attr( $category->{$args['value_field']} ),
                     "text" => $cat_name,
                     "depth" => $depth
-                );
+                ), $category );
                 
                 return $output;
 	}

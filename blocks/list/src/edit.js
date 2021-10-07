@@ -29,6 +29,7 @@ import {
 import { megaphone } from '@wordpress/icons';
 
 import ServerSideRender from '@wordpress/server-side-render';
+import AdvertsSelect from '../../../assets/jsx/adverts-select';
 import AdvertsListData from '../../../assets/jsx/adverts-list-data';
 
 
@@ -157,8 +158,6 @@ class Edit extends Component {
 
         var pt = this.getCurrentPostType();
 
-        console.log(pt);
-
         var scheme = {
             builtin: {
                 label: "Builtin",
@@ -181,10 +180,67 @@ class Edit extends Component {
             });
         }
         
-        console.log(this.props.attributes.form_scheme);
-        console.log(scheme);
+        //console.log(this.props.attributes.form_scheme);
+        //console.log(scheme);
 
         return scheme;
+    }
+
+    getDataOptions() {
+        var options = [];
+        var data = this.getAdvertsListData();
+        var i = 0;
+        var x = null;
+
+        var optgroup = [
+            {
+                label: "Builtin",
+                options: []
+            },
+            {
+                label: "Patterns",
+                options: []
+            },
+            {
+                label: "Custom Fields",
+                options: []
+            },
+            {
+                label: "Taxonomies",
+                options: []
+            }
+        ];
+
+        for(i=0;i<data.builtin.data.length; i++) {
+            if( data.builtin.data[i].name.startsWith("pattern__")) {
+                x = 1;
+            } else {
+                x = 0;
+            }
+            optgroup[x].options.push({
+                value: data.builtin.data[i].name,
+                label: data.builtin.data[i].label
+            })
+        }
+
+        for(i=0;i<data.meta.data.length; i++) {
+            optgroup[2].options.push({
+                value: data.meta.data[i].name,
+                label: data.meta.data[i].label
+            })
+        }
+
+        for(i=0;i<data.taxonomies.data.length; i++) {
+            optgroup[3].options.push({
+                value: data.taxonomies.data[i].name,
+                label: data.taxonomies.data[i].label
+            })
+        }
+
+
+
+
+        return optgroup;
     }
 
     initVisuals = () => {
@@ -219,6 +275,14 @@ class Edit extends Component {
         this.props.setAttributes( { show_pagination });
     }
 
+    toggleShowPriceColumn = ( show_price_column ) => {
+        this.props.setAttributes( { show_price_column } );
+    }
+
+    toggleShowImageColumn = ( show_image_column ) => {
+        this.props.setAttributes( { show_image_column } );
+    }
+
     onChangePostsPerPage = ( posts_per_page ) => {
         this.props.setAttributes( { posts_per_page });
     }
@@ -242,6 +306,30 @@ class Edit extends Component {
     onListDataChange = ( data ) => {
         this.props.setAttributes( { data: { ...data } } ); 
     } 
+
+    onChangeTitleSource = ( title_source ) => {
+        this.props.setAttributes( { title_source } );
+    }
+
+    onChangeAltSource = ( alt_source ) => {
+        this.props.setAttributes( { alt_source } );
+    }
+
+    onChangeListImageWidth = ( list_img_width ) => {
+        this.props.setAttributes( { list_img_width } );
+    }
+
+    onChangeListImageHeight = ( list_img_height ) => {
+        this.props.setAttributes( { list_img_height } );
+    }
+
+    onChangeListImageFit = ( list_img_fit ) => {
+        this.props.setAttributes( { list_img_fit } );
+    }
+
+    onChangeListImageSource = ( list_img_source ) => {
+        this.props.setAttributes( { list_img_source } );
+    }
 
     renderInit() {
 
@@ -318,6 +406,7 @@ class Edit extends Component {
             allow_sorting,
             show_pagination,
             posts_per_page,
+            data,
             display,
             order_by,
             order_by_featured,
@@ -330,6 +419,10 @@ class Edit extends Component {
             grid_img_height,
             grid_img_fit,
             grid_img_source,
+            show_price_column,
+            show_image_column,
+            title_source,
+            alt_source
         } = attributes;
 
         const { show_instructions } = this.state;
@@ -398,43 +491,36 @@ class Edit extends Component {
 
                         <ToggleControl
                             label="Show image column/row."
-                            checked={show_results_counter}
-                            onChange={this.toggleShowResultsCounter}
+                            checked={show_image_column}
+                            onChange={this.toggleShowImageColumn}
                         />                        
                         
                         <ToggleControl
                             label="Show price column/row."
-                            checked={show_results_counter}
-                            onChange={this.toggleShowResultsCounter}
+                            checked={show_price_column}
+                            onChange={this.toggleShowPriceColumn}
                         />    
 
                         <AdvertsListData 
                             data={this.getAdvertsListData()}
                             onChange={this.onListDataChange}
+                            value={data}
                         />
 
-                        <SelectControl
+                        <AdvertsSelect
                             label="Title Text"
                             labelPosition="top"
-                            value={display}
-                            options={ [
-                                { label: 'List', value: 'list' },
-                                { label: 'Grid', value: 'grid' },
-                                { label: 'Map (requires MAL extension)', value: 'map' }
-                            ] }
-                            onChange={this.onChangeDisplay}
+                            value={title_source}
+                            options={this.getDataOptions()}
+                            onChange={this.onChangeTitleSource}
                         />
 
-                        <SelectControl
+                        <AdvertsSelect
                             label="Third Column"
                             labelPosition="top"
-                            value={display}
-                            options={ [
-                                { label: 'List', value: 'list' },
-                                { label: 'Grid', value: 'grid' },
-                                { label: 'Map (requires MAL extension)', value: 'map' }
-                            ] }
-                            onChange={this.onChangeDisplay}
+                            value={alt_source}
+                            options={this.getDataOptions()}
+                            onChange={this.onChangeAltSource}
                         />
 
                     </PanelBody>
@@ -445,24 +531,26 @@ class Edit extends Component {
                         <RangeControl
                             label="Image Width"
                             value={list_img_width}
-                            onChange={ ( value ) => console.log( value ) }
-                            min={ 2 }
+                            onChange={this.onChangeListImageWidth}
+                            min={ 0 }
                             max={ 10 }
+                            withInputField={false}
                         />                        
                         
                         <RangeControl
                             label="Image Height"
                             value={list_img_height}
-                            onChange={ ( value ) => console.log( value ) }
-                            min={ 2 }
+                            onChange={this.onChangeListImageHeight}
+                            min={ 0 }
                             max={ 10 }
+                            withInputField={false}
                         />
 
                         <SelectControl 
                             label="Image Fit"
                             labelPosition="top"
                             value={list_img_fit}
-                            onChange={this.onChangeListType}
+                            onChange={this.onChangeListImageFit}
                             options={[
                                 { value: "none", label: "Default" },
                                 { value: "contain", label: "Contain" },
@@ -475,13 +563,15 @@ class Edit extends Component {
                             label="Use Image"
                             labelPosition="top"
                             value={list_img_source}
-                            onChange={this.onChangeListType}
+                            onChange={this.onChangeListImageSource}
                             options={[
-                                { value: "none", label: "Adverts - List" },
-                                { value: "contain", label: "Small" },
-                                { value: "cover", label: "Medium" },
-                                { value: "scale-down", label: "Large" },
-                                { value: "scale-down", label: "Full Size" }
+                                { value: "adverts-upload-thumbnail", label: "Adverts - Upload Thumbnail" },
+                                { value: "adverts-list", label: "Adverts - List" },
+                                { value: "adverts-gallery", label: "Adverts - Gallery" },
+                                { value: "small", label: "Small" },
+                                { value: "medium", label: "Medium" },
+                                { value: "large", label: "Large" },
+                                { value: "full", label: "Full Size" }
                             ]}
                         />
 

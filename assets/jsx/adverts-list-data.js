@@ -23,18 +23,22 @@ class AdvertsListData extends Component {
 
 	constructor( props ) {
         
-		super(props);
+        super(props);
+        
         this.data = {
             text: this.props.placeholder,
             options: [],
             ...props.data
         };
 
+        for(var i=0; i<this.props.value.length; i++) {
+            this.addOption(this.props.value[i]);
+        }
+
         this.state = {
             mode: "normal"
         };
 
-        console.log(this.props.data);
     }
 
     shouldComponentUpdate(nextProps) {
@@ -43,10 +47,17 @@ class AdvertsListData extends Component {
 
     onChange = ( e ) => {
         
+        if(e.target.value == "-1") {
+            return;
+        }
+        this.addOption( e.target.value);
+        this.props.onChange( this.data.options );
+    }
+
+    addOption( option ) {
         this.data.options.push( {
-            name: e.target.value
+            name: option
         });
-        this.props.onChange( this.data );
     }
 
     onCustomizeQuery = ( e ) => {
@@ -67,6 +78,11 @@ class AdvertsListData extends Component {
         }
         arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
         return arr; // for testing
+    }
+
+    onTrashClick = ( remove_index ) => {
+        this.data.options.splice( remove_index, 1 );
+        this.props.onChange( this.data );
     }
 
     getOptionLabel = ( name ) => {
@@ -182,6 +198,14 @@ class AdvertsListData extends Component {
                                             icon="edit"
                                             isSmall={true}
                                             onClick={this.toggleInstructions}
+                                        />
+
+                                        <Button 
+                                            label=""
+                                            variant="trynitary"
+                                            icon="trash"
+                                            isSmall={true}
+                                            onClick={e => this.onTrashClick(i)}
                                         />
                                     </FlexItem>
                                 </Flex>

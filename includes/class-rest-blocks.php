@@ -182,6 +182,14 @@ class Adverts_Rest_Blocks {
                 "name" => "meta__adverts_location", 
                 "label" => __( "Location", "wpadverts" ) 
             ),
+            array( 
+                "name" => "pattern__location", 
+                "label" => __( "Location (Formatted)", "wpadverts" ) 
+            ),            
+            array( 
+                "name" => "pattern__price", 
+                "label" => __( "Price (Formatted)", "wpadverts" ) 
+            ),
         );
 
         $arr_contact = array(
@@ -193,6 +201,36 @@ class Adverts_Rest_Blocks {
         );
 
         $arr = apply_filters( "wpadverts/rest/classifieds/builtin-meta", array(
+            "wpad-form-add" => $arr_add,
+            "wpad-form-contact" => $arr_contact,
+            "wpad-form-search" => $arr_search
+        ), $form_type );
+
+        return $arr[ $form_type ];
+    }
+
+    protected function _get_formatted_data( $form_type ) {
+
+        $arr_add = array(
+            array( 
+                "name" => "pattern__location", 
+                "label" => __( "Location", "wpadverts" ) 
+            ),            
+            array( 
+                "name" => "pattern__price", 
+                "label" => __( "Price", "wpadverts" ) 
+            ),
+        );
+
+        $arr_contact = array(
+
+        );
+        
+        $arr_search = array(
+
+        );
+
+        $arr = apply_filters( "wpadverts/rest/classifieds/formatted", array(
             "wpad-form-add" => $arr_add,
             "wpad-form-contact" => $arr_contact,
             "wpad-form-search" => $arr_search

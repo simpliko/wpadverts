@@ -8,38 +8,10 @@ OPTIONS:
 
 */
 
-$form_mood = "none";
-$form_mood_arr = array( "none" => "", "simple" => "atw-rounded-lg", "playful" => "atw-rounded-full", "elegant" => "atw-rounded-none") ;
-
-$form_style = "none";
-$form_style_arr = array(
-    "none" => "",
-    "unstyled" => "atw-outline-none atw-box-border",
-    "simple" => "atw-outline-none atw-box-border atw-border-gray-300 atw-shadow-sm focus:atw-border-indigo-300 focus:atw-ring focus:atw-ring-indigo-200 focus:atw-ring-opacity-50",
-    "underline" => array(),
-    "solid" => "atw-outline-none atw-box-border atw-bg-gray-100 atw-border-transparent focus:atw-ring-2 focus:atw-ring-blue-300"
-);
-
-$form_padding = "none";
-$form_padding_arr = array(
-    "none" => "",
-    "small" => "atw-py-3 atw-px-3",
-    "medium" => "atw-py-6 atw-px-6"
-);
-
-$form_focus = array(
-    
-);
-
-$cl_form_mood = $form_mood_arr[ $form_mood ];
-$cl_form_style = $form_style_arr[ $form_style ];
-$cl_form_padding = $form_padding_arr[ $form_padding ];
-    
-
-$show_results_counter = ( isset( $atts['show_results_counter'] ) && $atts['show_results_counter'] ) ? true : false;
-$allow_sorting = ( isset( $atts['allow_sorting'] ) && $atts['allow_sorting'] ) ? true : false;
-$switch_views = ( isset( $atts['switch_views'] ) && $atts['switch_views'] ) ? true : false;
-$show_pagination = ( isset( $atts['show_pagination'] ) && $atts['show_pagination'] ) ? true : false;
+$show_results_counter   = ( isset( $atts['show_results_counter'] ) && $atts['show_results_counter'] ) ? true : false;
+$allow_sorting          = ( isset( $atts['allow_sorting'] ) && $atts['allow_sorting'] ) ? true : false;
+$switch_views           = ( isset( $atts['switch_views'] ) && $atts['switch_views'] ) ? true : false;
+$show_pagination        = ( isset( $atts['show_pagination'] ) && $atts['show_pagination'] ) ? true : false;
 
 if( $switch_views && adverts_request( "display" ) ) {
     $atts['display'] = adverts_request( "display" );
@@ -48,6 +20,10 @@ if( $switch_views && adverts_request( "display" ) ) {
 $display = ( isset( $atts["display"] ) && $atts["display"] === "grid" ) ? "wpa-grid-view" : "wpa-list-view";
 
 $sort_current_title = "Publish Date";
+
+$show_image_column      = ( isset( $atts['show_image_column'] ) && $atts['show_image_column'] ) ? true : false;
+$show_price_column      = ( isset( $atts['show_price_column'] ) && $atts['show_price_column'] ) ? true : false;
+
 
 echo "<pre>"; print_r($atts);echo "</pre>";
 ?>

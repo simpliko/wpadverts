@@ -94,12 +94,12 @@ class Adverts_Block_List {
                     'default' => 'all'
                 ),
                 'list_img_width' => array(
-                    'type' => 'string',
-                    'default' => ''
+                    'type' => 'integer',
+                    'default' => 1
                 ),                
                 'list_img_height' => array(
-                    'type' => 'string',
-                    'default' => ''
+                    'type' => 'integer',
+                    'default' => 1
                 ),                
                 'list_img_fit' => array(
                     'type' => 'string',
@@ -125,6 +125,30 @@ class Adverts_Block_List {
                     'type' => 'string',
                     'default' => 'adverts-list'
                 ),
+                'data' => array(
+                    'type' => 'array',
+                    'default' => array(                
+                        "meta__adverts_location",
+                        "pattern__post_date"
+                    )
+                ),
+                'show_image_column' => array(
+                    'type' => 'boolean',
+                    'default' => true
+                ),
+                'show_price_column' => array(
+                    'type' => 'boolean',
+                    'default' => true
+                ),
+                'title_source' => array(
+                    'type' => 'string',
+                    'default' => 'default__post_title'
+                ),
+                'alt_source' => array(
+                    'type' => 'string',
+                    'default' => 'pattern__price'
+                )
+                
             )
         ) );
 

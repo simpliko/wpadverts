@@ -218,3 +218,110 @@ function wpadverts_print_grays_variables( $gray ) {
         echo sprintf( "--wpa-color-gray-%d: %s;\r\n", $k, adverts_hex2rgba( $v ) );
     }
 }
+
+function wpadverts_get_object_pattern( $object_id, $pattern ) {
+    $patterns = array(
+        "pattern__price" => "wpadverts_block_list_price",
+        "pattern__location" => null,
+        "pattern__post_date" => "wpadverts_block_list_post_date"
+    );
+
+    if( isset( $patterns[$pattern] ) && is_callable( $patterns[$pattern] ) ) {
+        return call_user_func( $patterns[$pattern], $object_id, $pattern );
+    }
+
+    return null;
+}
+
+function wpadverts_get_object_value( $object_id, $path ) {
+    $advert = get_post( $object_id );
+
+    list( $type, $name ) = explode( "__", $path );
+
+    $value = null;
+
+    if( $type == "default" ) {
+        $value = $advert->$name;
+    } else if( $type == "date" ) {
+        $value = $advert->$name;
+    } else if( $type == "meta" ) {
+        $value = get_post_meta( $object_id, $name, true );
+    } else if( $type == "pattern" ) {
+        $value = wpadverts_get_object_pattern( $object_id, $path );
+    }
+
+    return $value;
+}
+
+
+
+function wpadverts_block_tpl_wrap( $post_id, $path, $classes = "") {
+    $value = wpadverts_get_object_value( $post_id, $path );
+
+    if( $value ) {
+        return sprintf( '<div class="%s">%s</div>', $classes, $value );
+    }
+}
+
+function wpadverts_block_list_price( $post_id ) {
+    $price = get_post_meta( $post_id, "adverts_price", true );
+    $price_f = null;
+
+    if( $price ) {
+        $price_f = adverts_get_the_price( $post_id, $price );
+    } elseif( adverts_config( 'empty_price' ) ) {
+        $price_f = adverts_empty_price( $post_id );
+    }
+
+    return $price_f;
+}
+
+function wpadverts_block_list_post_date( $post_id ) {
+    return date_i18n( "d/m/Y", get_post_time( 'U', false, $post_id ) );
+}
+
+function wpadverts_block_list_image( $post_id, $atts ) {
+
+    $image_id = adverts_get_main_image_id( $post_id );
+    $image_type = "adverts-list";
+    $image = false;
+
+    $classes = array();
+    $classes_img = array();
+
+    if( $image_id ) {
+        $image = get_post( $image_id );
+    }
+
+    $widths = array( "atw-w-16", "atw-w-20", "atw-w-24", "atw-w-28", "atw-w-32", "atw-w-36", "atw-w-40", "atw-w-44", "atw-w-48", "atw-w-52", "atw-w-56", "atw-w-60" );
+    $height = array( "atw-h-16", "atw-h-20", "atw-h-24", "atw-h-28", "atw-h-32", "atw-h-36", "atw-h-40", "atw-h-44", "atw-h-48", "atw-h-52", "atw-h-56", "atw-h-60" );
+    $fits = array( 
+        "contain" => "atw-object-contain",
+        "cover" => "atw-object-cover",
+        "fill" => "atw-object-fill",
+        "none" => "atw-object-none",
+        "scale-down" => "atw-object-scale-down"
+    );
+
+    $classes[] = $widths[ $atts["list_img_width"] ];
+    $classes[] = $height[ $atts["list_img_height"] ];
+
+    $classes_img[] = $fits[ $atts["list_img_fit"] ];
+
+    $image_type = $atts["list_img_source"];
+
+    ?>
+        <div class="wpa-picture-list wpa-block-list-view-list atw-flex atw-pr-4 ">
+            <div class="atw-flex atw-items-center atw-box-border atw-bg-gray-50 atw-border atw-border-solid atw-rounded atw-border-gray-300 <?php echo join( " ", $classes ) ?>">
+            <?php if($image): ?>
+                <img src="<?php echo esc_attr( adverts_get_main_image( $post_id, $image_type ) ) ?>" class="atw-w-full atw-h-full atw-max-w-full atw-max-h-full atw-block atw-rounded-none atw-border-0 atw-shadow-none <?php echo join( " ", $classes_img ) ?>" title="<?php echo esc_attr($image->post_excerpt) ?>" alt="<?php echo esc_attr($image->post_content) ?>" />
+            <?php else: ?>
+                <div class="atw-transform atw-flex-grow atw-text-center atw-rotate-12">
+                    <i class="fas fa-image atw-text-6xl atw-text-gray-200 "></i>
+                </div>
+            <?php endif; ?>
+            </div>
+        </div>
+
+    <?php
+}

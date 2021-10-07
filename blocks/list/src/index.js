@@ -66,12 +66,12 @@ registerBlockType( 'wpadverts/list', {
             default: "all"
         },
         list_img_width: {
-            type: "string",
-            default: ""
+            type: "integer",
+            default: 1
         },
         list_img_height: {
-            type: "string",
-            default: ""
+            type: "integer",
+            default: 1
         },
         list_img_fit: {
             type: "string",
@@ -80,10 +80,6 @@ registerBlockType( 'wpadverts/list', {
         list_img_source: {
             type: "string",
             default: "adverts-list"
-        },
-        list_img_height: {
-            type: "string",
-            default: ""
         },
         grid_columns: {
             type: "integer",
@@ -100,8 +96,30 @@ registerBlockType( 'wpadverts/list', {
         grid_img_source: {
             type: "string",
             default: "adverts-list"
+        },
+        data: {
+            type: "array",
+            default: [
+                "meta__adverts_location",
+                "pattern__post_date"
+            ]
+        },
+        show_image_column: {
+            type: "boolean",
+            default: true
+        },
+        show_price_column: {
+            type: "boolean",
+            default: true
+        },
+        title_source: {
+            type: "string",
+            default: "default__post_title"
+        },
+        alt_source: {
+            type: "string",
+            default: "pattern__price"
         }
-        
         
     },
     edit: Edit,

@@ -25,7 +25,7 @@ $show_image_column      = ( isset( $atts['show_image_column'] ) && $atts['show_i
 $show_price_column      = ( isset( $atts['show_price_column'] ) && $atts['show_price_column'] ) ? true : false;
 
 
-echo "<pre>"; print_r($atts);echo "</pre>";
+echo "<pre>"; print_r($atts);print_r($params);echo "</pre>";
 ?>
 <link href="/wpadverts/wp-content/plugins/wpadverts/assets/css/all.min.css" rel="stylesheet">
 

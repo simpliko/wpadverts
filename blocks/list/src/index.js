@@ -82,12 +82,16 @@ registerBlockType( 'wpadverts/list', {
             default: "adverts-list"
         },
         grid_columns: {
-            type: "integer",
-            default: 2
+            type: "string",
+            default: '2'
+        },        
+        grid_columns_mobile: {
+            type: "string",
+            default: '2'
         },
         grid_img_height: {
-            type: "string",
-            default: ""
+            type: "integer",
+            default: 2
         },
         grid_img_fit: {
             type: "string",
@@ -100,8 +104,8 @@ registerBlockType( 'wpadverts/list', {
         data: {
             type: "array",
             default: [
-                "meta__adverts_location",
-                "pattern__post_date"
+                { name: "meta__adverts_location" },
+                { name: "pattern__post_date" }
             ]
         },
         show_image_column: {

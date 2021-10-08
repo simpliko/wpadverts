@@ -189,6 +189,10 @@ class Adverts_Rest_Blocks {
             array( 
                 "name" => "pattern__price", 
                 "label" => __( "Price (Formatted)", "wpadverts" ) 
+            ),            
+            array( 
+                "name" => "pattern__post_date", 
+                "label" => __( "Post date (Formatted)", "wpadverts" ) 
             ),
         );
 

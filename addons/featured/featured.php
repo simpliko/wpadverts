@@ -330,8 +330,12 @@ function adext_featured_manage_list_status( $post ) {
 function adext_featured_adverts_list_params( $out, $pairs, $atts ) {
     if( ! isset( $atts["list_type"] ) ) {
         $atts["list_type"] = "all";
+    }    
+    if( ! isset( $atts["order_by_featured"] ) ) {
+        $atts["order_by_featured"] = "1";
     }
     
+    $out["order_by_featured"] = $atts["order_by_featured"];
     $out["list_type"] = $atts["list_type"];
     return $out;
 }
@@ -364,8 +368,47 @@ function adext_featured_adverts_list_query( $args, $params = array() ) {
         }
     }
     
-    if( isset( $args["orderby"] ) && is_array( $args["orderby"] ) ) {
-        $args["orderby"] = array_merge( array( 'menu_order'=>'DESC' ), $args["orderby"] );
+    if( isset( $params["order_by_featured"] ) && $params["order_by_featured"] == "1" ) {
+        if( isset( $args["orderby"] ) && is_array( $args["orderby"] ) ) {
+            $args["orderby"] = array_merge( array( 'menu_order'=>'DESC' ), $args["orderby"] );
+        }
+    }
+    
+    return $args;
+}
+
+/**
+ * Modifies Classifieds/List block WP_Query arguments
+ * 
+ * This function handles:
+ * - featured_only param in [adverts_list] shortcode
+ * - sorting by is_featured flag first
+ * 
+ * @since 2.0
+ * @param array     $args       WP_Query arguments
+ * @param array     $params     [adverts_list] shortcode params 
+ * @return array                Updated list of WP_Query arguments
+ */
+function adext_featured_block_list_query( $args, $params = array() ) {
+
+    if( isset( $params["list_type"] ) ) {
+        switch( $params["list_type"] ) {
+            case "featured":
+                $args["menu_order"] = 1;
+                break;
+            case "normal":
+                $args["menu_order"] = 0;
+                break;
+            default:
+                // do nothing
+                break;
+        }
+    }
+    
+    if( isset( $params["order_by_featured"] ) && $params["order_by_featured"] == "1" ) {
+        if( isset( $args["orderby"] ) && is_array( $args["orderby"] ) ) {
+            $args["orderby"] = array_merge( array( 'menu_order'=>'DESC' ), $args["orderby"] );
+        }
     }
     
     return $args;

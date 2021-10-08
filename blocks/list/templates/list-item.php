@@ -56,7 +56,7 @@
             <div class="atw-flex atw-flex-none  atw-space-x-3 atw-text-base atw-font-medium atw-text-gray-500">
 
                 <?php foreach( $atts["data"] as $element ): ?>
-                <?php echo wrap( get_the_ID(), $element ) ?>
+                <?php echo wrap( get_the_ID(), $element["name"] ) ?>
                 <?php endforeach; ?>
 
             </div>

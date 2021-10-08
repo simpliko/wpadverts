@@ -110,12 +110,16 @@ class Adverts_Block_List {
                     'default' => 'adverts-list'
                 ),                
                 'grid_columns' => array(
-                    'type' => 'integer',
-                    'default' => 2
+                    'type' => 'string',
+                    'default' => '2'
+                ),                   
+                'grid_columns_mobile' => array(
+                    'type' => 'string',
+                    'default' => '2'
                 ),                
                 'grid_img_height' => array(
-                    'type' => 'string',
-                    'default' => ''
+                    'type' => 'integer',
+                    'default' => 2
                 ),                
                 'grid_img_fit' => array(
                     'type' => 'string',
@@ -128,8 +132,12 @@ class Adverts_Block_List {
                 'data' => array(
                     'type' => 'array',
                     'default' => array(                
-                        "meta__adverts_location",
-                        "pattern__post_date"
+                        array(
+                            "name" => "meta__adverts_location"
+                        ),
+                        array(
+                            "name" => "pattern__post_date"
+                        )
                     )
                 ),
                 'show_image_column' => array(
@@ -171,6 +179,7 @@ class Adverts_Block_List {
             'switch_views' => adverts_config( 'config.ads_list_default__switch_views' ),
             'allow_sorting' => 0,
             'order_by' => 'date-desc',
+            'order_by_featured' => '0',
             'paged' => adverts_request("pg", 1),
             'posts_per_page' => adverts_config( 'config.ads_list_default__posts_per_page' ),
             'show_pagination' => true
@@ -201,11 +210,6 @@ class Adverts_Block_List {
 
         $taxonomy = $this->_get_tax_query( $atts );
 
-        if( isset( $atts["order_by_featured"] ) && $atts["order_by_featured"] ) {
-            add_filter( 'adverts_list_query', 'adext_featured_adverts_list_query', 10, 2 );
-        } else {
-            remove_filter( 'adverts_list_query', 'adext_featured_adverts_list_query', 10, 2 );
-        }
 
         if($allow_sorting && adverts_request("adverts_sort")) {
             $adverts_sort = adverts_request("adverts_sort");

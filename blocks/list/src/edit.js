@@ -304,7 +304,7 @@ class Edit extends Component {
     }
 
     onListDataChange = ( data ) => {
-        this.props.setAttributes( { data: { ...data } } ); 
+        this.props.setAttributes( { data: [ ...data ] } ); 
     } 
 
     onChangeTitleSource = ( title_source ) => {
@@ -329,6 +329,26 @@ class Edit extends Component {
 
     onChangeListImageSource = ( list_img_source ) => {
         this.props.setAttributes( { list_img_source } );
+    }
+
+    onChangeGridColumns = ( grid_columns ) => {
+        this.props.setAttributes( { grid_columns } );
+    }
+
+    onChangeGridColumnsMobile = ( grid_columns_mobile ) => {
+        this.props.setAttributes( { grid_columns_mobile } );
+    }
+
+    onChangeGridImgHeight = ( grid_img_height ) => {
+        this.props.setAttributes( { grid_img_height } );
+    }
+
+    onChangeGridImgFit = ( grid_img_fit ) => {
+        this.props.setAttributes( { grid_img_fit } );
+    }
+
+    onChangeGridImgSource = ( grid_img_source ) => {
+        this.props.setAttributes( { grid_img_source } );
     }
 
     renderInit() {
@@ -416,6 +436,7 @@ class Edit extends Component {
             list_img_fit,
             list_img_source,
             grid_columns,
+            grid_columns_mobile,
             grid_img_height,
             grid_img_fit,
             grid_img_source,
@@ -580,30 +601,39 @@ class Edit extends Component {
                     <PanelBody title="Grid View Options">
 
                         <TextControl
-                            label="Number of columns in the Grid view."
+                            label="Columns in the Grid view."
                             value={grid_columns}
-                            onChange={ () => {
-                                alert( ( state ) => ! state );
-                            } }
+                            onChange={this.onChangeGridColumns}
                             type="number"
                             min="1"
                             max="6"
+                            step="1"
+                        />                        
+                        
+                        <TextControl
+                            label="Columns in the mobile Grid view."
+                            value={grid_columns_mobile}
+                            onChange={this.onChangeGridColumnsMobile}
+                            type="number"
+                            min="1"
+                            max="2"
                             step="1"
                         />
 
                         <RangeControl
                             label="Image Height"
                             value={grid_img_height}
-                            onChange={ ( value ) => console.log( value ) }
+                            onChange={this.onChangeGridImgHeight}
                             min={ 2 }
                             max={ 10 }
+                            withInputField={false}
                         />
 
                         <SelectControl 
                             label="Image Fit"
                             labelPosition="top"
                             value={grid_img_fit}
-                            onChange={this.onChangeListType}
+                            onChange={this.onChangeGridImgFit}
                             options={[
                                 { value: "none", label: "Default" },
                                 { value: "contain", label: "Contain" },
@@ -616,13 +646,15 @@ class Edit extends Component {
                             label="Use Image"
                             labelPosition="top"
                             value={grid_img_source}
-                            onChange={this.onChangeListType}
+                            onChange={this.onChangeGridImgSource}
                             options={[
-                                { value: "none", label: "Adverts - List" },
-                                { value: "contain", label: "Small" },
-                                { value: "cover", label: "Medium" },
-                                { value: "scale-down", label: "Large" },
-                                { value: "scale-down", label: "Full Size" }
+                                { value: "adverts-upload-thumbnail", label: "Adverts - Upload Thumbnail" },
+                                { value: "adverts-list", label: "Adverts - List" },
+                                { value: "adverts-gallery", label: "Adverts - Gallery" },
+                                { value: "small", label: "Small" },
+                                { value: "medium", label: "Medium" },
+                                { value: "large", label: "Large" },
+                                { value: "full", label: "Full Size" }
                             ]}
                         />
                     </PanelBody>

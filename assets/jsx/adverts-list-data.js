@@ -31,9 +31,7 @@ class AdvertsListData extends Component {
             ...props.data
         };
 
-        for(var i=0; i<this.props.value.length; i++) {
-            this.addOption(this.props.value[i]);
-        }
+        this.data.options = this.props.value;
 
         this.state = {
             mode: "normal"
@@ -166,7 +164,7 @@ class AdvertsListData extends Component {
                                     key={i} 
                                 >
 
-                                    <FlexBlock>
+                                    <FlexBlock title={this.getOptionLabel(object.name)} style={{textOverflow:"ellipsis", overflow:"hidden", whiteSpace:"nowrap"}}>
                                         {this.getOptionLabel(object.name)}
                                     </FlexBlock>
                                     

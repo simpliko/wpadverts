@@ -20,6 +20,13 @@ class Adverts_Block_List {
 
         $this->path = dirname(__FILE__);
         
+        wp_register_style(
+            'wpadverts-blocks-editor-list',
+            ADVERTS_URL . '/assets/css/blocks-editor-list.css',
+            array( 'wp-edit-blocks' ),
+            filemtime( ADVERTS_PATH . '/assets/css/blocks-editor-list.css' )
+        );
+
         wp_register_script(
             $js_handler,
             plugins_url( 'build/index.js', __FILE__ ),
@@ -29,17 +36,17 @@ class Adverts_Block_List {
 
         wp_register_script(
             "wpadverts-block-list-and-search",
-            ADVERTS_PATH . '/assets/js/block-list-and-search.js',
+            ADVERTS_URL . '/assets/js/block-list-and-search.js',
             array( 'jquery' ),
             '2.0.0'
         );
         
         register_block_type( sprintf( "%s/%s", $package, $module ), array(
             'apiVersion' => 2,
-            'editor_style' => 'wpadverts-blocks',
+            'editor_style' => 'wpadverts-blocks-editor-list',
             'editor_script' => $js_handler,
             'render_callback' => array( $this, "render" ),
-            'style' => 'wpadverts-blocks',
+            'style' => 'wpadverts-blocks-common',
             'script' => 'wpadverts-block-list-and-search',
             'attributes' => array(
                 'post_type' => array(
@@ -80,6 +87,10 @@ class Adverts_Block_List {
                 'display' => array(
                     'type' => 'string',
                     'default' => 'grid'
+                ),
+                'default_image_url' => array(
+                    'type' => 'string',
+                    'default' => ''
                 ),
                 'order_by' => array(
                     'type' => 'string',
@@ -155,8 +166,19 @@ class Adverts_Block_List {
                 'alt_source' => array(
                     'type' => 'string',
                     'default' => 'pattern__price'
-                )
-                
+                ),
+                'color_price' => array(
+                    'type' => 'string',
+                    'default' => '#b91c1c'
+                ),                
+                'color_title' => array(
+                    'type' => 'string',
+                    'default' => ''
+                ),                
+                'color_bg_featured' => array(
+                    'type' => 'string',
+                    'default' => ''
+                ),
             )
         ) );
 

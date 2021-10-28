@@ -46,6 +46,10 @@ registerBlockType( 'wpadverts/search', {
         buttons_pos: {
             type: "string",
             default: "wpa-flex-row"
+        },
+        redirect_to: {
+            type: "string",
+            default: ""
         }
     },
     edit: Edit,
@@ -59,3 +63,4 @@ registerBlockType( 'wpadverts/search', {
         />
     }
 });
+

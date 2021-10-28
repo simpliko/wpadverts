@@ -98,6 +98,8 @@ class Adverts_Taxonomies {
         
         $adverts_list_page = get_post( adverts_config( 'ads_list_id' ) );
 
+        //$shortcode = do_blocks( get_page(5765)->post_content );
+
         $dummy_post_properties = array(
             'ID'                    => 0,
             'post_status'           => 'publish',

@@ -38,6 +38,8 @@ class Adverts_Block_Search {
             'apiVersion' => 2,
             'editor_style' => 'wpadverts-blocks-editor-search',
             'editor_script' => $js_handler,
+            'style' => 'wpadverts-blocks-common',
+            'script' => null,
             'render_callback' => array( $this, "render" ),
             'style' => 'wpadverts-blocks',
             'attributes' => array(
@@ -83,6 +85,10 @@ class Adverts_Block_Search {
                 "buttons_pos" => array(
                     "type" => "string",
                     "default" => "atw-flex-row"
+                ),
+                "redirect_to" => array(
+                    "type" => "string",
+                    "default" => ""
                 )
             )
         ) );

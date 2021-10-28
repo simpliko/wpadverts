@@ -17,7 +17,8 @@ import {
     SelectControl, 
     Spinner,
     Placeholder,
-    Text
+    Text,
+    TextControl
 } from '@wordpress/components';
 
 import { megaphone } from '@wordpress/icons';
@@ -86,6 +87,10 @@ class Edit extends Component {
         this.props.setAttributes( { form_scheme } );
     }
 
+    onSetRedirectTo = ( redirect_to ) => {
+        this.props.setAttributes( { redirect_to } );
+    }
+
     getAvailablePostTypes = () => {
         var types = [{
             label: "", value: ""
@@ -131,7 +136,8 @@ class Edit extends Component {
             form, 
             primary_button,
             secondary_button,
-            buttons_pos
+            buttons_pos,
+            redirect_to
         } = attributes;
 
         //console.log("Render Again...");
@@ -183,6 +189,14 @@ class Edit extends Component {
                                 />
 
                             </div>
+
+                            <TextControl
+                                label="Redirect To"
+                                labelPosition="top"
+                                value={redirect_to}
+                                onChange={this.onSetRedirectTo}
+                            />
+                            
                         </PanelBody>
 
                         <PartialForm                        

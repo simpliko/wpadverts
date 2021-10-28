@@ -1,0 +1,19 @@
+.wpa-color-indicator-wrap {
+    margin: 4px 0 0 0;
+}
+
+.wpa-color-indicator {
+    background:transparent;
+    margin: 0 10px 0 0;
+    height: 24px;
+    line-height: 24px;
+    vertical-align: middle;
+    border-radius: 50%;
+    width: 24px;
+    border: 1px solid #dadada;
+    display: inline-block;
+}
+
+.wpa-color-indicator-wrap button.is-link {
+    margin: 0 0 0 10px;
+}

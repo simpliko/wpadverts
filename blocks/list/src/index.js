@@ -108,6 +108,10 @@ registerBlockType( 'wpadverts/list', {
                 { name: "pattern__post_date" }
             ]
         },
+        default_image_url: {
+            type: 'string',
+            default: ''
+        },
         show_image_column: {
             type: "boolean",
             default: true
@@ -123,6 +127,18 @@ registerBlockType( 'wpadverts/list', {
         alt_source: {
             type: "string",
             default: "pattern__price"
+        },
+        color_price: {
+            type: "string",
+            default: "#b91c1c"
+        },
+        color_title: {
+            type: "string",
+            default: ""
+        },
+        color_bg_featured: {
+            type: "string",
+            default: ""
         }
         
     },

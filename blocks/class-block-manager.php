@@ -20,12 +20,7 @@ class Adverts_Block_Manager {
     public function __construct( $path = null ) {
         $this->_path = $path;
         
-        wp_register_style(
-            'wpadverts-blocks',
-            ADVERTS_URL . '/compiled.css',
-            array( 'wp-edit-blocks' ),
-            filemtime( ADVERTS_PATH . '/compiled.css' )
-        );
+
     }
     
     public function register() {

@@ -124,6 +124,12 @@ function adverts_admin_page_extensions() {
                     "text" => __("Emails module sends transactional emails to users and allows editing the email templates content.", "wpadverts"),
                     "type" => "",
                     "plugin" => null
+                ),
+                "styling" => array(
+                    "title" => __( "Default Styles", "wpadverts"),
+                    "text" => __( "", "wpadverts" ),
+                    "type" => "static",
+                    "plugin" => null
                 )
             )
         ),

@@ -96,15 +96,22 @@ function adverts_field_radio_block( $field, $form = null ) {
 function wpadverts_block_button( $args = array(), $options = array() ) {
 //echo "<pre>";print_r($options);echo "</pre>";
 
-    $args = array(
+    $_args = array(
         "classes_prepend" => "atw-w-full",
         "classes_append" => ""
     );
 
+    $button_class = "";
+
+    if( isset( $args["type"] ) ) {
+        $button_class = sprintf( "wpa-btn-%s", $args["type"] );
+    }
+
     $defaults = array(
+        "type"              => isset( $args["type"] ) ? $args["type"] : "",
         "classes"           => "atw-text-base atw-outline-none atw-bg-none atw-border atw-border-solid atw-font-semibold atw-px-4",
-        "text"              => "Search",
-        "icon"              => "fa-search",
+        "text"              => isset( $args["text"] ) ? $args["text"] : "",
+        "icon"              => isset( $args["icon"] ) ? $args["icon"] : "",
         "icon-position"     => "left"
     );
 
@@ -182,10 +189,44 @@ function wpadverts_block_button( $args = array(), $options = array() ) {
     }
 
     ?>
-    <button class="atw-inline-block hover:atw-bg-none atw-bg-none atw-text-white wpa-btn-primary atw-w-full atw-text-base atw-outline-none atw-border-solid hover:atw-bg-blue-700 atw-font-semibold atw-px-4 atw-py-2 <?php echo "$border_radius $border_width $leading" ?>">
+    <button class="<?php echo $button_class ?> atw-inline-block hover:atw-bg-none atw-bg-none atw-text-white atw-w-full atw-text-base atw-outline-none atw-border-solid hover:atw-bg-blue-700 atw-font-semibold atw-px-4 atw-py-2 <?php echo "$border_radius $border_width $leading" ?>">
         <span class=" <?php echo join( " ", array( $m_icon, $d_icon ) ) ?> atw-text-white"><i class="fas fa-search atw-text-base"></i></span> 
         <span class="<?php echo join( " ", array( $m_text, $d_text ) ) ?>"><?php isset( $args["text"] ) ? esc_html( $args["text"] ) : _e("Search", "wpadverts" ) ?></span>
     </button>
+    <?php
+}
+
+function wpadverts_block_button_css( $type, $args ) {
+
+    $color_text     = isset( $args["color_text"] )      ? $args["color_text"]       : null;
+    $color_bg       = isset( $args["color_bg"] )        ? $args["color_bg"]         : null;
+    $color_border   = isset( $args["color_border"] )    ? $args["color_border"]     : null;
+    
+    $color_text_h   = isset( $args["color_text_h"] )    ? $args["color_text_h"]     : null;
+    $color_bg_h     = isset( $args["color_bg_h"] )      ? $args["color_bg_h"]       : null;
+    $color_border_h = isset( $args["color_border_h"] )  ? $args["color_border_h"]   : null;
+    
+    $button_class = sprintf( "wpa-btn-%s", $type );
+
+    ?>
+    <?php echo sprintf( ".%s", $button_class ) ?> {
+        color: <?php echo $color_text ?>;
+        background-color: <?php echo $color_bg ?>;
+        border-color: <?php echo $color_border ?>;
+        --wpa-btn-shadow-color: <?php echo $color_border ?>;
+    }
+    <?php echo sprintf( ".%s", $button_class ) ?> > span > i.fas {
+        color: <?php echo $color_text ?>;
+    }
+    <?php echo sprintf( ".%s:hover", $button_class ) ?> {
+        color: <?php echo $color_text_h ?>;
+        background-color: <?php echo $color_bg_h ?>;
+        border-color: <?php echo $color_border_h ?>;
+        --wpa-btn-shadow-color: <?php echo $color_border_h ?>;
+    }
+    <?php echo sprintf( ".%s:hover", $button_class ) ?> > span > i.fas {
+        color: <?php echo $color_text_h ?>;
+    }
     <?php
 }
 
@@ -210,6 +251,34 @@ function wpadverts_get_grays_palette( $gray ) {
 
     return $palettes[ $gray ];
 };
+
+function wpadverts_block_form_styles( $atts ) {
+    $form_border = array(
+        0 => "wpa-border-none",
+        1 => "wpa-border-thin",
+        2 => "wpa-border-thick",
+        3 => "wpa-border-thick-x2"
+    );
+    $form_rounded = array(
+        0 => "wpa-rounded-none",
+        1 => "wpa-rounded-sm",
+        2 => "wpa-rounded",
+        3 => "wpa-rounded-md",
+        4 => "wpa-rounded-lg",
+        5 => "wpa-rounded-xl",
+        6 => "wpa-rounded-2xl",
+    );
+    
+    $form_styles = join( " ", array(
+        isset( $atts["form"]["style"] ) ? $atts["form"]["style"] : "",
+        isset( $atts["form"]["shadow"] ) ? $atts["form"]["shadow"] : "",
+        isset( $atts["form"]["border"] ) ? $form_border[ $atts["form"]["border"] ] : $form_border[0],
+        isset( $atts["form"]["rounded"] ) ? $form_rounded[ $atts["form"]["rounded"] ] : $form_rounded[0],
+        "wpa-padding-sm"
+    ) );
+
+    return $form_styles;
+}
 
 function wpadverts_print_grays_variables( $gray ) {
     $grays = wpadverts_get_grays_palette( $gray );
@@ -280,14 +349,71 @@ function wpadverts_block_list_post_date( $post_id ) {
     return date_i18n( "d/m/Y", get_post_time( 'U', false, $post_id ) );
 }
 
-function wpadverts_block_list_image( $post_id, $atts ) {
+function wpadverts_block_img_options( $prop ) {
+    $width = array(
+        "w-1/12", 
+        "w-2/12", 
+        "w-3/12", 
+        "w-4/12", 
+        "w-5/12", 
+        "w-6/12", 
+        "w-7/12", 
+        "w-8/12", 
+        "w-9/12", 
+        "w-10/12", 
+        "w-11/12", 
+        "w-12/12", 
+    );
+    $height = array(
+        "atw-h-16", 
+        "atw-h-20", 
+        "atw-h-24", 
+        "atw-h-28", 
+        "atw-h-32", 
+        "atw-h-36", 
+        "atw-h-40", 
+        "atw-h-44", 
+        "atw-h-48", 
+        "atw-h-52", 
+        "atw-h-56", 
+        "atw-h-60",
+        "atw-h-64",
+        "atw-h-72",
+        "atw-h-80",
+        "atw-h-96",
+    );
+    $fit = array(
+        "contain" => "atw-object-contain",
+        "cover" => "atw-object-cover",
+        "fill" => "atw-object-fill",
+        "none" => "atw-object-none",
+        "scale-down" => "atw-object-scale-down"
+    );
 
+    $props = array(
+        "height" => $height,
+        "width" => $width,
+        "fit" => $fit
+    );
+
+    return $props[ $prop ];
+}
+
+function wpadverts_block_list_image_list( $post_id, $atts ) {
+
+    $result = new stdClass;
     $image_id = adverts_get_main_image_id( $post_id );
     $image_type = "adverts-list";
     $image = false;
 
     $classes = array();
     $classes_img = array();
+
+    $default_image_url = null;
+
+    if( isset( $atts["default_image_url"] ) && ! empty( $atts["default_image_url"] ) ) {
+        $default_image_url = $atts["default_image_url"];
+    }
 
     if( $image_id ) {
         $image = get_post( $image_id );
@@ -310,18 +436,53 @@ function wpadverts_block_list_image( $post_id, $atts ) {
 
     $image_type = $atts["list_img_source"];
 
-    ?>
-        <div class="wpa-picture-list wpa-block-list-view-list atw-flex atw-pr-4 ">
-            <div class="atw-flex atw-items-center atw-box-border atw-bg-gray-50 atw-border atw-border-solid atw-rounded atw-border-gray-300 <?php echo join( " ", $classes ) ?>">
-            <?php if($image): ?>
-                <img src="<?php echo esc_attr( adverts_get_main_image( $post_id, $image_type ) ) ?>" class="atw-w-full atw-h-full atw-max-w-full atw-max-h-full atw-block atw-rounded-none atw-border-0 atw-shadow-none <?php echo join( " ", $classes_img ) ?>" title="<?php echo esc_attr($image->post_excerpt) ?>" alt="<?php echo esc_attr($image->post_content) ?>" />
-            <?php else: ?>
-                <div class="atw-transform atw-flex-grow atw-text-center atw-rotate-12">
-                    <i class="fas fa-image atw-text-6xl atw-text-gray-200 "></i>
-                </div>
-            <?php endif; ?>
-            </div>
-        </div>
+    $result->image = $image;
+    $result->image_id = $image_id;
+    $result->image_type = $image_type;
+    $result->classes = $classes;
+    $result->classes_img = $classes_img;
+    $result->default_image_url = $default_image_url;
 
-    <?php
+    return $result;
+}
+
+function wpadverts_block_list_image_grid( $post_id, $atts ) {
+    $result = new stdClass;
+
+    $image_id = adverts_get_main_image_id( $post_id );
+    $image_type = "adverts-list";
+    $image = false;
+
+    $classes = array();
+    $classes_img = array();
+
+    $default_image_url = null;
+
+    if( isset( $atts["default_image_url"] ) && ! empty( $atts["default_image_url"] ) ) {
+        $default_image_url = $atts["default_image_url"];
+    }
+
+    if( $image_id ) {
+        $image = get_post( $image_id );
+    }
+
+    $widths = wpadverts_block_img_options( "width" );
+    $height = wpadverts_block_img_options( "height" );    
+    $fits = wpadverts_block_img_options( "fit" );
+
+    $classes[] = $height[ $atts["grid_img_height"] ];
+
+    $classes_img[] = $fits[ $atts["grid_img_fit"] ];
+
+    $image_type = $atts["grid_img_source"];
+
+    
+    $result->image = $image;
+    $result->image_id = $image_id;
+    $result->image_type = $image_type;
+    $result->classes = $classes;
+    $result->classes_img = $classes_img;
+    $result->default_image_url = $default_image_url;
+
+    return $result;
 }

@@ -621,14 +621,14 @@ function adverts_upload_item_data( $attach_id, $is_new = false ) {
     $image_keys = array( "url", "width", "height", "is_intermidiate" );
 
     
-    $image_defaults = array( 
+    $image_defaults = apply_filters( "adverts_upload_item_data_image_defaults", array( 
         "full" => array(
             "enabled" => 1,
             "width" => null,
             "height" => null,
             "crop" => false
         )
-    );
+    ) );
 
     $image_sizes = array_merge( $image_defaults, adverts_config( "gallery.image_sizes" ) );
 

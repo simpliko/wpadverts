@@ -1,13 +1,5 @@
 <?php
 
-/*
-
-OPTIONS:
-- INPUT STYLE: unstyled, simple, underline, solid
-- INPUT MOOD:  simple, playful, elegant
-
-*/
-
 $show_results_counter   = ( isset( $atts['show_results_counter'] ) && $atts['show_results_counter'] ) ? true : false;
 $allow_sorting          = ( isset( $atts['allow_sorting'] ) && $atts['allow_sorting'] ) ? true : false;
 $switch_views           = ( isset( $atts['switch_views'] ) && $atts['switch_views'] ) ? true : false;
@@ -24,67 +16,44 @@ $sort_current_title = "Publish Date";
 $show_image_column      = ( isset( $atts['show_image_column'] ) && $atts['show_image_column'] ) ? true : false;
 $show_price_column      = ( isset( $atts['show_price_column'] ) && $atts['show_price_column'] ) ? true : false;
 
+$grid_cols_arr = array(
+    1 => "atw-grid-cols-1",
+    2 => "atw-grid-cols-2",
+    3 => "atw-grid-cols-3",
+    4 => "atw-grid-cols-4",
+    5 => "atw-grid-cols-5",
+    6 => "atw-grid-cols-6",
+    7 => "atw-grid-cols-7",
+    8 => "atw-grid-cols-8",
+    9 => "atw-grid-cols-9",
+);
 
-echo "<pre>"; print_r($atts);print_r($params);echo "</pre>";
+$grid_cols = sprintf("%s md:%s", $grid_cols_arr[ $atts["grid_columns_mobile"] ], $grid_cols_arr[ $atts["grid_columns"] ] );
+
+//echo "<pre>"; print_r($atts);print_r($params);echo "</pre>";
 ?>
-<link href="/wpadverts/wp-content/plugins/wpadverts/assets/css/all.min.css" rel="stylesheet">
 
-<style>
-[type=checkbox]:checked {
-    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='gray' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
-}
-[type=radio]:checked {
- background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='gray' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='4'/%3e%3c/svg%3e");
-  }
-  
-  .wpadverts-form.wpa-solid select {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-  
-  }
-  
-
-
-.wpadverts-blocks {
-    --wpa-color-primary-light: 147, 197, 253; /*165, 180, 252;*/
-    --wpa-color-primary-main: 29, 78, 216; /*67, 56, 202;*/
-    --wpa-color-primary-dark: 30, 58, 138; /*49, 46, 129;*/
-}
-  
+<style type="text/css">
+    <?php if( $atts["color_title"]): ?>
+    .wpa-result-title-text {
+        color: <?php echo $atts["color_title"] ?>;
+    }
+    <?php endif; ?>
+    <?php if( $atts["color_price"]): ?>
+    .wpa-result-last-text {
+        color: <?php echo $atts["color_price"] ?>;
+    }
+    <?php endif; ?>
+    <?php if( $atts["color_bg_featured"]): ?>
+    .wpadverts-block-list .advert-is-featured {
+        background-color: <?php echo $atts["color_bg_featured"] ?>;
+    }
+    .wpadverts-block-list .advert-is-featured:hover {
+        background-color: <?php echo $atts["color_bg_featured"] ?>;
+        filter: brightness(0.975);
+    }
+    <?php endif; ?>
 </style>
-
-<script type="text/javascript">
-jQuery(function($) {
-    $("#js-wpa-sort").on("click", function(e) {
-        e.preventDefault();
-        $("#js-wpa-sort-options").toggle();
-        return false;
-    });
-    
-    $(".js-wpa-view-list").on("click", function(e) {
-        e.preventDefault(); 
-        
-        $(".js-wpa-view-list").addClass("wpa-selected");
-        $(".js-wpa-view-grid").removeClass("wpa-selected");
-        
-        var results = $(".wpa-results");
-        results.addClass("wpa-list-view");
-        results.removeClass("wpa-grid-view");
-        
-    });
-    $(".js-wpa-view-grid").on("click", function(e) {
-        e.preventDefault(); 
-        
-        $(".js-wpa-view-list").removeClass("wpa-selected");
-        $(".js-wpa-view-grid").addClass("wpa-selected");
-        
-        var results = $(".wpa-results");
-        results.removeClass("wpa-list-view");
-        results.addClass("wpa-grid-view");
-    });
-    
-});
-
-</script>
 
 <div class="wpadverts-blocks wpadverts-block-list atw-flex atw-flex-col">
     
@@ -164,7 +133,7 @@ jQuery(function($) {
 
 
     <?php if( $show_results ): ?>
-    <div class="wpa-block-list-results wpa-results atw-grid atw-p-0 atw-m-0 <?php echo $display ?>">
+    <div class="wpa-block-list-results wpa-results atw-grid atw-p-0 atw-m-0 <?php echo  $grid_cols . " " . $display; ?>">
         <?php if( $loop->have_posts() ): ?>
         <?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
         <?php include apply_filters( "adverts_template_load", $this->path . '/templates/list-item.php' ) ?>

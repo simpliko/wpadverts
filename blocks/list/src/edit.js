@@ -31,6 +31,7 @@ import { megaphone } from '@wordpress/icons';
 import ServerSideRender from '@wordpress/server-side-render';
 import AdvertsSelect from '../../../assets/jsx/adverts-select';
 import AdvertsListData from '../../../assets/jsx/adverts-list-data';
+import AdvertsColorPicker from '../../../assets/jsx/adverts-color-picker';
 
 
 class Edit extends Component {
@@ -291,6 +292,10 @@ class Edit extends Component {
         this.props.setAttributes( { display });
     }
 
+    onChangeDefaultImageUrl = ( default_image_url ) => {
+        this.props.setAttributes( { default_image_url });
+    }
+
     onChangeOrderBy = ( order_by ) => {
         this.props.setAttributes( { order_by } );
     }    
@@ -349,6 +354,18 @@ class Edit extends Component {
 
     onChangeGridImgSource = ( grid_img_source ) => {
         this.props.setAttributes( { grid_img_source } );
+    }
+
+    onChangeColorPrice = ( color_price ) => {
+        this.props.setAttributes( { color_price } );
+    }
+    
+    onChangeColorTitle = ( color_title ) => {
+        this.props.setAttributes( { color_title } );
+    }
+    
+    onChangeColorBgFeatured = ( color_bg_featured ) => {
+        this.props.setAttributes( { color_bg_featured } );
     }
 
     renderInit() {
@@ -428,6 +445,7 @@ class Edit extends Component {
             posts_per_page,
             data,
             display,
+            default_image_url,
             order_by,
             order_by_featured,
             list_type,
@@ -443,7 +461,10 @@ class Edit extends Component {
             show_price_column,
             show_image_column,
             title_source,
-            alt_source
+            alt_source,
+            color_price,
+            color_title,
+            color_bg_featured
         } = attributes;
 
         const { show_instructions } = this.state;
@@ -504,7 +525,11 @@ class Edit extends Component {
                         onChange={this.onChangeDisplay}
                     />
                     
-
+                    <TextControl
+                        label="Default Image URL"
+                        value={default_image_url}
+                        onChange={this.onChangeDefaultImageUrl}
+                    />
 
                     </PanelBody>
                     
@@ -624,8 +649,8 @@ class Edit extends Component {
                             label="Image Height"
                             value={grid_img_height}
                             onChange={this.onChangeGridImgHeight}
-                            min={ 2 }
-                            max={ 10 }
+                            min={ 0 }
+                            max={ 15 }
                             withInputField={false}
                         />
 
@@ -773,25 +798,27 @@ class Edit extends Component {
 
 
                     <PanelBody title="Colors">
-                        <BaseControl
-                            label="Featured Ads Background Color"
-                        >
-                            <ColorPalette
-                                colors={[]}
-                                onChange={ (v) => console.log( v ) }
-                            />
 
-                        </BaseControl>
-
-                        <BaseControl
+                        <AdvertsColorPicker
                             label="Price Color"
-                        >
-                            <ColorPicker
-                                
-                                onChange={ (v) => console.log( v ) }
-                            />
+                            labelPosition="top"
+                            value={color_price}
+                            onChange={this.onChangeColorPrice}
+                        />
 
-                        </BaseControl>
+                        <AdvertsColorPicker
+                            label="Title Color"
+                            labelPosition="top"
+                            value={color_title}
+                            onChange={this.onChangeColorTitle}
+                        />
+                        <AdvertsColorPicker
+                            label="Featured Ads Background Color"
+                            labelPosition="top"
+                            value={color_bg_featured}
+                            onChange={this.onChangeColorBgFeatured}
+                        />
+
                     </PanelBody>
 
 

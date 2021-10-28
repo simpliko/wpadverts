@@ -137,6 +137,9 @@ function adverts_init() {
     wp_register_style( 'adverts-icons', ADVERTS_URL . '/assets/css/wpadverts-glyphs.css', array(), "4.7.2" );
     wp_register_style( 'adverts-icons-animate', ADVERTS_URL . '/assets/css/animation.css', array(), "1.3.5" );
     
+    wp_register_style( 'wpadverts-blocks-common', ADVERTS_URL . '/assets/css/all.min.css', array(), "2.0.0" );
+    wp_register_style( 'wpadverts-blocks', ADVERTS_URL . '/compiled.css', array( 'wp-edit-blocks', 'wpadverts-blocks-common' ), filemtime( ADVERTS_PATH . '/compiled.css' ) );
+    
     wp_register_script('adverts-form', ADVERTS_URL . '/assets/js/wpadverts-form.js', array( 'jquery' ), "1.5.2" );
     
     load_plugin_textdomain("wpadverts", false, dirname(plugin_basename(__FILE__))."/languages/");
@@ -466,6 +469,7 @@ function adverts_init_admin() {
     wp_register_style( 'adverts-admin-updates', ADVERTS_URL . '/assets/css/wpadverts-admin-updates.css', array(), "1.5.3" );
     
     wp_register_script( 'adverts-types-post', ADVERTS_URL . '/assets/js/wpadverts-types-post.js', array( 'jquery' ), "1.6.0", true );
+    wp_register_script( 'adverts-admin-styling', ADVERTS_URL . '/assets/js/wpadverts-admin-styling.js', array( 'jquery' ), "2.0.0", true );
     
     add_filter( 'display_post_states', 'adverts_display_expired_state' );
     add_action( 'post_submitbox_misc_actions', 'adverts_expiry_meta_box' );

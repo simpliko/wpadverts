@@ -21,45 +21,94 @@
  * @return void
  */
 function adext_styling_page_options() {
-    
+    global $adverts_namespace;
+
     wp_enqueue_style( 'adverts-admin' );
     $flash = Adverts_Flash::instance();
     $error = array();
     
-    $options = get_option ( "adext_contact_form_config", array() );
+    $options_defaults = $adverts_namespace["blocks_styling"]["default"];
+
+    $options = get_option( 'adverts_blocks_styling' );
     if( $options === null || empty( $options ) ) {
-        $options = adverts_config( "contact_form.ALL" );
+        $options = $options_defaults;
     }
 
-    $scheme = Adverts::instance()->get("form_contact_form_config");
-    $form = new Adverts_Form( $scheme );
-    
-    $button_text = __("Update Options", "wpadverts");
-    
-    if(isset($_POST) && !empty($_POST)) {
-        $form->bind( stripslashes_deep( $_POST ) );
-        $valid = $form->validate();
-
-        if($valid) {
-            $form_data = $form->get_values();
-            
-            if(!isset($form_data['show_phone'])) {
-                $form_data['show_phone'] = 0;
-            }
-            if(!isset($form_data['reveal_on_click'])) {
-                $form_data['reveal_on_click'] = "0";
-            } else {
-                $form_data['reveal_on_click'] = "1";
-            }
-            
-            update_option("adext_contact_form_config", $form_data);
-            $flash->add_info( __("Settings updated.", "wpadverts") );
-        } else {
-            $flash->add_error( __("There are errors in your form.", "wpadverts") );
-        }
+    if( isset( $options['primary_button'] ) ) {
+        $pb = $options['primary_button'];
     } else {
-        $form->bind( $options );
+        $pb = $options_defaults['primary_button'];  
     }
+    $pd = $options_defaults['primary_button'];    
     
+    if( isset( $options['secondary_button'] ) ) {
+        $sb = $options['secondary_button'];
+    } else {
+        $sb = $options_defaults['secondary_button'];
+    }
+    $sd = $options_defaults['secondary_button'];    
+    
+    if( isset( $options['form'] ) ) {
+        $frm = $options['form'];
+    } else {
+        $frm = $options_defaults['form'];
+    }
+    $frmd = $options_defaults['form'];
+    
+    echo "<pre>";var_dump($sb);echo "</pre>";
+
+    $show_buttons = false;
+    $button_text = __("Update Options", "wpadverts");
+
+    $form = new Adverts_Form( adext_styling_page_options_demo_form() );
+
     include ADVERTS_PATH . 'addons/styling/admin/options.php';
+    
+    
+}
+
+function adext_styling_page_options_demo_form() {
+    return array(
+        "name" => "demo-form",
+        "field" => array(
+            array(
+                "name" => "_item_information",
+                "type" => "adverts_field_header",
+                "order" => 6,
+                "label" => __( 'Example Header', 'wpadverts' )
+            ),
+            array(
+                "name" => "_post_title",
+                "type" => "adverts_field_text",
+                "order" => 7,
+                "label" => __( "Title", "wpadverts" ),
+            ),
+            array(
+                "name" => "_dropdown",
+                "type" => "adverts_field_select",
+                "order" => 7,
+                "label" => __( "Dropdown", "wpadverts" ),
+                "value" => "",
+                "empty_option" => true,
+                "empty_option_text" => __( "Select Option", "wpadverts" ),
+                "options" => array(
+                    array( "value" => "Option 1", "text" => "Option 1" ),
+                    array( "value" => "Option 2", "text" => "Option 2" ),
+                    array( "value" => "Option 3", "text" => "Option 3" ),
+                )
+            ),            
+            array(
+                "name" => "_checkbox",
+                "type" => "adverts_field_checkbox",
+                "order" => 7,
+                "label" => __( "Checkbox", "wpadverts" ),
+                "value" => "",
+                "options" => array(
+                    array( "value" => "Option 1", "text" => "Option 1" ),
+                    array( "value" => "Option 2", "text" => "Option 2" ),
+                    array( "value" => "Option 3", "text" => "Option 3" ),
+                )
+            ),
+        )
+    );
 }

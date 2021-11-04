@@ -1200,3 +1200,90 @@ function adverts_delete() {
     exit;
 }
 
+function wpadverts_admin_styling_save() {
+
+    $response = array(
+        "status" => 0,
+        "error" => ""
+    );
+
+    if( ! current_user_can( "manage_options" ) ) {
+        $response["error"] = __( "You cannot access this page.", "wpadverts" );
+        echo json_encode( $response );
+        exit;
+    }
+
+    $settings = adverts_config( "blocks_styling.ALL" );
+    $keys = array_keys( $settings );
+
+    if( ! in_array( adverts_request( "param" ), $keys ) ) {
+        $response["error"] = __( "Invalid param name.", "wpadverts" );
+        echo json_encode( $response );
+        exit;
+    }
+
+    $param = adverts_request( "param" );
+    $form = adverts_request( "form" );
+
+    $options = get_option ( "adverts_blocks_styling", array() );
+    if( $options === null || empty( $options ) ) {
+        $options = array();
+    }
+    if( ! isset( $options[$param] ) ) {
+        $options[$param] = array();
+    }
+
+    foreach( $form as $key => $value ) {
+        if( isset( $settings[$param][$key] ) ) {
+            $options[$param][$key] = $value;
+        }
+    }
+
+    update_option( "adverts_blocks_styling", $options );
+
+    $response["status"] = 1;
+
+    echo json_encode( $response );
+    exit;
+}
+
+function wpadverts_admin_styling_reset() {
+
+    $response = array(
+        "status" => 0,
+        "error" => ""
+    );
+
+    if( ! current_user_can( "manage_options" ) ) {
+        $response["error"] = __( "You cannot access this page.", "wpadverts" );
+        echo json_encode( $response );
+        exit;
+    }
+
+    $settings = adverts_config( "blocks_styling.ALL" );
+    $keys = array_keys( $settings );
+
+    if( ! in_array( adverts_request( "param" ), $keys ) ) {
+        $response["error"] = __( "Invalid param name.", "wpadverts" );
+        echo json_encode( $response );
+        exit;
+    }
+
+    $options = get_option ( "adverts_blocks_styling", array() );
+    if( $options === null || empty( $options ) ) {
+        $options = array();
+    }
+
+    $param = adverts_request( "param" );
+    
+    if( isset( $options[$param] ) ) {
+        unset( $options[$param] );
+    }
+
+    update_option( "adverts_blocks_styling", $options );
+
+    $response["status"] = 1;
+
+    echo json_encode( $response );
+    exit;
+}

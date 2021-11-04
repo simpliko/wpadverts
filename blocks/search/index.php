@@ -295,7 +295,7 @@ class Adverts_Block_Search {
             }
         }
     
-        
+        echo "<pre>";print_r($atts);echo "</pre>";
         $template = dirname( __FILE__ ) . "/templates/search.php";
         ob_start();
         

@@ -108,6 +108,43 @@ $adverts_namespace['moderate'] = array(
     )
 );
 
+$adverts_namespace['blocks_styling'] = array(
+    "option_name" => "adverts_blocks_styling",
+    "default" => array(
+        "primary_button" => array(
+            "border_radius" => "atw-rounded",
+            "border_width" => "atw-border-0",
+            "font_weight" => "atw-font-bold",
+            "color_text" => "#ffffff",
+            "color_bg" => "#e25a58",
+            "color_border" => "#e25a58",
+            "color_text_h" => "#ffffff",
+            "color_bg_h" => "#c44c4c",
+            "color_border_h" => "#c44c4c"
+        ),      
+        "secondary_button" => array(
+            "border_radius" => "atw-rounded",
+            "border_width" => "atw-border-0",
+            "font_weight" => "atw-font-normal",
+            "color_text" => "#6b7280",
+            "color_bg" => "#e5e7eb",
+            "color_border" => "#e5e7eb",
+            "color_text_h" => "#374151",
+            "color_bg_h" => "#e5e7eb",
+            "color_border_h" => "#e5e7eb"
+        ),
+        "form" => array(
+            "style" => "wpa-solid",
+            "shadow" => "wpa-shadow-none",
+            "palette" => "cool-gray",
+            "rounded" => 3,
+            "px" => 0,
+            "py" => 0,
+            "border" => 1
+        )
+    )
+);
+
 /**
  * Main Adverts Init Function
  * 
@@ -471,6 +508,11 @@ function adverts_init_admin() {
     wp_register_script( 'adverts-types-post', ADVERTS_URL . '/assets/js/wpadverts-types-post.js', array( 'jquery' ), "1.6.0", true );
     wp_register_script( 'adverts-admin-styling', ADVERTS_URL . '/assets/js/wpadverts-admin-styling.js', array( 'jquery' ), "2.0.0", true );
     
+    wp_localize_script( 'adverts-admin-styling', 'adverts_admin_styling_lang', array(
+        "ajax" => admin_url( 'admin-ajax.php' ),
+        "are_you_sure" => __( "Are you sure you want to reset this settings to defaults?", "wpadverts" )
+    ));
+
     add_filter( 'display_post_states', 'adverts_display_expired_state' );
     add_action( 'post_submitbox_misc_actions', 'adverts_expiry_meta_box' );
     
@@ -496,6 +538,8 @@ function adverts_init_admin() {
     add_action( "admin_footer", "wpadverts_qe_hide_author_field" );
     
     // AJAX filters
+    add_action('wp_ajax_wpadverts-styling-save', 'wpadverts_admin_styling_save');
+    add_action('wp_ajax_wpadverts-styling-reset', 'wpadverts_admin_styling_reset');
     add_action('wp_ajax_adverts_author_suggest', 'adverts_author_suggest');
     add_action('wp_ajax_adverts_gallery_upload', 'adverts_gallery_upload');
     add_action('wp_ajax_adverts_gallery_update', 'adverts_gallery_update');

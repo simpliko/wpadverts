@@ -349,6 +349,23 @@ function wpadverts_block_list_post_date( $post_id ) {
     return date_i18n( "d/m/Y", get_post_time( 'U', false, $post_id ) );
 }
 
+function wpadverts_block_tpl_field_width( $field ) {
+    $arr = array(
+        "full" => "atw-w-full",
+        "half" => "atw-w-full md:atw-w-2/4",
+        "third" => "atw-w-full md:atw-w-1/3",
+        "fourth" => "atw-w-full md:atw-w-1/4"
+    );
+
+    if( ! isset( $field['meta'] ) || ! isset( $field['meta']['search_type'] ) ) {
+        $field_type = "full";
+    }  else {
+        $field_type = $field['meta']['search_type'];
+    }
+
+    return $arr[ $field_type ] . " wpa-w-" . $field_type;
+}
+
 function wpadverts_block_img_options( $prop ) {
     $width = array(
         "w-1/12", 
@@ -486,3 +503,4 @@ function wpadverts_block_list_image_grid( $post_id, $atts ) {
 
     return $result;
 }
+

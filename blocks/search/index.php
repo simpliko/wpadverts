@@ -65,7 +65,7 @@ class Adverts_Block_Search {
                 "form" => array(
                     "type" => "object",
                     "default" => array(
-                        "style" => "",
+                        "style" => "wpa-solid",
                         "shadow" => "",
                         "rounded" => "",
                         "border" => "",
@@ -295,7 +295,7 @@ class Adverts_Block_Search {
             }
         }
     
-        echo "<pre>";print_r($atts);echo "</pre>";
+        
         $template = dirname( __FILE__ ) . "/templates/search.php";
         ob_start();
         

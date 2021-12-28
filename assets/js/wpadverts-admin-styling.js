@@ -51,19 +51,23 @@ WPADVERTS.Styling.Button.prototype.removePreviewClass = function(index, item) {
     this.preview.removeClass(jQuery(item).attr("value"));
 }
 
+WPADVERTS.Styling.Button.prototype.removePreviewDataClass = function(index, item) {
+    this.preview.removeClass(jQuery(item).data("value"));
+};
+
 WPADVERTS.Styling.Button.prototype.setDefaults = function() {
-    this.preview.addClass(this.width.val());
-    this.preview.addClass(this.radius.val());
+    this.preview.addClass(this.width.find("opton:selected").data("value"));
+    this.preview.addClass(this.radius.find("option:selected").data("value"));
 };
 
 WPADVERTS.Styling.Button.prototype.onRadiusChange = function( e ) {
-    jQuery.each(this.radius.find("option"), jQuery.proxy(this.removePreviewClass,this));
-    this.preview.addClass(e.target.value);
+    jQuery.each(this.radius.find("option"), jQuery.proxy(this.removePreviewDataClass,this));
+    this.preview.addClass(this.radius.find("option:selected").data("value"));
 };
 
 WPADVERTS.Styling.Button.prototype.onWidthChange = function( e ) {
-    jQuery.each(this.width.find("option"), jQuery.proxy(this.removePreviewClass,this));
-    this.preview.addClass(e.target.value);
+    jQuery.each(this.width.find("option"), jQuery.proxy(this.removePreviewDataClass,this));
+    this.preview.addClass(this.width.find("option:selected").data("value"));
 };
 
 WPADVERTS.Styling.Button.prototype.onFontWeightChange = function( e ) {
@@ -204,6 +208,7 @@ WPADVERTS.Styling.Form = function( el, preview ) {
     this.el = el;
     this.preview = preview;
 
+    this.form = el.find("form");
     this.palette = el.find(".palette");
     this.style = el.find(".style");
     this.shadow = el.find(".shadow");
@@ -216,10 +221,104 @@ WPADVERTS.Styling.Form = function( el, preview ) {
     this.rounded.on("change", jQuery.proxy(this.onRoundedChange, this));
     this.border.on("change", jQuery.proxy(this.onBorderChange, this));
 
+    this.submit = el.find(".button-primary");
+    this.reset = el.find(".wpa-button-settings-reset");
+    this.spinner = el.find(".spinner");
 
+    this.submit.on("click", jQuery.proxy(this.onSubmitClick, this));
+    this.reset.on("click", jQuery.proxy(this.onResetClick, this));
 
     this.setDefaults();
 };
+
+WPADVERTS.Styling.Form.prototype.onSubmitClick = function( e ) {
+    e.preventDefault();
+
+    this.submit.addClass("disabled");
+    this.spinner.addClass("atw-visible");
+
+    var data = {
+        action: "wpadverts-styling-save",
+        param: this.form.data("param"),
+        form: {}
+    };
+
+    jQuery.each(this.form.serializeArray(), function() {
+        data.form[this.name] = this.value;
+    });
+
+    jQuery.ajax({
+        url: adverts_admin_styling_lang.ajax,
+        data: data,
+        dataType: "json",
+        type: "POST",
+        context: this,
+        success: this.SaveSuccess,
+        error: this.GlobalError
+
+    });
+
+    return false;
+}
+ 
+WPADVERTS.Styling.Form.prototype.onResetClick = function( e ) {
+    e.preventDefault();
+
+    this.submit.addClass("disabled");
+    this.spinner.addClass("atw-visible");
+
+    var data = {
+        action: "wpadverts-styling-reset",
+        param: this.form.data("param")
+    };
+
+    jQuery.ajax({
+        url: adverts_admin_styling_lang.ajax,
+        data: data,
+        dataType: "json",
+        type: "POST",
+        context: this,
+        success: this.ResetSuccess,
+        error: this.GlobalError
+
+    });
+
+    return false;
+}
+
+WPADVERTS.Styling.Form.prototype.SaveSuccess = function( response ) {
+    if( response.status != "1" ) {
+        return this.GlobalError();
+    }
+
+    this.submit.removeClass("disabled");
+    this.spinner.removeClass("atw-visible");
+}
+
+WPADVERTS.Styling.Form.prototype.ResetSuccess = function( response ) {
+    if( response.status != "1" ) {
+        return this.GlobalError();
+    }
+
+    this.el.find(".wp-picker-default").click();
+
+
+    this.submit.removeClass("disabled");
+    this.spinner.removeClass("atw-visible");
+
+
+}
+
+WPADVERTS.Styling.Form.prototype.GlobalError = function( response ) {
+
+    this.submit.removeClass("disabled");
+    this.spinner.removeClass("atw-visible");
+
+    if( typeof response.error !== "undefined" && response.error.length > 0 ) {
+        alert(response.error);
+    }
+    
+}
 
 WPADVERTS.Styling.Form.prototype.setDefaults = function() {
 

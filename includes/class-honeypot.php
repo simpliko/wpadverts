@@ -67,7 +67,8 @@ class WPAdverts_Honeypot {
     }
 
     public function head() {
-        echo sprintf( '<style type="text/css">.adverts-field-name-%s { display: none !important }</style>', adverts_config( "moderate.honeypot_name" ) );
+        $hp = adverts_config( "moderate.honeypot_name" );
+        echo sprintf( '<style type="text/css">.wpa-field--%s, .adverts-field-name-%s { display: none !important }</style>', $hp, $hp );
     }
 }
 

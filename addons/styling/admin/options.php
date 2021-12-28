@@ -51,23 +51,23 @@
                     <div>
                         <div class="atw-block atw-mb-1"><?php _e("Border Radius", "wpadverts" ) ?></div>
                         <select name="border_radius" class="border-radius" data-default-value="<?php echo esc_attr( $pd["border_radius"] ) ?>">
-                            <option value="atw-rounded-none" <?php selected( $pb["border_radius"], "atw-rounded-none",) ?>><?php _e("None", "wpadverts" ) ?></option>
-                            <option value="atw-rounded-sm" <?php selected( $pb["border_radius"], "atw-rounded-sm",) ?>><?php _e("Extra Small", "wpadverts" ) ?></option>
-                            <option value="atw-rounded" <?php selected( $pb["border_radius"], "atw-rounded",) ?>><?php _e("Small", "wpadverts" ) ?></option>
-                            <option value="atw-rounded-md" <?php selected( $pb["border_radius"], "atw-rounded-md",) ?>><?php _e("Medium", "wpadverts" ) ?></option>
-                            <option value="atw-rounded-lg" <?php selected( $pb["border_radius"], "atw-rounded-lg",) ?>><?php _e("Large", "wpadverts" ) ?></option>
-                            <option value="atw-rounded-xl" <?php selected( $pb["border_radius"], "atw-rounded-xl",) ?>><?php _e("Extra Large", "wpadverts" ) ?></option>
-                            <option value="atw-rounded-full" <?php selected( $pb["border_radius"], "atw-rounded-full",) ?>><?php _e("Full", "wpadverts" ) ?></option>
+                            <option value="0" data-value="atw-rounded-none" <?php selected( $pb["border_radius"], "0",) ?>><?php _e("None", "wpadverts" ) ?></option>
+                            <option value="1" data-value="atw-rounded-sm" <?php selected( $pb["border_radius"], "1",) ?>><?php _e("Extra Small", "wpadverts" ) ?></option>
+                            <option value="2" data-value="atw-rounded" <?php selected( $pb["border_radius"], "2",) ?>><?php _e("Small", "wpadverts" ) ?></option>
+                            <option value="3" data-value="atw-rounded-md" <?php selected( $pb["border_radius"], "3",) ?>><?php _e("Medium", "wpadverts" ) ?></option>
+                            <option value="4" data-value="atw-rounded-lg" <?php selected( $pb["border_radius"], "4",) ?>><?php _e("Large", "wpadverts" ) ?></option>
+                            <option value="5" data-value="atw-rounded-xl" <?php selected( $pb["border_radius"], "5",) ?>><?php _e("Extra Large", "wpadverts" ) ?></option>
+                            <option value="6" data-value="atw-rounded-full" <?php selected( $pb["border_radius"], "6",) ?>><?php _e("Full", "wpadverts" ) ?></option>
                         </select>
                     </div>
 
                     <div>
                         <div class="atw-block atw-mb-1"><?php _e("Border Width", "wpadverts" ) ?></div>
                         <select name="border_width" class="border-width" data-default-value="<?php echo esc_attr( $pd["border_width"] ) ?>">
-                            <option value="atw-border-0" <?php selected( $pb["border_width"], "atw-border-0",) ?>><?php _e("None", "wpadverts" ) ?></option>
-                            <option value="atw-border" <?php selected( $pb["border_width"], "atw-border",) ?>><?php _e("Thin", "wpadverts" ) ?></option>
-                            <option value="atw-border-2" <?php selected( $pb["border_width"], "atw-border-2",) ?>><?php _e("Thick", "wpadverts" ) ?></option>
-                            <option value="atw-border-4" <?php selected( $pb["border_width"], "atw-border-4",) ?>><?php _e("Extra Thick", "wpadverts" ) ?></option>
+                            <option value="0" data-value="atw-border-0" <?php selected( $pb["border_width"], "0",) ?>><?php _e("None", "wpadverts" ) ?></option>
+                            <option value="1" data-value="atw-border" <?php selected( $pb["border_width"], "1",) ?>><?php _e("Thin", "wpadverts" ) ?></option>
+                            <option value="2" data-value="atw-border-2" <?php selected( $pb["border_width"], "2",) ?>><?php _e("Thick", "wpadverts" ) ?></option>
+                            <option value="3" data-value="atw-border-4" <?php selected( $pb["border_width"], "3",) ?>><?php _e("Extra Thick", "wpadverts" ) ?></option>
                         </select>
                     </div>
 
@@ -174,23 +174,23 @@
                         <div>
                             <div class="atw-block atw-mb-1"><?php _e("Border Radius", "wpadverts" ) ?></div>
                             <select name="border_radius" class="border-radius" data-default-value="<?php echo esc_attr( $sd["border_radius"] ) ?>">
-                                <option value="atw-rounded-none" <?php selected( $sb["border_radius"], "atw-rounded-none",) ?>><?php _e("None", "wpadverts" ) ?></option>
-                                <option value="atw-rounded-sm" <?php selected( $sb["border_radius"], "atw-rounded-sm",) ?>><?php _e("Extra Small", "wpadverts" ) ?></option>
-                                <option value="atw-rounded" <?php selected( $sb["border_radius"], "atw-rounded",) ?>><?php _e("Small", "wpadverts" ) ?></option>
-                                <option value="atw-rounded-md" <?php selected( $sb["border_radius"], "atw-rounded-md",) ?>><?php _e("Medium", "wpadverts" ) ?></option>
-                                <option value="atw-rounded-lg" <?php selected( $sb["border_radius"], "atw-rounded-lg",) ?>><?php _e("Large", "wpadverts" ) ?></option>
-                                <option value="atw-rounded-xl" <?php selected( $sb["border_radius"], "atw-rounded-xl",) ?>><?php _e("Extra Large", "wpadverts" ) ?></option>
-                                <option value="atw-rounded-full" <?php selected( $sb["border_radius"], "atw-rounded-full",) ?>><?php _e("Full", "wpadverts" ) ?></option>
+                                <option value="0" data-value="atw-rounded-none" <?php selected( $sb["border_radius"], "0",) ?>><?php _e("None", "wpadverts" ) ?></option>
+                                <option value="1" data-value="atw-rounded-sm" <?php selected( $sb["border_radius"], "1",) ?>><?php _e("Extra Small", "wpadverts" ) ?></option>
+                                <option value="2" data-value="atw-rounded" <?php selected( $sb["border_radius"], "2",) ?>><?php _e("Small", "wpadverts" ) ?></option>
+                                <option value="3" data-value="atw-rounded-md" <?php selected( $sb["border_radius"], "3",) ?>><?php _e("Medium", "wpadverts" ) ?></option>
+                                <option value="4" data-value="atw-rounded-lg" <?php selected( $sb["border_radius"], "4",) ?>><?php _e("Large", "wpadverts" ) ?></option>
+                                <option value="5" data-value="atw-rounded-xl" <?php selected( $sb["border_radius"], "5",) ?>><?php _e("Extra Large", "wpadverts" ) ?></option>
+                                <option value="6" data-value="atw-rounded-full" <?php selected( $sb["border_radius"], "6",) ?>><?php _e("Full", "wpadverts" ) ?></option>
                             </select>
                         </div>
 
                         <div>
                             <div class="atw-block atw-mb-1"><?php _e("Border Width", "wpadverts" ) ?></div>
                             <select name="border_width" class="border-width" data-default-value="<?php echo esc_attr( $sd["border_width"] ) ?>">
-                                <option value="atw-border-0" <?php selected( $sb["border_width"], "atw-border-0",) ?>><?php _e("None", "wpadverts" ) ?></option>
-                                <option value="atw-border" <?php selected( $sb["border_width"], "atw-border",) ?>><?php _e("Thin", "wpadverts" ) ?></option>
-                                <option value="atw-border-2" <?php selected( $sb["border_width"], "atw-border-2",) ?>><?php _e("Thick", "wpadverts" ) ?></option>
-                                <option value="atw-border-4" <?php selected( $sb["border_width"], "atw-border-4",) ?>><?php _e("Extra Thick", "wpadverts" ) ?></option>
+                                <option value="0" data-value="atw-border-0" <?php selected( $sb["border_width"], "0",) ?>><?php _e("None", "wpadverts" ) ?></option>
+                                <option value="1" data-value="atw-border" <?php selected( $sb["border_width"], "1",) ?>><?php _e("Thin", "wpadverts" ) ?></option>
+                                <option value="2" data-value="atw-border-2" <?php selected( $sb["border_width"], "2",) ?>><?php _e("Thick", "wpadverts" ) ?></option>
+                                <option value="3" data-value="atw-border-4" <?php selected( $sb["border_width"], "3",) ?>><?php _e("Extra Thick", "wpadverts" ) ?></option>
                             </select>
                         </div>
 
@@ -319,7 +319,7 @@
 
                    <div>
                         <div class="atw-block atw-mb-1"><?php _e("Shadow", "wpadverts" ) ?></div>
-                        <select name="style" class="shadow" data-default-value="<?php echo esc_attr( $frmd["shadow"] ) ?>">
+                        <select name="shadow" class="shadow" data-default-value="<?php echo esc_attr( $frmd["shadow"] ) ?>">
                             <option value="wpa-shadow-none" <?php selected( $frm["shadow"], "wpa-shadow-none",) ?>><?php _e("None (default styling)", "wpadverts" ) ?></option>
                             <option value="wpa-shadow-sm" <?php selected( $frm["shadow"], "wpa-shadow-sm",) ?>><?php _e("Small", "wpadverts" ) ?></option>
                             <option value="wpa-shadow-md" <?php selected( $frm["shadow"], "wpa-shadow-md",) ?>><?php _e("Medium", "wpadverts" ) ?></option>
@@ -370,7 +370,7 @@
         
     </div>
 
-        <div class="wpa-styling-form-preview atw-flex atw-flex-1 atw-items-center atw-justify-around atw-w-full atw-h-auto  atw-border-0 atw-border-solid atw-border-gray-500 atw-bg-white">
+        <div class="wpa-styling-form-preview atw-flex atw-flex-1 atw-items-center atw-justify-around atw-w-full atw-h-auto  atw-border-0 atw-border-solid atw-border-gray-500 atw-bg-white atw-p-6">
             <style type="text/css">
                 <?php $palette = array( "blue-gray", "cool-gray", "gray", "true-gray", "warm-gray" ) ?>
                 <?php foreach( $palette as $p ): ?>

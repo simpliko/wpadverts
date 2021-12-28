@@ -51,6 +51,28 @@ class Adverts_Block_Details {
             'attributes' => array(
                 'post_type' => array(
                     'type' => 'string'
+                ),
+                'contact_primary' => array(
+                    'type' => 'string',
+                    'default' => 'contact-form'
+                ),                
+                'contact_secondary' => array(
+                    'type' => 'string',
+                    'default' => 'phone-button'
+                ),
+                'contact_additional' => array(
+                    'type' => 'array',
+                    'default' => array(
+
+                    )
+                ),
+                'phone_reveal' => array(
+                    'type' => 'integer',
+                    'default' => 1
+                ),
+                'sticky_footer' => array(
+                    'type' => 'integer',
+                    'default' => 0
                 )
             )
         ) );
@@ -86,12 +108,56 @@ class Adverts_Block_Details {
 
         );
 
+        $contact_methods = $this->_get_contact_options( $atts, $post_id );
+        $contact_options = array( "primary" => null, "secondary" => null );
+        $contact_additional = array();
+
+        // sort here
+        $co_count = 0;
+
+        foreach( $contact_methods as $ckey => $cm ) {
+            if( $ckey == $atts["contact_primary"] ) {
+                $contact_options["primary"] = $cm;
+                $co_count++;
+            } elseif( $ckey == $atts["contact_secondary"] ) {
+                $contact_options["secondary"] = $cm;
+                $co_count++;
+            } else {
+                $contact_additional[] = $cm;
+            }
+        }
+
+        $more_button = $this->_get_more_button();
+
+        
+
+
+
         $template = dirname( __FILE__ ) . "/templates/single.php";
         ob_start();
         include $template;
         return ob_get_clean();
     }
     
+    protected function _get_contact_options( $atts, $post_id ) {
+
+        $contact_options = array();
+        $contact_options = apply_filters( "wpadverts/block/details/contact-options", $contact_options, $atts, $post_id );
+
+        return $contact_options;
+    }
+
+    protected function _get_more_button() {
+        return array(
+            "text" => "",
+            "html" => "", 
+            "icon" => "fas fa-ellipsis-h", 
+            "class" => "wpadverts-more",
+            "type" => "secondary",
+            "options" => array()
+        );
+    }
+
     protected function _get_categories_parsed( $post_id ) {
         $advert_category = get_the_terms( $post_id, 'advert_category' );
 

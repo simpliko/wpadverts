@@ -1,4 +1,13 @@
-<?php do_action( "wpadverts/block/details/tpl/pre", $post_id, $atts ) ?>
+<?php do_action( "wpadverts/block/details/tpl/start", $post_id, $atts ) ?>
+
+<style type="text/css">
+    .wpadverts-cpt form.wpadverts-form {
+        <?php wpadverts_print_grays_variables( isset( $atts["form"] ) ? $atts["form"] : "" ) ?>
+    }
+    <?php wpadverts_block_button_css( "primary", isset( $atts["primary_button"] ) ? $atts["primary_button"] : array() ) ?>
+    <?php wpadverts_block_button_css( "secondary", isset( $atts["secondary_button"] ) ? $atts["secondary_button"] : array() ) ?>
+</style>
+
 <div class="wpadverts-cpt <?php echo sprintf( "wpadverts-cpt-", $atts["post_type"] ) ?>">
 
     <?php do_action( "adverts_tpl_single_top", $post_id ) ?>
@@ -64,7 +73,7 @@
     </div>
 
     <div class="">
-        <?php foreach( array(1,2) as $k ): ?>
+        <?php foreach( array(1) as $k ): ?>
         <div class="atw-mt-3">
             <div>
                 <span class="atw-inline-block atw-text-gray-700 atw-text-xl atw-font-bold atw-py-3">Description</span>
@@ -101,49 +110,89 @@
 
 
     <?php do_action( "adverts_tpl_single_bottom", $post_id ) ?>
+    
+    <?php if( ! empty( $contact_options ) || ! empty( $options ) ): ?>
+    <div class="wpa-cpt-contact-details atw-my-3  atw--mx-1">
 
-<?php
+        <div class="atw-relative atw-flex atw-flex-col md:atw-flex-row">
+            <?php do_action( "wpadverts/block/details/tpl/contact-options", $post_id, $atts ) ?>
 
-$atts["button_secondary"] = array(
-    "border_radius" => 0,
-    "border_width" => 1,
-    "desktop" => "text",
-    "mobile" => "text",
-    "icon" => "fa-phone"
-);
-
-?>
-
-
-    <div class="atw-absolute md:atw-relative atw-left-0 atw-right-0">
-
-        <div class="atw-fixed md:atw-relative atw-bottom-0 atw-left-0 atw-right-0">
-            <div class="atw-flex md:atw--mx-1 atw-py-6">
-                <div class="flex-none md:atw-flex-none atw-px-1 atw-w-1/2 md:atw-w-auto">
-                    <button class="wpa-btn-primary atw-overflow-hidden atw-truncate atw-overflow-ellipsis atw-inline-block hover:atw-bg-none atw-bg-none atw-text-white atw-w-full atw-text-base atw-outline-none atw-border-solid atw-border atw-border-blue-400 hover:atw-bg-blue-700 atw-bg-blue-400 atw-font-semibold atw-px-4 atw-py-2 atw-rounded-md atw-leading-loose">
-                        <span class="md:atw-inline atw-text-white"><i class="fas fa-search atw-text-base"></i></span> 
-                        <span class="atw-truncate atw-w-full ">Send Emailsss More emails</span>
-                        
-                    </button>
-                </div>            
-                
-                <div class="flex-none  md:atw-flex-none atw-px-1 atw-w-1/2 md:atw-w-auto">
-                    <button class="wpa-btn-primary atw-overflow-hidden atw-truncate atw-overflow-ellipsis atw-inline-block hover:atw-bg-none atw-bg-none atw-text-gray-600 atw-w-full atw-text-base atw-outline-none atw-border-solid atw-border atw-border-gray-300 hover:atw-bg-blue-700 atw-bg-white atw-font-semibold atw-px-4 atw-py-2 atw-rounded-md atw-leading-loose">
-                        <span class="md:atw-inline atw-text-gray-600"><i class="fas fa-search atw-text-base"></i></span> 
-                        <span class="atw-truncate atw-w-full ">
-                            Call <a href="" class="">700 100 100</a>
-                        </span>
-                        
-                    </button>
-                </div>            
-                
+            <div class="atw-relative atw-flex atw-flex-1 atw-flex-col md:atw-flex-row">
+                <?php foreach( $contact_options as $contact_option ): ?>
+                <div class="atw-flex-auto atw-mx-1 atw-mb-3">
+                <?php 
+                    echo wpadverts_block_button( 
+                        $contact_option, 
+                        $contact_option["options"]
+                    ) 
+                ?>
+                </div>
+                <?php endforeach; ?>
             </div>
 
+            <?php if( $atts['sticky_footer'] ): ?>
+            <div class="atw-relative atw-flex atw-flex-none">
+            <?php if( $more_button ): ?>
+                <div class="atw-flex-none atw-mx-1">
+                <?php 
+                    echo wpadverts_block_button( 
+                        $more_button, 
+                        $more_button["options"] 
+                    ) 
+                ?>
+                </div>
+                <?php endif; ?>
+            </div>
+            <?php endif; ?>
+            
         </div>
 
         
+        <div class="wpa-contact-more atw-inset-x-0">
+
+            <div class="atw-w-full atw-flex atw-flex-col atw-mt-0 atw-px-0">
+                    <div class="">  
+                    <?php foreach( $contact_additional as $contact_a ): ?>
+                        <div class="atw-flex-auto atw-mx-1 atw-mb-3">             
+                        <?php 
+                            echo wpadverts_block_button( 
+                                $contact_a, 
+                                $contact_a["options"] 
+                            ) 
+                        ?>
+                        </div>
+                    <?php endforeach; ?>
+                    </div>
+            </div>
+
+            <div class="atw-w-full atw-flex atw-flex-col md:atw-flex-row atw-my-3 atw-px-0 atw-mx-1 md:atw-my-0">
+
+                    <div class="atw-py-2 atw-flex atw-content-center md:atw-px-3">
+                        
+                        <a href="#" class="atw-text-base md:atw-text-base atw-text-gray-700 atw-no-underline atw-font-bold ">
+                            <i class="far fa-flag atw-text-lg md:atw-text-lg atw-text-black atw-pr-2"></i>
+                            <span class="atw-self-center">Report this Ad.</span>
+                        </a>
+                    </div>
+
+                    <div class="atw-py-2 atw-flex atw-content-center md:atw-px-3">
+                        
+                        <a href="#" class="atw-text-base md:atw-text-base atw-text-gray-700 atw-no-underline atw-font-bold atw-self-center">
+                            <i class="far fa-heart atw-text-lg md:atw-text-lg atw-text-black atw-pr-2"></i>
+                            <span class="atw-self-center">Add to favorite</span>
+                        </a>
+                    </div>
+            </div>
+        </div>
 
     </div>
 
+    <div class="wpa-more-bg atw-z-30 atw-bg-black atw-inset-0 atw-absolute atw-opacity-60" style="display:none"></div>
+
+    <?php endif; ?>
+
+    <?php do_action( "wpadverts/block/details/tpl/contact", $post_id, $atts ) ?>
+
 </div>
-<?php do_action( "wpadverts/block/details/tpl/post", $post_id, $atts ) ?>
+
+<?php do_action( "wpadverts/block/details/tpl/end", $post_id, $atts ) ?>

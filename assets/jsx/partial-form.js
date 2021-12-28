@@ -2,33 +2,30 @@ import { Component } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 import {
-    Panel, PanelBody,
-    Flex, FlexItem, FlexBlock,
-    Button, ButtonGroup,
+    Panel, 
+    PanelBody,
     BaseControl,
     TextControl,
-    ColorPalette,
-    Popover,
+    ToggleControl,
     SelectControl,
-    RangeControl,
-    NumberControl,
-    TabPanel,
-    Heading
+    RangeControl
 } from '@wordpress/components';
 
 class PartialForm extends Component {
 
 	constructor( props ) {
+
         super(props);
         
         this.data = {
-            style: "",
-            shadow: "",
-            palette: "",
-            rounded: "",
+            style: "wpa-solid",
+            shadow: "wpa-none",
+            palette: "cool-gray",
+            rounded: "3",
             px: "",
             py: "",
-            border: "",
+            border: "1",
+            customize: 0,
             ...props.data
         };
 
@@ -71,7 +68,10 @@ class PartialForm extends Component {
         this.props.onChange( this.data )
     }
 
-
+    onCustomizeChange = ( customize ) => {
+        this.data.customize = (customize === true ? 1 : 0);
+        this.props.onChange( this.data );
+    }
 
     void = ( param ) => {
         this.props.onChange( this.data );
@@ -86,12 +86,15 @@ class PartialForm extends Component {
             rounded,
             px,
             py,
-            border
+            border,
+            customize
         } = this.data;
 
         const {
 
         } = this.state;
+
+
 
         return (
             <>
@@ -99,101 +102,117 @@ class PartialForm extends Component {
 
                     <PanelBody title={this.props.title} initialOpen={this.props.initialOpen}>
 
-                        <SelectControl
-                            label="Color Palette"
-                            labelPosition="top"
-                            value={ palette }
-                            options={ [
-                                { label: 'Blue Gray', value: 'blue-gray' },
-                                { label: 'Cool Gray', value: 'cool-gray' },
-                                { label: 'Gray', value: 'gray' },
-                                { label: 'True Gray', value: 'true-gray' },
-                                { label: 'Warm Gray', value: 'warm-gray' }
-                            ] }
-                            onChange={this.onPaletteChange}
-                        />  
-
-                        <SelectControl
-                            label="Style"
-                            labelPosition="top"
-                            value={ style }
-                            options={ [
-                                { label: 'None (default styling)', value: 'wpa-unstyled' },
-                                { label: 'Flat', value: 'wpa-flat' },
-                                { label: 'Solid', value: 'wpa-solid' },
-                                { label: 'Bottom Border', value: 'wpa-bottom-border' },
-                            ] }
-                            onChange={this.onStyleChange}
-                        />  
-
-                        <SelectControl
-                            label="Shadow"
-                            labelPosition="top"
-                            value={ shadow }
-                            options={ [
-                                { label: 'None (default styling)', value: 'wpa-shadow-none' },
-                                { label: 'Small', value: 'wpa-shadow-sm' },
-                                { label: 'Medium', value: 'wpa-shadow-md' },
-                                { label: 'Inside', value: 'wpa-shadow-inside' },
-                            ] }
-                            onChange={this.onShadowChange}
-                        />  
-
-                        <BaseControl label="Border Width">
-                            <RangeControl
-                                min="0"
-                                max="3"
-                                step="1"
-                                xmarks={[
-                                    {value:0, label:"None"},
-                                    {value:1, label:"Thin"},
-                                    {value:2, label:"Thick"},
-                                    {value:3, label:"Extra Thick"}
-                                ]}
-                                showTooltip={false}
-                                withInputField={false}
-                                value={border}
-                                onChange={this.onBorderChange}
-                            >
-
-                            </RangeControl>
-                        </BaseControl>
-
-                        <BaseControl label="Round Corners">
-                            <RangeControl
-                                min="0"
-                                max="6"
-                                step="1"
-                                xmarks={[
-                                    {value:0, label:"None"},
-                                    {value:1, label:"XS"},
-                                    {value:2, label:"S"},
-                                    {value:3, label:"M"},
-                                    {value:4, label:"L"},
-                                    {value:5, label:"XL"},
-                                    {value:6, label:"Full"}
-                                ]}
-                                showTooltip={false}
-                                withInputField={false}
-                                value={rounded}
-                                onChange={this.onRoundedChange}
-                            >
-                            </RangeControl>
-                        </BaseControl>  
-
-                        <TextControl
-                            label="Padding - Horizontal"
-                            type="number"
-                            value={px}
-                            onChange={this.onPXChange}
+                        <ToggleControl
+                            label="Customize the default form styling"
+                            checked={ customize }
+                            onChange={this.onCustomizeChange}
                         />
-                        
-                        <TextControl
-                            label="Padding - Vertical"
-                            type="number"
-                            value={py}
-                            onChange={this.onPYChange}
-                        />
+
+                        <div className="wpa-block-editor-common-tip">
+                            The default form styling (applied to all WPAdverts form by default) you can change in the <a href="http://localhost/wpadverts/wp-admin/edit.php?post_type=advert&amp;page=adverts-extensions&amp;module=styling" target="_blank">Styling Settings</a>.
+                        </div>
+
+                        { customize === 1 && 
+                            <>
+                                <SelectControl
+                                    label="Color Palette"
+                                    labelPosition="top"
+                                    value={ palette }
+                                    options={ [
+                                        { label: 'Blue Gray', value: 'blue-gray' },
+                                        { label: 'Cool Gray', value: 'cool-gray' },
+                                        { label: 'Gray', value: 'gray' },
+                                        { label: 'True Gray', value: 'true-gray' },
+                                        { label: 'Warm Gray', value: 'warm-gray' }
+                                    ] }
+                                    onChange={this.onPaletteChange}
+                                />  
+
+                                <SelectControl
+                                    label="Style"
+                                    labelPosition="top"
+                                    value={ style }
+                                    options={ [
+                                        { label: 'None (default styling)', value: 'wpa-unstyled' },
+                                        { label: 'Flat', value: 'wpa-flat' },
+                                        { label: 'Solid', value: 'wpa-solid' },
+                                        { label: 'Bottom Border', value: 'wpa-bottom-border' },
+                                    ] }
+                                    onChange={this.onStyleChange}
+                                />  
+
+                                <SelectControl
+                                    label="Shadow"
+                                    labelPosition="top"
+                                    value={ shadow }
+                                    options={ [
+                                        { label: 'None (default styling)', value: 'wpa-shadow-none' },
+                                        { label: 'Small', value: 'wpa-shadow-sm' },
+                                        { label: 'Medium', value: 'wpa-shadow-md' },
+                                        { label: 'Inside', value: 'wpa-shadow-inside' },
+                                    ] }
+                                    onChange={this.onShadowChange}
+                                />  
+
+                                <BaseControl label="Border Width">
+                                    <RangeControl
+                                        min="0"
+                                        max="3"
+                                        step="1"
+                                        xmarks={[
+                                            {value:0, label:"None"},
+                                            {value:1, label:"Thin"},
+                                            {value:2, label:"Thick"},
+                                            {value:3, label:"Extra Thick"}
+                                        ]}
+                                        showTooltip={false}
+                                        withInputField={false}
+                                        value={border}
+                                        onChange={this.onBorderChange}
+                                    >
+
+                                    </RangeControl>
+                                </BaseControl>
+
+                                <BaseControl label="Round Corners">
+                                    <RangeControl
+                                        min="0"
+                                        max="6"
+                                        step="1"
+                                        xmarks={[
+                                            {value:0, label:"None"},
+                                            {value:1, label:"XS"},
+                                            {value:2, label:"S"},
+                                            {value:3, label:"M"},
+                                            {value:4, label:"L"},
+                                            {value:5, label:"XL"},
+                                            {value:6, label:"Full"}
+                                        ]}
+                                        showTooltip={false}
+                                        withInputField={false}
+                                        value={rounded}
+                                        onChange={this.onRoundedChange}
+                                    >
+                                    </RangeControl>
+                                </BaseControl>  
+
+                                <TextControl
+                                    label="Padding - Horizontal"
+                                    type="number"
+                                    value={px}
+                                    onChange={this.onPXChange}
+                                />
+                                
+                                <TextControl
+                                    label="Padding - Vertical"
+                                    type="number"
+                                    value={py}
+                                    onChange={this.onPYChange}
+                                />
+
+                            </>
+
+                        }
 
 
                     </PanelBody>

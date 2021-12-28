@@ -414,7 +414,7 @@ class Adverts_Widget_Categories extends WP_Widget
      * @param array $instance       Widget settings
      * @param int   $level          Category depth
      */
-    protected function print_terms_multi_level( $terms, $current_id = false, $instance, $level = 0 )
+    protected function print_terms_multi_level( $terms, $current_id = false, $instance = array(), $level = 0 )
     {
         foreach ( $terms as $term_item ):
             $default_icon = "folder";

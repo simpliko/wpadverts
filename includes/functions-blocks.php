@@ -93,24 +93,90 @@ function adverts_field_radio_block( $field, $form = null ) {
     adverts_field_checkbox_block($field, $form, "radio");
 }
 
+/**
+ * Block based buttons
+ * 
+ * $args[
+ *  "text"  => "button text",
+ *  "html"  => "HTML do display instead of 'text' ",
+ *  "icon"  => "fa-* icon",
+ *  "type"  => "either primary or secondary",
+ *  "class" => "custom class to add",
+ *  "attr"  => array( 'key' => 'value / attributes to add to button' )
+ * ]
+ * 
+ * $options[
+ *  "border_radius"         => (default from config)
+ *  "border_width"          => (default from config)
+ *  "font_weight"           => (default from config)
+ *  "color_text"            => (default from config)
+ *  "color_bg"              => (default from config)
+ *  "color_border"          => (default from config)
+ *  "color_text_h"          => (default from config)
+ *  "color_bg_h"            => (default from config)
+ *  "color_border_h"        => (default from config)
+ *  "desktop"               => text-and-icon
+ *  "desktop_icon_size"     => "atw-text-base"
+ *  "mobile"                => text-and-icon
+ *  "mobile_icon_size"      => "atw-text-2xl"
+ * ]
+ * 
+ * @since   2.0
+ * @param   array   $args
+ * @param   array   $options
+ * @return  void
+ */
 function wpadverts_block_button( $args = array(), $options = array() ) {
-//echo "<pre>";print_r($options);echo "</pre>";
 
+    $atts= shortcode_atts( array(
+        "text" => "",
+        "icon" => "",
+        "type" => "secondary",
+        "class" => "",
+        "attr" => array()
+    ), $args );
+    //echo "<pre>";print_r($args);echo "</pre>";
     $_args = array(
         "classes_prepend" => "atw-w-full",
         "classes_append" => ""
     );
 
-    $button_class = "";
+    $_customize = array(
+        "primary" => "primary_button",
+        "secondary" => "secondary_button"
+    );
 
-    if( isset( $args["type"] ) ) {
-        $button_class = sprintf( "wpa-btn-%s", $args["type"] );
+    //echo "<pre>";
+    //print_r($args);
+    //print_r($options);
+
+    if( isset( $_customize[ $args["type"] ] ) ) {
+
+        if( ! isset( $options["customize"] ) || ! $options["customize"] ) {
+            $_options = adverts_config( sprintf( "blocks_styling.%s", $_customize[ $args["type"] ] ) );
+        } else {
+            $_options = array();
+        }
+
+        $_options["desktop"] = "text-and-icon";
+        $_options["mobile"] = "text-and-icon";
+        $_options["desktop_icon_size"] = "atw-text-base";
+        $_options["mobile_icon_size"] = "atw-text-base";
+
+        $options = array_merge( $_options, $options );
     }
+
+    //print_r($_options);
+    //print_r($options);
+    //echo "</pre>";
+
+    $button_class = trim( sprintf( "wpa-btn-%s %s ", $args["type"], $atts["class"] ) ) ." ";
 
     $defaults = array(
         "type"              => isset( $args["type"] ) ? $args["type"] : "",
         "classes"           => "atw-text-base atw-outline-none atw-bg-none atw-border atw-border-solid atw-font-semibold atw-px-4",
         "text"              => isset( $args["text"] ) ? $args["text"] : "",
+        "html"              => isset( $args["html"] ) ? $args["html"] : "",
         "icon"              => isset( $args["icon"] ) ? $args["icon"] : "",
         "icon-position"     => "left"
     );
@@ -188,15 +254,39 @@ function wpadverts_block_button( $args = array(), $options = array() ) {
             break;
     }
 
+    $attr_list = array();
+    foreach( $atts["attr"] as $k => $v) {
+        $attr_list[] = sprintf( '%s="%s"', $k, $v );
+    }
+
+    $__load = array(
+        "md:atw-text-sm",
+        "md:atw-text-base",
+        "md:atw-text-lg",
+        "md:atw-text-xl",
+        "md:atw-text-2xl",
+        "md:atw-text-3xl"
+    );
+
     ?>
-    <button class="<?php echo $button_class ?> atw-inline-block hover:atw-bg-none atw-bg-none atw-text-white atw-w-full atw-text-base atw-outline-none atw-border-solid hover:atw-bg-blue-700 atw-font-semibold atw-px-4 atw-py-2 <?php echo "$border_radius $border_width $leading" ?>">
-        <span class=" <?php echo join( " ", array( $m_icon, $d_icon ) ) ?> atw-text-white"><i class="fas fa-search atw-text-base"></i></span> 
-        <span class="<?php echo join( " ", array( $m_text, $d_text ) ) ?>"><?php isset( $args["text"] ) ? esc_html( $args["text"] ) : _e("Search", "wpadverts" ) ?></span>
+    <button <?php echo join( " ", $attr_list ) ?> class="<?php echo $button_class ?> atw-inline-block hover:atw-bg-none atw-bg-none atw-w-full atw-text-base atw-outline-none atw-border-solid atw-font-semibold atw-px-4 atw-py-2 <?php echo "$border_radius $border_width $leading" ?>">
+        <span class="<?php echo join( " ", array( $m_icon, $d_icon ) ) ?> atw-text-white"><i class="<?php echo esc_attr( sprintf( "%s %s md:%s", $atts["icon"], $options["mobile_icon_size"], $options["desktop_icon_size"] ) ) ?>"></i></span> 
+        <span class="<?php echo join( " ", array( $m_text, $d_text ) ) ?>"><?php echo ( !empty( $args["html"] ) ? $args["html"] : esc_html( $args["text"] ) ) ?></span>
     </button>
     <?php
 }
 
 function wpadverts_block_button_css( $type, $args ) {
+
+    $_customize = array(
+        "primary" => "primary_button",
+        "secondary" => "secondary_button"
+    );
+
+    if( isset( $_customize[ $type ] ) && ( ! isset( $options["customize"] ) || ! $options["customize"] ) ) {
+        $_options = adverts_config( sprintf( "blocks_styling.%s", $_customize[ $type ] ) );
+        $args = array_merge( $args, $_options );
+    }
 
     $color_text     = isset( $args["color_text"] )      ? $args["color_text"]       : null;
     $color_bg       = isset( $args["color_bg"] )        ? $args["color_bg"]         : null;
@@ -253,6 +343,11 @@ function wpadverts_get_grays_palette( $gray ) {
 };
 
 function wpadverts_block_form_styles( $atts ) {
+
+    if( ! isset( $atts["customize"] ) || $atts["customize"] != 1 ) {
+        $atts = adverts_config( "blocks_styling.form" );
+    }
+
     $form_border = array(
         0 => "wpa-border-none",
         1 => "wpa-border-thin",
@@ -270,17 +365,23 @@ function wpadverts_block_form_styles( $atts ) {
     );
     
     $form_styles = join( " ", array(
-        isset( $atts["form"]["style"] ) ? $atts["form"]["style"] : "",
-        isset( $atts["form"]["shadow"] ) ? $atts["form"]["shadow"] : "",
-        isset( $atts["form"]["border"] ) ? $form_border[ $atts["form"]["border"] ] : $form_border[0],
-        isset( $atts["form"]["rounded"] ) ? $form_rounded[ $atts["form"]["rounded"] ] : $form_rounded[0],
+        isset( $atts["style"] ) ? $atts["style"] : "",
+        isset( $atts["shadow"] ) ? $atts["shadow"] : "",
+        isset( $atts["border"] ) && $atts["border"] ? $form_border[ $atts["border"] ] : $form_border[0],
+        isset( $atts["rounded"] ) && $atts["rounded"] ? $form_rounded[ $atts["rounded"] ] : $form_rounded[0],
         "wpa-padding-sm"
     ) );
 
     return $form_styles;
 }
 
-function wpadverts_print_grays_variables( $gray ) {
+function wpadverts_print_grays_variables( $atts ) {
+
+    if( ! isset( $atts["customize"] ) || $atts["customize"] != 1 ) {
+        $atts = adverts_config( "blocks_styling.form" );
+    }
+
+    $gray = $atts["palette"];
     $grays = wpadverts_get_grays_palette( $gray );
 
     foreach( $grays as $k => $v ) {

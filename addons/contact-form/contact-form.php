@@ -91,7 +91,7 @@ function adext_contact_form( $post_id ) {
     
 }
 
-function adext_contact_form_content( $post_id ) {
+function _adext_contact_form_content( $post_id ) {
     
 
     include_once ADVERTS_PATH . 'includes/class-form.php';
@@ -188,18 +188,51 @@ function adext_contact_form_content( $post_id ) {
         
     }
     
+    return array(
+        "form" => $form,
+        "buttons" => $buttons,
+        "actions_class" => $actions_class,
+        "adverts_flash" => $flash,
+        "show_form" => $show_form
+    );
+}
+
+/**
+ * Renders contact form on Ad details page
+ * 
+ * This function is called by adverts_tpl_single_bottom action in
+ * wpadverts/templates/single.php
+ * 
+ * @see adverts_tpl_single_bottom action
+ * 
+ * @since 1.0.10
+ * 
+ * @access public
+ * 
+ * @param     int       $post_id    Post ID
+ * @return    void
+ */
+function adext_contact_form_content( $post_id ) {
+
+    $data = _adext_contact_form_content( $post_id );
+
+    $form = $data["form"];
+    $buttons = $data["buttons"];
+    $actions_class = $data["action_class"];
+    $flash = $data["adverts_flash"];
+    $show_form = $data["show_form"];
+
     ?>
 
-    <div id="adverts-contact-form-scroll"></div>
-    
     <?php if( adext_contact_form_get_to( $post_id ) ): ?>
-    <div class="adverts-contact-box adverts-contact-box-toggle" <?php if($show_form): ?>style="display: block"<?php endif ?>>
-        <?php adverts_flash( $flash ) ?>
-        <?php include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/form.php' ) ?>
-    </div>
+        <div class="adverts-contact-box adverts-contact-box-toggle" <?php if($show_form): ?>style="display: block"<?php endif ?>>
+            <?php adverts_flash( $flash ) ?>
+            <?php include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/form.php' ) ?>
+        </div>
     <?php endif; ?>
 
     <?php
+
 }
 
 function adext_contact_form_delete_tmp_files( $form_scheme, $uniqid ) {
@@ -265,6 +298,8 @@ function adext_contact_form_init() {
     } else {
         add_action( "adext_contact_form_send", "adext_contact_form_send_default_message", 10, 2 );
     }
+
+    add_action( "wp_ajax_nopriv_wpadverts-contact-form-submit", "adext_contact_form_ajax_submit" );
 }
 
 /**
@@ -278,6 +313,7 @@ function adext_contact_form_init() {
 function adext_contact_form_init_frontend() {
     remove_action('adverts_tpl_single_bottom', 'adverts_single_contact_information');
     add_action('adverts_tpl_single_bottom', 'adext_contact_form');
+    add_filter('wpadverts/block/details/contact-options', 'adext_cf_block_details_contact_options', 10, 3 );
 
     wp_register_script( 'adverts-contact-form-scroll', ADVERTS_URL  .'/assets/js/wpadverts-contact-form-scroll.js', array( 'jquery' ), "1.3.5", true);
 }
@@ -398,6 +434,104 @@ function adext_contact_form_get_to( $post_id ) {
     }
     
     return apply_filters( "adext_contact_form_get_to", $to, $post_id );
+}
+
+/**
+ * Returns contact form options.
+ * 
+ * This function is called with wpadverts/block/details/contact-options filter
+ * 
+ * @see wpadverts/block/details/contact-options filter
+ * 
+ * @since   2.0
+ * @param   array     $contact_options      List of available contact options
+ * @param   array     $atts                 Attributes passed to the block
+ * @param   int       $post_id              Current Post ID
+ * @return  array                           Customized list of contact options
+ */
+function adext_cf_block_details_contact_options( $contact_options, $atts, $post_id ) {
+
+    include_once ADVERTS_PATH . '/addons/contact-form/includes/class-block-details.php';
+
+    $bd = new Adext_Contact_Form_Block_Details( $atts, $post_id );
+
+    $co = array_merge( $contact_options, $bd->get_contact_options() );
+
+    $contact_options = $co;
+
+    return $contact_options;
+}
+
+function adext_contact_form_ajax_submit() {
+
+    include_once ADVERTS_PATH . 'includes/class-form.php';
+    include_once ADVERTS_PATH . 'includes/class-html.php';
+    
+
+    $flash = array( "error" => array(), "info" => array());
+    $message = null;
+
+    $post_id = adverts_request( 'post_id' );
+    
+    $form_scheme = apply_filters( "adverts_form_scheme", Adverts::instance()->get( "form_contact_form" ), array() );
+   
+    // adverts_form_load filter will add checksum fields
+    $form = new Adverts_Form( $form_scheme );
+    
+    $form->bind( stripslashes_deep( $_POST['data'] ) );
+    $valid = $form->validate();
+
+    if( $valid ) {
+            
+        //Adext_Contact_Form::instance()->send_message( get_post( $post_id ), $form );
+        do_action( "adext_contact_form_send", $post_id, $form );
+            
+        // delete uploaded files ($form)
+        $uniqid = sanitize_file_name( adverts_request( "wpadverts-form-upload-uniqid" ) );
+        adext_contact_form_delete_tmp_files( $form->get_scheme(), $uniqid );
+            
+        $bind = array();
+        $bind["_wpadverts_checksum"] = adverts_request( "_wpadverts_checksum" );
+        $bind["_wpadverts_checksum_nonce"] = adverts_request( "_wpadverts_checksum_nonce" );
+            
+        $form->bind( $bind );
+            
+        $flash["info"][] = array(
+            "message" => __( "Your message has been sent.", "wpadverts" ),
+            "icon" => "adverts-icon-ok"
+        );
+
+        print_r($form->get_errors());
+        print_r($form->get_values());
+
+    } else {
+        $flash["error"][] = array(
+            "message" => __( "There are errors in your form.", "wpadverts" ),
+            "icon" => "adverts-icon-attention-alt"
+        );
+
+        $errors = array();
+        foreach( $form->get_fields() as $k => $field ) {
+            if( isset( $field["error"] ) && ! empty( $field["error"] ) ) {
+                $errors[ $field["name"] ] = $field["error"];
+            }
+        }
+
+        //print_r($errors);
+        //print_r($form->get_values());
+
+        $response = array(
+            "status" => -1,
+            "message" => "NGMI",
+            "data" => $form->get_values(),
+            "errors" => $errors
+        );
+
+        echo json_encode( $response );
+        exit;
+    }
+
+    exit;
 }
 
 // Contact Form

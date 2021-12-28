@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+    @variants responsive {
+        .wpa-utility-shadow-top {
+            box-shadow: 0 -2px 4px 0 rgb(0 0 0 / 10%)
+        }
+    }
+}
+
 @layer components {
     
     .wpadverts-blocks .wpadverts-form input[type=checkbox]:checked {
@@ -43,7 +51,8 @@
 
     /* Flat */
 
-    .wpadverts-form.wpa-flat input[type=text] {
+    .wpadverts-form.wpa-flat input[type=text]
+    .wpadverts-form.wpa-flat textarea {
         @apply  atw-bg-white  atw-border-form-gray-300 atw-placeholder-form-gray-500 atw-text-form-gray-700
     }
     .wpadverts-form.wpa-flat select {
@@ -60,7 +69,8 @@
 
     /* Solid */
     
-    .wpadverts-form.wpa-solid input[type=text] {
+    .wpadverts-form.wpa-solid input[type=text],
+    .wpadverts-form.wpa-solid textarea {
         @apply atw-bg-form-gray-100 atw-border-form-gray-100 atw-placeholder-form-gray-500 atw-text-form-gray-500
  
     }
@@ -78,7 +88,8 @@
 
     /* Simple */
 
-    .wpadverts-form.wpa-simple input[type=text] {
+    .wpadverts-form.wpa-simple input[type=text],
+    .wpadverts-form.wpa-simple textarea {
         @apply atw-outline-none atw-box-border atw-bg-white atw-border-gray-300 atw-shadow-sm 
     }
     .wpadverts-form.wpa-simple select {
@@ -229,6 +240,22 @@
         @apply atw-rounded-none;
     }
     
+    /* FORM ERRORS */ 
+    .wpadverts-form .wpa-field-error {
+
+    }
+
+    .wpadverts-form .wpa-field-error input[type=text] {
+        @apply atw-ring-1 atw-ring-red-300;
+    }
+
+    .wpadverts-form .wpa-field-error .wpa-errors-list {
+        @apply atw-list-none atw-mx-0 atw-mt-1 atw-mb-0 atw-p-0;
+    }
+
+    .wpadverts-form .wpa-field-error .wpa-errors-list .wpa-error-item {
+        @apply atw-list-none atw-m-0 atw-px-0 atw-pt-1 atw-pb-2 atw-leading-5 atw-text-red-600
+    }
 
     /* BUTTONS */
 

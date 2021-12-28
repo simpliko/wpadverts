@@ -55,7 +55,7 @@ function adext_styling_page_options() {
     }
     $frmd = $options_defaults['form'];
     
-    echo "<pre>";var_dump($sb);echo "</pre>";
+    //echo "<pre>";var_dump($sb);echo "</pre>";
 
     $show_buttons = false;
     $button_text = __("Update Options", "wpadverts");

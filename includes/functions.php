@@ -2844,20 +2844,17 @@ function adverts_delete_post( $post_id, $skip_trash = true ) {
  * @return array        Updated menu items
  */
 function adverts_add_menu_classes( $menu ) {
+    $query = array(
+        'post_type'   => 'advert',
+        'post_status' => 'pending'
+    );
+    $adverts = new WP_Query($query);
 
-    $adverts = wp_count_posts( 'advert' );
-
-    if(!is_object($adverts) || !isset($adverts->pending)) {
+    if(!$adverts->found_posts){
         return $menu;
     }
     
-    $pending = $adverts->pending;
-    
-    if($pending < 1) {
-        return $menu;
-    }
-    
-    $wrap = " <span class=\"awaiting-mod count-$pending\" title=\"%s\"><span class=\"pending-count\">$pending</span></span>";
+    $wrap = " <span class=\"awaiting-mod count-$adverts->found_posts\" title=\"%s\"><span class=\"pending-count\">$adverts->found_posts</span></span>";
     
     foreach(array_keys($menu) as $key) {
         if(isset($menu[$key][5]) && $menu[$key][5] == "menu-posts-advert") {
@@ -2865,7 +2862,6 @@ function adverts_add_menu_classes( $menu ) {
             break;
         }
     }
-    
     
     return $menu;
 }

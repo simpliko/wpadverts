@@ -225,8 +225,8 @@ function adverts_init() {
     register_post_type( 'advert', apply_filters( 'adverts_post_type', $args, 'advert') ); 
     
     $labels = array(
-        'name'                       => __( 'Adverts Categories', 'wpadverts' ),
-        'singular_name'              => __( 'Advert Category', 'wpadverts' ),
+        'name'                       => _x( 'Adverts Categories', 'taxonomy general name', 'wpadverts' ),
+        'singular_name'              => _x( 'Advert Category', 'taxonomy singular name', 'wpadverts' ),
         'menu_name'                  => __( 'Categories', 'wpadverts' ),
     );
     

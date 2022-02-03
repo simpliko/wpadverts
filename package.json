@@ -6,12 +6,13 @@
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@wordpress/element": "^2.20.0",
-    "@wordpress/scripts": "14.0.1",
+    "@wordpress/scripts": "^14.0.1",
     "autoprefixer": "^10.2.5",
     "grunt-checktextdomain": "^1.0.1",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-wp-i18n": "^0.5.4",
-    "postcss": "^8.2.8",
+    "postcss": "^8.4.5",
+    "postcss-cli": "^9.1.0",
     "tailwindcss": "^2.0.4"
   },
   "scripts": {
@@ -20,14 +21,12 @@
     "build:list": "wp-scripts build blocks/list/src/index.js --output-path=blocks/list/build",
     "watch:build/list": "wp-scripts build blocks/list/src/index.js --output-path=blocks/list/build --watch --webpack--devtool=source-map",
     "postcss:watch": "postcss ./assets/css/tailwind.css -o compiled.css --watch",
-    
     "start/list": "wp-scripts start blocks/list/src/index.js --output-path=blocks/list/build --webpack--devtool=source-map",
     "start/search": "wp-scripts start blocks/search/src/index.js --output-path=blocks/search/build --webpack--devtool=source-map",
     "start/details": "wp-scripts start blocks/details/src/index.js --output-path=blocks/details/build --webpack--devtool=source-map",
     "build/list": "wp-scripts build blocks/list/src/index.js --output-path=blocks/list/build",
     "build/search": "wp-scripts build blocks/search/src/index.js --output-path=blocks/search/build",
     "build/details": "wp-scripts build blocks/details/src/index.js --output-path=blocks/details/build",
-    
     "build/css": "postcss ./assets/css/tailwind.css -o compiled.css",
     "build-all": "npm run build/list && npm run build/search && npm run build/details && npm run build/css"
   },

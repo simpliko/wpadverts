@@ -254,6 +254,8 @@ class Adverts_Post {
                 }
                 if( is_array( $field["value"] ) ) {
                     $terms = array_map( "intval", $field["value"] );
+                } elseif( is_scalar( $field["value"] ) && ! empty( $field["value"] ) ) {
+                    $terms = intval( $field["value"] );
                 }
                 wp_set_post_terms( $post_id, $terms, $name );
             } else if( $s["method"] == "file" ) {

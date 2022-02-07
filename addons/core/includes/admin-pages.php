@@ -67,11 +67,16 @@ function _adext_core_page_options_main() {
             $data = $form->get_values();
             $data['expired_ad_public_cap'] = adverts_request( 'expired_ad_public_cap' );
             
-            if( adverts_request( 'hide_images_in_media_library' ) ) {
-                $data['hide_images_in_media_library'] = 1;
-            } else {
-                $data['hide_images_in_media_library'] = 0;
+            $ckbox = array( 'hide_images_in_media_library', 'delete_from_media_library' );
+
+            foreach( $ckbox as $ckbox_option ) {
+                if( adverts_request( $ckbox_option ) ) {
+                    $data[$ckbox_option] = 1;
+                } else {
+                    $data[$ckbox_option] = 0;
+                }
             }
+
             $data["adverts_manage_moderate"] = $form->get_value( "adverts_manage_moderate", 0 );
             $data["module"] = adverts_config( 'config.module' );
             $data["license"] = adverts_config( 'config.license' );
@@ -129,6 +134,7 @@ function _adext_core_page_options_gallery() {
             "scrolling_items" => absint( adverts_request( "scrolling_items" ) ),
             "lightbox" => $lightbox_enabled,
             "image_edit_cap" => adverts_request( "image_edit_cap" ),
+            "image_editor" => adverts_request( "image_editor" ),
             "image_fit" => adverts_request( "image_fit" ),
         );
         
@@ -163,6 +169,7 @@ function _adext_core_page_options_gallery() {
             "scrolling_items" => adverts_config( "gallery.scrolling_items" ),
             "lightbox" => adverts_config( "gallery.lightbox" ),
             "image_edit_cap" => adverts_config( "gallery.image_edit_cap" ),
+            "image_editor" => adverts_config( "gallery.image_editor" ),
             "image_fit" => adverts_config( "gallery.image_fit" ),
         );
         
@@ -287,6 +294,15 @@ Adverts::instance()->set("form_core_config", array(
             "order" => 10,
             "options" => array(
                 array( "value" => "1", "text" => __( "Do not show Advert images (and other files) in Media Library.", "wpadverts" ) ),
+            )
+        ),
+        array(
+            "name" => "delete_from_media_library",
+            "type" => "adverts_field_checkbox",
+            "label" => " ",
+            "order" => 10,
+            "options" => array(
+                array( "value" => "1", "text" => __( "Delete Advert images from Media Library when deleting an Advert.", "wpadverts" ) ),
             )
         ),
         array(
@@ -520,6 +536,16 @@ Adverts::instance()->set("form_gallery_config", array(
             "title" => __( 'Gallery Upload', "wpadverts" )
         ),
         array(
+            "name" => "image_editor",
+            "type" => "adverts_field_select",
+            "order" => 10,
+            "label" => __("Image Editor", "wpadverts"),
+            "empty_option" => true,
+            "empty_option_text" => __( "Default", "wpadverts" ),
+            "options_callback" => "adverts_get_image_editors",
+            "hint" => __( "The library used for processing uploaded images.", "wpadverts" )
+        ),
+        array(
             "name" => "image_edit_cap",
             "type" => "adverts_field_select",
             "order" => 10,
@@ -559,6 +585,15 @@ Adverts::instance()->set("form_gallery_config", array(
         )
     )
 ));
+
+function adverts_get_image_editors() {
+    $ie = apply_filters( 'wp_image_editors', array( 'WP_Image_Editor_Imagick', 'WP_Image_Editor_GD' ) );
+    $arr = array();
+    foreach( $ie as $editor ) {
+        $arr[] = array( "value" => $editor, "text" => $editor );
+    }
+    return $arr;
+}
 
 function adverts_get_roles_dropdown() {
     $arr = array();

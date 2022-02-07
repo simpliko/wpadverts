@@ -5,7 +5,7 @@
  * Description: The lightweight WordPress classifieds plugin done right.
  * Author: Greg Winiarski
  * Text Domain: wpadverts
- * Version: 1.5.6
+ * Version: 1.5.7
  * 
  * Adverts is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -67,6 +67,7 @@ $adverts_namespace['config'] = array(
         'expired_ad_public_cap' => 'edit_pages',
         'empty_price' => '',
         'hide_images_in_media_library' => 0,
+        'delete_from_media_library' => 0,
         'adverts_manage_moderate' => 0
         
     )
@@ -88,6 +89,7 @@ $adverts_namespace['gallery'] = array(
             "adverts-upload-thumbnail" => array( 'enabled' => 1, 'width' => 150, 'height' => 105, 'crop' => true ),
             //"adverts-gallery-thumbnail"
         ),
+        'image_editor' => ''
     )
 );
 
@@ -429,6 +431,7 @@ function adverts_init_frontend() {
     }
     
     add_filter( 'adverts_form_load', 'adverts_discard_spam_content', 10, 2 );
+    add_filter( 'adverts_form_load', 'adverts_post_title_kses' );
 }
 
 /**
@@ -520,6 +523,10 @@ function adverts_init_admin() {
     
     /* Only run our customization on the 'edit.php' page in the admin. */
     add_action( 'load-edit.php', 'adverts_admin_load' );
+
+    if(adverts_config( "delete_from_media_library") == 1) {
+        add_action( "before_delete_post", "adverts_before_delete_post", 10, 2 );
+    }
 }
 
 /**

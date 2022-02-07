@@ -163,6 +163,8 @@ function adverts_gallery_upload() {
             'post_status'    => 'inherit'
         );
 
+        adverts_maybe_set_image_editor();
+
         // Create post if does not exist
         if( $parent_post_id < 1 ) {
 
@@ -477,7 +479,17 @@ function adverts_gallery_image_stream() {
         }
     }
 
+    adverts_maybe_set_image_editor();
+
     $image = wp_get_image_editor( $attached_file );
+
+    if( is_wp_error($image) ) {
+        echo json_encode( array(
+            "result" => 0,
+            "error" => $image->get_error_message()
+        ) );
+        exit;
+    }
 
     foreach( $history as $c ) {
         if( ! isset( $c->a ) ) {
@@ -630,6 +642,8 @@ function adverts_gallery_image_save() {
         $upload = adverts_upload_item_data( $attach_id );
         $attached_file = dirname( $attached_file ) . "/" . basename( $upload["sizes"]["full"]["url"] );
     }
+
+    adverts_maybe_set_image_editor();
 
     $image = wp_get_image_editor( $attached_file );
 
@@ -868,6 +882,8 @@ function adverts_gallery_video_cover() {
     @ chmod( $new_file, $perms );
     clearstatcache();
     
+    adverts_maybe_set_image_editor();
+
     $image = wp_get_image_editor( $new_file );
     
     if( is_wp_error( $image ) ) {

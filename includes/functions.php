@@ -1211,6 +1211,19 @@ function adverts_filter_number( $data ) {
 }
 
 /**
+ * Kses FILTER
+ * 
+ * Kses Strips Evil Tags
+ * 
+ * @param string $data
+ * @since 1.5.7
+ * @return float
+ */
+function adverts_filter_kses( $data ) {
+    return wp_kses( $data, array() );
+}
+
+/**
  * Form hidden input renderer
  * 
  * Prints (to browser) HTML for <input type="hidden" /> input
@@ -2214,7 +2227,8 @@ function adverts_currency_list( $currency = null, $get = null ) {
         array("code"=>"SAR", "sign"=>"ر.س", "label"=>__("Saudi Riyal", "wpadverts")),
         array("code"=>"ZAR", "sign"=>"R", "label"=>__("South African Rand", "wpadverts")),
         array("code"=>"LKR", "sign"=>"Rs. ", "label"=>__("Sri Lankan Rupees", "wpadverts")),
-        array("code"=>"AED", "sign"=>"ر.إ", "label"=>__("UAE Dirham", "wpadverts")),
+        array("code"=>"AED", "sign"=>"د.أ", "label"=>__("UAE Dirham", "wpadverts")),
+        array("code"=>"UAH", "sign"=>"₴", "label"=>__("Ukrainian hryvnia", "wpadverts")),
         array("code"=>"QAR", "sign"=>"ر.ق", "label"=>__("Qatari Riyal", "wpadverts")),
     ));
     
@@ -2772,6 +2786,34 @@ function adverts_remove_account_field( $form ) {
     foreach( $form["field"] as $key => $field ) {
         if( $field["name"] == "_adverts_account" ) {
             unset( $form["field"][$key] );
+        }
+    }
+    
+    return $form;
+}
+
+/**
+ * Remove HTML form the title
+ * 
+ * This function is being called in [adverts_manage] and [adverts_add] shortcodes, to remove
+ * potentially dangerous HTML tags added to the title.
+ * 
+ * @since 1.5.7
+ * @access public
+ * @param array $form   Form Scheme
+ * @return array        Modified form scheme
+ */
+function adverts_post_title_kses( $form ) {
+    if( $form['name'] != "advert" ) {
+        return $form;
+    }
+
+    foreach( $form["field"] as $key => $field ) {
+        if( $field["name"] == "post_title" ) {
+            if( ! isset( $field["filter"] ) || ! is_array( $field["filter"] ) ) {
+                $form["field"][$key]["filter"] = array();
+            }
+            $form["field"][$key]["filter"][] = array( "name" => "kses" );
         }
     }
     
@@ -3822,4 +3864,44 @@ function adverts_discard_spam_content( $form ) {
     }
     
     return $form;
+}
+
+function adverts_maybe_set_image_editor() {
+    $option = adverts_config( "gallery.image_editor" );
+
+    if( empty( $option ) ) {
+        return;
+    }
+
+    $callback = apply_filters( "adverts_maybe_set_image_editor_callback", 'adverts_set_image_editor' );
+
+    if( has_filter( 'wp_image_editors', $callback ) || ! is_callable( $callback ) ) {
+        return;
+    }
+
+    add_filter( 'wp_image_editors', $callback );
+}
+
+function adverts_set_image_editor( $editors ) {
+    return array( adverts_config( "gallery.image_editor" ) );
+}
+
+function adverts_before_delete_post( $post_id, $post ) {
+    if( ! in_array( $post->post_type, wpadverts_get_post_types() ) ) {
+        return;
+    }
+
+    $param = array( 
+        'post_parent' => $post_id, 
+        'post_type' => 'attachment',
+        'post_status' => 'any'
+    );
+    $children = get_posts( $param );
+    
+    // also delete all uploaded files
+    if( is_array( $children ) ) {
+        foreach( $children as $attch) {
+            wp_delete_post( $attch->ID, true);
+        }
+    } 
 }

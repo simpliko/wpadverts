@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 @layer utilities {
-    @variants responsive {
+    /*@variants responsive {*/
         .wpa-utility-shadow-top {
             box-shadow: 0 -2px 4px 0 rgb(0 0 0 / 10%)
         }
-    }
+    /*}*/
 }
 
 @layer components {
@@ -245,7 +245,9 @@
 
     }
 
-    .wpadverts-form .wpa-field-error input[type=text] {
+    .wpadverts-form .wpa-field-error input[type=text],
+    .wpadverts-form .wpa-field-error select,
+    .wpadverts-form .wpa-field-error textarea {
         @apply atw-ring-1 atw-ring-red-300;
     }
 
@@ -332,7 +334,7 @@
     }
     
     .wpadverts-block-list .wpa-results.wpa-grid-view .wpa-result-title {
-        @apply atw-flex-grow;
+        @apply atw-grow;
     }
     
     .wpadverts-block-list .js-wpa-view-list.wpa-selected i,
@@ -350,5 +352,54 @@
 
     /* END: Block / List: switch views */
 
-    
+    /* BEGIN Flash messages */
+
+    .wpadverts-flash {
+        @apply atw-rounded-md;
+    }
+
+    .wpadverts-flash .wpa-flash-icon {
+
+    }
+
+    .wpadverts-flash.wpa-style-error {
+        @apply atw-bg-red-100 atw-text-red-800;
+    }
+
+    .wpadverts-flash.wpa-style-error .wpa-flash-icon {
+        @apply atw-text-red-400;
+    }
+
+    .wpadverts-flash.wpa-style-success {
+        @apply atw-bg-green-100 atw-text-green-800;
+    }
+
+    .wpadverts-flash.wpa-style-success .wpa-flash-icon {
+        @apply atw-text-green-500;
+    }
+
+    .wpadverts-flash.wpa-layout-normal {
+        @apply atw-mx-0 atw-my-6 atw-px-4 atw-py-4;
+    }
+
+    .wpadverts-flash.wpa-layout-normal .wpa-flash-icon {
+        @apply atw-flex-none atw-m-0 atw-p-0 atw-pr-3 atw-text-xl;
+    }
+
+    .wpadverts-flash.wpa-layout-big {
+        @apply atw-mx-0 atw-my-6 atw-px-4 atw-py-4;
+    }
+
+    .wpadverts-flash.wpa-layout-big .wpa-flash-content {
+        @apply atw-flex-col atw-items-center atw-pb-3;
+    }
+
+    .wpadverts-flash.wpa-layout-big .wpa-flash-icon {
+        @apply atw-flex-none atw-m-0 atw-pt-3 atw-pb-3 atw-text-5xl;
+    }
+
+    .wpadverts-flash.wpa-layout-big .wpa-flash-message {
+        @apply atw-text-lg;
+    }
+
 }

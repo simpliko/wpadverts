@@ -2,8 +2,14 @@ const colors = require('tailwindcss/colors');
 
 module.exports = {
   prefix: 'atw-',
-  purge: [],
-  darkMode: false, // or 'media' or 'class'
+  content: [
+    './blocks/**/*.{php,js}',
+    './includes/*.php',
+    './templates/*.php',
+    './templates/block-partials/*.php',
+    './assets/js/*.js',
+    './assets/css/*.css'
+  ],
   theme: {
     extend: {},
     btn: {
@@ -166,16 +172,12 @@ module.exports = {
           }
         }
       },
-      gray: colors.coolGray,
+      gray: colors.gray,
       indigo: colors.indigo,
       blue: colors.blue,
-      red: colors.red
+      red: colors.red,
+      green: colors.green
     }
-  },
-  variants: {
-    extend: {
-      backgroundImage: ['hover']
-    },
   },
   plugins: [],
   corePlugins: {

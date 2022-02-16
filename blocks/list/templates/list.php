@@ -59,7 +59,7 @@ $grid_cols = sprintf("%s md:%s", $grid_cols_arr[ $atts["grid_columns_mobile"] ],
     
     <div class="atw-flex atw-flex-col md:atw-flex-row-reverse md:atw-justify-between">
     
-        <div class="atw-flex atw-flex-grow atw-pb-3 md:atw-flex-grow-0 md:atw-space-x-4 atw-justify-between">
+        <div class="atw-flex atw-grow atw-pb-3 md:atw-grow-0 md:atw-space-x-4 atw-justify-between">
 
 
             <div class="atw-flex atw-flex-none">
@@ -117,7 +117,7 @@ $grid_cols = sprintf("%s md:%s", $grid_cols_arr[ $atts["grid_columns_mobile"] ],
 
 
         <?php if( $show_results_counter ): ?>
-        <div class="atw-flex atw-flex-grow atw-pb-3">
+        <div class="atw-flex atw-grow atw-pb-3">
 
             <div class="">
                 <span>

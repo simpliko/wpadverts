@@ -1,5 +1,5 @@
 <?php do_action( "wpadverts/block/details/tpl/start", $post_id, $atts ) ?>
-
+<?php wp_enqueue_script( 'adverts-frontend' ); ?>
 <style type="text/css">
     .wpadverts-cpt form.wpadverts-form {
         <?php wpadverts_print_grays_variables( isset( $atts["form"] ) ? $atts["form"] : "" ) ?>
@@ -13,13 +13,13 @@
     <?php do_action( "adverts_tpl_single_top", $post_id ) ?>
 
     <div class="atw-flex atw-flex-col md:atw-flex-row">
-        <div class="atw-flex atw-flex-grow ">
+        <div class="atw-flex atw-grow ">
             <div class="atw-flex-none atw-m-0 atw-pr-4 -adverts-single-author-avatar">
                 <?php $id_or_email = get_post_field( 'post_author', $post_id ) ?>
                 <?php $id_or_email = $id_or_email ? $id_or_email : get_post_meta($post_id, 'adverts_email', true) ?>
                 <?php echo get_avatar( $id_or_email, 64, "", "", array( "class" => "atw-m-0 atw-p-0 atw-block atw-rounded-full" ) ) ?>
             </div>
-            <div class="atw-flex atw-flex-col atw-flex-grow atw-justify-center -adverts-single-author-name">
+            <div class="atw-flex atw-flex-col atw-grow atw-justify-center -adverts-single-author-name">
                 <div class="atw-block">
                     <span class="atw-font-bold atw-text-gray-700 atw-text-xl"><?php echo apply_filters( "adverts_tpl_single_posted_by", esc_html( get_post_meta($post_id, 'adverts_person', true) ), $post_id ) ?></span>
                 </div>
@@ -54,11 +54,11 @@
                         <i class="<?php echo esc_attr( $data["icon"] ) ?> atw-text-gray-400 atw-text-lg"></i>
                     </div>
                 </div>
-                <div class="atw-flex atw-flex-col md:atw-flex-row atw-flex-grow">
+                <div class="atw-flex atw-flex-col md:atw-flex-row atw-grow">
                     <div class="atw-flex atw-flex-none atw-items-center atw-w-1/3 atw-text-gray-700 atw-text-base atw-mb-1 md:atw-mb-0">
                         <span class="atw-inline-block atw-font-bold md:atw-font-normal"><?php echo esc_html( $data["label"] ) ?></span>
                     </div>
-                    <div class="atw-flex atw-flex-grow atw-items-center atw-text-gray-800">
+                    <div class="atw-flex atw-grow atw-items-center atw-text-gray-800">
                         <span class="atw-inline-block"><?php echo $data["value"] ?></span>
                     </div>
                 </div>
@@ -95,11 +95,11 @@
                         <i class="fas fa-fire atw-text-gray-300 atw-text-3xl"></i>
                     </div>
                 </div>
-                <div class="atw-flex atw-flex-col atw-flex-grow">
+                <div class="atw-flex atw-flex-col atw-grow">
                     <div class="atw-flex atw-flex-none atw-items-center atw-w-1/3 atw-text-gray-600 atw-text-base">
                         <span class="atw-inline-block atw-font-normal">Price</span>
                     </div>
-                    <div class="atw-flex atw-flex-grow atw-items-center atw-text-gray-800">
+                    <div class="atw-flex atw-grow atw-items-center atw-text-gray-800">
                         <span class="atw-inline-block">$143.00</span>
                     </div>
                 </div>
@@ -115,7 +115,6 @@
     <div class="wpa-cpt-contact-details atw-my-3  atw--mx-1">
 
         <div class="atw-relative atw-flex atw-flex-col md:atw-flex-row">
-            <?php do_action( "wpadverts/block/details/tpl/contact-options", $post_id, $atts ) ?>
 
             <div class="atw-relative atw-flex atw-flex-1 atw-flex-col md:atw-flex-row">
                 <?php foreach( $contact_options as $contact_option ): ?>
@@ -129,41 +128,12 @@
                 </div>
                 <?php endforeach; ?>
             </div>
-
-            <?php if( $atts['sticky_footer'] ): ?>
-            <div class="atw-relative atw-flex atw-flex-none">
-            <?php if( $more_button ): ?>
-                <div class="atw-flex-none atw-mx-1">
-                <?php 
-                    echo wpadverts_block_button( 
-                        $more_button, 
-                        $more_button["options"] 
-                    ) 
-                ?>
-                </div>
-                <?php endif; ?>
-            </div>
-            <?php endif; ?>
             
         </div>
 
+        <?php do_action( "wpadverts/block/details/tpl/contact-content", $post_id, $atts ) ?>
         
         <div class="wpa-contact-more atw-inset-x-0">
-
-            <div class="atw-w-full atw-flex atw-flex-col atw-mt-0 atw-px-0">
-                    <div class="">  
-                    <?php foreach( $contact_additional as $contact_a ): ?>
-                        <div class="atw-flex-auto atw-mx-1 atw-mb-3">             
-                        <?php 
-                            echo wpadverts_block_button( 
-                                $contact_a, 
-                                $contact_a["options"] 
-                            ) 
-                        ?>
-                        </div>
-                    <?php endforeach; ?>
-                    </div>
-            </div>
 
             <div class="atw-w-full atw-flex atw-flex-col md:atw-flex-row atw-my-3 atw-px-0 atw-mx-1 md:atw-my-0">
 

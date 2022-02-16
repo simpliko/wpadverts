@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WP Adverts\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-04 08:14:33+00:00\n"
-"PO-Revision-Date: 2022-01-22 03:26+0100\n"
+"PO-Revision-Date: 2022-01-22 03:21+0100\n"
 "Last-Translator: Thomas Tuschhoff <tuschhoff@gruene-mgh.de>\n"
 "Language-Team: Deutsch\n"
 "Language: de_DE\n"
@@ -1374,6 +1374,26 @@ msgstr "Keine Anzeigen gefunden, die diesen Filterkriterien entsprechen."
 
 #: includes/class-widget-categories.php:31
 #: includes/class-widget-categories.php:41
+msgid "Adverts"
+msgstr "Anzeigen"
+
+#: includes/class-widget-categories.php:31
+#: includes/class-widget-categories.php:41
+msgid "Advert"
+msgstr "Anzeige"
+
+#: includes/class-widget-categories.php:31
+#: includes/class-widget-categories.php:41
+msgid "Categories"
+msgstr "Kategorien"
+
+#: includes/class-widget-categories.php:31
+#: includes/class-widget-categories.php:41
+msgid "Advert Categories"
+msgstr "Anzeige Kategorien"
+
+#: includes/class-widget-categories.php:31
+#: includes/class-widget-categories.php:41
 msgctxt "taxonomy singular name"
 msgid "Advert Category"
 msgstr "Anzeige Kategorie"
@@ -1381,7 +1401,7 @@ msgstr "Anzeige Kategorie"
 #: includes/class-widget-categories.php:31
 #: includes/class-widget-categories.php:41
 msgctxt "taxonomy general name"
-msgid "Advert Categories"
+msgid "Adverts Categories"
 msgstr "Anzeigen Kategorien"
 
 #: includes/class-widget-categories.php:43

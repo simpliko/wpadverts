@@ -66,6 +66,15 @@ class Adverts_Block_Details {
 
                     )
                 ),
+                'contact' => array(
+                    'type' => 'array',
+                    'default' => array(
+                        array( 'name' => 'contact-form' ),
+                        array( 'name' => 'phone-button' ),
+                        array( 'name' => 'whatsapp' ),
+                        //array( 'name' => 'instagram')
+                    )
+                ),
                 'phone_reveal' => array(
                     'type' => 'integer',
                     'default' => 1
@@ -109,29 +118,21 @@ class Adverts_Block_Details {
         );
 
         $contact_methods = $this->_get_contact_options( $atts, $post_id );
-        $contact_options = array( "primary" => null, "secondary" => null );
+        $contact_options = array( );
         $contact_additional = array();
+
+
+
+        foreach( $atts['contact'] as $k => $contact ) {
+            if( isset( $contact_methods[ $contact['name'] ] ) ) {
+                $contact_options[] = $contact_methods[ $contact['name'] ];
+            }
+        } 
 
         // sort here
         $co_count = 0;
 
-        foreach( $contact_methods as $ckey => $cm ) {
-            if( $ckey == $atts["contact_primary"] ) {
-                $contact_options["primary"] = $cm;
-                $co_count++;
-            } elseif( $ckey == $atts["contact_secondary"] ) {
-                $contact_options["secondary"] = $cm;
-                $co_count++;
-            } else {
-                $contact_additional[] = $cm;
-            }
-        }
-
         $more_button = $this->_get_more_button();
-
-        
-
-
 
         $template = dirname( __FILE__ ) . "/templates/single.php";
         ob_start();

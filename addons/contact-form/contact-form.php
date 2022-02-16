@@ -98,6 +98,7 @@ function _adext_contact_form_content( $post_id ) {
     include_once ADVERTS_PATH . 'includes/class-html.php';
     
     $show_form = false;
+    $form_sent = false;
     $flash = array( "error" => array(), "info" => array());;
     $email = get_post_meta( $post_id, "adverts_email", true );
     $phone = get_post_meta( $post_id, "adverts_phone", true );
@@ -149,6 +150,7 @@ function _adext_contact_form_content( $post_id ) {
                 "icon" => "adverts-icon-ok"
             );
             $show_form = true; 
+            $form_sent = true;
         } else {
             $flash["error"][] = array(
                 "message" => __( "There are errors in your form.", "wpadverts" ),
@@ -190,6 +192,7 @@ function _adext_contact_form_content( $post_id ) {
     
     return array(
         "form" => $form,
+        "form_sent" => $form_sent,
         "buttons" => $buttons,
         "actions_class" => $actions_class,
         "adverts_flash" => $flash,

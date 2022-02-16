@@ -69,7 +69,7 @@ function adverts_field_checkbox_block( $field, $form = null, $type = "checkbox" 
         }
         
         $wrap = new Adverts_Html("div", array(
-            "class" => "atw-flex atw-flex-row atw-flex-grow atw-align-baseline",
+            "class" => "atw-flex atw-flex-row atw-grow atw-align-baseline",
         ), $padding . $checkbox->render() . $label->render() );
         
         $opts .= $wrap->render();
@@ -133,9 +133,12 @@ function wpadverts_block_button( $args = array(), $options = array() ) {
         "icon" => "",
         "type" => "secondary",
         "class" => "",
-        "attr" => array()
+        "attr" => array(),
+        "action" => "button",
+        "name" => "",
+        "value" => ""
     ), $args );
-    //echo "<pre>";print_r($args);echo "</pre>";
+    
     $_args = array(
         "classes_prepend" => "atw-w-full",
         "classes_append" => ""
@@ -269,7 +272,7 @@ function wpadverts_block_button( $args = array(), $options = array() ) {
     );
 
     ?>
-    <button <?php echo join( " ", $attr_list ) ?> class="<?php echo $button_class ?> atw-inline-block hover:atw-bg-none atw-bg-none atw-w-full atw-text-base atw-outline-none atw-border-solid atw-font-semibold atw-px-4 atw-py-2 <?php echo "$border_radius $border_width $leading" ?>">
+    <button name="<?php echo esc_attr( $atts["name"] ) ?>" value="<?php echo esc_attr( $atts["value"] ) ?>" type="<?php echo esc_attr( $atts["action"] ) ?>" <?php echo join( " ", $attr_list ) ?> class="<?php echo $button_class ?> atw-inline-block hover:atw-bg-none atw-bg-none atw-w-full atw-text-base atw-outline-none atw-border-solid atw-font-semibold atw-px-6 atw-py-2 <?php echo "$border_radius $border_width $leading" ?>">
         <span class="<?php echo join( " ", array( $m_icon, $d_icon ) ) ?> atw-text-white"><i class="<?php echo esc_attr( sprintf( "%s %s md:%s", $atts["icon"], $options["mobile_icon_size"], $options["desktop_icon_size"] ) ) ?>"></i></span> 
         <span class="<?php echo join( " ", array( $m_text, $d_text ) ) ?>"><?php echo ( !empty( $args["html"] ) ? $args["html"] : esc_html( $args["text"] ) ) ?></span>
     </button>
@@ -605,3 +608,70 @@ function wpadverts_block_list_image_grid( $post_id, $atts ) {
     return $result;
 }
 
+function wpadverts_block_flash( $data, $layout = "normal" ) {
+
+    $data = apply_filters( "adverts_flash_data", $data );
+    
+    $types = array(
+        "error" => array(
+            "icon" => "fas fa-exclamation-circle"
+        ),
+        "success" => array(
+            "icon" => "fas fa-check-circle"
+        ),
+        "info" => array(
+            "icon" => "fas fa-check-circle"
+        )
+    );
+
+    $styles = array(
+        "error" => "wpa-style-error",
+        "success" => "wpa-style-success",
+        "info" => "wpa-style-success"
+    );
+
+    $layouts = array(
+        "normal" => "wpa-layout-normal",
+        "big" => "wpa-layout-big"
+    );
+
+    $l = $layouts[$layout];
+
+    ?>
+
+    <?php foreach(array_keys($data) as $key): ?>
+        <?php if(isset($data[$key]) && is_array($data[$key]) && !empty($data[$key])): ?>
+            <?php $t = $types[$key]; ?>
+            <?php $s = $styles[$key]; ?>
+            <div class="wpadverts-flash <?php echo esc_attr("$l $s") ?>">
+            <?php foreach( $data[$key] as $key => $info): ?>
+                
+                <?php 
+                    if(is_string($info)) {
+                        $info = array( "message" => $info, "icon" => "", "link" => null);
+                    } 
+                ?>
+                
+                <div class="wpa-flash-content atw-flex">
+
+                    <?php if($info["icon"]): ?>
+                        <span class="wpa-flash-icon"><i class="<?php echo esc_attr( $t["icon"] ) ?>"></i></span>
+                    <?php endif; ?>
+
+                    <div class="atw-flex-1 atw-flex atw-flex-col">
+                        <div class="atw-flex">
+                            <span class="wpa-flash-message atw-flex-1"><?php echo $info["message"] ?></span>
+                            <?php if( $info["link"] ): ?>
+                            <a href="<?php echo esc_attr( $info["link"]["url"] ) ?>" class="wpa-flash-link atw-flex-none"><?php echo $info["link"]["title"] ?></a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    
+                </div>
+            <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+    <?php endforeach; ?>
+
+    <?php
+}

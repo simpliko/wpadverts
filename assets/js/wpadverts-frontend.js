@@ -234,19 +234,14 @@ jQuery(function($) {
         e.preventDefault();
 
         var $this = $(this);
-        var bar = $this.closest( ".wpa-cpt-contact-details" );
 
-        //$(".wpa-utility-sticky-bg").removeClass("atw-opacity-0");
-        //$(".wpa-utility-sticky").removeClass("atw-translate-x-full");
-
-        $(".wpa-utility-sticky-wrap").show();
-        var bg = $(".wpa-utility-sticky-bg");
-        var st = $(".wpa-utility-sticky");
-
-        bg.removeClass("atw-hidden").show().css("opacity", "1");//.addClass("atw-opacity-100");
-        st.removeClass("atw-translate-x-full");
-
-        
+        if($(".wpadverts-block-contact-box").is(":visible")) {
+            $(".wpadverts-block-contact-box").hide();
+            //window.location.hash = "";
+        } else {
+            $(".wpadverts-block-contact-box").show();
+            window.location.hash = "#wpadverts-block-contact-box";
+        }
     });
 
     $(".wpa-sticky-close").on("click", function(e) {
@@ -278,83 +273,3 @@ jQuery(function($) {
 function wpadverts_close_more() {
 
 }
-
-jQuery(function($) {
-    $(".wpadverts-block-cf-send").on("click", function(e) {
-        e.preventDefault();
-
-        var spinner = $(this).find(".wpa-utility-spinner");
-        var btn = spinner.closest("button");
-
-        spinner.removeClass("atw-hidden");
-        btn.addClass("atw-opacity-60");
-        btn.attr("disabled", "disabled");
-        btn.blur();
-
-        var data = {
-            action: "wpadverts-contact-form-submit",
-            post_id: 5737,
-            data: {}
-        };
-        jQuery.each(jQuery('form.wpadverts-form').serializeArray(), function() {
-            data.data[this.name] = this.value;
-        });
-
-        jQuery.ajax({
-            url: adverts_frontend_lang.ajaxurl,
-            data: data,
-            type: "post", 
-            dataType: "json",
-            success: function( result ) {
-                var spinner = $(".wpadverts-block-cf-send").find(".wpa-utility-spinner");
-                var btn = spinner.closest("button");
-        
-                spinner.addClass("atw-hidden");
-                btn.removeClass("atw-opacity-60");
-                btn.attr("disabled", false);
-
-                var $form = jQuery('form.wpadverts-form');
-                $form.find(".wpa-field-wrap").removeClass("wpa-field-error");
-                $form.find(".wpa-field-wrap").find(".wpa-errors-list").remove();
-
-                jQuery.each(result.errors, function( index, item ) {
-                    var $form = jQuery('form.wpadverts-form');
-                    var wrap = jQuery(".wpa-field-wrap.wpa-field--"+index);
-                    
-                    wrap.addClass("wpa-field-error");
-
-
-                    var ul = jQuery("<ul></ul>").addClass("wpa-errors-list");
-                    jQuery.each(item, function(j, error_message ) {
-                        var li = jQuery("<li></li>").addClass("wpa-error-item").html(error_message);
-                        ul.append(li);
-                    });
-                    
-                    wrap.append(ul);
-
-
-                });
-
-                $form.find(".wpa-feedback .wpa-feedback-error .wpa-feedback-title").text(result.message);
-                $form.find(".wpa-feedback .wpa-feedback-error").show();
-
-                var d = $('.wpa-utility-sticky');
-                d.scrollTop(d.prop("scrollHeight"));
-
-            },
-            error: function( result ) {
-                var spinner = $(".wpadverts-block-cf-send").find(".wpa-utility-spinner");
-                var btn = spinner.closest("button");
-        
-                spinner.addClass("atw-hidden");
-                btn.removeClass("atw-opacity-60");
-                btn.attr("disabled", false);
-
-
-                
-            }
-        });
-
-        return false;
-    });
-});

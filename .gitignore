@@ -9,4 +9,4 @@ blocks/*/build/**
 compiled.css
 
 babelrc.js.save
-
+.DS_Store

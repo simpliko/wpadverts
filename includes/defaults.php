@@ -309,6 +309,13 @@ adverts_form_add_filter("number", array(
     "callback" => "adverts_filter_number"
 ));
 
+// Register number filter
+/** @see adverts_filter_kses() */
+adverts_form_add_filter("kses", array(
+    "description" => __( "Number - converts string to a number.", "wpadverts" ),
+    "callback" => "adverts_filter_kses"
+));
+
 /* REGISTER FORM VALIDATORS */
 
 // Register "is required" validator

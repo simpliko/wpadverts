@@ -38,7 +38,7 @@ jQuery(function($) {
         
         <div class="atw-flex atw-flex-col md:<?php echo $buttons_position ?>">
             
-            <div class="md:atw-flex-grow md:atw--mx-1">
+            <div class="md:atw-grow md:atw--mx-1">
                 <?php if( !empty( $fields_visible ) ): ?>
                 <div class="atw-flex atw-flex-wrap atw-items-end atw-justify-between atw-py-0 atw-px-0">
                     <?php foreach( $fields_visible as $field ): ?>

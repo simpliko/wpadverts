@@ -8,7 +8,7 @@
     <?php elseif($data->default_image_url): ?>
         <img src="<?php echo esc_attr( $data->default_image_url ) ?>" class="atw-w-full atw-h-full atw-max-w-full atw-max-h-full atw-block atw-rounded-none atw-border-0 atw-shadow-none <?php echo join( " ", $data->classes_img ) ?>" title="" alt="" />
     <?php else: ?>
-        <div class="atw-transform atw-flex-grow atw-text-center atw-rotate-12">
+        <div class="atw-transform atw-grow atw-text-center atw-rotate-12">
             <i class="fas fa-image atw-text-6xl atw-text-gray-200 "></i>
         </div>
     <?php endif; ?>

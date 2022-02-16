@@ -18,7 +18,7 @@
     </div>
     <?php endif; ?>
        
-    <div class="wpa-result-details atw-flex atw-flex-grow">
+    <div class="wpa-result-details atw-flex atw-grow">
     
         <div class="wpa-detail-left atw-flex atw-flex-col atw-flex-1  ">
 

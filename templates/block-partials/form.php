@@ -10,13 +10,14 @@
 
 $redirect_to = "";
 $atts = isset( $atts ) ? $atts : array();
+$form_id = isset( $form_id ) ? $form_id : null;
 $buttons_position = isset( $buttons_position ) ? $buttons_position : "atw-flex-row";
 
 ?>
 
 <div class="wpadverts-block wpadverts-partial">
-    <form action="<?php echo esc_attr( $redirect_to ) ?>" method="get" class="wpadverts-form <?php echo wpadverts_block_form_styles( $atts ) ?>  atw-block atw-py-0">
-        
+    <form <?php if($form_id): ?>id="<?php echo esc_attr( $form_id ) ?>"<?php endif; ?> action="<?php echo esc_attr( $redirect_to ) ?>" method="post" class="wpadverts-form <?php echo wpadverts_block_form_styles( $atts ) ?>  atw-block atw-py-0">
+
         <?php foreach($form->get_fields( array( "type" => array( "adverts_field_hidden" ) ) ) as $field): ?>
         <?php call_user_func( adverts_field_get_renderer($field), $field, $form ) ?>
         <?php endforeach; ?>
@@ -24,7 +25,7 @@ $buttons_position = isset( $buttons_position ) ? $buttons_position : "atw-flex-r
         
         <div class="atw-flex atw-flex-col md:<?php echo $buttons_position ?>">
             
-            <div class="md:atw-flex-grow md:atw--mx-1">
+            <div class="md:atw-grow md:atw--mx-1">
                 <div class="atw-flex atw-flex-wrap atw-items-end atw-justify-between atw-py-0 atw-px-0">
                     <?php foreach($form->get_fields() as $field): ?>
                     <?php $width = wpadverts_block_tpl_field_width( $field ) ?>
@@ -39,7 +40,12 @@ $buttons_position = isset( $buttons_position ) ? $buttons_position : "atw-flex-r
                     <?php else: ?>
                         <div data-name="<?php echo esc_attr( $field["name"] ) ?>" class="wpa-field-wrap <?php echo sprintf( "wpa-field--%s", $field["name"] ) ?> atw-relative atw-items-end atw-box-border atw-pb-3 md:atw-px-1 <?php echo esc_attr( $width ) ?> <?php echo adverts_field_has_errors($field) ? "wpa-field-error" : "" ?>">
                             <?php if( isset( $field["label"] ) && ! empty( $field["label"] ) ): ?>
-                            <span class="atw-block atw-w-full atw-box-border atw-px-2 atw-py-0 atw-pb-1 atw-text-base atw-text-gray-600 adverts-search-input-label"><?php echo esc_html( $field["label"] ) ?></span>
+                            <span class="atw-block atw-w-full atw-box-border atw-px-0 atw-py-0 atw-pb-1 atw-text-base atw-text-gray-600 adverts-search-input-label">
+                                <span class="atw-leading-none"><?php echo esc_html( $field["label"] ) ?></span>
+                                <?php if(adverts_field_is_required($field)): ?>
+                                <span class="atw-text-base atw-text-red-600 atw-leading-none atw-font-bold">*</span>
+                                <?php endif; ?>
+                            </span>
                             <?php endif; ?>
                             <?php $field["class"] = isset( $field["class"] ) ?  $field["class"] : ""; ?>
                             <?php $field["class"] .= " atw-text-base atw-w-full atw-max-w-full"; ?>
@@ -63,7 +69,7 @@ $buttons_position = isset( $buttons_position ) ? $buttons_position : "atw-flex-r
 
             </div>
             
-            <div class="wpa-feedback">
+            <!--div class="wpa-feedback">
                 <div style="display:none" class="wpa-feedback-error atw-flex atw-flex-row atw-my-3 atw-py-3 atw-px-6 atw-bg-red-100 atw-text-red-600 atw-rounded-lg">
                     <div>
                         <span>
@@ -75,20 +81,20 @@ $buttons_position = isset( $buttons_position ) ? $buttons_position : "atw-flex-r
                             <span class="wpa-feedback-title atw-text-red-700"></span>
                         </div>
                         <div class="wpa-feedback-text">
-                            <!--ul>
+                            <ul>
                                 <li>Errror 1</li>
-                            </ul-->
+                            </ul>
                         </div>
                     </div>
 
                 </div>
-            </div>
+            </div-->
 
             <?php if( isset( $show_buttons ) && $show_buttons ): ?>
             <div class="atw-flex atw-pb-3 md:atw-flex-none <?php echo $buttons_position == "atw-flex-row" ? "md:atw-ml-2" : "" ?>">
         
                 <?php foreach( $buttons as $button ): ?>
-                <div class="atw-flex-auto">
+                <div class="atw-flex-none">
                     <?php echo wpadverts_block_button( $button, array() ) ?>
                 </div>
                 <?php endforeach; ?>

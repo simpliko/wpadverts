@@ -18,11 +18,12 @@
             
             <ul class="adverts-flexbox-list">
                 <?php
-                    $subs = get_terms( 'advert_category', array( 
+                    $subs = get_terms( apply_filters( 'adverts_categories_query_sub', array( 
+                        'taxonomy' => 'advert_category', 
                         'hide_empty' => 0, 
                         'parent' => $term->term_id ,
                         'number' => $sub_count
-                    ) );
+                    ) ) );
                 ?>
             
                 <?php foreach($subs as $sub): ?>

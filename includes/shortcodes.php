@@ -16,6 +16,7 @@ add_shortcode('adverts_list', 'shortcode_adverts_list');
 add_shortcode('adverts_add', 'shortcode_adverts_add');
 add_shortcode('adverts_manage', 'shortcode_adverts_manage');
 add_shortcode('adverts_categories', 'shortcode_adverts_categories');
+add_shortcode('advert_single', 'shortcode_advert_single' );
 
 // Shortcode functions
 
@@ -514,10 +515,11 @@ function shortcode_adverts_categories( $atts ) {
         $show = 'all';
     }
     
-    $terms = get_terms( 'advert_category', array( 
+    $terms = get_terms( apply_filters( 'adverts_categories_query', array( 
+        'taxonomy' => 'advert_category',
         'hide_empty' => 0, 
         'parent' => null, 
-    ) );
+    ), $atts ) );
     
     wp_enqueue_style( 'adverts-frontend');
     wp_enqueue_style( 'adverts-icons' );
@@ -581,4 +583,30 @@ function adverts_flash( $data ) {
     <?php endforeach; ?>
 
     <?php
+}
+
+/**
+ * Generates HTML for [advert_single] shortcode
+ * 
+ * @since   1.5.8
+ * @param   array       $atts   Shortcode params
+ * @return  string              Single Advert Page HTML
+ */
+function shortcode_advert_single( $atts = array() ) {
+
+    extract( shortcode_atts( array(
+        'post_id' => get_the_ID(),
+    ), $atts ) );
+
+    ob_start();
+        
+    $post_content = get_post( $post_id )->post_content;
+    $post_content = wp_kses($post_content, wp_kses_allowed_html( 'post' ) );
+    $post_content = apply_filters( "adverts_the_content", $post_content );
+        
+    include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/single.php' );
+
+    $content = ob_get_clean();
+
+    return $content;
 }

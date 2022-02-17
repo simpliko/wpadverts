@@ -12,6 +12,8 @@ class Adverts_Types_Admin {
             $this->restore_post_type();
         } else if( adverts_request( "restore-taxonomy" ) ) {
             $this->restore_taxonomy();
+        } else if( adverts_request( "enable-auto-comments" ) ) {
+            $this->enable_auto_comments();
         } else {
             $this->render_list();
         }
@@ -52,6 +54,15 @@ class Adverts_Types_Admin {
         $restore_url = $this->_get_post_type_restore_url( $post_type->name );
         $button_text = __( "Update", "wpadverts" );
         
+        $supports = $form_simple->get_value( "supports" );
+        $supports_comments = false;
+        if( is_array( $supports ) && in_array( "comments", $supports ) ) {
+            $supports_comments = true;
+            $without_comments = $this->_get_comment_closed_ads( $post_type->name );
+            $enable_url = $this->_get_enable_comments_url( $post_type->name );
+        }
+        //echo "<pre>";print_r($supports);echo "</pre>";
+
         include ADVERTS_PATH . 'addons/core/admin/types-edit-post.php';
     }
     
@@ -108,6 +119,24 @@ class Adverts_Types_Admin {
             "_nonce" => wp_create_nonce( "wpadverts-data-type-restore" ) 
         ) );
     }
+
+    protected function _get_enable_comments_url( $post_type ) {
+        return add_query_arg( array( 
+            "edit-post" => false, 
+            "noheader" => 1, 
+            "enable-auto-comments" => $post_type, 
+            "_nonce" => wp_create_nonce( "wpadverts-auto-enable-comments" ) 
+        ) );
+    }
+
+    protected function _get_comment_closed_ads( $post_type ) {
+        global $wpdb;
+
+        $sql = "SELECT COUNT(*) AS `cnt` FROM {$wpdb->posts} WHERE `post_type`='%s' AND `post_status`='publish' AND `comment_status`='closed'";
+        $prep = $wpdb->prepare( $sql, array( $post_type ) );
+
+        return $wpdb->get_var( $prep );
+    }
     
     public function restore_post_type() {
         $post_type = adverts_request( "restore-post-type" );
@@ -138,6 +167,54 @@ class Adverts_Types_Admin {
         exit;
     }
     
+    public function enable_auto_comments() {
+        $post_type = adverts_request( "enable-auto-comments" );
+        
+        $supported_cpt = wpadverts_get_post_types();
+        
+        if( ! wp_verify_nonce( adverts_request( "_nonce" ), "wpadverts-auto-enable-comments" ) ) {
+            wp_die( __( "Invalid nonce.", "wpadverts" ) );
+        }
+        
+        if( ! in_array( $post_type, $supported_cpt ) ) {
+            wp_die( __( "You are trying to restore unsupported post type.", "wpadverts" ) );
+        }
+        
+        global $wpdb;
+
+        $affected = $wpdb->update( 
+            $wpdb->posts, 
+            array(
+                'comment_status' => 'open'
+            ),
+            array( 
+                'post_type' => $post_type,
+                'post_status' => 'publish',
+                'comment_status' => 'closed'
+            ),  
+            array(
+                '%s'
+            ),
+            array( 
+                '%s',
+                '%s',
+                '%s'
+            )
+        );
+        
+        $flash = Adverts_Flash::instance();
+
+        if( $affected === false ) {
+            $flash->add_info( __( "There was an error while executing a MySQL query.", "wpadverts" ) );
+        } else {
+            $flash->add_info( sprintf( __( "%d comments enabled. If you are using some caching plugin make sure to clear cache.", "wpadverts" ), $affected ) );
+        }
+        $redirect_url = add_query_arg( array( 'edit-post' => $post_type, "noheader" => false, "enable-auto-comments" => false, "_nonce" => false ) );
+
+        wp_redirect( $redirect_url );
+        exit;
+    }
+
     public function restore_taxonomy() {
         $taxonomy = adverts_request( "restore-taxonomy" );
         
@@ -166,6 +243,15 @@ class Adverts_Types_Admin {
         $form_simple = new Adverts_Form();
         $form_simple->load( $this->_edit_post_form_simple( $post_type ) );
         
+        $option = get_option( "wpadverts_post_types" );
+        $comments_auto_enable = 0;
+        
+        $pt = $post_type->name;
+
+        if( isset( $option[$pt] ) && isset( $option[$pt]["_comments_auto_enable"] ) ) {
+            $comments_auto_enable = $option[$pt]["_comments_auto_enable"];
+        }
+
         $bind_default = array(
             "name" => $post_type->name,
             "label" => $post_type->label,
@@ -173,7 +259,8 @@ class Adverts_Types_Admin {
             "menu_position" => $post_type->menu_position,
             "menu_icon" => $post_type->menu_icon,
             "supports" => array_keys( get_all_post_type_supports( $post_type->name ) ),
-            "rewrite_slug" => $post_type->rewrite["slug"]
+            "rewrite_slug" => $post_type->rewrite["slug"],
+            "_comments_auto_enable" => $comments_auto_enable
         );
         
         $form_simple->bind( $bind_default );
@@ -235,6 +322,7 @@ class Adverts_Types_Admin {
         
         $values = $form_simple->get_values();
         $values["exclude_from_search"] = isset( $values["exclude_from_search"] ) ? $values["exclude_from_search"] : 0;
+        $values["_comments_auto_enable"] = isset( $values["_comments_auto_enable"] ) ? 1 : 0;
         $values["rewrite"] = array(
             "slug" => $rewrite_slug,
             "with_front" => false,
@@ -414,6 +502,16 @@ class Adverts_Types_Admin {
                         array( "value" => "excerpt", "text" => __( "Excerpt", "wpadverts" ) ),
                         array( "value" => "trackbacks", "text" => __( "Trackbacks", "wpadverts" ) ),
                         array( "value" => "comments", "text" => __( "Comments", "wpadverts" ) ),
+                    )
+                ),
+                array(
+                    "name" => "_comments_auto_enable",
+                    "type" => "adverts_field_checkbox", 
+                    "label" => __( "Comments", "wpadverts" ),
+                    "max_choices" => 1,
+                    "order" => 10,
+                    "options" => array(
+                        array( "value" => "1", "text" => __( "Automatically enable comments when Ad is saved in the database.", "wpadverts" ) )
                     )
                 ),
                 array(

@@ -30,6 +30,22 @@ jQuery(function($) {
         }
     });
     
+    $(".wpadverts-fcl-tr-supports input[type=checkbox][value=comments]").on("change", function(e) {
+        if(typeof e !== "undefined") {
+            e.preventDefault();
+        }
+
+        var $tr = $(".wpadverts-fcl-tr-_comments_auto_enable"); 
+        var $this = $(this);
+
+        if($this.is(":checked")) {
+            $tr.show();
+        } else {
+            $tr.hide();
+        }
+    });
+    $(".wpadverts-fcl-tr-supports input[type=checkbox][value=comments]").change();
+
     $("#rewrite_slug").on("keyup", wpadverts_admin_type_slug_preview);
     $("#rewrite_slug").on("change", wpadverts_admin_type_slug_preview);
     

@@ -175,6 +175,12 @@
     
     <?php adverts_admin_flash() ?>
     
+    <?php if( $supports_comments && $without_comments > 0 ): ?>
+    <div class="update-message notice inline notice-info notice-alt" style="padding:8px 8px">
+        <span style="color:#004991;line-height:2rem;"><?php echo sprintf( __("There are <strong>%d</strong> published ads with comments disabled.", "wpadverts" ), $without_comments ) ?> <a href="<?php echo esc_url( $enable_url ) ?>" style="margin-left:8px" class="button-secondary"><?php _e( "Enable comments for these ads now", "wpadverts" ) ?></a></span>
+    </div>
+    <?php endif; ?>
+
     <form action="" method="post">
     
         <div class="postbox ">

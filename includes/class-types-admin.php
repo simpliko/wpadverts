@@ -45,9 +45,9 @@ class Adverts_Types_Admin {
         $dashicons = $this->_scan_dashicons();
         
         if( ! isset( $_POST ) || empty( $_POST ) ) {
-            list( $form_simple, $form_labels ) = $this->_form_defaults( $post_type );
+            list( $form_simple, $form_labels, $form_renderers ) = $this->_form_defaults( $post_type );
         } else {
-            list( $form_simple, $form_labels ) = $this->_form_update( $post_type );
+            list( $form_simple, $form_labels, $form_renderers ) = $this->_form_update( $post_type );
         }
         
         $h2_title = sprintf( __("Edit '%s'", "wpadverts"), $post_type->label );
@@ -267,8 +267,11 @@ class Adverts_Types_Admin {
         
         $form_labels = new Adverts_Form();
         $form_labels->load( $this->_edit_post_form_labels( $post_type ) );
+
+        $form_renderers = new Adverts_Form();
+        $form_renderers->load( $this->_edit_form_renderers( "post", $post_type ) );
         
-        return array( $form_simple, $form_labels );
+        return array( $form_simple, $form_labels, $form_renderers );
     }
     
     protected function _taxonomy_defaults( $taxonomy ) {
@@ -661,6 +664,97 @@ class Adverts_Types_Admin {
         }
         
         
+        return $form_scheme;
+    }
+
+    protected function _edit_form_renderers( $object, $type ) {
+
+        $template_options = array(
+            array( 
+                "value" => "block", 
+                "text" => __( "Default Block Template", "wpadverts" ) 
+            )
+        );
+
+        $templates_draft = get_posts( array(
+            "post_type" => "page",
+            "post_status" => "draft"
+        )); 
+
+        if( ! empty( $templates_draft ) ) {
+            $template_options[] = array( 
+                "value" => "-1", 
+                "text" => __( "Draft Templates", "wpadverts" ), 
+                "depth" => 0,
+                "disabled" => 1
+            );
+        }
+        
+        foreach( $templates_draft as $tpl ) {
+            $title = $tpl->post_title;
+            if( empty( $title ) ) {
+                $title = __( "~ no title ~", "wpadverts" );
+            }
+            $template_options[] = array(
+                "value" => $tpl->ID,
+                "text" => sprintf( "%s (ID: %d)", $title, $tpl->ID ),
+                "depth" => 1
+            );
+        }
+
+        $templates_wp = get_posts( array(
+            "post_type" => "wp_template",
+            "post_status" => "publish"
+        )); 
+
+        if( ! empty( $templates_wp ) ) {
+            $template_options[] = array( 
+                "value" => "-2", 
+                "text" => 
+                __( "WP Templates", "wpadverts" ), 
+                "depth" => 0,
+                "disabled" => 1
+            );
+        }
+
+
+        foreach( $templates_wp as $tpl ) {
+            $title = $tpl->post_title;
+            if( empty( $title ) ) {
+                $title = __( "~ no title ~", "wpadverts" );
+            }
+            $template_options[] = array(
+                "value" => $tpl->ID,
+                "text" => sprintf( "%s (ID: %d)", $title, $tpl->ID ),
+                "depth" => 1
+            );
+        }
+
+        $form_scheme = array(
+            "name" => sprintf( "%s_%s", $object, $type->name ),
+            "field" => array(
+                array(
+                    "name" => sprintf( "renderers[%s]", "engine" ),
+                    "type" => "adverts_field_radio",
+                    "label" => __( "Renderer Type", "wpadverts" ),
+                    "order" => 10,
+                    "value" => "",
+                    "options" => array(
+                        array( "value" => "shortcode", "text" => __( "Default 1.X - Select this if you are using shortcodes.", "wpadverts" ) ),
+                        array( "value" => "block", "text" => __( "Block - Select this option if you are using blocks.", "wpadverts" ) ),
+                    )
+                ),
+                array(
+                    "name" => sprintf( "renderers[%s]", "template" ),
+                    "type" => "adverts_field_select",
+                    "label" => __( "Renderer Template", "wpadverts" ),
+                    "order" => 10,
+                    "value" => "",
+                    "options" => $template_options
+                )
+            )
+        );
+
         return $form_scheme;
     }
     

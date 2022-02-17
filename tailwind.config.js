@@ -3,6 +3,7 @@ const colors = require('tailwindcss/colors');
 module.exports = {
   prefix: 'atw-',
   content: [
+    './addons/styling/admin/options.php',
     './blocks/**/*.{php,js}',
     './includes/*.php',
     './templates/*.php',

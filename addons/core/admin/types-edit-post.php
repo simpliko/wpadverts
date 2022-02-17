@@ -209,12 +209,21 @@
                             </tbody>
                         </table>
                     </div>
+
+                    <div class="adverts-dt-form adverts-form wpadverts-types-form-renderers" data-tab="renderers">
+                        <table class="form-table">
+                            <tbody>
+                            <?php echo adverts_form_layout_config($form_renderers) ?>
+                            </tbody>
+                        </table>
+                    </div>
                     
                 </div>
                 
                 <ul class="wpadverts-types-edit-menu">
                     <li><a href="#" data-tab="general"><?php _e( "General", "wpadverts" ) ?></a></li>
                     <li><a href="#" data-tab="labels"><?php _e( "Labels", "wpadverts" ) ?></a></li>
+                    <li><a href="#" data-tab="renderers"><?php _e( "Rendering", "wpadverts" ) ?></a></li>
                 </ul>
             </div>
         </div>
@@ -262,7 +271,7 @@
                         <a class="button-primary wpadverts-admin-types-icon-select" href="#"><?php _e( "Select", "wpadverts" ) ?></a>					
                         <a class="button-secondary wpadverts-admin-types-icon-close" href="#"><?php _e( "Cancel", "wpadverts" ) ?></a>					
                     </div>
-		</div>
+		        </div>
             </div>
 
         </div>

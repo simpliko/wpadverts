@@ -3937,3 +3937,14 @@ function adverts_before_delete_post( $post_id, $post ) {
         }
     } 
 }
+
+function wpadverts_global_render_method() {
+    
+    $grm = get_option( "wpadverts_global_render_method", "shortcode" );
+
+    if( defined( "WPADVERTS_GLOBAL_RENDER_METHOD" ) ) {
+        $grm = WPADVERTS_GLOBAL_RENDER_METHOD;
+    }
+
+    return apply_filters( "wpadverts_global_render_method", $grm );
+}

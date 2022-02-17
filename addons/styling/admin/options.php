@@ -145,17 +145,26 @@
         </div>
 
 
-        <div class="atw-flex atw-flex-1 atw-items-center atw-justify-around atw-w-full atw-h-auto  atw-border-0 atw-border-solid atw-border-gray-500 atw-bg-white">
+        <div class="atw-flex atw-flex-1 atw-flex-col atw-justify-center atw-w-full atw-h-auto atw-border-0 atw-border-solid atw-border-gray-500 atw-bg-white">
             
-            <button class="wpa-preview-button-primary wpa-preview-button-primary-normal atw-inline-block hover:atw-bg-none atw-bg-none atw-text-white atw-w-auto atw-text-base atw-outline-none atw-border-solid atw-font-semibold atw-px-4 atw-py-2 <?php //echo "$border_radius $border_width $leading" ?>">
-                <span class=""><?php _e("Primary Button", "wpadverts" ) ?></span>
-            </button>
+            <div class="atw-flex atw-place-content-evenly atw-pb-9">
+                <span class="atw-text-2xl">Button Preview</span>
+            </div>
 
-            <button class="wpa-preview-button-primary wpa-preview-button-primary-hover atw-inline-block atw-bg-none atw-w-auto atw-text-base atw-outline-none atw-border-solid atw-font-semibold atw-px-4 atw-py-2 <?php //echo "$border_radius $border_width $leading" ?>">
-                <span class=""><?php _e("Primary Button Hover", "wpadverts" ) ?></span>
-            </button>
+            <div class="atw-flex atw-place-content-evenly">
+
+                <button class="wpa-preview-button-primary wpa-preview-button-primary-normal atw-inline-block hover:atw-bg-none atw-bg-none atw-text-white atw-w-auto atw-text-base atw-outline-none atw-border-solid atw-font-semibold atw-px-4 atw-py-2 <?php //echo "$border_radius $border_width $leading" ?>">
+                    <span class=""><?php _e("Primary Button", "wpadverts" ) ?></span>
+                </button>
+
+                <button class="wpa-preview-button-primary wpa-preview-button-primary-hover atw-inline-block atw-bg-none atw-w-auto atw-text-base atw-outline-none atw-border-solid atw-font-semibold atw-px-4 atw-py-2 <?php //echo "$border_radius $border_width $leading" ?>">
+                    <span class=""><?php _e("Primary Button Hover", "wpadverts" ) ?></span>
+                </button>
+                
+            </div>
 
         </div>
+
 
     </div>    
     
@@ -269,15 +278,23 @@
         </div>
 
 
-        <div class="atw-flex atw-flex-1 atw-items-center atw-justify-around atw-w-full atw-h-auto  atw-border-0 atw-border-solid atw-border-gray-500 atw-bg-white">
+        <div class="atw-flex atw-flex-1 atw-flex-col atw-justify-center atw-w-full atw-h-auto atw-border-0 atw-border-solid atw-border-gray-500 atw-bg-white">
             
-            <button class="wpa-preview-button-secondary wpa-preview-button-secondary-normal atw-inline-block hover:atw-bg-none atw-bg-none atw-text-white atw-w-auto atw-text-base atw-outline-none atw-border-solid atw-font-semibold atw-px-4 atw-py-2 <?php //echo "$border_radius $border_width $leading" ?>">
-                <span class=""><?php _e("Secondary Button", "wpadverts" ) ?></span>
-            </button>
+            <div class="atw-flex atw-place-content-evenly atw-pb-9">
+                <span class="atw-text-2xl">Button Preview</span>
+            </div>
 
-            <button class="wpa-preview-button-secondary wpa-preview-button-secondary-hover atw-inline-block atw-bg-none atw-w-auto atw-text-base atw-outline-none atw-border-solid atw-font-semibold atw-px-4 atw-py-2 <?php //echo "$border_radius $border_width $leading" ?>">
-                <span class=""><?php _e("Secondary Button Hover", "wpadverts" ) ?></span>
-            </button>
+            <div class="atw-flex atw-place-content-evenly">
+
+                <button class="wpa-preview-button-secondary wpa-preview-button-secondary-normal atw-inline-block hover:atw-bg-none atw-bg-none atw-text-white atw-w-auto atw-text-base atw-outline-none atw-border-solid atw-font-semibold atw-px-4 atw-py-2 <?php //echo "$border_radius $border_width $leading" ?>">
+                    <span class=""><?php _e("Secondary Button", "wpadverts" ) ?></span>
+                </button>
+
+                <button class="wpa-preview-button-secondary wpa-preview-button-secondary-hover atw-inline-block atw-bg-none atw-w-auto atw-text-base atw-outline-none atw-border-solid atw-font-semibold atw-px-4 atw-py-2 <?php //echo "$border_radius $border_width $leading" ?>">
+                    <span class=""><?php _e("Secondary Button Hover", "wpadverts" ) ?></span>
+                </button>
+
+            </div>
 
         </div>
 

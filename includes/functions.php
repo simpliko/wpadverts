@@ -409,15 +409,30 @@ function adverts_the_content($content) {
     global $wp_query;
     
     if ( is_singular( wpadverts_get_post_types() ) && in_the_loop() ) {
-        ob_start();
+
         $post_id = get_the_ID();
-        
-        $post_content = get_post( $post_id )->post_content;
-        $post_content = wp_kses($post_content, wp_kses_allowed_html( 'post' ) );
-        $post_content = apply_filters( "adverts_the_content", $post_content );
-        
-        include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/single.php' );
-        $content = ob_get_clean();
+        $post = get_post( $post_id );
+        $post_type = $post->post_type;
+
+        include_once ADVERTS_PATH . '/includes/class-block-templates.php';
+
+        $block_templates = new Adverts_Block_Templates();
+
+        if( $block_templates->get_post_render_method( $post_type ) == "shortcode" ) {
+            return do_shortcode("[advert_single]");
+        } else if( $block_templates->get_post_render_method( $post_type ) == "block" ) {
+
+            remove_action( 'adverts_tpl_single_bottom', 'adverts_single_contact_information' );
+            remove_action( 'adverts_tpl_single_bottom', 'adext_contact_form' );
+            remove_action( 'adverts_tpl_single_bottom', 'adext_bp_send_private_message_button', 50 );
+
+            $post_content = $post->post_content;
+            $post_content = wp_kses($post_content, wp_kses_allowed_html( 'post' ) );
+            $post_content = apply_filters( "adverts_the_content", $post_content );
+            
+            //include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/single.php' );
+            $content = do_blocks( $block_templates->get_post_template( $post_type ) );
+        }
     }
 
     return $content;
@@ -1139,7 +1154,7 @@ function adverts_validate_upload_dimensions( $file, $params = null ) {
  * 
  * Filters currency and returns it as a float
  * 
- * @param type $data
+ * @param string $data
  * @since 0.1
  * @return type
  */
@@ -3936,15 +3951,4 @@ function adverts_before_delete_post( $post_id, $post ) {
             wp_delete_post( $attch->ID, true);
         }
     } 
-}
-
-function wpadverts_global_render_method() {
-    
-    $grm = get_option( "wpadverts_global_render_method", "shortcode" );
-
-    if( defined( "WPADVERTS_GLOBAL_RENDER_METHOD" ) ) {
-        $grm = WPADVERTS_GLOBAL_RENDER_METHOD;
-    }
-
-    return apply_filters( "wpadverts_global_render_method", $grm );
 }

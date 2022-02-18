@@ -119,6 +119,19 @@ jQuery(function($) {
         
         $(".wpadverts-admin-types-icon").show();
     });
+
+    $(".wpadverts-types-form-renderers input[type=radio]").on("change", function(e) {
+        if($(this).val() == "block") {
+            $(".wpadverts-types-form-renderers select").closest("tr").show();
+        } else {
+            $(".wpadverts-types-form-renderers select").closest("tr").hide();
+        }
+        
+    });
+
+    if( $(".wpadverts-types-form-renderers input[type=radio]:checked").val() != "block") {
+        $(".wpadverts-types-form-renderers select").closest("tr").hide();
+    }
 });
 
 function wpadverts_admin_type_slug_preview() {

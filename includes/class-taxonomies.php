@@ -93,8 +93,16 @@ class Adverts_Taxonomies {
             $prefix = '';
         }
 
-        $shortcode_args = apply_filters( "adverts_tax_shortcode_args", $shortcode_args );
-        $shortcode = shortcode_adverts_list( $shortcode_args );
+        include_once ADVERTS_PATH . '/includes/class-block-templates.php';
+        $block_templates = new Adverts_Block_Templates;
+        $taxonomy = $queried_object->taxonomy;
+
+        if( $block_templates->get_taxonomy_render_method( $taxonomy ) == "shortcode" ) {
+            $shortcode_args = apply_filters( "adverts_tax_shortcode_args", $shortcode_args );
+            $shortcode = shortcode_adverts_list( $shortcode_args );
+        } else if( $block_templates->get_taxonomy_render_method( $taxonomy ) == "block" ) {
+            $shortcode = do_blocks( $block_templates->get_taxonomy_template( $taxonomy ) );
+        }
         
         $adverts_list_page = get_post( adverts_config( 'ads_list_id' ) );
 

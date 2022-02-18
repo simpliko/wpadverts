@@ -61,7 +61,7 @@ class Adverts_Types_Admin {
             $without_comments = $this->_get_comment_closed_ads( $post_type->name );
             $enable_url = $this->_get_enable_comments_url( $post_type->name );
         }
-        //echo "<pre>";print_r($supports);echo "</pre>";
+        //echo "<pre>";print_r($form_renderers);echo "</pre>";
 
         include ADVERTS_PATH . 'addons/core/admin/types-edit-post.php';
     }
@@ -73,9 +73,9 @@ class Adverts_Types_Admin {
         $taxonomy = get_taxonomy( adverts_request( "edit-taxonomy" ) );
         
         if( ! isset( $_POST ) || empty( $_POST ) ) {
-            list( $form_simple, $form_labels ) = $this->_taxonomy_defaults( $taxonomy );
+            list( $form_simple, $form_labels, $form_renderers ) = $this->_taxonomy_defaults( $taxonomy );
         } else {
-            list( $form_simple, $form_labels ) = $this->_taxonomy_update( $taxonomy );
+            list( $form_simple, $form_labels, $form_renderers ) = $this->_taxonomy_update( $taxonomy );
         }
         
         $h2_title = sprintf( __("Edit '%s' Taxonomy", "wpadverts"), $taxonomy->label );
@@ -269,8 +269,21 @@ class Adverts_Types_Admin {
         $form_labels->load( $this->_edit_post_form_labels( $post_type ) );
 
         $form_renderers = new Adverts_Form();
-        $form_renderers->load( $this->_edit_form_renderers( "post", $post_type ) );
-        
+        $form_renderers->load( $this->_edit_form_renderers( "post", $post_type->name ) );
+
+        include_once ADVERTS_PATH . '/includes/class-block-templates.php';
+        $block_templates = new Adverts_Block_Templates();
+
+        $engine = $block_templates->get_post_render_method( $post_type->name, false );
+        $template = $block_templates->get_post_template_id( $post_type->name );
+
+        $bind_renderers = array(
+            "renderers__engine" => $engine === null ? "global" : $engine,
+            "renderers__template" => $template,
+        );
+
+        $form_renderers->bind( $bind_renderers );
+
         return array( $form_simple, $form_labels, $form_renderers );
     }
     
@@ -293,7 +306,23 @@ class Adverts_Types_Admin {
         $form_labels = new Adverts_Form();
         $form_labels->load( $this->_edit_taxonomy_form_labels( $taxonomy ) );
         
-        return array( $form_simple, $form_labels );
+        $form_renderers = new Adverts_Form();
+        $form_renderers->load( $this->_edit_form_renderers( "taxonomy", $taxonomy->name ) );
+
+        include_once ADVERTS_PATH . '/includes/class-block-templates.php';
+        $block_templates = new Adverts_Block_Templates();
+
+        $engine = $block_templates->get_taxonomy_render_method( $taxonomy->name, false );
+        $template = $block_templates->get_taxonomy_template_id( $taxonomy->name );
+
+        $bind_renderers = array(
+            "renderers__engine" => $engine === null ? "global" : $engine,
+            "renderers__template" => $template,
+        );
+
+        $form_renderers->bind( $bind_renderers );
+
+        return array( $form_simple, $form_labels, $form_renderers );
     }
     
     protected function _form_update( $post_type ) {
@@ -351,13 +380,23 @@ class Adverts_Types_Admin {
         
         update_option( "wpadverts_post_types", $option );
         
+        $form_renderers = new Adverts_Form();
+        $form_renderers->load( $this->_edit_form_renderers( "post", $post_type->name ) );
+        $form_renderers->bind( stripslashes_deep( $_POST ) );
+
+        $engine = $form_renderers->get_value( "renderers__engine");
+        $template = $form_renderers->get_value( "renderers__template" );
+
+        include_once ADVERTS_PATH . '/includes/class-block-templates.php';
+        Adverts_Block_Templates::save( "post", $post_type->name, $engine, $template );
+
         $info = __( "Classifieds type updated.", "wpadverts" ) . "<br/>";
         $info.= __( 'Remember to reset permalinks by clicking "Save Changes" button in the <a href="%s">Permalinks</a> panel.', "wpadverts" );
         
         $flash = Adverts_Flash::instance();
         $flash->add_info( sprintf( $info, admin_url( 'options-permalink.php') ) );
 
-        return array( $form_simple, $form_labels );
+        return array( $form_simple, $form_labels, $form_renderers );
     }
     
     protected function _taxonomy_update( $taxonomy ) {
@@ -420,16 +459,23 @@ class Adverts_Types_Admin {
         
         update_option( "wpadverts_taxonomies", $option );
         
+        $form_renderers = new Adverts_Form();
+        $form_renderers->load( $this->_edit_form_renderers( "taxonomy", $taxonomy->name ) );
+        $form_renderers->bind( stripslashes_deep( $_POST ) );
+
+        $engine = $form_renderers->get_value( "renderers__engine");
+        $template = $form_renderers->get_value( "renderers__template" );
+
+        include_once ADVERTS_PATH . '/includes/class-block-templates.php';
+        Adverts_Block_Templates::save( "taxonomy", $taxonomy->name, $engine, $template );
+
         $info = __( "Taxonomy updated.", "wpadverts" ) . "<br/>";
         $info.= __( 'Remember to reset permalinks by clicking "Save Changes" button in the <a href="%s">Permalinks</a> panel.', "wpadverts" );
         
         $flash = Adverts_Flash::instance();
         $flash->add_info( sprintf( $info, admin_url( 'options-permalink.php') ) );
         
-        $flash = Adverts_Flash::instance();
-        $flash->add_info( $info );
-        
-        return array( $form_simple, $form_labels );
+        return array( $form_simple, $form_labels, $form_renderers );
     }
     
     protected function _get_labels() {
@@ -731,21 +777,23 @@ class Adverts_Types_Admin {
         }
 
         $form_scheme = array(
-            "name" => sprintf( "%s_%s", $object, $type->name ),
+            "name" => sprintf( "%s_%s", $object, $type ),
             "field" => array(
                 array(
-                    "name" => sprintf( "renderers[%s]", "engine" ),
+                    "name" => sprintf( "renderers__%s", "engine" ),
                     "type" => "adverts_field_radio",
                     "label" => __( "Renderer Type", "wpadverts" ),
                     "order" => 10,
                     "value" => "",
                     "options" => array(
-                        array( "value" => "shortcode", "text" => __( "Default 1.X - Select this if you are using shortcodes.", "wpadverts" ) ),
-                        array( "value" => "block", "text" => __( "Block - Select this option if you are using blocks.", "wpadverts" ) ),
+                        array( "value" => "global", "text" => __( "Use default method.", "wpadverts" ) ),
+                        array( "value" => "shortcode", "text" => __( "Shortcode - use the old version 1.5 templates.", "wpadverts" ) ),
+                        array( "value" => "block", "text" => __( "Block (recommended) - use block templates.", "wpadverts" ) ),
+                        array( "value" => "none", "text" => __( "None - you will need to create your own templates.", "wpadverts" ) ),
                     )
                 ),
                 array(
-                    "name" => sprintf( "renderers[%s]", "template" ),
+                    "name" => sprintf( "renderers__%s", "template" ),
                     "type" => "adverts_field_select",
                     "label" => __( "Renderer Template", "wpadverts" ),
                     "order" => 10,

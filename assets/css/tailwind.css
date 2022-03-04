@@ -16,10 +16,16 @@
         background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='gray' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
     }
     .wpadverts-blocks .wpadverts-form input[type=radio]:checked {
-     background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='gray' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='4'/%3e%3c/svg%3e");
-      }
+        background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='gray' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='4'/%3e%3c/svg%3e");
+    }
     .wpadverts-blocks .wpadverts-form.wpa-solid select {
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    }
+
+    .wpadverts-blocks .wpadverts-form input[type=radio]:before,
+    .wpadverts-blocks .wpadverts-form input[type=checkbox]:before,
+    .wpadverts-blocks .wpadverts-form select:before {
+        content: none !important;
     }
 
     .wpadverts-blocks i {
@@ -28,7 +34,57 @@
     
     .wpadverts-form .wpa-w-full input[type=text],
     .wpadverts-form .wpa-w-full select {
-        @apply atw-w-full atw-max-w-full;
+        @apply atw-w-full atw-max-w-full atw-m-0;
+    }
+
+    /* FORM COMMON */
+
+    .wpadverts-form .wpa-form-wrap {
+        @apply md:atw-grow md:atw--mx-1
+    }
+
+    .wpadverts-form .wpa-form-wrap-inner {
+        @apply atw-flex atw-flex-wrap atw-items-end atw-justify-between atw-py-0 atw-px-0
+    }
+
+    .wpadverts-form .wpa-form-header {
+        @apply atw-relative atw-items-end atw-box-border atw-pt-6 atw-pb-1 atw-mx-1;
+    }
+
+    .wpadverts-form .wpa-form-header-label {
+        @apply atw-text-2xl atw-font-normal;
+    }
+
+    .wpadverts-form .wpa-form-header-text {
+        @apply atw-text-base;
+    }
+
+    .wpadverts-form .wpa-field-wrap {
+        @apply atw-relative atw-box-border atw-pb-3 atw-mx-1
+    }
+
+    .wpadverts-form .wpa-field-label {
+        @apply atw-block atw-box-border atw-px-0 atw-pt-2 atw-pb-0 atw-text-base atw-text-gray-600;
+    }
+
+    .wpadverts-form .wpa-field-label-text {
+        @apply atw-leading-none;
+    }
+
+    .wpadverts-form .wpa-field-asterisk {
+        @apply atw-text-base atw-text-red-600 atw-leading-none atw-font-bold;
+    }
+
+    .wpadverts-form .wpa-field-input {
+        @apply atw-block atw-w-full;
+    }
+
+    .wpadverts-form .wpa-form-buttons {
+        @apply atw-flex atw-mt-3 atw-p-3 atw-bg-gray-50 atw-rounded-md atw-justify-end md:atw-flex-none;
+    }
+
+    .wpadverts-form .wpa-form-buttons-list {
+        @apply atw-flex-none;
     }
 
     /* FORM STYLES */
@@ -51,7 +107,7 @@
 
     /* Flat */
 
-    .wpadverts-form.wpa-flat input[type=text]
+    .wpadverts-form.wpa-flat input[type=text],
     .wpadverts-form.wpa-flat textarea {
         @apply  atw-bg-white  atw-border-form-gray-300 atw-placeholder-form-gray-500 atw-text-form-gray-700
     }
@@ -215,7 +271,10 @@
     .wpadverts-form.wpa-padding-sm select {
         @apply atw-py-2 atw-px-2 atw-leading-loose;
     }
-    
+    .wpadverts-form.wpa-padding-sm.wpa-layout-aligned .wpa-field-label {
+        @apply md:atw-py-2 atw-px-0 atw-leading-loose;
+    }
+
     .wpadverts-form.wpa-padding-md .button {
         @apply atw-py-3 atw-leading-loose;
     }
@@ -223,9 +282,10 @@
     .wpadverts-form.wpa-padding-md select {
         @apply atw-py-3 atw-px-3 atw-leading-loose;
     }
-    
+    .wpadverts-form.wpa-padding-md.wpa-layout-aligned .wpa-field-label {
+        @apply md:atw-py-3 atw-px-0 atw-leading-loose;
+    }
 
-    
     /* FORM ROUNDING */
     .wpadverts-form.wpa-mood-simple input[type=text], 
     .wpadverts-form.wpa-mood-simple select {
@@ -239,7 +299,45 @@
     .wpadverts-form.wpa-mood-elegnat select {
         @apply atw-rounded-none;
     }
+
+    /* FORM LAYOUTS */
+
+    .wpadverts-form.wpa-layout-stacked {
+
+    }
+
+    .wpadverts-form.wpa-layout-stacked .wpa-field-label {
+        @apply atw-mb-1;
+    }
+
+    .wpadverts-form.wpa-layout-aligned .wpa-field-wrap {
+        @apply atw-flex atw-items-start atw-flex-col md:atw-flex-row;
+    }
+
+    .wpadverts-form.wpa-layout-aligned .wpa-field-wrap .wpa-field-label {
+        @apply atw-flex-none atw-w-1/3;
+    }
     
+    .wpadverts-form.wpa-layout-aligned .wpa-field-wrap .wpa-field-input {
+        @apply atw-flex-grow;
+    }
+
+    .wpadverts-form.wpa-layout-aligned .wpa-field-label {
+        @apply atw-border-transparent atw-border-solid;
+    }
+    .wpadverts-form.wpa-border-none.wpa-layout-aligned .wpa-field-label {
+        @apply md:atw-border-y-0;
+    }
+    .wpadverts-form.wpa-border-thin.wpa-layout-aligned .wpa-field-label {
+        @apply md:atw-border-y;
+    }
+    .wpadverts-form.wpa-border-thick.wpa-layout-aligned .wpa-field-label {
+        @apply md:atw-border-y-2;
+    }
+    .wpadverts-form.wpa-border-thick-x2.wpa-layout-aligned .wpa-field-label {
+        @apply md:atw-border-y-4;
+    }
+
     /* FORM ERRORS */ 
     .wpadverts-form .wpa-field-error {
 
@@ -257,6 +355,25 @@
 
     .wpadverts-form .wpa-field-error .wpa-errors-list .wpa-error-item {
         @apply atw-list-none atw-m-0 atw-px-0 atw-pt-1 atw-pb-2 atw-leading-5 atw-text-red-600
+    }
+
+    /* FORM INTERLINE */
+
+    .wpadverts-form.wpa-form-interline .wpa-field-wrap {
+        @apply atw-border-0 md:atw-pt-3 md:atw-border-b md:atw-border-solid md:atw-border-gray-100;
+    }
+    .wpadverts-form.wpa-form-interline .wpa-form-header {
+        @apply atw-border-0 md:atw-pt-3 md:atw-mt-6 md:atw-border-b md:atw-border-solid md:atw-border-gray-100;
+    }
+
+    /* FORM ROWS SPACING */
+
+    .wpadverts-form.wpa-spacing-0 .wpa-field-wrap {
+        @apply atw-my-0;
+    }
+
+    .wpadverts-form.wpa-spacing-1 .wpa-field-wrap {
+        
     }
 
     /* BUTTONS */
@@ -370,12 +487,69 @@
         @apply atw-text-red-400;
     }
 
+    .wpadverts-flash.wpa-style-error a {
+        @apply atw-text-red-800 atw-underline;
+    }
+
+    .wpadverts-flash.wpa-style-error a:hover {
+        @apply atw-text-red-900 atw-underline;
+    }
+
+    .wpadverts-flash.wpa-style-error .wpa-btn-secondary {
+        @apply atw-bg-red-200 atw-border-red-200 atw-text-red-800;
+    }
+
+    .wpadverts-flash.wpa-style-error .wpa-btn-secondary:hover {
+        @apply atw-bg-red-300 atw-border-red-300 atw-text-red-900;
+    }
+
+
     .wpadverts-flash.wpa-style-success {
         @apply atw-bg-green-100 atw-text-green-800;
     }
 
     .wpadverts-flash.wpa-style-success .wpa-flash-icon {
         @apply atw-text-green-500;
+    }
+
+    .wpadverts-flash.wpa-style-success a {
+        @apply atw-text-green-800 atw-underline;
+    }
+
+    .wpadverts-flash.wpa-style-success a:hover {
+        @apply atw-text-green-900 atw-underline;
+    }
+
+    .wpadverts-flash.wpa-style-success .wpa-btn-secondary {
+        @apply atw-bg-green-200 atw-border-green-200 atw-text-green-800;
+    }
+
+    .wpadverts-flash.wpa-style-success .wpa-btn-secondary:hover {
+        @apply atw-bg-green-300 atw-border-green-300 atw-text-green-900;
+    }
+
+    .wpadverts-flash.wpa-style-info {
+        @apply atw-bg-gray-100 atw-text-gray-800;
+    }
+
+    .wpadverts-flash.wpa-style-info .wpa-flash-icon {
+        @apply atw-text-gray-500;
+    }
+
+    .wpadverts-flash.wpa-style-info a {
+        @apply atw-text-gray-800 atw-underline;
+    }
+
+    .wpadverts-flash.wpa-style-info a:hover {
+        @apply atw-text-gray-900 atw-underline;
+    }
+
+    .wpadverts-flash.wpa-style-info .wpa-btn-secondary {
+        @apply atw-bg-gray-200 atw-border-gray-200 atw-text-gray-800;
+    }
+
+    .wpadverts-flash.wpa-style-info .wpa-btn-secondary:hover {
+        @apply atw-bg-gray-300 atw-border-gray-300 atw-text-gray-900;
     }
 
     .wpadverts-flash.wpa-layout-normal {
@@ -387,7 +561,7 @@
     }
 
     .wpadverts-flash.wpa-layout-big {
-        @apply atw-mx-0 atw-my-6 atw-px-4 atw-py-4;
+        @apply atw-mx-0 atw-my-3 atw-px-3 atw-py-9;
     }
 
     .wpadverts-flash.wpa-layout-big .wpa-flash-content {

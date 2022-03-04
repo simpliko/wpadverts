@@ -142,7 +142,9 @@ $adverts_namespace['blocks_styling'] = array(
             "rounded" => 3,
             "px" => 0,
             "py" => 0,
-            "border" => 1
+            "border" => 1,
+            "interline" => 1,
+            "spacing" => 0
         )
     )
 );

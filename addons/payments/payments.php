@@ -177,6 +177,7 @@ function adext_payments_init_frontend() {
     add_filter("adverts_action", "adext_payments_add_action_payment");
     add_filter("adverts_action", "adext_payments_add_action_notify");
 
+    add_filter("wpadverts/block/publish/actions", "adext_payments_register_publish_action" );
     add_filter("adverts_action_payment", "adext_payments_action_payment", 10, 2);
     
     add_action( "adverts_sh_manage_actions_more", "adext_payments_action_renew" );
@@ -186,6 +187,18 @@ function adext_payments_init_frontend() {
     add_filter( "adverts_manage_action_renew", "adext_payments_manage_action_renew" );
     
     add_action( "adverts_sh_manage_list_status", 'adext_payments_manage_list_status' );
+}
+
+function adext_payments_register_publish_action( $possible_actions ) {
+    $possible_actions["payment"] = array(
+        "order" => 10,
+        "name" => "adverts_action_payment",
+        "callback" => "adext_payments_action_payment_block",
+    );
+
+    remove_filter("adverts_action_payment", "adext_payments_action_payment", 10, 2);
+
+    return $possible_actions;
 }
 
 /**
@@ -367,6 +380,9 @@ function adext_payments_form_load( $form ) {
  */
 function adverts_payments_field_payment($field) {
     
+    adverts_payments_field_payment_block( $field );
+    return;
+
     ob_start();
     
     echo '<div class="adverts-pricings-list">';
@@ -450,6 +466,86 @@ function adverts_payments_field_payment($field) {
     echo ob_get_clean();
 }
 
+function adverts_payments_field_payment_block( $field ) {
+    ob_start();
+    
+    echo '<div class="atw-flex atw-flex-col">';
+    
+    foreach( $field["options"] as $option ) {
+    
+        $post_id = $option["value"];
+        $post = get_post( $post_id );
+        $visible = get_post_meta( $post_id, 'adverts_visible', true );
+
+        if( get_post_meta( $post_id, 'adverts_price', true ) ) {
+            $adverts_price = adverts_price( get_post_meta( $post_id, 'adverts_price', true ) );
+        } else {
+            $adverts_price = __("Free", "wpadverts");
+        }
+
+        if($post->post_content) {
+            $post_content = '<br/><small style="padding-left:25px">'.$post->post_content.'</small>' ;
+        } else {
+            $post_content = '';
+        }
+        
+        if( isset( $option['disabled'] ) && $option['disabled'] ) {
+            $is_disabled = true;
+        } else {
+            $is_disabled = false;
+        }
+        
+        $is_disabled = apply_filters( "adext_payments_option_is_disabled", $is_disabled, $option );
+
+        if( $is_disabled ) {
+            $disabled = 'disabled="disabled"';
+        } else {
+            $disabled = '';
+        }
+        
+        ?>
+
+        <div class="atw-flex atw-items-center atw-p-3 atw-mb-3 atw-rounded-md atw-border atw-border-solid atw-border-gray-100 -atw-bg-gray-50 <?php if($is_disabled): ?>adverts-listing-type-x-disabled<?php endif; ?>">
+
+            <label class="atw-flex-none atw-pr-3 " for="<?php echo esc_attr( $field["name"] . "_" . $option["value"] ) ?>">
+                <input name="<?php echo esc_attr( $field["name"] ) ?>" class="atw-bg-white atw-border atw-border-solid atw-border-300" id="<?php echo esc_attr( $field["name"] . "_" . $option["value"] ) ?>" type="radio" value="<?php echo $post->ID ?>" <?php checked($post->ID, $field["value"]) ?> <?php disabled( $is_disabled ) ?> />
+            </label>
+
+            <div class="atw-flex-1">
+                <div class="adverts-listing-type-name">
+                    <span class="atw-font-normal atw-text-xl"><?php echo esc_html( $post->post_title ) ?></span>
+                </div>
+
+                <div class="adverts-listing-type-features">
+                    <span class="atw-text-sm atw-text-gray-600">
+                        <?php if( $visible > 0 ): ?>
+                        <?php printf( _n("Visible 1 day", "Visible %d days", $visible, "wpadverts"), $visible) ?>
+                        <?php else: ?>
+                        <?php echo esc_html_e( "Never Expires", "wpadverts" ) ?>
+                        <?php endif; ?>
+                    </span>
+                    <?php do_action("adverts_payments_features", $post->ID ) ?>
+                </div>
+
+                <?php if($post->post_content): ?>
+                <div class="atw-text-sm">
+                    <?php echo $post->post_content ?>
+                </div>
+                <?php endif; ?>
+            </div>
+
+            <span class="">
+                <span class="atw-font-bold atw-text-xl"><?php echo $adverts_price ?></span>
+            </span>
+        </div>
+
+        <?php
+    }
+    
+    //echo '</div>';
+    echo ob_get_clean();
+}
+
 /**
  * Binds default payment_listing_type value
  * 
@@ -469,6 +565,41 @@ function adext_payments_form_bind( Adverts_Form $form ) {
     return $form;
 }
 
+function adext_payments_get_template( $file, $is_block ) {
+    $blocks = array(
+        "add-payment"   => ADVERTS_PATH . 'addons/payments/templates/publish-payment.php',
+        "add-save"      => ADVERTS_PATH . '/templates/block-partials/publish-save.php',
+        "white-page"    => ADVERTS_PATH . 'addons/payments/templates/white-page.php'
+    );
+    $shortcodes = array(
+        "add-payment"   => ADVERTS_PATH . 'addons/payments/templates/add-payment.php',
+        "add-save"      => ADVERTS_PATH . '/templates/add-save.php',
+        "white-page"    => ADVERTS_PATH . 'addons/payments/templates/white-page.php'
+    );
+
+    if( $is_block ) {
+        return $blocks[ $file ];
+    } else {
+        return $shortcodes[ $file ];
+    }
+}
+
+/**
+ * Payment action
+ * 
+ * This function is executed when "payment" action is run in the Publish block
+ * 
+ * @since 2.0
+ * 
+ * @param       string          $content 
+ * @param       Adverts_Form    $form
+ * @param       boolean         $is_block
+ * @return      null
+ */
+function adext_payments_action_payment_block( $content, Adverts_Form $form ) {
+    adext_payments_action_payment( $content, $form, true );
+}
+
 /**
  * Payment action
  * 
@@ -476,25 +607,40 @@ function adext_payments_form_bind( Adverts_Form $form ) {
  * 
  * @see shortcode_adverts_add()
  * @since 1.0
+ * @since 2.0 - $is_block param
  * 
- * $param string $content 
- * @param Adverts_Form $form
- * @return null
+ * @param       string          $content 
+ * @param       Adverts_Form    $form
+ * @param       boolean         $is_block
+ * @return      null
  */
-function adext_payments_action_payment($content, Adverts_Form $form ) {
+function adext_payments_action_payment($content, Adverts_Form $form, $is_block = false ) {
     
     $post_id = adverts_request( "_post_id" );
     $post = get_post( $post_id );
     
-    $info[] = array(
-        "message" => sprintf( __( "<p><strong>Your Payment Is Required</strong><p>Please complete payment for the <em>'%s'</em> Ad posting to have it published.</p>", "wpadverts" ), $post->post_title ),
-        "icon" => "adverts-icon-basket"
-    );
+    $info = array();
+    $success = array();
     $error = array();
+
+    if( ! $is_block ) {
+        $info[] = array(
+            "message" => sprintf( __( "<p><strong>Your Payment Is Required</strong><p>Please complete payment for the <em>'%s'</em> Ad posting to have it published.</p>", "wpadverts" ), $post->post_title ),
+            "icon" => "adverts-icon-basket"
+        );
+    } else {
+        $success[] = array(
+            "message" => sprintf( __( "<div><strong>Your Payment Is Required</strong></div><div>Please complete payment for the <em>'%s'</em> Ad posting to have it published.</div>", "wpadverts" ), $post->post_title ),
+            "icon" => "fa-solid fa-cart-shopping"
+        );
+    }
+
+
+    
     
     wp_enqueue_script( 'adext-payments' );
     
-    $adverts_flash = array( "error" => $error, "info" => $info );
+    $adverts_flash = array( "error" => $error, "info" => $info, "success" => $success );
 
 
     wp_update_post( array( 
@@ -533,9 +679,15 @@ function adext_payments_action_payment($content, Adverts_Form $form ) {
     $payment = get_post( $payment_id );
     $price = get_post_meta($payment_id, '_adverts_payment_total', true);
 
-    ob_start();
-    include ADVERTS_PATH . 'addons/payments/templates/add-payment.php';
-    return ob_get_clean();
+    $tpl = adext_payments_get_template( "add-payment", $is_block );
+    if( $is_block ) {
+        include $tpl;
+    } else {
+        ob_start();
+        include $tpl;
+        return ob_get_clean();
+    }
+
 }
 
 /**
@@ -686,12 +838,14 @@ function adext_payments_action_renew( $post_id ) {
  * 
  * @see     adverts_manage_action_renew
  * @since   1.1.0
+ * @since   2.0     $is_block param
  * 
- * @param   string    $content  Content generated form [adverts_manage]
- * @param   array     $atts     [adverts_manage] params
- * @return  string              HTML for form which will allow to renew an Ad
+ * @param   string    $content      Content generated form [adverts_manage]
+ * @param   array     $atts         [adverts_manage] params
+ * @param   boolean   $is_block     Use templates for blocks or shortcodes
+ * @return  string                  HTML for form which will allow to renew an Ad
  */
-function adext_payments_manage_action_renew( $content, $atts = array() ) {
+function adext_payments_manage_action_renew( $content, $atts = array(), $is_block = false ) {
 
     $error = null;
     $info = null;
@@ -832,7 +986,7 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
                 
                 ob_start();
                 // wpadverts/addons/payments/templates/add-payment.php
-                include ADVERTS_PATH . 'addons/payments/templates/add-payment.php';
+                include adext_payments_get_template( "add-payment", $is_block );
                 return ob_get_clean();
             } else if( $price == 0 && $renewal_diff < $renewal_diff_min ) {
                 $m = __( 'Free Renewals cannot be used more than once every %d days.', 'wpadverts');
@@ -860,8 +1014,8 @@ function adext_payments_manage_action_renew( $content, $atts = array() ) {
                 do_action( "wpadverts_advert_saved", $post_id );
                 
                 ob_start();
-                // wpadverts/templates/add-payment.php
-                include ADVERTS_PATH . '/templates/add-save.php';
+                // wpadverts/templates/add-save.php
+                include adext_payments_get_template( "add-save", $is_block );
                 return ob_get_clean();
             }
         }

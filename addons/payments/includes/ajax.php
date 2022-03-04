@@ -20,6 +20,8 @@ add_action('wp_ajax_nopriv_adext_payments_complete_payment', 'adext_payments_aja
  */
 function adext_payments_ajax_render() {
     
+    $is_block = absint( adverts_request( "is_block" ) );
+
     $gateway_name = adverts_request('gateway');
     $gateway = adext_payment_gateway_get( $gateway_name );
     
@@ -78,7 +80,14 @@ function adext_payments_ajax_render() {
     
     if($response === null) {
         ob_start();
-        include ADVERTS_PATH . 'templates/form.php';
+
+        if( $is_block ) {
+            $form_layout = "wpa-layout-aligned";
+            include ADVERTS_PATH . 'templates/block-partials/form.php';
+        } else {
+            include ADVERTS_PATH . 'templates/form.php';
+        }
+
         $html_form = ob_get_clean();
 
         $response = array(

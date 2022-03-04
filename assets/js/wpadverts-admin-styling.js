@@ -214,12 +214,16 @@ WPADVERTS.Styling.Form = function( el, preview ) {
     this.shadow = el.find(".shadow");
     this.rounded = el.find(".rounded");
     this.border = el.find(".border");
+    this.interline = el.find(".interline");
+    this.spacing = el.find(".spacing");
 
     this.palette.on("change", jQuery.proxy(this.onPaletteChange, this));
     this.style.on("change", jQuery.proxy(this.onStyleChange, this));
     this.shadow.on("change", jQuery.proxy(this.onShadowChange, this));
     this.rounded.on("change", jQuery.proxy(this.onRoundedChange, this));
     this.border.on("change", jQuery.proxy(this.onBorderChange, this));
+    this.interline.on("change", jQuery.proxy(this.onInterlineChange, this));
+    this.spacing.on("change", jQuery.proxy(this.onSpacingChange, this));
 
     this.submit = el.find(".button-primary");
     this.reset = el.find(".wpa-button-settings-reset");
@@ -327,6 +331,8 @@ WPADVERTS.Styling.Form.prototype.setDefaults = function() {
     this.preview.addClass(this.shadow.val());
     this.preview.addClass(this.rounded.find("option:selected").data("value"));
     this.preview.addClass(this.border.find("option:selected").data("value"));
+    this.preview.addClass(this.interline.find("option:selected").data("value"));
+    this.preview.addClass(this.spacing.find("option:selected").data("value"));
 };
 
 WPADVERTS.Styling.Form.prototype.removePreviewClass = function(index, item) {
@@ -360,6 +366,16 @@ WPADVERTS.Styling.Form.prototype.onRoundedChange = function() {
 WPADVERTS.Styling.Form.prototype.onBorderChange = function() {
     jQuery.each(this.border.find("option"), jQuery.proxy(this.removePreviewDataClass,this));
     this.preview.addClass(this.border.find("option:selected").data("value"));
+};
+
+WPADVERTS.Styling.Form.prototype.onInterlineChange = function() {
+    jQuery.each(this.interline.find("option"), jQuery.proxy(this.removePreviewDataClass,this));
+    this.preview.addClass(this.interline.find("option:selected").data("value"));
+};
+
+WPADVERTS.Styling.Form.prototype.onSpacingChange = function() {
+    jQuery.each(this.spacing.find("option"), jQuery.proxy(this.removePreviewDataClass,this));
+    this.preview.addClass(this.spacing.find("option:selected").data("value"));
 };
 
 jQuery(function($) {

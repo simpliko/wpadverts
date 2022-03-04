@@ -15,6 +15,36 @@
 
 class Adverts_Block_Templates {
 
+    protected static $_post_id = null;
+
+    /**
+     * Set static post ID (used for Ad preview)
+     * 
+     * @var     int     $id     Post ID
+     * @return  void
+     */
+    public static function set_id( $id ) {
+        self::$_post_id = $id;
+    }
+
+    /**
+     * Unset static Post ID
+     * 
+     * @return  void
+     */
+    public static function unset_id() {
+        self::$_post_id = null;
+    }
+
+    /**
+     * Return static Post ID
+     * 
+     * @return  int     Post ID or NULL
+     */
+    public static function get_id() {
+        return self::$_post_id;
+    }
+
     /**
      * Returns global/default rendering method either "shortcode" or "block".
      * 

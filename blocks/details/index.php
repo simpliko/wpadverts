@@ -97,7 +97,12 @@ class Adverts_Block_Details {
 
         extract( $params );
 
-        $post_id = get_the_ID();
+        // If user is in Publish -> Preview use the Adverts_Block_Templates::get_id() instead of current page ID.
+        if( Adverts_Block_Templates::get_id() !== null ) {
+            $post_id = Adverts_Block_Templates::get_id();
+        } else {
+            $post_id = get_the_ID();
+        }
         
         $post_content = get_post( $post_id )->post_content;
         $post_content = wp_kses($post_content, wp_kses_allowed_html( 'post' ) );

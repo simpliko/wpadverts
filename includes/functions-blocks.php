@@ -353,7 +353,7 @@ function wpadverts_block_form_styles( $atts ) {
     if( ! isset( $atts["customize"] ) || $atts["customize"] != 1 ) {
         $atts = adverts_config( "blocks_styling.form" );
     }
-
+//print_r($atts);
     $form_border = array(
         0 => "wpa-border-none",
         1 => "wpa-border-thin",
@@ -369,12 +369,19 @@ function wpadverts_block_form_styles( $atts ) {
         5 => "wpa-rounded-xl",
         6 => "wpa-rounded-2xl",
     );
+
+    $form_spacing = array(
+        0 => "wpa-spacing-0",
+        1 => "wpa-spacing-1"
+    );
     
     $form_styles = join( " ", array(
         isset( $atts["style"] ) ? $atts["style"] : "",
         isset( $atts["shadow"] ) ? $atts["shadow"] : "",
         isset( $atts["border"] ) && $atts["border"] ? $form_border[ $atts["border"] ] : $form_border[0],
         isset( $atts["rounded"] ) && $atts["rounded"] ? $form_rounded[ $atts["rounded"] ] : $form_rounded[0],
+        isset( $atts["spacing"] ) && $atts["spacing"] ? $form_spacing[ $atts["spacing"] ] : $form_spacing[0],
+        isset( $atts["interline"] ) && $atts["interline"] ? "wpa-form-interline" : "",
         "wpa-padding-sm"
     ) );
 
@@ -620,17 +627,17 @@ function wpadverts_block_flash( $data, $layout = "normal" ) {
             "icon" => "fas fa-exclamation-circle"
         ),
         "success" => array(
-            "icon" => "fas fa-check-circle"
+            "icon" => "fas fa-check"
         ),
         "info" => array(
-            "icon" => "fas fa-check-circle"
+            "icon" => "fas fa-info-circle"
         )
     );
 
     $styles = array(
         "error" => "wpa-style-error",
         "success" => "wpa-style-success",
-        "info" => "wpa-style-success"
+        "info" => "wpa-style-info"
     );
 
     $layouts = array(
@@ -653,12 +660,15 @@ function wpadverts_block_flash( $data, $layout = "normal" ) {
                     if(is_string($info)) {
                         $info = array( "message" => $info, "icon" => "", "link" => null);
                     } 
+                    if( $info["icon"] && stripos( $info["icon"], "adverts-" ) === 0 ) {
+                        $info["icon"] = $t["icon"];
+                    }
                 ?>
                 
                 <div class="wpa-flash-content atw-flex">
 
                     <?php if($info["icon"]): ?>
-                        <span class="wpa-flash-icon"><i class="<?php echo esc_attr( $t["icon"] ) ?>"></i></span>
+                        <span class="wpa-flash-icon"><i class="<?php echo esc_attr( $info["icon"] ) ?>"></i></span>
                     <?php endif; ?>
 
                     <div class="atw-flex-1 atw-flex atw-flex-col">

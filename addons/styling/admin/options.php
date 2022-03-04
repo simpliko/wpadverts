@@ -375,6 +375,28 @@
                     </div>
                 </div>
 
+                <h3 class="atw-mt-6 atw-mb-3"><?php _e("Other","wpadverts" ) ?></h3>
+                
+                <div class="atw-flex">
+                    <div>
+                        <div class="atw-block atw-mb-1"><?php _e("Interline", "wpadverts" ) ?></div>
+                        <select name="interline" class="interline" data-default-value="<?php echo esc_attr( $frmd["interline"] ) ?>">
+                            <option value="0" data-value="wpa-form-interline-disabled" <?php selected( $frm["interline"], "0",) ?>><?php _e("Hide", "wpadverts" ) ?></option>
+                            <option value="1" data-value="wpa-form-interline" <?php selected( $frm["interline"], "1",) ?>><?php _e("Show", "wpadverts" ) ?></option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <div class="atw-block atw-mb-1"><?php _e("Row Spacing", "wpadverts" ) ?></div>
+                        <select name="spacing" class="spacing" data-default-value="<?php echo esc_attr( $frmd["spacing"] ) ?>">
+                            <option value="0" data-value="wpa-spacing-0" <?php selected( $frm["spacing"], "0",) ?>><?php _e("None", "wpadverts" ) ?></option>
+                            <option value="1" data-value="wpa-spacing-1" <?php selected( $frm["spacing"], "1",) ?>><?php _e("Small", "wpadverts" ) ?></option>
+                            <option value="2" data-value="wpa-spacing-2" <?php selected( $frm["spacing"], "2",) ?>><?php _e("Medium", "wpadverts" ) ?></option>
+                            <option value="3" data-value="wpa-spacing-3" <?php selected( $frm["spacing"], "3",) ?>><?php _e("Large", "wpadverts" ) ?></option>
+                        </select>
+                    </div>
+                </div>
+
                 <p class="submit">
                     <input type="submit" value="<?php echo __("Save Form Styling Settings", "wpadverts") ?>" class="button-primary wpa-save-secondary-button" name="Submit"/>
                     
@@ -392,7 +414,7 @@
                 <?php $palette = array( "blue-gray", "cool-gray", "gray", "true-gray", "warm-gray" ) ?>
                 <?php foreach( $palette as $p ): ?>
                 .wpadverts-block <?php echo sprintf(".wpadverts-form.%s", $p) ?> {
-                    <?php wpadverts_print_grays_variables( $p ) ?>
+                    <?php wpadverts_print_grays_variables( array( "customize" => 1, "palette" => $p ) ) ?>
                 }
                 <?php endforeach; ?>
             </style>

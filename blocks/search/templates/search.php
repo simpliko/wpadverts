@@ -9,8 +9,8 @@ $redirect_to  = isset( $atts["redirect_to"] ) ? $atts["redirect_to"] : "";
     .wpadverts-blocks.wpadverts-block-search {
         <?php wpadverts_print_grays_variables( $atts["form"] ) ?>
     }
-    <?php wpadverts_block_button_css( "primary", isset( $atts["primary_button"] ) ? $atts["primary_button"] : array() ) ?>
-    <?php wpadverts_block_button_css( "secondary", isset( $atts["secondary_button"] ) ? $atts["secondary_button"] : array() ) ?>
+    <?php wpadverts_block_button_css( "primary", isset( $atts["primary_button"] ) ? $atts["primary_button"] : array(), ".wpadverts-blocks.wpadverts-block-search" ) ?>
+    <?php wpadverts_block_button_css( "secondary", isset( $atts["secondary_button"] ) ? $atts["secondary_button"] : array(), ".wpadverts-blocks.wpadverts-block-search" ) ?>
 </style>
 
 <script type="text/javascript">
@@ -35,12 +35,11 @@ jQuery(function($) {
         <?php call_user_func( adverts_field_get_renderer($field), $field, $form ) ?>
         <?php endforeach; ?>
         
-        
         <div class="atw-flex atw-flex-col md:<?php echo $buttons_position ?>">
             
-            <div class="md:atw-grow md:atw--mx-1">
+            <div class="wpa-form-wrap">
                 <?php if( !empty( $fields_visible ) ): ?>
-                <div class="atw-flex atw-flex-wrap atw-items-end atw-justify-between atw-py-0 atw-px-0">
+                <div class="wpa-form-wrap-inner">
                     <?php foreach( $fields_visible as $field ): ?>
                     <?php $width = $this->_get_field_width( $field ) ?>
                     <?php $pr = $pl = ""; ?>
@@ -83,12 +82,12 @@ jQuery(function($) {
                  
                 <?php if( ! empty( $fields_hidden ) ): ?>
                 <div class="atw-flex-auto atw-pr-2">
-                    <?php echo wpadverts_block_button( array( "text" => __( "Filters", "wpadverts" ), "icon" => "fa-sliders-h", "type" => "secondary" ), $atts["secondary_button"] ) ?>
+                    <?php echo wpadverts_block_button( $button_s_args, $atts["secondary_button"] ) ?>
                 </div>
                 <?php endif; ?>
                 
                 <div class="atw-flex-auto">
-                    <?php echo wpadverts_block_button( array( "text" => __("Search", "wpadverts"), "icon" => "fa-search", "type" => "primary" ), $atts["primary_button"] ) ?>
+                    <?php echo wpadverts_block_button( $button_p_args, $atts["primary_button"] ) ?>
                 </div>
 
             </div>

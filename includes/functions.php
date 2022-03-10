@@ -1776,7 +1776,7 @@ function adverts_field_account( $field ) {
  * @param Adverts_Form  $form       Form object
  * @return void
  */
-function adverts_field_gallery($field, $form = null ) {
+function adverts_field_gallery($field, $form = null, $is_block = false ) {
     include_once ADVERTS_PATH . "includes/gallery.php";
     
     wp_enqueue_script( 'adverts-gallery' );
@@ -1824,7 +1824,11 @@ function adverts_field_gallery($field, $form = null ) {
         $conf["save"] = $save;
     }
 
-    adverts_gallery_content($post, $conf);
+    adverts_gallery_content($post, $conf, $is_block);
+}
+
+function adverts_field_gallery_block( $field, $form = null ) {
+    adverts_field_gallery( $field, $form, true );
 }
 
 /**

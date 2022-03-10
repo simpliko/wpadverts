@@ -3,10 +3,19 @@
 class WPAdverts_Honeypot {
 
     public function __construct() {
+
         add_action( "adverts_form_load", array( $this, "form_load" ), 5000 );
         add_action( "wp_head", array( $this, "head" ) ); 
-        
+
         do_action( "wpadverts_honeypot_init", $this );
+    }
+
+    public function is_rest() {
+        if ( defined('REST_REQUEST') && REST_REQUEST ) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function get_supported_forms() {
@@ -25,6 +34,10 @@ class WPAdverts_Honeypot {
     }
 
     public function form_load( $form ) {
+
+        if( $this->is_rest() ) {
+           return $form; 
+        }
 
         if( ! in_array( $form["name"], $this->get_supported_forms() ) ) {
             return $form;

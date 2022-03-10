@@ -243,7 +243,10 @@ class Adverts_Block_Publish_Engine {
             'requires_error' => "",
             'skip_preview' => 0,
             'post_type' => 'advert',
-            'preselect_category' => 1
+            'preselect_category' => 1,
+            'form' => null,
+            'button_primary' => null,
+            'button_secondary' => null
         ), $atts, 'adverts_add');
         
         $this->_params = apply_filters(
@@ -327,14 +330,14 @@ class Adverts_Block_Publish_Engine {
             $action_label = __( "Publish Listing", "wpadverts" );
         } else {
             $bind["_adverts_action"] = "preview";
-            $action_label = __( "Preview", "wpadverts" );
+            $action_label = __( "Preview Listing", "wpadverts" );
         }
         
         $form->bind( $bind );
 
         $buttons = array(
             array(
-                "html" => __( "Preview Listing", "wpadverts" ) . '<i class="fa fa-arrow-right atw-pl-3"></i>',
+                "html" => $action_label . '<i class="fa fa-arrow-right atw-pl-3"></i>',
                 "icon" => "fas-mail-alt",
                 "type" => "primary",
                 "class" => "wpadverts-block-cf-send",
@@ -348,6 +351,7 @@ class Adverts_Block_Publish_Engine {
 
         $show_buttons = true;
         $form_layout = "wpa-layout-aligned";
+        $atts = $this->_params["form"];
 
         // adverts/templates/add.php
         ob_start();
@@ -375,7 +379,7 @@ class Adverts_Block_Publish_Engine {
                 $error = __( "Checksum does not exist. Please refresh the page and try again.", "wpadverts" );
             }
 
-            return wpadverts_block_flash( array( "info" => array(), "error" => array( array( 
+            return $this->flash( array( "info" => array(), "error" => array( array( 
                 "icon" => "adverts-icon-close",
                 "message" => $error
                 
@@ -389,7 +393,7 @@ class Adverts_Block_Publish_Engine {
         $info = array();
         
         if( $post_id > 0 && ! wp_verify_nonce( $post_id_nonce, "wpadverts-publish-" . $post_id ) ) {
-            return wpadverts_block_flash( array( "info" => array(), "error" => array( array( 
+            return $this->flash( array( "info" => array(), "error" => array( array( 
                 "icon" => "adverts-icon-close",
                 "message" => __( "Could not validate. Refresh your session and make sure you are using cookies.", "wpadverts" )
                 
@@ -653,11 +657,17 @@ class Adverts_Block_Publish_Engine {
             "info" => array(
                 array( 
                     "message" => $parsed,
-                    "icon" => "adverts-icon-lock"
+                    "icon" => "fa-solid fa-lock"
                 )
             ),
         );
-        return wpadverts_block_flash( $adverts_flash, "big" );
+        return $this->flash( $adverts_flash, "big" );
+    }
+
+    public function flash( $data, $layout ) {
+        ob_start();
+        wpadverts_block_flash( $data, $layout );
+        return ob_get_clean();
     }
 }
 

@@ -20,9 +20,33 @@ class Adverts_Block_Manager {
     public function __construct( $path = null ) {
         $this->_path = $path;
         
-
+        add_filter( 'block_categories', array( $this, "register_block_category" ) );
     }
     
+    public function register_block_category( $categories ) {
+
+        $block_category = array( 
+            'title' => esc_html__( 'Classifieds', 'wpadverts' ), 
+            'slug' => 'wpadverts' 
+        );
+        $category_slugs = wp_list_pluck( $categories, 'slug' );
+     
+        if ( ! in_array( $block_category['slug'], $category_slugs, true ) ) {
+            $categories = array_merge(
+                $categories,
+                array(
+                    array(
+                        'title' => $block_category['title'], // Required
+                        'slug'  => $block_category['slug'], // Required
+                        'icon'  => 'wordpress', // Slug of a WordPress Dashicon or custom SVG
+                    ),
+                )
+            );
+        }
+     
+        return $categories;
+    }
+
     public function register() {
         $path = $this->_path;
         if( $path === null ) {

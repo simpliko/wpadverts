@@ -1,0 +1,49 @@
+{
+    "name": "wpadverts/search",
+    "textdomain": "wpadverts",
+    "apiVersion": 1,
+    "title": "Classifieds Search",
+    "icon": "megaphone",
+    "category": "wpadverts",
+    "example": {},
+    "attributes": {
+        "post_type": {
+            "type": "string",
+            "default": ""  
+        },
+        "form_scheme": {
+            "type": "string",
+            "default": ""
+        },
+        "form": {
+            "type": "object",
+            "default": {
+
+            }
+        },
+        "primary_button": {
+            "type": "object",
+            "default": {
+                "desktop": "icon",
+                "mobile": "text-and-icon",
+                "text": "Search"
+            }
+        },
+        "secondary_button": {
+            "type": "object",
+            "default": {
+                "desktop": "icon",
+                "mobile": "text-and-icon",
+                "text": "Filter"
+            }
+        },
+        "buttons_pos": {
+            "type": "string",
+            "default": "atw-flex-row"
+        },
+        "redirect_to": {
+            "type": "string",
+            "default": ""
+        }
+    }
+}

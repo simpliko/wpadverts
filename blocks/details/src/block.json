@@ -1,0 +1,26 @@
+{
+    "name": "wpadverts/details",
+    "textdomain": "wpadverts",
+    "apiVersion": 1,
+    "title": "Classifieds Details",
+    "icon": "megaphone",
+    "category": "wpadverts",
+    "example": {},
+    "attributes": {
+        "post_type": {
+            "type": "string",
+            "default": ""
+        },
+        "contact": {
+            "type": "array",
+            "default": [
+                { "name": "contact-form" },
+                { "name": "phone-button" }
+            ]
+        },
+        "phone_reveal": {
+            "type": "integer",
+            "default": 1
+        }
+    }
+}

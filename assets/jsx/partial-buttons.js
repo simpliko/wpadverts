@@ -26,8 +26,9 @@ class PartialButtons extends Component {
 	constructor( props ) {
         
 		super(props);
+        
         this.data = {
-            text: this.props.placeholder,
+            text: "",
             desktop: "",
             mobile: "",
             border_radius: "",
@@ -41,7 +42,7 @@ class PartialButtons extends Component {
             customize: 0,
             ...props.data
         };
-
+        console.log(this.data);
         this.state = {
             mode: "normal",
             popover_mode: "desktop",

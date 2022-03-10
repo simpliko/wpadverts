@@ -1,0 +1,55 @@
+{
+    "name": "wpadverts/publish",
+    "textdomain": "wpadverts",
+    "apiVersion": 1,
+    "title": "Classifieds Publish",
+    "icon": "megaphone",
+    "category": "wpadverts",
+    "example": {},
+    "attributes": {
+        "post_type": {
+            "type": "string",
+            "default": ""
+        },
+        "form_scheme": {
+            "type": "string",
+            "default": ""
+        },
+        "requires": {
+            "type": "string",
+            "default": ""
+        },
+        "requires_error": {
+            "type": "string",
+            "default": ""
+        },
+        "moderate": {
+            "type": "boolean",
+            "default": false
+        },
+        "skip_preview": {
+            "type": "boolean",
+            "default": false
+        },
+        "preselect_category": {
+            "type": "boolean",
+            "default": false
+        },
+        "preselect_category_type": {
+            "type": "string",
+            "default": "list"
+        },
+        "form": {
+            "type": "object",
+            "default": { }
+        },
+        "primary_button": {
+            "type": "object",
+            "default": {}
+        },
+        "secondary_button": {
+            "type": "object",
+            "default": {}
+        }
+    }
+}

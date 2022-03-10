@@ -28,7 +28,24 @@ $grid_cols_arr = array(
     9 => "atw-grid-cols-9",
 );
 
-$grid_cols = sprintf("%s md:%s", $grid_cols_arr[ $atts["grid_columns_mobile"] ], $grid_cols_arr[ $atts["grid_columns"] ] );
+$grid_cols_md_arr = array(
+    1 => "md:atw-grid-cols-1",
+    2 => "md:atw-grid-cols-2",
+    3 => "md:atw-grid-cols-3",
+    4 => "md:atw-grid-cols-4",
+    5 => "md:atw-grid-cols-5",
+    6 => "md:atw-grid-cols-6",
+    7 => "md:atw-grid-cols-7",
+    8 => "md:atw-grid-cols-8",
+    9 => "md:atw-grid-cols-9",
+);
+
+if( $loop->found_posts === 0 ) {
+    $atts["grid_columns_mobile"] = 1;
+    $atts["grid_columns"] = 1;
+}
+
+$grid_cols = sprintf("%s %s", $grid_cols_arr[ $atts["grid_columns_mobile"] ], $grid_cols_md_arr[ $atts["grid_columns"] ] );
 
 //echo "<pre>"; print_r($atts);print_r($params);echo "</pre>";
 ?>
@@ -55,21 +72,30 @@ $grid_cols = sprintf("%s md:%s", $grid_cols_arr[ $atts["grid_columns_mobile"] ],
     <?php endif; ?>
 </style>
 
+<script type="text/javascript">
+    jQuery(function($) {
+        $(".wpa-block-list-results > .wpa-result-item").on("click", function(e) {
+            window.location.href = $(this).find(".wpa-result-link").attr("href");
+        });
+        $(".wpa-block-list-results > .wpa-result-item").addClass("atw-cursor-pointer");
+    });
+</script>
+
 <div class="wpadverts-blocks wpadverts-block-list atw-flex atw-flex-col">
     
     <div class="atw-flex atw-flex-col md:atw-flex-row-reverse md:atw-justify-between">
     
-        <div class="atw-flex atw-grow atw-pb-3 md:atw-grow-0 md:atw-space-x-4 atw-justify-between">
+        <div class="atw-flex atw-grow atw-pb-3 md:atw-grow-0 md:atw-space-x-4 atw-justify-between atw-items-center">
 
 
             <div class="atw-flex atw-flex-none">
                 <?php if( $switch_views ): ?>
                 <div class="atw-flex atw-align-baseline atw-leading-none atw-space-x-2">
                     <div class="atw-align-baseline">
-                        <a href="#" class="js-wpa-view-list <?php echo $display == "wpa-list-view" ? "wpa-selected" : "" ?>"><i class="fas fa-th-list atw-text-gray-400 atw-text-2xl atw-leading-1 atw-align-baseline atw-block atw-transition atw-duration-100 hover:atw-text-blue-500"></i></a>
+                        <a href="#" class="js-wpa-view-list <?php echo $display == "wpa-list-view" ? "wpa-selected" : "" ?>"><i class="fas fa-th-list atw-text-gray-400 atw-text-2xl md:atw-text-xl atw-leading-1 atw-align-baseline atw-block atw-transition atw-duration-100"></i></a>
                     </div>
                     <div class="atw-align-baseline">
-                        <a href="#" class="js-wpa-view-grid <?php echo $display == "wpa-grid-view" ? "wpa-selected" : "" ?>"><i class="fas fa-th-large atw-text-gray-400 atw-text-2xl atw-leading-1 atw-align-baseline"></i></a>
+                        <a href="#" class="js-wpa-view-grid <?php echo $display == "wpa-grid-view" ? "wpa-selected" : "" ?>"><i class="fas fa-th-large atw-text-gray-400 atw-text-2xl md:atw-text-xl atw-leading-1 atw-align-baseline"></i></a>
                     </div>
                 </div>
                 <?php endif; ?>
@@ -81,17 +107,17 @@ $grid_cols = sprintf("%s md:%s", $grid_cols_arr[ $atts["grid_columns_mobile"] ],
 
 
                 <?php if( $allow_sorting ): ?>
-                <div class="atw-align-baseline">
+                <div class="">
 
-                        <span class="atw-text-gray-500 atw-text-sm">Sort By:</span>
+                        <span class="atw-text-gray-500 atw-text-base"><?php _e("Sort By", "wpadverts") ?>:</span>
 
-                        <span class="atw-relative atw-inline-block atw-text-gray-700 atw-text-sm">
-                            <span id="js-wpa-sort">
+                        <span class="atw-relative atw-inline-block atw-text-gray-700 atw-text-base">
+                            <span id="js-wpa-sort" class=" atw-cursor-pointer">
                                 <span><?php echo esc_html( $sort_current_title ) ?></span>
-                                <i class="fas fa-chevron-down atw-text-gray-500 atw-text-sm"></i>
+                                <i class="fas fa-chevron-down atw-text-gray-500 atw-text-base"></i>
                             </span>
 
-                            <div id="js-wpa-sort-options" class="atw-hidden atw-z-50 atw-origin-top-right atw-absolute atw-right-0 atw-mt-3 atw-w-56 atw-rounded-sm atw-shadow-lg atw-bg-white atw-ring-1 atw-ring-black atw-ring-opacity-5 -atw-divide-solid atw-divide-y atw-divide-gray-100 focus:atw-outline-none">
+                            <div id="js-wpa-sort-options" class="atw-hidden atw-z-50 atw-origin-top-right atw-absolute atw-right-0 atw-mt-3 atw-w-56 atw-rounded-sm atw-shadow-lg atw-bg-white atw-ring-1 atw-ring-black atw-ring-opacity-5 atw-divide-y atw-divide-gray-100 focus:atw-outline-none">
                             <?php foreach( $sort_options as $sort_group): ?>
                                 <div class="py-1">
                                     <span class="atw-text-gray-500 atw-block atw-px-4 atw-py-2 atw-text-sm">
@@ -121,8 +147,8 @@ $grid_cols = sprintf("%s md:%s", $grid_cols_arr[ $atts["grid_columns_mobile"] ],
 
             <div class="">
                 <span>
-                    <strong class="atw-text-gray-700 atw-text-sm md:atw-text-base"><?php echo $loop->found_posts ?></strong> 
-                    <span class="atw-text-sm atw-text-gray-500 md:atw-text-base">results found.</span>
+                    <strong class="atw-text-gray-700 atw-text-base"><?php echo $loop->found_posts ?></strong> 
+                    <span class="atw-text-gray-500 atw-text-base">results found.</span>
                 </span>
             </div>
 

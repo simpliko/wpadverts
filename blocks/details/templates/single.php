@@ -1,5 +1,5 @@
 <?php do_action( "wpadverts/block/details/tpl/start", $post_id, $atts ) ?>
-<?php wp_enqueue_script( 'adverts-frontend' ); ?>
+
 <style type="text/css">
     .wpadverts-cpt form.wpadverts-form {
         <?php wpadverts_print_grays_variables( isset( $atts["form"] ) ? $atts["form"] : "" ) ?>

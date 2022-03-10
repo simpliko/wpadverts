@@ -9,15 +9,15 @@
 
 <div class="wpadverts-blocks wpadverts-publish-preview">
 
-    <div class="atw-p-3 atw-mb-6 atw-flex atw-bg-gray-50 atw-rounded-md">
+    <div class="md:atw-p-3 atw-mb-6 atw-flex md:atw-bg-gray-50 atw-rounded-md">
 
-        <div class="atw-hidden md:atw-block atw-flex-1 atw-flex atw-items-center">
-            <span class="atw-hidden md:atw-block atw-text-xl atw-font-bold">
+        <div class="atw-hidden md:atw-block atw-flex-1 atw-flex atw-items-center atw-self-center">
+            <span class="atw-hidden md:atw-block atw-text-xl atw-font-bold ">
                 <?php _e( "Preview", "wpadverts" ) ?>
             </span>
         </div>
 
-        <div class="atw-flex-none atw-flex atw-flex-row atw-items-stretch">
+        <div class="atw-flex-grow md:atw-flex-none atw-flex atw-flex-row atw-items-stretch">
 
             <form action="" method="post" class="atw-inline atw-flex-grow">
                 <input type="hidden" name="_adverts_action" value="" />
@@ -60,15 +60,10 @@
         </span>
     </div-->
 
-    <div class="atw-p-3 atw-mb-6 atw-flex atw-bg-gray-50 atw-rounded-md">
+    <div class="md:atw-p-3 atw-mb-6 atw-flex md:atw-bg-gray-50 atw-rounded-md atw-justify-end">
 
-        <div class="atw-flex-1 atw-flex atw-items-center">
-            <span class="atw-block atw-text-xl atw-font-bold">
-                &nbsp;
-            </span>
-        </div>
 
-        <div class="atw-flex-none atw-flex atw-flex-row">
+        <div class="atw-flex-grow md:atw-flex-none atw-flex atw-flex-row">
 
             <form action="" method="post" class="atw-inline atw-flex-grow">
                 <input type="hidden" name="_adverts_action" value="" />

@@ -23,7 +23,7 @@
         <div class="wpa-detail-left atw-flex atw-flex-col atw-flex-1  ">
 
             <div class="wpa-result-title atw-mb-1 atw-leading-snug">
-                <a href="<?php the_permalink() ?>" title="<?php echo esc_attr( get_the_title() ) ?>" class="atw-inline-block atw-no-underline ">
+                <a href="<?php the_permalink() ?>" title="<?php echo esc_attr( get_the_title() ) ?>" class="wpa-result-link atw-inline-block atw-no-underline ">
                     <span class="wpa-result-title-text atw-inline-block atw-max-h-16 atw-text-gray-700 atw-text-lg atw-leading-tight atw-font-semibold "><?php echo esc_html( wpadverts_get_object_value( get_the_ID(), $atts["title_source"] ) ) ?></span>
                     <?php do_action( "adverts_list_after_title", get_the_ID() ) ?>
                 </a>

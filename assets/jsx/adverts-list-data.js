@@ -31,7 +31,7 @@ class AdvertsListData extends Component {
             ...props.data
         };
 
-        this.data.options = this.props.value;
+        this.data.options = [...this.props.value];
 
         this.state = {
             mode: "normal"
@@ -64,7 +64,7 @@ class AdvertsListData extends Component {
 
     onMove = ( old_index, new_index ) => {
         this.data.options = this.arrayMove( this.data.options, old_index, new_index );
-        this.props.onChange( this.data );
+        this.props.onChange( this.data.options );
     }
 
     arrayMove(arr, old_index, new_index) {
@@ -80,7 +80,7 @@ class AdvertsListData extends Component {
 
     onTrashClick = ( remove_index ) => {
         this.data.options.splice( remove_index, 1 );
-        this.props.onChange( this.data );
+        this.props.onChange( this.data.options );
     }
 
     getOptionLabel = ( name ) => {
@@ -189,7 +189,7 @@ class AdvertsListData extends Component {
                                             disabled={(i<=0)}
                                         />
 
-
+                                        {/* 
                                         <Button 
                                             label=""
                                             variant="trynitary"
@@ -197,7 +197,8 @@ class AdvertsListData extends Component {
                                             isSmall={true}
                                             onClick={this.toggleInstructions}
                                         />
-
+                                        */}
+                                        
                                         <Button 
                                             label=""
                                             variant="trynitary"

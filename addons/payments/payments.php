@@ -177,7 +177,7 @@ function adext_payments_init_frontend() {
     add_filter("adverts_action", "adext_payments_add_action_payment");
     add_filter("adverts_action", "adext_payments_add_action_notify");
 
-    add_filter("wpadverts/block/publish/actions", "adext_payments_register_publish_action" );
+    add_filter("wpadverts/block/publish/possible-actions", "adext_payments_register_publish_action" );
     add_filter("adverts_action_payment", "adext_payments_action_payment", 10, 2);
     
     add_action( "adverts_sh_manage_actions_more", "adext_payments_action_renew" );

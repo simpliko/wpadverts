@@ -1,8 +1,14 @@
 var WPADVERTS = WPADVERTS || {};
 
 WPADVERTS.Payments = {
+    Tab: {
+        Content: null,
+        Link: null,
+        Tabs: null
+    },
+
     DefaultSuccess: function(response) {
-        jQuery(".adverts-tab-content").css("opacity", 1).html(response.html);
+        jQuery(WPADVERTS.Payments.Tab.Content).css("opacity", 1).html(response.html);
     },
     
     DefaultError: function(response) {
@@ -14,16 +20,16 @@ WPADVERTS.Payments = {
         var $ = jQuery;
         var data = {
             action: "adext_payments_render",
-            gateway: $(".adverts-tab-link.current").data("tab"),
+            gateway: $(WPADVERTS.Payments.Tab.Link + ".current").data("tab"),
             page_id: $(".adverts-payment-data").data("page-id"),
             listing_id: $(".adverts-payment-data").data("listing-id"),
             object_id: $(".adverts-payment-data").data("object-id"),
             payment_id: $(".adverts-payment-data").data("payment-id"),
             is_block: $(".adverts-payment-data").data("is-block"),
-            form: $(".adverts-tab-content form").serializeArray()
+            form: $(WPADVERTS.Payments.Tab.Content + " form").serializeArray()
         };
         
-        $(".adverts-tab-content").css("opacity", 0.5);
+        $(WPADVERTS.Payments.Tab.Content).css("opacity", 0.5);
         
         $.ajax({
             url: adverts_frontend_lang.ajaxurl,
@@ -32,7 +38,7 @@ WPADVERTS.Payments = {
             dataType: "json",
             data: data,
             success: function(response) {
-                var tab = $(".adverts-tab-link.current").data("tab");
+                var tab = $(WPADVERTS.Payments.Tab.Link + ".current").data("tab");
                 var successCallback = WPADVERTS.Payments.DefaultSuccess;
 
                 if( typeof WPADVERTS.Payments.Engine[tab] !== 'undefined' ) {
@@ -43,7 +49,7 @@ WPADVERTS.Payments = {
 
                 if(response.result == 1) {
                     $(".adext-payments-place-order").fadeOut();
-                    $("ul.adverts-tabs li").unbind("click").css("cursor", "default");
+                    $(WPADVERTS.Payments.Tab.Tabs + " li").unbind("click").css("cursor", "default");
                 }
                 
                 if(response.execute == "click") {
@@ -54,7 +60,7 @@ WPADVERTS.Payments = {
                 
             },
             error: function(response) {
-                var tab = $(".adverts-tab-link.current").data("tab");
+                var tab = $(WPADVERTS.Payments.Tab.Link + ".current").data("tab");
                 var errorCallback = WPADVERTS.Payments.DefaultError;
 
                 if( typeof WPADVERTS.Payments.Engine[tab] !== 'undefined' ) {
@@ -74,15 +80,37 @@ jQuery(function($) {
     /**
      * Enable AJAX tab switching in [adverts_add] shortcode third step
      */
-    $(".adverts-tab-link").click(function(e) {
+
+    if($(".adverts-tab-link").length >= 1) {
+        WPADVERTS.Payments.Tab.Link = ".adverts-tab-link";
+    }    
+    if($(".adverts-tab-content").length === 1) {
+        WPADVERTS.Payments.Tab.Content = ".adverts-tab-content";
+    }    
+    if($("ul.adverts-tabs").length === 1) {
+        WPADVERTS.Payments.Tab.Tabs = "ul.adverts-tabs";
+    }
+
+    if($(".jswpa-payment-tab-link").length >= 1) {
+        WPADVERTS.Payments.Tab.Link = ".jswpa-payment-tab-link";
+    }    
+    if($(".jswpa-payment-tab-content").length === 1) {
+        WPADVERTS.Payments.Tab.Content = ".jswpa-payment-tab-content";
+    }    
+    if($(".jswpa-payment-tabs").length === 1) {
+        WPADVERTS.Payments.Tab.Tabs = ".jswpa-payment-tabs";
+    }
+
+
+    $(WPADVERTS.Payments.Tab.Link).click(function(e) {
         e.preventDefault();
         
         if(!$(".adext-payments-place-order").is(":visible")) {
             return;
         }
         
-        $(".adverts-tab-link").removeClass("current");
-        $(".adverts-tab-content").css("opacity", 0.5);
+        $(WPADVERTS.Payments.Tab.Link).removeClass("current");
+        $(WPADVERTS.Payments.Tab.Content).css("opacity", 0.5);
 
         $(this).addClass("current");
 
@@ -121,7 +149,7 @@ jQuery(function($) {
         e.preventDefault();
         
         
-        var tab = $(".adverts-tab-link.current").data("tab");
+        var tab = $(WPADVERTS.Payments.Tab.Link + ".current").data("tab");
         var place_order = null;
         if( typeof WPADVERTS.Payments.Engine[tab] !== 'undefined' ) {
             place_order = jQuery.proxy(WPADVERTS.Payments.Engine[tab].place_order, WPADVERTS.Payments.Engine[tab]);
@@ -133,5 +161,5 @@ jQuery(function($) {
         
     });
     
-    $(".adverts-tab-link.current").click();
+    $(WPADVERTS.Payments.Tab.Link + ".current").click();
 });

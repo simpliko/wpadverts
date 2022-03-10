@@ -286,7 +286,13 @@ WPADVERTS.File.Uploader.Plupload.prototype.getUploader = function() {
 WPADVERTS.File.Uploader.Plupload.prototype.Init = function(up) {
     if(up.features.dragdrop) {
         this.ui.addClass('drag-drop');
-        this.ui.find('.adverts-gallery').bind('dragover.wp-uploader', jQuery.proxy(this.engine.InitDragOver, this));
+        if(this.ui.find('.adverts-gallery').length === 1) {
+            this.ui.find('.adverts-gallery').bind('dragover.wp-uploader', jQuery.proxy(this.engine.InitDragOver, this));
+        }
+        if(this.ui.find('.wpadverts-gallery').length === 1) {
+            this.ui.find('.wpadverts-gallery').bind('dragover.wp-uploader', jQuery.proxy(this.engine.InitDragOver, this));
+        }
+        
         this.ui.find('.adverts-drag-drop-area').bind('dragleave.wp-uploader, drop.wp-uploader', jQuery.proxy(this.engine.InitDragLeave, this));
     }else{
         this.ui.removeClass('drag-drop');

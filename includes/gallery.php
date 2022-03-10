@@ -16,12 +16,16 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * 
  * Renders gallery drop file input and uploaded items.
  * 
- * @param WP_Post $post
- * @param array $conf
  * @since 0.1
+ * @since 2.0 $is_block param
+ * 
+ * @param WP_Post   $post
+ * @param array     $conf
+ * @param boolean   $is_block
+
  * @return void
  */
-function adverts_gallery_content( $post = null, $conf = array() ) {
+function adverts_gallery_content( $post = null, $conf = array(), $is_block = false ) {
 
     $button = "adverts-button";
 
@@ -89,7 +93,28 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
     ?>
 
 
+    <?php if( $is_block ): ?>
+    <div id="<?php echo esc_html("adverts-plupload-upload-ui-".$field_name) ?>" class="adverts-plupload-upload-ui <?php echo is_admin() ? "wpadverts-browser-admin" : "adverts-browser-frontend" ?>">
+        <div id="<?php echo esc_html("adverts-drag-drop-area-".$field_name) ?>"class="adverts-drag-drop-area">
+        
+        </div>
+        <div class="wpadverts-gallery atw-flex atw-flex-col atw-bg-white atw-border-2 atw-border-dashed atw-border-gray-300 atw-rounded-lg atw-py-3 atw-items-center">
+            
+            <div class=" atw-text-gray-400 atw-text-4xl atw-pt-4 atw-pb-2">
+                <i class="fa-solid fa-upload "></i>
+            </div>
+            <div class="atw-pt-2 atw-pb-4 atw-text-gray-700 atw-text-base">
+                <a href="#" id="<?php echo esc_html("adverts-plupload-browse-button-".$field_name) ?>" class=""><?php _e( "Upload a file", "wpadverts" ) ?></a>
+                <?php echo __( 'or drag and drop.', 'wpadverts' ) ?>
+            </div>
 
+        </div>
+        <div class="adverts-gallery-uploads">
+
+        </div>
+
+    </div>
+    <?php else: ?>
     <div id="<?php echo esc_html("adverts-plupload-upload-ui-".$field_name) ?>" class="adverts-plupload-upload-ui <?php echo is_admin() ? "wpadverts-browser-admin" : "adverts-browser-frontend" ?>">
         <div id="<?php echo esc_html("adverts-drag-drop-area-".$field_name) ?>"class="adverts-drag-drop-area">
         
@@ -103,6 +128,7 @@ function adverts_gallery_content( $post = null, $conf = array() ) {
         </div>
 
     </div>
+    <?php endif; ?>
     
     <?php add_action("wp_footer", "adverts_gallery_modal") ?>
     <?php add_action("admin_footer", "adverts_gallery_modal") ?>

@@ -1,30 +1,25 @@
 import { Component } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
-import { RichText, BlockControls, InspectorControls , PanelColorSettings } from '@wordpress/block-editor';
+import { 
+    BlockControls, 
+    InspectorControls, 
+} from '@wordpress/block-editor';
+
 import { 
     Button,
-    Dashicon,
     Placeholder,
-    Icon,
     Spinner,
     Disabled, 
     PanelBody, 
     Toolbar, 
-    ToolbarDropdownMenu, 
-    ColorIndicator,
-    ColorPalette, 
-    ColorPicker,
-    DropdownMenu, 
     SelectControl,
     TextControl,
     ToggleControl,
     RangeControl,
     Modal,
     BaseControl
-
 } from '@wordpress/components';
-
 
 import { megaphone } from '@wordpress/icons';
 
@@ -309,6 +304,7 @@ class Edit extends Component {
     }
 
     onListDataChange = ( data ) => {
+        console.log(data);
         this.props.setAttributes( { data: [ ...data ] } ); 
     } 
 
@@ -377,7 +373,7 @@ class Edit extends Component {
             <>
                 <Placeholder 
                     icon={ megaphone } 
-                    label="Classifieds List" 
+                    label={ __("Classifieds List", "wpadverts" ) }
                     instructions="Select custom post type and search form scheme to continue."
                     isColumnLayout="true"
                 >

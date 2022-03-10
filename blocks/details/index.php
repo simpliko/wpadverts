@@ -40,51 +40,17 @@ class Adverts_Block_Details {
             array( 'jquery' ),
             '2.0.0'
         );
-        
-        register_block_type( sprintf( "%s/%s", $package, $module ), array(
-            'apiVersion' => 2,
-            'editor_style' => 'wpadverts-blocks-editor-details',
-            'editor_script' => $js_handler,
-            'render_callback' => array( $this, "render" ),
-            'style' => 'wpadverts-blocks',
-            'script' => 'wpadverts-block-details',
-            'attributes' => array(
-                'post_type' => array(
-                    'type' => 'string'
-                ),
-                'contact_primary' => array(
-                    'type' => 'string',
-                    'default' => 'contact-form'
-                ),                
-                'contact_secondary' => array(
-                    'type' => 'string',
-                    'default' => 'phone-button'
-                ),
-                'contact_additional' => array(
-                    'type' => 'array',
-                    'default' => array(
 
-                    )
-                ),
-                'contact' => array(
-                    'type' => 'array',
-                    'default' => array(
-                        array( 'name' => 'contact-form' ),
-                        array( 'name' => 'phone-button' ),
-                        array( 'name' => 'whatsapp' ),
-                        //array( 'name' => 'instagram')
-                    )
-                ),
-                'phone_reveal' => array(
-                    'type' => 'integer',
-                    'default' => 1
-                ),
-                'sticky_footer' => array(
-                    'type' => 'integer',
-                    'default' => 0
-                )
+        register_block_type_from_metadata(
+            dirname( __FILE__ ) . '/src/block.json',
+            array(            
+                'editor_style' => 'wpadverts-blocks-editor-details',
+                'editor_script' => $js_handler,
+                'render_callback' => array( $this, "render" ),
+                'style' => 'wpadverts-blocks',
+                'script' => 'wpadverts-block-details'
             )
-        ) );
+        );
 
     }
     
@@ -96,6 +62,8 @@ class Adverts_Block_Details {
         ), $atts, 'adverts_details' );
 
         extract( $params );
+
+        include_once ADVERTS_PATH . '/includes/class-block-templates.php';
 
         // If user is in Publish -> Preview use the Adverts_Block_Templates::get_id() instead of current page ID.
         if( Adverts_Block_Templates::get_id() !== null ) {

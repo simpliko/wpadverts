@@ -37,20 +37,26 @@
     </div>
     <?php else: ?>
 
-    <br/>
+    <span class="atw-block atw-pt-6 atw-pb-3 atw-text-base atw-font-bold"><?php _e( "Select Payment Method", "wpadverts" ) ?></span>
 
-    <ul class="adverts-tabs adverts-payment-data" data-page-id="<?php esc_attr_e(get_the_ID()) ?>" data-listing-id="<?php echo esc_attr($listing->ID) ?>" data-object-id="<?php echo esc_attr($post->ID) ?>" data-object-type="<?php echo esc_attr( get_post_meta( $payment->ID, '_adverts_payment_for', true ) ) ?>" data-payment-id="<?php echo esc_attr($payment->ID) ?>" data-is-block="1">
+    <div class="jswpa-payment-tabs wpa-tabs adverts-payment-data" data-page-id="<?php esc_attr_e(get_the_ID()) ?>" data-listing-id="<?php echo esc_attr($listing->ID) ?>" data-object-id="<?php echo esc_attr($post->ID) ?>" data-object-type="<?php echo esc_attr( get_post_meta( $payment->ID, '_adverts_payment_for', true ) ) ?>" data-payment-id="<?php echo esc_attr($payment->ID) ?>" data-is-block="1">
         <?php foreach($gateways as $g_name => $gateway): ?>
-        <li class="adverts-tab-link <?php if($g_name==adverts_config("payments.default_gateway")):?>current<?php endif; ?>" data-tab="<?php echo esc_attr($g_name) ?>"><?php esc_html_e($gateway["title"]) ?></li>
+        <div class="jswpa-payment-tab-link wpa-tab-link <?php if($g_name==adverts_config("payments.default_gateway")):?>current<?php endif; ?>" data-tab="<?php echo esc_attr($g_name) ?>">
+            <i class="fa fa-circle-check"></i>
+            <?php esc_html_e($gateway["title"]) ?>
+            
+        </div>
         <?php endforeach; ?>
-    </ul>
-    <div class="adverts-tab-content">
+    </div>
+
+    <span class="atw-block atw-pt-3 atw-pb-3 atw-text-base atw-font-bold"><?php _e( "Fill Payment Form", "wpadverts" ) ?></span>
+
+    <div class="jswpa-payment-tab-content wpa-tab-content">
         
     </div>
 
-    <br/>
 
-    <div class="atw-flex">
+    <div class="atw-flex atw-py-3">
         <form action="" method="get" class="atw-flex-0">
         <?php 
             echo wpadverts_block_button( array( 

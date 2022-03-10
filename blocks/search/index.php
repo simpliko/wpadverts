@@ -34,64 +34,16 @@ class Adverts_Block_Search {
             $asset_file['version']
         );
 
-        register_block_type( sprintf( "%s/%s", $package, $module ), array(
-            'apiVersion' => 2,
-            'editor_style' => 'wpadverts-blocks-editor-search',
-            'editor_script' => $js_handler,
-            'style' => 'wpadverts-blocks-common',
-            'script' => null,
-            'render_callback' => array( $this, "render" ),
-            'style' => 'wpadverts-blocks',
-            'attributes' => array(
-                "content" => array(
-                    "type" => "string"
-                ),
-                "post_type" => array(
-                    "type" => "string",
-                    "default" => ""
-                ),                
-                "form_scheme" => array(
-                    "type" => "string",
-                    "default" => ""
-                ),                
-                "form_input_corners" => array(
-                    "type" => "string",
-                    "default" => "wpa-mood-simple"
-                ),                
-                "form_input_focus" => array(
-                    "type" => "string",
-                    "default" => "wpa-focus-simple"
-                ),
-                "form" => array(
-                    "type" => "object",
-                    "default" => array(
-                        "style" => "wpa-solid",
-                        "shadow" => "",
-                        "rounded" => "",
-                        "border" => "",
-                        "px" => "",
-                        "py" => ""
-                    )
-                ),
-                "primary_button" => array(
-                    "type" => "object",
-                    "default" => array(
-                        "desktop" => "icon",
-                        "mobile" => "text-and-icon",
-
-                        "text" => ""
-                    )
-                ),                
-                "buttons_pos" => array(
-                    "type" => "string",
-                    "default" => "atw-flex-row"
-                ),
-                "redirect_to" => array(
-                    "type" => "string",
-                    "default" => ""
-                )
+        register_block_type_from_metadata(
+            dirname( __FILE__ ) . '/src/block.json',
+            array(            
+                'editor_style' => 'wpadverts-blocks-editor-search',
+                'editor_script' => $js_handler,
+                'render_callback' => array( $this, "render" ),
+                'style' => 'wpadverts-blocks',
+                'script' => null
             )
-        ) );
+        );
 
     }
     
@@ -295,10 +247,24 @@ class Adverts_Block_Search {
             }
         }
     
-        
+        $button_p_args = array(
+            "type" => "primary",
+            "action" => "submit",
+            "icon" => "fa-solid fa-magnifying-glass", 
+            "text" => $atts["primary_button"]["text"], 
+            "desktop" => $atts["primary_button"]["desktop"], 
+            "mobile" => $atts["primary_button"]["mobile"], 
+        );
+        $button_s_args = array(
+            "type" => "secondary",
+            "icon" => "fa-solid fa-sliders", 
+            "text" => $atts["secondary_button"]["text"], 
+            "desktop" => $atts["secondary_button"]["desktop"], 
+            "mobile" => $atts["secondary_button"]["mobile"], 
+        );
+
         $template = dirname( __FILE__ ) . "/templates/search.php";
         ob_start();
-        
         include $template;
         return ob_get_clean();
     }

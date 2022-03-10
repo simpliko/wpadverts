@@ -18,6 +18,7 @@ import {
     DropdownMenu, 
     SelectControl,
     TextControl,
+    TextareaControl,
     ToggleControl,
     RangeControl,
     Modal,
@@ -32,7 +33,6 @@ import ServerSideRender from '@wordpress/server-side-render';
 import AdvertsSelect from '../../../assets/jsx/adverts-select';
 import AdvertsListData from '../../../assets/jsx/adverts-list-data';
 import AdvertsColorPicker from '../../../assets/jsx/adverts-color-picker';
-
 
 class Edit extends Component {
 
@@ -80,6 +80,38 @@ class Edit extends Component {
 
     onSelectFormScheme = ( form_scheme ) => {
         this.props.setAttributes( { form_scheme } );
+    }
+
+    toggleModeration = ( moderate ) => {
+        this.props.setAttributes( { moderate } );
+    }
+
+    toggleSkipPreview = ( skip_preview ) => {
+        this.props.setAttributes( { skip_preview } );
+    }
+
+    togglePreselectCategory = ( preselect_category ) => {
+        this.props.setAttributes( { preselect_category } );
+    }
+
+    onRequiresChange = ( requires ) => {
+        this.props.setAttributes( { requires } );
+    }
+
+    onRequiresErrorChange = ( requires_error ) => {
+        this.props.setAttributes( { requires_error } );
+    }
+
+    onPartialPrimaryButtonChange = ( primary_button ) => {
+        this.props.setAttributes( { primary_button: { ...primary_button } } ); 
+    }      
+    
+    onPartialSecondaryButtonChange = ( secondary_button ) => {
+        this.props.setAttributes( { secondary_button: { ...secondary_button } } ); 
+    }    
+    
+    onPartialFormChange = ( form ) => {
+        this.props.setAttributes( { form: { ...form } } );
     }
 
     onCustomizeQuery = ( param, value ) => {
@@ -173,7 +205,7 @@ class Edit extends Component {
 
     renderInit() {
 
-        const { post_type } = this.props.attributes;
+        const { post_type, form_scheme } = this.props.attributes;
         const { show_instructions } = this.state;
 
         return (
@@ -200,6 +232,16 @@ class Edit extends Component {
                                 onChange={this.onSelectPostType}
                                 style={{lineHeight:'1rem'}}
                             />
+
+                            { post_type !== "" && <SelectControl
+                                label="Search Form Scheme"
+                                labelPosition="top"
+                                value={ form_scheme }
+                                options={this.getAvailableSearchForms(post_type)}
+                                onChange={this.onSelectFormScheme}
+                                style={{lineHeight:'1rem'}}
+                                help="You can create multiple form schemes using Custom Fields extension."
+                            /> }
 
                             <div>
                                 <Button 
@@ -230,6 +272,16 @@ class Edit extends Component {
         } = this.props;
 
         const { 
+            requires,
+            requires_error,
+            moderate,
+            skip_preview,
+            preselect_category,
+            preselect_category_type,
+            primary_button,
+            secondary_button,
+            form
+
         } = attributes;
 
         const { show_instructions } = this.state;
@@ -239,6 +291,49 @@ class Edit extends Component {
                 { this.state.initiated === true ?
 
                 <>
+                <InspectorControls>
+                    <PanelBody title="Options">
+
+                    <ToggleControl
+                        label="Moderate Ads"
+                        checked={moderate}
+                        onChange={this.toggleModeration}
+                    />   
+
+                    <ToggleControl
+                        label="Skip Preview"
+                        checked={skip_preview}
+                        onChange={this.toggleSkipPreview}
+                    />                       
+                    
+                    <ToggleControl
+                        label="Preselect Category"
+                        checked={preselect_category}
+                        onChange={this.togglePreselectCategory}
+                    />   
+
+                    <div className="wpa-block-editor-common-tip" style={{display:"flex", alignItems:"center", lineHeight:"18px"}}>
+                        <Icon icon="warning" />
+                        <span style={{paddingLeft: "12px"}}>Category preselection requires <a href="">Custom Fields</a> extension.</span>
+                    </div>
+
+                    <TextControl
+                        label="Capability required to publish"
+                        value={requires}
+                        onChange={this.onRequiresChange}
+                        help="Capability required to see the publish form. By default anyone can see it."
+                    />
+
+                    { requires !== "" && <TextareaControl
+                        label="Error Message"
+                        help="Cusom message for users who are not allowed to post ads (leave blank otherwise)."
+                        value={requires_error}
+                        onChange={this.onRequiresErrorChange}
+                    /> }
+
+                    </PanelBody>
+
+                </InspectorControls>
 
                 <BlockControls>
                     <Toolbar 

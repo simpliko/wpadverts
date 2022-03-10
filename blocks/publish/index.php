@@ -40,24 +40,17 @@ class Adverts_Block_Publish {
             array( 'jquery' ),
             '2.0.0'
         );
-        
-        register_block_type( sprintf( "%s/%s", $package, $module ), array(
-            'apiVersion' => 2,
-            'editor_style' => 'wpadverts-blocks-editor-publish',
-            'editor_script' => $js_handler,
-            'render_callback' => array( $this, "render" ),
-            'style' => 'wpadverts-blocks-common',
-            'script' => 'wpadverts-block-publish',
-            'attributes' => array(
-                'post_type' => array(
-                    'type' => 'string'
-                ),
-                'form_scheme' => array(
-                    'type' => 'string',
-                    'default' => ''
-                ),
+
+        register_block_type_from_metadata(
+            dirname( __FILE__ ) . '/src/block.json',
+            array(            
+                'editor_style' => 'wpadverts-blocks-editor-publish',
+                'editor_script' => $js_handler,
+                'render_callback' => array( $this, "render" ),
+                'style' => 'wpadverts-blocks-common',
+                'script' => 'wpadverts-block-publish'
             )
-        ) );
+        );
 
     }
     

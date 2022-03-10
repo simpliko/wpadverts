@@ -40,148 +40,17 @@ class Adverts_Block_List {
             array( 'jquery' ),
             '2.0.0'
         );
-        
-        register_block_type( sprintf( "%s/%s", $package, $module ), array(
-            'apiVersion' => 2,
-            'editor_style' => 'wpadverts-blocks-editor-list',
-            'editor_script' => $js_handler,
-            'render_callback' => array( $this, "render" ),
-            'style' => 'wpadverts-blocks-common',
-            'script' => 'wpadverts-block-list-and-search',
-            'attributes' => array(
-                'post_type' => array(
-                    'type' => 'string'
-                ),
-                'query' => array(
-                    'type' => 'object',
-                    'default' => null
-                ),
-                'form_scheme' => array(
-                    'type' => 'string',
-                    'default' => ''
-                ),
-                'form_style' => array(
-                    'type' => 'string',
-                    'default' => 'wpa-solid'
-                ),
-                'show_results_counter' => array(
-                    'type' => 'boolean',
-                    'default' => true
-                ),
-                'switch_views' => array(
-                    'type' => 'boolean',
-                    'default' => true
-                ),
-                'allow_sorting' => array(
-                    'type' => 'boolean',
-                    'default' => true
-                ),
-                'show_pagination' => array(
-                    'type' => 'boolean',
-                    'default' => true
-                ),
-                'posts_per_page' => array(
-                    'type' => 'integer',
-                    'default' => 20
-                ),
-                'display' => array(
-                    'type' => 'string',
-                    'default' => 'grid'
-                ),
-                'default_image_url' => array(
-                    'type' => 'string',
-                    'default' => ''
-                ),
-                'order_by' => array(
-                    'type' => 'string',
-                    'default' => 'date-desc'
-                ),
-                'order_by_featured' => array(
-                    'type' => 'boolean',
-                    'default' => true
-                ),
-                'list_type' => array(
-                    'type' => 'string',
-                    'default' => 'all'
-                ),
-                'list_img_width' => array(
-                    'type' => 'integer',
-                    'default' => 1
-                ),                
-                'list_img_height' => array(
-                    'type' => 'integer',
-                    'default' => 1
-                ),                
-                'list_img_fit' => array(
-                    'type' => 'string',
-                    'default' => 'contain'
-                ),                
-                'list_img_source' => array(
-                    'type' => 'string',
-                    'default' => 'adverts-list'
-                ),                
-                'grid_columns' => array(
-                    'type' => 'string',
-                    'default' => '2'
-                ),                   
-                'grid_columns_mobile' => array(
-                    'type' => 'string',
-                    'default' => '2'
-                ),                
-                'grid_img_height' => array(
-                    'type' => 'integer',
-                    'default' => 2
-                ),                
-                'grid_img_fit' => array(
-                    'type' => 'string',
-                    'default' => 'contain'
-                ),                
-                'grid_img_source' => array(
-                    'type' => 'string',
-                    'default' => 'adverts-list'
-                ),
-                'data' => array(
-                    'type' => 'array',
-                    'default' => array(                
-                        array(
-                            "name" => "meta__adverts_location"
-                        ),
-                        array(
-                            "name" => "pattern__post_date"
-                        )
-                    )
-                ),
-                'show_image_column' => array(
-                    'type' => 'boolean',
-                    'default' => true
-                ),
-                'show_price_column' => array(
-                    'type' => 'boolean',
-                    'default' => true
-                ),
-                'title_source' => array(
-                    'type' => 'string',
-                    'default' => 'default__post_title'
-                ),
-                'alt_source' => array(
-                    'type' => 'string',
-                    'default' => 'pattern__price'
-                ),
-                'color_price' => array(
-                    'type' => 'string',
-                    'default' => '#b91c1c'
-                ),                
-                'color_title' => array(
-                    'type' => 'string',
-                    'default' => ''
-                ),                
-                'color_bg_featured' => array(
-                    'type' => 'string',
-                    'default' => ''
-                ),
-            )
-        ) );
 
+        register_block_type_from_metadata(
+            dirname( __FILE__ ) . '/src/block.json',
+            array(            
+                'editor_style' => 'wpadverts-blocks-editor-list',
+                'editor_script' => $js_handler,
+                'render_callback' => array( $this, "render" ),
+                'style' => 'wpadverts-blocks-common',
+                'script' => 'wpadverts-block-list-and-search'
+            )
+        );
     }
     
     public function render( $atts = array() ) {

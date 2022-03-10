@@ -167,6 +167,12 @@ function wpadverts_block_button( $args = array(), $options = array() ) {
         $_options["mobile_icon_size"] = "atw-text-base";
 
         $options = array_merge( $_options, $options );
+
+        foreach( $options as $k => $v ) {
+            if( empty( $v ) && isset( $_options[$k] ) ) {
+                $options[$k] = $_options[$k];
+            }
+        }
     }
 
     //print_r($_options);
@@ -282,14 +288,14 @@ function wpadverts_block_button( $args = array(), $options = array() ) {
     <?php
 }
 
-function wpadverts_block_button_css( $type, $args ) {
+function wpadverts_block_button_css( $type, $args, $rule_prefix = "" ) {
 
     $_customize = array(
         "primary" => "primary_button",
         "secondary" => "secondary_button"
     );
 
-    if( isset( $_customize[ $type ] ) && ( ! isset( $options["customize"] ) || ! $options["customize"] ) ) {
+    if( isset( $_customize[ $type ] ) && ( ! isset( $args["customize"] ) || ! $args["customize"] ) ) {
         $_options = adverts_config( sprintf( "blocks_styling.%s", $_customize[ $type ] ) );
         $args = array_merge( $args, $_options );
     }
@@ -305,22 +311,22 @@ function wpadverts_block_button_css( $type, $args ) {
     $button_class = sprintf( "wpa-btn-%s", $type );
 
     ?>
-    <?php echo sprintf( ".%s", $button_class ) ?> {
+    <?php echo sprintf( "%s .%s", $rule_prefix, $button_class ) ?> {
         color: <?php echo $color_text ?>;
         background-color: <?php echo $color_bg ?>;
         border-color: <?php echo $color_border ?>;
         --wpa-btn-shadow-color: <?php echo $color_border ?>;
     }
-    <?php echo sprintf( ".%s", $button_class ) ?> > span > i.fas {
+    <?php echo sprintf( "%s .%s", $rule_prefix, $button_class ) ?> > span > i.fas {
         color: <?php echo $color_text ?>;
     }
-    <?php echo sprintf( ".%s:hover", $button_class ) ?> {
+    <?php echo sprintf( "%s .%s:hover", $rule_prefix, $button_class ) ?> {
         color: <?php echo $color_text_h ?>;
         background-color: <?php echo $color_bg_h ?>;
         border-color: <?php echo $color_border_h ?>;
         --wpa-btn-shadow-color: <?php echo $color_border_h ?>;
     }
-    <?php echo sprintf( ".%s:hover", $button_class ) ?> > span > i.fas {
+    <?php echo sprintf( "%s .%s:hover", $rule_prefix, $button_class ) ?> > span > i.fas {
         color: <?php echo $color_text_h ?>;
     }
     <?php

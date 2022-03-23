@@ -278,7 +278,7 @@ function wpadverts_block_button( $args = array(), $options = array() ) {
     );
 
     ?>
-    <button name="<?php echo esc_attr( $atts["name"] ) ?>" value="<?php echo esc_attr( $atts["value"] ) ?>" type="<?php echo esc_attr( $atts["action"] ) ?>" <?php echo join( " ", $attr_list ) ?> class="<?php echo $button_class ?> -atw-inline-block atw-flex hover:atw-bg-none atw-bg-none atw-w-full atw-text-base atw-outline-none atw-border-solid atw-font-semibold atw-px-6 atw-py-2 <?php echo "$border_radius $border_width $leading" ?>">
+    <button name="<?php echo esc_attr( $atts["name"] ) ?>" value="<?php echo esc_attr( $atts["value"] ) ?>" type="<?php echo esc_attr( $atts["action"] ) ?>" <?php echo join( " ", $attr_list ) ?> class="<?php echo $button_class ?> atw-flex hover:atw-bg-none atw-bg-none atw-w-full atw-text-base atw-outline-none atw-border-solid atw-font-semibold atw-px-6 atw-py-2 <?php echo "$border_radius $border_width $leading" ?>">
         <div class="atw-flex-grow">
         <span class="<?php echo join( " ", array( $m_icon, $d_icon ) ) ?> atw-px-0.5"><i class="<?php echo esc_attr( sprintf( "%s %s md:%s", $atts["icon"], $options["mobile_icon_size"], $options["desktop_icon_size"] ) ) ?>"></i></span> 
         <span class="<?php echo join( " ", array( $m_text, $d_text ) ) ?> atw-px-0.5"><?php echo ( !empty( $args["html"] ) ? $args["html"] : esc_html( $args["text"] ) ) ?></span>
@@ -693,4 +693,8 @@ function wpadverts_block_flash( $data, $layout = "normal" ) {
     <?php endforeach; ?>
 
     <?php
+}
+
+function wpadverts_block_modal() {
+    include ADVERTS_PATH . '/templates/block-partials/modal.php';
 }

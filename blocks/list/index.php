@@ -233,21 +233,7 @@ class Adverts_Block_List {
             if( isset( $field['meta']["search_group"] ) ) {
                 $search_group = $field['meta']['search_group'];
             }
-            /*
-            if( isset( $field['meta']['search_type'] ) ) {
-                $search_type = $field['meta']['search_type'];
-            }
 
-            $counter[ $search_group . '-' . $search_type ]++;
-
-            if( $search_type == 'full' ) {
-                $field['adverts_list_classes'] = 'advert-input-type-full';
-            } else if( $counter[ $search_group . '-' . $search_type ] % 2 == 0 ) {
-                $field['adverts_list_classes'] = 'advert-input-type-half advert-input-type-half-right';
-            } else {
-                $field['adverts_list_classes'] = 'advert-input-type-half advert-input-type-half-left';
-            }
-*/
             if( $search_group == "visible" ) {
                 $fields_visible[] = $field;
             } else {

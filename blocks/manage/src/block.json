@@ -1,20 +1,17 @@
 {
-    "name": "wpadverts/list",
+    "name": "wpadverts/manage",
     "apiVersion": 1,
     "textdomain": "wpadverts",
-    "title": "Classifieds List",
+    "title": "Classifieds Manage",
     "icon": "megaphone",
     "category": "wpadverts",
-    "editor_style": "wpadverts-blocks-editor-list",
+    "editor_style": "wpadverts-blocks-manage",
     "editor_script": "block-wpadverts-list",
     "example": {},
     "attributes": {
         "post_type": {
             "type": "string",
             "default": ""
-        },
-        "form_scheme": {
-            "type": "string"
         },
         "query": {
             "type": "object",
@@ -130,7 +127,18 @@
         "color_bg_featured": {
             "type": "string",
             "default": ""
+        },
+        "form": {
+            "type": "object",
+            "default": { }
+        },
+        "primary_button": {
+            "type": "object",
+            "default": {}
+        },
+        "secondary_button": {
+            "type": "object",
+            "default": {}
         }
-        
     }
 }

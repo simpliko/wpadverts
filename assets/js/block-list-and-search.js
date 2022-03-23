@@ -1,21 +1,38 @@
 jQuery(function($) {
-    $("#js-wpa-filter").on("click", function(e) {
+
+    $(".wpa-block-list-results > .wpa-result-item").on("click", function(e) {
+        window.location.href = $(this).find(".wpa-result-link").attr("href");
+    });
+    $(".wpa-block-list-results > .wpa-result-item").addClass("atw-cursor-pointer");
+
+    $(".js-wpa-filters > button").on("click", function(e) {
         e.preventDefault();
-        //$("#js-wpa-filters-wrap").toggle();
-        if($("#js-wpa-filters-wrap").is(":visible")) {
-            $("#js-wpa-filters-wrap").addClass("atw-hidden");
+        if($("#js-wpa-filters-wrap").hasClass("wpadverts-hidden")) {
+            // show
+            $("#js-wpa-filters-wrap").removeClass("wpadverts-hidden");
+            if($("#reveal_hidden").length < 1) {
+                var rh = $('<input type="hidden" name="reveal_hidden" id="reveal_hidden" value="1" />');
+                $(".wpadverts-block-search .wpadverts-form").prepend(rh);
+            }
         } else {
-            $("#js-wpa-filters-wrap").removeClass("atw-hidden");
+            // hide
+            $("#js-wpa-filters-wrap").addClass("wpadverts-hidden");
+            $("#reveal_hidden").remove();
+
         }
         return false;
     });
-    
+    if($("#reveal_hidden").length > 0) {
+        $("#js-wpa-filters-wrap").removeClass("wpadverts-hidden");
+    }
+
     $("#js-wpa-sort").on("click", function(e) {
         e.preventDefault();
         $("#js-wpa-sort-options").toggle();
         return false;
     });
-    
+
+    /*
     $(".js-wpa-view-list").on("click", function(e) {
         e.preventDefault(); 
         
@@ -37,6 +54,5 @@ jQuery(function($) {
         results.removeClass("wpa-list-view");
         results.addClass("wpa-grid-view");
     });
-    
-    //$(".js-wpa-view-list").click();
+    */
 });

@@ -4,7 +4,7 @@
     <?php $icon = adverts_taxonomy_get("advert_category", $term->term_id, "advert_category_icon", "folder") ?>
     <div class="adverts-flexbox-item <?php echo $columns ?> <?php echo "adverts-category-slug-".$term->slug ?>">
         <span class="adverts-flexbox-wrap">
-            <span class="adverts-flexbox-icon <?php echo apply_filters("adverts_category_font_icon", "adverts-icon-".$icon, $term, "big") ?>"></span>
+            <span class="adverts-flexbox-icon <?php echo apply_filters("adverts_category_font_icon", adverts_guess_icon_class($icon), $term, "big") ?>"></span>
             <?php do_action( "adverts_category_pre_title", $term, "big") ?>
             <span class="adverts-flexbox-title">
                 <a class="adverts-category-link" href="<?php echo esc_attr(get_term_link($term)) ?>"></a>

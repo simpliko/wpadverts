@@ -261,7 +261,7 @@ class Edit extends Component {
                     */}
                     <div className="wpa-block-editor-common-tip" style={{textAlign:"center"}}>
                         <i className="fa-solid fa-eye-slash" style={{fontSize:"64px",padding:"16px",fontStyle:"normal",margin:"16px"}}></i>
-                        <p style={{fontSize:"24px"}}>No preview available for this block.</p>
+                        <p style={{fontSize:"24px"}}>No Preview Yet.</p>
                     </div>
                 </Disabled>
 

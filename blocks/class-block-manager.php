@@ -23,6 +23,14 @@ class Adverts_Block_Manager {
         add_filter( 'block_categories', array( $this, "register_block_category" ) );
     }
     
+    public function register_common_scripts() {
+
+    }
+
+    public function register_common_styles() {
+        
+    }
+
     public function register_block_category( $categories ) {
 
         $block_category = array( 

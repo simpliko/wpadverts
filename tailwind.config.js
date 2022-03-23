@@ -177,7 +177,8 @@ module.exports = {
       indigo: colors.indigo,
       blue: colors.blue,
       red: colors.red,
-      green: colors.green
+      green: colors.green,
+      yellow: colors.amber
     }
   },
   plugins: [],

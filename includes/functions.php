@@ -3956,3 +3956,11 @@ function adverts_before_delete_post( $post_id, $post ) {
         }
     } 
 }
+
+function adverts_guess_icon_class( $icon ) {
+    if( stripos( $icon, "fa-" ) === 0 ) {
+        return sprintf( "fas %s", $icon );
+    } else {
+        return sprintf( "adverts-icon-%s", $icon );
+    }
+}

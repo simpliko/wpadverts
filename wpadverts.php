@@ -671,25 +671,50 @@ function adverts_activate() {
     register_post_type( 'advert' ); 
     register_taxonomy( 'advert_category', 'advert' );
     
+    wp_insert_term(
+        'Default',
+        'advert_category'
+    );
+
+    wpadverts_install_20();
+}
+
+/**
+ * Installator for version 2.0
+ * 
+ * This function is run when WPAdverts is activated for the first time.
+ * 
+ * @since 2.0
+ * @return void
+ */
+function wpadverts_install_20() {
+
+    $hid_content = '<!-- wp:wpadverts/search {"post_type":"advert"} /-->\r\n';
+    $hid_content.= '<!-- wp:wpadverts/list {"post_type":"advert","form_scheme":""} /-->';
+
     $hid = wp_insert_post(array(
         'post_type' => 'page',
         'post_status' => 'publish',
-        'post_title' => 'Adverts',
+        'post_title' => 'Classifieds',
         'comment_status' => 'closed',
         'ping_status' => 'closed',
-        'post_content' => "[adverts_list]"
+        'post_content' => $hid_content
     ));
     
+    $aid_content = '<!-- wp:wpadverts/publish {"post_type":"advert"} /-->';
+
     $aid = wp_insert_post(array(
         'post_type' => 'page',
         'post_status' => 'draft',
-        'post_title' => 'Add',
+        'post_title' => 'Publish',
         'post_parent' => $hid,
         'comment_status' => 'closed',
         'ping_status' => 'closed',
-        'post_content' => "[adverts_add]"
+        'post_content' => $aid_content
     ));
     
+    $mid_content = '<!-- wp:wpadverts/manage {"post_type":"advert"} /-->';
+
     $mid = wp_insert_post(array(
         'post_type' => 'page',
         'post_status' => 'publish',
@@ -697,8 +722,12 @@ function adverts_activate() {
         'post_parent' => $hid,
         'comment_status' => 'closed',
         'ping_status' => 'closed',
-        'post_content' => "[adverts_manage]"
+        'post_content' => $mid_content
     ));
+
+    if( get_option( "wpadverts_block_templates_global_method" ) === false ) {
+        add_option( "wpadverts_block_templates_global_method", "block" );
+    }
 
     if( is_int( $hid ) ) {
         $option = get_option( "adverts_config" );
@@ -710,11 +739,6 @@ function adverts_activate() {
             add_option( "adverts_config", array( "ads_list_id" => $hid ) );
         }
     }
-    
-    wp_insert_term(
-        'Default',
-        'advert_category'
-    );
 }
 
 // Register activation function

@@ -3,7 +3,6 @@
 $show_results_counter   = ( isset( $atts['show_results_counter'] ) && $atts['show_results_counter'] ) ? true : false;
 $allow_sorting          = ( isset( $atts['allow_sorting'] ) && $atts['allow_sorting'] ) ? true : false;
 $switch_views           = ( isset( $atts['switch_views'] ) && $atts['switch_views'] ) ? true : false;
-$show_pagination        = ( isset( $atts['show_pagination'] ) && $atts['show_pagination'] ) ? true : false;
 
 if( $switch_views && adverts_request( "display" ) ) {
     $atts['display'] = adverts_request( "display" );
@@ -62,17 +61,20 @@ $grid_cols = sprintf("%s %s", $grid_cols_arr[ $atts["grid_columns_mobile"] ], $g
     }
     <?php endif; ?>
     <?php if( $atts["color_bg_featured"]): ?>
-    .wpadverts-block-list .advert-is-featured {
+    .wpadverts-block-manage .advert-is-featured {
         background-color: <?php echo $atts["color_bg_featured"] ?>;
     }
-    .wpadverts-block-list .advert-is-featured:hover {
+    .wpadverts-block-manage .advert-is-featured:hover {
         background-color: <?php echo $atts["color_bg_featured"] ?>;
         filter: brightness(0.975);
     }
     <?php endif; ?>
+
+    <?php wpadverts_block_button_css( "secondary", isset( $atts["secondary_button"] ) ? $atts["secondary_button"] : array(), ".wpadverts-blocks.wpadverts-block-manage" ) ?>
 </style>
 
-<div class="wpadverts-blocks wpadverts-block-list atw-flex atw-flex-col">
+<div class="wpadverts-blocks wpadverts-block-manage atw-flex atw-flex-col">
+    
     
     <div class="atw-flex atw-flex-col md:atw-flex-row-reverse md:atw-justify-between">
     
@@ -145,12 +147,12 @@ $grid_cols = sprintf("%s %s", $grid_cols_arr[ $atts["grid_columns_mobile"] ], $g
         
     </div>
 
+    
 
-    <?php if( $show_results ): ?>
     <div class="wpa-block-list-results wpa-results atw-grid atw-p-0 atw-m-0 <?php echo  $grid_cols . " " . $display; ?>">
         <?php if( $loop->have_posts() ): ?>
         <?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
-        <?php include apply_filters( "adverts_template_load", $this->path . '/templates/list-item.php' ) ?>
+        <?php include apply_filters( "adverts_template_load", $this->path . '/templates/manage-list-item.php' ) ?>
         <?php endwhile; ?>
         <?php else: ?>
         <div class="atw-flex atw-flex-col  atw-items-center atw-mb-8 atw-p-8 atw-border-b-2 atw-border-t-2 atw-border-solid atw-border-gray-100 ">
@@ -166,7 +168,6 @@ $grid_cols = sprintf("%s %s", $grid_cols_arr[ $atts["grid_columns_mobile"] ], $g
         <?php wp_reset_query(); ?>
     </div>
 
-    <?php if( $show_pagination ): ?>
     <div class="wpadverts-pagination">
         <?php echo paginate_links( array(
             'base' => $paginate_base,
@@ -176,8 +177,5 @@ $grid_cols = sprintf("%s %s", $grid_cols_arr[ $atts["grid_columns_mobile"] ], $g
             'prev_next' => false
         ) ); ?>
     </div>
-    <?php endif; ?>
-
-    <?php endif; ?>
 
 </div>

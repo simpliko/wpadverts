@@ -37,6 +37,10 @@
         @apply atw-w-full atw-max-w-full atw-m-0;
     }
 
+    .wpadverts-hidden {
+        @apply atw-hidden !important;
+    }
+
     /* FORM COMMON */
 
     .wpadverts-form .wpa-form-wrap {
@@ -60,7 +64,7 @@
     }
 
     .wpadverts-form .wpa-field-wrap {
-        @apply atw-relative atw-box-border atw-pb-3 atw-mx-1
+        @apply atw-relative atw-box-border atw-pb-3 md:atw-px-1
     }
 
     .wpadverts-form .wpa-field-label {
@@ -69,6 +73,14 @@
 
     .wpadverts-form .wpa-field-label-text {
         @apply atw-leading-none;
+    }
+
+    .wpadverts-block-search .wpadverts-form .wpa-field-label {
+        @apply atw-pt-0 atw-pl-1 atw-pb-1;
+    }
+
+    .wpadverts-block-search .wpadverts-form .wpa-field-label-text {
+        @apply atw-leading-normal;
     }
 
     .wpadverts-form .wpa-field-asterisk {
@@ -312,7 +324,7 @@
     }
 
     .wpadverts-form.wpa-layout-aligned .wpa-field-wrap {
-        @apply atw-flex atw-items-start atw-flex-col md:atw-flex-row;
+        @apply atw-flex atw-items-start atw-flex-col md:atw-flex-row atw-box-border;
     }
 
     .wpadverts-form.wpa-layout-aligned .wpa-field-wrap .wpa-field-label {
@@ -409,66 +421,80 @@
         
     }
     
-    .wpadverts-block-list .wpa-results.wpa-list-view {
+    /* removed .wpadverts-block-list  */
+    .wpa-results.wpa-list-view {
         @apply atw-grid-cols-1
     }
     
-    .wpadverts-block-list .wpa-results.wpa-grid-view {
+    .wpa-results.wpa-grid-view {
         @apply atw-gap-x-4 atw-gap-y-4
     }
     
-    .wpadverts-block-list .wpa-results.wpa-list-view .wpa-result-item {
+    .wpa-results.wpa-list-view .wpa-result-item {
         @apply atw-py-4;
     }
     
-    .wpadverts-block-list .wpa-results.wpa-grid-view .wpa-result-item {
+    .wpa-results.wpa-grid-view .wpa-result-item {
         @apply atw-flex-col atw-py-0 atw-border-none;
     }
     
-    .wpadverts-block-list .wpa-results .wpa-picture-list,
-    .wpadverts-block-list .wpa-results .wpa-picture-grid {
+    .wpa-results .wpa-list-only,
+    .wpa-results .wpa-grid-only {
         @apply atw-hidden;
     }
     
-    .wpadverts-block-list .wpa-results.wpa-list-view .wpa-picture-list {
+    .wpa-results.wpa-list-view .wpa-list-only {
         @apply atw-block;
     }
     
-    .wpadverts-block-list .wpa-results.wpa-grid-view .wpa-picture-grid {
+    .wpa-results.wpa-grid-view .wpa-grid-only {
+        @apply atw-block;
+    }
+
+    .wpa-results .wpa-picture-list,
+    .wpa-results .wpa-picture-grid {
+        @apply atw-hidden;
+    }
+    
+    .wpa-results.wpa-list-view .wpa-picture-list {
         @apply atw-block;
     }
     
-    .wpadverts-block-list .wpa-results.wpa-list-view .wpa-result-details {
+    .wpa-results.wpa-grid-view .wpa-picture-grid {
+        @apply atw-block;
+    }
+    
+    .wpa-results.wpa-list-view .wpa-result-details {
         @apply atw-flex-row atw-place-content-center
         
     }
-    .wpadverts-block-list .wpa-results.wpa-grid-view .wpa-result-details {
+    .wpa-results.wpa-grid-view .wpa-result-details {
         @apply atw-flex-col atw-px-2 atw-pt-4 atw-pb-2
         
     }
     
-    .wpadverts-block-list .wpa-results.wpa-list-view .wpa-detail-left {
+    .wpa-results.wpa-list-view .wpa-detail-left {
         @apply atw-self-center
     }
     
-    .wpadverts-block-list .wpa-results.wpa-list-view .wpa-result-title {
+    .wpa-results.wpa-list-view .wpa-result-title {
         @apply atw-flex-none 
     }
     
-    .wpadverts-block-list .wpa-results.wpa-grid-view .wpa-result-title {
+    .wpa-results.wpa-grid-view .wpa-result-title {
         @apply atw-grow;
     }
     
-    .wpadverts-block-list .js-wpa-view-list.wpa-selected i,
-    .wpadverts-block-list .js-wpa-view-grid.wpa-selected i {
+    .js-wpa-view-list.wpa-selected i,
+    .js-wpa-view-grid.wpa-selected i {
         @apply atw-text-gray-700;
     }
     
-    .wpadverts-block-list .wpa-results.wpa-grid-view .wpa-result-meta {
+    .wpa-results.wpa-grid-view .wpa-result-meta {
         @apply atw-flex-col;
     }
 
-    .wpadverts-block-list .wpa-results.wpa-list-view .wpa-result-meta {
+    .wpa-results.wpa-list-view .wpa-result-meta {
         @apply atw-flex-row atw-space-x-3;
     }
 
@@ -604,5 +630,52 @@
 
     .wpa-tab-content {
 
+    }
+
+    .wpadverts-pagination {
+        @apply atw-flex atw-flex-row atw-flex-wrap atw-my-4 atw--mx-1
+    }
+
+    .wpadverts-pagination .page-numbers {
+        @apply atw-inline-block atw-mx-1 atw-px-6 atw-py-3 atw-text-lg atw-font-bold atw-bg-gray-100 atw-text-gray-700 atw-rounded-lg atw-no-underline md:atw-px-4 md:atw-py-2 md:atw-text-base;
+    }
+
+    .wpadverts-pagination .page-numbers.current {
+        @apply atw-bg-gray-200 atw-text-gray-400
+    }
+
+    .wpa-bulb {
+        @apply atw-inline-block atw-rounded atw-py-1 atw-px-2 atw-text-sm
+    }
+    .wpa-bulb.wpa-bulb-error {
+        @apply atw-bg-red-100 atw-text-red-500
+    }
+    .wpa-bulb.wpa-bulb-error a {
+        @apply atw-text-red-700 atw-underline
+    }
+    .wpa-bulb.wpa-bulb-warning {
+        @apply atw-bg-yellow-100 atw-text-yellow-500
+    }
+    .wpa-bulb.wpa-bulb-warning a {
+        @apply atw-text-yellow-700 atw-underline
+    }
+    .wpa-bulb.wpa-bulb-info {
+        @apply atw-bg-gray-100 atw-text-gray-500;
+    }    
+    .wpa-bulb.wpa-bulb-info a {
+        @apply atw-text-gray-700 atw-underline
+    }
+    .wpa-bulb.wpa-bulb-success {
+        @apply atw-bg-green-100 atw-text-green-500;
+    }
+    .wpa-bulb.wpa-bulb-success a {
+        @apply atw-text-green-700 atw-underline
+    }
+    .wpadverts-modal .wpa-icon-question {
+        @apply atw-bg-red-100
+    }    
+    
+    .wpadverts-modal .wpa-icon-success {
+        @apply atw-bg-green-100
     }
 }

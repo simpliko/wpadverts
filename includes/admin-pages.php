@@ -296,6 +296,8 @@ function adverts_admin_page_extensions() {
  */
 function adverts_category_form_fields($tag)
 {
+    wp_enqueue_style( 'wpadverts-blocks-common' );
+
     wp_enqueue_style( 'adverts-admin' );
     wp_enqueue_style( 'adverts-icons' );
     
@@ -313,6 +315,16 @@ function adverts_category_form_fields($tag)
     }
 
     $current_icon = adverts_taxonomy_get($tag->taxonomy, $tag->term_id, 'advert_category_icon', '');
+    $current_tab = "v6";
+
+    if( stripos( $current_icon, "fa-" ) !== 0 ) {
+        $current_tab = "v4";
+    }
+
+    $icons_string = file_get_contents( ADVERTS_PATH . '/assets/css/all.min.css' );
+    preg_match_all( "/\.(fa\-[a-z0-9\-]+):before/", $icons_string, $matches );
+
+    $icons_v6 = $matches[1];
 
     ?>
 
@@ -343,8 +355,32 @@ function adverts_category_form_fields($tag)
             
         });
         
-        var scrollTo = $(".adverts-image-icon-picker .button-primary");
-        var scrollWrap = $(".adverts-image-icon-picker");
+        $(".js-wpa-icons-v4").on("click", function(e) {
+            e.preventDefault();
+            $(".js-wpa-icons-v4").addClass("nav-tab-active");
+            $(".js-wpa-icons-v6").removeClass("nav-tab-active");
+
+            $(".js-wpa-icons-v4-wrap").show();
+            $(".js-wpa-icons-v6-wrap").hide();
+        });
+
+        $(".js-wpa-icons-v6").on("click", function(e) {
+            e.preventDefault();
+            $(".js-wpa-icons-v6").addClass("nav-tab-active");
+            $(".js-wpa-icons-v4").removeClass("nav-tab-active");
+
+            $(".js-wpa-icons-v6-wrap").show();
+            $(".js-wpa-icons-v4-wrap").hide();
+        });
+
+        if( $(".js-wpa-icons-v4-wrap").is(":visible") ) {
+            var scrollTo = $(".js-wpa-icons-v4-wrap .adverts-image-icon-picker .button-primary");
+            var scrollWrap = $(".js-wpa-icons-v4-wrap .adverts-image-icon-picker");
+        } else {
+            var scrollTo = $(".js-wpa-icons-v6-wrap .adverts-image-icon-picker .button-primary");
+            var scrollWrap = $(".js-wpa-icons-v6-wrap .adverts-image-icon-picker");
+        }
+
 
         scrollWrap.scrollTop(scrollTo.offset().top - scrollWrap.offset().top + scrollWrap.scrollTop() - 20);
     });
@@ -354,19 +390,45 @@ function adverts_category_form_fields($tag)
     <tr class="form-field">
         <th scope="row" valign="top"><label for="advert_category_icon"><?php _e("Category Icon", "wpadverts") ?></label></th>
         <td>
+
             <input type="hidden" name="advert_category_icon" id="advert_category_icon" value="<?php esc_attr_e($current_icon) ?>" />
             <input type="text" autocomplete="off" id="adverts-category-icon-filter" placeholder="<?php _e("Filter Icons ...", "wpadverts") ?>" />
-            <ul class="adverts-image-icon-picker">
-                <?php foreach($icons as $icon): ?>
-                <?php $title = ucfirst(str_replace("-", " ", $icon ) ) ?>
-                <li data-name="<?php esc_html_e($icon) ?>">
-                    <a href="#" class="<?php echo $icon==$current_icon ? 'button-primary' : 'button-secondary' ?>" title="<?php esc_html_e( $title ) ?>" data-name="<?php esc_html_e($icon) ?>">
-                        <span class="adverts-icon-<?php esc_html_e($icon) ?>"></span>
-                    </a>
-                </li>
-                <?php endforeach; ?>
-            </ul>
+               
+            <h2 class="nav-tab-wrapper js-wpa-icon-tabs">
+                <a href="" class="js-wpa-icons-v4 nav-tab <?php echo $current_tab === "v4" ? "nav-tab-active" : "" ?>"><?php _e( "Icons V4", "wpadverts" ) ?></a>
+                <a href="" class="js-wpa-icons-v6 nav-tab <?php echo $current_tab === "v6" ? "nav-tab-active" : "" ?>"><?php _e( "Icons V6", "wpadverts" ) ?></a>
             
+            </h2>
+
+            <div class="js-wpa-icons-v4-wrap" style="<?php echo $current_tab !== "v4" ? "display:none" : "" ?>">
+
+                 <ul class="adverts-image-icon-picker">
+                    <?php foreach($icons as $icon): ?>
+                    <?php $title = ucfirst(str_replace("-", " ", $icon ) ) ?>
+                    <li data-name="<?php echo esc_attr($icon) ?>">
+                        <a href="#" class="<?php echo $icon==$current_icon ? 'button-primary' : 'button-secondary' ?>" title="<?php echo esc_attr( $title ) ?>" data-name="<?php echo esc_attr($icon) ?>">
+                            <span class="adverts-icon-<?php esc_html_e($icon) ?>"></span>
+                        </a>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+
+            </div>
+
+            <div class="js-wpa-icons-v6-wrap" style="<?php echo $current_tab !== "v6" ? "display:none" : "" ?>">
+
+                <ul class="adverts-image-icon-picker">
+                    <?php foreach($icons_v6 as $icon): ?>
+                    <?php $title = ucfirst(str_replace( array( "fa-", "-" ), array( "", " " ), $icon ) ) ?>
+                    <li data-name="<?php echo esc_attr($icon) ?>">
+                        <a href="#" class="<?php echo $icon==$current_icon ? 'button-primary' : 'button-secondary' ?>" title="<?php echo esc_attr( $title ) ?>" data-name="<?php echo esc_attr($icon) ?>">
+                            <span class="fas <?php echo esc_attr($icon) ?>"></span>
+                        </a>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+
+            </div>
         </td>
     </tr>
 

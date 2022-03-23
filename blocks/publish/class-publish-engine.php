@@ -6,7 +6,7 @@
  *
  * @package Adverts
  * @subpackage Classes
- * @since 1.4.0
+ * @since 2.0
  * @access public
  */
 
@@ -347,10 +347,16 @@ class Adverts_Block_Publish_Engine {
             )
         );
 
+        $_layouts = array(
+            "adverts-form-stacked" => "wpa-layout-stacked",
+            "adverts-form-aligned" => "wpa-layout-aligned"
+        );
+
         $buttons_position = "atw-flex-col";
 
         $show_buttons = true;
-        $form_layout = "wpa-layout-aligned";
+       
+        $form_layout = $_layouts[$form->get_layout()];
         $atts = $this->_params["form"];
 
         // adverts/templates/add.php

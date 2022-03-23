@@ -182,11 +182,13 @@ function adext_payments_init_frontend() {
     
     add_action( "adverts_sh_manage_actions_more", "adext_payments_action_renew" );
     add_action( "adverts_sh_manage_actions_more", "adext_payments_action_complete" );
+    add_filter( "wpadverts/block/manage/buttons-manage", "adext_payments_block_buttons_manage", 10, 2 );
     
     add_filter( "adverts_manage_action", "adext_payments_manage_action" );
-    add_filter( "adverts_manage_action_renew", "adext_payments_manage_action_renew" );
+    add_filter( "adverts_manage_action_renew", "adext_payments_manage_action_renew", 10, 3 );
     
     add_action( "adverts_sh_manage_list_status", 'adext_payments_manage_list_status' );
+    add_action( "wpadverts/block/manage/list/status", 'adext_payments_manage_list_status_block' );
 }
 
 function adext_payments_register_publish_action( $possible_actions ) {
@@ -379,9 +381,6 @@ function adext_payments_form_load( $form ) {
  * @return void
  */
 function adverts_payments_field_payment($field) {
-    
-    adverts_payments_field_payment_block( $field );
-    return;
 
     ob_start();
     
@@ -542,7 +541,7 @@ function adverts_payments_field_payment_block( $field ) {
         <?php
     }
     
-    //echo '</div>';
+    echo '</div>';
     echo ob_get_clean();
 }
 
@@ -569,12 +568,14 @@ function adext_payments_get_template( $file, $is_block ) {
     $blocks = array(
         "add-payment"   => ADVERTS_PATH . 'addons/payments/templates/publish-payment.php',
         "add-save"      => ADVERTS_PATH . '/templates/block-partials/publish-save.php',
-        "white-page"    => ADVERTS_PATH . 'addons/payments/templates/white-page.php'
+        "white-page"    => ADVERTS_PATH . 'addons/payments/templates/white-page.php',
+        "form"          => ADVERTS_PATH . 'addons/payments/templates/renew-form.php'
     );
     $shortcodes = array(
         "add-payment"   => ADVERTS_PATH . 'addons/payments/templates/add-payment.php',
         "add-save"      => ADVERTS_PATH . '/templates/add-save.php',
-        "white-page"    => ADVERTS_PATH . 'addons/payments/templates/white-page.php'
+        "white-page"    => ADVERTS_PATH . 'addons/payments/templates/white-page.php',
+        "form"          => ADVERTS_PATH . '/templates/form.php'
     );
 
     if( $is_block ) {
@@ -831,6 +832,42 @@ function adext_payments_action_renew( $post_id ) {
     echo $a->render();
 }
 
+function adext_payments_block_buttons_manage( $buttons_manage, $post_id ) {
+
+    if( get_post_field( "post_status", $post_id ) == "advert-pending" ) {
+        return $buttons_manage;
+    }
+        
+    $renewals = get_posts( array( 
+        'post_type' => 'adverts-renewal', 
+        'post_status' => 'any',
+        'posts_per_page' => 1, 
+    ) );
+    
+    $renewals = apply_filters( "wpadverts_filter_renewals", $renewals, $post_id );
+    
+    if( empty( $renewals ) ) {
+        return $buttons_manage;
+    }
+
+    $buttons_manage[] = array(                
+        "class" => "",
+        "link" => add_query_arg( "advert_renew", $post_id ),
+        "order" => 20,
+        "button" => array( 
+            "text" => __( "Renew Ad", "wpadverts" ), 
+            "action" => "button",
+            "type" => "secondary",
+            "attr" => array(
+                "onclick" => sprintf( "window.location.href='%s'", add_query_arg( "advert_renew", $post_id ) )
+            )
+        ),
+        "button_type" => "secondary_button"
+    );
+    
+    return $buttons_manage;
+}
+
 /**
  * Renders a form which allows to renew an Advert
  * 
@@ -882,8 +919,14 @@ function adext_payments_manage_action_renew( $content, $atts = array(), $is_bloc
     
     $pricings = apply_filters( "wpadverts_filter_renewals", $pricings, $post->ID );
     
+    if( $is_block ) {
+        $callback = "adverts_payments_field_payment_block";
+    } else {
+        $callback = "adverts_payments_field_payment";
+    }
+
     adverts_form_add_field("adverts_payments_field_payment", array(
-        "renderer" => "adverts_payments_field_payment",
+        "renderer" => $callback,
         "callback_save" => "adverts_save_single",
         "callback_bind" => "adverts_bind_single",
     ) );
@@ -930,15 +973,33 @@ function adext_payments_manage_action_renew( $content, $atts = array(), $is_bloc
     $form_scheme = apply_filters( "adverts_form_scheme", $form, null );
     $form = new Adverts_Form( $form_scheme );
     $form_label_placement = "adverts-form-stacked";
-    $buttons = array(
-        array(
-            "html" => "",
-            "tag" => "input",
-            "type" => "submit",
-            "value" => __( "Renew", "wpadverts" ),
-            "style" => "font-size:1.2em"
-        )
-    );
+    $show_buttons = true;
+
+    if( $is_block ) {
+        $buttons = array(
+            array(
+                "text" => __( "Renew", "wpadverts" ),
+                "html" => null,
+                "icon" => "",
+                "type" => "primary",
+                "class" => "",
+                "action" => "submit",
+                "name" => "wpadverts_manage_renew",
+                "value" => "1"
+            )
+        );
+    } else {
+        $buttons = array(
+            array(
+                "html" => "",
+                "tag" => "input",
+                "type" => "submit",
+                "value" => __( "Renew", "wpadverts" ),
+                "style" => "font-size:1.2em"
+            )
+        );
+    }
+
     
     if( isset( $_POST ) && ! empty( $_POST ) ) {
         $form->bind( stripslashes_deep( $_POST ) );
@@ -1027,7 +1088,7 @@ function adext_payments_manage_action_renew( $content, $atts = array(), $is_bloc
 
     ob_start();
     // adverts/templates/form.php
-    include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/form.php' );
+    include adext_payments_get_template( "form", $is_block );
     return ob_get_clean();
 }
 
@@ -1187,6 +1248,48 @@ function adext_payments_manage_list_status( $post ) {
     
     ?>
     <span class="adverts-inline-icon adverts-inline-icon-warn adverts-icon-credit-card" title="<?php _e("Inactive — Waiting for payment.", "wpadverts") ?>"></span>
+    <?php 
+}
+
+/**
+ * Display locked flag in [adverts_manage] shortcode
+ * 
+ * This function is being executed by adverts_sh_manage_list_status action, in
+ * wpadverts/templates/manage.php
+ * 
+ * @since   1.1.0
+ * @param   WP_Post     $post   Post for which we want to check the stataus
+ * @return  void
+ */
+function adext_payments_manage_list_status_block( $post ) {
+
+    if( $post->post_status != "advert-pending" ) {
+        return;
+    }
+
+    $loop = get_posts( array( 
+        'post_type' => 'adverts-payment', 
+        'post_status' => 'pending',
+        'posts_per_page' => 1, 
+        'meta_query' => array(
+            array(
+                'key' => '_adverts_object_id', 
+                'value' => $post->ID
+            )
+        )
+    ) );
+
+    if( ! isset( $loop[0] ) ) {
+        return;
+    }
+    
+    $id = $loop[0]->ID;
+
+    ?>
+    <span class="wpa-bulb wpa-bulb-warning">
+        <?php _e("Inactive — Waiting for payment.", "wpadverts") ?>
+        <a href="<?php echo adext_payments_get_checkout_url( $id ) ?>"><?php _e( "Complete Payment", "wpadverts" ) ?></a>
+    </span>
     <?php 
 }
 

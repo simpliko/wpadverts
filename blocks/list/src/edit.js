@@ -271,14 +271,6 @@ class Edit extends Component {
         this.props.setAttributes( { show_pagination });
     }
 
-    toggleShowPriceColumn = ( show_price_column ) => {
-        this.props.setAttributes( { show_price_column } );
-    }
-
-    toggleShowImageColumn = ( show_image_column ) => {
-        this.props.setAttributes( { show_image_column } );
-    }
-
     onChangePostsPerPage = ( posts_per_page ) => {
         this.props.setAttributes( { posts_per_page });
     }
@@ -289,6 +281,14 @@ class Edit extends Component {
 
     onChangeDefaultImageUrl = ( default_image_url ) => {
         this.props.setAttributes( { default_image_url });
+    }
+
+    toggleShowPriceColumn = ( show_price_column ) => {
+        this.props.setAttributes( { show_price_column } );
+    }
+
+    toggleShowImageColumn = ( show_image_column ) => {
+        this.props.setAttributes( { show_image_column } );
     }
 
     onChangeOrderBy = ( order_by ) => {

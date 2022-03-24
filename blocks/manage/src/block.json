@@ -91,10 +91,7 @@
         },
         "data": {
             "type": "array",
-            "default": [
-                { "name": "meta__adverts_location" },
-                { "name": "pattern__post_date" }
-            ]
+            "default": [ ]
         },
         "default_image_url": {
             "type": "string",

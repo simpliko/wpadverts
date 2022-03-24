@@ -104,7 +104,7 @@ $grid_cols = sprintf("%s %s", $grid_cols_arr[ $atts["grid_columns_mobile"] ], $g
 
                         <span class="atw-relative atw-inline-block atw-text-gray-700 atw-text-base">
                             <span id="js-wpa-sort" class=" atw-cursor-pointer">
-                                <span><?php echo esc_html( $sort_current_title ) ?></span>
+                                <span><?php echo esc_html( $sort_current_text ) ?></span>
                                 <i class="fas fa-chevron-down atw-text-gray-500 atw-text-base"></i>
                             </span>
 
@@ -117,7 +117,7 @@ $grid_cols = sprintf("%s %s", $grid_cols_arr[ $atts["grid_columns_mobile"] ], $g
                                     <?php foreach( $sort_group["items"] as $sort_item_key => $sort_item): ?>
                                         <a href="<?php echo esc_html( add_query_arg( "adverts_sort", $sort_item_key ) ) ?>" class="atw-text-gray-700 atw-block atw-px-4 atw-py-2 atw-text-sm atw-no-underline">
                                             <?php echo esc_html( $sort_item ) ?>
-                                            <?php if($adverts_sort==$sort_item_key): ?><span class="adverts-icon-asterisk" style="opacity:0.5"></span><?php endif; ?>
+                                            <?php if($adverts_sort==$sort_item_key): ?><i class="fa-solid fa-asterisk atw-pl-2 atw-text-gray-700"></i><?php endif; ?>
                                         </a>
                                     <?php endforeach; ?>
                                 </div>
@@ -155,15 +155,30 @@ $grid_cols = sprintf("%s %s", $grid_cols_arr[ $atts["grid_columns_mobile"] ], $g
         <?php include apply_filters( "adverts_template_load", $this->path . '/templates/manage-list-item.php' ) ?>
         <?php endwhile; ?>
         <?php else: ?>
-        <div class="atw-flex atw-flex-col  atw-items-center atw-mb-8 atw-p-8 atw-border-b-2 atw-border-t-2 atw-border-solid atw-border-gray-100 ">
-            <div class="atw-flex atw-justify-center atw-shadow-inner atw-h-12 atw-w-12 atw-rounded atw-p-4 atw-bg-gray-50 atw-text-center atw-items-center">
-                <i class="fas fa-search atw-text-4xl atw-text-center atw-text-gray-500"></i>
-            </div>
-            <div class="">
-                <span class="atw-inline-block atw-w-full atw-text-center atw-text-lg atw-font-bold atw-p-0 atw-pt-2 atw-text-gray-700">No results found.</span>
-                <span class="atw-inline-block atw-w-full atw-text-center ate-text-base atw-p-0">There aren't any results matching your search query.</span>
+            <div class="wpadverts-flash wpa-style-info wpa-layout-big">
+        <div class="wpa-flash-content atw-flex">
+
+            <span class="wpa-flash-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+
+            <div class="atw-flex-1 atw-flex atw-flex-col atw-items-center">
+                
+                <span class="wpa-flash-message atw-flex-1 atw-font-bold atw-py-3"><?php _e( "No results found.", "wpadverts" ) ?></span>
+                <span class="wpa-flash-message atw-flex-1 atw-pb-3"><?php _e( "You do not have any items posted yet.") ?></span>  
+                
+                <span class="atw-flex atw-flex-row atw-pb-3 atw-w-full atw-flex-col md:atw-flex-row">
+
+                    <form action="" class="atw-p-3 atw-flex-grow">
+                        <?php wpadverts_block_button( array( "text" => "Publish your first Ad", "type" => "secondary" )); ?>
+                    </form>
+
+                    <form action="" class="atw-p-3 atw-flex-grow">
+                        <?php wpadverts_block_button( array( "text" => "View ads list", "type" => "secondary" )); ?>
+                    </form>
+                </span>
+                
             </div>
         </div>
+    </div>
         <?php endif; ?>
         <?php wp_reset_query(); ?>
     </div>

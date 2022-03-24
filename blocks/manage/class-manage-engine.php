@@ -20,6 +20,32 @@ class Adverts_Block_Manage_Engine {
         $this->path = dirname( __FILE__ );
     }
 
+    public function get_sort_options() {
+        return apply_filters( "adverts_manage_sort_options", array(
+            "date" => array(
+                "label" => __("Publish Date", "wpadverts"),
+                "items" => array(
+                    "date-desc" => __("Newest First", "wpadverts"),
+                    "date-asc" => __("Oldest First", "wpadverts")
+                )
+            ),
+            "price" => array(
+                "label" => __("Price", "wpadverts"),
+                "items" => array(
+                    "price-asc" => __("Cheapest First", "wpadverts"),
+                    "price-desc" => __("Most Expensive First", "wpadverts")
+                )
+            ),
+            "title" => array(
+                "label" => __("Title", "wpadverts"),
+                "items" => array(
+                    "title-asc" => __("From A to Z", "wpadverts"),
+                    "title-desc" => __("From Z to A", "wpadverts")
+                )
+            )
+        ) );
+    }
+
     public function main( $atts = array() ) {
 
         if(!get_current_user_id()) {
@@ -61,13 +87,60 @@ class Adverts_Block_Manage_Engine {
             'posts_per_page' => 20,
         ), $atts));
         
+        $sort_options = $this->get_sort_options();
+
+        if($allow_sorting && adverts_request("adverts_sort")) {
+            $adverts_sort = adverts_request("adverts_sort");
+        } else {
+            $adverts_sort = $atts["order_by"];
+        }
+
+        $sarr = explode("-", $adverts_sort);
+        $sort_current_text = __("Publish Date", "wpadverts");
+        $sort_current_title = sprintf( __( "Sort By: %s - %s", "wpadverts"), __("Publish Date", "wpadverts"), __("Newest First", "wpadverts") );
+
+        if( isset( $sarr[1] ) && isset( $sort_options[$sarr[0]]["items"][$adverts_sort] ) ) {
+
+            $sort_key = $sarr[0];
+            $sort_dir = $sarr[1];
+
+            if($sort_dir == "asc") {
+                $sort_dir = "ASC";
+            } else {
+                $sort_dir = "DESC";
+            }
+
+            if($sort_key == "title") {
+                $orderby["title"] = $sort_dir;
+            } elseif($sort_key == "date") {
+                $orderby["date"] = $sort_dir;
+            } elseif($sort_key == "price") {
+                $orderby["adverts_price__orderby"] = $sort_dir;
+                $meta["adverts_price__orderby"] = array(
+                    'key' => 'adverts_price',
+                    'type' => 'NUMERIC',
+                    'compare' => 'NUMERIC',
+                );
+            } else {
+                // apply sorting using adverts_list_query filter.
+            }
+
+            $sort_current_text = $sort_options[$sort_key]["label"] ;
+            $s_descr = $sort_options[$sort_key]["items"][$adverts_sort];
+            $sort_current_title = sprintf( __( "Sort By: %s - %s", "wpadverts"), $sort_current_text, $s_descr );
+        } else {
+            $adverts_sort = $order_by;
+            $orderby["date"] = "desc"; 
+        }
+
         // Load ONLY current user data
         $loop = new WP_Query( apply_filters( "adverts_manage_query", array( 
             'post_type' => 'advert', 
             'post_status' => apply_filters("adverts_sh_manage_list_statuses", array('publish', 'advert-pending', 'pending', 'expired') ),
             'posts_per_page' => $posts_per_page, 
             'paged' => $paged,
-            'author' => get_current_user_id()
+            'author' => get_current_user_id(),
+            'orderby' => $orderby
         ) ) );
     
         $baseurl = apply_filters( "adverts_manage_baseurl", get_the_permalink() );
@@ -203,7 +276,7 @@ class Adverts_Block_Manage_Engine {
             }
         }
         
-        $adverts_flash = array( "error" => $error, "info" => $info );
+        $adverts_flash = array( "error" => $error, "success" => $info );
         $baseurl = apply_filters( "adverts_manage_baseurl", get_the_permalink() );
         $actions_class = "adverts-field-actions";
         
@@ -215,6 +288,7 @@ class Adverts_Block_Manage_Engine {
             add_action( "wpadverts/tpl/partial/form/before-buttons", array( $this, "moderation_notice" ) );
         }
 
+        $buttons_position = "";
         $show_buttons = true;
         $buttons = array(
             array(

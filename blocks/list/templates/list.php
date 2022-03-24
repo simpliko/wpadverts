@@ -102,7 +102,7 @@ $grid_cols = sprintf("%s %s", $grid_cols_arr[ $atts["grid_columns_mobile"] ], $g
 
                         <span class="atw-relative atw-inline-block atw-text-gray-700 atw-text-base">
                             <span id="js-wpa-sort" class=" atw-cursor-pointer">
-                                <span><?php echo esc_html( $sort_current_title ) ?></span>
+                                <span><?php echo esc_html( $sort_current_text ) ?></span>
                                 <i class="fas fa-chevron-down atw-text-gray-500 atw-text-base"></i>
                             </span>
 
@@ -115,7 +115,7 @@ $grid_cols = sprintf("%s %s", $grid_cols_arr[ $atts["grid_columns_mobile"] ], $g
                                     <?php foreach( $sort_group["items"] as $sort_item_key => $sort_item): ?>
                                         <a href="<?php echo esc_html( add_query_arg( "adverts_sort", $sort_item_key ) ) ?>" class="atw-text-gray-700 atw-block atw-px-4 atw-py-2 atw-text-sm atw-no-underline">
                                             <?php echo esc_html( $sort_item ) ?>
-                                            <?php if($adverts_sort==$sort_item_key): ?><span class="adverts-icon-asterisk" style="opacity:0.5"></span><?php endif; ?>
+                                            <?php if($adverts_sort==$sort_item_key): ?><i class="fa-solid fa-asterisk atw-pl-2 atw-text-gray-700"></i><?php endif; ?>
                                         </a>
                                     <?php endforeach; ?>
                                 </div>

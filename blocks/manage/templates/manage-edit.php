@@ -6,6 +6,8 @@
     <?php wpadverts_block_button_css( "secondary", isset( $atts["secondary_button"] ) ? $atts["secondary_button"] : array(), ".wpadverts-blocks.wpadverts-block-manage" ) ?>
 </style>
 
+
+
 <div class="wpadverts-blocks wpadverts-block-manage">
     <div class="atw-mb-2">
         <span>
@@ -15,6 +17,8 @@
             </a>
         </span>
     </div>
+
+    <?php wpadverts_block_flash( $adverts_flash ) ?>
 
     <div class="atw-flex atw-flex-col md:atw-flex-row atw--mx-1 atw-flex-wrap">
 

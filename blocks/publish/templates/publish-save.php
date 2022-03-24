@@ -29,7 +29,7 @@ if( $moderate == "1" ) {
                 <span class="wpa-flash-message atw-flex-1 atw-font-bold atw-py-3"><?php echo $adverts_flash["success"][0]["message"] ?></span>
                 <span class="wpa-flash-message atw-flex-1 atw-pb-3"><?php echo $m ?></span>  
                 
-                <span class="atw-flex atw-flex-row atw-pb-3 atw-w-full">
+                <span class="atw-flex atw-flex-row atw-pb-3 atw-w-full atw-flex-col md:atw-flex-row">
 
                     <form action="" class="atw-p-3 atw-flex-grow">
                         <?php wpadverts_block_button( array( "text" => "Publish another Ad", "type" => "secondary" )); ?>

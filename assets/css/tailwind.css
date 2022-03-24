@@ -328,7 +328,7 @@
     }
 
     .wpadverts-form.wpa-layout-aligned .wpa-field-wrap .wpa-field-label {
-        @apply atw-flex-none atw-w-1/3;
+        @apply atw-flex-none md:atw-w-1/3;
     }
     
     .wpadverts-form.wpa-layout-aligned .wpa-field-wrap .wpa-field-input {

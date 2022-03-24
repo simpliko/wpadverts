@@ -50,6 +50,8 @@ class AdvertsListData extends Component {
         }
         this.addOption( e.target.value);
         this.props.onChange( this.data.options );
+
+        e.target.value = "-1";
     }
 
     addOption( option ) {

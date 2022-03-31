@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classified script, classifieds sc
 Requires PHP: 5.3
 Requires at least: 4.0
 Tested up to: 5.9
-Stable tag: 1.5.7
+Stable tag: 1.5.8
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -123,6 +123,15 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.5.8 - 2022-04-05 =
+
+* FEATURE: [advert_single] shortcode - for rendering Ad details pages (useful when creating website with a page builder)
+* FEATURE: Enable comments on Ad details pages from wp-admin / Classifieds / Options / Core / Types panel
+* FEATURE: Bulk enable comments on existing Ads
+* FIXED: Calling get_terms() function 
+* API: adverts_categories_query filter for filtering the categories query in the [adverts_categories] shortcode
+* API: adverts_categories_query_sub filter for filtering sub-categories queries in the [adverts_categories] shortcode
 
 = 1.5.7 - 2022-02-08 =
 

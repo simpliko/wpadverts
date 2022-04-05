@@ -124,7 +124,7 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
-= 1.5.8 - 2022-04-05 =
+= 1.5.8 - 2022-04-06 =
 
 * FEATURE: [advert_single] shortcode - for rendering Ad details pages (useful when creating website with a page builder)
 * FEATURE: Enable comments on Ad details pages from wp-admin / Classifieds / Options / Core / Types panel

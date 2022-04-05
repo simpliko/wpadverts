@@ -1437,7 +1437,7 @@ function adverts_field_select( $field ) {
 
         
         if( isset( $v["id"] ) ) {
-            $id = $id.'_'.$i;
+            $id = $v["id"].'_'.$i;
         } else {
             $id = null;
         }

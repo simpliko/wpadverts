@@ -1452,7 +1452,7 @@ function adverts_field_select( $field ) {
 
         
         if( isset( $v["id"] ) ) {
-            $id = $id.'_'.$i;
+            $id = $v["id"].'_'.$i;
         } else {
             $id = null;
         }
@@ -3962,5 +3962,22 @@ function adverts_guess_icon_class( $icon ) {
         return sprintf( "fas %s", $icon );
     } else {
         return sprintf( "adverts-icon-%s", $icon );
+    }
+}
+
+function adverts_default_comments_status( $post_type ) {
+    $option = get_option( "wpadverts_post_types" );
+    $comments_auto_enable = 0;
+    
+    $pt = $post_type;
+
+    if( isset( $option[$pt] ) && isset( $option[$pt]["_comments_auto_enable"] ) ) {
+        $comments_auto_enable = $option[$pt]["_comments_auto_enable"];
+    }
+
+    if( $comments_auto_enable ) {
+        return "open";
+    } else {
+        return "closed";
     }
 }

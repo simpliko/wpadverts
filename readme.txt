@@ -128,8 +128,9 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 * FEATURE: [advert_single] shortcode - for rendering Ad details pages (useful when creating website with a page builder)
 * FEATURE: Enable comments on Ad details pages from wp-admin / Classifieds / Options / Core / Types panel
-* FEATURE: Bulk enable comments on existing Ads
+* FEATURE: Bulk enable comments on existing (published) Ads
 * FIXED: Calling get_terms() function 
+* FIXED: Undefined variable notice in the adverts_field_select() function
 * API: adverts_categories_query filter for filtering the categories query in the [adverts_categories] shortcode
 * API: adverts_categories_query_sub filter for filtering sub-categories queries in the [adverts_categories] shortcode
 

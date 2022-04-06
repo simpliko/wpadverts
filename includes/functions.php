@@ -3905,3 +3905,20 @@ function adverts_before_delete_post( $post_id, $post ) {
         }
     } 
 }
+
+function adverts_default_comments_status( $post_type ) {
+    $option = get_option( "wpadverts_post_types" );
+    $comments_auto_enable = 0;
+    
+    $pt = $post_type;
+
+    if( isset( $option[$pt] ) && isset( $option[$pt]["_comments_auto_enable"] ) ) {
+        $comments_auto_enable = $option[$pt]["_comments_auto_enable"];
+    }
+
+    if( $comments_auto_enable ) {
+        return "open";
+    } else {
+        return "closed";
+    }
+}

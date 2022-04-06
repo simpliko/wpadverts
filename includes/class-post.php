@@ -179,7 +179,10 @@ class Adverts_Post {
             $post_id = wp_update_post( apply_filters( "adverts_update_post", $data ), true );
         } else {
             // Post does not exist, insert it.
-            $data["comment_status"] = "closed";
+            if( ! isset( $data["comment_status" ] ) || ! in_array( $data["comment_status"], array( "open", "closed" ) ) ) {
+                $data["comment_status"] = "closed";
+            }
+            
             $post_id = wp_insert_post( apply_filters( "adverts_insert_post", $data ), true );
         }
         

@@ -370,7 +370,6 @@ class Adverts_Shortcode_Adverts_Add {
 
         // Allow to preview only if data in the form is valid.
         if($valid) {
-            
             $init = array(
                 "post" => array(
                     "ID" => $post_id,
@@ -380,6 +379,7 @@ class Adverts_Shortcode_Adverts_Add {
                     "post_date" => current_time( 'mysql' ),
                     "post_date_gmt" => current_time( 'mysql', 1 ),
                     "post_status" => adverts_tmp_post_status(),
+                    "comment_status" => adverts_default_comments_status( $this->_params['post_type'] ),
                     "guid" => ""
                 ),
                 "meta" => array()

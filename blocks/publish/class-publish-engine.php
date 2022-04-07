@@ -424,6 +424,7 @@ class Adverts_Block_Publish_Engine {
                     "post_date" => current_time( 'mysql' ),
                     "post_date_gmt" => current_time( 'mysql', 1 ),
                     "post_status" => adverts_tmp_post_status(),
+                    "comment_status" => adverts_default_comments_status( $this->_params['post_type'] ),
                     "guid" => ""
                 ),
                 "meta" => array()
@@ -582,6 +583,9 @@ class Adverts_Block_Publish_Engine {
         
         do_action( "wpadverts_advert_saved", $post_id );
         
+        $url_publish_ad = get_permalink( get_the_ID() );
+        $url_view_list = get_permalink( adverts_config( "config.ads_list_id" ) );
+
         // adverts/templates/add-save.php
         ob_start();
         include dirname( __FILE__ ) . '/templates/publish-save.php';

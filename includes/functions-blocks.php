@@ -280,7 +280,9 @@ function wpadverts_block_button( $args = array(), $options = array() ) {
     ?>
     <button name="<?php echo esc_attr( $atts["name"] ) ?>" value="<?php echo esc_attr( $atts["value"] ) ?>" type="<?php echo esc_attr( $atts["action"] ) ?>" <?php echo join( " ", $attr_list ) ?> class="<?php echo $button_class ?> atw-flex hover:atw-bg-none atw-bg-none atw-w-full atw-text-base atw-outline-none atw-border-solid atw-font-semibold atw-px-6 atw-py-2 <?php echo "$border_radius $border_width $leading" ?>">
         <div class="atw-flex-grow">
+        <?php if( isset( $atts["icon"] ) && $atts["icon"] ): ?>
         <span class="<?php echo join( " ", array( $m_icon, $d_icon ) ) ?> atw-px-0.5"><i class="<?php echo esc_attr( sprintf( "%s %s md:%s", $atts["icon"], $options["mobile_icon_size"], $options["desktop_icon_size"] ) ) ?>"></i></span> 
+        <?php endif; ?>
         <span class="<?php echo join( " ", array( $m_text, $d_text ) ) ?> atw-px-0.5"><?php echo ( !empty( $args["html"] ) ? $args["html"] : esc_html( $args["text"] ) ) ?></span>
         </div>
         <span style="display:none" class="atw-flex-0 atw-pl-6 atw-border-l atw-border-gray-800/20 atw-border-solid"><i class="fas fa-angle-down atw-text-2xl -atw-leading-tight atw-align-middle"></i></span>

@@ -8,5 +8,7 @@
 </style>
 
 <div class="wpadverts-blocks wpadverts-publish">
+    <?php wpadverts_block_flash( $adverts_flash ) ?>
+
     <?php include ADVERTS_PATH . 'templates/block-partials/form.php' ?>
 </div>

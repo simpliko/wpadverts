@@ -1,0 +1,21 @@
+{
+    "name": "wpadverts/categories",
+    "apiVersion": 1,
+    "textdomain": "wpadverts",
+    "title": "Classifieds Categories",
+    "icon": "megaphone",
+    "category": "wpadverts",
+    "editor_style": "wpadverts-blocks-categories",
+    "editor_script": "block-wpadverts-categories",
+    "example": {},
+    "attributes": {
+        "post_type": {
+            "type": "string",
+            "default": ""
+        },
+        "taxonomy": {
+            "type": "string",
+            "default": ""
+        }
+    }
+}

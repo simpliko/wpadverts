@@ -154,9 +154,9 @@ class Adext_Contact_Form_Block_Details {
         ?>
 
         <?php if( adext_contact_form_get_to( $post_id ) ): ?>
-        <div id="wpadverts-block-contact-box" class="wpadverts-block-contact-box wpadverts-block-contact-box-toggle" <?php if(!$show_form): ?>style="display: none"<?php endif ?>>
+        <div id="wpadverts-block-contact-box" class="wpadverts-block-contact-box wpadverts-block-contact-box-toggle atw-bg-gray-50 atw-px-6" <?php if(!$show_form): ?>style="display: none"<?php endif ?>>
                             
-            <div class="atw-my-3 atw-mx-0 atw-p-0 atw-font-bold atw-text-2xl"><?php _e( "Contact Seller", "wpadverts" ) ?></div>
+            <div class="atw-my-3 atw-mx-0 atw-pt-6 atw-pb-0 atw-font-bold atw-text-2xl"><?php _e( "Contact Seller", "wpadverts" ) ?></div>
 
             <?php if( $form_sent ): ?>
                 <?php wpadverts_block_flash( $flash, "big" ) ?>

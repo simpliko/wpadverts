@@ -26,13 +26,15 @@
     "start/details": "wp-scripts start blocks/details/src/index.js --output-path=blocks/details/build --webpack--devtool=source-map",
     "start/publish": "wp-scripts start blocks/publish/src/index.js --output-path=blocks/publish/build --webpack--devtool=source-map",
     "start/manage": "wp-scripts start blocks/manage/src/index.js --output-path=blocks/manage/build --webpack--devtool=source-map",
+    "start/categories": "wp-scripts start blocks/categories/src/index.js --output-path=blocks/categories/build --webpack--devtool=source-map",
     "build/list": "wp-scripts build blocks/list/src/index.js --output-path=blocks/list/build",
     "build/search": "wp-scripts build blocks/search/src/index.js --output-path=blocks/search/build",
     "build/details": "wp-scripts build blocks/details/src/index.js --output-path=blocks/details/build",
     "build/publish": "wp-scripts build blocks/publish/src/index.js --output-path=blocks/publish/build",
     "build/manage": "wp-scripts build blocks/manage/src/index.js --output-path=blocks/manage/build",
+    "build/categories": "wp-scripts build blocks/categories/src/index.js --output-path=blocks/categories/build",
     "build/css": "postcss ./assets/css/tailwind.css -o compiled.css",
-    "build-all": "npm run build/list && npm run build/search && npm run build/details && npm run build/publish && npm run build/manage && npm run build/css"
+    "build-all": "npm run build/list && npm run build/search && npm run build/details && npm run build/publish && npm run build/manage && npm run build/categories && npm run build/css"
   },
   "dependencies": {
     "@wordpress/components": "^13.0.0"

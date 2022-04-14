@@ -317,15 +317,23 @@ function adverts_category_form_fields($tag)
     $current_icon = adverts_taxonomy_get($tag->taxonomy, $tag->term_id, 'advert_category_icon', '');
     $current_tab = "v6";
 
-    if( stripos( $current_icon, "fa-" ) !== 0 ) {
+    if( stripos( $current_icon, "fas" ) !== 0 && stripos( $current_icon, "fa-brands" ) !== 0  ) {
         $current_tab = "v4";
     }
 
-    $icons_string = file_get_contents( ADVERTS_PATH . '/assets/css/all.min.css' );
-    preg_match_all( "/\.(fa\-[a-z0-9\-]+):before/", $icons_string, $matches );
+    $icon_files = array( "fas" => "all", "fa-brands" => "brands" );
+    $icons_v6 = array();
+    foreach( $icon_files as $icon_key => $icon_file ) {
+        $icons_string = file_get_contents( sprintf( '%s/assets/css/%s.min.css', ADVERTS_PATH, $icon_file ) );
+        preg_match_all( "/\.(fa\-[a-z0-9\-]+):before/", $icons_string, $matches );
 
-    $icons_v6 = $matches[1];
+        foreach( $matches[1] as $match ) {
+            $icons_v6[$match] = sprintf( "%s %s", $icon_key, $match );
+        }
+        
+    }
 
+    echo $current_icon;
     ?>
 
 <script type="text/javascript">
@@ -422,7 +430,7 @@ function adverts_category_form_fields($tag)
                     <?php $title = ucfirst(str_replace( array( "fa-", "-" ), array( "", " " ), $icon ) ) ?>
                     <li data-name="<?php echo esc_attr($icon) ?>">
                         <a href="#" class="<?php echo $icon==$current_icon ? 'button-primary' : 'button-secondary' ?>" title="<?php echo esc_attr( $title ) ?>" data-name="<?php echo esc_attr($icon) ?>">
-                            <span class="fas <?php echo esc_attr($icon) ?>"></span>
+                            <span class="<?php echo esc_attr($icon) ?>"></span>
                         </a>
                     </li>
                     <?php endforeach; ?>

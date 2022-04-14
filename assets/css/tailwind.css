@@ -107,7 +107,8 @@
     }
 
     .wpadverts-form select,
-    .wpadverts-form select[multiple] {
+    .wpadverts-form select[multiple], 
+    .wpadverts-form .adverts-multiselect-holder input[type=text] {
         @apply atw-outline-none atw-box-border atw-leading-loose atw-border-solid atw-bg-right atw-bg-no-repeat atw-appearance-none;
         
         background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
@@ -387,6 +388,34 @@
 
     .wpadverts-form.wpa-spacing-1 .wpa-field-wrap {
         
+    }
+
+    /* FORM MULTI-SELECT */
+
+    .wpadverts-form .adverts-multiselect-options {
+        @apply atw-bg-white atw-border atw-border-t-0 atw-border-solid atw-border-gray-300 atw-rounded-bl atw-rounded-br atw-shadow-lg atw-overflow-y-scroll atw-z-50 atw-absolute
+    }
+
+    .wpadverts-form .adverts-multiselect-options {
+        min-height: 50px;
+        max-height: 250px;
+        min-width: 200px;
+    }
+
+    .wpadverts-form .adverts-multiselect-options > label {
+        @apply atw-flex atw-items-center atw-px-3 atw-py-2
+    }
+
+    .wpadverts-form .adverts-multiselect-options > label:hover {
+        @apply atw-bg-gray-50
+    }
+
+    .wpadverts-form .adverts-multiselect-options > label > input[type=checkbox] {
+        @apply atw-inline-block atw-w-8 atw-h-8 md:atw-w-5 md:atw-h-5
+    }
+
+    .wpadverts-form .adverts-multiselect-options > label > span {
+        @apply atw-px-3 md:atw-px-2
     }
 
     /* BUTTONS */

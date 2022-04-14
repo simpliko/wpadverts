@@ -82,7 +82,7 @@ jQuery(function($) {
               checkbox.attr("checked", "checked");
           }
 
-          label.append(checkbox).append(" ").append(o.text());
+          label.append(checkbox).append(" ").append(jQuery("<span></span>").text(o.text()));
           options.append(label);
       });
 

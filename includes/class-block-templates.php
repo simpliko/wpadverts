@@ -197,7 +197,7 @@ class Adverts_Block_Templates {
      * @return  string                      block template string
      */
     public function get_default_taxonomy_template() {
-        return '';
+        return '@todo: default taxonomy template';
     }
 
     /**

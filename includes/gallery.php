@@ -341,7 +341,7 @@ function adverts_gallery_modal() {
              
             <div class="wpadverts-overlay-header">
                 <div class="wpadverts-overlay-title">
-                    <?php _e( "Détails des pièces jointes ", "wpadverts" ) ?>
+                    <?php _e( "Attachment details", "wpadverts" ) ?>
                 </div>
                 <div class="wpadverts-overlay-buttons"><!-- no line break 
                     --><span class="wpadverts-overlay-button wpadverts-file-pagi-prev adverts-icon-left-open wpadverts-navi-disabled"></span><!-- no line break

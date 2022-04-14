@@ -105,7 +105,7 @@
     <?php endif; ?>
     <?php wp_reset_query(); ?>
 </div>
-
+<?php echo $paginate_base; echo $paginate_format ?>
 <?php if( $show_pagination ): ?>
 <div class="adverts-pagination">
     <?php echo paginate_links( array(

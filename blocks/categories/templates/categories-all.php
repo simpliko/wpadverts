@@ -1,13 +1,29 @@
-<?php if( ! empty( $terms ) ): ?>
-<div class="atw-grid atw-grid-cols-2 md:atw-grid-cols-4 atw--m-2">
-    <?php foreach( $terms as $k => $term ): ?>
-    <div class="atw-flex atw-rounded atw-m-2 atw-flex-col atw-bg-gray-100 atw-shadow-none atw-border atw-border-gray-200 atw-border-solid <?php echo esc_attr( "adverts-category-slug-".$term->slug ) ?>">
-        <?php $icon = adverts_taxonomy_get("advert_category", $term->term_id, "advert_category_icon", "fa-folder") ?>
-        <span class="atw-text-center atw-text-6xl atw-py-3 atw-text-red-600 <?php echo apply_filters("adverts_category_font_icon", adverts_guess_icon_class($icon), $term, "big") ?>"></span>
-        <?php do_action( "adverts_category_pre_title", $term, "big") ?>
-        <span class="atw-pb-3 atw-text-center atw-text-black atw-font-bold atw-no-underline">
+<style type="text/css">
+.wpa-block-categories-item {
+    background: <?php echo $color_bg ?>;
+    border-color: <?php echo $color_border ?>;
+}
+.wpa-block-categories-icon:before {
+    color: <?php echo $color_icon ?>;
+}
+.wpa-block-categories-title,
+.wpa-block-categories-title > a {
+    color: <?php echo $color_text ?>
+}
+</style>
 
-            <a class="atw-text-black atw-font-bold atw-no-underline adverts-category-link" href="<?php echo esc_attr(get_term_link($term)) ?>">
+<?php if( ! empty( $terms ) ): ?>
+<div class="atw-grid atw-gap-0 <?php echo "$class_margin_neg $class_cols" ?>">
+    <?php foreach( $terms as $k => $term ): ?>
+    <div class="wpa-block-categories-item  <?php echo "$item_display $class_margin" ?> atw-flex atw-rounded  atw-shadow-none atw-border atw-border-solid <?php echo esc_attr( "adverts-category-slug-".$term->slug ) ?>">
+        <?php if( $show_icons ): ?>
+        <?php $icon = adverts_taxonomy_get("advert_category", $term->term_id, "advert_category_icon", $default_icon ) ?>
+        <span class="wpa-block-categories-icon <?php echo "$class_icon_size $class_icon_padding" ?> <?php echo apply_filters("adverts_category_font_icon", adverts_guess_icon_class($icon), $term, "big") ?>"></span>
+        <?php endif; ?>
+        <?php do_action( "adverts_category_pre_title", $term, "big") ?>
+        <span class="wpa-block-categories-title atw-font-bold atw-no-underline <?php echo "$class_item_padding" ?>">
+
+            <a class="atw-font-bold atw-no-underline adverts-category-link" href="<?php echo esc_attr(get_term_link($term)) ?>">
                 <?php echo esc_html($term->name) ?>
             </a>
             

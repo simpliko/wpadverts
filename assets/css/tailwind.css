@@ -707,4 +707,24 @@
     .wpadverts-modal .wpa-icon-success {
         @apply atw-bg-green-100
     }
+
+    .wpa-block-categories-item.wpa-item-stacked {
+        @apply atw-flex-col
+    }
+    .wpa-block-categories-item.wpa-item-stacked .wpa-block-categories-title {
+        @apply atw-text-center
+    }
+    .wpa-block-categories-item.wpa-item-stacked .wpa-block-categories-icon {
+        @apply atw-text-center
+    }
+
+    .wpa-block-categories-item.wpa-item-aligned {
+        @apply atw-flex-row atw-items-center
+    }
+    .wpa-block-categories-item.wpa-item-aligned .wpa-block-categories-title {
+        @apply atw-pr-3
+    }
+    .wpa-block-categories-item.wpa-item-aligned .wpa-block-categories-icon {
+        @apply atw-px-3
+    }
 }

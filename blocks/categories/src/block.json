@@ -16,6 +16,58 @@
         "taxonomy": {
             "type": "string",
             "default": ""
+        },        
+        "columns": {
+            "type": "integer",
+            "default": 4
+        },
+        "columns_mobile": {
+            "type": "integer",
+            "default": 2
+        },
+        "item_display": {
+            "type": "string",
+            "default": "wpa-item-stacked"
+        },
+        "item_padding": {
+            "type": "integer",
+            "default": 3
+        },
+        "show_icons": {
+            "type": "boolean",
+            "default": true
+        },
+        "show_count": {
+            "type": "boolean",
+            "default": true
+        },
+        "default_icon": {
+            "type": "string",
+            "default": "fas fa-folder"
+        },
+        "icon_size": {
+            "type": "integer",
+            "default": 9
+        },
+        "margin": {
+            "type": "integer",
+            "default": 2
+        },
+        "color_icon": {
+            "type": "string",
+            "default": "#dc2626"
+        },       
+        "color_text": {
+            "type": "string",
+            "default": "#000000"
+        },        
+        "color_bg": {
+            "type": "string",
+            "default": "#f3f4f6"
+        },
+        "color_border": {
+            "type": "string",
+            "default": "#e5e7eb"
         }
     }
 }

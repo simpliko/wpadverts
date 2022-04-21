@@ -15,6 +15,7 @@ import {
     Toolbar, 
     SelectControl,
     TextControl,
+    NumberControl,
     ToggleControl,
     RangeControl,
     Modal,
@@ -100,7 +101,12 @@ class Edit extends Component {
 
         return types;
     }
-
+    getAvailableItemDisplays = () => {
+        return [
+            { label: "Stacked", value: "wpa-item-stacked" },
+            { label: "Aligned", value: "wpa-item-aligned" }
+        ];
+    }
     initVisuals = () => {
         const { taxonomy } = this.props.attributes;
 
@@ -214,16 +220,56 @@ class Edit extends Component {
         this.props.setAttributes( { grid_img_source } );
     }
 
-    onChangeColorPrice = ( color_price ) => {
-        this.props.setAttributes( { color_price } );
+    onChangeColorIcon = ( color_icon ) => {
+        this.props.setAttributes( { color_icon } );
     }
     
-    onChangeColorTitle = ( color_title ) => {
-        this.props.setAttributes( { color_title } );
+    onChangeColorText = ( color_text ) => {
+        this.props.setAttributes( { color_text } );
     }
     
-    onChangeColorBgFeatured = ( color_bg_featured ) => {
-        this.props.setAttributes( { color_bg_featured } );
+    onChangeColorBg = ( color_bg ) => {
+        this.props.setAttributes( { color_bg } );
+    }    
+    
+    onChangeColorBorder = ( color_border ) => {
+        this.props.setAttributes( { color_border } );
+    }
+
+    toggleShowCount = ( show_count ) => {
+        this.props.setAttributes( { show_count });
+    }
+
+    toggleShowIcons = ( show_icons ) => {
+        this.props.setAttributes( { show_icons });
+    }
+
+    onChangeColumns = ( columns ) => {
+        this.props.setAttributes( { columns: parseInt(columns) } );
+    }
+
+    onChangeColumnsMobile = ( columns_mobile ) => {
+        this.props.setAttributes( { columns_mobile: parseInt(columns_mobile) } );
+    }
+
+    onChangeDefaultIcon = ( default_icon ) => {
+        this.props.setAttributes( { default_icon } );
+    }
+
+    onChangeIconSize = ( icon_size ) => {
+        this.props.setAttributes( { icon_size } );
+    }
+
+    onSelectItemDisplay = ( item_display ) => {
+        this.props.setAttributes( { item_display } );
+    }
+
+    onChangeMargin = ( margin ) => {
+        this.props.setAttributes( { margin } );
+    }
+
+    onChangeItemPadding = ( item_padding ) => {
+        this.props.setAttributes( { item_padding } );
     }
 
     renderInit() {
@@ -282,8 +328,24 @@ class Edit extends Component {
         } = this.props;
 
         const { 
-            taxonomy
+            taxonomy,
+            item_display,
+            item_padding,
+            columns,
+            columns_mobile,
+            default_icon,
+            icon_size,
+            show_icons,
+            show_count,
+            color_icon,
+            color_text,
+            color_bg,
+            color_border,
+            margin
         } = attributes;
+
+        console.log("cats...");
+        console.log(columns);
 
         return (
             <>
@@ -294,6 +356,119 @@ class Edit extends Component {
                 <InspectorControls>
 
                     <PanelBody title="Display Options">
+
+                        <SelectControl
+                            label="Item Display"
+                            labelPosition="top"
+                            value={ item_display }
+                            options={ this.getAvailableItemDisplays() }
+                            onChange={this.onSelectItemDisplay}
+                            style={{lineHeight:'1rem'}}
+                        />
+
+                        <ToggleControl
+                            label="Show items count"
+                            checked={show_count}
+                            onChange={this.toggleShowCount}
+                        />     
+                        
+
+
+                        <TextControl
+                            label="Columns"
+                            value={columns}
+                            onChange={this.onChangeColumns}
+                            type="number"
+                            min={ 1 }
+                            max={ 10 }
+                            step={ 1 }
+                        />  
+
+           
+
+                        <TextControl
+                            label="Columns (mobile)"
+                            value={columns_mobile}
+                            onChange={this.onChangeColumnsMobile}
+                            type="number"
+                            min={ 1 }
+                            max={ 2 }
+                            step={ 1 }
+                        />
+
+                        <RangeControl
+                            label="Margin between items"
+                            value={margin}
+                            onChange={this.onChangeMargin}
+                            min={ 0 }
+                            max={ 6 }
+                            withInputField={false}
+                        />  
+
+                        <RangeControl
+                            label="Item padding"
+                            value={item_padding}
+                            onChange={this.onChangeItemPadding}
+                            min={ 0 }
+                            max={ 6 }
+                            withInputField={false}
+                        />  
+
+                    </PanelBody>
+
+                    <PanelBody title="Icons" initialOpen={false}>
+
+                        <ToggleControl
+                            label="Show icons"
+                            checked={show_icons}
+                            onChange={this.toggleShowIcons}
+                        />  
+
+                        <TextControl
+                            label="Default icon"
+                            value={default_icon}
+                            onChange={this.onChangeDefaultIcon}
+                        />    
+
+                        <RangeControl
+                            label="Icon Size"
+                            value={icon_size}
+                            onChange={this.onChangeIconSize}
+                            min={ 0 }
+                            max={ 12 }
+                            withInputField={false}
+                        />  
+                    </PanelBody>
+
+                    <PanelBody title="Colors" initialOpen={false}>
+
+                        <AdvertsColorPicker
+                            label="Icon Color"
+                            labelPosition="top"
+                            value={color_icon}
+                            onChange={this.onChangeColorIcon}
+                        />
+
+                        <AdvertsColorPicker
+                            label="Text Color"
+                            labelPosition="top"
+                            value={color_text}
+                            onChange={this.onChangeColorText}
+                        />
+
+                        <AdvertsColorPicker
+                            label="Background Color"
+                            labelPosition="top"
+                            value={color_bg}
+                            onChange={this.onChangeColorBg}
+                        />
+
+                        <AdvertsColorPicker
+                            label="Border Color"
+                            labelPosition="top"
+                            value={color_border}
+                            onChange={this.onChangeColorBorder}
+                        />
 
                     </PanelBody>
 

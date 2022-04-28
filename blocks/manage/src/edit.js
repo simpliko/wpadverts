@@ -441,7 +441,7 @@ class Edit extends Component {
 
                     <InspectorControls>
 
-                        <PanelBody title="Display Options">
+                        <PanelBody title="Display Options" initialOpen={ true }>
          
                             <ToggleControl
                                 label="Show number of found results."
@@ -493,7 +493,7 @@ class Edit extends Component {
 
                         </PanelBody>
 
-                        <PanelBody title="Display Information">
+                        <PanelBody title="Display Information" initialOpen={ false }>
 
                             <ToggleControl
                                 label="Show image column/row."
@@ -521,7 +521,7 @@ class Edit extends Component {
 
                         </PanelBody>
 
-                        <PanelBody title="List View Options">
+                        <PanelBody title="List View Options" initialOpen={ false }>
 
                             <RangeControl
                                 label="Image Width"
@@ -572,7 +572,7 @@ class Edit extends Component {
 
                         </PanelBody>    
 
-                        <PanelBody title="Grid View Options">
+                        <PanelBody title="Grid View Options" initialOpen={ false }>
 
                             <TextControl
                                 label="Columns in the Grid view."
@@ -633,7 +633,7 @@ class Edit extends Component {
                             />
                         </PanelBody>
 
-                        <PanelBody title="Filters / Basic">
+                        <PanelBody title="Filters / Basic" initialOpen={ false }>
 
                             <SelectControl
                                 label="Default Sorting and Order"

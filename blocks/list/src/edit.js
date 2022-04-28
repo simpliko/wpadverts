@@ -472,7 +472,7 @@ class Edit extends Component {
                 <>
 
                 <InspectorControls>
-                    <PanelBody title="Display Options">
+                    <PanelBody title="Display Options" initialOpen={ true }>
 
               
                     <ToggleControl
@@ -529,7 +529,7 @@ class Edit extends Component {
 
                     </PanelBody>
                     
-                    <PanelBody title="Display Information">
+                    <PanelBody title="Display Information" initialOpen={ false }>
 
                         <ToggleControl
                             label="Show image column/row."
@@ -568,7 +568,7 @@ class Edit extends Component {
                     </PanelBody>
 
 
-                    <PanelBody title="List View Options">
+                    <PanelBody title="List View Options" initialOpen={ false }>
 
                         <RangeControl
                             label="Image Width"
@@ -619,7 +619,7 @@ class Edit extends Component {
 
                     </PanelBody>                    
                     
-                    <PanelBody title="Grid View Options">
+                    <PanelBody title="Grid View Options" initialOpen={ false }>
 
                         <TextControl
                             label="Columns in the Grid view."
@@ -680,7 +680,7 @@ class Edit extends Component {
                         />
                     </PanelBody>
 
-                    <PanelBody title="Featured Ads">
+                    <PanelBody title="Featured Ads" initialOpen={ false }>
 
                         <SelectControl 
                             label="Show on the list"
@@ -704,7 +704,7 @@ class Edit extends Component {
 
                     </PanelBody>
 
-                    <PanelBody title="Filters / Basic">
+                    <PanelBody title="Filters / Basic" initialOpen={ false }>
 
                         <SelectControl
                             label="Default Sorting and Order"
@@ -730,7 +730,7 @@ class Edit extends Component {
                         />
                     </PanelBody>
 
-                    <PanelBody title="Filters / Taxonomies">
+                    <PanelBody title="Filters / Taxonomies" initialOpen={ false }>
 
                         <BaseControl label="">
                             <Button 
@@ -793,7 +793,7 @@ class Edit extends Component {
                     </PanelBody>
 
 
-                    <PanelBody title="Colors">
+                    <PanelBody title="Colors" initialOpen={ false }>
 
                         <AdvertsColorPicker
                             label="Price Color"

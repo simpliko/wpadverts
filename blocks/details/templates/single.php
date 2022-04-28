@@ -112,11 +112,11 @@
     <?php do_action( "adverts_tpl_single_bottom", $post_id ) ?>
     
     <?php if( ! empty( $contact_options ) || ! empty( $options ) ): ?>
-    <div class="wpa-cpt-contact-details atw-my-3  atw--mx-1">
+    <div class="wpa-cpt-contact-details atw-my-3 atw--mx-1">
 
-        <div class="atw-relative atw-flex atw-flex-col md:atw-flex-row">
+        <div class="atw-relative atw-flex atw-flex-col md:atw-flex-row atw--mx-1">
 
-            <div class="atw-relative atw-flex atw-flex-1 atw-flex-col md:atw-flex-row">
+            <div class="atw-relative atw-flex atw-flex-1 atw-flex-col md:atw-flex-row md:atw-flex-none">
                 <?php foreach( $contact_options as $contact_option ): ?>
                 <div class="atw-flex-auto atw-mx-1 atw-mb-3">
                 <?php 
@@ -133,6 +133,7 @@
 
         <?php do_action( "wpadverts/block/details/tpl/contact-content", $post_id, $atts ) ?>
         
+        <?php /*
         <div class="wpa-contact-more atw-inset-x-0">
 
             <div class="atw-w-full atw-flex atw-flex-col md:atw-flex-row atw-my-3 atw-px-0 atw-mx-1 md:atw-my-0">
@@ -154,6 +155,7 @@
                     </div>
             </div>
         </div>
+        */ ?>
 
     </div>
 

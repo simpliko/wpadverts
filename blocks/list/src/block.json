@@ -82,7 +82,7 @@
         },
         "grid_img_height": {
             "type": "integer",
-            "default": 6
+            "default": 8
         },
         "grid_img_fit": {
             "type": "string",
@@ -95,8 +95,8 @@
         "data": {
             "type": "array",
             "default": [
-                { "name": "meta__adverts_location" },
-                { "name": "pattern__post_date" }
+                { "name": "pattern__post_date" },
+                { "name": "meta__adverts_location" }
             ]
         },
         "default_image_url": {

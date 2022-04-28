@@ -196,8 +196,10 @@ class Adverts_Block_Templates {
      * @param   string      $taxonomy       Taxonomy name
      * @return  string                      block template string
      */
-    public function get_default_taxonomy_template() {
-        return '@todo: default taxonomy template';
+    public function get_default_taxonomy_template( $taxonomy ) {
+        $tpl  = sprintf( '<!-- wp:wpadverts/search {"post_type":"advert"} /-->', $taxonomy );
+        $tpl .= sprintf( '<!-- wp:wpadverts/list { "post_type": "advert", "query":{"term_autodetect":true} } /-->', $taxonomy );
+        return $tpl;
     }
 
     /**

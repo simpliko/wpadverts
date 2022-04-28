@@ -92,11 +92,15 @@
     }
 
     .wpadverts-form .wpa-form-buttons {
-        @apply atw-flex atw-mt-3 atw-p-3 atw-bg-gray-50 atw-rounded-md atw-justify-end md:atw-flex-none;
+        @apply atw-flex atw-mt-3 atw-py-3 atw-bg-gray-50 atw-rounded-md atw-justify-end md:atw-flex-none;
     }
 
     .wpadverts-form .wpa-form-buttons-list {
         @apply atw-flex-none;
+    }
+
+    #wpadverts-block-contact-box .wpadverts-form .wpa-form-buttons {
+        @apply atw--mx-0
     }
 
     /* FORM STYLES */

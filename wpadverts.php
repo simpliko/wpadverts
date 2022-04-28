@@ -85,8 +85,8 @@ $adverts_namespace['gallery'] = array(
         'image_sizes' => array(
             // supported sizes: adverts-upload-thumbnail, adverts-list, adverts-gallery
             "adverts-gallery" => array( 'enabled' => 1, 'width' => 650, 'height' => 300, 'crop' => false ),
-            "adverts-list" => array( 'enabled' => 1, 'width' => 310, 'height' => 190, 'crop' => true ),
-            "adverts-upload-thumbnail" => array( 'enabled' => 1, 'width' => 150, 'height' => 105, 'crop' => true ),
+            "adverts-list" => array( 'enabled' => 1, 'width' => 310, 'height' => 190, 'crop' => false ),
+            "adverts-upload-thumbnail" => array( 'enabled' => 1, 'width' => 150, 'height' => 105, 'crop' => false ),
             //"adverts-gallery-thumbnail"
         ),
         'image_editor' => ''

@@ -63,7 +63,7 @@ class Adverts_Block_Manage {
                 'editor_style' => 'wpadverts-blocks-manage',
                 'editor_script' => $js_handler,
                 'render_callback' => array( $this, "render" ),
-                'style' => 'wpadverts-blocks-common',
+                'style' => 'wpadverts-blocks',
                 'script' => 'wpadverts-block-manage'
             )
         );

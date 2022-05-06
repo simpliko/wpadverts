@@ -3,12 +3,15 @@
   "version": "1.5.2",
   "description": "",
   "svn": "/home/greg/svn/wpadverts",
+  "release_path": "/home/greg/Release/wpadverts",
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@wordpress/element": "^2.20.0",
     "@wordpress/scripts": "^14.0.1",
     "autoprefixer": "^10.4.2",
     "grunt-checktextdomain": "^1.0.1",
+    "grunt-contrib-clean": "^2.0.1",
+    "grunt-contrib-compress": "^2.0.0",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-wp-i18n": "^0.5.4",
     "postcss": "^8.4.6",
@@ -34,7 +37,9 @@
     "build/manage": "wp-scripts build blocks/manage/src/index.js --output-path=blocks/manage/build",
     "build/categories": "wp-scripts build blocks/categories/src/index.js --output-path=blocks/categories/build",
     "build/css": "postcss ./assets/css/tailwind.css -o compiled.css",
-    "build-all": "npm run build/list && npm run build/search && npm run build/details && npm run build/publish && npm run build/manage && npm run build/categories && npm run build/css"
+    "build-all": "npm run build/list && npm run build/search && npm run build/details && npm run build/publish && npm run build/manage && npm run build/categories && npm run build/css",
+  
+    "r-list": "wp-scripts build blocks/list/src/index.js --output-path=blocks/list/build"
   },
   "dependencies": {
     "@wordpress/components": "^13.0.0"

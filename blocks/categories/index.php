@@ -55,7 +55,7 @@ class Adverts_Block_Categories {
                 'editor_style' => 'wpadverts-blocks-categories',
                 'editor_script' => $js_handler,
                 'render_callback' => array( $this, "render" ),
-                'style' => 'wpadverts-blocks-common',
+                'style' => 'wpadverts-blocks',
                 'script' => 'wpadverts-block-categories'
             )
         );

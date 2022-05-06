@@ -164,6 +164,14 @@ class Adverts_Block_Manage_Engine {
     }
 
     public function action_edit( $atts ) {
+
+        wp_enqueue_style( 'adverts-frontend' );
+        wp_enqueue_style( 'adverts-icons' );
+        wp_enqueue_style( 'adverts-icons-animate' );
+
+        wp_enqueue_script( 'adverts-frontend' );
+        wp_enqueue_script( 'adverts-auto-numeric' );
+
         $params = shortcode_atts(array(
             'name' => 'default',
             'moderate' => false
@@ -335,10 +343,20 @@ class Adverts_Block_Manage_Engine {
         $buttons_manage = apply_filters( "wpadverts/block/manage/buttons-manage", $buttons_manage, $post_id );
         uasort( $buttons_manage, array( $this, "sort_buttons" ) );
 
+        $_layouts = array(
+            "adverts-form-stacked" => "wpa-layout-stacked",
+            "adverts-form-aligned" => "wpa-layout-aligned"
+        );
+        $form_layout = $_layouts[$form->get_layout()];
+
         // adverts/templates/manage-edit.php
+        ob_start();
         include dirname( __FILE__ ) . '/templates/manage-edit.php';
+        $result = ob_get_clean();
 
         remove_action( "wpadverts/tpl/partial/form/before-buttons", array( $this, "moderation_notice" ) );
+
+        return $result;
     }
 
     public function moderation_notice() {

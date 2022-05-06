@@ -164,4 +164,10 @@ jQuery(function($) {
 
         return false;
     });
+
+    $(".wpadverts-block-manage .wpa-block-list-results > .wpa-result-item").on("click", function(e) {
+        window.location = $(this).find(".wpa-result-link").attr("href");
+    });
+    $(".wpadverts-block-manage .wpa-block-list-results > .wpa-result-item").addClass("atw-cursor-pointer");
+    
 });

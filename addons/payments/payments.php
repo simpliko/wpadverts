@@ -598,7 +598,7 @@ function adext_payments_get_template( $file, $is_block ) {
  * @return      null
  */
 function adext_payments_action_payment_block( $content, Adverts_Form $form ) {
-    adext_payments_action_payment( $content, $form, true );
+    return adext_payments_action_payment( $content, $form, true );
 }
 
 /**
@@ -681,14 +681,10 @@ function adext_payments_action_payment($content, Adverts_Form $form, $is_block =
     $price = get_post_meta($payment_id, '_adverts_payment_total', true);
 
     $tpl = adext_payments_get_template( "add-payment", $is_block );
-    if( $is_block ) {
-        include $tpl;
-    } else {
-        ob_start();
-        include $tpl;
-        return ob_get_clean();
-    }
 
+    ob_start();
+    include $tpl;
+    return ob_get_clean();
 }
 
 /**

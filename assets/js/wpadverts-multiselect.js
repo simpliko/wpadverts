@@ -83,7 +83,7 @@ jQuery(function($) {
           }
 
           label.append(checkbox).append(" ").append(jQuery("<span></span>").text(o.text()));
-          options.append(label);
+          options.hide().append(label);
       });
 
       holder.append(input).append(options);

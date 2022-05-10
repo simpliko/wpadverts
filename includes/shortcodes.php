@@ -51,6 +51,8 @@ function shortcode_adverts_list( $atts ) {
         'show_pagination' => true
     ), $atts, 'adverts_list' );
 
+    $params = apply_filters( "adverts_list_atts", $params );
+
     extract( $params );
 
     if( is_numeric( $redirect_to ) ) {

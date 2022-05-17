@@ -1410,7 +1410,7 @@ function adverts_field_select( $field ) {
     
     if(!$multiple && isset($field["empty_option"]) && $field["empty_option"]) {
         if(isset($field["empty_option_text"]) && !empty($field["empty_option_text"])) {
-            $html .= '<option value="">'.esc_html($field["empty_option_text"]).'</options>';
+            $html .= '<option value="">'.esc_html($field["empty_option_text"]).'</option>';
         } else {
             $html .= '<option value="">&nbsp;</option>'; 
         }
@@ -3891,19 +3891,14 @@ function adverts_before_delete_post( $post_id, $post ) {
         return;
     }
 
-    $param = array( 
-        'post_parent' => $post_id, 
-        'post_type' => 'attachment',
-        'post_status' => 'any'
-    );
-    $children = get_posts( $param );
-    
-    // also delete all uploaded files
-    if( is_array( $children ) ) {
-        foreach( $children as $attch) {
-            wp_delete_post( $attch->ID, true);
+    $attachments = get_attached_media( '', $post_id );
+
+    if( is_array( $attachments ) ) {
+        foreach ($attachments as $attachment) {
+            wp_delete_attachment( $attachment->ID, true );
         }
-    } 
+    }
+
 }
 
 function adverts_default_comments_status( $post_type ) {

@@ -1,6 +1,11 @@
 <p>
     <a href="<?php echo esc_attr($baseurl) ?>" class="adverts-button"><?php _e("Go Back", "wpadverts") ?></a>
+
+    <?php if( is_post_publicly_viewable( $post_id ) ): ?>
     <a href="<?php echo esc_attr(get_post_permalink( $post_id )) ?>" class="adverts-button"><?php _e("View Ad", "wpadverts") ?></a>
+    <?php else: ?>
+    <a href="<?php echo esc_attr(add_query_arg( array( 'advert_id' => null, 'action' => 'preview', 'preview_id' => $post_id ))) ?>" class="adverts-button"><?php _e("Preview Ad", "wpadverts") ?></a>
+    <?php endif; ?>
 </p>
 
 <?php adverts_flash( $adverts_flash ) ?>

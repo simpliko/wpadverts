@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classified script, classifieds sc
 Requires PHP: 5.3
 Requires at least: 4.0
 Tested up to: 5.9
-Stable tag: 1.5.8
+Stable tag: 1.5.9
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -123,6 +123,16 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 1.5.9 - 2022-05-18 =
+
+* FEATURE: Authors can preview the expired or pending Ad from the [adverts_manage] page.
+* FIXED: When deleting Ads from the wp-admin not always all the media library items attached to the Ad were deleted.
+* FIXED: Warning when submitting [adverts_add] with skip_preview param
+* FIXED: A typo in the function rendering the <option> tag.
+* FIXED: Warning when registering new validator with adverts_form_add_validator() function without "params" argument.
+* FIXED: Pull pricing_id from database instead of $_REQUEST for additional security.
+* TRANSLATION: Generated .mo file for the Dutch translation.
 
 = 1.5.8 - 2022-04-06 =
 

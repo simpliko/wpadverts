@@ -55,6 +55,13 @@ class Adverts_Shortcode_Adverts_Add {
      * @var Adverts_Checksum
      */
     protected $_checksum = null;
+
+    /**
+     * Arguments used to generate a checksum
+     *
+     * @var array
+     */
+    protected $_checksum_args = array();
     
     /**
      * Returns the shortcode params.

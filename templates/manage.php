@@ -51,7 +51,12 @@
         <div class="advert-published adverts-manage-actions-wrap">
 
             <span class="adverts-manage-actions-left">
+                
+                <?php if( is_post_publicly_viewable( $post->ID ) ): ?>
                 <a href="<?php echo esc_attr(get_the_permalink()) ?>" title="<?php _e("View", "wpadverts") ?>" class="adverts-manage-action"><span class="adverts-icon-eye"></span><?php _e("View", "wpadverts") ?></a>
+                <?php else: ?>
+                <a href="<?php echo esc_attr(add_query_arg( array( 'action' => 'preview', 'preview_id' => $post->ID ))) ?>" class="adverts-manage-action"><span class="adverts-icon-eye"></span><?php _e("Preview", "wpadverts") ?></a>
+                <?php endif; ?>
                 <a href="<?php echo esc_attr($baseurl . str_replace("%#%", get_the_ID(), $edit_format)) ?>" title="<?php _e("Edit", "wpadverts") ?>" class="adverts-manage-action"><span class="adverts-icon-pencil-squared"></span><?php _e("Edit", "wpadverts") ?></a>
                 <a href="<?php echo esc_attr(adverts_ajax_url()) ?>?action=adverts_delete&id=<?php echo get_the_ID() ?>&redirect_to=<?php esc_attr_e( urlencode( $baseurl ) ) ?>&_ajax_nonce=<?php echo wp_create_nonce( sprintf( 'wpadverts-delete-%d', get_the_ID() ) ) ?>" title="<?php _e("Delete", "wpadverts") ?>" class="adverts-manage-action adverts-manage-action-delete" data-id="<?php echo get_the_ID() ?>" data-nonce="<?php echo wp_create_nonce( sprintf( 'wpadverts-delete-%d', get_the_ID() ) ) ?>">
                     <span class="adverts-icon-trash-1"></span><?php _e("Delete", "wpadverts") ?>

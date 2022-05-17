@@ -23,8 +23,8 @@ function adext_payments_ajax_render() {
     $gateway_name = adverts_request('gateway');
     $gateway = adext_payment_gateway_get( $gateway_name );
     
-    $listing_id = absint( adverts_request( "listing_id" ) );
     $payment_id = absint( adverts_request( "payment_id" ) );
+    $listing_id = get_post_meta( $payment_id, "_adverts_pricing_id", true );
     
     $response = null;
     
@@ -49,10 +49,6 @@ function adext_payments_ajax_render() {
         $isValid = $form->validate();
         
         if($isValid) {
-            
-            $pricing = get_post( $data["listing_id"] );
-            $price = get_post_meta( $listing_id, "adverts_price", true );
-            
             
             $price = get_post_meta( $payment_id, "_adverts_payment_total", true );
             

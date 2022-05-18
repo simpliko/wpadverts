@@ -3917,3 +3917,20 @@ function adverts_default_comments_status( $post_type ) {
         return "closed";
     }
 }
+
+function adverts_get_taxonomy_path( $term, $glue = false ) {
+
+    $a = array();
+    $path = advert_term_path( $term );
+
+    foreach( $path as $term_id => $term_name ) {
+        $link = new Adverts_Html( "a", array( "href" => get_term_link( $term_id ) ), $term_name );
+        $a[] = $link->render();
+    }
+    
+    if( $glue === false ) {
+        return $a;
+    }
+
+    return implode( $glue, $a );
+}

@@ -2,8 +2,8 @@
 Plugin URI: https://wpadverts.com/
 Contributors: gwin
 Tags: classifieds, classified, classified ads, classified script, classifieds script, wp classified, wp classifieds
-Requires PHP: 5.3
-Requires at least: 4.0
+Requires PHP: 5.6
+Requires at least: 5.7
 Tested up to: 5.9
 Stable tag: 1.5.9
 License: GNU Version 2 or Any Later Version
@@ -124,8 +124,13 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
+= 1.5.10 - 2022-06-20 =
+
+* FEATURE: Category display on Ad details pages (each category in the path is now a link).
+
 = 1.5.9 - 2022-05-18 =
 
+* API: WPAdverts now requires WP 5.7 or newer and PHP 5.6 or newer
 * FEATURE: Authors can preview the expired or pending Ad from the [adverts_manage] page.
 * FIXED: When deleting Ads from the wp-admin not always all the media library items attached to the Ad were deleted.
 * FIXED: Warning when submitting [adverts_add] with skip_preview param

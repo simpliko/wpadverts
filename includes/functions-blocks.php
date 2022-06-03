@@ -47,7 +47,7 @@ function adverts_field_checkbox_block( $field, $form = null, $type = "checkbox" 
 
         $label = new Adverts_Html("label", array(
             "for" => $id,
-            "class" => "atw-flex-1 atw-inline-block atw-py-0 atw-px-2 atw-text-sm atw-text-gray-700 atw-align-baseline atw-truncate atw-cursor-pointer"
+            "class" => "atw-flex-1 atw-inline-block atw-py-0 atw-px-2 atw-text-gray-500 atw-align-baseline atw-truncate atw-cursor-pointer"
         ),  $v["text"]);
         
         if( isset( $field["class"] ) ) {
@@ -81,7 +81,7 @@ function adverts_field_checkbox_block( $field, $form = null, $type = "checkbox" 
 
     $wrap_classes = array();
     if( absint( $field["rows"] ) >= 1 ) {
-        $wrap_classes[] = sprintf( "atw-grid atw-grid-cols-%d atw-gap-3", absint( $field["rows"] ) );
+        $wrap_classes[] = sprintf( "atw-grid atw-grid-cols-%d atw-gap-2", absint( $field["rows"] ) );
     } else {
         $wrap_classes[] = "atw-flex atw-flex-wrap atw-flex-row atw-content-evenly";
     }
@@ -361,7 +361,7 @@ function wpadverts_block_form_styles( $atts ) {
     if( ! isset( $atts["customize"] ) || $atts["customize"] != 1 ) {
         $atts = adverts_config( "blocks_styling.form" );
     }
-//print_r($atts);
+
     $form_border = array(
         0 => "wpa-border-none",
         1 => "wpa-border-thin",
@@ -380,9 +380,12 @@ function wpadverts_block_form_styles( $atts ) {
 
     $form_spacing = array(
         0 => "wpa-spacing-0",
-        1 => "wpa-spacing-1"
+        1 => "wpa-spacing-1",
+        2 => ""
     );
-    
+
+    $atts = apply_filters( "wpadverts/block/form/styles/atts", $atts );
+
     $form_styles = join( " ", array(
         isset( $atts["style"] ) ? $atts["style"] : "",
         isset( $atts["shadow"] ) ? $atts["shadow"] : "",
@@ -655,6 +658,7 @@ function wpadverts_block_flash( $data, $layout = "normal" ) {
 
     $l = $layouts[$layout];
 
+    ob_start();
     ?>
 
     <?php foreach(array_keys($data) as $key): ?>
@@ -680,10 +684,14 @@ function wpadverts_block_flash( $data, $layout = "normal" ) {
                     <?php endif; ?>
 
                     <div class="atw-flex-1 atw-flex atw-flex-col">
-                        <div class="atw-flex">
+                        <div class="atw-flex atw-flex-col">
                             <span class="wpa-flash-message atw-flex-1"><?php echo $info["message"] ?></span>
-                            <?php if( $info["link"] ): ?>
-                            <a href="<?php echo esc_attr( $info["link"]["url"] ) ?>" class="wpa-flash-link atw-flex-none"><?php echo $info["link"]["title"] ?></a>
+                            <?php if( isset( $info["link"] ) && is_array( $info["link"] ) ): ?>
+                                <div class="wpa-flash-link-wrap">
+                                <?php foreach( $info["link"] as $link ): ?>
+                                    <a href="<?php echo esc_attr( $link["url"] ) ?>" class="wpa-flash-link atw-flex-none"><?php echo $link["title"] ?></a>
+                                <?php endforeach; ?>
+                                </div>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -695,8 +703,137 @@ function wpadverts_block_flash( $data, $layout = "normal" ) {
     <?php endforeach; ?>
 
     <?php
+
+    return ob_get_clean();
 }
 
 function wpadverts_block_modal() {
     include ADVERTS_PATH . '/templates/block-partials/modal.php';
+}
+
+/**
+ * Returns registered block templates
+ * 
+ * @since   2.0
+ * @return  array   An array of registered templates
+ */
+function wpadverts_get_block_templates() {
+    $template_options = array(
+        "draft" => array(),
+        "template" => array()
+    );
+
+    $templates_draft = get_posts( array(
+        "post_type" => "page",
+        "post_status" => "draft"
+    )); 
+    
+    foreach( $templates_draft as $tpl ) {
+        $title = $tpl->post_title;
+        if( empty( $title ) ) {
+            $title = __( "~ no title ~", "wpadverts" );
+        }
+        $template_options["draft"][] = array(
+            "value" => $tpl->ID,
+            "text" => sprintf( "%s (ID: %d)", $title, $tpl->ID ),
+            "depth" => 1
+        );
+    }
+
+    $templates_wp = get_posts( array(
+        "post_type" => "wp_template",
+        "post_status" => "publish"
+    )); 
+
+    foreach( $templates_wp as $tpl ) {
+        $title = $tpl->post_title;
+        if( empty( $title ) ) {
+            $title = __( "~ no title ~", "wpadverts" );
+        }
+        $template_options["template"][] = array(
+            "value" => $tpl->ID,
+            "text" => sprintf( "%s (ID: %d)", $title, $tpl->ID ),
+            "depth" => 1
+        );
+    }
+
+    return $template_options;
+}
+
+/**
+ * Returns template options formatted for adverts_field_select
+ * 
+ * @since   2.0
+ * @return  array   An array of registered templates options
+ */
+function wpadverts_get_block_templates_options() {
+
+    $all_templates = wpadverts_get_block_templates();
+
+    $template_options = array(
+        array( 
+            "value" => "block", 
+            "text" => __( "Default Block Template", "wpadverts" ) 
+        )
+    );
+
+    $templates_draft = $all_templates["draft"]; 
+
+    if( ! empty( $templates_draft ) ) {
+        $template_options[] = array( 
+            "value" => "-1", 
+            "text" => __( "Draft Templates", "wpadverts" ), 
+            "depth" => 0,
+            "disabled" => 1
+        );
+
+        $template_options = array_merge( $template_options, $templates_draft );
+    }
+
+    $templates_wp = $all_templates["template"]; 
+
+    if( ! empty( $templates_wp ) ) {
+        $template_options[] = array( 
+            "value" => "-2", 
+            "text" => 
+            __( "WP Templates", "wpadverts" ), 
+            "depth" => 0,
+            "disabled" => 1
+        );
+
+        $template_options = array_merge( $template_options, $templates_wp );
+    }
+
+
+    return $template_options;
+}
+
+function wpadverts_block_tpl_field_type( $field ) {
+
+    $classes = array();
+
+    $types = array(
+        "adverts_field_label" => "label",
+        "adverts_field_text" => "text",
+        "adverts_field_select" => "select",
+        "adverts_field_textarea" => "textarea",
+    );
+
+    $has_margin = apply_filters( "wpadverts/block/field/with-margin", array(
+        "adverts_field_label", "adverts_field_checkbox",  "adverts_field_radio"
+    ), $field );
+
+    if( in_array( $field["type"], $has_margin ) ) {
+        $classes[] = "wpa-with-margin";
+    }
+
+    if( isset( $types[ $field["type"] ] ) ) {
+        $type = $types[ $field["type"] ];
+    } else {
+        $type = "other";
+    }
+
+    $classes[] = sprintf( "wpadverts-input--%s", $type );
+
+    return implode( " ", $classes );
 }

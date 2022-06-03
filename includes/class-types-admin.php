@@ -715,67 +715,6 @@ class Adverts_Types_Admin {
 
     protected function _edit_form_renderers( $object, $type ) {
 
-        $template_options = array(
-            array( 
-                "value" => "block", 
-                "text" => __( "Default Block Template", "wpadverts" ) 
-            )
-        );
-
-        $templates_draft = get_posts( array(
-            "post_type" => "page",
-            "post_status" => "draft"
-        )); 
-
-        if( ! empty( $templates_draft ) ) {
-            $template_options[] = array( 
-                "value" => "-1", 
-                "text" => __( "Draft Templates", "wpadverts" ), 
-                "depth" => 0,
-                "disabled" => 1
-            );
-        }
-        
-        foreach( $templates_draft as $tpl ) {
-            $title = $tpl->post_title;
-            if( empty( $title ) ) {
-                $title = __( "~ no title ~", "wpadverts" );
-            }
-            $template_options[] = array(
-                "value" => $tpl->ID,
-                "text" => sprintf( "%s (ID: %d)", $title, $tpl->ID ),
-                "depth" => 1
-            );
-        }
-
-        $templates_wp = get_posts( array(
-            "post_type" => "wp_template",
-            "post_status" => "publish"
-        )); 
-
-        if( ! empty( $templates_wp ) ) {
-            $template_options[] = array( 
-                "value" => "-2", 
-                "text" => 
-                __( "WP Templates", "wpadverts" ), 
-                "depth" => 0,
-                "disabled" => 1
-            );
-        }
-
-
-        foreach( $templates_wp as $tpl ) {
-            $title = $tpl->post_title;
-            if( empty( $title ) ) {
-                $title = __( "~ no title ~", "wpadverts" );
-            }
-            $template_options[] = array(
-                "value" => $tpl->ID,
-                "text" => sprintf( "%s (ID: %d)", $title, $tpl->ID ),
-                "depth" => 1
-            );
-        }
-
         $form_scheme = array(
             "name" => sprintf( "%s_%s", $object, $type ),
             "field" => array(

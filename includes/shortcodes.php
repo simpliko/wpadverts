@@ -290,18 +290,19 @@ function shortcode_adverts_manage( $atts ) {
     if( adverts_request("advert_id") ) {
         $action = "edit";
     } else {
-        $action = "";
+        $action = adverts_request( "action", "" );
     }
     
     $action = apply_filters( "adverts_manage_action", $action );
-    
-    ob_start();
+    $content = "";
+
     if( $action == "" ) {
         $content = _adverts_manage_list( $atts );
     } else if( $action == "edit" ) {
         $content = _adverts_manage_edit( $atts );
-    } 
-    $content = ob_get_clean();
+    } else if( $action == "preview" ) {
+        $content = _adverts_manage_preview( $atts );
+    }
     
     return apply_filters("adverts_manage_action_$action", $content, $atts);
 }
@@ -344,7 +345,9 @@ function _adverts_manage_list( $atts ) {
     $edit_format = stripos( $baseurl, '?' ) ? '&advert_id=%#%' : '?advert_id=%#%';
 
     // adverts/templates/manage.php
+    ob_start();
     include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/manage.php' );
+    return ob_get_clean();
 } 
 
 /**
@@ -488,7 +491,68 @@ function _adverts_manage_edit( $atts ) {
     $actions_class = "adverts-field-actions";
     
     // adverts/templates/manage-edit.php
+    ob_start();
     include apply_filters( "adverts_template_load", ADVERTS_PATH . 'templates/manage-edit.php' );
+    return ob_get_clean();
+}
+
+function _adverts_manage_preview( $atts = array() ) {
+
+    wp_enqueue_style( 'adverts-frontend' );
+    wp_enqueue_style( 'adverts-icons' );
+    wp_enqueue_style( 'adverts-icons-animate' );
+
+    wp_enqueue_script( 'adverts-frontend' );
+
+    $post_id = intval( adverts_request( "preview_id" ) );
+
+    $post = get_post( $post_id );
+    
+    if( $post === null) {
+        $flash["error"][] = array(
+            "message" =>  __("Ad does not exist.", "wpadverts"),
+            "icon" => "adverts-icon-attention-alt"
+        );
+        ob_start();
+        adverts_flash( $flash );
+        return ob_get_clean();
+    }
+
+    if( $post->post_author != get_current_user_id() ) {
+        $flash["error"][] = array(
+            "message" =>  __("You do not own this Ad.", "wpadverts"),
+            "icon" => "adverts-icon-attention-alt"
+        );
+        ob_start();
+        adverts_flash( $flash );
+        return;
+    }
+    
+    $slist = apply_filters("adverts_sh_manage_list_statuses", array( 'publish', 'expired', 'pending', 'advert-pending', 'draft') );
+    
+    if( !in_array( $post->post_status, $slist ) ) {
+        $flash["error"][] = array(
+            "message" =>  sprintf( __( "Incorrect post status [%s].", "wpadverts" ), $post->post_status ),
+            "icon" => "adverts-icon-attention-alt"
+        );
+        adverts_flash( $flash );
+        return;
+    }
+
+    $go_back = add_query_arg( array( "action" => false, "preview_id" => false, "advert_id" => $post_id ) );
+    $flash["warn"][] = array(
+        "message" =>  sprintf( __( 'You are seeing a post preview. This page is not publicly available. <a href="%s">Go back</a>', "wpadverts" ), $go_back ),
+        "icon" => "adverts-icon-eye-off"
+    );
+
+    remove_action( 'adverts_tpl_single_bottom', 'adverts_single_contact_information' );
+    remove_action( 'adverts_tpl_single_bottom', 'adext_contact_form' );
+    remove_action( 'adverts_tpl_single_bottom', 'adext_bp_send_private_message_button', 50 );
+    
+    ob_start();
+    adverts_flash( $flash );
+    echo do_shortcode( sprintf( '[advert_single post_id="%d"]', $post_id ));
+    return ob_get_clean();
 }
 
 /**

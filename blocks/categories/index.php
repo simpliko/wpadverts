@@ -162,7 +162,7 @@ class Adverts_Block_Categories {
     public function get_icon_size( $icon_size ) {
         $icon_sizes = array(
             0 => "atw-text-xs",
-            1 => "atw-text-xm",
+            1 => "atw-text-sm",
             2 => "atw-text-base",
             3 => "atw-text-lg",
             4 => "atw-text-xl",
@@ -247,6 +247,29 @@ class Adverts_Block_Categories {
             return $paddings[$padding];
         } else {
             return $paddings[3];
+        }
+    }
+
+    public function get_block_icon_size( $icon_size ) {
+        $icon_sizes = array(
+            0 => "atw-h-3",
+            1 => "atw-h-3.5",
+            2 => "atw-h-4",
+            3 => "atw-h-5",
+            4 => "atw-h-5",
+            5 => "atw-h-6",
+            6 => "atw-h-7",
+            7 => "atw-h-9",
+            8 => "atw-h-12",
+            9 => "atw-h-14",
+            10 => "atw-h-16",
+            11 => "atw-h-24",
+            12 => "atw-h-32",
+        );
+        if( isset( $icon_sizes[$icon_size] ) ) {
+            return $icon_sizes[$icon_size];
+        } else {
+            return $icon_sizes[6];
         }
     }
 }

@@ -468,7 +468,7 @@ function adverts_payments_field_payment($field) {
 function adverts_payments_field_payment_block( $field ) {
     ob_start();
     
-    echo '<div class="atw-flex atw-flex-col">';
+    echo '<div class="adverts-pricings-list atw-flex atw-flex-col">';
     
     foreach( $field["options"] as $option ) {
     

@@ -161,9 +161,11 @@ class Adverts_Form
                 $find = array();
                 $repl = array();
                 
-                foreach($v["params"] as $k => $pv) {
-                    $find[] = "%" . $k . "%";
-                    $repl[] = $pv;
+                if( isset( $v["params"] ) && is_array( $v["params"] ) ) {
+                    foreach( $v["params"] as $k => $pv ) {
+                        $find[] = "%" . $k . "%";
+                        $repl[] = $pv;
+                    }
                 }
 
                 if( isset($v["message"][$result]) ) {

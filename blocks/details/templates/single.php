@@ -10,7 +10,7 @@
 
 <div class="wpadverts-cpt <?php echo sprintf( "wpadverts-cpt-", $atts["post_type"] ) ?> atw-w-full">
 
-    <?php do_action( "adverts_tpl_single_top", $post_id ) ?>
+    <?php do_action( "adverts_tpl_single_top", $post_id, true ) ?>
 
     <div class="atw-flex atw-flex-col md:atw-flex-row">
         <div class="atw-flex atw-grow ">
@@ -69,7 +69,7 @@
         </div>
         <?php endif; ?>
         <?php endforeach; ?>
-        <?php do_action( "adverts_tpl_single_details", $post_id ) ?>
+        <?php do_action( "adverts_tpl_single_details", $post_id, true ) ?>
     </div>
 
     <div class="">
@@ -109,7 +109,7 @@
     </div-->
 
 
-    <?php do_action( "adverts_tpl_single_bottom", $post_id ) ?>
+    <?php do_action( "adverts_tpl_single_bottom", $post_id, true ) ?>
     
     <?php if( ! empty( $contact_options ) || ! empty( $options ) ): ?>
     <div class="wpa-cpt-contact-details atw-my-3 atw--mx-1">

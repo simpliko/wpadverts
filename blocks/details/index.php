@@ -56,6 +56,8 @@ class Adverts_Block_Details {
     
     public function render( $atts = array() ) {
 
+        $atts = apply_filters( "wpadverts/block/details/atts", $atts );
+
         $params = shortcode_atts(array(
             'name' => 'default',
             'post_type' => 'advert'
@@ -76,7 +78,7 @@ class Adverts_Block_Details {
         $post_content = wp_kses($post_content, wp_kses_allowed_html( 'post' ) );
         $post_content = apply_filters( "adverts_the_content", $post_content );
 
-        $data_table = array(
+        $data_table = apply_filters( "wpadverts/block/details/data-table", array(
             array(
                 "label" => __( "Category", "wpadverts" ),
                 "icon" => "fas fa-folder",
@@ -88,13 +90,11 @@ class Adverts_Block_Details {
                 "value" => $this->_get_location_parsed( $post_id )
             )
 
-        );
+        ), $post_id );
 
         $contact_methods = $this->_get_contact_options( $atts, $post_id );
         $contact_options = array( );
         $contact_additional = array();
-
-
 
         foreach( $atts['contact'] as $k => $contact ) {
             if( isset( $contact_methods[ $contact['name'] ] ) ) {

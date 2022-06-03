@@ -1,6 +1,6 @@
 jQuery(function($) {
 
-    /*
+    
     $(".wpadverts-show-contact-form").on("click", function(e) {
         e.preventDefault();
 
@@ -14,5 +14,5 @@ jQuery(function($) {
             window.location.hash = "#wpadverts-block-contact-box";
         }
     });
-    */
+    
 });

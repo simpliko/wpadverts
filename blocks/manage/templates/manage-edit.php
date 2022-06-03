@@ -18,7 +18,7 @@
         </span>
     </div>
 
-    <?php wpadverts_block_flash( $adverts_flash ) ?>
+    <?php echo wpadverts_block_flash( $adverts_flash ) ?>
 
     <div class="atw-flex atw-flex-col md:atw-flex-row atw--mx-1 atw-flex-wrap">
 

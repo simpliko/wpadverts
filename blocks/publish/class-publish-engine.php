@@ -675,9 +675,7 @@ class Adverts_Block_Publish_Engine {
     }
 
     public function flash( $data, $layout ) {
-        ob_start();
-        wpadverts_block_flash( $data, $layout );
-        return ob_get_clean();
+        return wpadverts_block_flash( $data, $layout );
     }
 }
 

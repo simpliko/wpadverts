@@ -51,12 +51,20 @@ class Adverts_Block_Manage_Engine {
         if(!get_current_user_id()) {
 
             $permalink = get_permalink();
-            $message = __('Only logged in users can access this page. <a href="%1$s">Login</a> or <a href="%2$s">Register</a>.', "wpadverts");
+            $message = __('Only logged in users can access this page.', "wpadverts");
             $parsed = sprintf($message, wp_login_url( $permalink ), wp_registration_url( $permalink ) );
             
             return $this->flash( array( 
                 "info" => array( 
-                    array( "message" => $parsed, "icon" => "fa fa-lock" ),  
+                    array( 
+                        "message" => $parsed, 
+                        "icon" => "fa fa-lock",
+                        "link" => array(
+                            array( "title" => __( "Login", "wpadverts" ), "url" => "#" ),
+                            array( "title" => __( "Register", "wpadverts" ), "url" => "#" ),
+                        ) 
+
+                    ),  
                 )
             ), "big" );
         }
@@ -367,9 +375,7 @@ class Adverts_Block_Manage_Engine {
     }
 
     public function flash( $data, $layout = "normal" ) {
-        ob_start();
-        wpadverts_block_flash( $data, $layout );
-        return ob_get_clean();
+        return wpadverts_block_flash( $data, $layout );
     }
 
     public function modal_delete() {

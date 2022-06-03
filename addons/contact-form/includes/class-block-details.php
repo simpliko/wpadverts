@@ -151,6 +151,8 @@ class Adext_Contact_Form_Block_Details {
             )
         );
 
+        add_filter( "wpadverts/block/form/styles/atts", array( $this, "no_interline" ) );
+
         ?>
 
         <?php if( adext_contact_form_get_to( $post_id ) ): ?>
@@ -159,9 +161,9 @@ class Adext_Contact_Form_Block_Details {
             <div class="atw-my-3 atw-mx-0 atw-pt-6 atw-pb-0 atw-font-bold atw-text-2xl"><?php _e( "Contact Seller", "wpadverts" ) ?></div>
 
             <?php if( $form_sent ): ?>
-                <?php wpadverts_block_flash( $flash, "big" ) ?>
+                <?php echo wpadverts_block_flash( $flash, "big" ) ?>
             <?php else: ?>
-                <?php wpadverts_block_flash( $flash ) ?>
+                <?php echo wpadverts_block_flash( $flash ) ?>
                 <?php $buttons_position = "atw-flex-col"; ?>
                 <?php include ADVERTS_PATH . '/templates/block-partials/form.php' ?>
             <?php endif; ?>
@@ -172,6 +174,14 @@ class Adext_Contact_Form_Block_Details {
 
 
         <?php
+
+        remove_filter( "wpadverts/block/form/styles/atts", array( $this, "no_interline" ) );
     }
 
+    public function no_interline( $atts ) {
+        if( isset( $atts["interline"] ) ) {
+            unset( $atts["interline"] );
+        }
+        return $atts;
+    }
 }

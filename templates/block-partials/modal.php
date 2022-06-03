@@ -49,7 +49,7 @@
           <div class="atw-mt-3 atw-text-center sm:atw-mt-0 sm:atw-ml-4 sm:atw-text-left">
             <h3 class="js-wpa-modal-title atw-text-lg atw-leading-6 atw-font-medium atw-text-gray-900" id="modal-title">{{ data.title }}</h3>
             <div class="atw-mt-2">
-              <p class="js-wpa-modal-text atw-text-sm atw-text-gray-500">{{ data.text }}</p>
+              <p class="js-wpa-modal-text atw-text-sm atw-text-gray-500">{{{ data.text }}}</p>
             </div>
           </div>
         </div>

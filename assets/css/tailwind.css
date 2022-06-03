@@ -34,7 +34,7 @@
     
     .wpadverts-form .wpa-w-full input[type=text],
     .wpadverts-form .wpa-w-full select {
-        @apply atw-w-full atw-max-w-full atw-m-0;
+        @apply atw-w-full atw-max-w-full ;
     }
 
     .wpadverts-hidden {
@@ -52,7 +52,7 @@
     }
 
     .wpadverts-form .wpa-form-header {
-        @apply atw-relative atw-items-end atw-box-border atw-pt-6 atw-pb-1 atw-mx-1;
+        @apply atw-relative atw-items-end atw-box-border atw-pt-6 atw-pb-1 md:atw-mx-1;
     }
 
     .wpadverts-form .wpa-form-header-label {
@@ -91,6 +91,10 @@
         @apply atw-block atw-w-full;
     }
 
+    .wpadverts-form .wpa-field-desc .wpa-field-desc-text {
+        @apply atw-text-sm atw-text-gray-500;
+    }
+
     .wpadverts-form .wpa-form-buttons {
         @apply atw-flex atw-mt-3 atw-py-3 atw-bg-gray-50 atw-rounded-md atw-justify-end md:atw-flex-none;
     }
@@ -112,6 +116,7 @@
 
     .wpadverts-form select,
     .wpadverts-form select[multiple], 
+    .wpadverts-form input[type=text].wpadverts-autocomplete,
     .wpadverts-form .adverts-multiselect-holder input[type=text] {
         @apply atw-outline-none atw-box-border atw-leading-loose atw-border-solid atw-bg-right atw-bg-no-repeat atw-appearance-none;
         
@@ -120,7 +125,21 @@
 
     .wpadverts-form input[type=checkbox],
     .wpadverts-form input[type=radio] {
-        @apply atw-appearance-none atw-box-border atw-border-solid atw-w-5 atw-h-5 atw-text-base atw-outline-none atw-p-0 atw-m-0 atw-leading-loose;
+        @apply atw-appearance-none atw-box-border atw-border-solid atw-w-7 md:atw-w-5 atw-h-7 md:atw-h-5 atw-text-base atw-outline-none atw-p-0 atw-m-0 atw-leading-loose;
+    }
+
+    .wpadverts-form input[type=checkbox][disabled=disabled],
+    .wpadverts-form input[type=radio][disabled=disabled],
+    .wpadverts-form input[type=checkbox][readonly=readonly],
+    .wpadverts-form input[type=radio][readonly=readonly] {
+        @apply atw-bg-gray-100 atw-cursor-not-allowed !important;
+    }
+
+    ..wpadverts-form input[type=text].wpadverts-autocomplete {
+        @apply atw-cursor-pointer;
+    }
+    .wpadverts-form .wpadverts-autocomplete-openclose {
+        @apply atw-hidden !important;
     }
 
     /* Flat */
@@ -289,7 +308,8 @@
     .wpadverts-form.wpa-padding-sm select {
         @apply atw-py-2 atw-px-2 atw-leading-loose;
     }
-    .wpadverts-form.wpa-padding-sm.wpa-layout-aligned .wpa-field-label {
+    .wpadverts-form.wpa-padding-sm.wpa-layout-aligned .wpa-field-label,
+    .wpadverts-form.wpa-padding-sm.wpa-layout-aligned .wpa-field-input.wpa-with-margin {
         @apply md:atw-py-2 atw-px-0 atw-leading-loose;
     }
 
@@ -300,8 +320,14 @@
     .wpadverts-form.wpa-padding-md select {
         @apply atw-py-3 atw-px-3 atw-leading-loose;
     }
-    .wpadverts-form.wpa-padding-md.wpa-layout-aligned .wpa-field-label {
+    .wpadverts-form.wpa-padding-md.wpa-layout-aligned .wpa-field-label,
+    .wpadverts-form.wpa-padding-md.wpa-layout-aligned .wpa-field-input.wpa-with-margin {
         @apply md:atw-py-3 atw-px-0 atw-leading-loose;
+    }
+
+    .wpadverts-form.wpa-padding-sm.wpa-layout-aligned .wpa-field-input.wpa-with-margin,
+    .wpadverts-form.wpa-padding-md.wpa-layout-aligned .wpa-field-input.wpa-with-margin  {
+        @apply atw-self-center;
     }
 
     /* FORM ROUNDING */
@@ -338,6 +364,10 @@
     
     .wpadverts-form.wpa-layout-aligned .wpa-field-wrap .wpa-field-input {
         @apply atw-flex-grow;
+    }
+
+    .wpadverts-form.wpa-layout-aligned.wpa-form-interline .wpa-field-wrap .wpa-field-desc {
+        @apply atw-mt-2
     }
 
     .wpadverts-form.wpa-layout-aligned .wpa-field-label {
@@ -629,17 +659,32 @@
     }
 
     .wpadverts-flash.wpa-layout-big .wpa-flash-content {
-        @apply atw-flex-col atw-items-center atw-pb-3;
+        @apply atw-flex-col atw-items-center;
     }
 
     .wpadverts-flash.wpa-layout-big .wpa-flash-icon {
-        @apply atw-flex-none atw-m-0 atw-pt-3 atw-pb-3 atw-text-5xl;
+        @apply atw-flex-none atw-m-0 atw-pt-0 atw-pb-3 atw-text-5xl;
     }
 
     .wpadverts-flash.wpa-layout-big .wpa-flash-message {
-        @apply atw-text-lg;
+        @apply atw-text-lg atw-py-3;
     }
 
+    .wpadverts-flash .wpa-flash-link-wrap {
+        @apply atw-flex atw-flex-col md:atw-flex-row atw-pt-3 md:atw--mx-2
+    }
+
+    .wpadverts-flash.wpa-layout-big .wpa-flash-link-wrap {
+        @apply atw-justify-center;
+    }
+
+    .wpadverts-flash .wpa-flash-link-wrap .wpa-flash-link {
+        @apply atw-leading-loose atw-no-underline atw-rounded-lg atw-py-2 atw-px-4 atw-mt-3 md:atw-mx-2 md:atw-my-0 atw-bg-black/5 atw-font-bold
+    }
+
+    .wpadverts-flash .wpa-flash-link-wrap .wpa-flash-link:hover {
+        @apply atw-bg-black/10 atw-no-underline;
+    }
 
     .wpa-tabs {
         @apply atw-flex atw-flex-col md:atw-flex-row atw-list-none atw-p-0 atw-m-0 md:atw--mx-1;

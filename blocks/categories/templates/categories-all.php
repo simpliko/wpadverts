@@ -17,10 +17,14 @@
     <?php foreach( $terms as $k => $term ): ?>
     <div class="wpa-block-categories-item  <?php echo "$item_display $class_margin" ?> atw-flex atw-rounded  atw-shadow-none atw-border atw-border-solid <?php echo esc_attr( "adverts-category-slug-".$term->slug ) ?>">
         <?php if( $show_icons ): ?>
-        <?php $icon = adverts_taxonomy_get("advert_category", $term->term_id, "advert_category_icon", $default_icon ) ?>
-        <span class="wpa-block-categories-icon <?php echo "$class_icon_size $class_icon_padding" ?> <?php echo apply_filters("adverts_category_font_icon", adverts_guess_icon_class($icon), $term, "big") ?>"></span>
+            <?php $icon = adverts_taxonomy_get("advert_category", $term->term_id, "advert_category_icon", $default_icon ) ?>
+            <?php $font_icon = apply_filters("wpadverts/block/categories/tpl/font-icon", adverts_guess_icon_class($icon), $term, "big"); ?>
+            <?php if( is_string( $font_icon ) ): ?>
+                <span class="wpa-block-categories-icon <?php echo "$class_icon_size $class_icon_padding $font_icon" ?>"></span>
+            <?php endif; ?>
+            <?php do_action( "wpadverts/block/categories/tpl/icon", $term, "big", $atts ) ?>
         <?php endif; ?>
-        <?php do_action( "adverts_category_pre_title", $term, "big") ?>
+        
         <span class="wpa-block-categories-title atw-font-bold atw-no-underline <?php echo "$class_item_padding" ?>">
 
             <a class="atw-font-bold atw-no-underline adverts-category-link" href="<?php echo esc_attr(get_term_link($term)) ?>">

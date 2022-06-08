@@ -452,6 +452,21 @@
         @apply atw-px-3 md:atw-px-2
     }
 
+    .wpadverts-form.wpa-flat input[type=text][readonly=readonly],
+    .wpadverts-form.wpa-solid input[type=text][readonly=readonly],
+    .wpadverts-form.wpa-bottom-border input[type=text][readonly=readonly],
+    .wpadverts-form.wpa-flat input[type=checkbox][readonly=readonly],
+    .wpadverts-form.wpa-solid input[type=checkbox][readonly=readonly],
+    .wpadverts-form.wpa-bottom-border input[type=checkbox][readonly=readonly],
+    .wpadverts-form.wpa-flat select[readonly=readonly],
+    .wpadverts-form.wpa-solid select[readonly=readonly],
+    .wpadverts-form.wpa-bottom-border select[readonly=readonly],
+    .wpadverts-form.wpa-flat textarea[readonly=readonly],
+    .wpadverts-form.wpa-solid textarea[readonly=readonly],
+    .wpadverts-form.wpa-bottom-border textarea[readonly=readonly] {
+        @apply atw-bg-gray-50 atw-opacity-80;
+    }
+
     /* BUTTONS */
 
     /* Button Primary */
@@ -775,5 +790,27 @@
     }
     .wpa-block-categories-item.wpa-item-aligned .wpa-block-categories-icon {
         @apply atw-px-3
+    }
+
+    .wpa-row-inline-coma .wpa-row-value:after {
+        content: ', ';
+    }
+    .wpa-row-inline-coma .wpa-row-value:last-child:after {
+        content: '';
+    }
+
+    .wpa-row-inline {
+        @apply atw--mx-1
+    }
+    .wpa-row-inline .wpa-row-value {
+        @apply atw-px-1
+    }
+
+    .wpa-row-block .wpa-row-value {
+        @apply atw-block atw-w-full
+    }
+
+    .wpa-row-attach {
+        @apply atw-pr-2
     }
 }

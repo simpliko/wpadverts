@@ -737,7 +737,7 @@ class Adverts_Types_Admin {
                     "label" => __( "Renderer Template", "wpadverts" ),
                     "order" => 10,
                     "value" => "",
-                    "options" => $template_options
+                    "options" => wpadverts_get_block_templates_options()
                 )
             )
         );

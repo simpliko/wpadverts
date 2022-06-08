@@ -92,6 +92,14 @@ class Adverts_Block_Details {
 
         ), $post_id );
 
+        $content_table = apply_filters( "wpadverts/block/details/content-table", array(
+            array(
+                "label" => __( "Description", "wpadverts" ),
+                "icon" => "",
+                "value" => $post_content
+            )
+        ), $post_id );
+
         $contact_methods = $this->_get_contact_options( $atts, $post_id );
         $contact_options = array( );
         $contact_additional = array();

@@ -8,7 +8,7 @@
     <?php wpadverts_block_button_css( "secondary", isset( $atts["secondary_button"] ) ? $atts["secondary_button"] : array() ) ?>
 </style>
 
-<div class="wpadverts-cpt <?php echo sprintf( "wpadverts-cpt-", $atts["post_type"] ) ?> atw-w-full">
+<div class="wpadverts-cpt <?php echo sprintf( "wpadverts-cpt-", $atts["post_type"] ) ?> atw-w-full atw-flex atw-flex-col">
 
     <?php do_action( "adverts_tpl_single_top", $post_id, true ) ?>
 
@@ -55,11 +55,11 @@
                     </div>
                 </div>
                 <div class="atw-flex atw-flex-col md:atw-flex-row atw-grow">
-                    <div class="atw-flex atw-flex-none atw-items-center atw-w-1/3 atw-text-gray-700 atw-text-base atw-mb-1 md:atw-mb-0">
+                    <div class="atw-flex atw-flex-none atw-items-center atw-w-1/3 atw-h-10 atw-text-gray-700 atw-text-base atw-mb-1 md:atw-mb-0">
                         <span class="atw-inline-block atw-font-bold md:atw-font-normal"><?php echo esc_html( $data["label"] ) ?></span>
                     </div>
                     <div class="atw-flex atw-grow atw-items-center atw-text-gray-800">
-                        <span class="atw-inline-block"><?php echo $data["value"] ?></span>
+                        <span class="atw-inline-block <?php echo isset( $data["row_classes"] ) ? esc_attr( $data["row_classes"] ) : "" ?>"><?php echo $data["value"] ?></span>
                     </div>
                 </div>
             </div>
@@ -72,14 +72,14 @@
         <?php do_action( "adverts_tpl_single_details", $post_id, true ) ?>
     </div>
 
-    <div class="">
-        <?php foreach( array(1) as $k ): ?>
+    <div class="atw-mb-6">
+        <?php foreach( $content_table as $content ): ?>
         <div class="atw-mt-3">
             <div>
-                <span class="atw-inline-block atw-text-gray-700 atw-text-xl atw-font-bold atw-py-3">Description</span>
+                <span class="atw-inline-block atw-text-gray-700 atw-text-xl atw-font-bold atw-py-3"><?php echo esc_html( $content["label"] ) ?></span>
             </div>
             <div>
-                <?php echo $post_content ?>
+                <?php echo $content["value"] ?>
             </div>
         </div>
         <?php endforeach; ?>
@@ -112,7 +112,7 @@
     <?php do_action( "adverts_tpl_single_bottom", $post_id, true ) ?>
     
     <?php if( ! empty( $contact_options ) || ! empty( $options ) ): ?>
-    <div class="wpa-cpt-contact-details atw-my-3 atw--mx-1">
+    <div class="wpa-cpt-contact-details atw-my-6 atw--mx-1">
 
         <div class="atw-relative atw-flex atw-flex-col md:atw-flex-row atw--mx-1">
 

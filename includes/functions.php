@@ -3981,6 +3981,8 @@ function adverts_default_comments_status( $post_type ) {
 
 function adverts_get_taxonomy_path( $term, $glue = false ) {
 
+    include_once ADVERTS_PATH . '/includes/class-html.php';
+
     $a = array();
     $path = advert_term_path( $term );
 

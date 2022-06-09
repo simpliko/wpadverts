@@ -467,6 +467,55 @@
         @apply atw-bg-gray-50 atw-opacity-80;
     }
 
+    /* INPUT WITH BUTTON(S) */
+
+    .wpadverts-form .wpa-input-with-btns {
+        @apply atw-relative atw-m-0 atw-p-0
+    }
+
+    .wpadverts-form .wpa-input-with-btns > input[type=text] {
+        @apply atw-block
+    }
+
+    .wpadverts-form .wpa-input-with-btns .wpa-btns-wrap {
+        @apply atw-absolute atw-inset-y-0 atw-right-0 atw-flex atw-items-center atw-py-2 atw-pr-2
+    }
+
+    .wpadverts-form .wpa-input-with-btns .wpa-btns-wrap .wpa-btn {
+        @apply atw-px-2 atw-h-full atw-rounded-md atw-bg-gray-500 atw-text-white atw-flex atw-items-center atw-ml-1 atw-no-underline
+    }
+    .wpadverts-form .wpa-input-with-btns .wpa-btns-wrap .wpa-btn:hover {
+        @apply atw-no-underline atw-bg-gray-600 atw-text-white
+    }
+    .wpadverts-form .wpa-input-with-btns .wpa-btns-wrap .wpa-btn .wpa-btn-icon {
+        @apply atw-text-xl
+    }
+
+    /* MAL INPUTS */
+
+    .wpadverts-mal-adv-inputs {
+        @apply atw-flex atw-flex-wrap atw--mx-1 
+    }
+
+    .wpadverts-mal-adv-inputs .wpadverts-mal-adv-input {
+        @apply atw-box-border atw-w-full atw-py-1 atw-px-1
+    }
+
+    .wpadverts-mal-adv-inputs .wpadverts-mal-adv-input.wpadverts-mal-half {
+        @apply atw-w-2/4
+    }
+    
+    .wpadverts-mal-adv-inputs .wpadverts-mal-input {
+       
+    }
+
+    .wpadverts-mal-button-small {
+        @apply atw-px-2 atw-rounded-md atw-bg-gray-500 atw-text-white atw-flex atw-items-center atw-ml-1 atw-no-underline
+    }
+    .wpadverts-mal-button-small:hover {
+        @apply atw-no-underline atw-bg-gray-600 atw-text-white
+    }
+
     /* BUTTONS */
 
     /* Button Primary */

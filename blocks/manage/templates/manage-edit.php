@@ -32,8 +32,12 @@
 
     </div>
 
+    <?php do_action( "wpadverts/block/manage-edit/tpl/before-form", $post_id ) ?>
+
     <div>
         <?php include ADVERTS_PATH . '/templates/block-partials/form.php' ?>
     </div>
+
+    <?php do_action( "wpadverts/block/manage-edit/tpl/after-form", $post_id ) ?>
 </div>
 

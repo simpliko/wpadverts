@@ -335,7 +335,7 @@ class Adverts_Block_Publish_Engine {
         
         $form->bind( $bind );
 
-        $buttons = array(
+        $buttons = apply_filters( "wpadverts/block/publish/buttons", array(
             array(
                 "html" => $action_label . '<i class="fa fa-arrow-right atw-pl-3"></i>',
                 "icon" => "fas-mail-alt",
@@ -345,7 +345,7 @@ class Adverts_Block_Publish_Engine {
                 "name" => "adverts_contact_form",
                 "value" => "1"
             )
-        );
+        ), $this->_params );;
 
         $_layouts = array(
             "adverts-form-stacked" => "wpa-layout-stacked",
@@ -354,7 +354,7 @@ class Adverts_Block_Publish_Engine {
 
         $buttons_position = "atw-flex-col";
 
-        $show_buttons = true;
+        $show_buttons = apply_filters( "wpadverts/block/publish/show-buttons", true, $this->_params );
        
         $form_layout = $_layouts[$form->get_layout()];
         $atts = $this->_params["form"];
@@ -504,14 +504,15 @@ class Adverts_Block_Publish_Engine {
             if( $this->skip_preview() ) {
                 $action_label = __( "Publish Listing", "wpadverts" );
             } else {
-                $action_label = __( "Preview", "wpadverts" );
+                $action_label = __( "Preview Listing", "wpadverts" );
             }
             
             // adverts/templates/add.php
             ob_start();
-            $buttons = array(
+
+            $buttons = apply_filters( "wpadverts/block/publish/buttons", array(
                 array(
-                    "html" => __( "Preview Listing", "wpadverts" ) . '<i class="fa fa-arrow-right atw-pl-3"></i>',
+                    "html" => $action_label . '<i class="fa fa-arrow-right atw-pl-3"></i>',
                     "icon" => "fas-mail-alt",
                     "type" => "primary",
                     "class" => "wpadverts-block-cf-send",
@@ -519,11 +520,11 @@ class Adverts_Block_Publish_Engine {
                     "name" => "adverts_contact_form",
                     "value" => "1"
                 )
-            );
+            ), $this->_params );
     
             $buttons_position = "atw-flex-col";
     
-            $show_buttons = true;
+            $show_buttons = apply_filters( "wpadverts/block/publish/show-buttons", true, $this->_params );
             $form_layout = "wpa-layout-aligned";
     
             // adverts/templates/add.php

@@ -110,7 +110,8 @@
     /* FORM STYLES */
     
     .wpadverts-form input[type=text],
-    .wpadverts-form textarea {
+    .wpadverts-form textarea,
+    .wpadverts-form .wpa-input-alike {
         @apply atw-outline-none atw-box-border atw-leading-loose atw-border-solid atw-bg-right atw-bg-no-repeat
     }
 
@@ -135,7 +136,7 @@
         @apply atw-bg-gray-100 atw-cursor-not-allowed !important;
     }
 
-    ..wpadverts-form input[type=text].wpadverts-autocomplete {
+    .wpadverts-form input[type=text].wpadverts-autocomplete {
         @apply atw-cursor-pointer;
     }
     .wpadverts-form .wpadverts-autocomplete-openclose {
@@ -145,6 +146,7 @@
     /* Flat */
 
     .wpadverts-form.wpa-flat input[type=text],
+    .wpadverts-form.wpa-flat .wpa-input-alike,
     .wpadverts-form.wpa-flat textarea {
         @apply  atw-bg-white  atw-border-form-gray-300 atw-placeholder-form-gray-500 atw-text-form-gray-700
     }
@@ -163,6 +165,7 @@
     /* Solid */
     
     .wpadverts-form.wpa-solid input[type=text],
+    .wpadverts-form.wpa-solid .wpa-input-alike,
     .wpadverts-form.wpa-solid textarea {
         @apply atw-bg-form-gray-100 atw-border-form-gray-100 atw-placeholder-form-gray-500 atw-text-form-gray-500
  
@@ -182,6 +185,7 @@
     /* Simple */
 
     .wpadverts-form.wpa-simple input[type=text],
+    .wpadverts-form.wpa-simple .wpa-input-alike,
     .wpadverts-form.wpa-simple textarea {
         @apply atw-outline-none atw-box-border atw-bg-white atw-border-gray-300 atw-shadow-sm 
     }
@@ -203,21 +207,25 @@
     /* FORM CORNERS */
 
     .wpadverts-form.wpa-rounded-none input[type=text],
+    .wpadverts-form.wpa-rounded-none .wpa-input-alike,
     .wpadverts-form.wpa-rounded-none select,
     .wpadverts-form.wpa-rounded-none textarea {
         @apply atw-rounded-none;
     }    
     .wpadverts-form.wpa-rounded-sm input[type=text],
+    .wpadverts-form.wpa-rounded-sm .wpa-input-alike,
     .wpadverts-form.wpa-rounded-sm select,
     .wpadverts-form.wpa-rounded-sm textarea {
         @apply atw-rounded-sm;
     }        
     .wpadverts-form.wpa-rounded input[type=text],
+    .wpadverts-form.wpa-rounded .wpa-input-alike,
     .wpadverts-form.wpa-rounded select,
     .wpadverts-form.wpa-rounded textarea {
         @apply atw-rounded;
     }    
     .wpadverts-form.wpa-rounded-md input[type=text],
+    .wpadverts-form.wpa-rounded-md .wpa-input-alike,
     .wpadverts-form.wpa-rounded-md select,
     .wpadverts-form.wpa-rounded-md textarea {
         @apply atw-rounded-md;
@@ -228,11 +236,13 @@
         @apply atw-rounded-lg;
     }    
     .wpadverts-form.wpa-rounded-xl input[type=text],
+    .wpadverts-form.wpa-rounded-xl .wpa-input-alike,
     .wpadverts-form.wpa-rounded-xl select,
     .wpadverts-form.wpa-rounded-xl textarea {
         @apply atw-rounded-xl;
     }    
     .wpadverts-form.wpa-rounded-2xl input[type=text],
+    .wpadverts-form.wpa-rounded-2xl .wpa-input-alike,
     .wpadverts-form.wpa-rounded-2xl select,
     .wpadverts-form.wpa-rounded-2xl textarea {
         @apply atw-rounded-2xl;
@@ -241,21 +251,25 @@
     /* FORM SHADOWS */
 
     .wpadverts-form.wpa-shadow-none input,
+    .wpadverts-form.wpa-shadow-none .wpa-input-alike,
     .wpadverts-form.wpa-shadow-none select,
     .wpadverts-form.wpa-shadow-none textarea {
         @apply atw-shadow-none;
     }
     .wpadverts-form.wpa-shadow-sm input,
+    .wpadverts-form.wpa-shadow-sm .wpa-input-alike,
     .wpadverts-form.wpa-shadow-sm select,
     .wpadverts-form.wpa-shadow-sm textarea {
         @apply atw-shadow-sm;
     }
     .wpadverts-form.wpa-shadow-md input,
+    .wpadverts-form.wpa-shadow-md .wpa-input-alike,
     .wpadverts-form.wpa-shadow-md select,
     .wpadverts-form.wpa-shadow-md textarea {
         @apply atw-shadow-md;
     }
     .wpadverts-form.wpa-shadow-inner input,
+    .wpadverts-form.wpa-shadow-inner .wpa-input-alike,
     .wpadverts-form.wpa-shadow-inner select,
     .wpadverts-form.wpa-shadow-inner textarea {
         @apply atw-shadow-inner;
@@ -264,6 +278,7 @@
     /* FORM BORDER */
 
     .wpadverts-form.wpa-border-none input[type=text],
+    .wpadverts-form.wpa-border-none .wpa-input-alike,
     .wpadverts-form.wpa-border-none input[type=checkbox],
     .wpadverts-form.wpa-border-none input[type=radio],
     .wpadverts-form.wpa-border-none select,
@@ -271,6 +286,7 @@
         @apply atw-border-0;
     }
     .wpadverts-form.wpa-border-thin input[type=text],
+    .wpadverts-form.wpa-border-thin .wpa-input-alike,
     .wpadverts-form.wpa-border-thin input[type=checkbox],
     .wpadverts-form.wpa-border-thin input[type=radio],
     .wpadverts-form.wpa-border-thin select,
@@ -278,6 +294,7 @@
         @apply atw-border;
     }
     .wpadverts-form.wpa-border-thick input[type=text],
+    .wpadverts-form.wpa-border-thick .wpa-input-alike,
     .wpadverts-form.wpa-border-thick input[type=checkbox],
     .wpadverts-form.wpa-border-thick input[type=radio],
     .wpadverts-form.wpa-border-thick select,
@@ -285,6 +302,7 @@
         @apply atw-border-2;
     }    
     .wpadverts-form.wpa-border-thick-x2 input[type=text],
+    .wpadverts-form.wpa-border-thick-x2 .wpa-input-alike,
     .wpadverts-form.wpa-border-thick-x2 input[type=checkbox],
     .wpadverts-form.wpa-border-thick-x2 input[type=radio],
     .wpadverts-form.wpa-border-thick-x2 select,
@@ -295,6 +313,7 @@
     /* FORM FOCUS */
 
     .wpadverts-form.wpa-focus-simple input,
+    .wpadverts-form.wpa-focus-simple .wpa-input-alike,
     .wpadverts-form.wpa-focus-simple select {
         @apply focus:atw-ring focus:atw-ring-opacity-50 focus:atw-border-primary-light focus:atw-ring-primary-light ;
     }
@@ -305,6 +324,7 @@
         @apply atw-py-2 atw-leading-loose;
     }
     .wpadverts-form.wpa-padding-sm input,
+    .wpadverts-form.wpa-padding-sm .wpa-input-alike,
     .wpadverts-form.wpa-padding-sm select {
         @apply atw-py-2 atw-px-2 atw-leading-loose;
     }
@@ -317,6 +337,7 @@
         @apply atw-py-3 atw-leading-loose;
     }
     .wpadverts-form.wpa-padding-md input,
+    .wpadverts-form.wpa-padding-md .wpa-input-alike,
     .wpadverts-form.wpa-padding-md select {
         @apply atw-py-3 atw-px-3 atw-leading-loose;
     }
@@ -332,14 +353,17 @@
 
     /* FORM ROUNDING */
     .wpadverts-form.wpa-mood-simple input[type=text], 
+    .wpadverts-form.wpa-mood-simple .wpa-input-alike, 
     .wpadverts-form.wpa-mood-simple select {
         @apply atw-rounded-lg;
     }
     .wpadverts-form.wpa-mood-playful input[type=text], 
+    .wpadverts-form.wpa-mood-playful .wpa-input-alike, 
     .wpadverts-form.wpa-mood-playful select {
         @apply atw-rounded-full;
     }
     .wpadverts-form.wpa-mood-elegant input[type=text], 
+    .wpadverts-form.wpa-mood-elegant .wpa-input-alike, 
     .wpadverts-form.wpa-mood-elegnat select {
         @apply atw-rounded-none;
     }

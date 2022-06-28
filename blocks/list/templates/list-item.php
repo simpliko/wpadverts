@@ -48,4 +48,7 @@
         
     </div>
     
+    <?php do_action( "wpadverts/block/list-item/tpl/after-ad", get_the_ID() ) ?>
+    
+
 </div>

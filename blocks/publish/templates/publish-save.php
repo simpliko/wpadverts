@@ -8,14 +8,13 @@
 </style>
 
 <?php
-
-
-if( $moderate == "1" ) {
-    $m = _e("Your ad has been put into moderation, please wait for admin to approve it.", "wpadverts");
-} else {
-    $m = sprintf(__('Your ad has been published. You can view it here "<a href="%1$s">%2$s</a>".', 'wpadverts'), get_post_permalink( $post_id ), get_post( $post_id )->post_title );
+if( ! isset( $message ) ) {
+    if( $moderate == "1" ) {
+        $message = _e("Your ad has been put into moderation, please wait for admin to approve it.", "wpadverts");
+    } else {
+        $message = sprintf(__('Your ad has been published. You can view it here "<a href="%1$s">%2$s</a>".', 'wpadverts'), get_post_permalink( $post_id ), get_post( $post_id )->post_title );
+    }
 }
-
 ?>
 
 <div class="wpadverts-blocks wpadverts-publish-save">
@@ -27,7 +26,7 @@ if( $moderate == "1" ) {
             <div class="atw-flex-1 atw-flex atw-flex-col atw-items-center">
                 
                 <span class="wpa-flash-message atw-flex-1 atw-font-bold atw-py-3"><?php echo $adverts_flash["success"][0]["message"] ?></span>
-                <span class="wpa-flash-message atw-flex-1 atw-pb-3 atw-text-center"><?php echo $m ?></span>  
+                <span class="wpa-flash-message atw-flex-1 atw-pb-3 atw-text-center"><?php echo $message ?></span>  
                 
                 <span class="atw-flex atw-flex-row atw-pb-3 atw-w-full atw-flex-col md:atw-flex-row">
 

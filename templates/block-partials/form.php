@@ -33,10 +33,12 @@ $form_layout_prop = "atw-w-1/3";
                     <?php $width = wpadverts_block_tpl_field_width( $field ) ?>
                     <?php $pr = $pl = ""; ?>
                     <?php if($field["type"] == "adverts_field_header"): ?>
-                        <div class="wpa-form-header <?php echo esc_attr( $width ) ?>">
+                        <div data-name="<?php echo esc_attr( $field["name"] ) ?>" class="wpa-form-header <?php echo sprintf( "wpa-field--%s", $field["name"] ) ?> <?php echo esc_attr( $width ) ?>">
                             <span class="wpa-form-header-label "><?php echo esc_html($field["label"]) ?></span>
                             <?php if( isset( $field["description"] ) ): ?>
-                            <span class="wpa-form-header-text"><?php echo esc_html( $field["description"] ) ?></span>
+                            <div>
+                                <span class="wpa-form-header-text"><?php echo esc_html( $field["description"] ) ?></span>
+                            </div>
                             <?php endif; ?>
                         </div>
                     <?php else: ?>

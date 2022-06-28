@@ -837,3 +837,9 @@ function wpadverts_block_tpl_field_type( $field ) {
 
     return implode( " ", $classes );
 }
+
+function __wpadverts_load_tw_classes() {
+    array(
+        "atw-float-left", "atw-float-center", "atw-float-right"
+    );
+}

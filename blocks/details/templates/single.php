@@ -34,11 +34,11 @@
     
         <?php if( get_post_meta( $post_id, "adverts_price", true) ): ?>
         <div class="atw-flex atw-flex-none atw-items-center atw-mt-6 md:atw-m-0 -adverts-single-price">
-            <span class="-atw-text-3xl -atw-font-bold -atw-text-red-700 adverts-price-box"><?php echo esc_html( adverts_get_the_price( $post_id ) ) ?></span>
+            <span class="atw-text-2xl atw-font-normal atw-text-white atw-bg-red-700 atw-px-4 atw-py-2 wpadverts-price-box"><?php echo esc_html( adverts_get_the_price( $post_id ) ) ?></span>
         </div>
         <?php elseif( adverts_config( 'empty_price' ) ): ?>
         <div class="atw-flex atw-flex-none atw-items-center atw-mt-6 md:atw-m-0 -adverts-single-price adverts-price-empty">
-            <span class="adverts-price-box"><?php echo esc_html( adverts_empty_price( get_the_ID() ) ) ?></span>
+            <span class="atw-text-2xl atw-font-normal atw-text-white atw-bg-red-700 atw-px-4 atw-py-2 wpadverts-price-box"><?php echo esc_html( adverts_empty_price( get_the_ID() ) ) ?></span>
         </div>
         <?php endif; ?>
 
@@ -132,30 +132,6 @@
         </div>
 
         <?php do_action( "wpadverts/block/details/tpl/contact-content", $post_id, $atts ) ?>
-        
-        <?php /*
-        <div class="wpa-contact-more atw-inset-x-0">
-
-            <div class="atw-w-full atw-flex atw-flex-col md:atw-flex-row atw-my-3 atw-px-0 atw-mx-1 md:atw-my-0">
-
-                    <div class="atw-py-2 atw-flex atw-content-center md:atw-px-3">
-                        
-                        <a href="#" class="atw-text-base md:atw-text-base atw-text-gray-700 atw-no-underline atw-font-bold ">
-                            <i class="far fa-flag atw-text-lg md:atw-text-lg atw-text-black atw-pr-2"></i>
-                            <span class="atw-self-center">Report this Ad.</span>
-                        </a>
-                    </div>
-
-                    <div class="atw-py-2 atw-flex atw-content-center md:atw-px-3">
-                        
-                        <a href="#" class="atw-text-base md:atw-text-base atw-text-gray-700 atw-no-underline atw-font-bold atw-self-center">
-                            <i class="far fa-heart atw-text-lg md:atw-text-lg atw-text-black atw-pr-2"></i>
-                            <span class="atw-self-center">Add to favorite</span>
-                        </a>
-                    </div>
-            </div>
-        </div>
-        */ ?>
 
     </div>
 

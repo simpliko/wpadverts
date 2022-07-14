@@ -82,7 +82,7 @@
         },
         "grid_img_height": {
             "type": "integer",
-            "default": 8
+            "default": 10
         },
         "grid_img_fit": {
             "type": "string",

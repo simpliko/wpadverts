@@ -230,7 +230,7 @@ jQuery(function($) {
         $(this).remove();
     });
 
-    $(".wpadverts-show-contact-form").on("click", function(e) {
+    $(".adverts-button.wpadverts-show-contact-form").on("click", function(e) {
         e.preventDefault();
 
         var $this = $(this);

@@ -105,14 +105,14 @@
     <?php endif; ?>
     <?php wp_reset_query(); ?>
 </div>
-<?php echo $paginate_base; echo $paginate_format ?>
+
 <?php if( $show_pagination ): ?>
 <div class="adverts-pagination">
     <?php echo paginate_links( array(
         'base' => $paginate_base,
-	'format' => $paginate_format,
-	'current' => max( 1, $paged ),
-	'total' => $loop->max_num_pages,
+        'format' => $paginate_format,
+        'current' => max( 1, $paged ),
+        'total' => $loop->max_num_pages,
         'prev_next' => false
     ) ); ?>
 </div>

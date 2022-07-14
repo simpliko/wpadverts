@@ -2841,3 +2841,11 @@ ul.adverts-tabs li {
     font-size: 22px;
     opacity: 0.8;
 }
+
+.adverts-multiselect-options > label > input[type="checkbox"] {
+    border: 2px solid rgb(204, 204, 204);
+    vertical-align: middle;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+  }

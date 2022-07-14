@@ -150,7 +150,7 @@ class Adverts_Block_Details {
         ob_start();
         foreach($advert_category as $c) {
             ?>
-            <a href="<?php echo esc_attr( get_term_link( $c ) ) ?>"><?php echo join( " / ", advert_category_path( $c ) ) ?></a><br/>
+                <div><?php echo adverts_get_taxonomy_path( $c, " / " ) ?></div>
             <?php
         }
 

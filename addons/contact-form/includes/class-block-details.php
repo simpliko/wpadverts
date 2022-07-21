@@ -182,6 +182,9 @@ class Adext_Contact_Form_Block_Details {
         if( isset( $atts["interline"] ) ) {
             unset( $atts["interline"] );
         }
+        if( isset( $atts["style"] ) && $atts["style"] == "wpa-solid" ) {
+            $atts["style"] = "wpa-flat";
+        }
         return $atts;
     }
 }

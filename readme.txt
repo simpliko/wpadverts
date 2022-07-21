@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classified script, classifieds sc
 Requires PHP: 5.6
 Requires at least: 5.7
 Tested up to: 5.9
-Stable tag: 1.5.9
+Stable tag: 2.0.0
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -123,6 +123,11 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 2.0 - 2022-07-20 =
+
+* FEATURE: Build your website with modern Gutenberg blocks instead of shortcodes.
+* IMPORTANT: This is a major release please do a full site backup before upgrading or test the update on your staging website first!!!
 
 = 1.5.10 - 2022-06-20 =
 
@@ -684,18 +689,23 @@ Read release notes here https://wpadverts.com/blog/video-uploads-and-image-editi
 
 == Screenshots ==
 
-1. Ads list [adverts_list] displayed as a grid (you can select how many columns to display).
-2. Ads list [adverts_list] displayed as a list.
-3. Ad details page (compatible with all popular SEO plugins to boost your rankings).
-4. Top Categories [adverts_categories show="top"] icons are configurable from wp-admin / Classifieds / Categories panel.
-5. All Categories [adverts_categories].
-6. Post an Ad Form [adverts_add] (allow anonymous and/or registered users to post ads).
-7. Ads list in wp-admin panel.
-8. Ad edit page in wp-admin panel.
-9. Category edition with icon select.
-10. Options, modules and premium extensions.
-11. Payment history (if you are planning to charge users for posting Ads)
-12. Payment details
+1. Ads Search and List blocks displayed in a grid mode.
+2. Ads Search and List blocks displayed in a list mode.
+3. Ads list on a mobile device.
+4. Ads grid on a mobile device.
+5. Quickly customize dozens of display options directly from the wp-admin panel.
+6. Match your theme styling using the Styling Editor.
+7. Ad details page.
+8. Ad details page on a mobile device.
+9. Publish Ad Form - allow anonymous and/or registered users to post ads.
+10. Management Panel - allow users to manage their own ads.
+11. List available categories () 
+12. Ads list in wp-admin panel.
+13. Ad edit page in wp-admin panel.
+14. Category edition with icon select.
+15. Options, modules and premium extensions.
+16. Payment history - if you are planning to charge users for posting Ads.
+17. Payment details.
 
 == Upgrade Notice ==
 

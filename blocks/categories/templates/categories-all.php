@@ -27,7 +27,7 @@
         
         <span class="wpa-block-categories-title atw-font-bold atw-no-underline <?php echo "$class_item_padding" ?>">
 
-            <a class="atw-font-bold atw-no-underline adverts-category-link" href="<?php echo esc_attr(get_term_link($term)) ?>">
+            <a class="atw-font-bold atw-no-underline wpadverts-category-link" href="<?php echo esc_attr(get_term_link($term)) ?>">
                 <?php echo esc_html($term->name) ?>
             </a>
             

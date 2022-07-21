@@ -60,8 +60,8 @@ class Adverts_Block_Manage_Engine {
                         "message" => $parsed, 
                         "icon" => "fa fa-lock",
                         "link" => array(
-                            array( "title" => __( "Login", "wpadverts" ), "url" => "#" ),
-                            array( "title" => __( "Register", "wpadverts" ), "url" => "#" ),
+                            array( "title" => __( "Login", "wpadverts" ), "url" => wp_login_url( $permalink ) ),
+                            array( "title" => __( "Register", "wpadverts" ), "url" => wp_registration_url() ),
                         ) 
 
                     ),  

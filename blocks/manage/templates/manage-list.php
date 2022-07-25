@@ -155,7 +155,7 @@ $grid_cols = sprintf("%s %s", $grid_cols_arr[ $atts["grid_columns_mobile"] ], $g
         <?php include apply_filters( "adverts_template_load", $this->path . '/templates/manage-list-item.php' ) ?>
         <?php endwhile; ?>
         <?php else: ?>
-            <div class="wpadverts-flash wpa-style-info wpa-layout-big">
+    <div class="wpadverts-flash wpa-style-info wpa-layout-big">
         <div class="wpa-flash-content atw-flex">
 
             <span class="wpa-flash-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
@@ -167,12 +167,12 @@ $grid_cols = sprintf("%s %s", $grid_cols_arr[ $atts["grid_columns_mobile"] ], $g
                 
                 <span class="atw-flex atw-flex-row atw-pb-3 atw-w-full atw-flex-col md:atw-flex-row">
 
-                    <form action="" class="atw-p-3 atw-flex-grow">
+                    <!--form action="" class="atw-p-3 atw-flex-grow">
                         <?php wpadverts_block_button( array( "text" => "Publish your first Ad", "type" => "secondary" )); ?>
-                    </form>
+                    </form-->
 
-                    <form action="" class="atw-p-3 atw-flex-grow">
-                        <?php wpadverts_block_button( array( "text" => "View ads list", "type" => "secondary" )); ?>
+                    <form action="<?php echo get_permalink( adverts_config( "ads_list_id" ) ) ?>" class="atw-p-3 atw-flex-grow" method="get">
+                        <?php wpadverts_block_button( array( "text" => "View ads list", "type" => "secondary", "action" => "submit" )); ?>
                     </form>
                 </span>
                 

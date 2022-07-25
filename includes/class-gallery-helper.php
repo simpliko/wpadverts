@@ -67,6 +67,7 @@ class Adverts_Gallery_Helper {
         wp_enqueue_script( 'adverts-slick' );
 
         wp_enqueue_style( 'adverts-frontend' );
+        wp_enqueue_style( 'adverts-icons' );
 
         if( $this->has_lightbox() ) {
             add_action( "wp_footer", array( $this, "footer_lightbox" ) ); //"adverts_single_gallery_lightbox" );

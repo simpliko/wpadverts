@@ -63,8 +63,8 @@ class Adverts_Block_Manage {
                 'editor_style' => 'wpadverts-blocks-manage',
                 'editor_script' => $js_handler,
                 'render_callback' => array( $this, "render" ),
-                'style' => 'wpadverts-blocks',
-                'script' => 'wpadverts-block-manage'
+                'style' => wpadverts_load_assets_globally() ? 'wpadverts-blocks' : null,
+                'script' => wpadverts_load_assets_globally() ? 'wpadverts-block-manage' : null
             )
         );
     }
@@ -82,6 +82,13 @@ class Adverts_Block_Manage {
 
         $atts = $this->handlePayload( $atts );
 
+        if( ! wpadverts_load_assets_globally() ) {
+            wp_enqueue_style( 'wpadverts-blocks' );
+            wp_enqueue_script( 'wpadverts-block-manage' );
+
+            wp_enqueue_script( 'wpadverts-block-list-and-search' );
+        }
+        
         include_once dirname( __FILE__ ) . '/class-manage-engine.php';
 
         $engine = new Adverts_Block_Manage_Engine();

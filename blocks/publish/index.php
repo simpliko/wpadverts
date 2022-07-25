@@ -47,8 +47,8 @@ class Adverts_Block_Publish {
                 'editor_style' => 'wpadverts-blocks-editor-publish',
                 'editor_script' => $js_handler,
                 'render_callback' => array( $this, "render" ),
-                'style' => 'wpadverts-blocks',
-                'script' => 'wpadverts-block-publish'
+                'style' => wpadverts_load_assets_globally() ? 'wpadverts-blocks' : null,
+                'script' => wpadverts_load_assets_globally() ? 'wpadverts-block-publish' : null
             )
         );
 
@@ -57,6 +57,11 @@ class Adverts_Block_Publish {
     public function render( $atts = array() ) {
 
         $atts = $this->handlePayload( $atts );
+
+        if( ! wpadverts_load_assets_globally() ) {
+            wp_enqueue_style( 'wpadverts-blocks' );
+            wp_enqueue_script( 'wpadverts-block-publish' );
+        }
 
         include_once dirname( __FILE__ ) . '/class-publish-engine.php';
 

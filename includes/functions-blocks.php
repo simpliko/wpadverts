@@ -838,6 +838,13 @@ function wpadverts_block_tpl_field_type( $field ) {
     return implode( " ", $classes );
 }
 
+/**
+ * @since 2.0.1
+ */
+function wpadverts_load_assets_globally() {
+    return apply_filters( "wpadverts/blocks/load-assets-globally", is_admin() );
+}
+
 function __wpadverts_load_tw_classes() {
     array(
         "atw-float-left", "atw-float-center", "atw-float-right"

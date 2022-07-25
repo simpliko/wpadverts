@@ -47,8 +47,8 @@ class Adverts_Block_List {
                 'editor_style' => 'wpadverts-blocks-editor-list',
                 'editor_script' => $js_handler,
                 'render_callback' => array( $this, "render" ),
-                'style' => 'wpadverts-blocks-common',
-                'script' => 'wpadverts-block-list-and-search'
+                'style' => wpadverts_load_assets_globally() ? 'wpadverts-blocks' : null,
+                'script' => wpadverts_load_assets_globally() ? 'wpadverts-block-list-and-search' : null
             )
         );
     }
@@ -57,7 +57,11 @@ class Adverts_Block_List {
 
         $atts = $this->handlePayload( $atts );
 
-
+        if( ! wpadverts_load_assets_globally() ) {
+            wp_enqueue_style( 'wpadverts-blocks' );
+            wp_enqueue_script( 'wpadverts-block-list-and-search' );
+        }
+        
         $params = shortcode_atts(array(
             'name' => 'default',
             'author' => null,

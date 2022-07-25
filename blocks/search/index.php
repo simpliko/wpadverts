@@ -40,7 +40,7 @@ class Adverts_Block_Search {
                 'editor_style' => 'wpadverts-blocks-editor-search',
                 'editor_script' => $js_handler,
                 'render_callback' => array( $this, "render" ),
-                'style' => 'wpadverts-blocks',
+                'style' => wpadverts_load_assets_globally() ? 'wpadverts-blocks' : null,
                 'script' => null
             )
         );
@@ -59,6 +59,10 @@ class Adverts_Block_Search {
     public function render( $atts = array() ) {
 
         $atts = $this->handlePayload( $atts );
+
+        if( ! wpadverts_load_assets_globally() ) {
+            wp_enqueue_style( 'wpadverts-blocks' );
+        }
 
         $params = shortcode_atts(array(
             'name' => 'default',

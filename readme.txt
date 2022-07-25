@@ -4,8 +4,8 @@ Contributors: gwin
 Tags: classifieds, classified, classified ads, classified script, classifieds script, wp classified, wp classifieds
 Requires PHP: 5.6
 Requires at least: 5.7
-Tested up to: 5.9
-Stable tag: 2.0.0
+Tested up to: 6.0
+Stable tag: 2.0.1
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -124,10 +124,22 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
-= 2.0 - 2022-07-20 =
+= 2.0.1 - 2022-07-25 =
 
-* FEATURE: Build your website with modern Gutenberg blocks instead of shortcodes.
-* IMPORTANT: This is a major release please do a full site backup before upgrading or test the update on your staging website first!!!
+* IMPORTANT: This is a major release please do a full site backup before upgrading or test the update on your staging website first!!! 
+* The new version allows building a classifieds website with new design and customizable blocks instead of shortcodes.
+* If you would like to migrate from shortcodes to blocks please read https://wpadverts.com/doc/migrating-to-version-2-0/
+* If you would like to keep using shortcoded version you do not need to do anything (except for the website backup).
+* FIXED: Block related scripts and styles are now loaded only when needed.
+* FIXED: The blocks CSS file no longer loads wp-edit-blocks stylesheet.
+* FIXED: When ads list in Classifieds / Manage is empty invalid buttons are not shown.
+* FIXED: Loading gallery icons on the Ad details pages in Block mode.
+* API: You can force plugin to always load scripts and styles by adding below line in your theme functions.php file
+* API: add_filter( "wpadverts/blocks/load-assets-globally", "__return_true" );
+
+= 2.0.0 - 2022-07-21 =
+
+* SEE 2.0.1 notes.
 
 = 1.5.10 - 2022-06-20 =
 

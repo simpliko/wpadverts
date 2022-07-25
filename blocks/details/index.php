@@ -47,8 +47,8 @@ class Adverts_Block_Details {
                 'editor_style' => 'wpadverts-blocks-editor-details',
                 'editor_script' => $js_handler,
                 'render_callback' => array( $this, "render" ),
-                'style' => 'wpadverts-blocks',
-                'script' => 'wpadverts-block-details'
+                'style' => wpadverts_load_assets_globally() ? 'wpadverts-blocks' : null,
+                'script' => wpadverts_load_assets_globally() ? 'wpadverts-block-details' : null
             )
         );
 
@@ -57,6 +57,11 @@ class Adverts_Block_Details {
     public function render( $atts = array() ) {
 
         $atts = apply_filters( "wpadverts/block/details/atts", $atts );
+
+        if( ! wpadverts_load_assets_globally() ) {
+            wp_enqueue_style( 'wpadverts-blocks' );
+            wp_enqueue_script( 'wpadverts-block-details');
+        }
 
         $params = shortcode_atts(array(
             'name' => 'default',

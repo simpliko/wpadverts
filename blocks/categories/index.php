@@ -55,8 +55,8 @@ class Adverts_Block_Categories {
                 'editor_style' => 'wpadverts-blocks-categories',
                 'editor_script' => $js_handler,
                 'render_callback' => array( $this, "render" ),
-                'style' => 'wpadverts-blocks',
-                'script' => 'wpadverts-block-categories'
+                'style' => wpadverts_load_assets_globally() ? 'wpadverts-blocks' : null,
+                'script' => null
             )
         );
     }
@@ -74,6 +74,10 @@ class Adverts_Block_Categories {
 
         $atts = $this->handlePayload( $atts );
 
+        if( ! wpadverts_load_assets_globally() ) {
+            wp_enqueue_style( 'wpadverts-blocks' );
+        }
+        
         extract(shortcode_atts(array(
             'name' => 'default',
             'show' => 'top',

@@ -132,6 +132,12 @@ class Adext_Contact_Form_Block_Details {
         $show_form = $data["show_form"];
         $form_sent = $data["form_sent"];
 
+        if( isset( $flash["info"][0] ) ) {
+            $flash["success"] = $flash["info"];
+            $flash["success"][0]["icon"] = "fas fa-check";
+            $flash["info"] = array();
+        }
+
         $show_buttons = true;
 
         $loader = '<i class="fas fa-spinner atw-animate-spin atw-duration-1000 atw-text-xl"></i>';
@@ -156,9 +162,9 @@ class Adext_Contact_Form_Block_Details {
         ?>
 
         <?php if( adext_contact_form_get_to( $post_id ) ): ?>
-        <div id="wpadverts-block-contact-box" class="wpadverts-block-contact-box wpadverts-block-contact-box-toggle atw-bg-gray-50 atw-px-6" <?php if(!$show_form): ?>style="display: none"<?php endif ?>>
+        <div id="wpadverts-block-contact-box" class="wpadverts-block-contact-box wpadverts-block-contact-box-toggle atw-bg-gray-50 atw-px-6 atw-py-4" <?php if(!$show_form): ?>style="display: none"<?php endif ?>>
                             
-            <div class="atw-my-3 atw-mx-0 atw-pt-6 atw-pb-0 atw-font-bold atw-text-2xl"><?php _e( "Contact Seller", "wpadverts" ) ?></div>
+            <div class="atw-my-3 atw-mx-0 atw-pt-2 atw-pb-0 atw-font-bold atw-text-2xl"><?php _e( "Contact Seller", "wpadverts" ) ?></div>
 
             <?php if( $form_sent ): ?>
                 <?php echo wpadverts_block_flash( $flash, "big" ) ?>

@@ -127,7 +127,7 @@ function adverts_admin_page_extensions() {
                 ),
                 "styling" => array(
                     "title" => __( "Default Styles", "wpadverts"),
-                    "text" => __( "", "wpadverts" ),
+                    "text" => __( "Visually adjust forms and buttons styling for seamless integration with your theme.", "wpadverts" ),
                     "type" => "static",
                     "plugin" => null
                 )

@@ -407,6 +407,13 @@ function adverts_init() {
     
     Adverts::instance()->set( "block_manager", $block_manager );
     
+    include_once ADVERTS_PATH . "/blocks/class-block-patterns.php";
+    $block_patterns = new Adverts_Block_Patterns( );
+    $block_patterns->register_categories();
+    $block_patterns->register_patterns();
+    
+    Adverts::instance()->set( "block_patterns", $block_patterns );
+
     do_action("adverts_core_initiated");
 }
 

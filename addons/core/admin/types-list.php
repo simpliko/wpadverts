@@ -35,7 +35,7 @@
         
     <h2 class="">
         <?php echo esc_html( $data_type["title"] ) ?>
-        <!--a class="add-new-h2" href="#"><?php echo esc_html( $data_type["button_text"] ) ?></a-->
+        <?php do_action( "wpadverts_admin_types_after_title", $data_type ) ?>
     </h2>
     <table cellspacing="0" class="widefat post fixed">
         <?php foreach(array("thead", "tfoot") as $tx): ?>
@@ -84,6 +84,7 @@
     
     <h2 class="">
         <?php _e("Taxonomies", "wpadverts") ?>
+        <?php do_action( "wpadverts_admin_types_after_title", array( "button_text" => __( "+ New Taxonomy", "wpadverts" ), "type" => "taxonomy" ) ) ?>
     </h2>
     
     <table cellspacing="0" class="widefat post fixed">

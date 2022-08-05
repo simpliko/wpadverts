@@ -89,8 +89,9 @@ class Adverts_Types_Admin {
         return apply_filters( "wpadverts_classifieds_types", array( 
             "post_types" => array(
                 "title" => __("Classified Types", "wpadverts"),
-                "button_text" => __("+ New User Type", "wpadverts"),
-                "names" => wpadverts_get_post_types()
+                "button_text" => __("+ New Classified Type", "wpadverts"),
+                "names" => wpadverts_get_post_types(),
+                "type" => "classified"
             ),
         ));     
     }

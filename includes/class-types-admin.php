@@ -4,6 +4,36 @@ class Adverts_Types_Admin {
     
     public function render() {
         
+        $actions = apply_filters( "wpadverts_types_admin_actions", array(
+            "edit_post" => array( $this, "render_edit_post" ),
+            "edit_taxonomy" => array( $this, "render_edit_taxonomy" ),
+            "restore_post_type" => array( $this, "restore_post_type" ),
+            "restore_taxonomy" => array( $this, "restore_taxonomy" ),
+            "enable_auto_comments" => array( $this, "enable_auto_comments" ),
+            "list" => array( $this, "render_list" ),
+        ) );
+
+        if( adverts_request( "edit-post" ) ) {
+            $next_action = "edit_post";
+        } else if( adverts_request( "edit-taxonomy" ) ) {
+            $next_action = "edit_taxonomy";
+        } else if( adverts_request( "restore-post-type" ) ) {
+            $next_action = "restore_post_type";
+        } else if( adverts_request( "restore-taxonomy" ) ) {
+            $next_action = "restore_taxonomy";
+        } else if( adverts_request( "enable-auto-comments" ) ) {
+            $next_action = "enable_auto_comments";
+        } else {
+            $next_action = "list";
+        }
+
+        $next_action = apply_filters( "wpadverts_types_admin_next_action", $next_action );
+
+        if( isset( $actions[ $next_action ] ) && is_callable( $actions[ $next_action ] ) ) {
+            call_user_func( $actions[ $next_action ] );
+        }
+
+        /*
         if( adverts_request( "edit-post" ) ) {
             $this->render_edit_post();
         } else if( adverts_request( "edit-taxonomy" ) ) {
@@ -17,6 +47,7 @@ class Adverts_Types_Admin {
         } else {
             $this->render_list();
         }
+        */
     }
     
     public function render_list() {
@@ -41,8 +72,7 @@ class Adverts_Types_Admin {
         wp_enqueue_script( "adverts-types-post" );
         
         $post_type = get_post_type_object( adverts_request( "edit-post" ) );
-        
-        $dashicons = $this->_scan_dashicons();
+        $dashicons = null;
         
         if( ! isset( $_POST ) || empty( $_POST ) ) {
             list( $form_simple, $form_labels, $form_renderers ) = $this->_form_defaults( $post_type );
@@ -799,7 +829,7 @@ class Adverts_Types_Admin {
         return $form_scheme;
     }
     
-    protected function _scan_dashicons() {
+    public static function scan_dashicons() {
         
         $dashicons = array();
         $file_path = get_home_path() . 'wp-includes/css/dashicons.css';
@@ -827,5 +857,9 @@ class Adverts_Types_Admin {
         }
         
         return $dashicons;
+    }
+
+    public static function icon_picker() {
+        include ADVERTS_PATH . 'addons/core/admin/types-icon-picker.php';
     }
 }

@@ -3,6 +3,11 @@ jQuery(function($) {
     
     $(".wpadverts-types-edit-menu a").on("click", function(e) {
         e.preventDefault();
+
+        if($(this).hasClass("wpadverts-menu-disabled")) {
+            return;
+        }
+
         var tab = $(this).data("tab");
         
         $(".wpadverts-types-edit-menu li").removeClass("active");
@@ -115,8 +120,11 @@ jQuery(function($) {
     button.on("click", function(e) {
         e.preventDefault();
         $(".media-frame-content a").removeClass("button-primary");
-        $(".media-frame-content ." + $("#menu_icon").val() ).closest("a").addClass("button-primary");
-        
+
+        if($("#menu_icon").val().length > 0) {
+            $(".media-frame-content ." + $("#menu_icon").val() ).closest("a").addClass("button-primary");
+        }
+
         $(".wpadverts-admin-types-icon").show();
     });
 

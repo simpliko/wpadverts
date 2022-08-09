@@ -465,3 +465,157 @@ input[type=text].adverts-multiselect-input.adverts-multiselect-open {
 select[name="post_author"].authors option[value="0"] {
     /*display: none;*/
 }
+
+/* wp-admin / Classifieds / Options / Core / Types */
+
+#poststuff .wpadverts-types-edit {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+.wpadverts-types-edit-menu {
+    width: 250px;
+    margin:0;
+    line-height: 1em;
+    padding: 0 0 10px;
+    position: absolute;
+    background-color: #fafafa;
+    border-left: 1px solid #eee;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    
+}  
+
+.wpadverts-types-edit-menu > li {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.wpadverts-types-edit-menu > li > a {
+    margin: 0;
+    padding: 10px;
+    display: block;
+    box-shadow: none;
+    line-height: 20px!important;
+    border-bottom: 1px solid #eee;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+.wpadverts-types-edit-menu .wpadverts-menu-disabled,
+.wpadverts-types-edit-menu .wpadverts-menu-disabled:hover {
+    color:silver;
+    cursor:not-allowed
+}
+
+.wpadverts-types-edit-menu > li > a > .dashicons {
+    font-size: 14px;
+    vertical-align: baseline;
+    height: 18px;
+}
+.wpadverts-types-edit-menu > li > a > .dashicons:before {
+    font-size: 14px;
+}
+
+
+.wpadverts-types-edit-menu > li.active {
+    color: #555;
+    position: relative;
+    background-color: #eee;
+}
+
+.wpadverts-types-edit-menu > li:hover > a,
+.wpadverts-types-edit-menu > li.active > a {
+    color: #555;
+}
+
+.wpadverts-types-edit-form {
+    margin-right: 250px;
+}
+
+.wpadverts-types-edit-form .form-table {
+    margin: 0;
+    border-spacing: 12px;
+    border-collapse: separate;
+}
+.wpadverts-types-edit-form .form-table tr {
+    margin: 0;
+}
+.wpadverts-types-edit-form .form-table th {
+    margin:0;
+    padding: 6px 0 4px 0;
+    font-size: 13px;
+    color: #555;
+    font-weight: normal;
+}
+
+.wpadverts-types-edit-form .form-table td {
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+}
+
+
+
+.wpadverts-types-form-support th,
+.wpadverts-types-form-taxonomies th {
+    width: 0 !important;
+    display: none !important;
+}
+
+.wpadverts-admin-cursor-block,
+.wpadverts-admin-cursor-block input[type=checkbox] {
+    cursor: not-allowed !important;
+}
+
+.wpadverts-fcl-tr-rewrite_slug th,
+.wpadverts-fcl-tr-rewrite_slug td {
+    margin-bottom:10px;
+    padding-bottom: 10px;
+}
+
+.wpadverts-fcl-tr-_rewrite_slug th,
+.wpadverts-fcl-tr-_rewrite_slug td {
+    margin-top:0;
+    padding-top: 0;
+}
+
+.wpadverts-admin-types-icon .edit-attachment-frame .media-frame-title {
+    right:500px;
+}
+
+.wpadverts-admin-types-icon .dashicons {
+    line-height: 29px;
+}
+.wpadverts-admin-types-icon .media-frame-content {
+    padding: 16px;
+}
+
+.wpadverts-admin-types-icon .edit-attachment-frame .media-frame-content {
+    bottom: 62px;
+}
+
+.wpadverts-admin-types-icon-actions {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    border-top: 1px solid #ddd;
+    background: #f3f3f3;
+    padding: 16px;
+}
+
+.media-frame-content .button-secondary {
+    display: inline-block;
+    margin: 4px;
+}
+
+.wpadverts-admin-types-icon-search {
+    position: absolute;
+    right: 32px;
+    top: 9px;  
+}

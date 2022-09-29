@@ -3,9 +3,9 @@
 <div class="wrap">
     
     <h2 class="nav-tab-wrapper">
-        <a href="<?php esc_attr_e( remove_query_arg( array( 'adaction', 'edit-post' => false, 'edit-taxonomy' => false ) ) ) ?>" class="nav-tab"><?php _e("Core Options", "wpadverts") ?></a>
-        <a href="<?php esc_attr_e( add_query_arg( array('adaction' => 'gallery', 'edit-post' => false, 'edit-taxonomy' => false ) ) ) ?>" class="nav-tab "><?php _e("Gallery", "wpadverts") ?></a>
-        <a href="<?php esc_attr_e( add_query_arg( array('adaction' => 'types', 'edit-post' => false, 'edit-taxonomy' => false ) ) ) ?>" class="nav-tab nav-tab-active"><?php _e("Types", "wpadverts") ?></a>
+        <a href="<?php esc_attr_e( remove_query_arg( array( 'adaction', 'edit-post' => false, 'edit-user' => false, 'edit-taxonomy' => false ) ) ) ?>" class="nav-tab"><?php _e("Core Options", "wpadverts") ?></a>
+        <a href="<?php esc_attr_e( add_query_arg( array('adaction' => 'gallery', 'edit-post' => false, 'edit-user' => false, 'edit-taxonomy' => false ) ) ) ?>" class="nav-tab "><?php _e("Gallery", "wpadverts") ?></a>
+        <a href="<?php esc_attr_e( add_query_arg( array('adaction' => 'types', 'edit-post' => false, 'edit-user' => false, 'edit-taxonomy' => false ) ) ) ?>" class="nav-tab nav-tab-active"><?php _e("Types", "wpadverts") ?></a>
         <a href="<?php esc_attr_e( add_query_arg( array('adaction' => 'moderate') ) ) ?>" class="nav-tab "><?php _e("Spam", "wpadverts") ?></a>
     </h2>
     
@@ -19,7 +19,7 @@
     
     <?php adverts_admin_flash() ?>
     
-    <?php if( $supports_comments && $without_comments > 0 ): ?>
+    <?php if( isset( $supports_comments ) && $supports_comments && $without_comments > 0 ): ?>
     <div class="update-message notice inline notice-info notice-alt" style="padding:8px 8px">
         <span style="color:#004991;line-height:2rem;"><?php echo sprintf( __("There are <strong>%d</strong> published ads with comments disabled.", "wpadverts" ), $without_comments ) ?> <a href="<?php echo esc_url( $enable_url ) ?>" style="margin-left:8px" class="button-secondary"><?php _e( "Enable comments for these ads now", "wpadverts" ) ?></a></span>
     </div>

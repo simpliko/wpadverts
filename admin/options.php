@@ -72,7 +72,7 @@
 }
 
 .adverts-options-item-title .wpadverts-item-icon {
-    filter: invert(70%) sepia(9%) saturate(103%) hue-rotate(169deg) brightness(96%) contrast(88%);
+    filter: brightness(0) saturate(100%) invert(23%) sepia(93%) saturate(1063%) hue-rotate(179deg) brightness(100%) contrast(88%);
 }
 
 @media screen and (max-width:430px) {
@@ -92,7 +92,7 @@
 <?php foreach($module_groups as $mg_name => $group): ?>
 <div class="wpadverts-module-group">
 
-    <span class="wpadverts-module-group-title"><?php esc_html_e($group["title"]) ?></span>
+    <span class="wpadverts-module-group-title"><?php echo esc_html($group["title"]) ?></span>
 </div>
 
 <div class="adverts-options">
@@ -101,16 +101,30 @@
     <div class="adverts-options-wrap">
         <div class="adverts-options-item">
             <h3 class="adverts-options-item-title">
-                <img class="wpadverts-item-icon" src="https://wpadverts.com/wp-content/themes/red-dune/docs/contact-form.svg" height="24" alt="" />
-                <span><?php esc_html_e($data["title"]) ?></span>
+                
+                <?php 
+                    $icon_url = "";
+                    $default_icon_path = "%s/assets/images/options/%s.svg";
+                    if( isset( $data["icon_url"] ) ) {
+                        $icon_url = $data["icon_url"];
+                    } else if( file_exists( sprintf( $default_icon_path, ADVERTS_PATH, $key ) ) ) {
+                        $icon_url = sprintf( $default_icon_path, ADVERTS_URL, $key );
+                    } 
+                ?>
+
+                <?php if( $icon_url ): ?>
+                <img class="wpadverts-item-icon" src="<?php echo esc_attr( $icon_url ) ?>" height="24" alt="" />
+                <?php endif; ?>
+
+                <span><?php echo esc_html($data["title"]) ?></span>
             </h3>
-            <p><?php esc_html_e($data["text"]) ?></p>
+            <p><?php echo esc_html($data["text"]) ?></p>
         </div>
         <div class="adverts-options-actions">
             <?php if($data["type"]=="static"): ?>
             
                 <em><?php _e("Cannot be disabled", "wpadverts") ?></em>
-                <a href="<?php esc_attr_e( add_query_arg( array( 'module'=>$key ) ) ) ?>" class="button-primary"><?php _e("Settings") ?></a>
+                <a href="<?php echo esc_attr( add_query_arg( array( 'module'=>$key ) ) ) ?>" class="button-primary"><?php _e("Settings") ?></a>
 
             <?php elseif($data["plugin"]): ?>
             
@@ -118,12 +132,12 @@
             
                 <?php if( is_plugin_active( $data["plugin"] ) ): ?>
                     <em><?php _e( "Addon Uploaded and Activated", "wpadverts") ?></em>
-                    <a href="<?php esc_attr_e( add_query_arg( array( 'module'=>$key ) ) ) ?>" class="button-primary"><?php _e("Settings") ?></a>
+                    <a href="<?php echo esc_attr( add_query_arg( array( 'module'=>$key ) ) ) ?>" class="button-primary"><?php _e("Settings") ?></a>
                 <?php elseif( adverts_plugin_uploaded( $data["plugin"] ) ): ?>
                     <em><?php _e( "Addon Uploaded but Inactive", "wpadverts") ?></em>
-                    <a href="<?php esc_attr_e( admin_url( 'plugins.php?plugin_status=inactive' ) ) ?>" class="button-primary"><?php _e("Activate") ?></a>
+                    <a href="<?php echo esc_attr( admin_url( 'plugins.php?plugin_status=inactive' ) ) ?>" class="button-primary"><?php _e("Activate") ?></a>
                 <?php else: ?>
-                    <a href="<?php esc_attr_e( $data["purchase_url"]) ?>" class="button-secondary">
+                    <a href="<?php echo esc_attr( $data["purchase_url"]) ?>" class="button-secondary">
                         <strong><?php _e("Get This Addon", "wpadverts") ?></strong>
                         <span class="dashicons dashicons-cart" style="font-size:18px; line-height: 24px"></span>
                     </a>
@@ -132,10 +146,10 @@
             <?php else: ?>
             
                 <?php if(isset($module[$key])): ?>
-                <a href="<?php esc_attr_e( add_query_arg( array( 'module'=>$key ) ) ) ?>" class="button-primary"><?php _e("Settings") ?></a>
-                <a href="<?php esc_attr_e( add_query_arg( array( 'disable'=>$key, "noheader"=>1 ) ) ) ?>" class="button-secondary" style="margin-right:4px"><?php _e("Disable", "wpadverts") ?></a>
+                <a href="<?php echo esc_attr( add_query_arg( array( 'module'=>$key ) ) ) ?>" class="button-primary"><?php _e("Settings") ?></a>
+                <a href="<?php echo esc_attr( add_query_arg( array( 'disable'=>$key, "noheader"=>1 ) ) ) ?>" class="button-secondary" style="margin-right:4px"><?php _e("Disable", "wpadverts") ?></a>
                 <?php else: ?>
-                <a href="<?php esc_attr_e( add_query_arg( array( 'enable'=>$key, "noheader"=>1 ) ) ) ?>" class="button-secondary"><?php _e("Enable") ?></a>
+                <a href="<?php echo esc_attr( add_query_arg( array( 'enable'=>$key, "noheader"=>1 ) ) ) ?>" class="button-secondary"><?php _e("Enable") ?></a>
                 <?php endif; ?>
             
             <?php endif; ?>

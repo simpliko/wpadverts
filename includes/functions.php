@@ -3431,6 +3431,10 @@ function wpadverts_get_post_types() {
     return apply_filters( "wpadverts_get_post_types", array( "advert" ) );
 }
 
+function wpadverts_get_user_types() {
+    return apply_filters( "wpadverts_get_user_types", array( ) );
+}
+
 /**
  * Preserve Ad author
  * 

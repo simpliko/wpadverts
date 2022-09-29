@@ -6,8 +6,10 @@ class Adverts_Types_Admin {
         
         $actions = apply_filters( "wpadverts_types_admin_actions", array(
             "edit_post" => array( $this, "render_edit_post" ),
+            "edit_user" => array( $this, "render_edit_user" ),
             "edit_taxonomy" => array( $this, "render_edit_taxonomy" ),
             "restore_post_type" => array( $this, "restore_post_type" ),
+            "restore_user_type" => array( $this, "restore_user_type" ),
             "restore_taxonomy" => array( $this, "restore_taxonomy" ),
             "enable_auto_comments" => array( $this, "enable_auto_comments" ),
             "list" => array( $this, "render_list" ),
@@ -15,10 +17,14 @@ class Adverts_Types_Admin {
 
         if( adverts_request( "edit-post" ) ) {
             $next_action = "edit_post";
+        } else if( adverts_request( "edit-user") ) {
+            $next_action = "edit_user";
         } else if( adverts_request( "edit-taxonomy" ) ) {
             $next_action = "edit_taxonomy";
         } else if( adverts_request( "restore-post-type" ) ) {
-            $next_action = "restore_post_type";
+            $next_action = "restore_post_type";        
+        } else if( adverts_request( "restore-usert-type" ) ) {
+            $next_action = "restore_user_type";
         } else if( adverts_request( "restore-taxonomy" ) ) {
             $next_action = "restore_taxonomy";
         } else if( adverts_request( "enable-auto-comments" ) ) {
@@ -52,36 +58,52 @@ class Adverts_Types_Admin {
     
     public function render_list() {
         
-        $post_types = wpadverts_get_post_types();
         $taxonomies = array();
         
-        foreach( $post_types as $post_type ) {
+        foreach( wpadverts_get_post_types() as $post_type ) {
+            $taxonomies = array_merge( $taxonomies, get_object_taxonomies( $post_type ) );
+        }        
+        foreach( wpadverts_get_user_types() as $post_type ) {
             $taxonomies = array_merge( $taxonomies, get_object_taxonomies( $post_type ) );
         }
         
+        $registered_taxes = get_option( "wpadverts_taxonomies" );
+
+        if( is_array( $registered_taxes ) ) {
+            foreach( $registered_taxes as $reg_tax ) {
+                if( isset( $reg_tax["name"] ) && taxonomy_exists( $reg_tax["name"] ) ) {
+                    $taxonomies[] = $reg_tax["name"];
+                }
+            }
+        }
+
         $taxonomies = array_unique( $taxonomies );
         sort( $taxonomies );
-        
-        
-        
+
         include ADVERTS_PATH . 'addons/core/admin/types-list.php';
     }
     
     public function render_edit_post() {
+        $this->_render_edit_cpt( "post_types", get_post_type_object( adverts_request( "edit-post" ) ) );
+    }
+
+    public function render_edit_user() {
+        $this->_render_edit_cpt( "user_types", get_post_type_object( adverts_request( "edit-user" ) ) );
+    }
+
+    protected function _render_edit_cpt( $types, $post_type ) {
         
         wp_enqueue_script( "adverts-types-post" );
-        
-        $post_type = get_post_type_object( adverts_request( "edit-post" ) );
         $dashicons = null;
         
         if( ! isset( $_POST ) || empty( $_POST ) ) {
-            list( $form_simple, $form_labels, $form_renderers ) = $this->_form_defaults( $post_type );
+            list( $form_simple, $form_labels, $form_renderers ) = $this->_form_defaults( $post_type, $types );
         } else {
-            list( $form_simple, $form_labels, $form_renderers ) = $this->_form_update( $post_type );
+            list( $form_simple, $form_labels, $form_renderers ) = $this->_form_update( $post_type, $types );
         }
         
         $h2_title = sprintf( __("Edit '%s'", "wpadverts"), $post_type->label );
-        $restore_url = $this->_get_post_type_restore_url( $post_type->name );
+        $restore_url = $this->_get_post_type_restore_url( $post_type->name, "restore-post-type" );
         $button_text = __( "Update", "wpadverts" );
         
         $supports = $form_simple->get_value( "supports" );
@@ -142,11 +164,12 @@ class Adverts_Types_Admin {
         ) );
     }
     
-    protected function _get_post_type_restore_url( $post_type ) {
+    protected function _get_post_type_restore_url( $post_type, $restore_param ) {
+
         return add_query_arg( array( 
             "edit-post" => false, 
             "noheader" => 1, 
-            "restore-post-type" => $post_type, 
+            $restore_param => $post_type, 
             "_nonce" => wp_create_nonce( "wpadverts-data-type-restore" ) 
         ) );
     }
@@ -169,10 +192,15 @@ class Adverts_Types_Admin {
         return $wpdb->get_var( $prep );
     }
     
-    public function restore_post_type() {
-        $post_type = adverts_request( "restore-post-type" );
-        
-        $supported_cpt = wpadverts_get_post_types();
+    public function restore_user_type( ) {
+        $this->_restore_type( "user_types", adverts_request( "restore-post-type" ), wpadverts_get_user_types() );
+    }
+
+    public function restore_post_type( $types = "post_types") {
+        $this->_restore_type( "post_types", adverts_request( "restore-user-type" ), wpadverts_get_post_types() );
+    }
+
+    protected function _restore_type( $types, $post_type, $supported_cpt ) {
         
         if( ! wp_verify_nonce( adverts_request( "_nonce" ), "wpadverts-data-type-restore" ) ) {
             wp_die( __( "Invalid nonce.", "wpadverts" ) );
@@ -182,19 +210,18 @@ class Adverts_Types_Admin {
             wp_die( __( "You are trying to restore unsupported post type.", "wpadverts" ) );
         }
         
-        $option = get_option( "wpadverts_post_types" );
+        $option = get_option( sprintf( "wpadverts_%s", $types ) );
         
         if( is_array( $option ) && isset( $option[$post_type] ) ) {
             unset( $option[$post_type] );
         }
         
-        update_option( "wpadverts_post_types", $option );
-        
+        update_option( sprintf( "wpadverts_%s", $types ), $option );
         
         $flash = Adverts_Flash::instance();
         $flash->add_info( __( "Classified configuration restored to default.", "wpadverts" ) );
         
-        wp_redirect( remove_query_arg( array( "noheader", "restore-post-type", "_nonce" ) ) );
+        wp_redirect( remove_query_arg( array( "noheader", "restore-post-type", "restore-user-type", "_nonce" ) ) );
         exit;
     }
     
@@ -269,12 +296,12 @@ class Adverts_Types_Admin {
         exit;
     }
     
-    protected function _form_defaults( $post_type ) {
+    protected function _form_defaults( $post_type, $types = "post_types" ) {
         
         $form_simple = new Adverts_Form();
         $form_simple->load( $this->_edit_post_form_simple( $post_type ) );
         
-        $option = get_option( "wpadverts_post_types" );
+        $option = get_option(  sprintf( "wpadverts_%s", $types )  );
         $comments_auto_enable = 0;
         
         $pt = $post_type->name;
@@ -297,7 +324,7 @@ class Adverts_Types_Admin {
         $form_simple->bind( $bind_default );
         
         $form_labels = new Adverts_Form();
-        $form_labels->load( $this->_edit_post_form_labels( $post_type ) );
+        $form_labels->load( $this->_edit_post_form_labels( $post_type, $types ) );
 
         $form_renderers = new Adverts_Form();
         $form_renderers->load( $this->_edit_form_renderers( "post", $post_type->name ) );
@@ -356,7 +383,7 @@ class Adverts_Types_Admin {
         return array( $form_simple, $form_labels, $form_renderers );
     }
     
-    protected function _form_update( $post_type ) {
+    protected function _form_update( $post_type, $types = "post_types" ) {
         
         if( ! isset( $_POST ) || empty( $_POST ) ) {
             return;
@@ -375,7 +402,7 @@ class Adverts_Types_Admin {
             return $form_simple;
         }
         
-        $option = get_option( "wpadverts_post_types" );
+        $option = get_option( sprintf( "wpadverts_%s", $types ) );
         
         if( ! is_array( $option ) ) {
             $option = array();
@@ -393,10 +420,9 @@ class Adverts_Types_Admin {
             "pages" => 1,
             "ep_mask" => 1
         );
-        $values["labels"] = array( "name" => $values["label"] );
-        
+
         $form_labels = new Adverts_Form();
-        $form_labels->load( $this->_edit_post_form_labels( $post_type ) );
+        $form_labels->load( $this->_edit_post_form_labels( $post_type, $types ) );
         
         $form_labels->bind( stripslashes_deep( $_POST ) );
         $labels_all = $form_labels->get_values();
@@ -408,8 +434,8 @@ class Adverts_Types_Admin {
         unset( $values["rewrite_slug"] );
 
         $option[ $post_type->name ] = $values;
-        
-        update_option( "wpadverts_post_types", $option );
+
+        update_option( sprintf( "wpadverts_%s", $types ), $option );
         
         $form_renderers = new Adverts_Form();
         $form_renderers->load( $this->_edit_form_renderers( "post", $post_type->name ) );
@@ -458,7 +484,6 @@ class Adverts_Types_Admin {
         $values = $form_simple->get_values();
         $values["__connect_to"] = $form_simple->get_value( "__connect_to", array() );
         $values["hierarchical"] = isset( $values["hierarchical"] ) ? $values["hierarchical"] : 0;
-        $values["menu_position"] = $values["menu_position"];
         
         $rewrite_slug = trim( $form_simple->get_value( "rewrite_slug", $taxonomy->name ) );
         $rewrite_h = absint( $form_simple->get_value( "rewrite_hierarchical", 0 ) );
@@ -471,8 +496,7 @@ class Adverts_Types_Admin {
             "hierarchical" => $rewrite_hierarchical,
             "ep_mask" => 1
         );
-        $values["labels"] = array( "name" => $values["label"] );
-        
+
         $form_labels = new Adverts_Form();
         $form_labels->load( $this->_edit_taxonomy_form_labels( $taxonomy ) );
         
@@ -712,7 +736,7 @@ class Adverts_Types_Admin {
         return $form_scheme;
     }
     
-    protected function _edit_post_form_labels( $post_type ) {
+    protected function _edit_post_form_labels( $post_type, $types = "post_types" ) {
         
         $form_scheme = array(
             "name" => "types-post-labels",
@@ -723,7 +747,7 @@ class Adverts_Types_Admin {
         $labels_default = get_post_type_labels( $post_type_object );
 
         $labels = array();
-        $option = get_option( "wpadverts_post_types" );
+        $option = get_option( sprintf( "wpadverts_%s", $types ) );
         
         if( isset( $option[ $post_type->name ] ) && isset( $option[ $post_type->name ]["labels"] ) ) {
             $labels = $option[ $post_type->name ]["labels"];

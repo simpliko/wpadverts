@@ -842,7 +842,16 @@ function adverts_is_spam( $data, $params = null ) {
         $trash_arr = array_map( "trim", explode( "\n", $phrases_trash ) );
         
         foreach( $trash_arr as $trash_phrase ) {
-            if( stripos( $data, $trash_phrase ) !== false ) {
+
+            $match_type = adverts_config( "moderate.phrases_match_type");
+
+            if( $match_type == "exact" ) {
+                $found_spam = preg_match( sprintf( '/\b(%s)\b/', $phrases_trash ), $data ) === 1;
+            } else {
+                $found_spam = stripos( $data, $trash_phrase ) !== false;
+            }
+
+            if( $found_spam ) {
                 return "bad_words";
             }
         }

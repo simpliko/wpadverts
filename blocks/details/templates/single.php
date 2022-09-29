@@ -25,7 +25,7 @@
                 </div>
                 <div class="atw-block">
                     <span class="atw-text-gray-500 atw-text-base">
-                    <?php printf( __('Published %1$s - %2$s ago', "wpadverts"), date_i18n( 'd/m/Y' /*get_option( 'date_format' )*/, get_post_time( 'U', false, $post_id ) ), human_time_diff( get_post_time( 'U', false, $post_id ), current_time('timestamp') ) ) ?>
+                    <?php printf( __('Published %1$s - %2$s ago', "wpadverts"), wpadverts_block_details_post_date( $post_id), human_time_diff( get_post_time( 'U', false, $post_id ), current_time('timestamp') ) ) ?>
                     </span>
                 </div>
                 

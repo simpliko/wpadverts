@@ -427,6 +427,19 @@ function wpadverts_get_object_pattern( $object_id, $pattern ) {
     return null;
 }
 
+function wpadverts_get_object_taxonomy( $object_id, $path ) {
+    $p = explode( "__", $path );
+
+    $terms = get_the_terms( $object_id, $p[1] );
+    $content = "";
+
+    foreach($terms as $c) {
+        $content .= apply_filters( "wpadverts/block/object/taxonomy/term", sprintf( '<div>%s</div>', $c->name ), $c ); 
+    }
+
+    return apply_filters( "wpadverts/block/object/taxonomy", $content, $terms );
+}
+
 function wpadverts_get_object_value( $object_id, $path ) {
     $advert = get_post( $object_id );
 
@@ -442,6 +455,8 @@ function wpadverts_get_object_value( $object_id, $path ) {
         $value = get_post_meta( $object_id, $name, true );
     } else if( $type == "pattern" ) {
         $value = wpadverts_get_object_pattern( $object_id, $path );
+    } else if( $type == "taxonomy" ) {
+        $value = wpadverts_get_object_taxonomy( $object_id, $path );
     }
 
     return $value;
@@ -471,7 +486,13 @@ function wpadverts_block_list_price( $post_id ) {
 }
 
 function wpadverts_block_list_post_date( $post_id ) {
-    return date_i18n( "d/m/Y", get_post_time( 'U', false, $post_id ) );
+    $date_format = apply_filters( "wpadverts/block/date-format", adverts_config( "block_date_format" ), "list" );
+    return date_i18n( $date_format, get_post_time( 'U', false, $post_id ) );
+}
+
+function wpadverts_block_details_post_date( $post_id ) {
+    $date_format = apply_filters( "wpadverts/block/date-format", adverts_config( "block_date_format" ), "details" );
+    return date_i18n( $date_format, get_post_time( 'U', false, $post_id ) );
 }
 
 function wpadverts_block_tpl_field_width( $field ) {

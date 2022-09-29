@@ -165,8 +165,8 @@ function shortcode_adverts_list( $atts ) {
         'orderby' => $orderby
     ), $params);
 
-    if( ( $category || isset( $params["tax__advert_category"] ) ) && is_tax( 'advert_category' ) ) {
-        $pbase = get_term_link( get_queried_object()->term_id, 'advert_category' );
+    if( is_tax( get_object_taxonomies( 'advert' ) ) ) {
+        $pbase = get_term_link( get_queried_object()->term_id );
     } else {
         $pbase = get_the_permalink();
     }

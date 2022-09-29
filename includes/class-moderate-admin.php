@@ -32,6 +32,7 @@ class Adverts_Moderate_Admin {
                 "max_links" => adverts_request( "max_links" ),
                 "phrases_moderate" => adverts_request( "phrases_moderate" ),
                 "phrases_trash" => adverts_request( "phrases_trash" ),
+                "phrases_match_type" => adverts_request( "phrases_match_type" ),
 
                 "honeypot_enabled" => $honeypot_enabled,
                 "honeypot_title" => adverts_request( "honeypot_title" ),
@@ -57,6 +58,7 @@ class Adverts_Moderate_Admin {
                 "max_links" => adverts_config( "moderate.max_links" ),
                 "phrases_moderate" => adverts_config( "moderate.phrases_moderate" ),
                 "phrases_trash" => adverts_config( "moderate.phrases_trash" ),
+                "phrases_match_type" => adverts_config( "moderate.phrases_match_type" ),
 
                 "honeypot_enabled" => adverts_config( "moderate.honeypot_enabled" ),
                 "honeypot_title" => adverts_config( "moderate.honeypot_title" ),
@@ -102,11 +104,25 @@ class Adverts_Moderate_Admin {
                     "mode" => "plain-text",
                     "label" => __( "Blacklisted Phrases", "wpadverts" ),
                     "hint" => join( "<br/><br/>", array(
-                        __( 'When a classified contains any of these words in its content, it will return an error message. One word or phrase per line. It will match inside words, so “press” will match “WordPress”.', "wpadverts" ),
+                        __( 'When a classified contains any of these words in its content, it will return an error message. One word or phrase per line.', "wpadverts" ),
                         __( 'HINT: Jeff Starr from PerishablePress.com compiled a great <a href="https://perishablepress.com/wp/wp-content/online/code/wordpress-ultimate-comment-blacklist.txt">list of common spam phrases</a>.', 'wpadverts' )
                         )),
                     "order" => 4,
                     "class" => "large-text code"
+                ),
+                array(
+                    "type" => "adverts_field_select",
+                    "name" => "phrases_match_type",
+                    "label" => __( "Phrases Matching", "wpadverts" ),
+                    "options" => array(
+                        array( "value" => "partial", "text" => __( "Match partial phrases" ) ),
+                        array( "value" => "exact", "text" => __( "Match exact phrases" ) ),
+                    ),
+                    "hint" => join( "<br/>", array(
+                        __( '<em>Partial Matching</em> will match inside words, so “press” will match “WordPress”.', "wpadverts"),
+                        __( '<em>Exact Matching</em> will match whole words, so “press” will NOT match “WordPress”.')
+                    )),
+                    "order" => 5
                 ),
                 
                 array(

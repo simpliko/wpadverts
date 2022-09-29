@@ -229,9 +229,9 @@ function adverts_dropdown_pages( $field ) {
     $args = array(
         'selected' => $value, 
         'echo' => 1,
-	'name' => $field["name"], 
+	    'name' => $field["name"], 
         'id' => $id,
-	'show_option_none' => ' ',
+	    'show_option_none' => ' ',
         'option_none_value' => 0
     );
     
@@ -286,6 +286,19 @@ Adverts::instance()->set("form_core_config", array(
             "label" => __("Empty Price Text", "wpadverts"),
             "hint" => __("The text to display instead of price if item price was not provided.", "wpadverts"),
             "validator" => array()
+        ),        
+        array(
+            "name" => "block_date_format",
+            "type" => "adverts_field_text",
+            "order" => 10,
+            "label" => __("Date Format", "wpadverts"),
+            "hint" => __("This date format will be used on the ads list and details pages.", "wpadverts"),
+            "attr" => array(
+                "placeholder" => "d/m/Y"
+            ),
+            "validator" => array( 
+                array( "name" => "is_required" )
+            )
         ),
         array(
             "name" => "hide_images_in_media_library",

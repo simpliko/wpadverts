@@ -178,7 +178,7 @@ class Adverts_Block_List {
 
         $args = apply_filters( "adverts_list_query", array( 
             'author' => $author,
-            'post_type' => 'advert', 
+            'post_type' => $atts["post_type"], 
             'post_status' => 'publish',
             'posts_per_page' => $posts_per_page, 
             'paged' => $paged,
@@ -188,8 +188,8 @@ class Adverts_Block_List {
             'orderby' => $orderby
         ), $params);
 
-        if( ( $category || isset( $params["tax__advert_category"] ) ) && is_tax( 'advert_category' ) ) {
-            $pbase = get_term_link( get_queried_object()->term_id, 'advert_category' );
+        if( is_tax( get_object_taxonomies( $atts["post_type"] ) ) ) {
+            $pbase = get_term_link( get_queried_object()->term_id );
         } else {
             $pbase = get_the_permalink();
         }

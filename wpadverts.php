@@ -5,7 +5,7 @@
  * Description: The lightweight WordPress classifieds plugin done right.
  * Author: Greg Winiarski
  * Text Domain: wpadverts
- * Version: 2.0.1
+ * Version: 2.0.2
  * 
  * Adverts is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -68,7 +68,8 @@ $adverts_namespace['config'] = array(
         'empty_price' => '',
         'hide_images_in_media_library' => 0,
         'delete_from_media_library' => 0,
-        'adverts_manage_moderate' => 0
+        'adverts_manage_moderate' => 0,
+        'block_date_format' => 'd/m/Y'
         
     )
 );
@@ -99,6 +100,7 @@ $adverts_namespace['moderate'] = array(
         "max_links" => "",
         "phrases_moderate" => "",
         "phrases_trash" => "",
+        "phrases_match_type" => "partial",
         
         "honeypot_enabled" => "1",
         "honeypot_title" => "Website Address",

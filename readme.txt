@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classified script, classifieds sc
 Requires PHP: 5.6
 Requires at least: 5.7
 Tested up to: 6.0
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -124,12 +124,20 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
+= 2.0.3 - 2022-10-20 =
+
+* FIXED: allow_sorting param not working correctly in the Classifieds Manage block.
+* FIXED: Error when saving a custom taxonomy in the wp-admin / Classifieds / Options / Types panel without the "labels".
+* FIXED: Error when saving a custom post type in the wp-admin / Classifieds / Options / Types panel without the "labels".
+
 = 2.0.2 - 2022-10-04 =
 
 * FEATURE: Redesigned wp-admin / Classifieds / Options panel.
+* FEATURE: Added block pattern that allows displaying Classifieds / Search and Classifieds List blocks next to each other
 * FEATURE: Switch beteween different options for matching blacklisted words in the wp-admin / Classifieds / Options / Core / SPAM panel.
 * FEATURE: In the wp-admin / Classifieds / Options / Core you can set a custom date format for Classifieds / List and Classifieds / Details blocks.
 * FEATURE: API changes in the wp-admin / Classifieds / Options / Types panel to prepare the plugin for use with the upcoming Multiverse extension.
+* FIXED: allow_sorting notice showing in the Classifieds / Manage block in the frontend.
 * FIXED: Pagination (in [adverts_list] and Classifieds / List block) not working correctly on custom taxonomy pages.
 * FIXED: When selecting a taxonomy for display in the Classifieds / List block the taxonomy title did not show in the block.
 

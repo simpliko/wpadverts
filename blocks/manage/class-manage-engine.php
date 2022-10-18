@@ -93,6 +93,7 @@ class Adverts_Block_Manage_Engine {
             'name' => 'default',
             'paged' => adverts_request("pg", 1),
             'posts_per_page' => 20,
+            'allow_sorting' => true
         ), $atts));
         
         $sort_options = $this->get_sort_options();

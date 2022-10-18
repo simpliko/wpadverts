@@ -29,7 +29,7 @@ class Adverts_Types {
             return $args;
         }
 
-        if( isset( $args["labels" ] ) ) {
+        if( isset( $args["labels" ] ) && isset( $option[$post_type]["labels"] ) && is_array( $option[$post_type]["labels"]) ) {
             $labels = array_merge( $args["labels"], $option[ $post_type ]["labels"] );
         } else {
             $labels = array();
@@ -67,7 +67,7 @@ class Adverts_Types {
             return $args;
         }
 
-        if( isset( $args["labels" ] ) ) {
+        if( isset( $args["labels" ] ) && isset( $option[ $taxonomy ]["labels"] ) && is_array( $option[ $taxonomy ]["labels"] ) ) {
             $labels = array_merge( $args["labels"], $option[ $taxonomy ]["labels"] );
         } else {
             $labels = array();

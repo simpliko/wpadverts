@@ -4,8 +4,8 @@ Contributors: gwin
 Tags: classifieds, classified, classified ads, classified script, classifieds script, wp classified, wp classifieds
 Requires PHP: 5.6
 Requires at least: 5.7
-Tested up to: 6.0
-Stable tag: 2.0.3
+Tested up to: 6.1
+Stable tag: 2.0.4
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -123,6 +123,12 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 2.0.4 - 2022-11-29 =
+
+* FIXED: Reveal phone button not working when no image is uploaded to the gallery.
+* FIXED: Some phrases in block templates not marked correctly for translation.
+* FIXED: Internal server error when scheduling an advert from the wp-admin panel.
 
 = 2.0.3 - 2022-10-20 =
 

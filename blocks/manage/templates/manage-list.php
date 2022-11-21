@@ -138,7 +138,7 @@ $grid_cols = sprintf("%s %s", $grid_cols_arr[ $atts["grid_columns_mobile"] ], $g
             <div class="">
                 <span>
                     <strong class="atw-text-gray-700 atw-text-base"><?php echo $loop->found_posts ?></strong> 
-                    <span class="atw-text-gray-500 atw-text-base">results found.</span>
+                    <span class="atw-text-gray-500 atw-text-base"><?php _e("results found.", "wpadverts") ?></span>
                 </span>
             </div>
 
@@ -163,16 +163,16 @@ $grid_cols = sprintf("%s %s", $grid_cols_arr[ $atts["grid_columns_mobile"] ], $g
             <div class="atw-flex-1 atw-flex atw-flex-col atw-items-center">
                 
                 <span class="wpa-flash-message atw-flex-1 atw-font-bold atw-py-3"><?php _e( "No results found.", "wpadverts" ) ?></span>
-                <span class="wpa-flash-message atw-flex-1 atw-pb-3"><?php _e( "You do not have any items posted yet.") ?></span>  
+                <span class="wpa-flash-message atw-flex-1 atw-pb-3"><?php _e( "You do not have any items posted yet.", "wpadverts") ?></span>  
                 
                 <span class="atw-flex atw-flex-row atw-pb-3 atw-w-full atw-flex-col md:atw-flex-row">
 
                     <!--form action="" class="atw-p-3 atw-flex-grow">
-                        <?php wpadverts_block_button( array( "text" => "Publish your first Ad", "type" => "secondary" )); ?>
+                        <?php wpadverts_block_button( array( "text" => __("Publish your first Ad", "wpadverts"), "type" => "secondary" )); ?>
                     </form-->
 
                     <form action="<?php echo get_permalink( adverts_config( "ads_list_id" ) ) ?>" class="atw-p-3 atw-flex-grow" method="get">
-                        <?php wpadverts_block_button( array( "text" => "View ads list", "type" => "secondary", "action" => "submit" )); ?>
+                        <?php wpadverts_block_button( array( "text" => __("View ads list","wpadverts"), "type" => "secondary", "action" => "submit" )); ?>
                     </form>
                 </span>
                 

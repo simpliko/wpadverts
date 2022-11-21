@@ -210,7 +210,7 @@ jQuery(function($) {
 /* BLOCK CONTACT DETAILS */
 
 jQuery(function($) {
-    $(".wpadverts-reveal-phone").on("click", function(e) {
+    $(".adverts-button.wpadverts-reveal-phone").on("click", function(e) {
         e.preventDefault();
 
         if($(this).find(".wpadverts-phone-reveal").length > 0) {
@@ -219,15 +219,6 @@ jQuery(function($) {
 
         var phone = $(this).data("ph1") + "" + $(this).data("ph2");
         location.href='tel:'+phone;
-    });
-    $(".wpadverts-phone-reveal").on("click", function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        var wrap = $(this).closest(".wpadverts-reveal-phone");
-        var phone = wrap.find(".wpadverts-phone").data("ph1") + "" + wrap.data("ph2");
-
-        wrap.find(".wpadverts-phone").hide().text(phone).fadeIn("slow");
-        $(this).remove();
     });
 
     $(".adverts-button.wpadverts-show-contact-form").on("click", function(e) {

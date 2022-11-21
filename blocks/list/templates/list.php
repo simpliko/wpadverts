@@ -136,7 +136,7 @@ $grid_cols = sprintf("%s %s", $grid_cols_arr[ $atts["grid_columns_mobile"] ], $g
             <div class="">
                 <span>
                     <strong class="atw-text-gray-700 atw-text-base"><?php echo $loop->found_posts ?></strong> 
-                    <span class="atw-text-gray-500 atw-text-base">results found.</span>
+                    <span class="atw-text-gray-500 atw-text-base"><?php _e("results found.", "wpadverts" ) ?></span>
                 </span>
             </div>
 
@@ -158,8 +158,8 @@ $grid_cols = sprintf("%s %s", $grid_cols_arr[ $atts["grid_columns_mobile"] ], $g
                 <i class="fas fa-search atw-text-4xl atw-text-center atw-text-gray-500"></i>
             </div>
             <div class="">
-                <span class="atw-inline-block atw-w-full atw-text-center atw-text-lg atw-font-bold atw-p-0 atw-pt-2 atw-text-gray-700">No results found.</span>
-                <span class="atw-inline-block atw-w-full atw-text-center ate-text-base atw-p-0">There aren't any results matching your search query.</span>
+                <span class="atw-inline-block atw-w-full atw-text-center atw-text-lg atw-font-bold atw-p-0 atw-pt-2 atw-text-gray-700"><?php _e("No results found.", "wpadverts") ?></span>
+                <span class="atw-inline-block atw-w-full atw-text-center ate-text-base atw-p-0"><?php _e("There aren't any results matching your search query.", "wpadverts") ?></span>
             </div>
         </div>
         <?php endif; ?>

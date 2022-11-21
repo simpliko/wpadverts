@@ -38,7 +38,7 @@ class Adverts_Block_Details {
             "wpadverts-block-details",
             ADVERTS_URL . '/assets/js/block-details.js',
             array( 'jquery' ),
-            '2.0.0'
+            '2.0.4'
         );
 
         register_block_type_from_metadata(

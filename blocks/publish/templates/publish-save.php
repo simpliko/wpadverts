@@ -31,11 +31,11 @@ if( ! isset( $message ) ) {
                 <span class="atw-flex atw-flex-row atw-pb-3 atw-w-full atw-flex-col md:atw-flex-row">
 
                     <form action="<?php echo esc_attr( $url_publish_ad ) ?>" class="atw-p-3 atw-flex-grow">
-                        <?php wpadverts_block_button( array( "text" => "Publish another Ad", "type" => "secondary", "action" => "submit" )); ?>
+                        <?php wpadverts_block_button( array( "text" => __("Publish another Ad","wpadverts"), "type" => "secondary", "action" => "submit" )); ?>
                     </form>
 
                     <form action="<?php echo esc_attr( $url_view_list ) ?>" method="get" class="atw-p-3 atw-flex-grow">
-                        <?php wpadverts_block_button( array( "text" => "View ads list", "type" => "secondary", "action" => "submit" )); ?>
+                        <?php wpadverts_block_button( array( "text" => __("View ads list", "wpadverts"), "type" => "secondary", "action" => "submit" )); ?>
                     </form>
                 </span>
                 

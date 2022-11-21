@@ -292,7 +292,7 @@ function adverts_touch_time( $post_date, $tab_index = 0, $never_expires = false 
         </div>
     </div>
     
-    <input type="hidden" id="ss" name="ss" value="' . $ss . '" />
+    <!--input type="hidden" id="ss" name="ss" value="' . $ss . '" /-->
 
     <?php
     

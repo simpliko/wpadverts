@@ -67,7 +67,9 @@ $redirect_to  = isset( $atts["redirect_to"] ) ? $atts["redirect_to"] : "";
                         <div class="wpa-field-input">
                             <?php $r = adverts_field_get_renderer($field); ?>
                             <?php $r = function_exists( $r . "_block" ) ? $r . "_block" : $r; ?>
+                            <?php if( function_exists( $r) ): ?>
                             <?php call_user_func( $r, $field, $form ) ?>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <?php endforeach; ?>

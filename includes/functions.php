@@ -928,10 +928,12 @@ function adverts_verify_choices( $data, $params = null, $field = null ) {
  * 
  * @param array $file       An item from $_FILES array
  * @param array $params     Validation parameters (integer files)
+ * @param array $field      The field being validated
  * @since 1.2.0
+ * @since 2.0.4             $field param
  * @return string|boolean
  */
-function adverts_validate_upload_limit( $file, $params = null ) {
+function adverts_validate_upload_limit( $file, $params = null, $field = null ) {
    
     $post_id = intval( adverts_request( "post_id" ) );
     
@@ -950,12 +952,16 @@ function adverts_validate_upload_limit( $file, $params = null ) {
     }
     
     if( $post_id > 0 ) {
-        $attachments = get_children( array( 'post_parent' => $post_id ) );
+        $attachments = get_children( array( 
+            'post_parent' => $post_id,
+            'meta_key' => 'wpadverts_form_field',
+            'meta_value' => $field["name"] 
+        ) );
         $images = count( $attachments );
     } else {
         $images = 0;
     }
-    
+
     if( $file === null ) {
         $i = 0;
     } else {

@@ -100,7 +100,7 @@ class Adverts_Upload_Helper {
             } 
 
             
-            $result = call_user_func( $v["callback"], $file, $v["params"] );
+            $result = call_user_func( $v["callback"], $file, $v["params"], $this->_field );
             
             if( $result === true || $result === 1) {
                 continue;

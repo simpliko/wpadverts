@@ -75,14 +75,16 @@ function adverts_gallery_upload() {
     $v->set_post_id( $post_id );
     
     if( $post_id > 0 ) {
-        $form_params = array(
-            "form_scheme_id" => get_post_meta( $post_id, "_wpacf_form_scheme_id", true )
-        );
+        $form_scheme_id = get_post_meta( $post_id, "_wpacf_form_scheme_id", true );
+    } elseif( isset( $args["form_scheme_id"] ) ) {
+        $form_scheme_id = $args["form_scheme_id"];
     } else {
-        $form_params = array(
-            "form_scheme_id" => isset( $args["form_scheme_id"] ) ? $args["form_scheme_id"]: null
-        );
+        $form_scheme_id = null;
     }
+
+    $form_params = array(
+        "form_scheme_id" => $form_scheme_id
+    );
 
     $form_scheme = apply_filters( "adverts_form_scheme", wpadverts_get_form( $form_name ), $form_params );
     $form_scheme = apply_filters( "adverts_form_load", $form_scheme );
@@ -185,6 +187,10 @@ function adverts_gallery_upload() {
                 'post_type'         => isset( $args["post_type"] ) ? $args["post_type"] : "advert",
                 'comments_status'   => 'closed'
             ) ) );
+
+            if( is_int( $parent_post_id ) && $form_scheme_id ) {
+                update_post_meta( $parent_post_id, "_wpacf_form_scheme_id", $form_scheme_id );
+            }
 
             remove_filter("post_type_link", "__return_empty_string");
         } else {

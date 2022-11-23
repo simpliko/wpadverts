@@ -16,6 +16,7 @@ add_shortcode('adverts_list', 'shortcode_adverts_list');
 add_shortcode('adverts_add', 'shortcode_adverts_add');
 add_shortcode('adverts_manage', 'shortcode_adverts_manage');
 add_shortcode('adverts_categories', 'shortcode_adverts_categories');
+add_shortcode('adverts_block', 'shortcode_adverts_block');
 add_shortcode('advert_single', 'shortcode_advert_single' );
 
 // Shortcode functions
@@ -673,4 +674,46 @@ function shortcode_advert_single( $atts = array() ) {
     $content = ob_get_clean();
 
     return $content;
+}
+
+/**
+ * Generates HTML for a WPAdverts block
+ * 
+ * Usefule when building a website using a page builder different than Gutenberg
+ * 
+ * @since   2.0.4
+ * @param   array       $atts   Shortcode params
+ * @return  string              Block HTML
+ */
+function shortcode_adverts_block( $atts = array() ) {
+
+    $params = shortcode_atts( array(
+        'template_id' => 0,
+        'template_name' => null
+    ), $atts );
+
+    $post_id = absint( $params["template_id"] ) ;
+    $post_name = $params["template_name"];
+
+    if( $post_id < 1 && empty( $post_name ) ) {
+        return "<strong>ERROR</strong> You need to provide either 'template_id' or 'template_name' param.";
+    }
+
+    if( $post_id ) {
+        $post = get_post( $post_id );
+    } else if( $post_name ) {
+        $post = get_page_by_path( $post_name );
+    } else {
+        $post = null;
+    }
+
+    if( ! is_object( $post ) ) {
+        if( $post_id ) {
+            return "<strong>ERROR</strong> Template with ID {$post_id} does not exist.";
+        } else {
+            return "<strong>ERROR</strong> Template with name {$post_name} does not exist.";
+        }
+    }
+
+    return do_blocks( $post->post_content );
 }

@@ -126,9 +126,11 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 = 2.0.4 - 2022-11-29 =
 
+* FEATURE: [adverts_block] shortcode allows rendering blocks using the shortcode syntax.
 * FIXED: Reveal phone button not working when no image is uploaded to the gallery.
 * FIXED: Some phrases in block templates not marked correctly for translation.
 * FIXED: Internal server error when scheduling an advert from the wp-admin panel.
+* FIXED: Files upload_limit validator not working correctly when the form has two or more file fields.
 
 = 2.0.3 - 2022-10-20 =
 

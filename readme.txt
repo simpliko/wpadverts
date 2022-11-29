@@ -131,6 +131,7 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 * FIXED: Some phrases in block templates not marked correctly for translation.
 * FIXED: Internal server error when scheduling an advert from the wp-admin panel.
 * FIXED: Files upload_limit validator not working correctly when the form has two or more file fields.
+* FIXED: Classifieds / Publish block showing incorrect Form Schemes
 
 = 2.0.3 - 2022-10-20 =
 

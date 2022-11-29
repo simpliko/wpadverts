@@ -184,7 +184,7 @@ class Edit extends Component {
 
     getAvailableSearchForms = ( post_type ) => {
         var pt = this.getCurrentPostType();
-        return [{label: "", value: ""}].concat( pt["form_schemes"]["search"] );
+        return [{label: "", value: ""}].concat( pt["form_schemes"]["publish"] );
     }
 
     initVisuals = () => {
@@ -213,7 +213,7 @@ class Edit extends Component {
                 <Placeholder 
                     icon={ megaphone } 
                     label="Classifieds Publish" 
-                    instructions="Select custom post type and search form scheme to continue."
+                    instructions="Select custom post type and publish form scheme to continue."
                     isColumnLayout="true"
                 >
                     

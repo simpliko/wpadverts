@@ -20,7 +20,7 @@ class Adverts_Block_Manager {
     public function __construct( $path = null ) {
         $this->_path = $path;
         
-        add_filter( 'block_categories', array( $this, "register_block_category" ) );
+        add_filter( 'block_categories_all', array( $this, "register_block_category" ) );
     }
     
     public function register_common_scripts() {

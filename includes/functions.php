@@ -2542,7 +2542,7 @@ function adverts_sort_images($images, $post_id, $field_name = null) {
         uksort( $images, array( new Adverts_Sort_Images( $images_order ), "sort" ) );
     }
 
-    return $images;
+    return apply_filters( "adverts_sort_images", $images, $post_id, $field_name );
 }
 
 /**

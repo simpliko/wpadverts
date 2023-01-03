@@ -7,7 +7,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@wordpress/element": "^2.20.0",
-    "@wordpress/scripts": "^14.0.1",
+    "@wordpress/scripts": "^25.1.0",
     "autoprefixer": "^10.4.2",
     "grunt-checktextdomain": "^1.0.1",
     "grunt-contrib-clean": "^2.0.1",

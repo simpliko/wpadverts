@@ -242,10 +242,32 @@ function adverts_gallery_content( $post = null, $conf = array(), $is_block = fal
             "sizes" => $sizes
         );
 
+        if(is_admin()) {
+            adverts_gallery_content_scripts($upload_conf);
+            return;
+        }
 
+        $upload_conf_arr = Adverts::instance()->get("upload_conf", []);
+
+        if(empty($upload_conf_arr)) {
+            add_action("wp_footer", "adverts_gallery_content_footer");
+        }
+
+        $upload_conf_arr[] = $upload_conf;
+        Adverts::instance()->set("upload_conf", $upload_conf_arr);
+
+}
+
+function adverts_gallery_content_footer() {
+    $upload_conf_arr = Adverts::instance()->get("upload_conf", []);
+    foreach($upload_conf_arr as $upload_conf) {
+        adverts_gallery_content_scripts($upload_conf);
+    }
+}
+
+function adverts_gallery_content_scripts($upload_conf) {
+    $sizes = $upload_conf["sizes"];
     ?>
-    
-    
     <script type="text/javascript">
     if(typeof ADVERTS_PLUPLOAD_DATA === "undefined") {
         var ADVERTS_PLUPLOAD_DATA = [];

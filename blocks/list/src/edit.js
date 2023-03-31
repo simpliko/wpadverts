@@ -136,13 +136,35 @@ class Edit extends Component {
     }
 
     getSelectedFormSchemeData = ( type ) => {
-        var fs = this.getSelectedFormScheme(type);
 
-        if(fs === null) {
-            return [];
-        } else {
-            return fs.data;
+        var pt = this.getCurrentPostType();
+        var data = [];
+
+        console.log(pt);
+        for(var i=0; i<pt.form_schemes[type].length; i++) {
+            console.log(pt.form_schemes[type][i].data);
+
+            Object.entries(pt.form_schemes[type][i].data).map(([key, value]) => {
+                data.push(value);
+            })
+            data = this.getUnique(data, "name");
+            data.sort((a, b) => a.label > b.label ? 1 : -1)
+            //data.push(pt.form_schemes[type][i].data);
         }
+        console.log(data);
+        return data;
+    }
+
+    getUnique = (array, key) => {
+        if (typeof key !== 'function') {
+          const property = key;
+          key = function(item) { return item[property]; };
+        }
+        return Array.from(array.reduce(function(map, item) {
+          const k = key(item);
+          if (!map.has(k)) map.set(k, item);
+          return map;
+        }, new Map()).values());
     }
 
     getAvailableSearchForms = ( post_type ) => {

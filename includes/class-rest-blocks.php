@@ -104,10 +104,16 @@ class Adverts_Rest_Blocks {
 
     public function get_form_scheme_data( $post, $ad_type ) {
 
-        include_once ADVERTS_PATH . "./../wpadverts-custom-fields/includes/functions.php";
+        $fpath = ADVERTS_PATH . "./../wpadverts-custom-fields/includes/functions.php";
+        if(file_exists($fpath)) {
+            include_once ADVERTS_PATH . "./../wpadverts-custom-fields/includes/functions.php";
 
-        //$meta_common = $this->_get_builtin_data( $post );
-        $meta_unique = wpadverts_custom_fields_get_unique_metas( $post->post_status );
+            //$meta_common = $this->_get_builtin_data( $post );
+            $meta_unique = wpadverts_custom_fields_get_unique_metas( $post->post_status );
+        } else {
+            $meta_unique = [];
+        }
+
 
         //echo "<pre>";
         //echo ($post->post_title . " " . $post->post_status . " " . $post->post_type . " " . $ad_type);

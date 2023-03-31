@@ -433,6 +433,10 @@ function wpadverts_get_object_taxonomy( $object_id, $path ) {
     $terms = get_the_terms( $object_id, $p[1] );
     $content = "";
 
+    if(!is_array($terms)) {
+        return apply_filters( "wpadverts/block/object/taxonomy", $content, $terms );
+    }
+
     foreach($terms as $c) {
         $content .= apply_filters( "wpadverts/block/object/taxonomy/term", sprintf( '<div>%s</div>', $c->name ), $c ); 
     }

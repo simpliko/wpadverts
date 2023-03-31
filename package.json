@@ -38,7 +38,6 @@
     "build/categories": "wp-scripts build blocks/categories/src/index.js --output-path=blocks/categories/build",
     "build/css": "postcss ./assets/css/tailwind.css -o compiled.css",
     "build-all": "npm run build/list && npm run build/search && npm run build/details && npm run build/publish && npm run build/manage && npm run build/categories && npm run build/css",
-  
     "r-list": "wp-scripts build blocks/list/src/index.js --output-path=blocks/list/build"
   },
   "dependencies": {

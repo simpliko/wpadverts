@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classified script, classifieds sc
 Requires PHP: 5.6
 Requires at least: 5.7
 Tested up to: 6.1
-Stable tag: 2.0.4
+Stable tag: 2.0.5
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -123,6 +123,16 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 2.0.5 - 2023-04-04 =
+
+* FEATURE: Icon for the new Analytics extension.
+* FIXED: Loading the ADVERTS_PLUPLOAD_DATA data in the wp_footer.
+* FIXED: Loading options for blocks fail if the CF extension is not available.
+* FIXED: Classifieds List block / List Data dropdown is not showing all possible options.
+* FIXED: Using depracated block_categories filter instead of block_categories_all.
+* FIXED: Check marks not showing for the checkbox and radio inputs in the contact form.
+* FIXED: Warning thrown when object does not have any taxonomy terms assigned.
 
 = 2.0.4 - 2022-11-29 =
 

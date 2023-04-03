@@ -9,6 +9,7 @@ class Adverts_Types {
     public function __construct() {
         
         add_filter( "adverts_post_type", array( $this, "register_post_type" ), 10, 2 );
+        add_filter( "adverts_post_type", array( $this, "register_user_type" ), 10, 2 );
         
         add_filter( "adverts_register_taxonomy_post_type", array( $this, "register_taxonomy_post_type" ), 10, 2 );
         add_filter( "adverts_register_taxonomy", array( $this, "register_taxonomy" ), 10, 2 );
@@ -20,10 +21,18 @@ class Adverts_Types {
     }
     
     public function register_post_type( $args, $post_type ) {
+        return $this->_register_type( $args, $post_type, "wpadverts_post_types" );
+    }
+
+    public function register_user_type( $args, $post_type ) {
+        return $this->_register_type( $args, $post_type, "wpadverts_user_types" );
+    }
+
+    public function _register_type( $args, $post_type, $option_name ) {
 
         self::$_cpt_defaults[$post_type] = $args;
         
-        $option = get_option( "wpadverts_post_types" );
+        $option = get_option( $option_name );
         
         if( !is_array( $option ) || ! isset( $option[ $post_type ] ) ) {
             return $args;

@@ -221,7 +221,7 @@ function adext_contact_form_content( $post_id ) {
 
     $form = $data["form"];
     $buttons = $data["buttons"];
-    $actions_class = $data["action_class"];
+    $actions_class = $data["actions_class"];
     $flash = $data["adverts_flash"];
     $show_form = $data["show_form"];
 

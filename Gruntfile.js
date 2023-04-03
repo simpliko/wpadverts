@@ -53,7 +53,7 @@ module.exports = function(grunt) {
                             '**', '!node_modules/**', '!Gruntfile.js', '!package.json', '!.gitignore', '!nbproject/**', 
                             '!tests/**', '!bin/**', '!.phpcs.xml.dist', '!.travis.yml', '!phpunit.xml.dist',
                             '!blocks.webpack.js', '!package-lock.json', '!postcss.config.js', '!tailwind.config.js',
-                            '!blocks/*/src/*.js', '!assets/jsx/**', '!assets/css/tailwind.css'
+                            '!blocks/*/src/*.js', '!blocks/*/build/index.js.map', '!assets/jsx/**', '!assets/css/tailwind.css'
                         ],
                         dest:   "<%= pkg.svn %>/trunk/"
                     }

@@ -124,7 +124,7 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
-= 2.0.5 - 2023-04-04 =
+= 2.0.5 - 2023-04-03 =
 
 * FEATURE: Icon for the new Analytics extension.
 * FIXED: Loading the ADVERTS_PLUPLOAD_DATA data in the wp_footer.
@@ -133,6 +133,10 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 * FIXED: Using depracated block_categories filter instead of block_categories_all.
 * FIXED: Check marks not showing for the checkbox and radio inputs in the contact form.
 * FIXED: Warning thrown when object does not have any taxonomy terms assigned.
+* FIXED: Remove all index.js.map files (these files are for development only).
+* FIXED: Warning in the contact form.
+* FIXED: Author Types in the wp-admin / Classifieds / Options / Core / Types panel not saving properly.
+* API: adverts_sort_images filter added to the adverts_sort_images() function.
 
 = 2.0.4 - 2022-11-29 =
 

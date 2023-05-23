@@ -140,9 +140,8 @@ class Edit extends Component {
         var pt = this.getCurrentPostType();
         var data = [];
 
-        console.log(pt);
+        //console.log(pt);
         for(var i=0; i<pt.form_schemes[type].length; i++) {
-            console.log(pt.form_schemes[type][i].data);
 
             Object.entries(pt.form_schemes[type][i].data).map(([key, value]) => {
                 data.push(value);
@@ -151,7 +150,7 @@ class Edit extends Component {
             data.sort((a, b) => a.label > b.label ? 1 : -1)
             //data.push(pt.form_schemes[type][i].data);
         }
-        console.log(data);
+        //console.log(data);
         return data;
     }
 
@@ -294,6 +293,7 @@ class Edit extends Component {
     }
 
     onChangePostsPerPage = ( posts_per_page ) => {
+        posts_per_page = parseInt(posts_per_page);
         this.props.setAttributes( { posts_per_page });
     }
 
@@ -326,7 +326,6 @@ class Edit extends Component {
     }
 
     onListDataChange = ( data ) => {
-        console.log(data);
         this.props.setAttributes( { data: [ ...data ] } ); 
     } 
 

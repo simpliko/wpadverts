@@ -94,7 +94,9 @@ class Adverts_Gallery_Helper {
             array( 'key' => 'wpadverts_form_field', 'value' => $field_name )
         );
 
-        if( $form_name == "advert" && $field_name == "gallery" ) {
+        $disable_backcompat = apply_filters( "wpadverts_disable_gallery_backcompat", false );
+
+        if( ! $disable_backcompat && $form_name == "advert" && $field_name == "gallery" ) {
             $att_search_meta = array(
                 "relation" => "OR",
                 $att_search_meta,

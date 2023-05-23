@@ -123,6 +123,18 @@ module.exports = function(grunt) {
                 force: true
             },
             build: [ '<%= pkg.release_path %>' ]
+        },
+        run: {
+            options: {
+
+            },
+            deploy: {
+                cmd: 'npm',
+                args: [
+                    'run',
+                    'build-all'
+                ]
+            }
         }
     });
 
@@ -131,8 +143,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-checktextdomain');
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-run');
 
     grunt.registerTask('test', ['checktextdomain']);
-    grunt.registerTask('deploy', ['checktextdomain', 'copy', 'makepot']);
-    grunt.registerTask('build', ['checktextdomain', 'clean:build', 'copy:build', 'makepot:build', 'compress:build']);
+    grunt.registerTask('deploy', ['checktextdomain', 'run', 'copy', 'makepot']);
+    grunt.registerTask('build', ['checktextdomain', 'run:deploy', 'clean:build', 'copy:build', 'makepot:build', 'compress:build']);
 };

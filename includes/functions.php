@@ -4016,3 +4016,12 @@ function adverts_get_taxonomy_path( $term, $glue = false ) {
 
     return implode( $glue, $a );
 }
+
+function wpadverts_multiverse_promo( $data_type ) {
+    
+    $url = "https://wpadverts.com/extensions/multiverse/";
+    $text = __( "Create new types with <strong>Multiverse</strong> extension.", "wpadverts" );
+
+    echo sprintf( '<a class="add-new-h2" href="%s"><span class="dashicons dashicons-cart"></span> %s</a>', $url, $text );
+
+}

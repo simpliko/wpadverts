@@ -542,6 +542,7 @@ function adverts_init_admin() {
     add_filter( 'post_updated_messages', 'adverts_post_updated_messages');
     
     add_filter( 'add_menu_classes', 'adverts_add_menu_classes' );
+    add_action( 'wpadverts_admin_types_after_title', 'wpadverts_multiverse_promo' );
     
     // Adverts category meta handlers
     add_action( 'edited_advert_category', 'adverts_save_category', 10, 2);

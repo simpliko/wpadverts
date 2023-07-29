@@ -1,0 +1,43 @@
+{
+    "name": "wpadverts/single-data-table",
+    "textdomain": "wpadverts",
+    "apiVersion": 1,
+    "title": "Classifieds Single Data Table",
+    "icon": "megaphone",
+    "category": "wpadverts",
+    "example": {},
+    "attributes": {
+        "post_type": {
+            "type": "string",
+            "default": ""
+        },
+        "layout": {
+            "type": "string",
+            "default": "list"
+        },
+        "columns": {
+            "type": "integer",
+            "default": 3
+        },
+        "closed_top": {
+            "type": "boolean",
+            "default": true
+        },
+        "include_fields": {
+            "type": "array",
+            "default": []
+        },
+        "exclude_fields": {
+            "type": "array",
+            "default": []
+        },
+        "include_types": {
+            "type": "array",
+            "default": []
+        },
+        "exclude_types": {
+            "type": "array",
+            "default": []
+        }
+    }
+}

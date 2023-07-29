@@ -34,7 +34,8 @@ class Adverts_Rest_Blocks {
                     ),
                 ),
                 "form_schemes_default" => $this->get_form_schemes_default( $post_type ), 
-                "form_schemes" => $this->get_form_schemes( $post_type )
+                "form_schemes" => $this->get_form_schemes( $post_type ),
+                "contact" => $this->get_contact_options()
             );
 
             $data[] = $item;
@@ -51,6 +52,25 @@ class Adverts_Rest_Blocks {
     public function classifieds_types_perms() {
         return true;
         return current_user_can( 'edit_pages' );
+    }
+
+    public function get_contact_options() {
+        $opts = wpadverts_block_get_contact_options();
+        $options = array();
+
+        foreach($opts as $key => $o) {
+            $options[] = array(
+                "name" => $key,
+                "label" => $o["label"],
+                "is_active" => $o["is_active"],
+                "button" => array(
+                    "text" => isset( $o["html"] ) ? $o["html"] : $o["text"],
+                    "icon" => $o["icon"]
+                )
+            );
+        }
+
+        return $options;
     }
 
     public function get_form_schemes_default( $post_type ) {

@@ -989,7 +989,8 @@ function adverts_show_contact() {
     
     // @todo check_ajax_referer( 'my-special-string', 'security' );
     
-    $id = adverts_request("id");
+    $id = absint( adverts_request("id") );
+    $mode = adverts_request("mode");
     $post = get_post($id);
     
     if( $post === null || ! wpadverts_post_type( $post ) ) {
@@ -998,6 +999,32 @@ function adverts_show_contact() {
             'error' => __("Post with given ID does not exist.", "wpadverts")
         ));
         exit;
+    }
+
+    if($mode === "block") {
+        $options = wpadverts_block_get_contact_reveal_options( $id );
+        $result = array(
+            "result" => 1,
+            "data" => array()
+        );
+
+        foreach($options as $k => $o) {
+            $value = get_post_meta( $id, $k, true );
+            $value = apply_filters( "wpadverts/block/get/contact/reveal/value", $value, $id );
+
+            if(isset($o["template"]) && $o["template"]) {
+                $html = str_replace('{value}', $value, $o["template"]);
+            } else {
+                $html = '';
+            }
+
+            $result["data"][$k] = array(
+                "value" => $value,
+                "html" => $html
+            );
+        }
+
+        echo json_encode( $result );
     } else {
         echo json_encode( array(
             'result' => 1,

@@ -16,6 +16,13 @@ class Adverts_Block_Manager {
      * @var object[]
      */
     protected $_block = array();
+
+    /**
+     * True if custom styles were already printed in the footer
+     * 
+     * @var boolean
+     */
+    protected static $_custom_styles_printed = false;
     
     public function __construct( $path = null ) {
         $this->_path = $path;
@@ -78,7 +85,9 @@ class Adverts_Block_Manager {
             include_once $loader;
             
             $name = basename( $block );
-            $class = sprintf( "Adverts_Block_%s", ucfirst( $name ) );
+            $cname = str_replace( " ", "_", ucwords( str_replace( "-", " ", $name ) ) );
+
+            $class = sprintf( "Adverts_Block_%s", $cname );
             
             if( ! class_exists( $class ) ) {
                 continue;
@@ -88,5 +97,22 @@ class Adverts_Block_Manager {
         }
 
     }
-    
+ 
+    public static function print_custom_styles() {
+        if( self::$_custom_styles_printed ) {
+            return;
+        }
+
+        $atts = [];
+
+        echo '<style type="text/css">' . PHP_EOL;
+        echo '.wpadverts-cpt form.wpadverts-form {' . PHP_EOL;
+        wpadverts_print_grays_variables( isset( $atts["form"] ) ? $atts["form"] : "" );
+        echo '}' . PHP_EOL;
+        wpadverts_block_button_css( "primary", isset( $atts["primary_button"] ) ? $atts["primary_button"] : array() );
+        wpadverts_block_button_css( "secondary", isset( $atts["secondary_button"] ) ? $atts["secondary_button"] : array() );
+        echo '</style>' . PHP_EOL;
+
+        self::$_custom_styles_printed = true;
+    }
 }

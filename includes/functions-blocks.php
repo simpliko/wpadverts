@@ -875,3 +875,76 @@ function __wpadverts_load_tw_classes() {
         "atw-float-left", "atw-float-center", "atw-float-right"
     );
 }
+
+function wpadverts_block_get_contact_options( $post_id = null, $atts = array() ) {
+
+    $contact_options = array(
+        "contact-reveal" => array( 
+            "text" => __("Show Contact Info", "wpadverts"), 
+            "icon" => "fas fa-address-card", 
+            "class" => "wpadverts-contact-reveal",
+            "type" => "primary",
+            "order" => 0,
+            "options" => array(
+                "mobile" => "text-and-icon",
+                "desktop" => "text-and-icon"
+            ),
+            "attr" => array(
+                "data-id" => $post_id,
+            ),
+            "label" => __( "Reveal Contact Info", "wpadverts" ),
+            "is_active" => true,
+            "content_callback" => array(
+                "callback" => "_wpadverts_block_contact_reveal_callback",
+                "priority" => 10
+            )
+
+        )
+    );
+
+    $contact_options = apply_filters( "wpadverts/block/details/contact-options", $contact_options, $atts, $post_id );
+
+    return $contact_options;
+}
+
+function wpadverts_block_get_contact_reveal_options( $post_id = null ) {
+    $contact = apply_filters( "wpadverts/block/get/contact/reveal/options", array(
+        "adverts_email" => array(
+            "icon" => "fas fa-envelope",
+            "label" => __("Email", "wpadverts"),
+            "template" => '<a href="mailto:{value}">{value}</a>'
+        ),
+        "adverts_phone" => array(
+            "icon" => "fas fa-phone",
+            "label" => __("Phone", "wpadverts"),
+            "template" => '<a href="tel:{value}">{value}</a>'
+        )
+    ), $post_id );
+
+    return $contact;
+}
+
+function _wpadverts_block_contact_reveal_callback( $post_id, $atts ) {
+
+    $contact_info = wpadverts_block_get_contact_reveal_options( $post_id );
+
+    ?>
+    <div class="wpadverts-contact-reveal-box atw-bg-gray-100 atw-border atw-border-solid atw-border-gray-200 atw-px-6 atw-pt-3 atw-rounded atw-hidden">
+        <div class="wpadverts-reveal-loader atw-pb-3 atw-items-center atw-flex">
+            <svg class="wpa-utility-spinner atw-animate-spin atw-transition-transform atw-h-8 atw-w-8 atw-ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="atw-opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="atw-opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+        </div>    
+
+        <div class="wpadverts-reveal-inner atw-hidden">
+            <?php foreach($contact_info as $k => $contact): ?>
+            <div class="wpadverts-reveal-item <?php echo sprintf( "wpadverts-reveal--%s", $k ) ?> atw-flex atw-pb-3 atw-pr-6">
+                <span class="atw-mr-3 atw-text-lg" title="<?php echo esc_attr($contact["label"]) ?>"><i class="<?php echo esc_attr( $contact["icon"] ) ?>"></i></span>
+                <span class="wpadverts-reveal-value">&nbsp;</span>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <?php
+}

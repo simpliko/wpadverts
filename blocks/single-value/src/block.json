@@ -1,0 +1,71 @@
+{
+    "name": "wpadverts/single-value",
+    "textdomain": "wpadverts",
+    "apiVersion": 1,
+    "title": "Classifieds Single Value",
+    "icon": "megaphone",
+    "category": "wpadverts",
+    "example": {},
+    "attributes": {
+        "post_type": {
+            "type": "string",
+            "default": ""
+        },
+        "data": {
+            "type": "array",
+            "default": []
+        },
+        "empty_value": {
+            "type": "string",
+            "default": ""
+        },
+        "render_as": {
+            "type": "string",
+            "default": "text"
+        },
+        "text_size": {
+            "type": "string",
+            "default": "atw-text-base"
+        },
+        "font_weight": {
+            "type": "string",
+            "default": "atw-font-normal"
+        },
+        "type": {
+            "type": "string",
+            "default": "atw-inline"
+        },
+        "color": {
+            "type": "string",
+            "default": ""
+        },        
+        "color_bg": {
+            "type": "string",
+            "default": ""
+        },
+        "margin_x": {
+            "type": "string",
+            "default": ""
+        },
+        "margin_y": {
+            "type": "string",
+            "default": ""
+        },
+        "padding_x": {
+            "type": "string",
+            "default": ""
+        },
+        "padding_y": {
+            "type": "string",
+            "default": ""
+        },
+        "border_radius": {
+            "type": "string",
+            "default": ""
+        },
+        "p_value": {
+            "type": "string",
+            "default": "text ..."
+        }
+    }
+}

@@ -26,7 +26,7 @@ $adverts_namespace['contact_form'] = array(
 add_action( "init", "adext_contact_form_init", 20 );
 
 if(is_admin() ) {
-    add_action( "init", "adext_contact_form_init_admin", 20 );
+    //add_action( "init", "adext_contact_form_init_admin", 20 );
 } else {
     add_action( "init", "adext_contact_form_init_frontend", 20 );
 }
@@ -458,6 +458,10 @@ function adext_cf_block_details_contact_options( $contact_options, $atts, $post_
 
     $bd = new Adext_Contact_Form_Block_Details( $atts, $post_id );
 
+    if( isset( $contact_options["contact-reveal"] ) ) {
+        $contact_options["contact-reveal"]["is_active"] = false;
+    }
+
     $co = array_merge( $contact_options, $bd->get_contact_options() );
 
     $contact_options = $co;
@@ -504,8 +508,8 @@ function adext_contact_form_ajax_submit() {
             "icon" => "adverts-icon-ok"
         );
 
-        print_r($form->get_errors());
-        print_r($form->get_values());
+        //print_r($form->get_errors());
+        //print_r($form->get_values());
 
     } else {
         $flash["error"][] = array(

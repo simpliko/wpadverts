@@ -186,7 +186,9 @@ class Adverts_Block_Templates {
      * @return  string                      block template string
      */
     public function get_default_post_template( $post_type ) {
-        return sprintf( '<!-- wp:wpadverts/details {"post_type":"%s"} /-->', $post_type );
+        include_once ADVERTS_PATH . '/blocks/class-block-patterns.php';
+        $patterns = new Adverts_Block_Patterns;
+        return $patterns->get_classifieds_details( $post_type );
     }
 
     /**

@@ -1,8 +1,8 @@
 {
-    "name": "wpadverts/details",
+    "name": "wpadverts/single-gallery",
     "textdomain": "wpadverts",
     "apiVersion": 1,
-    "title": "Classifieds Details",
+    "title": "Classifieds Single Gallery",
     "icon": "megaphone",
     "category": "wpadverts",
     "example": {},
@@ -14,7 +14,6 @@
         "contact": {
             "type": "array",
             "default": [
-                { "name": "contact-reveal"},
                 { "name": "contact-form" },
                 { "name": "phone-button" }
             ]

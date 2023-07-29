@@ -25,13 +25,8 @@ class Adext_Contact_Form_Block_Details {
     public function get_contact_options() {
 
         $co["contact-form"] = $this->get_contact_form_button();
-        
-        $pb = $this->get_phone_button();
+        $co["phone-button"] = $this->get_phone_button();
 
-        if( is_array( $pb ) ) {
-            $co["phone-button"] = $pb;
-        }
-    
         return $co;
     }
 
@@ -46,11 +41,17 @@ class Adext_Contact_Form_Block_Details {
             "options" => array(
                 "mobile" => "text-and-icon",
                 "desktop" => "text-and-icon"
+            ),
+            "label" => __( "Contact Form", "wpadverts" ),
+            "is_active" => true,
+            "content_callback" => array(
+                "callback" => array( $this, "contact_options_form" ),
+                "priority" => 10
             )
 
         );
 
-        add_action( "wpadverts/block/details/tpl/contact-content", array( $this, "contact_options_form" ), 10 );
+        //add_action( "wpadverts/block/details/tpl/contact-content", array( $this, "contact_options_form" ), 10 );
 
         return $cf;
     }
@@ -58,19 +59,27 @@ class Adext_Contact_Form_Block_Details {
     public function get_phone_button() {
 
         $phone = get_post_meta( $this->_post_id, "adverts_phone", true );
-    
+        $ph1 = "";
+        $ph2 = "";
+
         if( empty( $phone ) ) {
-            return null;
+            $is_active = false;
+        } else {
+            $is_active = adverts_config( "contact_form.show_phone");
+            $phone = trim( $phone );
+            if( $phone ) {
+                $ph1 = str_replace( " ", "", substr( $phone, 0, 3 ) );
+                $ph2 = str_replace( " ", "", substr( $phone, 3 ) );
+            }
         }
 
-        $phone = trim( $phone );
-
-        if( $phone ) {
-            $ph1 = str_replace( " ", "", substr( $phone, 0, 3 ) );
-            $ph2 = str_replace( " ", "", substr( $phone, 3 ) );
+        if( isset( $this->_atts["phone_reveal"] ) ) {
+            $phone_reveal = $this->_atts["phone_reveal"];
+        } else {
+            $phone_reveal = adverts_config( "contact_form.reveal_on_click" );
         }
 
-        if( $this->_atts["phone_reveal"] == 1) {
+        if( $phone_reveal == 1) {
             $pb = array( 
                 "html" => sprintf( __('Call <span data-ph1="%s" class="wpadverts-phone">%s...</span> <a href="#" class="wpadverts-phone-reveal">show phone</a>', "wpadverts"), $ph1, $ph1 ), 
                 "icon" => "fas fa-phone-alt", 
@@ -84,7 +93,11 @@ class Adext_Contact_Form_Block_Details {
                 "options" => array(
                     "mobile" => "text-and-icon",
                     "desktop" => "text-and-icon"
-                )
+                ),
+                "label" => __( "Phone", "wpadverts" ),
+                "is_active" => $is_active,
+                "content_callback" => null
+
             );
         } else {
             $pb = array( 
@@ -100,7 +113,10 @@ class Adext_Contact_Form_Block_Details {
                 "options" => array(
                     "mobile" => "text-and-icon",
                     "desktop" => "text-and-icon"
-                )
+                ),
+                "label" => __("Phone", "wpadverts"),
+                "is_active" => $is_active,
+                "content_callback" => null
             );
         }
 

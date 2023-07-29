@@ -41,6 +41,14 @@ class Adverts_Block_Details {
             '2.0.4'
         );
 
+        wp_localize_script(
+            "wpadverts-block-details",
+            "wpadverts_block_details",
+            array(
+                "ajaxurl" => admin_url("admin-ajax.php")
+            )
+            );
+
         register_block_type_from_metadata(
             dirname( __FILE__ ) . '/src/block.json',
             array(            
@@ -128,10 +136,40 @@ class Adverts_Block_Details {
     
     protected function _get_contact_options( $atts, $post_id ) {
 
+        $co = wpadverts_block_get_contact_options( $post_id, $atts );
         $contact_options = array();
-        $contact_options = apply_filters( "wpadverts/block/details/contact-options", $contact_options, $atts, $post_id );
+        
+        foreach( $co as $k => $o ) {
+            if( ! isset( $o["is_active"] ) || ! $o["is_active"] ) {
+                continue;
+            }
+
+            $contact_options[$k] = $o;
+
+            if( isset( $o["content_callback"] ) && is_array( $o["content_callback"] ) ) {
+                
+                $this->_add_content_callback( $o["content_callback"] );
+            }
+        }
 
         return $contact_options;
+    }
+
+    protected function _add_content_callback( $cb ) {
+        $callback = null;
+        $priority = 10;
+
+        if( isset( $cb["callback"] ) && is_callable( $cb["callback"] ) ) {
+            $callback = $cb["callback"];
+        }
+
+        if( isset( $cb["priority"]) && is_numeric( $cb["priority"] ) ) {
+            $priority = absint( $cb["priority"] );
+        } 
+
+        if( ! has_action( "wpadverts/block/details/tpl/contact-content", $callback ) ) {
+            add_action( "wpadverts/block/details/tpl/contact-content", $callback, $priority, 2 );
+        }
     }
 
     protected function _get_more_button() {

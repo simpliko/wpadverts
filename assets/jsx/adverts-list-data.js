@@ -37,6 +37,9 @@ class AdvertsListData extends Component {
             mode: "normal"
         };
 
+        if(typeof this.props.mode === 'undefined') {
+            this.props.mode = "multi";
+        }
     }
 
     shouldComponentUpdate(nextProps) {
@@ -52,6 +55,28 @@ class AdvertsListData extends Component {
         this.props.onChange( this.data.options );
 
         e.target.value = "-1";
+    }
+
+    onChangeSingle = ( e ) => {
+        if(e.target.value == "-1") {
+            this.data.options = [];
+            return;
+        }
+
+        this.data.options = [ e.target.value ];
+        this.props.onChange( this.data.options );
+    }
+
+    maybeSelected = ( e ) => {
+        if(this.props.mode === "multi") {
+            return false;
+        }
+
+        if(this.data.options.includes(e)) {
+            return "selected";
+        } else {
+            return false;
+        }
     }
 
     addOption( option ) {
@@ -93,6 +118,11 @@ class AdvertsListData extends Component {
             }
         }
 
+        for(var j=0; j<this.props.data.meta.data.length; j++) {
+            if(this.props.data.meta.data[j].name === name ) {
+                return this.props.data.meta.data[j].label;
+            }
+        }
 
         for(var i=0; i<this.props.data.length; i++) {
             for(var j=0; j<this.props.data[i].data.length; j++) {
@@ -110,25 +140,46 @@ class AdvertsListData extends Component {
     render( ) {
 
         const {
-            options
+            options,
         } = this.data;
 
+        if(this.props.mode === 'multi') {
+            var callback = this.onChange;
+            var mode = "multi";
+        } else {
+            var callback = this.onChangeSingle;
+            var mode = "single";
+        }
+
+        if(typeof this.props.label === 'undefined') {
+            var label = "List Data";
+        } else {
+            var label = this.props.label;
+        }
+
+        if(typeof this.props.placeholder === 'undefined') {
+            var placeholder = "";
+        } else {
+            var placeholder = this.props.placeholder;
+        }
+        
         return(
             <>
                 <BaseControl
-                    label="List Data"
+                    label={label}
                     labelPosition="top"
                 >
                     <select
+                        style={{width:"100%"}}
                         className="components-select-control__input"
-                        onChange={this.onChange}
+                        onChange={callback}
                     >
                         <option key="-1" value="-1"></option>
 
                         <optgroup label={this.props.data.builtin.label}>
                             {this.props.data.builtin.data.map((object,i) => {
                                 return(
-                                    <option key={i} value={object.name}>{object.label}</option> 
+                                    <option key={i} value={object.name} selected={this.maybeSelected(object.name)}>{object.label}</option> 
                                 );
                                 
                             })}
@@ -158,7 +209,7 @@ class AdvertsListData extends Component {
 
                     </select>
 
-                { options.length > 0 &&
+                { ( mode == "multi" && options.length > 0 ) &&
                     <>
                         {options.map((object, i) => {
                             return (
@@ -212,6 +263,11 @@ class AdvertsListData extends Component {
                                 </Flex>
                             );
                         })}
+                    </>
+                }
+                { ( mode == "multi" && options.length === 0 && placeholder.length > 0 ) &&
+                    <>
+                        <div><em>{placeholder}</em></div>
                     </>
                 }
                 </BaseControl>

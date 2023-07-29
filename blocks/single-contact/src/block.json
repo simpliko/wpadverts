@@ -1,0 +1,34 @@
+{
+    "name": "wpadverts/single-contact",
+    "textdomain": "wpadverts",
+    "apiVersion": 1,
+    "title": "Classifieds Single Contact",
+    "icon": "megaphone",
+    "category": "wpadverts",
+    "example": {},
+    "attributes": {
+        "post_type": {
+            "type": "string",
+            "default": ""
+        },
+        "custom_contact": {
+            "type": "boolean",
+            "default": false
+        },
+        "contact": {
+            "type": "array",
+            "default": [
+                "contact-form"
+            ]
+        },
+        "requires": {
+            "type": "string",
+            "default": ""
+        },
+        "requires_error": {
+            "type": "string",
+            "default": ""
+        }
+
+    }
+}

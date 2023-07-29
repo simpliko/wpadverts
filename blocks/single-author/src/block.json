@@ -1,0 +1,39 @@
+{
+    "name": "wpadverts/single-author",
+    "textdomain": "wpadverts",
+    "apiVersion": 1,
+    "title": "Classifieds Single Author",
+    "icon": "megaphone",
+    "category": "wpadverts",
+    "example": {},
+    "attributes": {
+        "post_type": {
+            "type": "string",
+            "default": ""
+        },
+        "layout": {
+            "type": "string",
+            "default": "list"
+        },
+        "show_avatar": {
+            "type": "boolean",
+            "default": true
+        },
+        "avatar_size": {
+            "type": "int",
+            "default": 64
+        },        
+        "avatar_radius": {
+            "type": "string",
+            "default": "atw-rounded-full"
+        },
+        "data_main": {
+            "type": "array",
+            "default": []
+        },
+        "data_secondary": {
+            "type": "array",
+            "default": [ "published" ]
+        }
+    }
+}

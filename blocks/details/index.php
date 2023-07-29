@@ -207,6 +207,6 @@ class Adverts_Block_Details {
             return false;
         }
 
-        return apply_filters( "adverts_tpl_single_location", esc_html( $location ), $post_id );
+        return apply_filters( "adverts_tpl_single_location", esc_html( $location ), $post_id, "block/details" );
     }
 }

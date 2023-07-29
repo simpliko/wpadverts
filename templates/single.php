@@ -60,7 +60,7 @@
                 <span class="adverts-row-title"><?php _e("Location", "wpadverts") ?></span>
             </div>
             <div class="adverts-grid-col adverts-col-65">
-                <?php echo apply_filters( "adverts_tpl_single_location", esc_html( get_post_meta( $post_id, "adverts_location", true ) ), $post_id ) ?>
+                <?php echo apply_filters( "adverts_tpl_single_location", esc_html( get_post_meta( $post_id, "adverts_location", true ) ), $post_id, "shortcode" ) ?>
             </div>
         </div>
         <?php endif; ?>

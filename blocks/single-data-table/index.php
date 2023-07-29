@@ -121,7 +121,7 @@ class Adverts_Block_Single_Data_Table {
             return false;
         }
 
-        return apply_filters( "adverts_tpl_single_location", esc_html( $location ), $post_id );
+        return apply_filters( "adverts_tpl_single_location", esc_html( $location ), $post_id, "block/single-data-table" );
     }
 
     public function get_data( $post_id ) {

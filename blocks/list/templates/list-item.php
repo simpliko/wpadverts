@@ -32,7 +32,7 @@
             <div class="wpa-result-meta atw-flex atw-flex-none atw-text-base atw-font-medium atw-text-gray-500">
 
                 <?php foreach( $atts["data"] as $element ): ?>
-                <?php echo wrap( get_the_ID(), $element["name"] ) ?>
+                <?php echo wrap( get_the_ID(), $element["name"], sprintf( "wpa-result-meta--%s", $element["name"] ) ) ?>
                 <?php endforeach; ?>
 
             </div>

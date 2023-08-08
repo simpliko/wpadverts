@@ -28,7 +28,7 @@
 
     <?php adverts_admin_flash() ?>
 
-    <?php foreach( $this->get_data_types() as $data_type_key => $data_type ): ?>
+    <?php foreach( $this->get_data_types() as $data_type_key => $data_type ): ?>     
         <?php
             $edits = array( "classified" => "edit-post", "user" => "edit-user");
             $restores = array( "classified" => "restore-post-type", "user" => "restore-user-type");

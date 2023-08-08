@@ -272,6 +272,14 @@ class Edit extends Component {
         this.props.setAttributes( { item_padding } );
     }
 
+    toggleTaxonomyDetect = ( taxonomy_detect ) => {
+        this.props.setAttributes( { taxonomy_detect } );
+    }
+
+    toggleNoCategoriesText = ( no_categories_text ) => {
+        this.props.setAttributes( { no_categories_text } );
+    }
+
     renderInit() {
 
         const { taxonomy} = this.props.attributes;
@@ -341,7 +349,9 @@ class Edit extends Component {
             color_text,
             color_bg,
             color_border,
-            margin
+            margin,
+            taxonomy_detect,
+            no_categories_text
         } = attributes;
 
         console.log("cats...");
@@ -413,6 +423,24 @@ class Edit extends Component {
                             max={ 6 }
                             withInputField={false}
                         />  
+
+                    </PanelBody>
+
+                    <PanelBody title="Filters" initialOpen={false}>
+
+                        <ToggleControl
+                            label="Autodetect taxonomy"
+                            checked={taxonomy_detect}
+                            onChange={this.toggleTaxonomyDetect}
+                        />  
+
+                        {taxonomy_detect &&
+                            <ToggleControl
+                                label="Show 'no categories found' text"
+                                checked={no_categories_text}
+                                onChange={this.toggleNoCategoriesText}
+                            />
+                        }
 
                     </PanelBody>
 

@@ -16,7 +16,15 @@
         "taxonomy": {
             "type": "string",
             "default": ""
-        },        
+        },  
+        "taxonomy_detect": {
+            "type": "boolean",
+            "default": false
+        },
+        "no_categories_text": {
+            "type": "boolean",
+            "default": true
+        },      
         "columns": {
             "type": "integer",
             "default": 4

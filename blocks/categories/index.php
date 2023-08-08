@@ -94,7 +94,9 @@ class Adverts_Block_Categories {
             'color_border' => '',
             'margin' => 2,
             'show_icons' => true,
-            'item_padding' => 3
+            'item_padding' => 3,
+            'taxonomy_detect' => false,
+            'no_categories_text' => true
         ), $atts));
         
         $columns = (int)$columns;
@@ -120,13 +122,28 @@ class Adverts_Block_Categories {
         $terms = get_terms( apply_filters( 'adverts_categories_query', array( 
             'taxonomy' => 'advert_category',
             'hide_empty' => 0, 
-            'parent' => null, 
+            'parent' => $this->get_parent_id( 'advert_category', $taxonomy_detect ), 
         ), $atts ) );
         
         ob_start();
         include_once dirname( __FILE__ ) . '/templates/categories-all.php';
 
         return ob_get_clean();
+    }
+
+    public function get_parent_id( $taxonomy, $taxonomy_detect ) {
+        if( ! $taxonomy_detect ) {
+            return null;
+        }
+
+        $o = get_queried_object();
+
+        if( ! is_object( $o ) || ! $o instanceof WP_Term || $o->taxonomy != $taxonomy ) {
+            return null;
+        } else {
+            return $o->term_id;
+        }
+
     }
 
     public function get_cols_desktop( $cols ) {

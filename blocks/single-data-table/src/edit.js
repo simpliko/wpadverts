@@ -421,7 +421,7 @@ class Edit extends Component {
             <>
                 <Placeholder 
                     icon={ megaphone } 
-                    label="Classifieds Single Gallery" 
+                    label="Classifieds Single Data Table" 
                     instructions="Select custom post type and search form scheme to continue."
                     isColumnLayout="true"
                 >

@@ -68,7 +68,7 @@ class Adverts_Block_Patterns {
         $html[] = '<!-- /wp:column --></div>';
         $html[] = '<!-- /wp:columns -->';
         $html[] = '';
-        $html[] = sprintf('<!-- wp:wpadverts/single-data-table {"post_type":"%s","closed_top":false,"include_fields":[],"exclude_types":[{"name":"__builtin"},{"name":"adverts_field_textarea"}]} /-->', $post_type);
+        $html[] = sprintf('<!-- wp:wpadverts/single-data-table {"post_type":"%s","closed_top":true,"include_fields":[],"exclude_types":[{"name":"__builtin"},{"name":"adverts_field_textarea"}]} /-->', $post_type);
         $html[] = '';
         $html[] = sprintf('<!-- wp:wpadverts/single-data-table {"post_type":"%s","layout":"text","include_types":[{"name":"adverts_field_textarea"}]} /-->', $post_type );
         $html[] = '';

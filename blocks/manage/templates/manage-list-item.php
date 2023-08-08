@@ -34,7 +34,7 @@
                 <?php $post = get_post( get_the_ID() ) ?>
                 
                 <?php foreach( $atts["data"] as $element ): ?>
-                <?php echo wrap( get_the_ID(), $element["name"] ) ?>
+                    <?php echo wrap( get_the_ID(), $element["name"], sprintf( "wpa-result-meta--%s", $element["name"] ) ) ?>
                 <?php endforeach; ?>
 
                 <div class="atw-block">

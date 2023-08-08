@@ -39,6 +39,6 @@
     <?php endforeach; ?>
 </div>
 
-<?php else: ?>
+<?php elseif( $no_categories_text ): ?>
 <div class="atw-p-3 atw-text-center"><?php _e( "No categories found.", "wpadverts" ) ?></div>
 <?php endif; ?>

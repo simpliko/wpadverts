@@ -272,11 +272,11 @@ class Adverts_Block_Single_Data_Table {
             $c_data = [];
 
             if(is_array($tr)) {
-                $c_data += $tr;
+                $c_data = array_merge( $c_data, $tr );
             }
 
             if(is_array($fw)) {
-                $c_data += $fw;
+                $c_data = array_merge( $c_data, $fw );
             }
             //echo "<pre>";print_r($c_data);echo "</pre>";
 

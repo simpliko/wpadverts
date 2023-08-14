@@ -51,6 +51,20 @@ class Adverts_Block_Patterns {
     }
 
     public function get_classifieds_details( $post_type = "advert", $form_scheme = "" ) {
+        $v = apply_filters( "wpadverts/block-patterns/classifieds-details/version", "v2" );
+
+        if( $v == "v2" ) {
+            return $this->get_classifieds_details_v2( $post_type, $form_scheme );
+        } else {
+            return $this->get_classifieds_details_v1( $post_type );
+        }
+    }
+
+    public function get_classifieds_details_v1( $post_type = "advert" ) {
+        return sprintf( '<!-- wp:wpadverts/details {"post_type":"%s"} /-->', $post_type );
+    }
+
+    public function get_classifieds_details_v2( $post_type = "advert", $form_scheme = "" ) {
         $html = array();
         $html[] = '<!-- wp:wpadverts/single-notification /-->';
         $html[] = '';
@@ -58,7 +72,7 @@ class Adverts_Block_Patterns {
         $html[] = '';
         $html[] = '<!-- wp:columns -->';
         $html[] = '<div class="wp-block-columns"><!-- wp:column {"verticalAlignment":"center","width":"66.66%"} -->';
-        $html[] = sprintf( '<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:66.66%%"><!-- wp:wpadverts/single-author {"post_type":"%s","avatar_size":"64","avatar_radius":"atw-rounded-md","data_secondary":["published"]} /--></div>', $post_type );
+        $html[] = sprintf( '<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:66.66%%"><!-- wp:wpadverts/single-author {"post_type":"%s","avatar_size":"64","avatar_radius":"atw-rounded-full","data_secondary":["published"]} /--></div>', $post_type );
         $html[] = '<!-- /wp:column -->';
         $html[] = '';
         $html[] = '<!-- wp:column {"verticalAlignment":"center","width":"33.33%","className":"atw-text-left"} -->';

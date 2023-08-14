@@ -135,7 +135,7 @@ class Adverts_Block_Single_Contact {
         $contact_options = array( );
 
         foreach($contact_methods as $key => $cm) {
-            if($cm["is_active"]) {
+            if(isset($cm["is_active"]) && $cm["is_active"]) {
                 $contact_options[] = $cm;
             }
         }

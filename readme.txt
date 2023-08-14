@@ -4,8 +4,8 @@ Contributors: gwin
 Tags: classifieds, classified, classified ads, classified script, classifieds script, wp classified, wp classifieds
 Requires PHP: 5.6
 Requires at least: 5.7
-Tested up to: 6.2
-Stable tag: 2.0.6
+Tested up to: 6.3
+Stable tag: 2.1.0
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -123,6 +123,11 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 2.1.0 - 2023-08-21 =
+
+* FEATURE: 5 new Classifieds Single blocks allow visually building Ad details pages.
+* FEATURE: Classifieds Categories block allows auto-detecting current category and hiding the 'No categories found' text.
 
 = 2.0.5 - 2023-05-24 =
 

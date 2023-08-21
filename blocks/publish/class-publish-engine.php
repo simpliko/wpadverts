@@ -477,7 +477,7 @@ class Adverts_Block_Publish_Engine {
             remove_action( 'adverts_tpl_single_bottom', 'adext_contact_form' );
             remove_action( 'adverts_tpl_single_bottom', 'adext_bp_send_private_message_button', 50 );
 
-            add_action( 'wpadverts/block/details/contact-options', '__return_null', 1000 );
+            add_action( 'wpadverts/block/details/contact-options', '__return_empty_array', 1000 );
 
             $post_content = $post_content;
             $post_content = wp_kses($post_content, wp_kses_allowed_html( 'post' ) );

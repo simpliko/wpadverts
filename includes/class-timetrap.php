@@ -12,8 +12,10 @@ class WPAdverts_Timetrap {
         
         if( ! empty( $salt ) ) {
             $this->hash = $salt;
-        } else {
+        } else if( defined( "NONCE_SALT" ) ) {
             $this->hash = NONCE_SALT;
+        } else {
+            $this->hash = "";
         }
         
         $this->hash = apply_filters( "wpadverts_timetrap_salt", $this->hash );

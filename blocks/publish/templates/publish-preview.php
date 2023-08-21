@@ -48,7 +48,7 @@
 
     </div>
 
-    <div class="atw-flex atw-mb-3">
+    <div class="atw-flex atw-flex-col atw-mb-3">
         <?php echo $ad_preview ?>
     </div>
 

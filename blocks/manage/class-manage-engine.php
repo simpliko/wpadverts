@@ -384,6 +384,6 @@ class Adverts_Block_Manage_Engine {
     }
 
     public function sort_buttons( $a, $b ) {
-        return ( $a["order"] >= $b["order"] );
+        return ( $a["order"] >= $b["order"] ) ? 1 : -1;
     }
 }

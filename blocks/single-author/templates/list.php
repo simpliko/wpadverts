@@ -14,7 +14,7 @@
                 <div class="atw-block">
                     <?php if(in_array("published", $data_secondary)): ?>
                     <span class="atw-text-gray-500 atw-text-base">
-                    <?php printf( __('Published %1$s - %2$s ago', "wpadverts"), $last_seen_date, $last_seen_rel ) ?>
+                    <?php printf( __('Published %1$s - %2$s ago', "wpadverts"), $published_date, $published_rel ) ?>
                     </span>
                     <?php endif; ?>
                 </div>

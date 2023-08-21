@@ -87,7 +87,13 @@ class Adverts_Block_Single_Author {
 
         $last_seen = $this->get_user_last_seen( $post_id );
         $last_seen_rel = human_time_diff( $last_seen, current_time('timestamp') );
-        $last_seen_date = $this->get_user_last_seen_date( $last_seen );
+        $last_seen_date = $this->get_foramtted_date( $last_seen );
+
+        $post = get_post( $post_id );
+
+        $published = strtotime( $post->post_date );
+        $published_rel = human_time_diff( current_time('timestamp'), $published );
+        $published_date = $this->get_foramtted_date( $published );
 
         $template = sprintf( "%s/templates/%s.php", dirname( __FILE__ ), $atts["layout"]);
         ob_start();
@@ -116,7 +122,7 @@ class Adverts_Block_Single_Author {
         return $last_seen;
     }
 
-    public function get_user_last_seen_date( $last_seen ) {
+    public function get_foramtted_date( $last_seen ) {
         $date_format = apply_filters( "wpadverts/block/date-format", adverts_config( "block_date_format" ), "single-author" );
         return date_i18n( $date_format, $last_seen );
 

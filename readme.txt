@@ -124,7 +124,7 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
-= 2.1.0 - 2023-08-24 =
+= 2.1.0 - 2023-08-23 =
 
 * FEATURE: 5 new Classifieds Single blocks allow visually building Ad details pages.
 * FEATURE: Classifieds Categories block allows auto-detecting current category and hiding the 'No categories found' text.

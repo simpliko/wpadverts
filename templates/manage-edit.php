@@ -1,12 +1,18 @@
-<p>
-    <a href="<?php echo esc_attr($baseurl) ?>" class="adverts-button"><?php _e("Go Back", "wpadverts") ?></a>
+<?php 
+    $back_button = '<a href="' . esc_attr($baseurl) . '" class="adverts-button">' . __("Go Back", "wpadverts") . '</a>';
+    $back_button = apply_filters( 'adverts_back_button', $back_button, $post_id );
+    if( is_post_publicly_viewable( $post_id ) ){
+        $public_link = '<a href="' . esc_attr( get_post_permalink( $post_id ) ) . '" class="adverts-button">' . __("View Ad", "wpadverts") . '</a>';
+    }
+    else{
+        $public_link = '<a href="' . esc_attr( add_query_arg( array( 'advert_id' => null, 'action' => 'preview', 'preview_id' => $post_id ) ) ) . '" class="adverts-button">' . __("Preview Ad", "wpadverts") . '</a>';
+    }
+    $public_link = apply_filters( 'adverts_public_link', $public_link, $post_id );
 
-    <?php if( is_post_publicly_viewable( $post_id ) ): ?>
-    <a href="<?php echo esc_attr(get_post_permalink( $post_id )) ?>" class="adverts-button"><?php _e("View Ad", "wpadverts") ?></a>
-    <?php else: ?>
-    <a href="<?php echo esc_attr(add_query_arg( array( 'advert_id' => null, 'action' => 'preview', 'preview_id' => $post_id ))) ?>" class="adverts-button"><?php _e("Preview Ad", "wpadverts") ?></a>
-    <?php endif; ?>
-</p>
+    if( !empty( $back_button ) || !empty( $public_link ) ){
+        echo '<p>' . $back_button . $public_link . '</p>';
+    }
+?>
 
 <?php adverts_flash( $adverts_flash ) ?>
 

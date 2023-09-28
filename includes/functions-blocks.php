@@ -38,7 +38,7 @@ function adverts_field_checkbox_block( $field, $form = null, $type = "checkbox" 
 
         $checkbox = new Adverts_Html("input", array(
             "type" => $type,
-            "name" => $field["name"].'[]',
+            "name" => $field["name"] . ($type == "checkbox" ? '[]' : ''),
             "id" => $id,
             "value" => $v["value"],
             "class" => " atw-flex-none atw-self-center",
@@ -472,7 +472,11 @@ function wpadverts_block_tpl_wrap( $post_id, $path, $classes = "") {
     $value = wpadverts_get_object_value( $post_id, $path );
 
     if( $value ) {
-        return sprintf( '<div class="%s">%s</div>', $classes, $value );
+        return sprintf( 
+            '<div class="%s">%s</div>', 
+            $classes, 
+            apply_filters( "wpadverts/block/tpl/wrap/value", $value, $post_id, $path ) 
+        );
     }
 }
 

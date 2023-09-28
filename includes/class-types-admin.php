@@ -193,11 +193,11 @@ class Adverts_Types_Admin {
     }
     
     public function restore_user_type( ) {
-        $this->_restore_type( "user_types", adverts_request( "restore-post-type" ), wpadverts_get_user_types() );
+        $this->_restore_type( "user_types", adverts_request( "restore-user-type" ), wpadverts_get_user_types() );
     }
 
-    public function restore_post_type( $types = "post_types") {
-        $this->_restore_type( "post_types", adverts_request( "restore-user-type" ), wpadverts_get_post_types() );
+    public function restore_post_type( ) {
+        $this->_restore_type( "post_types", adverts_request( "restore-post-type" ), wpadverts_get_post_types() );
     }
 
     protected function _restore_type( $types, $post_type, $supported_cpt ) {

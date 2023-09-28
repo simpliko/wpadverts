@@ -568,6 +568,7 @@ class Edit extends Component {
                             data={this.getAdvertsListData()}
                             onChange={this.onListDataChange}
                             value={data}
+                            mode="multi"
                         />
 
                         <AdvertsSelect

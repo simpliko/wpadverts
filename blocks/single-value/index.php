@@ -59,6 +59,9 @@ class Adverts_Block_Single_Value {
     public function render( $atts = array() ) {
 
         // If user is in Publish -> Preview use the Adverts_Block_Templates::get_id() instead of current page ID.
+        
+        include_once ADVERTS_PATH . '/includes/class-block-templates.php';
+        
         if( Adverts_Block_Templates::get_id() !== null ) {
             $post_id = Adverts_Block_Templates::get_id();
         } else {

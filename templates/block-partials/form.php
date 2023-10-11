@@ -55,7 +55,7 @@ $form_layout_prop = "atw-w-1/3";
                             <?php $field["class"] .= " atw-text-base atw-w-full atw-max-w-full"; ?>
                             <div class="wpa-field-input <?php echo wpadverts_block_tpl_field_type( $field ) ?>">
                                 <?php $r = adverts_field_get_renderer($field); ?>
-                                <?php $r = function_exists( $r . "_block" ) ? $r . "_block" : $r; ?>
+                                <?php $r = is_string( $r) && function_exists( $r . "_block" ) ? $r . "_block" : $r; ?>
                                 <?php call_user_func( $r, $field, $form ) ?>
 
                                 <?php if(isset( $field["description"] ) ): ?>

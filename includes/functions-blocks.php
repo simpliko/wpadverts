@@ -844,8 +844,12 @@ function wpadverts_block_tpl_field_type( $field ) {
     $types = array(
         "adverts_field_label" => "label",
         "adverts_field_text" => "text",
+        "adverts_field_password" => "password",
         "adverts_field_select" => "select",
         "adverts_field_textarea" => "textarea",
+        "adverts_field_radio" => "radio",
+        "adverts_field_checkbox" => "checkbox",
+        "adverts_field_gallery" => "gallery"
     );
 
     $has_margin = apply_filters( "wpadverts/block/field/with-margin", array(

@@ -337,7 +337,7 @@ class Adverts_Block_Single_Data_Table {
             }
 
             foreach( $data_table as $dt ) {
-                if( ! in_array( $dt["type"], $ef ) ) {
+                if( ! in_array( $dt["name"], $ef ) ) {
                     $filtered[] = $dt;
                 }
             }

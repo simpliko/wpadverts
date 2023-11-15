@@ -4,8 +4,8 @@ Contributors: gwin
 Tags: classifieds, classified, classified ads, classified script, classifieds script, wp classified, wp classifieds
 Requires PHP: 5.6
 Requires at least: 5.7
-Tested up to: 6.3
-Stable tag: 2.1.0
+Tested up to: 6.4
+Stable tag: 2.1.1
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -123,6 +123,19 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 2.1.1 - 2023-11-15 =
+
+* FEATURE: More accurate field type classes in the HTML code generated for the block inputs.
+* FIXED: Block Single Data Table not filtering by exclude_fields correctly.
+* FIXED: Block Single Value generating a fatal error.
+* FIXED: Custom Post Types and Taxonomies not restoring correctly in the wp-admin / Classifieds / Options / Core / Types panel.
+* FIXED: Block "radio" inputs generating with incorrect name (with a [] at the end).
+* FIXED: In the block rendering checking if {input}_block is a function name.
+* API: wpadverts/block/tpl/wrap/value filter added to the wpadverts_block_tpl_wrap() function.
+* API: adverts_manage_edit_back_button filter in [adverts_manage]
+* API: adverts_manage_edit_public_link filter in [adverts_manage]
+* LANGUAGE: Updated German translation.
 
 = 2.1.0 - 2023-08-23 =
 

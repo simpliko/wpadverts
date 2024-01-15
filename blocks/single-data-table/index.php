@@ -326,7 +326,10 @@ class Adverts_Block_Single_Data_Table {
 
         if( ! empty( $atts["include_fields"] ) ) {
             foreach( $atts["include_fields"] as $ifc ) {
-                $filtered[] = $this->get_field_by_name( $ifc["name"], $data_table );
+                $f = $this->get_field_by_name( $ifc["name"], $data_table );
+                if( is_array( $f ) ) {
+                    $filtered[] = $f;
+                }
             }
         }
 

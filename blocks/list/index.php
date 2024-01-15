@@ -195,6 +195,7 @@ class Adverts_Block_List {
         }
 
         $loop = new WP_Query( $args );
+
         $paginate_base = apply_filters( 'adverts_list_pagination_base', $pbase . '%_%' );
         $paginate_format = stripos( $paginate_base, '?' ) ? '&pg=%#%' : '?pg=%#%';
 

@@ -42,7 +42,7 @@ $form_layout_prop = "atw-w-1/3";
                             <?php endif; ?>
                         </div>
                     <?php else: ?>
-                        <div data-name="<?php echo esc_attr( $field["name"] ) ?>" class="wpa-field-wrap <?php echo sprintf( "wpa-field--%s", $field["name"] ) ?> <?php echo esc_attr( $width ) ?> <?php echo adverts_field_has_errors($field) ? "wpa-field-error" : "" ?>">
+                        <div data-name="<?php echo esc_attr( $field["name"] ) ?>" data-field="<?php echo esc_attr( wpadverts_block_field_short_name($field ) ) ?>" class="wpa-field-wrap <?php echo sprintf( "wpa-field--%s", $field["name"] ) ?> <?php echo esc_attr( $width ) ?> <?php echo adverts_field_has_errors($field) ? "wpa-field-error" : "" ?>">
                             <?php if( isset( $field["label"] ) && ! empty( $field["label"] ) ): ?>
                             <span class="wpa-field-label">
                                 <span class="wpa-field-label-text"><?php echo esc_html( $field["label"] ) ?></span>

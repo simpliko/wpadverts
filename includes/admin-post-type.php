@@ -335,7 +335,7 @@ function adverts_expiry_meta_box() {
         // Set expiration date based on _expiration_date meta
         $expiry = $meta;
         $date = date_i18n( $datef, $expiry );
-        $touch_time = date( "Y-m-d H:i:s", $expiry );
+        $touch_time = date( "Y-m-d H:i:s", absint($expiry) );
         $never_expires = false;
     } else if( $pagenow != "post-new.php" ) {
         // _expiration_date meta not in DB, set expiration to 'never'

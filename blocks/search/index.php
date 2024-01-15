@@ -62,6 +62,7 @@ class Adverts_Block_Search {
 
         if( ! wpadverts_load_assets_globally() ) {
             wp_enqueue_style( 'wpadverts-blocks' );
+            wp_enqueue_script( 'wpadverts-block-list-and-search' );
         }
 
         $params = shortcode_atts(array(

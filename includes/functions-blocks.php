@@ -841,7 +841,7 @@ function wpadverts_block_tpl_field_type( $field ) {
 
     $classes = array();
 
-    $types = array(
+    $types = apply_filters( "wpadverts/block/field/types", array(
         "adverts_field_label" => "label",
         "adverts_field_text" => "text",
         "adverts_field_password" => "password",
@@ -850,7 +850,7 @@ function wpadverts_block_tpl_field_type( $field ) {
         "adverts_field_radio" => "radio",
         "adverts_field_checkbox" => "checkbox",
         "adverts_field_gallery" => "gallery"
-    );
+    ) );
 
     $has_margin = apply_filters( "wpadverts/block/field/with-margin", array(
         "adverts_field_label", "adverts_field_checkbox",  "adverts_field_radio"
@@ -869,6 +869,27 @@ function wpadverts_block_tpl_field_type( $field ) {
     $classes[] = sprintf( "wpadverts-input--%s", $type );
 
     return implode( " ", $classes );
+}
+
+function wpadverts_block_field_short_name( $field ) {
+    $types = apply_filters( "wpadverts/block/field/types", array(
+        "adverts_field_label" => "label",
+        "adverts_field_text" => "text",
+        "adverts_field_password" => "password",
+        "adverts_field_select" => "select",
+        "adverts_field_textarea" => "textarea",
+        "adverts_field_radio" => "radio",
+        "adverts_field_checkbox" => "checkbox",
+        "adverts_field_gallery" => "gallery"
+    ) );
+
+    $field_type = $field["type"];
+
+    if( isset( $types[ $field_type] ) ) {
+        return $types[ $field_type ];
+    } else {
+        return "other";
+    }
 }
 
 /**

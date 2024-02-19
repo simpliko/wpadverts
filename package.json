@@ -5,19 +5,19 @@
   "svn": "/home/greg/svn/wpadverts",
   "release_path": "/home/greg/Release/wpadverts",
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.13.0",
-    "@wordpress/element": "^2.20.0",
-    "@wordpress/scripts": "^14.1.1",
-    "autoprefixer": "^10.4.2",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@wordpress/element": "^2.20.3",
+    "@wordpress/scripts": "^27.2.0",
+    "autoprefixer": "^10.4.17",
     "grunt-checktextdomain": "^1.0.1",
     "grunt-contrib-clean": "^2.0.1",
     "grunt-contrib-compress": "^2.0.0",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-run": "^0.8.1",
-    "grunt-wp-i18n": "^0.5.4",
-    "postcss": "^8.4.6",
+    "grunt-wp-i18n": "^1.0.3",
+    "postcss": "^8.4.35",
     "postcss-cli": "^9.1.0",
-    "tailwindcss": "^3.0.19"
+    "tailwindcss": "^3.4.1"
   },
   "scripts": {
     "start": "wp-scripts start --config blocks.webpack.js",
@@ -55,7 +55,7 @@
     "r-list": "wp-scripts build blocks/list/src/index.js --output-path=blocks/list/build"
   },
   "dependencies": {
-    "@wordpress/components": "^13.0.0",
-    "caniuse-lite": "^1.0.30001587"
+    "@wordpress/components": "^26.0.1",
+    "caniuse-lite": "^1.0.30001588"
   }
 }

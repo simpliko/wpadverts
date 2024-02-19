@@ -773,8 +773,8 @@ Adverts::instance()->set("form_payments", array(
             "order" => 10,
             "empty_option" => true,
             "options" => array(
-                array( "value" => "adverts-pricing", "text" => __( "New Advert Posting", "wpadverts" ) ),
-                array( "value" => "adverts-renewal", "text" => __( "Advert Renewal", "wpadverts" ) )
+                array( "value" => "adverts-pricing", "text" => __( "New Posting", "wpadverts" ) ),
+                array( "value" => "adverts-renewal", "text" => __( "Renewal", "wpadverts" ) )
             ),
             "validator" => array(
                 array( "name" => "is_required" )

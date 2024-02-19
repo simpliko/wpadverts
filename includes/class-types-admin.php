@@ -140,8 +140,8 @@ class Adverts_Types_Admin {
     public function get_data_types() {
         return apply_filters( "wpadverts_classifieds_types", array( 
             "post_types" => array(
-                "title" => __("Classified Types", "wpadverts"),
-                "button_text" => __("+ New Classified Type", "wpadverts"),
+                "title" => __("Post Types", "wpadverts"),
+                "button_text" => __("+ New Post Type", "wpadverts"),
                 "names" => wpadverts_get_post_types(),
                 "type" => "classified"
             ),
@@ -219,7 +219,7 @@ class Adverts_Types_Admin {
         update_option( sprintf( "wpadverts_%s", $types ), $option );
         
         $flash = Adverts_Flash::instance();
-        $flash->add_info( __( "Classified configuration restored to default.", "wpadverts" ) );
+        $flash->add_info( __( "Post Type configuration restored to default.", "wpadverts" ) );
         
         wp_redirect( remove_query_arg( array( "noheader", "restore-post-type", "restore-user-type", "_nonce" ) ) );
         exit;
@@ -447,7 +447,7 @@ class Adverts_Types_Admin {
         include_once ADVERTS_PATH . '/includes/class-block-templates.php';
         Adverts_Block_Templates::save( "post", $post_type->name, $engine, $template );
 
-        $info = __( "Classifieds type updated.", "wpadverts" ) . "<br/>";
+        $info = __( "Post Type updated.", "wpadverts" ) . "<br/>";
         $info.= __( 'Remember to reset permalinks by clicking "Save Changes" button in the <a href="%s">Permalinks</a> panel.', "wpadverts" );
         
         $flash = Adverts_Flash::instance();

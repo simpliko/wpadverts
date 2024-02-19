@@ -55,6 +55,13 @@ class Adverts_Block_Publish_Engine {
      * @var Adverts_Checksum
      */
     protected $_checksum = null;
+
+    /**
+     * Checksum args
+     * 
+     * @var array
+     */
+    protected $_checksum_args = array();
     
     /**
      * Returns the shortcode params.

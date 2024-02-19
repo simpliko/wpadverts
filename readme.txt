@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classified script, classifieds sc
 Requires PHP: 5.6
 Requires at least: 5.7
 Tested up to: 6.4
-Stable tag: 2.1.1
+Stable tag: 2.1.2
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -123,6 +123,20 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 2.1.2 - 2024-02-19 =
+
+* FIXED: List Data input not working correctly in the Classifieds Manage block
+* FIXED: Contact Phone button in Contact Block should be hidden when the phone is not provided.
+* FIXED: Changes to some phrases in the wp-admin / Classifieds / Options to make them more self explanatory.
+* FIXED: $_checksum_args property missing (causing a notice/warning in the Classifieds Publish block). 
+* FIXED: Selecting "None" in the taxonomy rendering option is not working correclty.
+* FIXED: Data Table block not filtering fields correclty by the include_fields option.
+* FIXED: Classifieds Search block not loading CSS code.
+* FIXED: Not possible to move the Single Notification block.
+* API: wpadverts/block/single-contact/contact-options filter added.
+* API: wpadverts/block/field/types filter allows registering new field types.
+* API: Introduced is_visible property to the contact options API 
 
 = 2.1.1 - 2023-11-15 =
 

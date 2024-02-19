@@ -102,6 +102,9 @@ class Adverts_Taxonomies {
             $shortcode = shortcode_adverts_list( $shortcode_args );
         } else if( $block_templates->get_taxonomy_render_method( $taxonomy ) == "block" ) {
             $shortcode = do_blocks( $block_templates->get_taxonomy_template( $taxonomy ) );
+        } else if( $block_templates->get_taxonomy_render_method( $taxonomy ) == "none" ) {
+            // do nothing 
+            return;
         }
         
         $adverts_list_page = get_post( adverts_config( 'ads_list_id' ) );

@@ -57,7 +57,9 @@ class Adverts_Block_Single_Notifications {
     }
     
     public function render( $atts = array() ) {
+        ob_start();
         do_action( "wpadverts/block/single-notifications", get_the_ID(), $atts );
+        return ob_get_clean();
     }
 
 }

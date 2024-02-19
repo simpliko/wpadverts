@@ -115,12 +115,25 @@ class Adverts_Block_Single_Contact {
             $contact_options = $this->_get_custom_contacts( $atts, $post_id );
         }
 
-        foreach($contact_options as $o) {
-            if( isset( $o["content_callback"] ) && is_array( $o["content_callback"] ) ) {
-                $this->_add_content_callback( $o["content_callback"] );
+        $has_visible_contact_options = false;
+
+        foreach( $contact_options as $k => $o ) {
+            if( ! isset( $o["is_visible"] ) ) {
+                $contact_options[$k]["is_visible"] = $o["is_active"];
+            }
+
+            if( $contact_options[$k]["is_active"] && $contact_options[$k]["is_visible"] ) {
+                $has_visible_contact_options = true;
+
+                if( isset( $o["content_callback"] ) && is_array( $o["content_callback"] ) ) {
+                    $this->_add_content_callback( $o["content_callback"] );
+                }
             }
         }
         
+        $contact_options = apply_filters( "wpadverts/block/single-contact/contact-options", $contact_options, $post_id, $atts );
+        $contact_options = $this->_set_primary_contact_option( $contact_options );
+
         $atts["layout"] = "contact";
 
         $template = sprintf( "%s/templates/%s.php", dirname( __FILE__ ), $atts["layout"]);
@@ -128,6 +141,21 @@ class Adverts_Block_Single_Contact {
         include $template;
         return ob_get_clean();
 
+    }
+
+    protected function _set_primary_contact_option( $contact_options ) {
+        $has_primary = false;
+
+        foreach( $contact_options as $k => $o ) {
+            if( $o["is_active"] && $o["is_visible"] && ! $has_primary ) {
+                $contact_options[$k]["type"] = "primary";
+                $has_primary = true;
+            } else {
+                $contact_options[$k]["type"] = "secondary";
+            }
+        }
+
+        return $contact_options;
     }
 
     protected function _get_default_contacts( $atts, $post_id ) {

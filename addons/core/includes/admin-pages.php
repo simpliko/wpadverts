@@ -263,7 +263,7 @@ Adverts::instance()->set("form_core_config", array(
             "type" => "adverts_dropdown_pages",
             "order" => 10,
             "label" => __("Default Ads List Page", "wpadverts"),
-            "hint" => __("Select page on which the main [adverts_list] shortcode is being used.", "wpadverts"),
+            "hint" => __("Select the main page with list of Ads.", "wpadverts"),
             "attr" => array(
                 "id" => "option__ads_list_id"
             )
@@ -306,7 +306,7 @@ Adverts::instance()->set("form_core_config", array(
             "label" => __( "Media Library", "wpadverts" ),
             "order" => 10,
             "options" => array(
-                array( "value" => "1", "text" => __( "Do not show Advert images (and other files) in Media Library.", "wpadverts" ) ),
+                array( "value" => "1", "text" => __( "Do not show Ad images (and other files) in Media Library.", "wpadverts" ) ),
             )
         ),
         array(
@@ -315,16 +315,16 @@ Adverts::instance()->set("form_core_config", array(
             "label" => " ",
             "order" => 10,
             "options" => array(
-                array( "value" => "1", "text" => __( "Delete Advert images from Media Library when deleting an Advert.", "wpadverts" ) ),
+                array( "value" => "1", "text" => __( "Delete Ad images from Media Library when deleting an Ad.", "wpadverts" ) ),
             )
         ),
         array(
             "name" => "adverts_manage_moderate",
             "type" => "adverts_field_checkbox",
-            "label" => __( "Adverts Manage Moderation", "wpadverts" ),
+            "label" => __( "Manage Moderation", "wpadverts" ),
             "order" => 10,
             "options" => array(
-                array( "value" => "1", "text" => __( "Set Ad status to 'pending' when user updates his Ad from page with [adverts_manage] shortcode.", "wpadverts" ) ),
+                array( "value" => "1", "text" => __( "Set Ad status to 'pending' when user updates his Ad in the frontend.", "wpadverts" ) ),
             )
         ),
         array(

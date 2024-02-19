@@ -81,19 +81,19 @@ function adverts_admin_page_extensions() {
             "modules" => array(
                 "core" => array(
                     "title" => __("Core", "wpadverts"),
-                    "text" => __("Here you can configure most basic Adverts options, applicable on any site.", "wpadverts"),
+                    "text" => __("Here you can configure most basic options, applicable on any site.", "wpadverts"),
                     "type" => "static",
                     "plugin" => null,
                 ),
                 "payments" => array(
                     "title" => __("Payments", "wpadverts"),
-                    "text" => __("Charge users for posting classified ads on your site.", "wpadverts"),
+                    "text" => __("Charge users for posting ads on your website.", "wpadverts"),
                     "type" => "",
                     "plugin" => null
                 ),
                 "wc-payments" => array(
                     "title" => __("WooCommerce Payments", "wpadverts"),
-                    "text" => __("Use WooCommerce to charge users for posting classifieds.", "wpadverts"),
+                    "text" => __("Use WooCommerce to charge users for posting ads on your website.", "wpadverts"),
                     "type" => "",
                     "plugin" => "wpadverts-wc/wpadverts-wc.php",
                     "purchase_url" => "https://wpadverts.com/extensions/woocommerce-integration/"
@@ -107,14 +107,14 @@ function adverts_admin_page_extensions() {
                 ),
                 "custom-fields" => array(
                     "title" => __("Custom Fields", "wpadverts"),
-                    "text" => __("Allow users to edit: Add, Search and Contact forms using easy to use drag and drop editor.", "wpadverts"),
+                    "text" => __("Allow users to customize forms using easy to use drag and drop editor.", "wpadverts"),
                     "type" => "",
                     "plugin" => "wpadverts-custom-fields/wpadverts-custom-fields.php",
                     "purchase_url" => "https://wpadverts.com/extensions/custom-fields/"
                 ),
                 "authors" => array(
                     "title" => __("Authors", "wpadverts"),
-                    "text" => __("Using Authors module users can create their profiles with list of authors ads.", "wpadverts"),
+                    "text" => __("Using Authors module users can create and manage their profiles.", "wpadverts"),
                     "type" => "",
                     "plugin" => "wpadverts-authors/wpadverts-authors.php",
                     "purchase_url" => "https://wpadverts.com/extensions/authors/"
@@ -144,7 +144,7 @@ function adverts_admin_page_extensions() {
                 ),
                 "contact-form" => array(
                     "title" => __( "Contact Form", "wpadverts" ),
-                    "text" => __( "Display contact form on Ad details pages instead of just the contact information.", "wpadverts" ),
+                    "text" => __( "Display contact form on the Ad details pages.", "wpadverts" ),
                     "type" => "",
                     "plugin" => null
                 ),

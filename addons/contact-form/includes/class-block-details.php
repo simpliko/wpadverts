@@ -44,6 +44,7 @@ class Adext_Contact_Form_Block_Details {
             ),
             "label" => __( "Contact Form", "wpadverts" ),
             "is_active" => true,
+            "is_visible" => true,
             "content_callback" => array(
                 "callback" => array( $this, "contact_options_form" ),
                 "priority" => 10
@@ -96,6 +97,7 @@ class Adext_Contact_Form_Block_Details {
                 ),
                 "label" => __( "Phone", "wpadverts" ),
                 "is_active" => $is_active,
+                "is_visible" => $is_active,
                 "content_callback" => null
 
             );
@@ -116,6 +118,7 @@ class Adext_Contact_Form_Block_Details {
                 ),
                 "label" => __("Phone", "wpadverts"),
                 "is_active" => $is_active,
+                "is_visible" => $is_active,
                 "content_callback" => null
             );
         }

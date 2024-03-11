@@ -1541,7 +1541,7 @@ function adverts_field_textarea( $field ) {
             "cols" => 50,
             "placeholder" => isset($field["placeholder"]) ? $field["placeholder"] : null,
             "class" => isset($field["class"]) ? $field["class"] : null,
-        ), $value);
+        ), esc_html( $value ) );
         $html->forceLongClosing();
         
         echo $html->render();
@@ -3330,6 +3330,8 @@ function adverts_skip_preview( $tpl ) {
         exit;
     }
     
+    Adverts::instance()->set("upload_conf", []);
+
     return $tpl;
 }
 

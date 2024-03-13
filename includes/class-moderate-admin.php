@@ -14,6 +14,10 @@ class Adverts_Moderate_Admin {
         $scheme = $this->get_form_scheme();
         $form = new Adverts_Form( $scheme );
 
+        if( ! wpadverts_check_config_nonce( $form ) ) {
+            return;
+        }
+
         if( isset( $_POST ) && !empty( $_POST ) ) {
 
             if( adverts_request( "honeypot_enabled" ) === null ) {

@@ -28,7 +28,11 @@ function adext_bank_transfer_page_options() {
 
     $scheme = Adverts::instance()->get("form_bank_transfer_config");
     $form = new Adverts_Form( $scheme );
-    
+
+    if( ! wpadverts_check_config_nonce( $form ) ) {
+        return;
+    }
+
     $button_text = __("Update Options", "wpadverts");
     
     if(isset($_POST) && !empty($_POST)) {

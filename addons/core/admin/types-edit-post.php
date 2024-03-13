@@ -26,7 +26,7 @@
     <?php endif; ?>
 
     <form action="" method="post">
-    
+        <?php wpadverts_config_nonce( $form_simple ) ?>
         <div class="postbox ">
             <div class="postbox-header">
                 <h2 class="hndle ui-sortable-handle">

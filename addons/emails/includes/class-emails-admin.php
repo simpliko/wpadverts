@@ -58,6 +58,10 @@ class Adext_Emails_Admin {
         $scheme = $this->options_form( );
         $form = new Adverts_Form( $scheme );
 
+        if( ! wpadverts_check_config_nonce( $form ) ) {
+            return;
+        }
+
         $button_text = __("Update Options", "wpadverts");
 
         if( isset( $_POST ) && !empty( $_POST ) ) {
@@ -97,7 +101,7 @@ class Adext_Emails_Admin {
      */
     public function browse() {
         if(adverts_request( "edit" ) != "" ) {
-            $this->emails_edit();
+            $this->edit();
             return;
         }
         
@@ -154,6 +158,10 @@ class Adext_Emails_Admin {
         $form = new Adverts_Form( $scheme );
         $form->bind( $bind );
 
+        if( ! wpadverts_check_config_nonce( $form ) ) {
+            return;
+        }
+
         $button_text = __("Update Message Template", "wpadverts");
 
         if(isset($_POST) && !empty($_POST)) {
@@ -181,9 +189,9 @@ class Adext_Emails_Admin {
      * 
      * @since   1.3.0
      * 
-     * @param   array   $form           Form Scheme
-     * @param   string  $email_name     Edited email name
-     * @return  boolean                 True if the message was saved
+     * @param   Adverts_Form   $form           Form Scheme
+     * @param   string         $email_name     Edited email name
+     * @return  boolean                        True if the message was saved
      */
     public function edit_save($form, $email_name ) {
         

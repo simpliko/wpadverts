@@ -21,6 +21,7 @@
     <?php if( $payment !== null ): ?>
     
     <form action="" method="post" class="adverts-form">
+    <?php wpadverts_config_nonce( $form ) ?>
     <div id="poststuff" class=" ">
     <div id="post-body" class="metabox-holder columns-2">
     

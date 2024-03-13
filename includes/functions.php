@@ -4019,6 +4019,53 @@ function adverts_get_taxonomy_path( $term, $glue = false ) {
     return implode( $glue, $a );
 }
 
+/**
+ * Verifies config nonce.
+ * 
+ * @since 2.1.3
+ * 
+ * @param Adverts_Form $form;
+ * @return bool
+ */
+function wpadverts_check_config_nonce($form) {
+    if( isset( $_POST ) && !empty( $_POST ) ) {
+
+        $nonce = adverts_request( "_wpadverts_config_nonce" );
+
+        if( get_current_user_id() > 0 ) {
+            $action = sprintf( "%s-%d", $form->get_scheme("name"), get_current_user_id() );
+        } else {
+            $action = $form->get_scheme("name");
+        }
+
+        if( ! wp_verify_nonce( $nonce, $action ) ) {
+            $flash = Adverts_Flash::instance();
+            $flash->add_error( __("Cannot verify config nonce. <a href=''>Retry</a>", "wpadverts") );
+            adverts_admin_flash($flash);
+            return false;
+        }
+    }
+    return true;
+}
+
+/**
+ * Display config nonce field.
+ * 
+ * @since 2.1.3
+ * 
+ * @param Adverts_Form $form;
+ * @return void
+ */
+function wpadverts_config_nonce($form) {
+    if( get_current_user_id() > 0 ) {
+        $action = sprintf( "%s-%d", $form->get_scheme("name"), get_current_user_id() );
+    } else {
+        $action = $form->get_scheme("name");
+    }
+    
+    wp_nonce_field( $action, "_wpadverts_config_nonce" );
+}
+
 function wpadverts_multiverse_promo( $data_type ) {
     
     $url = "https://wpadverts.com/extensions/multiverse/";

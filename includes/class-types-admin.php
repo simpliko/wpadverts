@@ -96,12 +96,19 @@ class Adverts_Types_Admin {
         wp_enqueue_script( "adverts-types-post" );
         $dashicons = null;
         
+        $form_verify = new Adverts_Form();
+        $form_verify->load( $this->_edit_post_form_simple( $post_type ) );
+
+        if( ! wpadverts_check_config_nonce( $form_verify ) ) {
+            return;
+        }
+
         if( ! isset( $_POST ) || empty( $_POST ) ) {
             list( $form_simple, $form_labels, $form_renderers ) = $this->_form_defaults( $post_type, $types );
         } else {
             list( $form_simple, $form_labels, $form_renderers ) = $this->_form_update( $post_type, $types );
         }
-        
+
         $h2_title = sprintf( __("Edit '%s'", "wpadverts"), $post_type->label );
         $restore_url = $this->_get_post_type_restore_url( $post_type->name, "restore-post-type" );
         $button_text = __( "Update", "wpadverts" );
@@ -124,6 +131,13 @@ class Adverts_Types_Admin {
         
         $taxonomy = get_taxonomy( adverts_request( "edit-taxonomy" ) );
         
+        $form_verify = new Adverts_Form();
+        $form_verify->load( $this->_edit_taxonomy_form_simple( $taxonomy ) );
+
+        if( ! wpadverts_check_config_nonce( $form_verify ) ) {
+            return;
+        }
+
         if( ! isset( $_POST ) || empty( $_POST ) ) {
             list( $form_simple, $form_labels, $form_renderers ) = $this->_taxonomy_defaults( $taxonomy );
         } else {

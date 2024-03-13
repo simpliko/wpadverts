@@ -52,6 +52,10 @@ class Adverts_Flash
      */
     protected $_loaded = false;
 
+    protected $_id = null;
+
+    protected $_new = null;
+
     /**
      * Singleton Returns Adverts Flash Instance
      * 

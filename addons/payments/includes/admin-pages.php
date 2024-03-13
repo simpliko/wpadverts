@@ -32,6 +32,10 @@ function adext_payments_page_options() {
     $form = new Adverts_Form( $scheme );
     $form->bind( get_option ( "adext_payments_config", array() ) );
     
+    if( ! wpadverts_check_config_nonce( $form ) ) {
+        return;
+    }
+
     $button_text = __("Update Options", "wpadverts");
     
     if(isset($_POST) && !empty($_POST)) {
@@ -129,6 +133,10 @@ function adext_payments_page_pricing() {
         $button_text = __("Add Pricing", "wpadverts");
         $form = new Adverts_Form(Adverts::instance()->get("form_payments"));
         
+        if( ! wpadverts_check_config_nonce( $form ) ) {
+            return;
+        }
+
         if(isset($_POST) && !empty($_POST)) {
             
             // If $_POST is not empty the form was sent: validate and save it.
@@ -175,6 +183,10 @@ function adext_payments_page_pricing() {
         $form = new Adverts_Form(Adverts::instance()->get("form_payments"));
         $form->bind( $bind );
         
+        if( ! wpadverts_check_config_nonce( $form ) ) {
+            return;
+        }
+
         if(isset($_POST) && !empty($_POST)) {
             
             // If $_POST is not empty the form was sent: validate and save it.
@@ -210,6 +222,10 @@ function adext_payments_page_pricing() {
         if( ! $post || ! in_array( $post->post_type, array( 'adverts-pricing', 'adverts-renewal' ) ) ) {
             wp_die(__('Adverts Pricing with given ID does not exist.', 'wpadverts'));
         }
+
+        if( ! wp_verify_nonce( adverts_request( "_nonce" ), sprintf( "delete-pricing-%d", $post->ID ) ) ) {
+            wp_die( __( "Cannot verify nonce.", "wpadverts" ) );
+        }
         
         foreach( get_children( $post->ID ) as $child) {
             wp_delete_post( $child->ID, true );
@@ -225,7 +241,11 @@ function adext_payments_page_pricing() {
         $action = adverts_request( 'action', adverts_request( 'action2' ) );
         $item = ( adverts_request( 'item' ) );
         $i = 0;
-        
+
+        if( ! wp_verify_nonce( adverts_request( "_nonce" ), "wpadverts-pricing-bulk-action" ) ) {
+            wp_die( __( "Cannot verify nonce.", "wpadverts" ) );
+        }
+
         foreach($item as $id) {
             foreach( get_children( $id ) as $child) {
                 wp_delete_post( $child->ID, true );
@@ -338,6 +358,10 @@ function adext_payments_page_history() {
         $form->load( $form_scheme );
         $form->bind( Adverts_Post::to_array( $payment ) );
         
+        if( ! wpadverts_check_config_nonce( $form ) ) {
+            return;
+        }
+
         if(isset($_POST) && !empty($_POST)) {
             $form->bind( stripslashes_deep( $_POST ) );
             $valid = $form->validate();
@@ -383,7 +407,11 @@ function adext_payments_page_history() {
         if( !$post || $post->post_type != 'adverts-payment' ) {
             wp_die(__('Adverts Payment with given ID does not exist.', 'wpadverts'));
         }
-        
+
+        if( ! wp_verify_nonce( adverts_request( "_nonce" ), sprintf( "delete-payment-history-%d", $post->ID ) ) ) {
+            wp_die( __( "Cannot verify nonce.", "wpadverts" ) );
+        }
+
         foreach( get_children( $post->ID ) as $child) {
             wp_delete_post( $child->ID, true );
         }
@@ -404,6 +432,10 @@ function adext_payments_page_history() {
         // Apply bulk actions and return to payments history list
         $action = adverts_request( 'action' );
         
+        if( ! wp_verify_nonce( adverts_request( "_nonce" ), "wpadverts-payment-history-bulk-action" ) ) {
+            wp_die( __( "Cannot verify nonce.", "wpadverts" ) );
+        }
+
         if( empty( $action) ) {
             $action = adverts_request( 'action2' );
         }

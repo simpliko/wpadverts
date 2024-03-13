@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classified script, classifieds sc
 Requires PHP: 5.6
 Requires at least: 5.7
 Tested up to: 6.4
-Stable tag: 2.1.3
+Stable tag: 2.1.3.b2
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -124,9 +124,11 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
-= 2.1.2 - 2024-03-13 =
+= 2.1.3 - 2024-03-15 =
 
+* FIXED: XSS vulnerability in administration panel.
 * FIXED: Patched CSFR vulnerability. 
+* FIXED: Replaced esc_attr_e() functions with esc_attr() where applicable
 
 = 2.1.2 - 2024-02-19 =
 

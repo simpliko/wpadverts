@@ -20,17 +20,18 @@
 
 
 <ul class="subsubsub">
-    <li><a <?php if($filter == ""): ?>class="current"<?php endif; ?> href="<?php esc_attr_e(remove_query_arg('status')) ?>"><?php _e("All") ?></a><span class="count">(<?php echo array_sum($status_list) ?>)</span> | </li>
+    <li><a <?php if($filter == ""): ?>class="current"<?php endif; ?> href="<?php echo esc_attr(remove_query_arg('status')) ?>"><?php _e("All") ?></a><span class="count">(<?php echo array_sum($status_list) ?>)</span> | </li>
     <?php foreach($status_list as $status => $count): ?>
-    <li><a <?php if($filter == $status): ?>class="current"<?php endif; ?> href="<?php esc_attr_e(add_query_arg(array('status'=>$status))) ?>"><?php esc_html_e(get_post_status_object($status)->label) ?></a><span class="count">(<?php echo (int)$count ?>)</span> | </li>
+    <li><a <?php if($filter == $status): ?>class="current"<?php endif; ?> href="<?php echo esc_attr(add_query_arg(array('status'=>$status))) ?>"><?php esc_html_e(get_post_status_object($status)->label) ?></a><span class="count">(<?php echo (int)$count ?>)</span> | </li>
     <?php endforeach; ?>
     
     <?php if($temporary_count > 0): ?>
-    <li><a <?php if($filter == "adverts-payment-tmp"): ?>class="current"<?php endif; ?>href="<?php esc_attr_e(add_query_arg(array('status'=>"adverts-payment-tmp"))) ?>"> <?php esc_html_e(get_post_status_object("adverts-payment-tmp")->label) ?></a></li>
+    <li><a <?php if($filter == "adverts-payment-tmp"): ?>class="current"<?php endif; ?>href="<?php echo esc_attr(add_query_arg(array('status'=>"adverts-payment-tmp"))) ?>"> <?php esc_html_e(get_post_status_object("adverts-payment-tmp")->label) ?></a></li>
     <?php endif; ?>
 </ul>
 
-<form method="post" action="<?php esc_attr_e( add_query_arg( array( 'noheader'=>1, 'pg'=>null ) ) ) ?>" id="posts-filter">
+<form method="post" action="<?php echo esc_attr( add_query_arg( array( 'noheader'=>1, 'pg'=>null ) ) ) ?>" id="posts-filter">
+<?php wp_nonce_field( "wpadverts-payment-history-bulk-action", "_nonce" ) ?>
 <input type="hidden" name="noheader" value="1" />
     
 <div class="tablenav">
@@ -54,7 +55,7 @@
         <option value="this-month" <?php selected($month, "this-month") ?>><?php _e("This month", "wpadverts") ?></option>
         <option value="last-month" <?php selected($month, "last-month") ?>><?php _e("Last month", "wpadverts") ?></option>
         <?php foreach($months as $m): ?>
-        <option value="<?php esc_attr_e($m["value"]) ?>" <?php selected($month, $m["value"]) ?>><?php esc_html_e($m["label"]) ?></option>
+        <option value="<?php echo esc_attr($m["value"]) ?>" <?php selected($month, $m["value"]) ?>><?php esc_html_e($m["label"]) ?></option>
         <?php endforeach; ?>
     </select>  
     
@@ -93,10 +94,10 @@
                 <input type="checkbox" value="<?php echo $item->ID ?>" name="item[]"/>
             </th>
             <td class="">
-                <strong><a title='<?php _e("View Order", "wpadverts") ?>' href="<?php esc_attr_e(add_query_arg('edit', $item->ID)) ?>" class=""><?php echo esc_html(adext_payments_format_order_id($item->ID)) ?></a></strong>
+                <strong><a title='<?php _e("View Order", "wpadverts") ?>' href="<?php echo esc_attr(add_query_arg('edit', $item->ID)) ?>" class=""><?php echo esc_html(adext_payments_format_order_id($item->ID)) ?></a></strong>
                 <div class="row-actions" style="">
-                    <span class="edit"><a href="<?php esc_attr_e(add_query_arg('edit', $item->ID)) ?>"><?php _e("View Order", "wpadverts") ?></a> | </span>
-                    <span class=""><a href="<?php esc_attr_e( add_query_arg( array( "delete" => $item->ID,"noheader" => 1 ) ) ) ?>" title="<?php _e("Delete") ?>" class="adverts-delete"><?php _e("Delete") ?></a> | </span>
+                    <span class="edit"><a href="<?php echo esc_attr(add_query_arg('edit', $item->ID)) ?>"><?php _e("View Order", "wpadverts") ?></a> | </span>
+                    <span class=""><a href="<?php echo esc_attr( add_query_arg( array( "delete" => $item->ID,"noheader" => 1, "_nonce" => wp_create_nonce( sprintf( "delete-payment-history-%d", $item->ID ) ) ) ) ) ?>" title="<?php _e("Delete") ?>" class="adverts-delete"><?php _e("Delete") ?></a> | </span>
                 </div>
             </td>
             

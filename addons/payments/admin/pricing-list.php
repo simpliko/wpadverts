@@ -13,16 +13,17 @@
 <div class="wrap">
   
 <h2 class="nav-tab-wrapper">
-    <a href="<?php esc_attr_e( remove_query_arg( array( 'edit', 'adaction' ) ) ) ?>" class="nav-tab "><?php _e("Options", "wpadverts") ?></a>
-    <a href="<?php esc_attr_e( add_query_arg( array('adaction'=>'list') ) ) ?>" class="nav-tab nav-tab-active">
+    <a href="<?php echo esc_attr( remove_query_arg( array( 'edit', 'adaction' ) ) ) ?>" class="nav-tab "><?php _e("Options", "wpadverts") ?></a>
+    <a href="<?php echo esc_attr( add_query_arg( array('adaction'=>'list') ) ) ?>" class="nav-tab nav-tab-active">
         <?php _e("Pricing", "wpadverts") ?>
-        <a class="add-new-h2" href="<?php esc_attr_e( add_query_arg( array( 'add'=>1 ) ) ) ?>"><?php _e("Add New") ?></a> 
+        <a class="add-new-h2" href="<?php echo esc_attr( add_query_arg( array( 'add'=>1 ) ) ) ?>"><?php _e("Add New") ?></a> 
     </a>
 </h2>
     
 <?php adverts_admin_flash() ?>
     
-<form method="post" action="<?php esc_attr_e( add_query_arg( array( 'noheader'=>1, 'pg'=>null ) ) ) ?>" id="posts-filter">
+<form method="post" action="<?php echo esc_attr( add_query_arg( array( 'noheader'=>1, 'pg'=>null ) ) ) ?>" id="posts-filter">
+<?php wp_nonce_field( "wpadverts-pricing-bulk-action", "_nonce" ) ?>
 <input type="hidden" name="noheader" value="1" />
 
 <div class="tablenav">
@@ -37,7 +38,7 @@
 
 </div>
 
-<div class="clear"/>&nbsp;</div>
+<div class="clear">&nbsp;</div>
 
 <table cellspacing="0" class="widefat post fixed">
     <?php foreach(array("thead", "tfoot") as $tx): ?>
@@ -60,10 +61,10 @@
                 <input type="checkbox" value="<?php echo $item->ID ?>" name="item[]"/>
             </th>
             <td class="post-title column-title">
-                <strong><a title='<?php _e("Edit") ?>  "(<?php esc_attr_e($item->post_title) ?>)"' href="<?php esc_attr_e(add_query_arg('edit', $item->ID)) ?>" class=""><?php echo esc_html($item->post_title) ?></a></strong>
+                <strong><a title='<?php _e("Edit") ?>  "(<?php echo esc_attr($item->post_title) ?>)"' href="<?php echo esc_attr(add_query_arg('edit', $item->ID)) ?>" class=""><?php echo esc_html($item->post_title) ?></a></strong>
                 <div class="row-actions">
-                    <span class="edit"><a title="<?php _e("Edit") ?>" href="<?php esc_attr_e(add_query_arg('edit', $item->ID)) ?>"><?php _e("Edit") ?></a> | </span>
-                    <span class=""><a href="<?php esc_attr_e( add_query_arg( array( "delete" => $item->ID,"noheader" => 1 ) ) ) ?>" title="<?php _e("Delete") ?>" class="adverts-delete"><?php _e("Delete") ?></a> | </span>
+                    <span class="edit"><a title="<?php _e("Edit") ?>" href="<?php echo esc_attr(add_query_arg('edit', $item->ID)) ?>"><?php _e("Edit") ?></a> | </span>
+                    <span class=""><a href="<?php echo esc_attr( add_query_arg( array( "delete" => $item->ID,"noheader" => 1, "_nonce" => wp_create_nonce( sprintf( "delete-pricing-%d", $item->ID ) ) ) ) ) ?>" title="<?php _e("Delete") ?>" class="adverts-delete"><?php _e("Delete") ?></a> | </span>
                 </div>
             </td>
             

@@ -18,6 +18,8 @@
     <?php adverts_admin_flash() ?>
 
     <form action="" method="post" class="adverts-form">
+        <?php wpadverts_config_nonce( $form ) ?>
+
         <table class="form-table">
             <tbody>
             <?php echo adverts_form_layout_config($form) ?>

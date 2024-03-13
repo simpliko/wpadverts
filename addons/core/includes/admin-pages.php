@@ -57,7 +57,11 @@ function _adext_core_page_options_main() {
     
     $scheme = Adverts::instance()->get("form_core_config");
     $form = new Adverts_Form( $scheme );
-    
+
+    if( ! wpadverts_check_config_nonce( $form ) ) {
+        return;
+    }
+
     if(isset($_POST) && !empty($_POST)) {
         $form->bind( stripslashes_deep( $_POST ) );
         $valid = $form->validate();
@@ -117,6 +121,10 @@ function _adext_core_page_options_gallery() {
     
     $scheme = Adverts::instance()->get("form_gallery_config");
     $form = new Adverts_Form( $scheme );
+    
+    if( ! wpadverts_check_config_nonce( $form ) ) {
+        return;
+    }
     
     if(isset($_POST) && !empty($_POST)) {
         

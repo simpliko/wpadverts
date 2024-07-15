@@ -16,12 +16,17 @@ jQuery(function($) {
         text = $this.data("empty-option-text");
       }
 
+      var atwClasses = $this.attr("class").split(" ").filter(function(text) {
+        return text.match(/(?:^|\s)atw-/);
+      });
+      
       var input = $('<input type="text" />');
       input.attr("id", $this.attr("name"));
       input.attr("id", $this.attr("id"));
       input.attr("placeholder", text);
       input.attr("autocomplete", "off");
       input.addClass("adverts-multiselect-input");
+      input.addClass(atwClasses);
       input.on("focus", function(e) {
           
           $(this).blur();
@@ -36,6 +41,7 @@ jQuery(function($) {
             $(this).parent().find(".adverts-multiselect-options").show();
           }
       });
+
 
 
       var options = $("<div></div>");

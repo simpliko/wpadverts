@@ -50,7 +50,7 @@ class Adverts_Block_Single_Value {
                 'editor_script' => $js_handler,
                 'render_callback' => array( $this, "render" ),
                 'style' => wpadverts_load_assets_globally() ? 'wpadverts-blocks' : null,
-                'script' => wpadverts_load_assets_globally() ? 'wpadverts-block-single-value' : null
+                //'script' => wpadverts_load_assets_globally() ? 'wpadverts-block-single-value' : null
             )
         );
 

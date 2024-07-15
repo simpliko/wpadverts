@@ -50,7 +50,7 @@ class Adverts_Block_Single_Notifications {
                 'editor_script' => $js_handler,
                 'render_callback' => array( $this, "render" ),
                 'style' => wpadverts_load_assets_globally() ? 'wpadverts-blocks' : null,
-                'script' => wpadverts_load_assets_globally() ? 'wpadverts-block-single-notifications' : null
+                //'script' => wpadverts_load_assets_globally() ? 'wpadverts-block-single-notifications' : null
             )
         );
 

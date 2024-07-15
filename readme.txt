@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classifieds script, classifieds p
 Requires PHP: 5.6
 Requires at least: 5.7
 Tested up to: 6.4
-Stable tag: 2.1.3
+Stable tag: 2.1.4
 License: GNU Version 2 or Any Later Version
 
 Build classifieds section in seconds. Allow your visitors to browse and post (paid or free) classified ads on your site.
@@ -123,6 +123,11 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 2.1.4 - 2024-07-16 =
+
+* FIXED: Blocks trying to load JavaScript file that does not exist.
+* FIXED: Multiselect input not inheriting the styling correctly in the block mode.
 
 = 2.1.3 - 2024-03-18 =
 

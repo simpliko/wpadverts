@@ -53,9 +53,39 @@ class Adverts_Block_List {
         );
     }
     
+    public function is_preview() {
+        if( wp_is_json_request() == "1" ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function render( $atts = array() ) {
 
         $atts = $this->handlePayload( $atts );
+
+        $height = wpadverts_block_img_options( "height" );
+        $display = adverts_request( "display", $atts["display"] );
+
+        if( $display == "grid" ) {
+            $slider_img_height = $height[ $atts["grid_img_height"] ];
+            $slider_enabled = $atts["grid_img_slider"] && ! $this->is_preview();
+            $slider_is_lazy = $atts["grid_img_slider_is_lazy"];
+        } else {
+            $slider_img_height = $height[ $atts["list_img_height"] ];
+            $slider_enabled = $atts["list_img_slider"] && ! $this->is_preview();
+            $slider_is_lazy = $atts["list_img_slider_is_lazy"];
+        }
+        
+        if( $slider_enabled ) {
+
+            include_once ADVERTS_PATH . "/includes/class-gallery-helper.php";
+            include_once ADVERTS_PATH . '/includes/class-block-templates.php';
+
+            wp_enqueue_style( 'wpadverts-tiny-slider');
+            wp_enqueue_script( 'wpadverts-tiny-slider' );
+        }
 
         if( ! wpadverts_load_assets_globally() ) {
             wp_enqueue_style( 'wpadverts-blocks' );

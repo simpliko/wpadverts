@@ -1,9 +1,11 @@
         
 <?php $data = wpadverts_block_list_image_grid( get_the_ID(), $atts ) ?>
-    
+
 <div class="wpa-picture-grid wpa-block-list-view-grid atw-flex atw-grow">
     <div class="atw-flex atw-items-center atw-box-border atw-w-full atw-bg-gray-50 atw-rounded atw-overflow-hidden <?php echo join( " ", $data->classes ) ?>">
-    <?php if($data->image_id): ?>
+    <?php if($slider_enabled && $images): ?>
+        <?php include apply_filters( "wpadverts/blocks/load/template", dirname( __FILE__ ) . "/list-item-img-slider.php", $atts )?>
+    <?php elseif($data->image_id): ?>
         <?php $image = get_post( $data->image_id ) ?>
         <img src="<?php echo esc_attr( adverts_get_main_image( get_the_ID(), $data->image_type ) ) ?>" class="atw-w-full atw-max-w-full atw-max-h-full atw-block atw-rounded-none atw-border-0 atw-shadow-none <?php echo join( " ", $data->classes_img ) ?>" title="<?php echo esc_attr($image->post_excerpt) ?>" alt="<?php echo esc_attr($image->post_content) ?>" />
     <?php elseif($data->default_image_url): ?>

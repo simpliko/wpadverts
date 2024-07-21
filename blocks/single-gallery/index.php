@@ -68,6 +68,29 @@ class Adverts_Block_Single_Gallery {
             $post_id = get_the_ID();
         }
 
+        $data = new \stdClass;
+        $data->image_type = "adverts-list";
+
+        $slider_img_height = "atw-h-8";
+        $slider_is_lazy = false;
+
+        $gallery_helper = new Adverts_Gallery_Helper( $post_id );
+        $images = $gallery_helper->load_attachments();
+        $template = dirname( __FILE__ ) . "/templates/gallery.php";
+
+        ob_start();
+        include $template;
+        $content = ob_get_clean();
+
+        return $content;
+
+        // If user is in Publish -> Preview use the Adverts_Block_Templates::get_id() instead of current page ID.
+        if( Adverts_Block_Templates::get_id() !== null ) {
+            $post_id = Adverts_Block_Templates::get_id();
+        } else {
+            $post_id = get_the_ID();
+        }
+
         ob_start();
         $gallery_helper = new Adverts_Gallery_Helper( $post_id );
         $gallery_helper->render_gallery();

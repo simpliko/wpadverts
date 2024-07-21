@@ -1,8 +1,25 @@
 jQuery(function($) {
 
+    var wpa_block_list_drag = false;
+    document.addEventListener(
+        'mousedown', () => wpa_block_list_drag = false
+    );
+
+    document.addEventListener(
+        'mousemove', () => wpa_block_list_drag = true
+    );
+
     $(".wpa-block-list-results > .wpa-result-item").on("click", function(e) {
-        window.location = $(this).find(".wpa-result-link").attr("href");
+        if(!wpa_block_list_drag) {
+            window.location = $(this).find(".wpa-result-link").attr("href");
+        }
     });
+    $(".wpa-block-list-results > .wpa-result-item").on("auxclick", function(e) {
+        if(!wpa_block_list_drag) {
+            window.location = $(this).find(".wpa-result-link").attr("href");
+        }
+    });
+
     $(".wpa-block-list-results > .wpa-result-item").addClass("atw-cursor-pointer");
 
     $(".js-wpa-filters > button").on("click", function(e) {
@@ -32,27 +49,57 @@ jQuery(function($) {
         return false;
     });
 
-    /*
-    $(".js-wpa-view-list").on("click", function(e) {
-        e.preventDefault(); 
-        
-        $(".js-wpa-view-list").addClass("wpa-selected");
-        $(".js-wpa-view-grid").removeClass("wpa-selected");
-        
-        var results = $(".wpa-results");
-        results.addClass("wpa-list-view");
-        results.removeClass("wpa-grid-view");
-        
+});
+
+var WPADVERTS = WPADVERTS || {};
+
+WPADVERTS.GridGallery = function(item) {
+    var $item = jQuery(item);
+
+    this.slider = tns({
+        container: "#" + $item.find('.wpa-grid-gallery-slider').attr("id"),
+        items: 1,
+        slideBy: 1,
+        autoplay: false,
+        mouseDrag: true,
+        center: false,
+        controls: false,
+        nav: false,
+        lazyload: $item.hasClass("wpa-slider-is-lazy"),
+        lazyloadSelector: ".wpa-lazy-img"
     });
-    $(".js-wpa-view-grid").on("click", function(e) {
-        e.preventDefault(); 
-        
-        $(".js-wpa-view-list").removeClass("wpa-selected");
-        $(".js-wpa-view-grid").addClass("wpa-selected");
-        
-        var results = $(".wpa-results");
-        results.removeClass("wpa-list-view");
-        results.addClass("wpa-grid-view");
-    });
-    */
+
+    this.prev = $item.find(".wpa-grid-gallery-left-btn");
+    this.next = $item.find(".wpa-grid-gallery-right-btn");
+
+    this.current = $item.find(".wpa-grid-gallery-current");
+
+    this.slider.events.on('indexChanged', jQuery.proxy(this.IndexChanged, this));
+
+    this.prev.on("click", jQuery.proxy(this.PrevClick, this));
+    this.next.on("click", jQuery.proxy(this.NextClick, this));
+};
+
+WPADVERTS.GridGallery.prototype.PrevClick = function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.slider.goTo("prev");
+};
+
+WPADVERTS.GridGallery.prototype.NextClick = function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.slider.goTo("next");
+};
+
+WPADVERTS.GridGallery.prototype.IndexChanged = function(e) {
+    this.current.text(this.slider.getInfo().displayIndex);
+};
+
+jQuery(function($) {
+    if($(".wpa-grid-gallery-slider-wrap").length > 0) {
+        $(".wpa-grid-gallery-slider-wrap").each(function(index, item) {
+            new WPADVERTS.GridGallery(item);
+        });
+    }
 });

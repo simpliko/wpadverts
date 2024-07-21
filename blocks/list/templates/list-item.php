@@ -4,17 +4,18 @@
 
 ?>
 <?php $image_id = adverts_get_main_image_id( get_the_ID() ) ?>
-
+<?php $images = wpadverts_get_slider_images( get_the_ID() ) ?>
 <div class="wpa-result-item atw-flex atw-border-solid atw-px-0 atw-border-0 atw-border-t atw-border-gray-100 hover:atw-bg-gray-50 atw-relative <?php echo adverts_css_classes( '', get_the_ID() ) ?>">
     
     <?php if( $show_image_column ): ?>
     <div class="atw-flex atw-flex-none atw-items-center">
         
+        <?php if( $atts["display"] == "list" ): ?>
         <?php include apply_filters( "wpadverts/blocks/load/template", dirname( __FILE__ ) . "/list-item-img-list.php", $atts )?>
+        <?php elseif( $atts["display"] == "grid" ): ?>
         <?php include apply_filters( "wpadverts/blocks/load/template", dirname( __FILE__ ) . "/list-item-img-grid.php", $atts )?>
+        <?php endif; ?>
 
-
-        
     </div>
     <?php endif; ?>
        
@@ -42,7 +43,7 @@
 
         <?php if( $show_price_column ): ?>
         <div class="wpa-detail-right wpa-result-last atw-flex atw-items-center ">
-            <?php echo wrap( get_the_ID(), $atts["alt_source"], "wpa-result-last-text atw-font-bold atw-text-red-700 atw-text-lg") ?>
+            <?php echo wrap( get_the_ID(), $atts["alt_source"], "wpa-result-last-text atw-font-bold atw-text-lg " . (!$atts["color_price"] ? "atw-text-red-700" : "") )  ?>
         </div>
         <?php endif; ?>
         

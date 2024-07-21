@@ -34,6 +34,10 @@
     .wpa-admin-styling-color-picker .wp-picker-holder {
         position: absolute;
     }
+    .wpa-styling-form-preview input[type="radio"]:checked::before,
+    .wpa-styling-form-preview input[type="checkbox"]:checked::before {
+        content: none !important;
+    }
     </style>
 
     <?php $button = array( "class_wrap" => "wpa-style-primary-button", "name" => "primary_button" ) ?>

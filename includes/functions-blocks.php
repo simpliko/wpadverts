@@ -977,3 +977,21 @@ function _wpadverts_block_contact_reveal_callback( $post_id, $atts ) {
     </div>
     <?php
 }
+
+/**
+ * Returns slider images for $post_id
+ * 
+ * @since   2.1.5
+ * @var     int     $post_id
+ * @var     bool    $images_only
+ * @return  array
+ */
+function wpadverts_get_slider_images( $post_id, $images_only = false ) {
+    include_once ADVERTS_PATH . "/includes/class-gallery-helper.php";
+
+    $gallery_helper = new Adverts_Gallery_Helper( get_the_ID() );
+    $images = $gallery_helper->load_attachments();
+
+    return $images;
+    
+}

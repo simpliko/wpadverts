@@ -72,6 +72,14 @@
             "type": "string",
             "default": "adverts-list"
         },
+        "list_img_slider": {
+            "type": "boolean",
+            "default": false
+        },
+        "list_img_slider_is_lazy": {
+            "type": "boolean",
+            "default": false
+        },
         "grid_columns": {
             "type": "string",
             "default": "2"
@@ -91,6 +99,14 @@
         "grid_img_source": {
             "type": "string",
             "default": "adverts-list"
+        },
+        "grid_img_slider": {
+            "type": "boolean",
+            "default": false
+        },
+        "grid_img_slider_is_lazy": {
+            "type": "boolean",
+            "default": false
         },
         "data": {
             "type": "array",

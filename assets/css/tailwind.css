@@ -653,6 +653,11 @@
         @apply atw-flex-row atw-space-x-3;
     }
 
+    .wpa-result-item:hover .wpa-grid-gallery-left,
+    .wpa-result-item:hover .wpa-grid-gallery-right {
+        @apply atw-flex;
+    }
+
     /* END: Block / List: switch views */
 
     /* BEGIN Flash messages */

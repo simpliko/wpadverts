@@ -385,6 +385,22 @@ class Edit extends Component {
         this.props.setAttributes( { color_bg_featured } );
     }
 
+    onToggleListImgSlider = ( list_img_slider ) => {
+        this.props.setAttributes( { list_img_slider } );
+    }
+
+    onToggleListImgSliderIsLazy = ( list_img_slider_is_lazy ) => {
+        this.props.setAttributes( { list_img_slider_is_lazy } );
+    }
+
+    onToggleGridImgSlider = ( grid_img_slider ) => {
+        this.props.setAttributes( { grid_img_slider } );
+    }
+
+    onToggleGridImgSliderIsLazy = ( grid_img_slider_is_lazy ) => {
+        this.props.setAttributes( { grid_img_slider_is_lazy } );
+    }
+
     renderInit() {
 
         const { post_type, query, form_scheme } = this.props.attributes;
@@ -470,11 +486,15 @@ class Edit extends Component {
             list_img_height,
             list_img_fit,
             list_img_source,
+            list_img_slider,
+            list_img_slider_is_lazy,
             grid_columns,
             grid_columns_mobile,
             grid_img_height,
             grid_img_fit,
             grid_img_source,
+            grid_img_slider,
+            grid_img_slider_is_lazy,
             show_price_column,
             show_image_column,
             title_source,
@@ -639,6 +659,20 @@ class Edit extends Component {
                             ]}
                         />
 
+                        <ToggleControl
+                            label="Show images in a slider."
+                            checked={list_img_slider}
+                            onChange={this.onToggleListImgSlider}
+                        /> 
+
+                        {list_img_slider &&
+                        <ToggleControl
+                            label="Lazy-load images."
+                            checked={list_img_slider_is_lazy}
+                            onChange={this.onToggleListImgSliderIsLazy}
+                        />
+                        } 
+
                     </PanelBody>                    
                     
                     <PanelBody title="Grid View Options" initialOpen={ false }>
@@ -700,6 +734,20 @@ class Edit extends Component {
                                 { value: "full", label: "Full Size" }
                             ]}
                         />
+
+                        <ToggleControl
+                            label="Show images in a slider."
+                            checked={grid_img_slider}
+                            onChange={this.onToggleGridImgSlider}
+                        /> 
+
+                        {grid_img_slider &&
+                        <ToggleControl
+                            label="Lazy-load images."
+                            checked={grid_img_slider_is_lazy}
+                            onChange={this.onToggleGridImgSliderIsLazy}
+                        />
+                        } 
                     </PanelBody>
 
                     <PanelBody title="Featured Ads" initialOpen={ false }>

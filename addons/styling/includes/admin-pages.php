@@ -102,7 +102,19 @@ function adext_styling_page_options_demo_form() {
                 "type" => "adverts_field_checkbox",
                 "order" => 7,
                 "label" => __( "Checkbox", "wpadverts" ),
-                "value" => "",
+                "value" => "Option 1",
+                "options" => array(
+                    array( "value" => "Option 1", "text" => "Option 1" ),
+                    array( "value" => "Option 2", "text" => "Option 2" ),
+                    array( "value" => "Option 3", "text" => "Option 3" ),
+                )
+            ),
+            array(
+                "name" => "_radio",
+                "type" => "adverts_field_radio",
+                "order" => 7,
+                "label" => __( "Radio", "wpadverts" ),
+                "value" => "Option 1",
                 "options" => array(
                     array( "value" => "Option 1", "text" => "Option 1" ),
                     array( "value" => "Option 2", "text" => "Option 2" ),

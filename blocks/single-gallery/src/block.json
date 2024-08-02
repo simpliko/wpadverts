@@ -11,16 +11,57 @@
             "type": "string",
             "default": ""
         },
-        "contact": {
-            "type": "array",
-            "default": [
-                { "name": "contact-form" },
-                { "name": "phone-button" }
-            ]
+        "gallery_img_height": {
+            "type": "string",
+            "default": "atw-h-72"
         },
-        "phone_reveal": {
-            "type": "integer",
-            "default": 1
+        "gallery_img_size": {
+            "type": "string",
+            "default": "full"
+        },
+        "gallery_fit": {
+            "type": "string",
+            "default": "contain"
+        },
+        "gallery_bg": {
+            "type": "string",
+            "default": ""
+        },
+        "slider_is_lazy": {
+            "type": "boolean",
+            "default": false
+        },
+        "thumb_show": {
+            "type": "boolean",
+            "default": true
+        },
+        "thumb_width": {
+            "type": "string",
+            "default": "atw-w-24"
+        },
+        "thumb_height": {
+            "type": "string",
+            "default": "atw-h-16"
+        },
+        "thumb_img_size": {
+            "type": "string",
+            "default": "adverts_list"
+        },
+        "thumb_fit": {
+            "type": "string",
+            "default": "scale-down"
+        },
+        "thumb_bg": {
+            "type": "string",
+            "default": ""
+        },
+        "nav_show": {
+            "type": "boolean",
+            "default": true
+        },
+        "nav_position": {
+            "type": "string",
+            "default": "bottom-right"
         }
     }
 }

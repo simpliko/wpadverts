@@ -2561,7 +2561,8 @@ function adverts_get_attachment_mime( $attach ) {
 
     $known = array(
         "video" => array( "video/webm", "video/mp4", "video/ogv" ),
-        "image" => array( "image/jpeg", "image/jpe", "image/jpg", "image/gif", "image/png", "image/webp" )
+        "image" => array( "image/jpeg", "image/jpe", "image/jpg", "image/gif", "image/png", "image/webp" ),
+        "pdf"   => array( "application/pdf" )
     );
     
     foreach( $known as $key => $mimes ) {

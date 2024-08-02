@@ -995,3 +995,38 @@ function wpadverts_get_slider_images( $post_id, $images_only = false ) {
     return $images;
     
 }
+
+function wpadverts_get_file_fa_icon( $attach ) {
+    $mime_types = array(
+        "fas fa-file-zipper" => array(
+            "application/x-freearc", "application/x-bzip", "application/x-bzip2", "application/gzip",
+            "application/x-gzip", "application/java-archive", "application/vnd.rar", "application/x-tar",
+            "application/zip", "application/x-7z-compressed"
+        ),
+        "fas fa-file-word" => array(
+            "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "application/vnd.oasis.opendocument.text", 
+        ),
+        "fas fa-file-excel" => array(
+            "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            "application/vnd.oasis.opendocument.spreadsheet",
+        ),
+        "fas fa-file-csv" => array(
+            "text/csv"
+        ),
+        "fas fa-file-powerpoint" => array(
+            "application/vnd.ms-powerpoint", "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+        ),
+        "fas fa-file-pdf" => array(
+            "application/pdf"   
+        )
+    );
+
+    foreach( $mime_types as $icon => $mimes ) {
+        if( in_array( $attach->post_mime_type, $mimes) ) {
+            return $icon;
+        }
+    }
+
+    return "fas fa-file";
+}

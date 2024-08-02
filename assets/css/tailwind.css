@@ -653,9 +653,16 @@
         @apply atw-flex-row atw-space-x-3;
     }
 
+    .wpa-gallery-nav-slider .wpa-grid-gallery-left,
+    .wpa-gallery-nav-slider .wpa-grid-gallery-right,
     .wpa-result-item:hover .wpa-grid-gallery-left,
     .wpa-result-item:hover .wpa-grid-gallery-right {
         @apply atw-flex;
+    }
+
+    .wpa-block-gallery-nav-item:hover,
+    .wpa-block-gallery-nav-item.wpa-current {
+        @apply atw-border-gray-400;
     }
 
     /* END: Block / List: switch views */

@@ -357,6 +357,22 @@ function adverts_init() {
         true
     );
 
+    wp_register_script(
+        'wpadverts-glightbox',
+        ADVERTS_URL . '/assets/js/glightbox.min.js',
+        array(),
+        "3.3.0",
+        true
+    );
+
+    wp_register_style( 
+        'wpadverts-glightbox', 
+        ADVERTS_URL . '/assets/css/glightbox.min.css', 
+        array(), 
+        "3.3.0" 
+    );
+   
+
     wp_localize_script( 'adverts-auto-numeric', 'adverts_currency', array(
         "aSign" => $currency["sign"], 
         "pSign" => $currency["sign_type"],

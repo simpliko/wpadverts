@@ -665,6 +665,35 @@
         @apply atw-border-gray-400;
     }
 
+    .wpa-block-gallery-circles .wpa-block-gallery-circle.wpa-circle-current .wpa-circle-inner {
+        @apply atw-border-2;
+    }
+
+    .wpa-block-gallery-circles .wpa-block-gallery-circle.wpa-circle {
+        @apply atw-h-4 atw-w-4;
+    }
+    .wpa-block-gallery-circles .wpa-block-gallery-circle.wpa-circle .wpa-circle-inner {
+        @apply atw-h-2 atw-w-2;
+    }
+
+    .wpa-block-gallery-circles .wpa-block-gallery-circle.wpa-circle-sm {
+        @apply atw-h-4 atw-w-4;
+    }
+    .wpa-block-gallery-circles .wpa-block-gallery-circle.wpa-circle-sm .wpa-circle-inner {
+        @apply atw-h-1 atw-w-1;
+    }
+
+    .wpa-block-gallery-circles .wpa-block-gallery-circle.wpa-circle-xs {
+        @apply atw-h-4 atw-w-4;
+    }
+    .wpa-block-gallery-circles .wpa-block-gallery-circle.wpa-circle-xs .wpa-circle-inner {
+        @apply atw-h-0.5 atw-w-0.5;
+    }
+
+    .wpa-block-gallery-circles .wpa-block-gallery-circle.wpa-circle-none {
+        @apply atw-h-0 atw-w-0;
+    }
+
     /* END: Block / List: switch views */
 
     /* BEGIN Flash messages */

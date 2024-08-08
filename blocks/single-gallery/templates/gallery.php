@@ -1,6 +1,6 @@
 <div class="wpa-block-gallery atw-relative" >
 
-    <div class="atw-relative">
+    <div class="atw-relative atw-mb-3">
         <div class="wpa-block-gallery-slider atw-relative <?php if($slider_is_lazy): ?>wpa-slider-is-lazy<?php endif; ?>">
             <?php foreach($images as $attach): ?>
                 
@@ -78,8 +78,8 @@
         </div>
     </div>
 
-    <div class="wpa-block-gallery-nav wpa-picture-grid atw-relative">
-        <div id="<?php echo sprintf("wpa-block-gallery-nav--%d", get_the_ID()) ?>" class="wpa-block-gallery-nav-container atw-scroll-smooth atw-flex atw-flex-row atw-flex-nowrap atw-justify-start atw-overflow-x-scroll atw-mb-2 atw-py-3">
+    <div class="wpa-block-gallery-nav wpa-picture-grid atw-relative <?php if(!$thumb_show): ?>atw-hidden<?php endif; ?>">
+        <div id="<?php echo sprintf("wpa-block-gallery-nav--%d", get_the_ID()) ?>" class="wpa-block-gallery-nav-container atw-scroll-smooth atw-flex atw-flex-row atw-flex-nowrap atw-justify-start atw-overflow-x-scroll atw-mb-3 atw-pb-3">
             <?php $i = 0 ?>
             <?php foreach($images as $attach): ?>
        

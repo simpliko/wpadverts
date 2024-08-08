@@ -78,6 +78,11 @@ WPADVERTS.GridGallery = function(item) {
 
     this.prev.on("click", jQuery.proxy(this.PrevClick, this));
     this.next.on("click", jQuery.proxy(this.NextClick, this));
+
+    this.circles = $item.find(".wpa-block-gallery-circles .wpa-block-gallery-circle");
+
+    this.PaginationVis();
+    this.HandleCircles();
 };
 
 WPADVERTS.GridGallery.prototype.PrevClick = function(e) {
@@ -94,6 +99,63 @@ WPADVERTS.GridGallery.prototype.NextClick = function(e) {
 
 WPADVERTS.GridGallery.prototype.IndexChanged = function(e) {
     this.current.text(this.slider.getInfo().displayIndex);
+    this.PaginationVis();
+    this.HandleCircles();
+};
+
+WPADVERTS.GridGallery.prototype.PaginationVis = function() {
+    if(this.slider.getInfo().displayIndex === 1) {
+        this.prev.hide();
+    } else {
+        this.prev.show();
+    }
+
+    if(this.slider.getInfo().displayIndex === this.slider.getInfo().slideCount) {
+        this.next.hide();
+    } else {
+        this.next.show();
+    }
+};
+
+WPADVERTS.GridGallery.prototype.HandleCircles = function() {
+    if(this.circles.length === 0) {
+        return;
+    }
+
+    this.circles.removeClass("wpa-circle-current");
+    this.circles.removeClass("wpa-circle");
+    this.circles.removeClass("wpa-circle-sm");
+    this.circles.removeClass("wpa-circle-xs");
+
+    var index = this.slider.getInfo().displayIndex;
+
+
+    jQuery.each(this.circles, function(i, item) {
+        var $item = jQuery(item);
+        var distance = (i+1) - index;
+        console.log(distance);
+
+        if(distance == 0) {
+            // current
+            $item.addClass("wpa-circle-current");
+            $item.addClass("wpa-circle");
+        } else if(distance == -1 || distance == 1) {
+            // next to the current
+            $item.removeClass("wpa-circle-current");
+            $item.addClass("wpa-circle");
+        } else if(distance == -2 || distance == 2) {
+            $item.removeClass("wpa-circle-current");
+            $item.addClass("wpa-circle-sm");
+            // small
+        } else if(distance == -3 || distance == -3) {
+            $item.removeClass("wpa-circle-current");
+            $item.addClass("wpa-circle-xs");
+        } else {
+            $item.removeClass("wpa-circle-current");
+            $item.addClass("wpa-circle-xs");
+        }
+    });
+
 };
 
 jQuery(function($) {

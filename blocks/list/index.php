@@ -72,10 +72,12 @@ class Adverts_Block_List {
             $slider_img_height = $height[ $atts["grid_img_height"] ];
             $slider_enabled = $atts["grid_img_slider"] && ! $this->is_preview();
             $slider_is_lazy = $atts["grid_img_slider_is_lazy"];
+            $slider_nav = $atts["grid_img_show_nav"];
         } else {
             $slider_img_height = $height[ $atts["list_img_height"] ];
             $slider_enabled = $atts["list_img_slider"] && ! $this->is_preview();
             $slider_is_lazy = $atts["list_img_slider_is_lazy"];
+            $slider_nav = $atts["list_img_show_nav"];
         }
         
         if( $slider_enabled ) {

@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classifieds script, classifieds p
 Requires PHP: 5.6
 Requires at least: 5.7
 Tested up to: 6.4
-Stable tag: 2.1.4
+Stable tag: 2.1.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,15 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 2.1.5 - 2024-08-08 =
+
+* FEATURE: Redesigned Gallery Block - the block is now more intuitive to use, is responsive and supports touch navigation.
+* FEATURE: In the Classifieds List Block you can enable image slider to allow users to see images without going into Ad details.
+* FEATURE: Added Radio button preview to the wp-admin / Classifieds / Options / Default Styles preview.
+* FIXED: Loading images for both grid and list view in the Classifieds List block.
+* FIXED: Changing price color in the Classifieds List block does not work.
+* API: To revert to the old Gallery add in your wp-config the define("WPADVERTS_BLOCK_GALLERY_USE_OLD", true); line.
 
 = 2.1.4 - 2024-07-16 =
 

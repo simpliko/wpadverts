@@ -393,12 +393,20 @@ class Edit extends Component {
         this.props.setAttributes( { list_img_slider_is_lazy } );
     }
 
+    onToggleListImgShowNav = ( list_img_show_nav ) => {
+        this.props.setAttributes( { list_img_show_nav } );
+    }
+
     onToggleGridImgSlider = ( grid_img_slider ) => {
         this.props.setAttributes( { grid_img_slider } );
     }
 
     onToggleGridImgSliderIsLazy = ( grid_img_slider_is_lazy ) => {
         this.props.setAttributes( { grid_img_slider_is_lazy } );
+    }
+
+    onToggleGridImgShowNav = ( grid_img_show_nav ) => {
+        this.props.setAttributes( { grid_img_show_nav } );
     }
 
     renderInit() {
@@ -488,6 +496,7 @@ class Edit extends Component {
             list_img_source,
             list_img_slider,
             list_img_slider_is_lazy,
+            list_img_show_nav,
             grid_columns,
             grid_columns_mobile,
             grid_img_height,
@@ -495,6 +504,7 @@ class Edit extends Component {
             grid_img_source,
             grid_img_slider,
             grid_img_slider_is_lazy,
+            grid_img_show_nav,
             show_price_column,
             show_image_column,
             title_source,
@@ -666,11 +676,19 @@ class Edit extends Component {
                         /> 
 
                         {list_img_slider &&
-                        <ToggleControl
-                            label="Lazy-load images."
-                            checked={list_img_slider_is_lazy}
-                            onChange={this.onToggleListImgSliderIsLazy}
-                        />
+                            <>
+                                <ToggleControl
+                                    label="Lazy-load images."
+                                    checked={list_img_slider_is_lazy}
+                                    onChange={this.onToggleListImgSliderIsLazy}
+                                />
+
+                                <ToggleControl
+                                    label="Show slides counter"
+                                    checked={list_img_show_nav}
+                                    onChange={this.onToggleListImgSliderIsLazy}
+                                />
+                            </>
                         } 
 
                     </PanelBody>                    
@@ -742,11 +760,19 @@ class Edit extends Component {
                         /> 
 
                         {grid_img_slider &&
-                        <ToggleControl
-                            label="Lazy-load images."
-                            checked={grid_img_slider_is_lazy}
-                            onChange={this.onToggleGridImgSliderIsLazy}
-                        />
+                            <>
+                                <ToggleControl
+                                    label="Lazy-load images."
+                                    checked={grid_img_slider_is_lazy}
+                                    onChange={this.onToggleGridImgSliderIsLazy}
+                                />
+
+                                <ToggleControl
+                                    label="Show slides counter"
+                                    checked={grid_img_show_nav}
+                                    onChange={this.onToggleGridImgShowNav}
+                                />
+                            </>
                         } 
                     </PanelBody>
 

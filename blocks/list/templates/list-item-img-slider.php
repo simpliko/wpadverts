@@ -1,6 +1,6 @@
 
 
-        <div class="wpa-grid-gallery-slider-wrap atw-relative atw-w-full <?php echo $slider_is_lazy ? " wpa-slider-is-lazy" : "" ?>">
+        <div class="wpa-grid-gallery-slider-wrap atw-relative atw-w-full atw-h-full atw-max-w-full atw-max-h-full atw-overflow-hidden <?php echo $slider_is_lazy ? " wpa-slider-is-lazy" : "" ?>">
 
             <div id="<?php echo sprintf("wpa-grid-gallery-slider--%d", get_the_ID()) ?>" class="wpa-grid-gallery-slider">
             <?php $total = 0 ?>
@@ -11,9 +11,9 @@
                     <div class="<?php echo esc_attr($slider_img_height) ?>">
                         <div class="atw-flex atw-justify-center atw-w-full atw-h-full">
                             <?php if($slider_is_lazy): ?>
-                            <img data-src="<?php echo esc_attr( $image[0] ) ?>" class="wpa-lazy-img atw-object-contain" alt="" />
+                            <img data-src="<?php echo esc_attr( $image[0] ) ?>" class="wpa-grid-gallery-slide wpa-lazy-img atw-w-full atw-h-full atw-max-w-full atw-max-h-full atw-block atw-rounded-none atw-border-0 atw-shadow-none <?php echo join( " ", $data->classes_img ) ?>" alt="" />
                             <?php else: ?>
-                            <img src="<?php echo esc_attr( $image[0] ) ?>" class="atw-object-contain" alt="" />
+                            <img src="<?php echo esc_attr( $image[0] ) ?>" class="wpa-grid-gallery-slide atw-w-full atw-h-full atw-max-w-full atw-max-h-full atw-block atw-rounded-none atw-border-0 atw-shadow-none <?php echo join( " ", $data->classes_img ) ?>" alt="" />
                             <?php endif; ?>
                         </div>
                     </div>
@@ -33,12 +33,12 @@
                 </div-->
 
                 <div class="wpa-grid-gallery-left atw-flex atw-absolute atw-inset-y-0 atw-left-0 atw-items-center">
-                    <a href="#" class="wpa-grid-gallery-left-btn atw-block atw-ml-1 atw-px-1 atw-w-8 atw-h-8 atw-shadow atw-rounded-full atw-text-center" style="background-color:rgba(7, 17, 33, 0.46)">
+                    <a href="#" class="wpa-grid-gallery-left-btn atw-no-underline atw-flex-none atw-box-border atw-block atw-ml-1 atw-px-1 atw-w-8 atw-h-8 atw-shadow atw-rounded-full atw-text-center" style="background-color:rgba(7, 17, 33, 0.46)">
                         <span class="fas fa-chevron-left atw-block atw-text-white atw-text-lg atw-pt-0.5"></span>
                     </a>
                 </div>
                 <div class="wpa-grid-gallery-right atw-flex atw-absolute atw-inset-y-0 atw-right-0 atw-items-center">
-                    <a href="#" class="wpa-grid-gallery-right-btn atw-block atw-mr-1 atw-px-1 atw-w-8 atw-h-8 atw-shadow atw-rounded-full atw-text-center"  style="background-color:rgba(7, 17, 33, 0.46)">
+                    <a href="#" class="wpa-grid-gallery-right-btn atw-no-underline atw-flex-none atw-box-border atw-block atw-mr-1 atw-px-1 atw-w-8 atw-h-8 atw-shadow atw-rounded-full atw-text-center"  style="background-color:rgba(7, 17, 33, 0.46)">
                         <span class="fas fa-chevron-right atw-block atw-text-white atw-text-lg atw-pt-0.5"></span>
                     </a>
                 </div>

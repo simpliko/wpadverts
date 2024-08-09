@@ -133,12 +133,29 @@ WPADVERTS.GridGallery.prototype.HandleCircles = function() {
     jQuery.each(this.circles, function(i, item) {
         var $item = jQuery(item);
         var distance = (i+1) - index;
-        console.log(distance);
+        var viewport = 3;
+        var visible = [];
+
+        for(var j=0; j<viewport; j++) {
+            visible.push(index+j);
+        }
+
+        console.log(visible);
+        $item.addClass("wpa-circle");
 
         if(distance == 0) {
             // current
             $item.addClass("wpa-circle-current");
-            $item.addClass("wpa-circle");
+            
+        }
+
+        
+
+        /*
+        if(distance == 0) {
+            // current
+            $item.addClass("wpa-circle-current");
+            
         } else if(distance == -1 || distance == 1) {
             // next to the current
             $item.removeClass("wpa-circle-current");
@@ -154,6 +171,7 @@ WPADVERTS.GridGallery.prototype.HandleCircles = function() {
             $item.removeClass("wpa-circle-current");
             $item.addClass("wpa-circle-xs");
         }
+            */
     });
 
 };

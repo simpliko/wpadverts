@@ -1,6 +1,6 @@
-<div class="wpa-block-gallery atw-relative" >
+<div class="wpa-block-gallery atw-relative  atw-mb-3" >
 
-    <div class="atw-relative atw-mb-3">
+    <div class="atw-relative">
         <div class="wpa-block-gallery-slider atw-relative <?php if($slider_is_lazy): ?>wpa-slider-is-lazy<?php endif; ?>">
             <?php foreach($images as $attach): ?>
                 
@@ -10,7 +10,7 @@
 
                     <?php if( $mime == "image" ): ?>
 
-                    <a data-title="<?php echo esc_attr($attach->post_excerpt ?? $attach->post_title) ?>" data-description="<?php echo esc_attr($attach->post_content) ?>" data-desc-position="bottom" href="<?php echo esc_attr( $attach->guid ) ?>" class="wpa-glightbox atw-flex atw-justify-center atw-h-full atw-border atw-border-solid atw-border-gray-100 atw-round atw-mx-1">
+                    <a data-title="<?php echo esc_attr($attach->post_excerpt ?? $attach->post_title) ?>" data-description="<?php echo esc_attr($attach->post_content) ?>" data-desc-position="bottom" href="<?php echo esc_attr( $attach->guid ) ?>" class="wpa-glightbox atw-box-border atw-flex atw-justify-center atw-h-full atw-border atw-border-solid atw-border-gray-100 atw-round atw-mx-1">
                     
                         <?php $image = wp_get_attachment_image_src( $attach->ID, $gallery_img_size );  ?>
                         <?php if($slider_is_lazy): ?>
@@ -22,7 +22,7 @@
 
                     <?php elseif( $mime == "video" ): ?>
 
-                    <a data-title="<?php echo esc_attr($attach->post_excerpt ?? $attach->post_title) ?>" data-description="<?php echo esc_attr($attach->post_content) ?>" data-desc-position="bottom" href="<?php echo esc_attr( $attach->guid ) ?>" class="wpa-glightbox atw-flex atw-justify-center atw-h-full atw-border atw-border-solid atw-border-gray-100 atw-round atw-mx-1">
+                    <a data-title="<?php echo esc_attr($attach->post_excerpt ?? $attach->post_title) ?>" data-description="<?php echo esc_attr($attach->post_content) ?>" data-desc-position="bottom" href="<?php echo esc_attr( $attach->guid ) ?>" class="wpa-glightbox atw-box-border atw-flex atw-justify-center atw-h-full atw-border atw-border-solid atw-border-gray-100 atw-round atw-mx-1">
                     
                         <video <?php if(!$custom_controls):?>controls="true"<?php endif; ?> src="<?php echo $attach->guid ?>" preload="metadata" poster="<?php echo adverts_get_post_img_url( $attach, array( $gallery_img_size ) ) ?>">
                             <?php _e("Your browser cannot play this video.", "wpadverts") ?> 
@@ -33,7 +33,7 @@
 
                     <?php else: ?>
 
-                    <a href="<?php echo "#inline-attach--".$attach->ID ?>" data-title="<?php echo esc_attr($attach->post_excerpt ?? $attach->post_title) ?>" data-description="<?php echo esc_attr($attach->post_content) ?>" data-desc-position="bottom" class="wpa-glightbox atw-flex atw-justify-center atw-h-full atw-border atw-border-solid atw-border-gray-100 atw-round atw-mx-1">
+                    <a href="<?php echo "#inline-attach--".$attach->ID ?>" data-title="<?php echo esc_attr($attach->post_excerpt ?? $attach->post_title) ?>" data-description="<?php echo esc_attr($attach->post_content) ?>" data-desc-position="bottom" class="wpa-glightbox atw-no-underline atw-box-border atw-flex atw-justify-center atw-h-full atw-border atw-border-solid atw-border-gray-100 atw-round atw-mx-1">
                     
                         <div id="<?php echo "inline-attach--".$attach->ID ?>" class="atw-flex atw-content-center atw-w-full atw-h-full atw-items-center">
                             <div class="atw-mx-auto atw-flex atw-flex-col atw-justify-center atw-w-full atw-h-full ">
@@ -59,13 +59,13 @@
         </div>
         <div class="wpa-gallery-nav-slider" class="atw-relative">
                 <div class="wpa-block-gallery-left atw-ml-1 atw-hidden atw-absolute atw-inset-y-0 atw-left-0 atw-items-center">
-                    <a href="#" class="wpa-block-gallery-left-btn atw-block atw-ml-1 atw-px-1 atw-w-8 atw-h-8 atw-shadow atw-rounded-full atw-text-center" style="background-color:rgba(7, 17, 33, 0.46)">
-                        <span class="fas fa-chevron-left atw-block atw-text-white atw-text-lg atw-pt-0.5"></span>
+                    <a href="#" class="wpa-block-gallery-left-btn atw-flex-none atw-box-border atw-no-underline atw-block atw-ml-1 atw-px-1 atw-w-8 atw-h-8 atw-shadow atw-rounded-full atw-text-center" style="background-color:rgba(7, 17, 33, 0.46)">
+                        <span class="fas fa-chevron-left atw-inline-block atw-text-white atw-text-lg atw-pt-0.5"></span>
                     </a>
                 </div>
                 <div class="wpa-block-gallery-right atw-mr-1 atw-hidden atw-absolute atw-inset-y-0 atw-right-0 atw-items-center">
-                    <a href="#" class="wpa-block-gallery-right-btn atw-block atw-mr-1 atw-px-1 atw-w-8 atw-h-8 atw-shadow atw-rounded-full atw-text-center" style="background-color:rgba(7, 17, 33, 0.46)">
-                        <span class="fas fa-chevron-right atw-block atw-text-white atw-text-lg atw-pt-0.5"></span>
+                    <a href="#" class="wpa-block-gallery-right-btn atw-flex-none atw-box-border atw-no-underline atw-block atw-mr-1 atw-px-1 atw-w-8 atw-h-8 atw-shadow atw-rounded-full atw-text-center" style="background-color:rgba(7, 17, 33, 0.46)">
+                        <span class="fas fa-chevron-right atw-inline-block atw-text-white atw-text-lg atw-pt-0.5"></span>
                     </a>
                 </div>
 
@@ -79,7 +79,7 @@
     </div>
 
     <div class="wpa-block-gallery-nav wpa-picture-grid atw-relative <?php if(!$thumb_show): ?>atw-hidden<?php endif; ?>">
-        <div id="<?php echo sprintf("wpa-block-gallery-nav--%d", get_the_ID()) ?>" class="wpa-block-gallery-nav-container atw-scroll-smooth atw-flex atw-flex-row atw-flex-nowrap atw-justify-start atw-overflow-x-scroll atw-mb-3 atw-pb-3">
+        <div id="<?php echo sprintf("wpa-block-gallery-nav--%d", get_the_ID()) ?>" class="wpa-block-gallery-nav-container atw-scroll-smooth atw-flex atw-flex-row atw-flex-nowrap atw-justify-start atw-overflow-x-scroll atw-py-3">
             <?php $i = 0 ?>
             <?php foreach($images as $attach): ?>
        
@@ -138,12 +138,12 @@
 
         <div class="wpa-block-gallery-nav-interface">
                 <div class="wpa-block-gallery-nav-left atw-hidden atw-absolute atw-inset-y-0 atw-left-0 atw-items-center">
-                    <a href="#" class="wpa-block-gallery-nav-left-btn atw-block atw-ml-1 atw-px-1 atw-w-8 atw-h-8 atw-shadow atw-rounded-full atw-text-center" style="background-color:rgba(7, 17, 33, 0.46)">
+                    <a href="#" class="wpa-block-gallery-nav-left-btn atw-flex-none atw-box-border atw-no-underline atw-block atw-ml-1 atw-px-1 atw-w-8 atw-h-8 atw-shadow atw-rounded-full atw-text-center" style="background-color:rgba(7, 17, 33, 0.46)">
                         <span class="fas fa-chevron-left atw-block atw-text-white atw-text-lg atw-pt-0.5"></span>
                     </a>
                 </div>
                 <div class="wpa-block-gallery-nav-right atw-hidden atw-absolute atw-inset-y-0 atw-right-0 atw-items-center">
-                    <a href="#" class="wpa-block-gallery-nav-right-btn atw-block atw-mr-1 atw-px-1 atw-w-8 atw-h-8 atw-shadow atw-rounded-full atw-text-center" style="background-color:rgba(7, 17, 33, 0.46)">
+                    <a href="#" class="wpa-block-gallery-nav-right-btn atw-flex-none atw-box-border atw-no-underline atw-block atw-mr-1 atw-px-1 atw-w-8 atw-h-8 atw-shadow atw-rounded-full atw-text-center" style="background-color:rgba(7, 17, 33, 0.46)">
                         <span class="fas fa-chevron-right atw-block atw-text-white atw-text-lg atw-pt-0.5"></span>
                     </a>
                 </div>

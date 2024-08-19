@@ -27,7 +27,7 @@
         </table>
 
         <p class="submit">
-            <input type="submit" value="<?php esc_attr_e($button_text) ?>" class="button-primary" name="Submit"/>
+            <input type="submit" value="<?php echo esc_attr($button_text) ?>" class="button-primary" name="Submit"/>
         </p>
 
     </form>

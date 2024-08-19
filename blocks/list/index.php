@@ -73,11 +73,15 @@ class Adverts_Block_List {
             $slider_enabled = $atts["grid_img_slider"] && ! $this->is_preview();
             $slider_is_lazy = $atts["grid_img_slider_is_lazy"];
             $slider_nav = $atts["grid_img_show_nav"];
+            $iface_size_box = "atw-w-8 atw-h-8";
+            $iface_size_text = "atw-text-lg";
         } else {
             $slider_img_height = $height[ $atts["list_img_height"] ];
             $slider_enabled = $atts["list_img_slider"] && ! $this->is_preview();
             $slider_is_lazy = $atts["list_img_slider_is_lazy"];
             $slider_nav = $atts["list_img_show_nav"];
+            $iface_size_box = "atw-w-6 atw-h-6";
+            $iface_size_text = "atw-text-base";
         }
         
         if( $slider_enabled ) {

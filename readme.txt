@@ -4,8 +4,8 @@ Contributors: gwin
 Tags: classifieds, classified, classified ads, classifieds script, classifieds plugin
 Requires PHP: 5.6
 Requires at least: 5.7
-Tested up to: 6.4
-Stable tag: 2.1.5
+Tested up to: 6.6
+Stable tag: 2.1.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -27,7 +27,7 @@ It also plays nicely with other plugins, giving you the freedom to quickly creat
 
 = ANY HOSTING? YES! =
  
-There’s no need for expensive hosting with WPAdverts, because our crafty Wordpress-standards coding keeps your server-load low and your loading-times FAST!
+There’s no need for expensive hosting with WPAdverts, because our crafty WordPress-standards coding keeps your server-load low and your loading-times FAST!
 
 = EASIER BY DESIGN =
 
@@ -37,7 +37,7 @@ WPAdverts blends seamlessly with WordPress, making it super-simple and familiar;
 
 = SPEEDY, EXPERT SUPPORT =
 
-If you ever do get stuck you can rest assured of fast support by someone who really knows Wordpress!
+If you ever do get stuck you can rest assured of fast support by someone who really knows WordPress!
 
 We also have extensive documentation and helper videos too.
 
@@ -124,6 +124,13 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 2.1.6 - 2024-08-19 =
+
+* API: The minified Tailwind CSS file was renamed and moved to /assets/css folder.
+* FIXED: Improvments and fixes for the new slider to better integrate it with various themes.
+* FIXED: wpadverts-blocks-editor-search stylesheet generates incorrect version number.
+* FIXED: Use 'echo esc_attr()' instrad of 'esc_attr_e()' function where appropriate.
 
 = 2.1.5 - 2024-08-08 =
 

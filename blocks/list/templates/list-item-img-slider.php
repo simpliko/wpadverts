@@ -33,13 +33,13 @@
                 </div-->
 
                 <div class="wpa-grid-gallery-left atw-flex atw-absolute atw-inset-y-0 atw-left-0 atw-items-center">
-                    <a href="#" class="wpa-grid-gallery-left-btn atw-no-underline atw-flex-none atw-box-border atw-block atw-ml-1 atw-px-1 atw-w-8 atw-h-8 atw-shadow atw-rounded-full atw-text-center" style="background-color:rgba(7, 17, 33, 0.46)">
-                        <span class="fas fa-chevron-left atw-block atw-text-white atw-text-lg atw-pt-0.5"></span>
+                    <a href="#" class="wpa-grid-gallery-left-btn atw-flex atw-items-center atw-justify-center atw-no-underline atw-flex-none atw-box-border -atw-block atw-ml-1 atw-px-1 <?php echo $iface_size_box ?> atw-shadow atw-rounded-full" style="background-color:rgba(7, 17, 33, 0.46)">
+                        <span class="fas fa-chevron-left atw-block atw-text-white <?php echo $iface_size_text ?>"></span>
                     </a>
                 </div>
                 <div class="wpa-grid-gallery-right atw-flex atw-absolute atw-inset-y-0 atw-right-0 atw-items-center">
-                    <a href="#" class="wpa-grid-gallery-right-btn atw-no-underline atw-flex-none atw-box-border atw-block atw-mr-1 atw-px-1 atw-w-8 atw-h-8 atw-shadow atw-rounded-full atw-text-center"  style="background-color:rgba(7, 17, 33, 0.46)">
-                        <span class="fas fa-chevron-right atw-block atw-text-white atw-text-lg atw-pt-0.5"></span>
+                    <a href="#" class="wpa-grid-gallery-right-btn atw-flex atw-items-center atw-justify-center atw-no-underline atw-flex-none atw-box-border -atw-block atw-mr-1 atw-px-1 <?php echo $iface_size_box ?> atw-shadow atw-rounded-full"  style="background-color:rgba(7, 17, 33, 0.46)">
+                        <span class="fas fa-chevron-right atw-block atw-text-white <?php echo $iface_size_text ?>"></span>
                     </a>
                 </div>
 

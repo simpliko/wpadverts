@@ -20,11 +20,7 @@
     "tailwindcss": "^3.4.1"
   },
   "scripts": {
-    "start": "wp-scripts start --config blocks.webpack.js",
-    "build": "wp-scripts build --config blocks.webpack.js",
-    "build:list": "wp-scripts build blocks/list/src/index.js --output-path=blocks/list/build",
-    "watch:build/list": "wp-scripts build blocks/list/src/index.js --output-path=blocks/list/build --watch --webpack--devtool=source-map",
-    "postcss:watch": "postcss ./assets/css/tailwind.css -o compiled.css --watch",
+    "start/css": "postcss ./assets/css/tailwind.css -o ./assets/css/blocks.min.css --watch",
     "start/list": "wp-scripts start blocks/list/src/index.js --output-path=blocks/list/build --webpack--devtool=source-map",
     "start/search": "wp-scripts start blocks/search/src/index.js --output-path=blocks/search/build --webpack--devtool=source-map",
     "start/details": "wp-scripts start blocks/details/src/index.js --output-path=blocks/details/build --webpack--devtool=source-map",
@@ -49,7 +45,7 @@
     "build/single-value": "wp-scripts build blocks/single-value/src/index.js --output-path=blocks/single-value/build",
     "build/single-data-table": "wp-scripts build blocks/single-data-table/src/index.js --output-path=blocks/single-data-table/build",
     "build/single-notifications": "wp-scripts build blocks/single-notifications/src/index.js --output-path=blocks/single-notifications/build",
-    "build/css": "postcss ./assets/css/tailwind.css -o compiled.css",
+    "build/css": "postcss ./assets/css/tailwind.css -o ./assets/css/blocks.min.css",
     "build-all-single": "npm run build/single-notifications && npm run build/single-data-table && npm run build/single-value && npm run build/single-gallery && npm run build/single-contact && npm run build/single-author",
     "build-all": "npm run build/list && npm run build/search && npm run build/details && npm run build/publish && npm run build/manage && npm run build/categories && npm run build-all-single && npm run build/css",
     "r-list": "wp-scripts build blocks/list/src/index.js --output-path=blocks/list/build"

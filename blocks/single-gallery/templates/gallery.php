@@ -24,7 +24,7 @@
 
                     <a data-title="<?php echo esc_attr($attach->post_excerpt ?? $attach->post_title) ?>" data-description="<?php echo esc_attr($attach->post_content) ?>" data-desc-position="bottom" href="<?php echo esc_attr( $attach->guid ) ?>" class="wpa-glightbox atw-box-border atw-flex atw-justify-center atw-h-full atw-border atw-border-solid atw-border-gray-100 atw-round atw-mx-1">
                     
-                        <video <?php if(!$custom_controls):?>controls="true"<?php endif; ?> src="<?php echo $attach->guid ?>" preload="metadata" poster="<?php echo adverts_get_post_img_url( $attach, array( $gallery_img_size ) ) ?>">
+                        <video <?php if(!$custom_controls):?>controls="true"<?php endif; ?> src="<?php echo $attach->guid ?>" preload="metadata" poster="<?php echo adverts_get_post_img_url( $attach, array( $gallery_img_size ) ) ?>" class="atw-m-0 atw-p-0">
                             <?php _e("Your browser cannot play this video.", "wpadverts") ?> 
                             <?php _e("Please use a different browser or download the video and play on your device.", "wpadverts" ) ?>
                         </video>

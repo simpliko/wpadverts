@@ -7,6 +7,7 @@ blocks/*/build/**
  
 # Compiled Tailwind CSS
 compiled.css
+blocks.min.css
 
 babelrc.js.save
 .DS_Store

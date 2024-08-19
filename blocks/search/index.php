@@ -24,7 +24,7 @@ class Adverts_Block_Search {
             'wpadverts-blocks-editor-search',
             ADVERTS_URL . '/assets/css/blocks-editor-search.css',
             array( 'wp-edit-blocks' ),
-            filemtime( ADVERTS_PATH . '/compiled.css' )
+            filemtime( ADVERTS_PATH . '/assets/css/blocks-editor-search.css' )
         );
         
         wp_register_script(

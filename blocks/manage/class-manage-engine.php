@@ -167,6 +167,8 @@ class Adverts_Block_Manage_Engine {
             "mobile" => "text", 
         );
 
+        $slider_enabled = false;
+
         ob_start();
         include dirname( __FILE__ ) . '/templates/manage-list.php';
         return ob_get_clean();

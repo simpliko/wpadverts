@@ -1,4 +1,9 @@
-<div class="wpa-block-gallery atw-relative  atw-mb-3" >
+<?php if( empty( $images ) ): ?>
+<div class="wpa-block-gallery wpa-block-gallery-empty"></div>
+<?php return; ?>
+<?php endif; ?>
+
+<div class="wpa-block-gallery atw-relative atw-mb-3" >
 
     <div class="atw-relative">
         <div class="wpa-block-gallery-slider atw-relative <?php if($slider_is_lazy): ?>wpa-slider-is-lazy<?php endif; ?>">
@@ -161,5 +166,4 @@
 .wpa-block-gallery-nav .wpa-block-gallery-nav-item { background-color: <?php echo esc_js($thumb_bg) ?>;}
 <?php endif; ?>
 </style>
-
 <?php endif; ?>

@@ -313,7 +313,7 @@ function adverts_init() {
         'adverts-auto-numeric', 
         ADVERTS_URL  .'/assets/js/auto-numeric.js', 
         array( 'jquery' ), 
-        "1", 
+        "4.10.4", 
         true
     );
     

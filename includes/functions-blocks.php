@@ -801,9 +801,21 @@ function wpadverts_get_block_templates_options() {
 
     $template_options = array(
         array( 
+            "value" => "-1", 
+            "text" => __( "Builtin Templates", "wpadverts" ), 
+            "depth" => 0,
+            "disabled" => 1
+        ),
+        array( 
             "value" => "block", 
-            "text" => __( "Default Block Template", "wpadverts" ) 
-        )
+            "text" => __( "Default Block Template", "wpadverts" ),
+            "depth" => "1"
+        ),
+        array( 
+            "value" => "block-with-sidebar", 
+            "text" => __( "Template with a sidebar", "wpadverts" ),
+            "depth" => "1"
+        ),
     );
 
     $templates_draft = $all_templates["draft"]; 

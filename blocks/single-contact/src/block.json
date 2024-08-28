@@ -21,6 +21,10 @@
                 "contact-form"
             ]
         },
+        "contact_order": {
+            "type": "array",
+            "default": []
+        },
         "requires": {
             "type": "string",
             "default": ""

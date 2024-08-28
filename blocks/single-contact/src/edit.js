@@ -5,6 +5,7 @@ import { RichText, BlockControls, InspectorControls , PanelColorSettings } from 
 import { 
     Button,
     Dashicon,
+    Draggable,
     Placeholder,
     Icon,
     Spinner,
@@ -33,6 +34,7 @@ import { megaphone } from '@wordpress/icons';
 import ServerSideRender from '@wordpress/server-side-render';
 import AdvertsSelect from '../../../assets/jsx/adverts-select';
 import AdvertsListData from '../../../assets/jsx/adverts-list-data';
+import AdvertsListCheckbox from '../../../assets/jsx/adverts-list-checkbox';
 import AdvertsColorPicker from '../../../assets/jsx/adverts-color-picker';
 
 
@@ -183,7 +185,6 @@ class Edit extends Component {
         var pt = this.getCurrentPostType();
         var data = [];
 
-        //console.log(pt);
         for(var i=0; i<pt.form_schemes[type].length; i++) {
 
             Object.entries(pt.form_schemes[type][i].data).map(([key, value]) => {
@@ -193,8 +194,23 @@ class Edit extends Component {
             data.sort((a, b) => a.label > b.label ? 1 : -1)
             //data.push(pt.form_schemes[type][i].data);
         }
-        //console.log(data);
+
         return data;
+    }
+
+    getContactOptions = () => {
+        let options = this.getCurrentPostType().contact;
+        //console.log(options);
+
+        return options;
+    }
+
+    onChangeContactOptions = ( options ) => {
+        this.props.setAttributes( { contact: [ ...options ] } ); 
+    }
+
+    onChangeContactOptionsOrder = ( order ) => {
+        this.props.setAttributes( { order: [ ...order ] } );
     }
 
     getUnique = (array, key) => {
@@ -467,6 +483,7 @@ class Edit extends Component {
         const { 
             custom_contact,
             contact,
+            contact_order,
             requires,
             requires_error
         } = attributes;
@@ -516,19 +533,23 @@ class Edit extends Component {
 
                         {custom_contact === true && 
                             <>
-                            {this.getCurrentPostType().contact.map(cm => (
-                            
-                                <CheckboxControl
-                                    label={cm.label}
-                                    value={cm.name}
-                                    checked={ this.contactMethodChecked(cm) }
-                                    onChange={(is_checked) => this.setChecked(is_checked, cm.name, contact)}
-                                />
-                            ) ) }
+                                <AdvertsListCheckbox 
+                                    label="Contact Methods"
+                                    options={this.getContactOptions()}
+                                    onChange={this.onChangeContactOptions}
+                                    onChangeOrder={this.onChangeContactOptionsOrder}
+                                    checked={contact}
+                                    order={contact_order}
+                                /> 
+                                
                             </>
                         }
 
+   
+
                     </PanelBody>
+
+                    { wp.hooks.doAction( 'hook_name' ) }
 
                     <PanelBody title="Access Control">
 

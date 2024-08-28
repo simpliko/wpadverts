@@ -136,6 +136,13 @@ class Adverts_Block_Single_Contact {
 
         $atts["layout"] = "contact";
 
+        $options_flex = "row";
+        if( $options_flex == "row") {
+        $options_flex = "md:atw-flex-row md:atw-flex-wrap";
+        } else {
+        $options_flex = "md:atw-flex-col";
+        }
+
         $template = sprintf( "%s/templates/%s.php", dirname( __FILE__ ), $atts["layout"]);
         ob_start();
         include $template;
@@ -174,7 +181,8 @@ class Adverts_Block_Single_Contact {
     protected function _get_custom_contacts( $atts, $post_id ) {
         $contact_methods = $this->_get_contact_options( $atts, $post_id );
         $contact_options = array( );
-
+        return $contact_options;
+//echo "<pre>";print_r($atts);echo "</pre>";
         $primary = false;
 
         foreach( $atts['contact'] as $k => $contact ) {

@@ -271,7 +271,7 @@ class Adverts_Block_Templates {
      */
     public function get_post_template( $post_type ) {
 
-        $template_id = $this->_get_template( "post", $post_type );
+        $template_id = apply_filters( "wpadverts/block/post/template", $this->_get_template( "post", $post_type ), $post_type );
 
         if( $template_id < 1 ) {
             return $this->get_default_post_template( $post_type, $template_id );

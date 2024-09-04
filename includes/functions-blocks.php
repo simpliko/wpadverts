@@ -1042,3 +1042,43 @@ function wpadverts_get_file_fa_icon( $attach ) {
 
     return "fas fa-file";
 }
+
+/**
+ * Returns form HTML
+ * 
+ * $data = [
+ *  "buttons" => [],
+ *  "show_buttons" => true,
+ *  "buttons_position" => "atw-flex-col",
+ *  "redirect_to" => "",
+ *  "atts" => [],
+ *  "form" => null, // Adverts_Form (required)
+ *  "form_id" => null,
+ *  "form_style_atts" => [],
+ *  "form_layout" => "wpa-layout-stacked",
+ *  "form_layout_prop" => "atw-w-1/3"
+ * ];
+ * 
+ * @since   2.2.0
+ * @return  string      Rendered form HTML
+ */
+function wpadverts_block_form_partial( $data ) {
+    $buttons = [];
+    $show_buttons = true;
+    $buttons_position = "atw-flex-col";
+    $redirect_to = "";
+    $atts = [];
+    $form = null;
+    $form_id = null;
+    $form_style_atts = [];
+    $form_layout = "wpa-layout-stacked";
+    $form_layout_prop = "atw-w-1/3";
+
+    $_btn_classes = ["top" => "wpa-form-buttons", "inner" => "wpa-form-buttons-list"];
+
+    extract( $data );
+
+    ob_start();
+    include ADVERTS_PATH . '/templates/block-partials/form.php';
+    return ob_get_clean();
+}

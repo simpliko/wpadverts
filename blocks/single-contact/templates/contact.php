@@ -1,7 +1,7 @@
 <div class="wpadverts-cpt <?php echo sprintf( "wpadverts-cpt-", $atts["post_type"] ) ?> wpadverts-cpt-single-contact atw-w-full atw-flex atw-flex-col">
 
 <?php if( $has_visible_contact_options ): ?>
-    <div class="wpa-cpt-contact-details atw-my-6">
+    <div class="wpa-cpt-contact-details">
 
         <div class="atw-relative atw-flex atw-flex-col md:atw-flex-row atw--mx-1">
 

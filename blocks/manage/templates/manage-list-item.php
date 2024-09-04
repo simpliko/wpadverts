@@ -10,8 +10,8 @@
     <?php if( $show_image_column ): ?>
     <div class="atw-flex atw-flex-none atw-items-center">
         
-        <?php include apply_filters( "wpadverts/blocks/load/template", $this->path . "./../list/templates/list-item-img-list.php", $atts )?>
-        <?php include apply_filters( "wpadverts/blocks/load/template", $this->path . "./../list/templates/list-item-img-grid.php", $atts )?>
+        <?php include apply_filters( "wpadverts/blocks/load/template", rtrim($this->path, "/" ) . "/../list/templates/list-item-img-list.php", $atts )?>
+        <?php include apply_filters( "wpadverts/blocks/load/template", rtrim($this->path, "/" ) . "/../list/templates/list-item-img-grid.php", $atts )?>
 
 
         

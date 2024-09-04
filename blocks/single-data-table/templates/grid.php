@@ -2,10 +2,11 @@
 
     <div class="atw-grid atw-grid-cols-1 <?php echo $cols_class ?> <?php if( $atts["closed_top"] ): ?>atw-mt-6<?php endif; ?>">
     <?php foreach( $data_table as $data ): ?>
-        <div class="atw-border-solid atw-border-gray-100 atw-pb-2">
+        <?php if( $data["value"] !== false ): ?>
+        <div class="atw-border-none atw-border-gray-100 atw-pb-2">
             <div class="atw-flex atw-items-center atw-py-3 atw-mx-0">
                 <div class="atw-flex atw-justify-center atw-items-center atw-flex-none atw-mr-3">
-                    <div class=" ">
+                    <div class="atw-rounded-full atw-bg-gray-100 atw-w-7 atw-h-7">
                         <i class="<?php echo esc_attr($data["icon"]) ?> atw-text-gray-300 atw-text-3xl"></i>
                     </div>
                 </div>
@@ -19,6 +20,7 @@
                 </div>
             </div>
         </div>
+        <?php endif; ?>
     <?php endforeach; ?>
     </div>
 

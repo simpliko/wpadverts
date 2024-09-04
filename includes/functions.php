@@ -1529,16 +1529,21 @@ function adverts_field_select( $field ) {
 function adverts_field_textarea( $field ) {
     
     $value = '';
-    
+    $attr = [];
+
     if(isset($field["value"])) {
         $value = $field["value"];
+    }
+
+    if(isset($field["attr"])) {
+        $attr = $field["attr"];
     }
     
     if($field["mode"] == "plain-text") {
         $html = new Adverts_Html("textarea", array(
             "name" => $field["name"],
-            "rows" => 10,
-            "cols" => 50,
+            "rows" => isset( $attr["rows"] ) ? $attr["rows"] : 10,
+            "cols" => isset( $attr["cols"] ) ? $attr["cols"] : 50,
             "placeholder" => isset($field["placeholder"]) ? $field["placeholder"] : null,
             "class" => isset($field["class"]) ? $field["class"] : null,
         ), esc_html( $value ) );

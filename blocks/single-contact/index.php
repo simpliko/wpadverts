@@ -122,8 +122,14 @@ class Adverts_Block_Single_Contact {
                 $contact_options[$k]["is_visible"] = $o["is_active"];
             }
 
+
+
             if( $contact_options[$k]["is_active"] && $contact_options[$k]["is_visible"] ) {
                 $has_visible_contact_options = true;
+
+                if($o["class"] == "wpadverts-show-contact-form" && $atts["form_button_hide"] ) {
+                    $contact_options[$k]["is_visible"] = false;
+                }
 
                 if( isset( $o["content_callback"] ) && is_array( $o["content_callback"] ) ) {
                     $this->_add_content_callback( $o["content_callback"] );
@@ -137,10 +143,10 @@ class Adverts_Block_Single_Contact {
         $atts["layout"] = "contact";
 
         $options_flex = "row";
-        if( $options_flex == "row") {
-        $options_flex = "md:atw-flex-row md:atw-flex-wrap";
+        if( $atts["contacts_stacked"] == false ) {
+            $options_flex = "md:atw-flex-row md:atw-flex-wrap";
         } else {
-        $options_flex = "md:atw-flex-col";
+            $options_flex = "md:atw-flex-col atw-w-full";
         }
 
         $template = sprintf( "%s/templates/%s.php", dirname( __FILE__ ), $atts["layout"]);
@@ -180,12 +186,24 @@ class Adverts_Block_Single_Contact {
 
     protected function _get_custom_contacts( $atts, $post_id ) {
         $contact_methods = $this->_get_contact_options( $atts, $post_id );
+        //return [];
+        //echo "<pre>";print_r($contact_methods);echo "</pre>";
         $contact_options = array( );
-        return $contact_options;
+        
 //echo "<pre>";print_r($atts);echo "</pre>";
         $primary = false;
+        $contacts_order = [];
+        foreach($atts['contact_order'] as $c) {
+            if(in_array($c, $atts["contact"])) {
+                $contacts_order[] = $c;
+            }
+        }
+        if( empty( $contacts_order ) ) {
+            $contacts_order = $atts['contact'];
+        }
 
-        foreach( $atts['contact'] as $k => $contact ) {
+
+        foreach( $contacts_order as $k => $contact ) {
             if( isset( $contact_methods[ $contact ] ) ) {
                 $cm = $contact_methods[ $contact ];
                 if(!$primary) {

@@ -16,6 +16,7 @@ $buttons_position = isset( $buttons_position ) ? $buttons_position : "atw-flex-r
 $form_layout = isset( $form_layout ) ? $form_layout : "wpa-layout-stacked";
 $form_layout_prop = "atw-w-1/3";
 
+$_btn_classes = isset( $_btn_classes ) ? $_btn_classes : ["top" => "wpa-form-buttons", "inner" => "wpa-form-buttons-list"];
 ?>
 
 <div class="wpadverts-block wpadverts-partial wpadverts-form">
@@ -82,10 +83,10 @@ $form_layout_prop = "atw-w-1/3";
             <?php do_action( "wpadverts/tpl/partial/form/before-buttons", $atts ) ?>
 
             <?php if( isset( $show_buttons ) && $show_buttons ): ?>
-            <div class="wpa-form-buttons <?php echo $buttons_position == "atw-flex-row" ? "md:atw-ml-2" : "" ?>">
+            <div class="<?php echo esc_attr( $_btn_classes["top"] ) ?> <?php echo $buttons_position == "atw-flex-row" ? "md:atw-ml-2" : "" ?>">
         
                 <?php foreach( $buttons as $button ): ?>
-                <div class="wpa-form-buttons-list">
+                <div class="<?php echo esc_attr( $_btn_classes["inner"] ) ?>">
                     <?php echo wpadverts_block_button( $button, array() ) ?>
                 </div>
                 <?php endforeach; ?>

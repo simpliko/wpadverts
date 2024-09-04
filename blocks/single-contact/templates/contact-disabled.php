@@ -1,6 +1,6 @@
 <div class="wpadverts-cpt <?php echo sprintf( "wpadverts-cpt-", $atts["post_type"] ) ?> wpadverts-cpt-single-contact atw-w-full atw-flex atw-flex-col">
 
-    <div class="wpa-cpt-contact-details atw-my-6 atw--mx-1">
+    <div class="wpa-cpt-contact-details atw--mx-1">
 
     <div class="wpadverts-flash wpa-style-info wpa-layout-big">
         <div class="wpa-flash-content atw-flex">

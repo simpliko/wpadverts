@@ -1,4 +1,4 @@
-import { Component } from '@wordpress/element';
+import { Component, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 import { RichText, BlockControls, InspectorControls , PanelColorSettings } from '@wordpress/block-editor';
@@ -84,6 +84,10 @@ class Edit extends Component {
 
     onSelectFormScheme = ( form_scheme ) => {
         this.props.setAttributes( { form_scheme } );
+    }
+
+    setContactsStacked = ( contacts_stacked ) => {
+        this.props.setAttributes( { contacts_stacked } );
     }
 
     onCustomizeQuery = ( param, value ) => {
@@ -205,12 +209,13 @@ class Edit extends Component {
         return options;
     }
 
-    onChangeContactOptions = ( options ) => {
-        this.props.setAttributes( { contact: [ ...options ] } ); 
-    }
-
-    onChangeContactOptionsOrder = ( order ) => {
-        this.props.setAttributes( { order: [ ...order ] } );
+    onChangeContactOptions = ( contact, contact_order ) => {
+        //contact[1] = contact[1] + "X"
+        console.log(contact);
+        this.props.setAttributes( { 
+            contact: [ ...contact ], 
+            contact_order: [ ...contact_order ] 
+        } ); 
     }
 
     getUnique = (array, key) => {
@@ -228,6 +233,11 @@ class Edit extends Component {
     getAvailableSearchForms = ( post_type ) => {
         var pt = this.getCurrentPostType();
         return [{label: "", value: ""}].concat( pt["form_schemes"]["search"] );
+    }
+
+    getAvailableContactForms = ( post_type ) => {
+        var pt = this.getCurrentPostType();
+        return [{label: "", value: ""}].concat( pt["form_schemes"]["contact"] );
     }
 
     getAdvertsListData = () => {
@@ -352,6 +362,50 @@ class Edit extends Component {
         this.props.setAttributes( { custom_contact } );
     }
 
+    setFormExpand = ( form_expand ) => {
+        this.props.setAttributes( { form_expand } );
+    }
+
+    setFormButtonHide = ( form_button_hide ) => {
+        this.props.setAttributes( { form_button_hide } );
+    }
+
+    setFormTitle = ( form_title ) => {
+        this.props.setAttributes( { form_title } );
+    }
+
+    setFormStyle = ( form_style ) => {
+        this.props.setAttributes( { form_style } );
+    }
+
+    setFormScheme = ( form_scheme ) => {
+        this.props.setAttributes( { form_scheme } );
+    }
+
+    setFormCondensed = ( form_condensed ) => {
+        this.props.setAttributes( { form_condensed } );
+    }
+
+    setFormPx = ( form_px ) => {
+        this.props.setAttributes( { form_px } );
+    }
+
+    setFormPy = ( form_py ) => {
+        this.props.setAttributes( { form_py } );
+    }
+
+    setFormBg = ( form_bg ) => {
+        this.props.setAttributes( { form_bg } );
+    }
+
+    setRequiresLogin = ( requires_login ) => {
+        this.props.setAttributes( { requires_login } );
+    }
+
+    setRequiresRegister = ( requires_register ) => {
+        this.props.setAttributes( { requires_register } );
+    }
+
     getContactMethodByName( name ) {
 
         var m = null;
@@ -362,6 +416,68 @@ class Edit extends Component {
         });
 
         return m;
+    }
+
+    getPxMarks() {
+        return [
+            "atw-px-0",
+            "atw-px-0.5",
+            "atw-px-1",
+            "atw-px-1.5",
+            "atw-px-2",
+            "atw-px-2.5",
+            "atw-px-3",
+            "atw-px-3.5",
+            "atw-px-4",
+            "atw-px-4.5",
+            "atw-px-5",
+            "atw-px-5.5",
+            "atw-px-6",
+            "atw-px-6.5",
+            "atw-px-7",
+            "atw-px-7.5",
+            "atw-px-8",
+            "atw-px-8.5",
+            "atw-px-9",
+            "atw-px-9.5",
+            "atw-px-10",
+            "atw-px-10.5"
+        ];
+    }
+
+    getPyMarks() {
+        return [
+            "atw-py-0",
+            "atw-py-0.5",
+            "atw-py-1",
+            "atw-py-1.5",
+            "atw-py-2",
+            "atw-py-2.5",
+            "atw-py-3",
+            "atw-py-3.5",
+            "atw-py-4",
+            "atw-py-4.5",
+            "atw-py-5",
+            "atw-py-5.5",
+            "atw-py-6",
+            "atw-py-6.5",
+            "atw-py-7",
+            "atw-py-7.5",
+            "atw-py-8",
+            "atw-py-8.5",
+            "atw-py-9",
+            "atw-py-9.5",
+            "atw-py-10",
+            "atw-py-10.5"
+        ];
+    }
+
+    getPxMark(index) {
+        return this.getPxMarks()[index];
+    }
+
+    getPyMark(index) {
+        return this.getPyMarks()[index];
     }
 
     onRequiresChange = ( requires ) => {
@@ -481,11 +597,23 @@ class Edit extends Component {
         } = this.props;
 
         const { 
+            contacts_stacked,
             custom_contact,
             contact,
             contact_order,
+            form_expand,
+            form_button_hide,
+            form_title,
+            form_style,
+            form_scheme,
+            form_condensed,
+            form_px,
+            form_py,
+            form_bg,
             requires,
-            requires_error
+            requires_error,
+            requires_login,
+            requires_register
         } = attributes;
 
         var stl = {};
@@ -494,6 +622,23 @@ class Edit extends Component {
         ].join( " " );
 
         const { show_instructions } = this.state;
+
+        let _flex_dir = "";
+        let _flex_dir2 = "";
+        if(!contacts_stacked) {
+            _flex_dir = "atw-flex-row";
+            _flex_dir2 = "atw-mx-1";
+        } else {
+            _flex_dir = "atw-flex-col";
+        }
+
+        let _form_labels = ["", "", ""];
+        let _form_values = ["", "", ""];
+        if(form_condensed) {
+            _form_values = ["Your Name", "Your Email", "Subject", "Message"];
+        } else {
+            _form_labels = ["Your Name", "Your Email", "Subject", "Message"];
+        }
 
         var opts = [];
         const regex = /(<([^>]+)>)/gi;
@@ -506,7 +651,18 @@ class Edit extends Component {
                     }
                 });
             } else {
-                contact.map((name) => {
+                let contact_list = [];
+                for(let i=0; i<contact_order.length; i++) {
+                    if(contact.includes(contact_order[i])) {
+                        contact_list.push(contact_order[i]);
+                    }
+                } 
+
+                if(form_button_hide && contact_list.includes("contact-form")) {
+                    contact_list.splice(contact_list.indexOf("contact-form"), 1);
+                }
+
+                contact_list.map((name) => {
                     var data = this.getContactMethodByName(name);
                     if(data) {
                         opts.push(data);
@@ -526,6 +682,12 @@ class Edit extends Component {
                     <PanelBody title="Contact Methods">
 
                         <ToggleControl 
+                            label="Show contacts button stacked"
+                            checked={ contacts_stacked }
+                            onChange={this.setContactsStacked}
+                        />
+
+                        <ToggleControl 
                             label="I want to select available contact options"
                             checked={ custom_contact }
                             onChange={this.onCustomContactToggle}
@@ -537,7 +699,6 @@ class Edit extends Component {
                                     label="Contact Methods"
                                     options={this.getContactOptions()}
                                     onChange={this.onChangeContactOptions}
-                                    onChangeOrder={this.onChangeContactOptionsOrder}
                                     checked={contact}
                                     order={contact_order}
                                 /> 
@@ -549,7 +710,89 @@ class Edit extends Component {
 
                     </PanelBody>
 
-                    { wp.hooks.doAction( 'hook_name' ) }
+                    { contact.includes("contact-form") &&
+                        <PanelBody title="Contact Form">
+                            <ToggleControl 
+                                label="Expand form by default."
+                                checked={ form_expand }
+                                onChange={this.setFormExpand}
+                            />
+
+                            <ToggleControl 
+                                label="Hide 'contact form' button."
+                                checked={ form_button_hide }
+                                onChange={this.setFormButtonHide}
+                                help="When the button is hidden users will not be able to hide the contact form."
+                            />
+
+                            <TextControl
+                                label="Form Title"
+                                value={ form_title }
+                                onChange={this.setFormTitle}
+                            />
+
+                            <SelectControl
+                                label="Form Style"
+                                value={ form_style }
+                                options={ [
+                                    { label: 'Default', value: '' },
+                                    { label: 'None', value: 'wpa-unstyled' },
+                                    { label: 'Flat', value: 'wpa-flat' },
+                                    { label: 'Solid', value: 'wpa-solid' },
+                                    { label: 'Border Bottom', value: 'wpa-border-bottom' }
+                                ] }
+                                onChange={this.setFormStyle}
+                            /> 
+
+                            <SelectControl
+                                label="Form Scheme"
+                                value={ form_scheme }
+                                options={this.getAvailableContactForms(post_type)}
+                                onChange={this.setFormScheme}
+                            /> 
+
+                            <ToggleControl 
+                                label="Condense Form."
+                                checked={ form_condensed }
+                                onChange={this.setFormCondensed}
+                                help="Use form labels as input placeholders."
+                            />
+
+                            <BaseControl label="Form Margins">
+                                <RangeControl
+                                    __nextHasNoMarginBottom
+                                    beforeIcon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="m7.5 6h9v-1.5h-9zm0 13.5h9v-1.5h-9zm-3-3h1.5v-9h-1.5zm13.5-9v9h1.5v-9z" style={{opacity: "0.25"}}></path><path d="m4.5 7.5v9h1.5v-9z"></path><path d="m18 7.5v9h1.5v-9z"></path></svg>}
+                                    label=""
+                                    value={ form_px }
+                                    onChange={ this.setFormPx }
+                                    min={ 0 }
+                                    max={ this.getPxMarks().length }
+                                    withInputField={false}
+                                />
+
+                                <RangeControl
+                                    __nextHasNoMarginBottom
+                                    beforeIcon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="m7.5 6h9v-1.5h-9zm0 13.5h9v-1.5h-9zm-3-3h1.5v-9h-1.5zm13.5-9v9h1.5v-9z" style={{opacity: "0.25"}}></path><path d="m7.5 6h9v-1.5h-9z"></path><path d="m7.5 19.5h9v-1.5h-9z"></path></svg>}
+                                    label=""
+                                    value={ form_py }
+                                    onChange={ this.setFormPy }
+                                    min={ 0 }
+                                    max={ this.getPyMarks().length }
+                                    withInputField={false}
+                                />
+                            </BaseControl>
+
+                            <BaseControl label="Form Background Color">
+                                <AdvertsColorPicker
+                                    value={form_bg}
+                                    onChange={this.setFormBg}
+                                />
+                            </BaseControl>
+
+                        </PanelBody>
+
+                        
+                    }
 
                     <PanelBody title="Access Control">
 
@@ -560,12 +803,29 @@ class Edit extends Component {
                             help="Capability required to see contact options. By default anyone can see it."
                         />
         
-                        { requires !== "" && <TextareaControl
-                            label="Error Message"
-                            help="Cusom message for users who are not allowed to contact options (leave blank otherwise)."
-                            value={requires_error}
-                            onChange={this.onRequiresErrorChange}
-                        /> }
+                        { requires !== "" && 
+                            <>
+                                <TextareaControl
+                                    label="Error Message"
+                                    help="Cusom message for users who are not allowed to contact options (leave blank otherwise)."
+                                    value={requires_error}
+                                    onChange={this.onRequiresErrorChange}
+                                /> 
+
+                                <TextControl
+                                    label="Login URL"
+                                    value={requires_login}
+                                    onChange={this.setRequiresLogin}
+                                />
+
+                                <TextControl
+                                    label="Registration URL"
+                                    value={requires_register}
+                                    onChange={this.setRequiresRegister}
+                                />
+
+                            </>
+                        }   
 
                     </PanelBody>
 
@@ -584,7 +844,7 @@ class Edit extends Component {
                 </BlockControls>
 
 
-                    <div class="wpa-cpt-contact-details atw-my-6 atw--mx-1">
+                    <div class="wpa-cpt-contact-details atw-my-6 ">
 
                         {opts.length===0 &&
                             <div class="atw-block atw-bg-gray-100 atw-px-4 atw-py-2 atw-rounded-lg atw-text-sm atw-text-center">
@@ -592,11 +852,12 @@ class Edit extends Component {
                                 <span class="atw-text-xs atw-text-gray-600">No contact options selected.</span>
                             </div>
                         }
-                        <div class="atw-relative atw-flex atw-flex-col md:atw-flex-row --atw--mx-1">
+                        <div class="atw-relative atw-flex atw-flex-col md:atw-flex-row">
 
-                            <div class="atw-relative atw-flex atw-flex-1 atw-flex-col md:atw-flex-row md:atw-flex-none">
+                            <div className={"atw-relative atw-box-border atw-flex atw-flex-1 atw--mx-1 atw-flex-row " + _flex_dir }>
                                 {opts.map((o,index) => (
-                                <div class="atw-flex-auto atw-mx-1 atw-mb-3 atw-relative">
+                                    
+                                <div className={"atw-flex-auto atw-box-border atw-mb-3 atw-px-1 atw-relative atw-w-full 11"}>
                                     
                                     <Disabled>
                                     <button name="" value="" type="button" class="wpa-btn-primary wpadverts-show-contact-form  atw-flex hover:atw-bg-none atw-bg-none atw-w-full atw-text-base atw-outline-none atw-border-solid atw-font-semibold atw-px-6 atw-py-2 atw-rounded atw-border atw-leading-loose">
@@ -608,23 +869,56 @@ class Edit extends Component {
                                     </button>
                                     </Disabled>
 
-                                    {custom_contact===true && index>0 &&
-                                    <span title="Move Left" onClick={(e) => this.Move("left",o.name)} class="atw-absolute atw-flex atw-items-center atw-cursor-pointer atw-px-2 atw-inset-y-0 atw-top-0 atw-left-0 hover:atw-bg-gray-50">
-                                        <span class="atw-not-italic fa-solid fa-chevron-left"></span>
-                                    </span>                                    
-                                    }
-
-                                    {custom_contact===true && index<opts.length-1 &&
-                                    <span title="Move Right" onClick={(e) => this.Move("right",o.name)} class="atw-absolute atw-flex atw-items-center atw-cursor-pointer atw-px-2 atw-inset-y-0 atw-top-0 atw-right-0 hover:atw-bg-gray-50">
-                                        <span class="atw-not-italic fa-solid fa-chevron-right"></span>
-                                    </span>
-                                    }
 
                                 </div>
                                 ) ) }
                             </div>
         
                         </div>
+
+                        {form_expand &&
+                            <div className={this.getPxMark(form_px) + " " + this.getPyMark(form_py)} style={{backgroundColor: form_bg}}>
+                                { form_title &&
+                                    <div className="atw-py-3 atw-text-lg">{form_title}</div>
+                                }
+
+                                <div>
+                                    <form>
+                                        <div>
+                                            <Disabled>
+                                                <TextControl label={_form_labels[0]} value={_form_values[0]} onChange={e => alert("")} />
+                                            </Disabled>
+                                        </div>
+
+                                        <div>
+                                            <Disabled>
+                                                <TextControl label={_form_labels[1]} value={_form_values[1]} onChange={e => alert("")} />
+                                            </Disabled>
+                                        </div>
+                                        <div>
+                                            <Disabled>
+                                                <TextControl label={_form_labels[2]} value={_form_values[2]} onChange={e => alert("")} />
+                                            </Disabled>
+                                        </div>
+                                        <div>
+                                            <Disabled>
+                                                <TextareaControl value="" onChange={e => alert("")} />
+                                            </Disabled>
+                                        </div>
+                                        <div>
+                                            <Disabled>
+                                            <button name="" value="" type="button" class="wpa-btn-primary atw-flex hover:atw-bg-none atw-bg-none atw-w-full atw-text-base atw-outline-none atw-border-solid atw-font-semibold atw-px-6 atw-py-2 atw-rounded atw-border atw-leading-loose">
+                                                <div class="atw-flex-grow">
+                                                    <span class="atw-inline md:atw-inline atw-px-0.5">Send Message</span>
+                                                </div>
+                                            </button>
+                                            </Disabled>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        
+                        }
                         
 
 

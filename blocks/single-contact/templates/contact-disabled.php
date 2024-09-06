@@ -9,7 +9,7 @@
 
             <div class="atw-flex-1 atw-flex atw-flex-col atw-items-center">
                 
-                <span class="wpa-flash-message atw-flex-1 atw-font-bold atw-py-3">
+                <span class="wpa-flash-message atw-flex-1 atw-font-bold atw-py-3 atw-text-center">
                     <?php echo esc_html( $message_header ) ?>
                 </span>
                 <span class="wpa-flash-message atw-flex-1 atw-pb-3 atw-text-center"><?php echo $message ?></span>  

@@ -79,7 +79,7 @@ class Edit extends Component {
     }
 
     onSelectPostType = ( post_type ) => {
-        this.props.setAttributes( { post_type, form_scheme: "" } );
+        this.props.setAttributes( { post_type: post_type, form_scheme: "" } );
     }
 
     onSelectFormScheme = ( form_scheme ) => {
@@ -211,9 +211,8 @@ class Edit extends Component {
 
     onChangeContactOptions = ( contact, contact_order ) => {
         //contact[1] = contact[1] + "X"
-        console.log(contact);
         this.props.setAttributes( { 
-            contact: [ ...contact ], 
+            contact: [...contact], 
             contact_order: [ ...contact_order ] 
         } ); 
     }
@@ -331,25 +330,6 @@ class Edit extends Component {
 
     onChangeLayout = ( layout ) => {
         this.props.setAttributes( { layout } );
-    }
-
-    setChecked = ( checked, name ) => {
-        var c = [];//this.props.attributes.contact;
-
-        this.props.attributes.contact.map((method) => {
-            c.push(method);
-        });
-
-        var index = c.indexOf(name);
-
-        if(checked && index === -1) {
-            c.push(name);
-        } else if(!checked && index >= 0) {
-            c.splice(index, 1);
-        }
-        //console.log(data);
-        //console.log(c);
-        this.props.setAttributes( { contact: c } );
     }
 
     contactMethodChecked( cm ) {
@@ -641,6 +621,7 @@ class Edit extends Component {
         }
 
         var opts = [];
+        var ignore_empty_list = false;
         const regex = /(<([^>]+)>)/gi;
         if(this.state.initiated === true) {
 
@@ -660,6 +641,7 @@ class Edit extends Component {
 
                 if(form_button_hide && contact_list.includes("contact-form")) {
                     contact_list.splice(contact_list.indexOf("contact-form"), 1);
+                    ignore_empty_list = true;
                 }
 
                 contact_list.map((name) => {
@@ -846,7 +828,7 @@ class Edit extends Component {
 
                     <div class="wpa-cpt-contact-details atw-my-6 ">
 
-                        {opts.length===0 &&
+                        {(opts.length===0 && !contact.includes('contact-form')) &&
                             <div class="atw-block atw-bg-gray-100 atw-px-4 atw-py-2 atw-rounded-lg atw-text-sm atw-text-center">
                                 <span class="fas fa-warning atw-not-italic atw-text-gray-400 atw-mr-2"></span>
                                 <span class="atw-text-xs atw-text-gray-600">No contact options selected.</span>
@@ -876,7 +858,7 @@ class Edit extends Component {
         
                         </div>
 
-                        {form_expand &&
+                        {(contact.includes('contact-form') && form_expand) &&
                             <div className={this.getPxMark(form_px) + " " + this.getPyMark(form_py)} style={{backgroundColor: form_bg}}>
                                 { form_title &&
                                     <div className="atw-py-3 atw-text-lg">{form_title}</div>

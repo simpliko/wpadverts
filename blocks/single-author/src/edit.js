@@ -504,6 +504,12 @@ class Edit extends Component {
                             checked={data_secondary.includes('published')}
                             onChange={(is_checked) => this.setDataSecondaryChecked(is_checked, "published")}
                         />
+                        <CheckboxControl
+                            label="Reveal - Phone Number"
+                            value="reveal_phone"
+                            checked={data_secondary.includes('reveal_phone')}
+                            onChange={(is_checked) => this.setDataSecondaryChecked(is_checked, "reveal_phone")}
+                        />
                     </PanelBody>
 
                 </InspectorControls>
@@ -535,8 +541,14 @@ class Edit extends Component {
                         </div>
                         <div class="atw-block">
                             {data_secondary.includes('published') &&
-                                <span class="atw-text-gray-500 atw-text-base">
+                                <span class="atw-text-gray-500 atw-text-base atw-pr-2">
                                 Published 17/07/2023 - 2 hours ago
+                                </span>
+                            }
+                            {data_secondary.includes('reveal_phone') &&
+                                <span class="atw-text-gray-500 atw-text-base">
+                                    <span class="fas fa-phone"></span>
+                                    <a href="#" class="atw-ml-1 atw-text-sm">reveal phone number</a>
                                 </span>
                             }
                         </div>

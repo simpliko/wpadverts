@@ -23,6 +23,10 @@
             "type": "array",
             "default": []
         },
+        "contact_data": {
+            "type": "array",
+            "default": []
+        },
         "contact_order": {
             "type": "array",
             "default": []
@@ -53,11 +57,11 @@
         },
         "form_px": {
             "type": "integer",
-            "default": 6
+            "default": 12
         },
         "form_py": {
             "type": "integer",
-            "default": 4
+            "default": 8
         },
         "form_bg": {
             "type": "string",

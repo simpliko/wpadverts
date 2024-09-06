@@ -74,6 +74,14 @@ class Adverts_Block_Single_Contact {
         $message_header = __("Only logged-in members can contact sellers.", "wpadverts");
         $message = __("Please login or register to to send a message.", "wpadverts");
 
+        if( $atts["requires_login"] ) {
+            $url_login = $atts["requires_login"];
+        }
+
+        if( $atts["requires_register"] ) {
+            $url_register = $atts["requires_register"];
+        }
+
         $atts["layout"] = "contact-disabled";
 
         $template = sprintf( "%s/templates/%s.php", dirname( __FILE__ ), $atts["layout"]);

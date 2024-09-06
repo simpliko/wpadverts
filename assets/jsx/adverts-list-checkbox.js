@@ -35,6 +35,9 @@ class AdvertsListCheckbox extends Component {
 
         this.data.options = [...this.props.options];
 
+        this.props.checked = [...this.props.checked];
+        this.props.order = [...this.props.order];
+
         this.state = {
             mode: "normal"
         };
@@ -163,6 +166,14 @@ class AdvertsListCheckbox extends Component {
             var placeholder = this.props.placeholder;
         }
 
+        let objects = [];
+        for(let i=0; i<this.props.order.length; i++) {
+            let object = this.getObjectByName(this.props.order[i]);
+            if(object !== undefined) {
+                objects.push(object);
+            }
+        }
+
         return(
             <>
                 <BaseControl
@@ -172,8 +183,7 @@ class AdvertsListCheckbox extends Component {
 
                 
                     <>
-                        {this.props.order.map((name, i) => {
-                            {var object = this.getObjectByName(name)}
+                        {objects.map((object, i) => {
                             return (
                                 
                                 <Flex 

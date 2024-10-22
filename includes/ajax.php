@@ -987,12 +987,21 @@ function adverts_gallery_video_cover() {
  */
 function adverts_show_contact() {
     
-    // @todo check_ajax_referer( 'my-special-string', 'security' );
-    
     $id = absint( adverts_request("id") );
     $mode = adverts_request("mode");
+    $security = adverts_request( "security" );
     $post = get_post($id);
+
+    $nonce = sprintf( "wpadverts-show-contact-info--%d", absint( $id ) );
     
+    if( ! wp_verify_nonce( $security, $nonce ) ) { 
+        echo json_encode( array( 
+            'result' => 0,
+            'error' => __("Invalid Nonce.", "wpadverts")
+        ));
+        exit;
+    }
+
     if( $post === null || ! wpadverts_post_type( $post ) ) {
         echo json_encode( array( 
             'result' => 0,
@@ -1009,7 +1018,7 @@ function adverts_show_contact() {
         );
 
         foreach($options as $k => $o) {
-            $value = get_post_meta( $id, $k, true );
+            $value = esc_html( get_post_meta( $id, $k, true ) );
             $value = apply_filters( "wpadverts/block/get/contact/reveal/value", $value, $id );
 
             if(isset($o["template"]) && $o["template"]) {
@@ -1028,8 +1037,8 @@ function adverts_show_contact() {
     } else {
         echo json_encode( array(
             'result' => 1,
-            'email' => get_post_meta( $id, 'adverts_email', true ),
-            'phone' => get_post_meta( $id, 'adverts_phone', true )
+            'email' => esc_html( get_post_meta( $id, 'adverts_email', true ) ),
+            'phone' => esc_html( get_post_meta( $id, 'adverts_phone', true ) )
         ));
     }
     

@@ -100,7 +100,7 @@ jQuery(function($) {
         
         var data = {
             action: 'adverts_show_contact',
-            security: 'nonce',
+            security: $(this).data("security"),
             id: $(this).data("id")
         };
         
@@ -114,11 +114,11 @@ jQuery(function($) {
                 var email = "\u2014";
                 
                 if(response.phone) {
-                    phone = $("<a></a>").attr("href", "tel:"+response.phone).text(response.phone);
+                    phone = $("<a></a>").attr("href", "tel:"+response.phone).html(response.phone);
                 }
                 
                 if(response.email) {
-                    email = $("<a></a>").attr("href", "mailto:"+response.email).text(response.email);
+                    email = $("<a></a>").attr("href", "mailto:"+response.email).html(response.email);
                 }
                 
                 if(response.result == 1) {

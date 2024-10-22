@@ -38,7 +38,7 @@ class Adverts_Block_Details {
             "wpadverts-block-details",
             ADVERTS_URL . '/assets/js/block-details.js',
             array( 'jquery' ),
-            '2.0.4'
+            '2.1.7'
         );
 
         wp_localize_script(

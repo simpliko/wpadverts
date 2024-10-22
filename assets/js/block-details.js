@@ -13,7 +13,7 @@ jQuery(function($) {
         var data = {
             action: 'adverts_show_contact',
             mode: 'block',
-            security: 'nonce',
+            security: $(this).data("security"),
             id: $(this).data("id")
         };
         
@@ -24,10 +24,18 @@ jQuery(function($) {
             context: $(".wpadverts-contact-reveal-box"),
             success: function(response) {
                 
+                if(response.result != 1) {
+                    $(".wpadverts-contact-reveal-box").addClass("atw-hidden");
+                    alert(response.error);
+                    return;
+                }
+
                 $(".wpadverts-contact-reveal").hide();
 
                 this.find(".wpadverts-reveal-loader").addClass("atw-hidden");
                 this.find(".wpadverts-reveal-inner").removeClass("atw-hidden");
+
+
 
                 jQuery.each(response.data, jQuery.proxy( function(key, item) {
                     var css = ".wpadverts-reveal--" + key + " .wpadverts-reveal-value";

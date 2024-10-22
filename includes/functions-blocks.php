@@ -920,6 +920,7 @@ function wpadverts_block_get_contact_options( $post_id = null, $atts = array() )
             ),
             "attr" => array(
                 "data-id" => $post_id,
+                "data-security" => wp_create_nonce( sprintf( "wpadverts-show-contact-info--%d", absint( $post_id ) ) )
             ),
             "label" => __( "Reveal Contact Info", "wpadverts" ),
             "is_active" => true,

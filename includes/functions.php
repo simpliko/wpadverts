@@ -1175,6 +1175,10 @@ function adverts_validate_upload_dimensions( $file, $params = null ) {
  */
 function adverts_filter_money( $data ) {
     
+    if( $data === null ) {
+        $data = "";
+    }
+
     $cleanString = preg_replace('/([^0-9\.,])/i', '', $data);
     $onlyNumbersString = preg_replace('/([^0-9])/i', '', $data);
 

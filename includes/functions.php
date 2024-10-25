@@ -2714,7 +2714,7 @@ function adverts_single_rslides( $post_id ) {
 function adverts_single_contact_information( $post_id ) {
     ?>
     <div class="adverts-single-actions">
-        <a href="#" class="adverts-button adverts-show-contact" data-id="<?php echo $post_id ?>">
+        <a href="#" class="adverts-button adverts-show-contact" data-id="<?php echo $post_id ?>" data-security="<?php echo wp_create_nonce( sprintf( "wpadverts-show-contact-info--%d", absint( $post_id ) ) ) ?>">
             <?php esc_html_e("Show Contact Information", "wpadverts") ?>
             <span class="adverts-icon-down-open"></span>
         </a>

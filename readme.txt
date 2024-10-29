@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classifieds script, classifieds p
 Requires PHP: 5.6
 Requires at least: 5.7
 Tested up to: 6.6
-Stable tag: 2.1.6
+Stable tag: 2.1.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,13 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 2.1.7 - 2024-10-29 =
+
+* FIXED: XSS when loading contact details.
+* FIXED: Nonce validation when revealing contact details on the Ad details pages.
+* FIXED: Gallery icon showing on Ad details pages even when there are no images uploaded.
+* FIXED: Fatal error when null is passed to adverts_filter_money() function.
 
 = 2.1.6 - 2024-08-19 =
 

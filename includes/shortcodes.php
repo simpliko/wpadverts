@@ -542,7 +542,7 @@ function _adverts_manage_preview( $atts = array() ) {
 
     $go_back = add_query_arg( array( "action" => false, "preview_id" => false, "advert_id" => $post_id ) );
     $flash["warn"][] = array(
-        "message" =>  sprintf( __( 'You are seeing a post preview. This page is not publicly available. <a href="%s">Go back</a>', "wpadverts" ), $go_back ),
+        "message" =>  sprintf( __( 'You are seeing a post preview. This page is not publicly available. <a href="%s">Go back</a>', "wpadverts" ), esc_url( $go_back ) ),
         "icon" => "adverts-icon-eye-off"
     );
 

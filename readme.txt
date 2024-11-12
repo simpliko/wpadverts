@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classifieds script, classifieds p
 Requires PHP: 5.6
 Requires at least: 5.7
 Tested up to: 6.6
-Stable tag: 2.1.7
+Stable tag: 2.1.8
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -125,6 +125,10 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
+= 2.1.8 - 2024-11-14 =
+
+* FIXED: XSS in the [adverts_manage] shortcode.
+ 
 = 2.1.7 - 2024-10-29 =
 
 * FIXED: XSS when loading contact details.

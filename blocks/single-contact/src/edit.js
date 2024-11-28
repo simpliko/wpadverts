@@ -577,6 +577,7 @@ class Edit extends Component {
         } = this.props;
 
         const { 
+            post_type,
             contacts_stacked,
             custom_contact,
             contact,

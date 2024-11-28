@@ -90,6 +90,7 @@ class Adverts_Block_Manage_Engine {
     public function action_list( $atts ) {
 
         extract(shortcode_atts(array(
+            'post_type' => 'advert',
             'name' => 'default',
             'paged' => adverts_request("pg", 1),
             'posts_per_page' => 20,
@@ -144,7 +145,7 @@ class Adverts_Block_Manage_Engine {
 
         // Load ONLY current user data
         $loop = new WP_Query( apply_filters( "adverts_manage_query", array( 
-            'post_type' => 'advert', 
+            'post_type' => $post_type, 
             'post_status' => apply_filters("adverts_sh_manage_list_statuses", array('publish', 'advert-pending', 'pending', 'expired') ),
             'posts_per_page' => $posts_per_page, 
             'paged' => $paged,
@@ -184,6 +185,7 @@ class Adverts_Block_Manage_Engine {
         wp_enqueue_script( 'adverts-auto-numeric' );
 
         $params = shortcode_atts(array(
+            'post_type' => 'advert',
             'name' => 'default',
             'moderate' => false
         ), $atts, "adverts_manage");

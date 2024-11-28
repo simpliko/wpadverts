@@ -4084,3 +4084,34 @@ function wpadverts_multiverse_promo( $data_type ) {
     echo sprintf( '<a class="add-new-h2" href="%s"><span class="dashicons dashicons-cart"></span> %s</a>', $url, $text );
 
 }
+
+/**
+ * Determines if the post type should use show_in_rest flag.
+ * 
+ * The function disables show_in_rest flag when adding or editing an Ad from the wp-admin panel
+ * to force WP to use the block-less interface
+ * 
+ * @since 2.2.0
+ * @uses adverts_show_in_rest filter
+ * 
+ * @param   bool    $show_in_rest       True if Ad should be shown in rest interface
+ * @param   string  $type               Custom Post Type name
+ * @return  bool
+ */
+function adverts_show_in_rest( $show_in_rest, $type ) {
+    global $pagenow;
+
+    $post = absint( adverts_request( "post" ), 0 );
+    $post_type = adverts_request( "post_type", "" );
+
+    if( is_admin() ) {
+        if($pagenow == "post.php" && $post && get_post_type( $post ) === $type ) {
+            $show_in_rest = false;
+        }
+        if($pagenow == "post-new.php" && $post_type == $type ) {
+            $show_in_rest = false;
+        }
+    }
+
+    return apply_filters( "adverts_show_in_rest", $show_in_rest, $type );
+}

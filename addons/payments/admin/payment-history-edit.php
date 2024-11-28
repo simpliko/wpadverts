@@ -171,7 +171,8 @@
 
 <script type="text/javascript">
     jQuery(function($) {
-        $(".adverts-payment-price").autoNumeric('init', adverts_currency);
+        new AutoNumeric(".adverts-payment-price", adverts_currency);
+        
     });
 </script>
 

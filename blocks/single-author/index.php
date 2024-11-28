@@ -39,8 +39,16 @@ class Adverts_Block_Single_Author {
         wp_register_script(
             "wpadverts-block-single-author",
             ADVERTS_URL . '/assets/js/block-single-author.js',
-            array( 'jquery' ),
-            '2.0.4'
+            array( ),
+            '2.2.0'
+        );
+
+        wp_localize_script(
+            "wpadverts-block-single-author",
+            "wpadverts_block_single_author",
+            [
+                "ajaxurl" => admin_url("admin-ajax.php")
+            ]
         );
 
         register_block_type_from_metadata(
@@ -50,7 +58,7 @@ class Adverts_Block_Single_Author {
                 'editor_script' => $js_handler,
                 'render_callback' => array( $this, "render" ),
                 //'style' => wpadverts_load_assets_globally() ? 'wpadverts-blocks' : null,
-                //'script' => wpadverts_load_assets_globally() ? 'wpadverts-block-single-data-table' : null
+                'script' => wpadverts_load_assets_globally() ? 'wpadverts-block-single-author' : null
             )
         );
 
@@ -62,7 +70,7 @@ class Adverts_Block_Single_Author {
 
         if( ! wpadverts_load_assets_globally() ) {
             wp_enqueue_style( 'wpadverts-blocks' );
-            wp_enqueue_script( 'wpadverts-block-details');
+            wp_enqueue_script( "wpadverts-block-single-author");
         }
 
         $params = shortcode_atts(array(

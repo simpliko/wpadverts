@@ -74,6 +74,14 @@ class Adverts_Block_Single_Contact {
         $message_header = __("Only logged-in members can contact sellers.", "wpadverts");
         $message = __("Please login or register to to send a message.", "wpadverts");
 
+        if( $atts["requires_login"] ) {
+            $url_login = $atts["requires_login"];
+        }
+
+        if( $atts["requires_register"] ) {
+            $url_register = $atts["requires_register"];
+        }
+
         $atts["layout"] = "contact-disabled";
 
         $template = sprintf( "%s/templates/%s.php", dirname( __FILE__ ), $atts["layout"]);
@@ -122,8 +130,14 @@ class Adverts_Block_Single_Contact {
                 $contact_options[$k]["is_visible"] = $o["is_active"];
             }
 
+
+
             if( $contact_options[$k]["is_active"] && $contact_options[$k]["is_visible"] ) {
                 $has_visible_contact_options = true;
+
+                if($o["class"] == "wpadverts-show-contact-form" && $atts["form_button_hide"] ) {
+                    $contact_options[$k]["is_visible"] = false;
+                }
 
                 if( isset( $o["content_callback"] ) && is_array( $o["content_callback"] ) ) {
                     $this->_add_content_callback( $o["content_callback"] );
@@ -135,6 +149,13 @@ class Adverts_Block_Single_Contact {
         $contact_options = $this->_set_primary_contact_option( $contact_options );
 
         $atts["layout"] = "contact";
+
+        $options_flex = "row";
+        if( $atts["contacts_stacked"] == false ) {
+            $options_flex = "md:atw-flex-row md:atw-flex-wrap";
+        } else {
+            $options_flex = "md:atw-flex-col atw-w-full";
+        }
 
         $template = sprintf( "%s/templates/%s.php", dirname( __FILE__ ), $atts["layout"]);
         ob_start();
@@ -173,11 +194,24 @@ class Adverts_Block_Single_Contact {
 
     protected function _get_custom_contacts( $atts, $post_id ) {
         $contact_methods = $this->_get_contact_options( $atts, $post_id );
+        //return [];
+        //echo "<pre>";print_r($contact_methods);echo "</pre>";
         $contact_options = array( );
-
+        
+//echo "<pre>";print_r($atts);echo "</pre>";
         $primary = false;
+        $contacts_order = [];
+        foreach($atts['contact_order'] as $c) {
+            if(in_array($c, $atts["contact"])) {
+                $contacts_order[] = $c;
+            }
+        }
+        if( empty( $contacts_order ) ) {
+            $contacts_order = $atts['contact'];
+        }
 
-        foreach( $atts['contact'] as $k => $contact ) {
+
+        foreach( $contacts_order as $k => $contact ) {
             if( isset( $contact_methods[ $contact ] ) ) {
                 $cm = $contact_methods[ $contact ];
                 if(!$primary) {

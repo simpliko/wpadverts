@@ -40,7 +40,7 @@
 
 <script type="text/javascript">
     jQuery(function($) {
-        $("#adverts_price").autoNumeric('init', adverts_currency);
+        new AutoNumeric("#adverts_price", adverts_currency);
     });
     
 </script>

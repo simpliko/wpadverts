@@ -92,7 +92,11 @@ class Adverts_Block_Templates {
         }
 
         if( $method == "block" ) {
-            $option[$type][$name]["template"] = absint( $template );
+            if( is_numeric( $template ) ) {
+                $option[$type][$name]["template"] = absint( $template );
+            } else {
+                $option[$type][$name]["template"] = $template;
+            }
         }
 
         if( empty( $option[$type] ) ) {
@@ -182,13 +186,21 @@ class Adverts_Block_Templates {
      * Returns default post block template
      * 
      * @since   2.0
+     * @since   2.2.0       $template param
+     * 
      * @param   string      $post_type      Post type
+     * @param   string      $template       The template code
      * @return  string                      block template string
      */
-    public function get_default_post_template( $post_type ) {
+    public function get_default_post_template( $post_type, $template = null ) {
         include_once ADVERTS_PATH . '/blocks/class-block-patterns.php';
         $patterns = new Adverts_Block_Patterns;
-        return $patterns->get_classifieds_details( $post_type );
+        if($template == "block-with-sidebar") {
+            return $patterns->get_classifieds_details_with_sidebar( $post_type );
+        } else {
+            return $patterns->get_classifieds_details( $post_type );
+        }
+        
     }
 
     /**
@@ -233,10 +245,10 @@ class Adverts_Block_Templates {
      * 
      * @since   2.0
      * @param   string      $post_type      Post type
-     * @return  int                         ID of the WP_Post storing the post_type template
+     * @return  mixed                        ID of the WP_Post storing the post_type template
      */
     public function get_post_template_id( $post_type ) {
-        return absint( $this->_get_template( "post", $post_type ) );
+        return $this->_get_template( "post", $post_type );
     }
 
     /**
@@ -259,16 +271,16 @@ class Adverts_Block_Templates {
      */
     public function get_post_template( $post_type ) {
 
-        $template_id = $this->_get_template( "post", $post_type );
-    
+        $template_id = apply_filters( "wpadverts/block/post/template", $this->_get_template( "post", $post_type ), $post_type );
+
         if( $template_id < 1 ) {
-            return $this->get_default_post_template( $post_type );
+            return $this->get_default_post_template( $post_type, $template_id );
         }
     
         $template = get_post( $template_id );
     
         if( $template === null ) {
-            return $this->get_default_post_template( $post_type ) . sprintf( '<!-- wpadverts-error: could not load template %d; using default. -->', $template_id );
+            return $this->get_default_post_template( $post_type, $template_id ) . sprintf( '<!-- wpadverts-error: could not load template %d; using default. -->', $template_id );
         } else {
             return $template->post_content;
         }

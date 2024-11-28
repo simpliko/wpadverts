@@ -2,7 +2,7 @@
     <div class="atw-grid atw-grid-cols-1 md:atw-grid-cols-1 atw-border-x-0 atw-border-b-0 <?php if( $atts["closed_top"] ): ?>atw-mt-6 atw-border-t<?php else: ?>atw-border-t-0<?php endif; ?> atw-border-solid atw-border-gray-100">
         <?php foreach( $data_table as $k => $data ): ?>
         <?php if( $data["value"] !== false ): ?>
-        <div class="atw-border-b atw-border-solid atw-border-gray-100 atw-pb-2">
+        <div class="atw-border-0 atw-border-b atw-border-solid atw-border-gray-100 atw-pb-2">
             <div class="atw-flex atw-pt-3 atw-pb-1 atw-mx-0">
                 <div class="atw-hidden md:atw-flex atw-justify-center atw-items-center atw-bg-gray-200 atw-w-10 atw-h-10 atw-rounded-full atw-mr-3">
                     <div class=" ">

@@ -1,6 +1,6 @@
 <div class="wpadverts-cpt <?php echo sprintf( "wpadverts-cpt-", $atts["post_type"] ) ?> wpadverts-cpt-single-contact atw-w-full atw-flex atw-flex-col">
 
-    <div class="wpa-cpt-contact-details atw-my-6 atw--mx-1">
+    <div class="wpa-cpt-contact-details atw--mx-1">
 
     <div class="wpadverts-flash wpa-style-info wpa-layout-big">
         <div class="wpa-flash-content atw-flex">
@@ -9,7 +9,7 @@
 
             <div class="atw-flex-1 atw-flex atw-flex-col atw-items-center">
                 
-                <span class="wpa-flash-message atw-flex-1 atw-font-bold atw-py-3">
+                <span class="wpa-flash-message atw-flex-1 atw-font-bold atw-py-3 atw-text-center">
                     <?php echo esc_html( $message_header ) ?>
                 </span>
                 <span class="wpa-flash-message atw-flex-1 atw-pb-3 atw-text-center"><?php echo $message ?></span>  

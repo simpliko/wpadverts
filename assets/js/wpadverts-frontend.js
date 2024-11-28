@@ -147,7 +147,7 @@ jQuery(function($) {
     }
     
     if($(".adverts-filter-money").length > 0) {
-        $(".adverts-filter-money").autoNumeric('init', adverts_currency);
+        new AutoNumeric(".adverts-filter-money", adverts_currency);
     }
     
     if($(".adverts-form-filters").length > 0) {

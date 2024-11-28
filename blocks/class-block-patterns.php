@@ -33,6 +33,18 @@ class Adverts_Block_Patterns {
                 'viewportWidth' => 800,
             )
         );
+
+        register_block_pattern(
+            'wpadverts/classifieds-details-with-sidebar',
+            array(
+                'title'         => __( 'Classifieds details', 'wpadverts' ),
+                'description'   => __( 'Classifieds details page with a sidebar', 'wpadverts' ),
+                'content'       => $this->get_classifieds_details_with_sidebar(),
+                'categories'    => array( 'classifieds' ),
+                'keywords'      => array( ),
+                'viewportWidth' => 800,
+            )
+        );
     }
 
     public function get_classifieds_with_sidebar( $post_type = "advert", $form_scheme = "" ) {
@@ -58,6 +70,38 @@ class Adverts_Block_Patterns {
         } else {
             return $this->get_classifieds_details_v1( $post_type );
         }
+    }
+
+    public function get_classifieds_details_with_sidebar( $post_type = "advert", $form_scheme = "" ) {
+        $html = array();
+        $html[] = '<!-- wp:wpadverts/single-notification /-->';
+        $html[] = '';
+        $html[] = '<!-- wp:columns -->';
+        $html[] = '<div class="wp-block-columns"><!-- wp:column {"width":"66.66%"} -->';
+        $html[] = '<div class="wp-block-column" style="flex-basis:66.66%"><!-- wp:wpadverts/single-gallery {"post_type":"advert"} /-->';
+        $html[] = '';
+        $html[] = '<!-- wp:wpadverts/single-value {"post_type":"advert","data":["pattern__price"],"render_as":"html","text_size":"atw-text-4xl","font_weight":"atw-font-bold","type":"atw-inline-block","margin_y":"atw-my-1.5","padding_y":"atw-py-1.5","border_radius":"atw-rounded-lg","p_value":"$2,500"} /-->';
+        $html[] = '';
+        $html[] = '<!-- wp:wpadverts/single-data-table {"post_type":"advert","columns":2,"exclude_types":[{"name":"__builtin"},{"name":"adverts_field_textarea"}]} /-->';
+        $html[] = '';
+        $html[] = '<!-- wp:wpadverts/single-data-table {"post_type":"advert","layout":"text","include_types":[{"name":"adverts_field_textarea"}]} /--></div>';
+        $html[] = '<!-- /wp:column -->';
+        $html[] = '';
+        $html[] = '<!-- wp:column {"width":"33.33%","style":{"spacing":{"padding":{"right":"var:preset|spacing|10","left":"var:preset|spacing|10","top":"var:preset|spacing|10","bottom":"var:preset|spacing|10"}}}} -->';
+        $html[] = '<div class="wp-block-column" style="padding-top:var(--wp--preset--spacing--10);padding-right:var(--wp--preset--spacing--10);padding-bottom:var(--wp--preset--spacing--10);padding-left:var(--wp--preset--spacing--10);flex-basis:33.33%"><!-- wp:wpadverts/single-author {"post_type":"advert","avatar_size":"64","data_secondary":["reveal_phone"]} /-->';
+        $html[] = '';
+        $html[] = '<!-- wp:wpadverts/single-contact {"post_type":"advert","contacts_stacked":true,"custom_contact":true,"contact":["contact-form"],"contact_order":["contact-reveal","contact-form","phone-button"],"form_expand":true,"form_button_hide":true,"form_title":"","form_style":"wpa-solid","form_condensed":true,"form_px":0,"form_py":0,"form_bg":"#ffffff"} /--></div>';
+        $html[] = '<!-- /wp:column --></div>';
+        $html[] = '<!-- /wp:columns -->';
+        $html[] = '';
+        $html[] = '<!-- wp:paragraph {"style":{"spacing":{"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20"}}}} -->';
+        $html[] = '<p style="padding-top:var(--wp--preset--spacing--20);padding-bottom:var(--wp--preset--spacing--20)"></p>';
+        $html[] = '<!-- /wp:paragraph -->';
+        $html[] = '';
+        $html[] = '<!-- wp:paragraph -->';
+        $html[] = '<p></p>';
+        $html[] = '<!-- /wp:paragraph -->';
+        return implode( "\r\n", $html );
     }
 
     public function get_classifieds_details_v1( $post_type = "advert" ) {

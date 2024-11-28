@@ -11,21 +11,75 @@
             "type": "string",
             "default": ""
         },
+        "contacts_stacked": {
+            "type": "boolean",
+            "default": false
+        },
         "custom_contact": {
             "type": "boolean",
             "default": false
         },
         "contact": {
             "type": "array",
-            "default": [
-                "contact-form"
-            ]
+            "default": []
+        },
+        "contact_data": {
+            "type": "array",
+            "default": []
+        },
+        "contact_order": {
+            "type": "array",
+            "default": []
+        },
+        "form_expand": {
+            "type": "boolean",
+            "default": false
+        },
+        "form_button_hide": {
+            "type": "boolean",
+            "default": false
+        },
+        "form_title": {
+            "type": "string",
+            "default": "Contact Seller"
+        },
+        "form_style": {
+            "type": "string",
+            "default": ""
+        },
+        "form_condensed": {
+            "type": "boolean",
+            "default": false
+        },
+        "form_scheme": {
+            "type": "string",
+            "default": ""
+        },
+        "form_px": {
+            "type": "integer",
+            "default": 12
+        },
+        "form_py": {
+            "type": "integer",
+            "default": 8
+        },
+        "form_bg": {
+            "type": "string",
+            "default": ""
         },
         "requires": {
             "type": "string",
             "default": ""
         },
         "requires_error": {
+            "type": "string",
+            "default": ""
+        },
+        "requires_login": {
+            "type": "string",
+            "default": ""
+        },
+        "requires_register": {
             "type": "string",
             "default": ""
         }

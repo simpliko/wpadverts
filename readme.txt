@@ -133,10 +133,11 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 * FEATURE: Updated Autonumeric JavaScript library (it is being used with the Price input).
 * FEATURE: REST API is enabled by default for the "advert" Custom Post Type.
 * FIXED: Classifieds Manage block not working with post type different than 'advert'
+* FIXED: Warning when checking if *_block() function exists.
 * LANUGAGE: Updated German translation.
 * API: adverts_show_in_rest filter
 
-= 2.1.8 - 2024-11-14 =
+= 2.1.8 - 2024-11-19 =
 
 * FIXED: XSS in the [adverts_manage] shortcode.
  

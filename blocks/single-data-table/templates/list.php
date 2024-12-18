@@ -13,7 +13,7 @@
                     <div class="atw-flex atw-flex-none atw-items-center atw-w-1/3 atw-h-10 atw-text-gray-700 atw-text-base atw-mb-1 md:atw-mb-0">
                         <span class="atw-inline-block atw-font-bold md:atw-font-normal"><?php echo esc_html( $data["label"] ) ?></span>
                     </div>
-                    <div class="atw-flex atw-grow atw-items-center atw-text-gray-800">
+                    <div class="atw-flex atw-grow atw-items-center atw-text-base atw-text-gray-800">
                         <span class="atw-inline-block <?php echo isset( $data["row_classes"] ) ? esc_attr( $data["row_classes"] ) : "" ?>"><?php echo $data["value"] ?></span>
                     </div>
                 </div>

@@ -123,7 +123,7 @@
     .wpadverts-form select[multiple], 
     .wpadverts-form input[type=text].wpadverts-autocomplete,
     .wpadverts-form .adverts-multiselect-holder input[type=text] {
-        @apply atw-outline-none atw-box-border atw-leading-loose atw-border-solid atw-bg-right atw-bg-no-repeat atw-appearance-none;
+        @apply atw-outline-none atw-box-border atw-leading-loose atw-border-solid atw-bg-right atw-bg-no-repeat atw-appearance-none atw-cursor-pointer;
         
         background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
     }

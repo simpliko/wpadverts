@@ -83,10 +83,10 @@ $grid_cols = sprintf("%s %s", $grid_cols_arr[ $atts["grid_columns_mobile"] ], $g
                 <?php if( $switch_views ): ?>
                 <div class="atw-flex atw-align-baseline atw-leading-none atw-space-x-2">
                     <div class="atw-align-baseline">
-                        <a href="<?php echo esc_html( add_query_arg( "display", "list" ) ) ?>" class="js-wpa-view-list <?php echo $display == "wpa-list-view" ? "wpa-selected" : "" ?>"><i class="fas fa-th-list atw-text-gray-400 atw-text-2xl md:atw-text-xl atw-leading-1 atw-align-baseline atw-block atw-transition atw-duration-100"></i></a>
+                        <a href="<?php echo esc_html( add_query_arg( "display", "list" ) ) ?>" class="js-wpa-view-list <?php echo $display == "wpa-list-view" ? "wpa-selected" : "" ?> atw-no-underline"><i class="fas fa-th-list atw-text-gray-400 atw-text-2xl md:atw-text-xl atw-leading-1 atw-align-baseline atw-block atw-transition atw-duration-100"></i></a>
                     </div>
                     <div class="atw-align-baseline">
-                        <a href="<?php echo esc_html( add_query_arg( "display", "grid" ) ) ?>" class="js-wpa-view-grid <?php echo $display == "wpa-grid-view" ? "wpa-selected" : "" ?>"><i class="fas fa-th-large atw-text-gray-400 atw-text-2xl md:atw-text-xl atw-leading-1 atw-align-baseline"></i></a>
+                        <a href="<?php echo esc_html( add_query_arg( "display", "grid" ) ) ?>" class="js-wpa-view-grid <?php echo $display == "wpa-grid-view" ? "wpa-selected" : "" ?> atw-no-underline"><i class="fas fa-th-large atw-text-gray-400 atw-text-2xl md:atw-text-xl atw-leading-1 atw-align-baseline"></i></a>
                     </div>
                 </div>
                 <?php endif; ?>
@@ -107,8 +107,8 @@ $grid_cols = sprintf("%s %s", $grid_cols_arr[ $atts["grid_columns_mobile"] ], $g
                             </span>
 
                             <div id="js-wpa-sort-options" class="atw-hidden atw-z-50 atw-origin-top-right atw-absolute atw-right-0 atw-mt-3 atw-w-56 atw-rounded-sm atw-shadow-lg atw-bg-white atw-ring-1 atw-ring-black atw-ring-opacity-5 atw-divide-y atw-divide-gray-100 focus:atw-outline-none">
-                            <?php foreach( $sort_options as $sort_group): ?>
-                                <div class="py-1">
+                            <?php foreach( $sort_options as $sort_group_key => $sort_group): ?>
+                                <div class="py-1 <?php echo esc_attr( sprintf( "wpa-block-list-sortgroup--%s", $sort_group_key ) ) ?>">
                                     <span class="atw-text-gray-500 atw-block atw-px-4 atw-py-2 atw-text-sm">
                                         <strong><?php echo esc_html( $sort_group["label"] ) ?></strong>
                                     </span>

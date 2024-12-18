@@ -7,7 +7,7 @@
             <div>
                 <span class="atw-inline-block atw-text-gray-700 atw-text-xl atw-font-bold atw-py-3"><?php echo esc_html( $content["label"] ) ?></span>
             </div>
-            <div>
+            <div class="atw-text-base">
                 <?php echo $content["value"] ?>
             </div>
         </div>

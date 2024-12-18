@@ -46,6 +46,7 @@ jQuery(function($) {
 
       var options = $("<div></div>");
       options.addClass("adverts-multiselect-options");
+      options.addClass("atw-text-sm");
 
       $this.find("option").each(function(i, o) {
           var o = $(o);

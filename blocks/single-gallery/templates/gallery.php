@@ -74,7 +74,7 @@
                     </a>
                 </div>
 
-                <div class="atw-absolute <?php echo esc_attr( $nav_position ) ?>">
+                <div class="atw-absolute <?php echo esc_attr( $nav_position ) ?> atw-break-keep">
                     <div class="atw-flex atw-items-center atw-bg-white atw-rounded-lg atw-mx-3 atw-my-2 atw-px-2 atw-py-1 atw-border atw-border-solid atw-border-gray-100">
                         <span class="atw-text-sm fas fa-camera atw-pr-2"></span>
                         <span class="atw-text-xs atw-font-semibold "><span class="wpa-block-gallery-current">1</span> / <?php echo count( $images ) ?></span>

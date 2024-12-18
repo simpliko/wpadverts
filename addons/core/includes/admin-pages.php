@@ -336,75 +336,6 @@ Adverts::instance()->set("form_core_config", array(
             )
         ),
         array(
-            "name" => "_defaults_adverts_list",
-            "type" => "adverts_field_header",
-            "order" => 10,
-            "label" => __( 'Defaults Values For [adverts_list]', "wpadverts" ),
-            "title" => __( 'Defaults Values For [adverts_list]', "wpadverts" )
-        ),
-        array(
-            "name" => "ads_list_default__search_bar",
-            "type" => "adverts_field_select",
-            "label" => __( "Search Bar", "wpadverts" ),
-            "order" => 10,
-            "options" => array(
-                array( "value" => "enabled", "text" => __( "Enabled", "wpadverts" ) ),
-                array( "value" => "disabled", "text" => __( "Disabled", "wpadverts" ) )
-            ),
-            "attr" => array(
-                "id" => "option__ads_list_default__search_bar"
-            )
-        ),
-        array(
-            "name" => "ads_list_default__display",
-            "type" => "adverts_field_select",
-            "label" => __( "Display Ads As", "wpadverts" ),
-            "order" => 10,
-            "options" => array(
-                array( "value" => "grid", "text" => __( "Grid (2 or more columns)", "wpadverts" ) ),
-                array( "value" => "list", "text" => __( "List (1 column)", "wpadverts" ) )
-            ),
-            "attr" => array(
-                "id" => "option__ads_list_default__display"
-            )
-        ),
-        array(
-            "name" => "ads_list_default__columns",
-            "type" => "adverts_field_select",
-            "order" => 10,
-            "label" => __( "Columns", "wpadverts" ),
-            "options" => array(
-                array( "value" => 2, "text" => "2" ),
-                array( "value" => 3, "text" => "3" ),
-                array( "value" => 4, "text" => "4" ),
-            ),
-            "attr" => array(
-                "id" => "option__ads_list_default__columns"
-            )
-        ),
-        array(
-            "name" => "ads_list_default__posts_per_page",
-            "type" => "adverts_field_text",
-            "order" => 10,
-            "label" => __( "Posts Per Page", "wpadverts" ),
-            "validator" => array(
-                array("name"=>"is_required"),
-                array("name"=>"is_integer")
-            ),
-            "attr" => array(
-                "id" => "option__ads_list_default__posts_per_page"
-            )
-        ),
-        array(
-            "name" => "ads_list_default__switch_views",
-            "type" => "adverts_field_checkbox",
-            "label" => __( "Switch Views", "wpadverts" ),
-            "order" => 10,
-            "options" => array(
-                array( "value" => "grid", "text" => __( "Allow users to switch between grid and list view.", "wpadverts" ), "id" => "option__ads_list_default__switch_views" ),
-            )
-        ),
-        array(
             "name" => "_currency_settings",
             "type" => "adverts_field_header",
             "order" => 10,
@@ -485,6 +416,75 @@ Adverts::instance()->set("form_core_config", array(
             "empty_option_text" => "",
             "options_callback" => "adverts_get_roles_dropdown",
             "hint" => __( "Cabability (or Role) required to always see expired Ads details pages.", "wpadverts" )
+        ),
+        array(
+            "name" => "_defaults_adverts_list",
+            "type" => "adverts_field_header",
+            "order" => 100,
+            "label" => __( 'Defaults Values For [adverts_list]', "wpadverts" ),
+            "title" => __( 'Defaults Values For [adverts_list]', "wpadverts" )
+        ),
+        array(
+            "name" => "ads_list_default__search_bar",
+            "type" => "adverts_field_select",
+            "label" => __( "Search Bar", "wpadverts" ),
+            "order" => 100,
+            "options" => array(
+                array( "value" => "enabled", "text" => __( "Enabled", "wpadverts" ) ),
+                array( "value" => "disabled", "text" => __( "Disabled", "wpadverts" ) )
+            ),
+            "attr" => array(
+                "id" => "option__ads_list_default__search_bar"
+            )
+        ),
+        array(
+            "name" => "ads_list_default__display",
+            "type" => "adverts_field_select",
+            "label" => __( "Display Ads As", "wpadverts" ),
+            "order" => 100,
+            "options" => array(
+                array( "value" => "grid", "text" => __( "Grid (2 or more columns)", "wpadverts" ) ),
+                array( "value" => "list", "text" => __( "List (1 column)", "wpadverts" ) )
+            ),
+            "attr" => array(
+                "id" => "option__ads_list_default__display"
+            )
+        ),
+        array(
+            "name" => "ads_list_default__columns",
+            "type" => "adverts_field_select",
+            "order" => 100,
+            "label" => __( "Columns", "wpadverts" ),
+            "options" => array(
+                array( "value" => 2, "text" => "2" ),
+                array( "value" => 3, "text" => "3" ),
+                array( "value" => 4, "text" => "4" ),
+            ),
+            "attr" => array(
+                "id" => "option__ads_list_default__columns"
+            )
+        ),
+        array(
+            "name" => "ads_list_default__posts_per_page",
+            "type" => "adverts_field_text",
+            "order" => 100,
+            "label" => __( "Posts Per Page", "wpadverts" ),
+            "validator" => array(
+                array("name"=>"is_required"),
+                array("name"=>"is_integer")
+            ),
+            "attr" => array(
+                "id" => "option__ads_list_default__posts_per_page"
+            )
+        ),
+        array(
+            "name" => "ads_list_default__switch_views",
+            "type" => "adverts_field_checkbox",
+            "label" => __( "Switch Views", "wpadverts" ),
+            "order" => 100,
+            "options" => array(
+                array( "value" => "grid", "text" => __( "Allow users to switch between grid and list view.", "wpadverts" ), "id" => "option__ads_list_default__switch_views" ),
+            )
         ),
     )
 ));

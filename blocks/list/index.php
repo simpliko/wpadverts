@@ -170,6 +170,12 @@ class Adverts_Block_List {
                     "title-asc" => __("From A to Z", "wpadverts"),
                     "title-desc" => __("From Z to A", "wpadverts")
                 )
+            ),
+            "random" => array(
+                "label" => __("Random", "wpadverts"),
+                "items" => array(
+                    "random-asc" => __("Random Order", "wpadverts")
+                )
             )
         ) );
 
@@ -199,6 +205,8 @@ class Adverts_Block_List {
                     'type' => 'NUMERIC',
                     'compare' => 'NUMERIC',
                 );
+            } elseif($sort_key == "random") {
+                $orderby["rand"] = $sort_dir;
             } else {
                 // apply sorting using adverts_list_query filter.
             }

@@ -1769,7 +1769,7 @@ function adverts_field_account( $field ) {
     if(is_user_logged_in() ) {
         
         $text = __('You are posting as <strong>%1$s</strong>. <br/>If you want to use a different account, please <a href="%2$s">logout</a>.', 'wpadverts');
-        printf( '<div>'.$text.'</div>', wp_get_current_user()->display_name, wp_logout_url() );
+        printf( '<div class="atw-text-base">'.$text.'</div>', wp_get_current_user()->display_name, wp_logout_url() );
         
     } else {
         

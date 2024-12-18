@@ -812,7 +812,8 @@ class Edit extends Component {
                                 { label: 'Most Expensive First', value: 'price-desc' },
                                 { label: 'Cheapest First', value: 'price-asc' },
                                 { label: 'From A to Z', value: 'title-asc' },
-                                { label: 'From Z to A', value: 'title-desc' }
+                                { label: 'From Z to A', value: 'title-desc' },
+                                { label: 'Random', value: 'random-asc'}
                             ] }
                             onChange={this.onChangeOrderBy}
                         />

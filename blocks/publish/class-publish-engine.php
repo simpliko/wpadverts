@@ -248,6 +248,8 @@ class Adverts_Block_Publish_Engine {
             'moderate' => false,
             'requires' => "",
             'requires_error' => "",
+            'requires_login' => "",
+            'requires_register' => "",
             'skip_preview' => 0,
             'post_type' => 'advert',
             'preselect_category' => 1,
@@ -666,8 +668,19 @@ class Adverts_Block_Publish_Engine {
             $parsed = $params["requires_error"];
         } else {
             $permalink = get_permalink();
+            $login_url = $params["requires_login"];
+            $register_url = $params["requires_register"];
+
+            if( ! $login_url ) {
+                $login_url = wp_login_url( $permalink );
+            }
+
+            if( ! $register_url ) {
+                $register_url = wp_registration_url( $permalink );
+            }
+
             $message = __('Only logged in users can access this page. <a href="%1$s">Login</a> or <a href="%2$s">Register</a>.', "wpadverts");
-            $parsed = sprintf($message, wp_login_url( $permalink ), wp_registration_url( $permalink ) );
+            $parsed = sprintf($message, $login_url, $register_url );
 
         }
         

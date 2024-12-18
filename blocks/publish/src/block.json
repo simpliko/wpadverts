@@ -23,6 +23,14 @@
             "type": "string",
             "default": ""
         },
+        "requires_login": {
+            "type": "string",
+            "default": ""
+        },
+        "requires_register": {
+            "type": "string",
+            "default": ""
+        },
         "moderate": {
             "type": "boolean",
             "default": false

@@ -169,13 +169,6 @@ function adverts_admin_page_extensions() {
                     "plugin" => "wpadverts-recaptcha/wpadverts-recaptcha.php",
                     "purchase_url" => "https://wpadverts.com/extensions/recaptcha/"
                 ),
-                "wpadverts-google-analytics" => array(
-                    "title" => __( "Analytics", "wpadverts" ),
-                    "text" => __( "Google Analytics integration, allows users to view their Ads stats in past 30 days.", "wpadverts" ),
-                    "type" => "",
-                    "plugin" => "wpadverts-google-analytics/wpadverts-google-analytics.php",
-                    "purchase_url" => "https://wpadverts.com/extensions/google-analytics/"
-                ),
                 "wpadverts-category-icons" => array(
                     "title" => __( "Category Icons", "wpadverts" ),
                     "text" => __( "Set custom icons (small and big) for each category.", "wpadverts" ),
@@ -190,6 +183,13 @@ function adverts_admin_page_extensions() {
                     "plugin" => "wpadverts-mark-as-sold/wpadverts-mark-as-sold.php",
                     "purchase_url" => "https://wpadverts.com/extensions/wpadverts-mark-as-sold/"
                 ),
+                "wpadverts-analytics" => array(
+                    "title" => __( "Analytics", "wpadverts" ),
+                    "text" => __( "Native analytics implementation independent of any third parties.", "wpadverts" ),
+                    "type" => "",
+                    "plugin" => "wpadverts-analytics/wpadverts-analytics.php",
+                    "purchase_url" => "https://wpadverts.com/extensions/analytics/"
+                )
             )
         ),
         array(

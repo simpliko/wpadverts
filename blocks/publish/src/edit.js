@@ -114,6 +114,14 @@ class Edit extends Component {
         this.props.setAttributes( { form: { ...form } } );
     }
 
+    setRequiresLogin = ( requires_login ) => {
+        this.props.setAttributes( { requires_login } );
+    }
+
+    setRequiresRegister = ( requires_register ) => {
+        this.props.setAttributes( { requires_register } );
+    }
+
     onCustomizeQuery = ( param, value ) => {
         var query = {...this.props.attributes.query};
 
@@ -274,6 +282,8 @@ class Edit extends Component {
         const { 
             requires,
             requires_error,
+            requires_login,
+            requires_register,
             moderate,
             skip_preview,
             preselect_category,
@@ -324,12 +334,31 @@ class Edit extends Component {
                         help="Capability required to see the publish form. By default anyone can see it."
                     />
 
-                    { requires !== "" && <TextareaControl
-                        label="Error Message"
-                        help="Cusom message for users who are not allowed to post ads (leave blank otherwise)."
-                        value={requires_error}
-                        onChange={this.onRequiresErrorChange}
-                    /> }
+                    { requires !== "" && 
+
+                        <>
+
+                        <TextareaControl
+                            label="Error Message"
+                            help="Cusom message for users who are not allowed to post ads (leave blank otherwise)."
+                            value={requires_error}
+                            onChange={this.onRequiresErrorChange}
+                        /> 
+
+                        <TextControl
+                            label="Login URL"
+                            value={requires_login}
+                            onChange={this.setRequiresLogin}
+                        />
+
+                        <TextControl
+                            label="Registration URL"
+                            value={requires_register}
+                            onChange={this.setRequiresRegister}
+                        />
+
+                        </>
+                    }
 
                     </PanelBody>
 

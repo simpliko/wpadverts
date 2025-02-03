@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classifieds script, classifieds p
 Requires PHP: 5.6
 Requires at least: 5.7
 Tested up to: 6.7
-Stable tag: 2.2.2
+Stable tag: 2.2.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -125,9 +125,12 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
-= 2.2.2 - 2025-02-03 =
+= 2.2.1 - 2025-02-03 =
 
+* FEATURE: Option to sort Classifieds List block items randomly.
+* FEATURE: Option to enter custom login and registration URLs in the Classifieds Publish block.
 * FEATURE: core::on_manage_to_pending_notify_admin email sent to administrator when Ad was updated in the Classified Manage block and needs moderation.
+* FEATURE: Some blocks styling optimization.
 * FIXED: Remove the contact options and show a notification when viewing the expired Ad details page.
 * FIXED: Some emails compatibility with the Multiverse extension.
 * FIXED: Using not not-callable function in the Emails will no longer cause a fatal error.

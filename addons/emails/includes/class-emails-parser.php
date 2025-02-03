@@ -213,15 +213,21 @@ class Adext_Emails_Parser implements Adext_Emails_Parser_Interface {
                     array_unshift( $cb_args, $value );
 
                     if( isset( $this->_functions[ $callback ] ) ) {
-                        $value = call_user_func_array( $this->_functions[ $callback ], $cb_args );
+                        $callback_function = $this->_functions[ $callback ];
                     } else {
-                        $value = call_user_func_array( $callback, $cb_args );
+                        $callback_function = $callback;
+                    }
+
+                    if( is_callable( $callback_function ) ) {
+                        $value = call_user_func_array( $callback_function, $cb_args );
+                    } else {
+                        $value = sprintf( "[unknown function: %s]", print_r( $callback_function, true ) );
                     }
                 }
             }
             $text = str_replace( $var, $value, $text );
         }
-        
+   
         return $text;
     }
     

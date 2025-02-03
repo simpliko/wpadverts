@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classifieds script, classifieds p
 Requires PHP: 5.6
 Requires at least: 5.7
 Tested up to: 6.7
-Stable tag: 2.2.1
+Stable tag: 2.2.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,16 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 2.2.2 - 2025-02-03 =
+
+* FEATURE: core::on_manage_to_pending_notify_admin email sent to administrator when Ad was updated in the Classified Manage block and needs moderation.
+* FIXED: Remove the contact options and show a notification when viewing the expired Ad details page.
+* FIXED: Some emails compatibility with the Multiverse extension.
+* FIXED: Using not not-callable function in the Emails will no longer cause a fatal error.
+* FIXED: Stripe credit card field not loading correctly if Stripe is the default payment method.
+* FIXED: "Your ad has been put into moderation …" message showing in an incorrect place.
+* API: wpadverts/block/manage/update/moderate action
 
 = 2.2.0 - 2024-12-02 =
 

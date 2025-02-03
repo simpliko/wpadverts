@@ -218,6 +218,20 @@ class Adext_Emails_Messages {
                 "headers" => array(),
                 "attachments" => array()
             ),
+            "core::on_manage_to_pending_notify_admin" => array(
+                "name" => "core::on_manage_to_pending_notify_admin",
+                "action" => "wpadverts/block/manage/update/moderate",
+                "callback" => array( $this, "on_manage_to_pending_notify_admin" ),
+                "enabled" => 1,
+                "help" => "https://wpadverts.com/documentation/emails/#core-on_manage_to_pending_notify_admin",
+                "notify" => "admin",
+                "from" => array( "name" => "", "email" => "" ),
+                "to" => "{\$admin_email}",
+                "subject" => __( "User updated his Ad (action required).", "wpadverts" ),
+                "body" => __( "Hello,\nAd titled '{\$advert.post_title}' has been updated by the user and is pending moderation.\n\nYou can edit the Ad here:\n{\$advert|admin_edit_url}\n\nPlease either Publish or Trash it then the owner will be notified.", "wpadverts" ),
+                "headers" => array(),
+                "attachments" => array()
+            ),
         ) );
     }
     
@@ -383,7 +397,7 @@ class Adext_Emails_Messages {
      */
     public function on_draft_to_publish_notify_user( $post ) {
         
-        if( $post->post_type !== "advert" ) {
+        if( ! wpadverts_post_type( $post->post_type ) ) {
             return;
         }
         
@@ -405,7 +419,7 @@ class Adext_Emails_Messages {
      */
     public function on_draft_to_pending_notify_user( $post ) {
 
-        if( $post->post_type !== "advert" ) {
+        if( ! wpadverts_post_type( $post->post_type ) ) {
             return;
         }
         
@@ -427,7 +441,7 @@ class Adext_Emails_Messages {
      */
     public function on_pending_to_publish_notify_user( $post ) {
         
-        if( $post->post_type !== "advert" ) {
+        if( ! wpadverts_post_type( $post->post_type ) ) {
             return;
         }
         
@@ -449,7 +463,7 @@ class Adext_Emails_Messages {
      */
     public function on_pending_to_trash_notify_user( $post ) {
         
-        if( $post->post_type !== "advert" ) {
+        if( ! wpadverts_post_type( $post->post_type ) ) {
             return;
         }
         
@@ -471,7 +485,7 @@ class Adext_Emails_Messages {
      */
     public function on_publish_to_expired_notify_user( $post ) {
         
-        if( $post->post_type !== "advert" ) {
+        if( ! wpadverts_post_type( $post->post_type ) ) {
             return;
         }
         
@@ -494,7 +508,7 @@ class Adext_Emails_Messages {
      */
     public function on_draft_to_publish_notify_admin( $post ) {
 
-        if( $post->post_type !== "advert" ) {
+        if( ! wpadverts_post_type( $post->post_type ) ) {
             return;
         }
         
@@ -524,6 +538,30 @@ class Adext_Emails_Messages {
         }
         
         return $this->send_message( "core::on_draft_to_pending_notify_admin", array( 
+            "advert" => $post,
+            "advert_files" => adverts_get_post_files( $post ),
+            "admin_email" => Adext_Emails::admin_email(),
+            "admin_edit_url" => admin_url( sprintf( 'post.php?post=%d&action=edit', $post->ID ) )
+        ) );
+    }
+
+    /**
+     * Sent when Ad is updated in the Classifieds Manage block 
+     * and needs to be moderated by the administrator
+     * 
+     * Variables
+     * - $advert            => WP_Post
+     * - $admin_edit_url    => string           Post edit URL in wp-admin
+     * 
+     * @since   1.3.0
+     * @param   int     $post_id
+     * @return  void
+     */
+    public function on_manage_to_pending_notify_admin( $post_id ) {
+        
+        $post = get_post( $post_id );
+
+        return $this->send_message( "core::on_manage_to_pending_notify_admin", array( 
             "advert" => $post,
             "advert_files" => adverts_get_post_files( $post ),
             "admin_email" => Adext_Emails::admin_email(),

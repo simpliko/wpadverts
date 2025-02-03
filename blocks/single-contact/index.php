@@ -58,21 +58,41 @@ class Adverts_Block_Single_Contact {
     
     public function render( $atts = array() ) {
 
+        // If user is in Publish -> Preview use the Adverts_Block_Templates::get_id() instead of current page ID.
+        if( Adverts_Block_Templates::get_id() !== null ) {
+            $post_id = null;
+        } else {
+            $post_id = get_the_ID();
+        }
+
         $atts = apply_filters( "wpadverts/block/single-contact/atts", $atts );
 
-        if($atts["requires"] && ! current_user_can( $atts["requires"] ) ) {
-            return $this->render_disabled( $atts );
+        if(adverts_config( 'expired_ad_status' ) === "200" && $post_id && get_post_status( $post_id ) == "expired" ) {
+            $params = array(
+                "message_header" =>  "",
+                "message" => __("Contact options are disabled for expired ads.", "wpadverts"),
+                "show_buttons" => false
+            );
+            return $this->render_disabled( $atts, $params );
+        } else if($atts["requires"] && ! current_user_can( $atts["requires"] ) ) {
+            $params = array(
+                "message_header" =>  __("Only logged-in members can contact sellers.", "wpadverts"),
+                "message" => __("Please login or register to to send a message.", "wpadverts"),
+                "show_buttons" => true
+            );
+            return $this->render_disabled( $atts, $params );
         } else {
             return $this->render_contacts( $atts );
         }
     }
 
-    public function render_disabled( $atts ) {
+    public function render_disabled( $atts, $params ) {
 
         $url_login = wp_login_url( get_permalink() );
         $url_register = wp_registration_url();
-        $message_header = __("Only logged-in members can contact sellers.", "wpadverts");
-        $message = __("Please login or register to to send a message.", "wpadverts");
+        $message_header = $params["message_header"];
+        $message = $params["message"];
+        $show_buttons = $params["show_buttons"];
 
         if( $atts["requires_login"] ) {
             $url_login = $atts["requires_login"];

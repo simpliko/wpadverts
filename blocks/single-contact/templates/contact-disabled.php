@@ -9,11 +9,19 @@
 
             <div class="atw-flex-1 atw-flex atw-flex-col atw-items-center">
                 
+                <?php if( $message_header ): ?>
                 <span class="wpa-flash-message atw-flex-1 atw-font-bold atw-py-3 atw-text-center">
                     <?php echo esc_html( $message_header ) ?>
                 </span>
-                <span class="wpa-flash-message atw-flex-1 atw-pb-3 atw-text-center"><?php echo $message ?></span>  
+                <?php endif; ?>
+
+                <?php if( $message ): ?>
+                <span class="wpa-flash-message atw-flex-1 atw-pb-3 atw-text-center">
+                    <?php echo $message ?>
+                </span>  
+                <?php endif; ?>
                 
+                <?php if( $show_buttons ): ?>
                 <span class="atw-flex atw-flex-row atw-pb-3 atw-w-full atw-flex-col md:atw-flex-row">
 
                     <form action="<?php echo esc_attr( $url_login ) ?>" class="atw-p-3 atw-flex-grow">
@@ -24,6 +32,7 @@
                         <?php wpadverts_block_button( array( "text" => __("Register", "wpadverts"), "type" => "secondary", "action" => "submit" )); ?>
                     </form>
                 </span>
+                <?php endif; ?>
                 
             </div>
         </div>

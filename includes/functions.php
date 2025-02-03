@@ -2986,12 +2986,13 @@ function adverts_user_can_edit_image( ) {
  * @return void
  */
 function adverts_handle_expired_ads() {
-    if( is_singular( 'advert' ) && get_post( get_the_ID() )->post_status == "expired" ) {
+    if( is_singular( wpadverts_get_post_types() ) && get_post( get_the_ID() )->post_status == "expired" ) {
         remove_action( 'adverts_tpl_single_bottom', 'adverts_single_contact_information' );
         remove_action( 'adverts_tpl_single_bottom', 'adext_contact_form' );
         remove_action( 'adverts_tpl_single_bottom', 'adext_bp_send_private_message_button', 50 );
 
         add_action( 'adverts_tpl_single_top', "adverts_handle_expired_ads_notification", 1 );
+        add_action( 'wpadverts/block/single-notifications', 'adverts_handle_expired_ads_notification_block', 1 );
     }
 }
 
@@ -3027,6 +3028,42 @@ function adverts_handle_expired_ads_notification( $post_id ) {
             "icon" => $icon
         );
         adverts_flash( $flash );
+    } 
+}
+
+/**
+ * Displays Ad expiration notification.
+ * 
+ * This function is registered in adverts_tpl_single_top action.
+ * 
+ * @see adverts_handle_expired_ads()
+ * @see adverts_tpl_single_top filter
+ * 
+ * @param   int   $post_id  Post ID
+ * @return  void
+ */
+function adverts_handle_expired_ads_notification_block( $post_id ) {
+    if( get_post( $post_id )->post_status == "expired" ) {
+        
+        if( adverts_config( 'expired_ad_status' ) === "200" && current_user_can( adverts_config( 'expired_ad_public_cap' ) ) ) {
+            $icon = "fas fa-eye-slash";
+            $m = __( "<strong>Visible To Administrators Only</strong><br/>This Ad expired, but as a user with <em>%s</em> capability you can see this page.", "wpadverts" );
+            $message = sprintf( $m, adverts_config( 'expired_ad_public_cap' ) );
+            
+        } else {
+            $icon = "fas fa-ban";
+            $m = __( "<strong>This Ad expired and is no longer available.</strong><br/>See our other active <a href=\"%s\">classified ads</a>.", "wpadverts" );
+            $message = sprintf( $m, get_permalink( adverts_config( 'ads_list_id' ) ) );
+            
+        }
+        
+        $flash = array( "error" => array(), "info" => array(), "warn" => array() );
+        $flash["error"][] = array(
+            "message" => $message,
+            "icon" => $icon
+        );
+
+        echo wpadverts_block_flash( $flash );
     } 
 }
 

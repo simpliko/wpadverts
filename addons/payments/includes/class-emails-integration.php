@@ -272,7 +272,7 @@ class Adext_Payments_Emails_Integration {
      * @return  void
      */
     public function on_advert_pending_notify_user( $post ) {
-        if( $post->post_type !== "advert" ) {
+        if( ! wpadverts_post_type( $post->post_type ) ) {
             return;
         }
         
@@ -337,7 +337,7 @@ class Adext_Payments_Emails_Integration {
      * @return  void
      */
     public function on_paid_pending_to_publish_notify_user( $post ) {
-        if( $post->post_type !== "advert" ) {
+        if( ! wpadverts_post_type( $post->post_type ) ) {
             return;
         }
         
@@ -358,7 +358,7 @@ class Adext_Payments_Emails_Integration {
      * @return  void
      */
     public function on_paid_pending_to_publish_notify_admin( $post ) {
-        if( $post->post_type !== "advert" ) {
+        if( ! wpadverts_post_type( $post->post_type ) ) {
             return;
         }
         
@@ -379,7 +379,7 @@ class Adext_Payments_Emails_Integration {
      * @return  void
      */
     public function on_payment_pending_notify_admin( $post ) {
-        if( $post->post_type !== "advert" ) {
+        if( ! wpadverts_post_type( $post->post_type ) ) {
             return;
         }
 
@@ -422,7 +422,7 @@ class Adext_Payments_Emails_Integration {
      * @return  void
      */
     public function on_expired_to_publish_notify_user( $post ) {
-        if( $post->post_type !== "advert" ) {
+        if( ! wpadverts_post_type( $post->post_type ) ) {
             return;
         }
         
@@ -443,7 +443,7 @@ class Adext_Payments_Emails_Integration {
      * @return  void
      */
     public function on_expired_to_pending_notify_user( $post ) {
-        if( $post->post_type !== "advert" ) {
+        if( ! wpadverts_post_type( $post->post_type ) ) {
             return;
         }
         
@@ -464,7 +464,7 @@ class Adext_Payments_Emails_Integration {
      * @return  void
      */
     public function on_expired_to_publish_notify_admin( $post ) {
-        if( $post->post_type !== "advert" ) {
+        if( ! wpadverts_post_type( $post->post_type ) ) {
             return;
         }
         
@@ -485,7 +485,7 @@ class Adext_Payments_Emails_Integration {
      * @return  void
      */
     public function on_expired_to_pending_notify_admin( $post ) {
-        if( $post->post_type !== "advert" ) {
+        if( ! wpadverts_post_type( $post->post_type ) ) {
             return;
         }
         

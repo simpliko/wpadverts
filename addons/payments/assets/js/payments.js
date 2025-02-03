@@ -108,7 +108,7 @@ jQuery(function($) {
         if(!$(".adext-payments-place-order").is(":visible")) {
             return;
         }
-        
+
         $(WPADVERTS.Payments.Tab.Link).removeClass("current");
         $(WPADVERTS.Payments.Tab.Content).css("opacity", 0.5);
 
@@ -161,5 +161,7 @@ jQuery(function($) {
         
     });
     
-    $(WPADVERTS.Payments.Tab.Link + ".current").click();
+    if($(WPADVERTS.Payments.Tab.Link).data("tab") != "stripe") {
+        $(WPADVERTS.Payments.Tab.Link + ".current").click();
+    }
 });

@@ -172,7 +172,7 @@ function adext_payments_install() {
  * @since 1.0
  */
 function adext_payments_init_frontend() {
-    wp_register_script('adext-payments', plugins_url().'/wpadverts/addons/payments/assets/js/payments.js', array('jquery'), '1.3.0');
+    wp_register_script('adext-payments', plugins_url().'/wpadverts/addons/payments/assets/js/payments.js', array('jquery'), '2.2.2');
     
     add_filter("adverts_action", "adext_payments_add_action_payment");
     add_filter("adverts_action", "adext_payments_add_action_notify");

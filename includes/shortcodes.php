@@ -477,6 +477,10 @@ function _adverts_manage_edit( $atts ) {
                     "message" => __("Post has been updated.", "wpadverts"),
                     "icon" => "adverts-icon-ok"
                 );
+
+                if( adverts_config( "adverts_manage_moderate") == "1" ) {
+                    do_action( "wpadverts/block/manage/update/moderate", $post_id );
+                }
             }
             
         } else {

@@ -4,8 +4,8 @@ Contributors: gwin
 Tags: classifieds, classified, classified ads, classifieds script, classifieds plugin
 Requires PHP: 5.6
 Requires at least: 5.7
-Tested up to: 6.7
-Stable tag: 2.2.1
+Tested up to: 6.8
+Stable tag: 2.2.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,12 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 2.2.2 - 2025-04-01 =
+
+* FIXED: XSS vulnerability in the [adverts_block] shortcode
+* FIXED: correctly wrapping the long titles in the Classifieds List block
+* API: wpadverts/blocks/list/pagination/params filter allows customizing paginate_links() function params in the Classifieds List block.
 
 = 2.2.1 - 2025-02-03 =
 

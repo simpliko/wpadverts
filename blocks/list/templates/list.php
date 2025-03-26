@@ -168,13 +168,13 @@ $grid_cols = sprintf("%s %s", $grid_cols_arr[ $atts["grid_columns_mobile"] ], $g
 
     <?php if( $show_pagination ): ?>
     <div class="wpadverts-pagination">
-        <?php echo paginate_links( array(
+        <?php echo paginate_links( apply_filters( "wpadverts/blocks/list/pagination/params", array(
             'base' => $paginate_base,
             'format' => $paginate_format,
             'current' => max( 1, $paged ),
             'total' => $loop->max_num_pages,
             'prev_next' => false
-        ) ); ?>
+        ) ), $atts ); ?>
     </div>
     <?php endif; ?>
 

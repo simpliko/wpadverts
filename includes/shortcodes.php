@@ -713,9 +713,9 @@ function shortcode_adverts_block( $atts = array() ) {
 
     if( ! is_object( $post ) ) {
         if( $post_id ) {
-            return "<strong>ERROR</strong> Template with ID {$post_id} does not exist.";
+            return sprintf( "<strong>ERROR</strong> Template with ID '%d' does not exist.", absint( $post_id ) );
         } else {
-            return "<strong>ERROR</strong> Template with name {$post_name} does not exist.";
+            return sprintf( "<strong>ERROR</strong> Template with name '%s' does not exist.", esc_html( $post_name ) );
         }
     }
 

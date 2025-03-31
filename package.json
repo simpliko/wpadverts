@@ -51,7 +51,6 @@
     "r-list": "wp-scripts build blocks/list/src/index.js --output-path=blocks/list/build"
   },
   "dependencies": {
-    "@wordpress/components": "^26.0.1",
-    "caniuse-lite": "^1.0.30001588"
+    "@wordpress/components": "^26.0.1"
   }
 }

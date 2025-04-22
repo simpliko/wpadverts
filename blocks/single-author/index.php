@@ -103,7 +103,13 @@ class Adverts_Block_Single_Author {
         $published_rel = human_time_diff( current_time('timestamp'), $published );
         $published_date = $this->get_foramtted_date( $published );
 
-        $template = sprintf( "%s/templates/%s.php", dirname( __FILE__ ), $atts["layout"]);
+        if( in_array( $atts["layout"], ["list", "grid", "text"] ) ) {
+            $layout = $atts["layout"];
+        } else {
+            $layout = "list";
+        }
+
+        $template = sprintf( "%s/templates/%s.php", dirname( __FILE__ ), $layout );
         ob_start();
         include $template;
         return ob_get_clean();

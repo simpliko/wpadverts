@@ -90,7 +90,13 @@ class Adverts_Block_Single_Data_Table {
 
         $cols_class = $this->get_cols($atts["columns"]);
 
-        $template = sprintf( "%s/templates/%s.php", dirname( __FILE__ ), $atts["layout"]);
+        if( in_array( $atts["layout"], ["list", "grid", "text"] ) ) {
+            $layout = $atts["layout"];
+        } else {
+            $layout = "list";
+        }
+
+        $template = sprintf( "%s/templates/%s.php", dirname( __FILE__ ), $layout);
         ob_start();
         include $template;
         return ob_get_clean();

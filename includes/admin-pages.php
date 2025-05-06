@@ -189,6 +189,13 @@ function adverts_admin_page_extensions() {
                     "type" => "",
                     "plugin" => "wpadverts-analytics/wpadverts-analytics.php",
                     "purchase_url" => "https://wpadverts.com/extensions/analytics/"
+                ),
+                "currencies" => array(
+                    "title" => __( "Currencies", "wpadverts" ),
+                    "text" => __( "Expand your classifieds site globally with seamless multi-currency support.", "wpadverts" ),
+                    "type" => "",
+                    "plugin" => "wpadverts-currencies/wpadverts-currencies.php",
+                    "purchase_url" => "https://wpadverts.com/extensions/currencies/"
                 )
             )
         ),

@@ -10,7 +10,7 @@
                     </div>
                 </div>
                 <div class="atw-flex atw-flex-col md:atw-flex-row atw-grow">
-                    <div class="atw-flex atw-flex-none atw-items-center atw-w-1/3 atw-h-10 atw-text-gray-700 atw-text-base atw-mb-1 md:atw-mb-0">
+                    <div class="atw-flex atw-flex-none atw-items-center md:atw-w-1/3 atw-h-10 atw-text-gray-700 atw-text-base atw-mb-1 md:atw-mb-0">
                         <span class="atw-inline-block atw-font-bold md:atw-font-normal"><?php echo esc_html( $data["label"] ) ?></span>
                     </div>
                     <div class="atw-flex atw-grow atw-items-center atw-text-base atw-text-gray-800">

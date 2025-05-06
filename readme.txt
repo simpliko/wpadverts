@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classifieds script, classifieds p
 Requires PHP: 5.6
 Requires at least: 5.7
 Tested up to: 6.8
-Stable tag: 2.2.3
+Stable tag: 2.2.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,13 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 2.2.4 - 2025-05-13 =
+
+* FEATURE: Added Currencies extension in the wp-admin -> Classifieds -> Options panel.
+* FIXED: Warning in the Classifieds List block when using default_image_url option.
+* FIXED: XSS vulnerability in the Classifieds Search block.
+* FIXED: In mobile view, the Ad details table is overflowing on the data below. 
 
 = 2.2.3 - 2025-04-22 =
 

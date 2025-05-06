@@ -19,7 +19,7 @@ $redirect_to  = isset( $atts["redirect_to"] ) ? $atts["redirect_to"] : "";
         <?php call_user_func( adverts_field_get_renderer($field), $field, $form ) ?>
         <?php endforeach; ?>
         
-        <div class="atw-flex atw-flex-col md:<?php echo $buttons_position ?>">
+        <div class="atw-flex atw-flex-col md:<?php echo esc_attr($buttons_position) ?>">
             
             <div class="wpa-form-wrap">
                 <?php if( !empty( $fields_visible ) ): ?>

@@ -22,7 +22,7 @@
                     <span class="wpa-block-contact-reveal-phone atw-text-gray-500 atw-text-base atw-px-2 md:atw-px-0">
                         <span class="fas fa-phone"></span>
 
-                        <a href="#" class="atw-text-sm wpa-reveal-btn" data-postid="<?php echo esc_attr(get_the_ID()) ?>">show phone number</a>
+                        <a href="#" class="atw-text-sm wpa-reveal-btn" data-postid="<?php echo esc_attr(get_the_ID()) ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( sprintf( "wpadverts-show-contact-info--%d", absint( $post_id ) ) ) ) ?>"><?php _e("show phone number", "wpadverts" ) ?></a>
 
                         <svg class="wpa-reveal-spinner atw-hidden atw-animate-spin atw-transition-transform atw-h-4 atw-w-4 atw-ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle class="atw-opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

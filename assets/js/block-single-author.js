@@ -35,7 +35,7 @@ class WPAdverts_Block_Author_Phone {
                 "content-type": "application/x-www-form-urlencoded"
             },
             //make sure to serialize your JSON body
-            body: "action=adverts_show_contact&mode=block&id=" + this.btn.dataset.postid
+            body: "action=adverts_show_contact&mode=block&id=" + this.btn.dataset.postid + "&security=" + this.btn.dataset.nonce
         })
         .then( (response) => { return response.json() })
         .then( (response) => this.onBtnClickLoad(response));

@@ -81,6 +81,7 @@ class Adverts_Block_Single_Author {
         extract( $params );
 
         $data_secondary = $atts["data_secondary"];
+        $show_avatar = $atts["show_avatar"];
         $avatar_size = $atts["avatar_size"];
         $avatar_radius = $atts["avatar_radius"];
 

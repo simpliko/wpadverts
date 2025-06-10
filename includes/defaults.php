@@ -312,7 +312,7 @@ adverts_form_add_filter("number", array(
 // Register number filter
 /** @see adverts_filter_kses() */
 adverts_form_add_filter("kses", array(
-    "description" => __( "Number - converts string to a number.", "wpadverts" ),
+    "description" => __( "HTML - removes unsafe HTML tags and attributes.", "wpadverts" ),
     "callback" => "adverts_filter_kses"
 ));
 

@@ -15,7 +15,7 @@
 <?php if( ! empty( $terms ) ): ?>
 <div class="atw-grid atw-gap-0 <?php echo "$class_margin_neg $class_cols" ?>">
     <?php foreach( $terms as $k => $term ): ?>
-    <div class="wpa-block-categories-item  <?php echo "$item_display $class_margin" ?> atw-flex atw-rounded  atw-shadow-none atw-border atw-border-solid <?php echo esc_attr( "adverts-category-slug-".$term->slug ) ?>">
+    <div class="wpa-block-categories-item  <?php echo esc_attr("$item_display $class_margin") ?> atw-flex atw-rounded  atw-shadow-none atw-border atw-border-solid <?php echo esc_attr( "adverts-category-slug-".$term->slug ) ?>">
         <?php if( $show_icons ): ?>
             <?php $icon = adverts_taxonomy_get("advert_category", $term->term_id, "advert_category_icon", $default_icon ) ?>
             <?php $font_icon = apply_filters("wpadverts/block/categories/tpl/font-icon", adverts_guess_icon_class($icon), $term, "big"); ?>

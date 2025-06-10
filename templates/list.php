@@ -119,3 +119,5 @@
 <?php endif; ?>
 
 <?php endif; ?>
+		    
+<?php do_action( "adverts_sh_list_after", $params ) ?>

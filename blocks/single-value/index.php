@@ -110,12 +110,12 @@ class Adverts_Block_Single_Value {
         }
 
         if(!empty($style)) {
-            $params .= sprintf(' style="%s"', $style );
+            $params .= sprintf(' style="%s"', esc_attr( $style ) );
         }
 
         $html = apply_filters( "wpadverts/block/single-value/html", '<span class="%s"%s>%s</span>', $atts, $post_id );
 
-        return sprintf( $html, join( " ", $classes ), $params, $value );
+        return sprintf( $html, esc_attr( join( " ", $classes ) ), $params, $value );
 
 
     }

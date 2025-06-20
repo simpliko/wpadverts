@@ -148,6 +148,13 @@ function adverts_admin_page_extensions() {
                     "type" => "",
                     "plugin" => null
                 ),
+                "wpadverts-bm" => array(
+                    "title" => __( "Better Messages", "wpadverts" ),
+                    "text" => __( "Allow users to start realtime chat with sellers (using Better Messages plugin).", "wpadverts" ),
+                    "type" => "",
+                    "plugin" => "wpadverts-bm/wpadverts-bm.php",
+                    "purchase_url" => "https://wpadverts.com/extensions/better-messages-integration/"
+                ),
                 "wpadverts-mal" => array(
                     "title" => __( "Maps And Locations", "wpadverts" ),
                     "text" => __( "Locations Taxonomy, Google Maps integration and more.", "wpadverts" ),

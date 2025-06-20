@@ -125,6 +125,13 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
+= 2.2.6 - 2025-06-24 =
+
+* FEATURE: New Plugin Better Messages Integration.
+* FIXED: Translation files not loading automatically.
+* FIXED: Comments removed from the modal.php template to prevent JS error.
+* FIXED: XSS vulnerability in the Classifieds Single Value block.
+
 = 2.2.5 - 2025-06-10 =
 
 * FIXED: Incorrect label for the KSES filter.
@@ -242,75 +249,9 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 * API: adverts_manage_edit_public_link filter in [adverts_manage]
 * LANGUAGE: Updated German translation.
 
-= 2.1.0 - 2023-08-23 =
-
-* FEATURE: 5 new Classifieds Single blocks allow visually building Ad details pages.
-* FEATURE: Classifieds Categories block allows auto-detecting current category and hiding the 'No categories found' text.
-* FEATURE: CSS classes added meta items generated in the Classifieds List block.
-* FIXED: Warning in the Classifieds Manage block
-
-= 2.0.5 - 2023-05-24 =
-
-* FIXED: Blocks JavaScript compiled without references to js.map files.
-* FIXED: Classifieds List block "posts per page" option not saving.
-* API: wpadverts_disable_gallery_backcompat filter added to disable gallery backward compatibility.
-
-= 2.0.5 - 2023-04-03 =
-
-* FEATURE: Icon for the new Analytics extension.
-* FIXED: Loading the ADVERTS_PLUPLOAD_DATA data in the wp_footer.
-* FIXED: Loading options for blocks fail if the CF extension is not available.
-* FIXED: Classifieds List block / List Data dropdown is not showing all possible options.
-* FIXED: Using depracated block_categories filter instead of block_categories_all.
-* FIXED: Check marks not showing for the checkbox and radio inputs in the contact form.
-* FIXED: Warning thrown when object does not have any taxonomy terms assigned.
-* FIXED: Remove all index.js.map files (these files are for development only).
-* FIXED: Warning in the contact form.
-* FIXED: Author Types in the wp-admin / Classifieds / Options / Core / Types panel not saving properly.
-* API: adverts_sort_images filter added to the adverts_sort_images() function.
-
-= 2.0.4 - 2022-11-29 =
-
-* FEATURE: [adverts_block] shortcode allows rendering blocks using the shortcode syntax.
-* FIXED: Reveal phone button not working when no image is uploaded to the gallery.
-* FIXED: Some phrases in block templates not marked correctly for translation.
-* FIXED: Internal server error when scheduling an advert from the wp-admin panel.
-* FIXED: Files upload_limit validator not working correctly when the form has two or more file fields.
-* FIXED: Classifieds / Publish block showing incorrect Form Schemes
-
-= 2.0.3 - 2022-10-20 =
-
-* FIXED: allow_sorting param not working correctly in the Classifieds Manage block.
-* FIXED: Error when saving a custom taxonomy in the wp-admin / Classifieds / Options / Types panel without the "labels".
-* FIXED: Error when saving a custom post type in the wp-admin / Classifieds / Options / Types panel without the "labels".
-
-= 2.0.2 - 2022-10-04 =
-
-* FEATURE: Redesigned wp-admin / Classifieds / Options panel.
-* FEATURE: Added block pattern that allows displaying Classifieds / Search and Classifieds List blocks next to each other
-* FEATURE: Switch beteween different options for matching blacklisted words in the wp-admin / Classifieds / Options / Core / SPAM panel.
-* FEATURE: In the wp-admin / Classifieds / Options / Core you can set a custom date format for Classifieds / List and Classifieds / Details blocks.
-* FEATURE: API changes in the wp-admin / Classifieds / Options / Types panel to prepare the plugin for use with the upcoming Multiverse extension.
-* FIXED: allow_sorting notice showing in the Classifieds / Manage block in the frontend.
-* FIXED: Pagination (in [adverts_list] and Classifieds / List block) not working correctly on custom taxonomy pages.
-* FIXED: When selecting a taxonomy for display in the Classifieds / List block the taxonomy title did not show in the block.
-
-= 2.0.1 - 2022-07-25 =
-
-* IMPORTANT: This is a major release please do a full site backup before upgrading or test the update on your staging website first!!! 
-* The new version allows building a classifieds website with new design and customizable blocks instead of shortcodes.
-* If you would like to migrate from shortcodes to blocks please read https://wpadverts.com/doc/migrating-to-version-2-0/
-* If you would like to keep using shortcoded version you do not need to do anything (except for the website backup).
-* FIXED: Block related scripts and styles are now loaded only when needed.
-* FIXED: The blocks CSS file no longer loads wp-edit-blocks stylesheet.
-* FIXED: When ads list in Classifieds / Manage is empty invalid buttons are not shown.
-* FIXED: Loading gallery icons on the Ad details pages in Block mode.
-* API: You can force plugin to always load scripts and styles by adding below line in your theme functions.php file
-* API: add_filter( "wpadverts/blocks/load-assets-globally", "__return_true" );
-
 = 2.0.0 - 2022-07-21 =
 
-* SEE 2.0.1 notes.
+* Notes trimmed
 
 = 1.0 - 2015-08-11 =
 

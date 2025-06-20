@@ -4,10 +4,10 @@
 </style>
 
 <script type="text/html" id="tmpl-wpadverts-modal">
-<!-- This example requires Tailwind CSS v2.0+ -->
+
 <div class="wpadverts-blocks wpadverts-modal atw-fixed atw-z-10 atw-inset-0 atw-overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
   <div class="atw-flex atw-items-end atw-justify-center atw-min-h-screen atw-pt-4 atw-px-4 atw-pb-20 atw-text-center sm:atw-block sm:atw-p-0 atw-box-border">
-    <!--
+    <?php /*
       Background overlay, show/hide based on modal state.
 
       Entering: "ease-out duration-300"
@@ -16,13 +16,13 @@
       Leaving: "ease-in duration-200"
         From: "opacity-100"
         To: "opacity-0"
-    -->
+    */ ?>
     <div class="atw-fixed atw-inset-0 atw-bg-gray-500 atw-bg-opacity-75 atw-transition-opacity" aria-hidden="true"></div>
 
-    <!-- This element is to trick the browser into centering the modal contents. -->
+    <?php /* This element is to trick the browser into centering the modal contents. */ ?>
     <span class="atw-hidden sm:atw-inline-block sm:atw-align-middle sm:atw-h-screen" aria-hidden="true">&#8203;</span>
 
-    <!--
+    <?php /*
       Modal panel, show/hide based on modal state.
 
       Entering: "ease-out duration-300"
@@ -31,7 +31,7 @@
       Leaving: "ease-in duration-200"
         From: "opacity-100 translate-y-0 sm:scale-100"
         To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-    -->
+    */ ?>
     <div class="atw-relative atw-inline-block atw-align-bottom atw-bg-white atw-rounded-lg atw-text-left atw-overflow-hidden atw-shadow-xl atw-transform atw-transition-all sm:atw-my-8 sm:atw-align-middle sm:atw-max-w-lg sm:atw-w-full">
       <div class="atw-bg-white atw-px-4 atw-pt-5 atw-pb-4 sm:atw-p-6 sm:atw-pb-4">
         <div class="sm:atw-flex sm:atw-items-start">

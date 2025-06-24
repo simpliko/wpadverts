@@ -150,7 +150,7 @@ function adverts_admin_page_extensions() {
                 ),
                 "wpadverts-bm" => array(
                     "title" => __( "Better Messages", "wpadverts" ),
-                    "text" => __( "Allow users to start realtime chat with sellers (using Better Messages plugin).", "wpadverts" ),
+                    "text" => __( "Enable Real-Time Messaging with Sellers Using Better Messages", "wpadverts" ),
                     "type" => "",
                     "plugin" => "wpadverts-bm/wpadverts-bm.php",
                     "purchase_url" => "https://wpadverts.com/extensions/better-messages-integration/"

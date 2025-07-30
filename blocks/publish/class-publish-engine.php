@@ -366,7 +366,8 @@ class Adverts_Block_Publish_Engine {
         $show_buttons = apply_filters( "wpadverts/block/publish/show-buttons", true, $this->_params );
        
         $form_layout = $_layouts[$form->get_layout()];
-        $atts = $this->_params["form"];
+        $atts = $this->_params;
+        $form_style_atts = $atts["form"];
 
         // adverts/templates/add.php
         ob_start();

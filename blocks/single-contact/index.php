@@ -143,17 +143,14 @@ class Adverts_Block_Single_Contact {
             $contact_options = $this->_get_custom_contacts( $atts, $post_id );
         }
 
-        $has_visible_contact_options = false;
+        
 
         foreach( $contact_options as $k => $o ) {
             if( ! isset( $o["is_visible"] ) ) {
                 $contact_options[$k]["is_visible"] = $o["is_active"];
             }
 
-
-
             if( $contact_options[$k]["is_active"] && $contact_options[$k]["is_visible"] ) {
-                $has_visible_contact_options = true;
 
                 if($o["class"] == "wpadverts-show-contact-form" && $atts["form_button_hide"] ) {
                     $contact_options[$k]["is_visible"] = false;
@@ -166,6 +163,14 @@ class Adverts_Block_Single_Contact {
         }
         
         $contact_options = apply_filters( "wpadverts/block/single-contact/contact-options", $contact_options, $post_id, $atts );
+        $has_visible_contact_options = false;
+        
+        foreach( $contact_options as $k => $o ) {
+            if( $contact_options[$k]["is_active"] && $contact_options[$k]["is_visible"] ) {
+                $has_visible_contact_options = true;
+            }
+        }
+
         $contact_options = $this->_set_primary_contact_option( $contact_options );
 
         $atts["layout"] = "contact";

@@ -85,11 +85,19 @@ function adverts_admin_page_extensions() {
                     "type" => "static",
                     "plugin" => null,
                 ),
-                "payments" => array(
-                    "title" => __("Payments", "wpadverts"),
-                    "text" => __("Charge users for posting ads on your website.", "wpadverts"),
+                "custom-fields" => array(
+                    "title" => __("Custom Fields", "wpadverts"),
+                    "text" => __("Allow users to customize forms using easy to use drag and drop editor.", "wpadverts"),
                     "type" => "",
-                    "plugin" => null
+                    "plugin" => "wpadverts-custom-fields/wpadverts-custom-fields.php",
+                    "purchase_url" => "https://wpadverts.com/extensions/custom-fields/"
+                ),
+                "elementor-integration" => array(
+                    "title" => __("Elementor Integration", "wpadverts"),
+                    "text" => __("Build classifieds sections with Elementor page builder.", "wpadverts"),
+                    "type" => "",
+                    "plugin" => "wpadverts-elementor/wpadverts-elementor.php",
+                    "purchase_url" => "https://wpadverts.com/extensions/elementor-classifieds/"
                 ),
                 "wc-payments" => array(
                     "title" => __("WooCommerce Payments", "wpadverts"),
@@ -98,19 +106,24 @@ function adverts_admin_page_extensions() {
                     "plugin" => "wpadverts-wc/wpadverts-wc.php",
                     "purchase_url" => "https://wpadverts.com/extensions/woocommerce-integration/"
                 ),
+                "payments" => array(
+                    "title" => __("Payments", "wpadverts"),
+                    "text" => __("Charge users for posting ads on your website.", "wpadverts"),
+                    "type" => "",
+                    "plugin" => null
+                ),
+                "emails" => array(
+                    "title" => __("Emails", "wpadverts"),
+                    "text" => __("Emails module sends transactional emails to users and allows editing the email templates content.", "wpadverts"),
+                    "type" => "",
+                    "plugin" => null
+                ),
                 "buddypress" => array(
                     "title" => __("BuddyPress Integration", "wpadverts"),
                     "text" => __("Integrate user Ads with BuddyPress profiles, registration and private messages.", "wpadverts"),
                     "type" => "",
                     "plugin" => "wpadverts-bp/wpadverts-bp.php",
                     "purchase_url" => "https://wpadverts.com/extensions/buddypress-integration/"
-                ),
-                "custom-fields" => array(
-                    "title" => __("Custom Fields", "wpadverts"),
-                    "text" => __("Allow users to customize forms using easy to use drag and drop editor.", "wpadverts"),
-                    "type" => "",
-                    "plugin" => "wpadverts-custom-fields/wpadverts-custom-fields.php",
-                    "purchase_url" => "https://wpadverts.com/extensions/custom-fields/"
                 ),
                 "authors" => array(
                     "title" => __("Authors", "wpadverts"),
@@ -119,12 +132,7 @@ function adverts_admin_page_extensions() {
                     "plugin" => "wpadverts-authors/wpadverts-authors.php",
                     "purchase_url" => "https://wpadverts.com/extensions/authors/"
                 ),
-                "emails" => array(
-                    "title" => __("Emails", "wpadverts"),
-                    "text" => __("Emails module sends transactional emails to users and allows editing the email templates content.", "wpadverts"),
-                    "type" => "",
-                    "plugin" => null
-                ),
+
                 "styling" => array(
                     "title" => __( "Default Styles", "wpadverts"),
                     "text" => __( "Visually adjust forms and buttons styling for seamless integration with your theme.", "wpadverts" ),

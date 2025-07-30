@@ -17,10 +17,25 @@ $form_layout = isset( $form_layout ) ? $form_layout : "wpa-layout-stacked";
 $form_layout_prop = "atw-w-1/3";
 
 $_btn_classes = isset( $_btn_classes ) ? $_btn_classes : ["top" => "wpa-form-buttons", "inner" => "wpa-form-buttons-list"];
+
 ?>
+<style type="text/css">
+    <?php if( isset( $form_style_atts ) && is_array( $form_style_atts ) ): ?>
+    .wpadverts-block.wpadverts-partial.wpadverts-form .wpadverts-form {
+        <?php wpadverts_print_grays_variables( $form_style_atts ) ?>
+    }
+    <?php endif; ?>
+
+    <?php if( isset( $atts["primary_button"] ) && is_array( $atts["primary_button"] ) ): ?>
+    <?php wpadverts_block_button_css( "primary", isset( $atts["primary_button"] ) ? $atts["primary_button"] : array(), ".wpadverts-blocks.wpadverts-block-search" ) ?>
+    <?php endif; ?>
+    <?php if( isset( $atts["secondary_button"] ) && is_array( $atts["secondary_button"] ) ): ?>
+    <?php wpadverts_block_button_css( "secondary", isset( $atts["secondary_button"] ) ? $atts["secondary_button"] : array(), ".wpadverts-blocks.wpadverts-block-search" ) ?>
+    <?php endif; ?>
+</style>
 
 <div class="wpadverts-block wpadverts-partial wpadverts-form">
-    <form <?php if($form_id): ?>id="<?php echo esc_attr( $form_id ) ?>"<?php endif; ?> action="<?php echo esc_attr( $redirect_to ) ?>" method="post" class="wpadverts-form <?php echo wpadverts_block_form_styles( $atts ) ?> <?php echo esc_attr( $form_layout ) ?>  atw-block atw-py-0">
+    <form <?php if($form_id): ?>id="<?php echo esc_attr( $form_id ) ?>"<?php endif; ?> action="<?php echo esc_attr( $redirect_to ) ?>" method="post" class="wpadverts-form <?php echo wpadverts_block_form_styles( $form_style_atts ) ?> <?php echo esc_attr( $form_layout ) ?>  atw-block atw-py-0">
 
         <?php foreach($form->get_fields( array( "type" => array( "adverts_field_hidden" ) ) ) as $field): ?>
         <?php call_user_func( adverts_field_get_renderer($field), $field, $form ) ?>

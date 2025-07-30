@@ -82,7 +82,9 @@ class Adverts_Block_Manage_Engine {
             $content = $this->action_list( $atts );
         } else if( $action == "edit" ) {
             $content = $this->action_edit( $atts );
-        } 
+        } else {
+            $content = "";
+        }
         
         return apply_filters("adverts_manage_action_$action", $content, $atts, true);
     }

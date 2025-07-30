@@ -147,14 +147,16 @@ class Adext_Contact_Form_Block_Details {
         $atts = $this->_atts;
         $atts_style = [];
 
+        /*
         if( $atts["form_style"] ) {
 
             $atts_style = [
                 "customize" => 1,
             ];
 
-            add_filter("wpadverts/block/form/styles/atts", [$this, "change_form_style"], 50);
+            //add_filter("wpadverts/block/form/styles/atts", [$this, "change_form_style"], 50);
         }
+        */
 
         $data = $this->_adext_contact_form_content( $post_id, $atts );
 
@@ -185,7 +187,7 @@ class Adext_Contact_Form_Block_Details {
             "atts" => $atts_style,
             "form" => $form, // Adverts_Form (required)
             "form_id" => "wpadverts-contact-form",
-            "form_style_atts" => [],
+            "form_style_atts" => $atts["form_style"],
             "form_layout" => "wpa-layout-stacked",
             "form_layout_prop" => "atw-w-1/3",
         ];
@@ -433,18 +435,13 @@ class Adext_Contact_Form_Block_Details {
         if( isset( $atts["interline"] ) ) {
             unset( $atts["interline"] );
         }
+        if( isset( $atts["customize"] ) && $atts["customize"] == 1) {
+            return $atts;
+        }
         if( isset( $atts["style"] ) && $atts["style"] == "wpa-solid" ) {
             $atts["style"] = "wpa-flat";
         }
         return $atts;
     }
 
-    public function change_form_style( $atts ) {
-        $atts = adverts_config( "blocks_styling.form" );
-        if( isset( $atts["interline"] ) ) {
-            unset( $atts["interline"] );
-        }
-        $atts["style"] = "wpa-solid";
-        return $atts;
-    }
 }

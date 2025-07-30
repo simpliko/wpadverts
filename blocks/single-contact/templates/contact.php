@@ -1,5 +1,14 @@
 <div class="wpadverts-cpt <?php echo sprintf( "wpadverts-cpt-", $atts["post_type"] ) ?> wpadverts-cpt-single-contact atw-w-full atw-flex atw-flex-col">
 
+<style type="text/css">
+    <?php if( isset( $atts["primary_button"] ) && is_array( $atts["primary_button"] ) ): ?>
+    <?php wpadverts_block_button_css( "primary", isset( $atts["primary_button"] ) ? $atts["primary_button"] : array(), ".wpa-cpt-contact-details" ) ?>
+    <?php endif; ?>
+    <?php if( isset( $atts["secondary_button"] ) && is_array( $atts["secondary_button"] ) ): ?>
+    <?php wpadverts_block_button_css( "secondary", isset( $atts["secondary_button"] ) ? $atts["secondary_button"] : array(), ".wpa-cpt-contact-details" ) ?>
+    <?php endif; ?>
+</style>
+
 <?php if( $has_visible_contact_options ): ?>
     <div class="wpa-cpt-contact-details">
 

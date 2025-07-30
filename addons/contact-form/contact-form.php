@@ -458,7 +458,7 @@ function adext_cf_block_details_contact_options( $contact_options, $atts, $post_
 
     $bd = new Adext_Contact_Form_Block_Details( $atts, $post_id );
 
-    if( ! $atts["custom_contact"] && isset( $contact_options["contact-reveal"] ) ) {
+    if( isset( $atts["custom_contact"] ) && ! $atts["custom_contact"] && isset( $contact_options["contact-reveal"] ) ) {
         $contact_options["contact-reveal"]["is_active"] = false;
     }
 

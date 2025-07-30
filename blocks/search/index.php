@@ -9,7 +9,7 @@ class Adverts_Block_Search {
     }
     
     public function init() {
-        
+
         $package = "wpadverts";
         $module = "search";
         
@@ -57,7 +57,7 @@ class Adverts_Block_Search {
     }
 
     public function render( $atts = array() ) {
-
+        
         $atts = $this->handlePayload( $atts );
 
         if( ! wpadverts_load_assets_globally() ) {

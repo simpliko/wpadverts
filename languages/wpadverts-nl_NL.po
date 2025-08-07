@@ -1,288 +1,2867 @@
-# Copyright (C) 2017 Greg Winiarski
-# This file is distributed under the same license as the WP Adverts package.
+# Translation of Plugins - WPAdverts &#8211; Classifieds Plugin - Stable (latest release) in Dutch
+# This file is distributed under the same license as the Plugins - WPAdverts &#8211; Classifieds Plugin - Stable (latest release) package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Adverts 1.1.1\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wpadverts\n"
-"POT-Creation-Date: 2017-03-17 11:25+0100\n"
+"PO-Revision-Date: 2025-07-22 17:40+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2022-05-13 11:42+0000\n"
-"Language-Team: Dutch\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
-"_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
-"esc_html_x:1,2c\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-Basepath: ..\n"
-"X-Textdomain-Support: yes\n"
+"Language: nl-NL\n"
+"Project-Id-Version: Plugins - WPAdverts &#8211; Classifieds Plugin - Stable "
+"(latest release)\n"
+"Language-Team: Nederlands\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-21 12:59+0000\n"
 "Last-Translator: \n"
-"Language: nl_NL\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Loco-Version: 2.6.0; wp-5.9.3"
+"X-Loco-Version: 2.8.0; wp-6.8.2; php-8.4.8"
 
-#: addons/bank-transfer/admin/options.php:15
-msgid "Payment Gateway / Bank Transfer"
-msgstr "Betaalgateway / Bankoverschrijving"
+#: addons/payments/includes/admin-pages.php:514
+msgid "%1$s %2$d"
+msgstr "%1$s %2$d"
 
-#: addons/bank-transfer/bank-transfer.php:42 includes/admin-pages.php:159
-msgid "Bank Transfer"
-msgstr "Bankoverschrijving"
+#: includes/admin-post-type.php:286
+msgid "%1$s %2$s, %3$s @ %4$s : %5$s"
+msgstr "%1$s %2$s, %3$s @ %4$s : %5$s"
 
-#: addons/bank-transfer/bank-transfer.php:62
-#: addons/payments/includes/admin-pages.php:572 includes/defaults.php:56
-msgid "Contact Person"
-msgstr "Contactpersoon"
+#. translators: 1: month number (01, 02, etc.), 2: month abbreviation
+#: includes/admin-post-type.php:274
+msgid "%1$s-%2$s"
+msgstr "%1$s-%2$s"
 
-#: addons/bank-transfer/bank-transfer.php:72
-#: addons/payments/admin/payment-history-list.php:68
-#: addons/payments/includes/admin-pages.php:582 includes/defaults.php:66
-#: includes/defaults.php:309 includes/defaults.php:319
-#: includes/functions.php:1939
-msgid "Email"
-msgstr "Email"
-
-#: addons/bank-transfer/includes/admin-pages.php:32
-#: addons/contact-form/includes/admin-pages.php:37
-#: addons/core/includes/admin-pages.php:26
-#: addons/payments/includes/admin-pages.php:35
-msgid "Update Options"
-msgstr "Opties bijwerken"
-
-#: addons/bank-transfer/includes/admin-pages.php:41
-#: addons/contact-form/includes/admin-pages.php:46
-#: addons/core/includes/admin-pages.php:46
-#: addons/payments/includes/admin-pages.php:43
-msgid "Settings updated."
-msgstr "Instellingen bijgewerkt."
-
-#: addons/bank-transfer/includes/admin-pages.php:43
-#: addons/contact-form/contact-form.php:104
-#: addons/contact-form/includes/admin-pages.php:48
-#: addons/core/includes/admin-pages.php:48
-#: addons/payments/includes/admin-pages.php:45
-#: addons/payments/includes/admin-pages.php:157
-#: addons/payments/includes/admin-pages.php:200
-#: addons/payments/includes/admin-pages.php:315
-msgid "There are errors in your form."
-msgstr "Je formulier bevat fouten."
-
-#: addons/bank-transfer/includes/admin-pages.php:60
-msgid "Payment Name"
-msgstr "Naam van de betaling"
-
-#: addons/bank-transfer/includes/admin-pages.php:61
-msgid "Payment gateway name visible in the frontend when making a payment."
-msgstr ""
-"Naam van de betaalgateway zichtbaar in de frontend bij het doen van een "
-"betaling."
-
-#: addons/bank-transfer/includes/admin-pages.php:70
-#: addons/contact-form/contact-form.php:240
-msgid "Message"
-msgstr "Bericht"
-
-#: addons/bank-transfer/includes/admin-pages.php:73
+#: includes/class-types-admin.php:282
 msgid ""
-"User will see this message when asked to make payment, make sure that "
-"instructions here will make it as easy as possible to make a payment.<br/>"
-"Allowed variables:<br/>- {total} - total amount to pay (for example $10.00)"
-"<br/>- {order_number} - unique order number<br/>To revert to default message "
-"remove whole text from editor and save the form."
+"%d comments enabled. If you are using some caching plugin make sure to clear "
+"cache."
 msgstr ""
-"Gebruiker zal dit bericht zien wanneer hem wordt gevraagd om te betalen. "
-"Zorg ervoor dat de instructies hier het zo makkelijk mogelijk maken om de "
-"​​betaling te doen.<br/> Toegestane ​​variabelen:<br/>- {total} - totaal te "
-"betalen bedrag (voor bijvoorbeeld € 10,00)<br/>- {order_number} - uniek "
-"ordernummer<br/>Om terug te keren naar het standaardbericht: verwijder alle "
-"tekst uit de editor en sla het formulier op."
+"%d reacties ingeschakeld. Als je een caching-plug-in gebruikt, zorg er dan "
+"voor dat je de cache wist."
 
-#: addons/contact-form/admin/options.php:15 includes/admin-pages.php:127
-msgid "Contact Form"
-msgstr "Contactformulier"
+#: includes/admin-post-type.php:624
+msgid "%s ago"
+msgstr "%s geleden"
 
-#: addons/contact-form/contact-form.php:59
-#: addons/contact-form/contact-form.php:118
-msgid "Send Message"
-msgstr "Bericht verzenden"
+#: addons/payments/admin/payment-history-list.php:141
+#: addons/payments/admin/pricing-list.php:105
+msgid "&laquo;"
+msgstr "&laquo;"
 
-#: addons/contact-form/contact-form.php:101
-msgid "Your message has been sent."
-msgstr "Je bericht is verzonden."
+#: addons/payments/admin/payment-history-list.php:142
+#: addons/payments/admin/pricing-list.php:106
+msgid "&raquo;"
+msgstr "&raquo;"
 
-#: addons/contact-form/contact-form.php:124 includes/functions.php:1934
-msgid "Phone"
-msgstr "Telefoon"
+#: includes/admin-post-type.php:447
+msgid "(required)"
+msgstr "(vereist)"
 
-#: addons/contact-form/contact-form.php:208
-msgid "Your Name"
-msgstr "Je naam"
+#: includes/class-types-admin.php:158
+msgid "+ New Post Type"
+msgstr "+ Nieuwe post type"
 
-#: addons/contact-form/contact-form.php:218
-msgid "Your Email"
-msgstr "Je emailadres"
+#: addons/core/admin/types-list.php:93
+msgid "+ New Taxonomy"
+msgstr "+ Nieuwe taxonomie"
 
-#: addons/contact-form/contact-form.php:229
-msgid "Subject"
-msgstr "Onderwerp"
+#: addons/payments/admin/pricing-list.php:90
+msgid "1 day"
+msgid_plural "%s days"
+msgstr[0] "1 dag"
+msgstr[1] "%s dagen"
 
-#: addons/contact-form/includes/admin-pages.php:65 includes/defaults.php:78
-msgid "Phone Number"
-msgstr "Telefoonnummer"
+#: addons/payments/includes/admin-pages.php:419
+#: addons/payments/includes/admin-pages.php:455
+msgid "1 Payment deleted."
+msgid_plural "%s Payments deleted."
+msgstr[0] "1 betaling verwijderd."
+msgstr[1] "%s betalingen verwijderd."
 
-#: addons/contact-form/includes/admin-pages.php:69
-msgid "Show phone number next to contact button."
-msgstr "Telefoonnummer tonen naast contactknop."
+#: addons/payments/includes/admin-pages.php:258
+msgid "1 Pricing deleted."
+msgid_plural "%s Pricings deleted."
+msgstr[0] "1 prijs verwijderd."
+msgstr[1] "%s prijzen verwijderd."
 
-#: addons/contact-form/includes/admin-pages.php:78
-msgid "From Name"
-msgstr "Van naam"
-
-#: addons/contact-form/includes/admin-pages.php:85
-msgid "From Email"
-msgstr "Van email"
-
-#: addons/core/includes/admin-pages.php:25
-msgid "Core Options"
-msgstr "Hoofdopties"
-
-#: addons/core/includes/admin-pages.php:121
-#: addons/core/includes/admin-pages.php:122
-msgid "Common Settings"
-msgstr "Algemene instellingen"
-
-#: addons/core/includes/admin-pages.php:128
-msgid "Default Ads List Page"
-msgstr "Standaard advertentielijst-pagina"
-
-#: addons/core/includes/admin-pages.php:129
-msgid "Select page on which the main [adverts_list] shortcode is being used."
+#: addons/payments/payments.php:634
+msgid ""
+"<div><strong>Your Payment Is Required</strong></div><div>Please complete "
+"payment for the <em>'%s'</em> Ad posting to have it published.</div>"
 msgstr ""
-"Selecteer de pagina waarop de belangrijkste [adverts_list] shortcode wordt "
-"gebruikt."
+"<div><strong>Je betaling is vereist</strong></div><div>Voltooi de betaling "
+"voor de plaatsing van de <em>'%s'</em> advertentie om deze te laten "
+"publiceren.</div>"
 
-#: addons/core/includes/admin-pages.php:135
-msgid "Default Visibility"
-msgstr "Standaard zichtbaarheid"
+#: includes/class-moderate-admin.php:127
+msgid ""
+"<em>Exact Matching</em> will match whole words, so “press” will NOT match "
+"“WordPress”."
+msgstr ""
+"<em>Exacte overeenkomsten</em> komen overeen met hele woorden, dus \"druk\" "
+"komt NIET overeen met \"WordPress\"."
 
-#: addons/core/includes/admin-pages.php:136
-msgid "Number of days Ad will be visible by default."
-msgstr "Aantal dagen dat de advertentie standaard zichtbaar zal zijn."
+#: includes/class-moderate-admin.php:126
+msgid ""
+"<em>Partial Matching</em> will match inside words, so “press” will match "
+"“WordPress”."
+msgstr ""
+"<em>Gedeeltelijke overeenkomsten</em> komen overeen met woorden, dus "
+"\"druk\" komt overeen met \"WordPress\"."
 
-#: addons/core/includes/admin-pages.php:146
-#: addons/core/includes/admin-pages.php:147
-msgid "Defaults Values For [adverts_list]"
-msgstr "Standaardwaarden voor [adverts_list]"
+#: templates/categories-all.php:41
+msgid "<em>View All &raquo;</em>"
+msgstr "<em>Alles bekijken &raquo;</em>"
 
-#: addons/core/includes/admin-pages.php:152
-msgid "Search Bar"
-msgstr "Zoekbalk"
+#: addons/payments/payments.php:629
+msgid ""
+"<p><strong>Your Payment Is Required</strong><p>Please complete payment for "
+"the <em>'%s'</em> Ad posting to have it published.</p>"
+msgstr ""
+"<p><strong>Je betaling is vereist</strong><p>Voltooi de betaling voor de "
+"plaatsing van de <em>'%s'</em> advertentie om deze te laten publiceren.</p>"
 
-#: addons/core/includes/admin-pages.php:155
-msgid "Enabled"
-msgstr "Ingeschakeld"
+#: addons/payments/includes/shortcodes.php:95
+msgid ""
+"<p><strong>Your Payment Is Required</strong><p>Please complete payment for "
+"the <em>'%s'</em> Ad posting.</p>"
+msgstr ""
+"<p><strong>Je betaling is vereist</strong><p>Voltooi de betaling voor het "
+"plaatsen van de <em>'%s'</em> advertentie.</p>"
 
-#: addons/core/includes/admin-pages.php:156
-msgid "Disabled"
-msgstr "Uitgeschakeld"
+#: addons/payments/includes/admin-pages.php:382
+msgid "<strong>%1$s</strong> changed payment status to <strong>%2$s</strong>"
+msgstr ""
+"<strong>%1$s</strong> heeft de betalingsstatus gewijzigd in <strong>"
+"%2$s</strong>"
 
-#: addons/core/includes/admin-pages.php:162
-msgid "Display Ads As"
-msgstr "Advertenties tonen als"
+#: addons/core/includes/admin-pages.php:400
+msgid ""
+"<strong>200</strong> — Show Ad details page with contact options disabled."
+msgstr ""
+"<strong>200</strong> — Toon de pagina met advertentiedetails met "
+"uitgeschakelde contactopties."
 
-#: addons/core/includes/admin-pages.php:165
-msgid "Grid (2 or more columns)"
-msgstr "Raster (2 of meer kolommen)"
+#: addons/core/includes/admin-pages.php:399
+msgid "<strong>301</strong> — Redirect to a different page ..."
+msgstr "<strong>301</strong> — Omleiden naar een andere pagina ..."
 
-#: addons/core/includes/admin-pages.php:166
-msgid "List (1 column)"
-msgstr "Lijst (1 kolom)"
+#: addons/core/includes/admin-pages.php:398
+msgid "<strong>404</strong> — Show 'Page Not Found' Error"
+msgstr "<strong>404</strong> — Toon 'Pagina niet gevonden' fout"
 
-#: addons/core/includes/admin-pages.php:173
+#: blocks/manage/class-manage-engine.php:382 templates/manage-edit.php:69
+msgid ""
+"<strong>Important Note.</strong> After submitting changes your Ad will be "
+"held for moderation. It will become active again once the Administrator will "
+"approve it."
+msgstr ""
+"<strong>Belangrijke opmerking.</strong> Na het indienen van wijzigingen "
+"wordt je advertentie in de wacht gezet voor moderatie. Het wordt weer actief "
+"zodra de beheerder het toestaat."
+
+#: includes/functions.php:3020 includes/functions.php:3055
+msgid ""
+"<strong>This Ad expired and is no longer available.</strong><br/>See our "
+"other active <a href=\"%s\">classified ads</a>."
+msgstr ""
+"<strong>Deze advertentie is verlopen en is niet langer beschikbaar.</strong>"
+"<br/>Bekijk onze andere actieve <a href=\"%s\">rubrieksadvertenties</a>."
+
+#: includes/functions.php:3015 includes/functions.php:3050
+msgid ""
+"<strong>Visible To Administrators Only</strong><br/>This Ad expired, but as "
+"a user with <em>%s</em> capability you can see this page."
+msgstr ""
+"<strong>Alleen zichtbaar voor beheerders</strong><br/>Deze advertentie is "
+"verlopen, maar als gebruiker met <em>%s</em> mogelijkheden kan je deze "
+"pagina zien."
+
+#: addons/contact-form/includes/class-emails-integration.php:69
+msgid "[{$advert.post_title}] {$form.message_subject}."
+msgstr "[{$advert.post_title}] {$form.message_subject}."
+
+#: addons/payments/includes/admin-pages.php:641
+msgid "Abandoned"
+msgstr "Verlaten"
+
+#: includes/defaults.php:50
+msgid "Account"
+msgstr "Account"
+
+#: addons/core/admin/types-edit-post.php:81 includes/gallery.php:589
+msgid "Actions"
+msgstr "Acties"
+
+#: admin/options.php:138 includes/class-updates-manager.php:317
+msgid "Activate"
+msgstr "Activeer"
+
+#: includes/class-updates-manager.php:320
+msgid "Activate your License in order to enable automatic updates."
+msgstr "Activeer je licentie om automatische updates mogelijk te maken."
+
+#: addons/payments/payments.php:1052
+msgid "Ad <strong>%s</strong> renewed. <a href=\"%s\">Go back to Ads list</a>."
+msgstr ""
+"Advertentie <strong>%s</strong> vernieuwd. <a href=\"%s\">Ga terug naar de "
+"advertentielijst</a>."
+
+#: blocks/manage/class-manage-engine.php:230 includes/shortcodes.php:414
+#: includes/shortcodes.php:518
+msgid "Ad does not exist."
+msgstr "Advertentie bestaat niet."
+
+#: addons/emails/includes/class-emails-admin.php:306
+msgid "Add Attachment"
+msgstr "Bijlage toevoegen"
+
+#: addons/emails/includes/class-emails-admin.php:284
+msgid "Add Header"
+msgstr "Header toevoegen"
+
+#: addons/payments/admin/pricing-edit.php:19
+#: addons/payments/admin/pricing-list.php:19
+msgid "Add New"
+msgstr "Nieuwe toevoegen"
+
+#: wpadverts.php:241
+msgid "Add New Classified"
+msgstr "Nieuwe advertentie toevoegen"
+
+#: addons/payments/includes/admin-pages.php:132
+#: addons/payments/includes/admin-pages.php:133
+msgid "Add Pricing"
+msgstr "Prijzen toevoegen"
+
+#: includes/class-moderate-admin.php:103
+msgid ""
+"Adding more than 'Max. Links' in the content will disallow posting an Ad. "
+"Empty value = unlimited number of links"
+msgstr ""
+"Meer links toevoegen dan 'Max. Links' in het bericht van een advertentie is "
+"niet toestaan. Lege waarde = onbeperkt aantal links"
+
+#: includes/admin-post-type.php:538
+msgid "Additional Information"
+msgstr "Aanvullende informatie"
+
+#: admin/options.php:134
+msgid "Addon Uploaded and Activated"
+msgstr "Add-on geüpload en actief"
+
+#: admin/options.php:137
+msgid "Addon Uploaded but Inactive"
+msgstr "Add-on geüpload maar inactief"
+
+#: addons/emails/admin/emails-list.php:37
+#: addons/emails/admin/emails-list.php:93
+msgid "Administrator"
+msgstr "Beheerder"
+
+#: includes/class-widget-ads.php:171
+msgid "Ads Types"
+msgstr "Advertentie types"
+
+#: templates/list.php:85
+msgid "Advanced Search"
+msgstr "Geavanceerd zoeken"
+
+#: includes/ajax.php:1254
+msgid "Advert <strong>%s</strong> deleted."
+msgstr "Advertentie <strong>%s</strong> verwijderd."
+
+#: includes/class-widget-categories.php:31
+#: includes/class-widget-categories.php:41
+msgid "Advert Categories"
+msgstr "Advertentie categorieën"
+
+#: addons/core/includes/admin-pages.php:501
+#: addons/core/includes/admin-pages.php:502
+msgid "Advert Details Pages"
+msgstr "Advertentie detail pagina's"
+
+#: addons/core/includes/admin-pages.php:590
+msgid "Adverts Gallery"
+msgstr "Advertentie galerij"
+
+#: addons/core/includes/admin-pages.php:597
+msgid "Adverts List"
+msgstr "Advertentie lijst"
+
+#: includes/admin-pages.php:37
+msgid "Adverts Options"
+msgstr "Advertentie opties"
+
+#: addons/payments/payments.php:1117
+msgid "Adverts Payment History"
+msgstr "Betaal geschiedenis advertenties"
+
+#: addons/payments/includes/admin-pages.php:408
+msgid "Adverts Payment with given ID does not exist."
+msgstr "Een betaling van advertentie met opgegeven ID bestaat niet."
+
+#: addons/payments/includes/admin-pages.php:223
+msgid "Adverts Pricing with given ID does not exist."
+msgstr "Advertenties prijzen met opgegeven ID bestaan ​​niet."
+
+#: addons/payments/admin/payment-history-list.php:23
+#: includes/class-widget-ads.php:174
+msgid "All"
+msgstr "Alle"
+
+#: wpadverts.php:244
+msgid "All Classifieds"
+msgstr "Alle advertenties"
+
+#: addons/payments/admin/payment-history-list.php:54
+msgid "All dates"
+msgstr "Alle datums"
+
+#: addons/payments/admin/payment-history-list.php:64
+msgid "All Payments"
+msgstr "Alle betalingen"
+
+#: addons/core/includes/admin-pages.php:535
+msgid "Allow opening Gallery images in a Lightbox."
+msgstr "Sta het openen van galerijafbeeldingen in een lightbox toe."
+
+#: includes/admin-pages.php:188
+msgid "Allow users and administrators to mark the Ads as sold."
+msgstr ""
+"Sta gebruikers en beheerders toe om de advertenties als verkocht te markeren."
+
+#: includes/admin-pages.php:110
+msgid "Allow users to customize forms using easy to use drag and drop editor."
+msgstr ""
+"Gebruikers toestaan formulieren aan te passen met de drag and drop editor."
+
+#: includes/admin-pages.php:214
+msgid ""
+"Allow users to pay for ad posting using direct bank transfer or cash "
+"payments."
+msgstr ""
+"Gebruikers toestaan ​​te betalen voor het plaatsen van advertenties door "
+"middel van rechtstreekse overboeking of contante betalingen."
+
+#: includes/admin-pages.php:141
+msgid "Allow users to post Ads displayed always at the top of the list."
+msgstr ""
+"Sta gebruikers toe advertenties te plaatsen die altijd bovenaan de lijst "
+"worden weergegeven."
+
+#: addons/core/includes/admin-pages.php:486
+msgid "Allow users to switch between grid and list view."
+msgstr "Sta gebruikers toe te wisselen tussen raster- en lijstweergave."
+
+#: includes/gallery.php:70
+msgid "Allowed Files"
+msgstr "Toegestane bestanden"
+
+#: addons/core/includes/admin-pages.php:414
+msgid "Always Visible For"
+msgstr "Altijd zichtbaar voor"
+
+#: addons/payments/admin/payment-history-list.php:82
+msgid "Amount"
+msgstr "Aantal"
+
+#: includes/admin-pages.php:194
+msgid "Analytics"
+msgstr "Statistieken"
+
+#: addons/payments/admin/payment-history-list.php:48
+#: addons/payments/admin/payment-history-list.php:158
+#: addons/payments/admin/pricing-list.php:37
+#: addons/payments/admin/pricing-list.php:119
+msgid "Apply"
+msgstr "Toepassen"
+
+#: includes/gallery.php:603
+msgid "Apply changes to all image sizes"
+msgstr "Wijzigingen toepassen op alle afbeeldingsformaten"
+
+#: includes/class-honeypot.php:31 includes/class-honeypot.php:75
+msgid "Are you a bot trying to submit a classified Ad?"
+msgstr "Ben jij een robot die probeert een advertentie te plaatsen?"
+
+#: blocks/manage/index.php:50
+msgid "Are you sure you want to delete '%s'"
+msgstr "Weet je zeker dat je '%s' wil verwijderen"
+
+#: wpadverts.php:554
+msgid "Are you sure you want to reset this settings to defaults?"
+msgstr ""
+"Weet je zeker dat je deze instellingen wilt terugzetten naar de "
+"standaardwaarden?"
+
+#: templates/manage.php:67
+msgid "Are you sure?"
+msgstr "Weet je het zeker?"
+
+#: includes/class-widget-ads.php:160
+msgid "Ascending"
+msgstr "Oplopend"
+
+#: addons/core/admin/types-list.php:101
+msgid "Assigned To"
+msgstr "Toegewezen aan"
+
+#: includes/gallery.php:366
+msgid "Attachment details"
+msgstr "Bijlage gegevens"
+
+#: includes/ajax.php:339
+msgid "Attachment does not exist."
+msgstr "Bijlage bestaat niet."
+
+#: addons/emails/includes/class-emails-admin.php:399
+msgid "Attachments"
+msgstr "Bijlagen"
+
+#: includes/functions.php:2243
+msgid "Australian Dollars"
+msgstr "Australische dollars"
+
+#: includes/admin-post-type.php:577 includes/class-types-admin.php:618
+msgid "Author"
+msgstr "Auteur"
+
+#: includes/admin-pages.php:116
+msgid "Authors"
+msgstr "Auteurs"
+
+#: addons/payments/admin/payment-history-list.php:165
+msgid "Automatic cleanup was never run."
+msgstr "Automatische opschoning is nooit uitgevoerd."
+
+#: includes/class-types-admin.php:632
+msgid "Automatically enable comments when Ad is saved in the database."
+msgstr ""
+"Reacties automatisch inschakelen wanneer advertentie in de database wordt "
+"opgeslagen."
+
+#: addons/styling/admin/options.php:101 addons/styling/admin/options.php:127
+#: addons/styling/admin/options.php:233 addons/styling/admin/options.php:258
+msgid "Background"
+msgstr "Achtergrond"
+
+#: addons/bank-transfer/bank-transfer.php:42 includes/admin-pages.php:213
+msgid "Bank Transfer"
+msgstr "Overschrijving per bank"
+
+#: includes/admin-pages.php:152
+msgid "Better Messages"
+msgstr "Better Messages"
+
+#: includes/class-moderate-admin.php:109
+msgid "Blacklisted Phrases"
+msgstr "Zwarte lijst woorden"
+
+#: includes/class-types-admin.php:799
+msgid "Block (recommended) - use block templates."
+msgstr "Blokkeren (aanbevolen) - gebruik blok templates."
+
+#: addons/styling/admin/options.php:323
+msgid "Blue Gray"
+msgstr "Blauw grijs"
+
+#: addons/emails/includes/class-emails-admin.php:393
+msgid "Body"
+msgstr "Body"
+
+#: addons/styling/admin/options.php:84 addons/styling/admin/options.php:216
+msgid "Bold"
+msgstr "Vet"
+
+#: addons/styling/admin/options.php:107 addons/styling/admin/options.php:133
+#: addons/styling/admin/options.php:239 addons/styling/admin/options.php:264
+msgid "Border"
+msgstr "Rand"
+
+#: addons/styling/admin/options.php:56 addons/styling/admin/options.php:188
+#: addons/styling/admin/options.php:359
+msgid "Border Radius"
+msgstr "Randradius"
+
+#: addons/styling/admin/options.php:355
+msgid "Border Settings"
+msgstr "Rand instellingen"
+
+#: addons/styling/admin/options.php:69 addons/styling/admin/options.php:201
+#: addons/styling/admin/options.php:372
+msgid "Border Width"
+msgstr "Rand breedte"
+
+#: addons/styling/admin/options.php:337
+msgid "Bottom Border"
+msgstr "Onderrand"
+
+#: includes/functions.php:2244
+msgid "Brazilian Real"
+msgstr "Braziliaanse real"
+
+#: includes/gallery.php:124
+msgid "browse files ..."
+msgstr "bestanden doorbladeren ..."
+
+#: includes/admin-pages.php:102
+msgid "BuddyPress Integration"
+msgstr "BuddyPress integratie"
+
+#: includes/functions-blocks.php:805
+msgid "Builtin Templates"
+msgstr "Ingebouwde templates"
+
+#: addons/payments/admin/payment-history-list.php:41
+#: addons/payments/admin/payment-history-list.php:152
+#: addons/payments/admin/pricing-list.php:33
+#: addons/payments/admin/pricing-list.php:116
+msgid "Bulk Actions"
+msgstr "Bulkacties"
+
+#: templates/single.php:23
+msgid "by <strong>%s</strong>"
+msgstr "met <strong>%s</strong>"
+
+#: addons/core/includes/admin-pages.php:418
+msgid "Cabability (or Role) required to always see expired Ads details pages."
+msgstr ""
+"Rechten (of Rol) vereist om altijd de verlopen pagina's met "
+"advertentiedetails te zien."
+
+#: addons/core/includes/admin-pages.php:577
+msgid "Cabability required to edit images in the Gallery."
+msgstr "Mogelijkheid vereist om afbeeldingen in de galerij te bewerken."
+
+#: blocks/single-author/templates/list.php:37
+msgid "call"
+msgstr "bel"
+
+#: addons/contact-form/includes/class-block-details.php:89
+msgid ""
+"Call <span data-ph1=\"%s\" class=\"wpadverts-phone\">%s...</span> <a "
+"href=\"#\" class=\"wpadverts-phone-reveal\">show phone</a>"
+msgstr ""
+"Bel <span data-ph1=\"%s\" class=\"wpadverts-phone\">%s...</span> <a "
+"href=\"#\" class=\"wpadverts-phone-reveal\">toon telefoon</a>"
+
+#: addons/contact-form/includes/class-block-details.php:110
+msgid "Call <span data-ph1=\"%s\" class=\"wpadverts-phone\">%s</span>"
+msgstr "Bel <span data-ph1=\"%s\" class=\"wpadverts-phone\">%s</span>"
+
+#: includes/functions.php:2245
+msgid "Canadian Dollars"
+msgstr "Canadese dollars"
+
+#: addons/core/admin/types-icon-picker.php:21 blocks/manage/index.php:52
+#: includes/admin-post-type.php:310 includes/class-updates-manager.php:333
+#: includes/gallery.php:514 includes/gallery.php:592 templates/manage.php:70
+#: wpadverts.php:396
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: admin/options.php:126
+msgid "Cannot be disabled"
+msgstr "Kan niet worden uitgeschakeld"
+
+#: includes/class-updates-manager.php:150
+msgid "Cannot connect to remote server. Please try again later."
+msgstr ""
+"Kan geen verbinding maken met externe server. Probeer het later opnieuw."
+
+#: includes/defaults.php:348
+msgid "Cannot create account. User with this email address already exists."
+msgstr "Kan geen account maken. Gebruiker met dit e-mailadres bestaat al."
+
+#: addons/payments/payments.php:895
+msgid ""
+"Cannot renew Ads with status 'pending', <a href=\"%s\">cancel and go back</a>"
+"."
+msgstr ""
+"Kan advertenties met status 'in behandeling' niet verlengen, <a href=\"%s\">"
+"annuleer en ga terug</a>."
+
+#: wpadverts.php:398
+msgid "Cannot select more than %s items."
+msgstr "Kan niet meer dan %s items selecteren."
+
+#: blocks/manage/class-manage-engine.php:298 includes/shortcodes.php:488
+msgid "Cannot update. There are errors in your form."
+msgstr "Kan niet updaten. Er staan ​​fouten in je formulier."
+
+#: includes/defaults.php:480
+msgid "Cannot validate uploaded image width and height."
+msgstr "Kan breedte en hoogte van geüploade afbeelding niet valideren."
+
+#: includes/functions.php:4090
+msgid "Cannot verify config nonce. <a href=''>Retry</a>"
+msgstr ""
+"Kan de configuratie nonce niet verifiëren. <a href=''>Opnieuw proberen</a>"
+
+#: addons/payments/includes/admin-pages.php:227
+#: addons/payments/includes/admin-pages.php:246
+#: addons/payments/includes/admin-pages.php:412
+#: addons/payments/includes/admin-pages.php:436
+msgid "Cannot verify nonce."
+msgstr "Nonce kan niet worden geverifieerd."
+
+#: includes/gallery.php:509
+msgid "Capture ..."
+msgstr "Vastleggen ..."
+
+#: wpadverts.php:278
+msgid "Categories"
+msgstr "Categorieën"
+
+#: blocks/details/index.php:96 blocks/single-data-table/index.php:261
+#: includes/class-widget-ads.php:103 includes/defaults.php:105
+#: templates/single.php:45
+msgid "Category"
+msgstr "Categorie"
+
+#: includes/admin-pages.php:413
+msgid "Category Icon"
+msgstr "Categorie pictogram"
+
+#: includes/admin-pages.php:180
+msgid "Category Icons"
+msgstr "Categorie pictogrammen"
+
+#: includes/functions.php:463
+msgid "Category: %s"
+msgstr "Categorie: %s"
+
+#: includes/admin-pages.php:227
+msgid ""
+"Charge users for Ad postings using credit cards (and some other payment "
+"gateways)."
+msgstr ""
+"Breng gebruikers kosten in rekening voor het plaatsen van advertenties met "
+"creditcards (en sommige andere betalingsgateways)."
+
+#: includes/admin-pages.php:90
+msgid "Charge users for posting ads on your website."
+msgstr ""
+"Laat gebruikers betalen voor het plaatsen van advertenties op jouw website."
+
+#: blocks/list/index.php:163 blocks/manage/class-manage-engine.php:35
+#: blocks/search/index.php:135 includes/shortcodes.php:105
+msgid "Cheapest First"
+msgstr "Goedkoopste eerst"
+
+#: addons/styling/includes/admin-pages.php:104
+msgid "Checkbox"
+msgstr "Selectievakje"
+
+#: blocks/publish/class-publish-engine.php:394
+#: includes/class-shortcode-adverts-add.php:348 includes/functions.php:3179
+msgid "Checksum does not exist. Please refresh the page and try again."
+msgstr "Checksum bestaat niet. Ververs de pagina en probeer het opnieuw."
+
+#: wpadverts.php:240
+msgctxt "classified"
+msgid "Add New"
+msgstr "Nieuwe toevoegen"
+
+#: blocks/class-block-manager.php:44 blocks/class-block-patterns.php:8
+#: wpadverts.php:250
+msgid "Classifieds"
+msgstr "Advertenties"
+
+#: blocks/class-block-patterns.php:28 blocks/class-block-patterns.php:40
+msgid "Classifieds details"
+msgstr "Advertenties details"
+
+#: blocks/class-block-patterns.php:41
+msgid "Classifieds details page with a sidebar"
+msgstr "Advertenties details pagina met zijbalk"
+
+#: includes/gallery.php:828
+msgid "Classifieds List"
+msgstr "Lijst met advertenties"
+
+#: blocks/class-block-patterns.php:17
+msgid ""
+"Classifieds list with a search form in the left sidebar. Best to use with "
+"full-width page template."
+msgstr ""
+"Advertentielijst met zoekformulier in de linkerzijbalk. Het beste te "
+"gebruiken met een paginasjabloon over de volledige breedte."
+
+#: blocks/class-block-patterns.php:16
+msgid "Classifieds with a sidebar"
+msgstr "Advertenties met een zijblak"
+
+#: addons/payments/admin/payment-history-list.php:161
+msgid "Cleanup Now"
+msgstr "Nu opschonen"
+
+#: blocks/manage/index.php:56 includes/gallery.php:644 wpadverts.php:394
+msgid "Close"
+msgstr "Sluiten"
+
+#: addons/emails/admin/emails-list.php:52
+msgid "Code"
+msgstr "Code"
+
+#: addons/styling/admin/options.php:321
+msgid "Color Palette"
+msgstr "Kleurenpalet"
+
+#: addons/styling/admin/options.php:117 addons/styling/admin/options.php:248
+msgid "Colors Hover"
+msgstr "Hover kleuren"
+
+#: addons/styling/admin/options.php:91 addons/styling/admin/options.php:223
+msgid "Colors Normal"
+msgstr "Kleuren normaal"
+
+#: addons/core/includes/admin-pages.php:457
 msgid "Columns"
 msgstr "Kolommen"
 
-#: addons/core/includes/admin-pages.php:184
-msgid "Posts Per Page"
-msgstr "Berichten per pagina"
+#: includes/class-types-admin.php:622 includes/class-types-admin.php:628
+msgid "Comments"
+msgstr "Reacties"
 
-#: addons/core/includes/admin-pages.php:193
-msgid "Switch Views"
-msgstr "Schakelen tussen weergaven"
+#: addons/core/includes/admin-pages.php:266
+#: addons/core/includes/admin-pages.php:267 addons/styling/admin/options.php:52
+#: addons/styling/admin/options.php:184 addons/styling/admin/options.php:316
+msgid "Common Settings"
+msgstr "Algemene instellingen"
 
-#: addons/core/includes/admin-pages.php:196
-msgid "Allow users to switch between grid and list view."
+#: addons/payments/includes/ajax.php:105 addons/payments/payments.php:785
+#: addons/payments/payments.php:1287
+msgid "Complete Payment"
+msgstr "Complete betaling"
+
+#: addons/payments/includes/admin-pages.php:788
+msgid "Complete Payment Page"
+msgstr "Pagina complete betaling"
+
+#: addons/payments/payments.php:74
+msgctxt "completed status payment"
+msgid "Completed"
+msgstr "Afgerond"
+
+#: addons/core/admin/types-edit-post.php:33
+msgid "Configuration"
+msgstr "Configuratie"
+
+#: includes/class-types-admin.php:705
+msgid "Connect To"
+msgstr "Verbind met"
+
+#: blocks/single-data-table/index.php:208 includes/class-rest-blocks.php:197
+msgid "Contact Email"
+msgstr "Contact e-mail"
+
+#: addons/contact-form/admin/options.php:15
+#: addons/contact-form/includes/class-block-details.php:49
+#: addons/contact-form/includes/class-emails-integration.php:44
+#: includes/admin-pages.php:146
+msgid "Contact Form"
+msgstr "Contact formulier"
+
+#: includes/defaults.php:44
+msgid "Contact Information"
+msgstr "Contactgegevens"
+
+#: blocks/single-contact/index.php:73
+msgid "Contact options are disabled for expired ads."
+msgstr "Voor verlopen advertenties zijn de contactopties uitgeschakeld."
+
+#: blocks/publish/templates/publish-preview.php:59
+msgid "Contact options are hidden in the preview."
+msgstr "Contactopties zijn verborgen in het voorbeeld."
+
+#: addons/bank-transfer/bank-transfer.php:63
+#: addons/payments/includes/admin-pages.php:704
+#: blocks/single-data-table/index.php:201 includes/class-rest-blocks.php:193
+#: includes/defaults.php:56
+msgid "Contact Person"
+msgstr "Contact persoon"
+
+#: blocks/single-data-table/index.php:215 includes/class-rest-blocks.php:201
+msgid "Contact Phone"
+msgstr "Contact telefoon"
+
+#: addons/core/includes/admin-pages.php:546
+msgid "Contain"
+msgstr "Bevat"
+
+#: includes/class-rest-blocks.php:173
+msgid "Content"
+msgstr "Inhoud"
+
+#: includes/class-moderate-admin.php:90
+msgid "Content Blacklist"
+msgstr "Inhoud zwarte lijst"
+
+#: addons/styling/admin/options.php:324
+msgid "Cool Gray"
+msgstr "Koel grijs"
+
+#: blocks/single-author/templates/list.php:36
+msgid "copy"
+msgstr "kopieëren"
+
+#: addons/emails/includes/class-emails.php:368 includes/admin-pages.php:83
+msgid "Core"
+msgstr "Core"
+
+#: addons/core/admin/moderate.php:15 addons/core/admin/options-gallery.php:15
+#: addons/core/admin/options.php:15 addons/core/admin/types-edit-post.php:6
+#: addons/core/admin/types-list.php:23
+msgid "Core Options"
+msgstr "Core opties"
+
+#: blocks/publish/class-publish-engine.php:413
+#: blocks/publish/class-publish-engine.php:563
+#: includes/class-shortcode-adverts-add.php:367
+#: includes/class-shortcode-adverts-add.php:477
+msgid ""
+"Could not validate. Refresh your session and make sure you are using cookies."
 msgstr ""
-"Gebruikers toestaan om te schakelen tussen de weergave Raster en Lijst."
+"Kan niet valideren. Vernieuw je sessie en zorg ervoor dat je cookies "
+"gebruikt."
 
-#: addons/core/includes/admin-pages.php:203
-#: addons/core/includes/admin-pages.php:204
-msgid "Currency Settings"
-msgstr "Valuta-instellingen"
+#: blocks/publish/class-publish-engine.php:392
+#: includes/class-shortcode-adverts-add.php:346 includes/functions.php:3177
+msgid ""
+"Could not verify the request checksum. Please refresh the page and try again."
+msgstr ""
+"Kan de checksum van het verzoek niet verifiëren. Ververs de pagina en "
+"probeer het opnieuw."
 
-#: addons/core/includes/admin-pages.php:210
+#: includes/ajax.php:881
+msgid "Could not write file %s"
+msgstr "Kan bestand %s niet schrijven"
+
+#: includes/class-widget-ads.php:82
+msgid "Count"
+msgstr "Aantal"
+
+#: addons/core/includes/admin-pages.php:547
+msgid "Cover"
+msgstr "Omslagafbeelding"
+
+#: includes/functions.php:1776
+msgid ""
+"Create an account for me so I can manage all my ads from one place (password "
+"will be emailed to you) or <a href=\"%s\">Sign In</a>"
+msgstr ""
+"Creëer een account voor me zodat ik al mijn advertenties kan beheren (je "
+"krijgt via de email een wachtwoord). Als je al een account hebt, <a "
+"href=\"%s\">log dan in</a>."
+
+#: addons/payments/includes/admin-pages.php:93
+msgid "Create at least one <a href='%s'>Pricing</a> before selecting default."
+msgstr ""
+"Maak ten minste één <a href='%s'>prijs</a> voordat je standaard selecteert."
+
+#: includes/gallery.php:504
+msgid "Create Image"
+msgstr "Creëer afbeelding"
+
+#: includes/functions.php:4119
+msgid "Create new types with <strong>Multiverse</strong> extension."
+msgstr "Maak nieuwe typen met de extensie <strong>Multiverse</strong>."
+
+#: includes/gallery.php:504
+msgid "Create thumbnail from full size image."
+msgstr "Maak een thumbnail van een afbeelding."
+
+#: addons/payments/admin/payment-history-edit.php:47
+msgid "Created"
+msgstr "Gemaakt"
+
+#: includes/gallery.php:571
+msgid "Crop"
+msgstr "Bijsnijden"
+
+#: addons/core/includes/admin-pages.php:692
+msgid "crop image"
+msgstr "afbeelding bijsnijden"
+
+#: includes/admin-pages.php:201
+msgid "Currencies"
+msgstr "Valuta"
+
+#: addons/core/includes/admin-pages.php:349
 msgid "Currency"
-msgstr "Munteenheid"
+msgstr "Valuta"
 
-#: addons/core/includes/admin-pages.php:217
+#: addons/core/includes/admin-pages.php:356
 msgid "Currency Position"
 msgstr "Positie valutasymbool"
 
-#: addons/core/includes/admin-pages.php:219
-msgid "Prefix - $10"
-msgstr "Voorvoegsel - €10"
+#: addons/core/includes/admin-pages.php:342
+#: addons/core/includes/admin-pages.php:343
+msgid "Currency Settings"
+msgstr "Valutainstellingen"
 
-#: addons/core/includes/admin-pages.php:220
-msgid "Suffix - 10$"
-msgstr "Achtervoegsel - 10€"
+#: includes/gallery.php:617
+msgid "Current size:"
+msgstr "Huidige grootte:"
 
-#: addons/core/includes/admin-pages.php:227
+#: includes/admin-pages.php:109
+msgid "Custom Fields"
+msgstr "Aangepaste velden"
+
+#: addons/payments/admin/payment-history-edit.php:125
+msgid "Customer Details"
+msgstr "Klant details"
+
+#: includes/functions.php:2246
+msgid "Czech Koruna"
+msgstr "Tsjechische kroon"
+
+#: includes/functions.php:2247
+msgid "Danish Krone"
+msgstr "Deense kroon"
+
+#: addons/payments/admin/payment-history-list.php:81
+#: includes/admin-post-type.php:579
+msgid "Date"
+msgstr "Datum"
+
+#: addons/core/includes/admin-pages.php:302
+msgid "Date Format"
+msgstr "Datumnotatie"
+
+#: addons/core/includes/admin-pages.php:366
 msgid "Decimal Places"
-msgstr "Aantal decimalen"
+msgstr "Decimaal plaatsen"
 
-#: addons/core/includes/admin-pages.php:237
+#: addons/core/includes/admin-pages.php:376
 msgid "Decimal Separator"
-msgstr "Decimaalscheiding"
+msgstr "Scheidingsteken decimalen"
 
-#: addons/core/includes/admin-pages.php:243
-msgid "Thousands Separator"
-msgstr "Scheidingsteken voor duizendtallen"
+#: addons/core/includes/admin-pages.php:565
+msgid "Default"
+msgstr "Standaard"
 
-#: addons/featured/admin/options.php:15 includes/admin-pages.php:121
+#: addons/core/includes/admin-pages.php:273
+msgid "Default Ads List Page"
+msgstr "Pagina met advertentielijst"
+
+#: includes/functions-blocks.php:811
+msgid "Default Block Template"
+msgstr "Standaard blok template"
+
+#: blocks/class-block-patterns.php:29
+msgid "Default classifieds details page"
+msgstr "Standaard advertentie details pagina"
+
+#: addons/payments/includes/admin-pages.php:771
+msgid "Default Payment Gateway"
+msgstr "Standaard betalingsgateway"
+
+#: addons/payments/includes/admin-pages.php:780
+msgid "Default Pricing"
+msgstr "Standaard prijzen"
+
+#: includes/admin-pages.php:129
+msgid "Default Styles"
+msgstr "Standaard stijlen"
+
+#: addons/core/includes/admin-pages.php:283
+msgid "Default Visibility"
+msgstr "Standaard zichtbaarheid"
+
+#: addons/core/includes/admin-pages.php:424
+#: addons/core/includes/admin-pages.php:425
+msgid "Defaults Values For [adverts_list]"
+msgstr "Standaardwaarden voor [adverts_list]"
+
+#: addons/payments/admin/payment-history-list.php:45
+#: addons/payments/admin/payment-history-list.php:100
+#: addons/payments/admin/payment-history-list.php:156
+#: addons/payments/admin/pricing-list.php:34
+#: addons/payments/admin/pricing-list.php:67
+#: addons/payments/admin/pricing-list.php:117 blocks/manage/index.php:51
+#: templates/manage.php:61 templates/manage.php:62
+msgid "Delete"
+msgstr "Verwijderen"
+
+#: blocks/manage/class-manage-engine.php:348
+msgid "Delete ..."
+msgstr "Verwijderen..."
+
+#: addons/core/includes/admin-pages.php:326
+msgid "Delete Ad images from Media Library when deleting an Ad."
+msgstr ""
+"Verwijder advertentieafbeeldingen uit de mediabibliotheek bij het "
+"verwijderen van een advertentie."
+
+#: includes/gallery.php:354
+msgid "Delete File"
+msgstr "Verwijder bestand"
+
+#: wpadverts.php:406
+msgid "Delete Image"
+msgstr "Verwijder afbeelding"
+
+#: blocks/manage/index.php:49
+msgid "Delete this item?"
+msgstr "Dit item verwijderen?"
+
+#: addons/payments/includes/admin-pages.php:482
+msgid "Deleted %d temporary payment."
+msgid_plural "Deleted %d temporary payments"
+msgstr[0] "%d tijdelijke betaling verwijderd."
+msgstr[1] "%d tijdelijke betalingen verwijderd"
+
+#: includes/class-widget-ads.php:155
+msgid "Descending"
+msgstr "Aflopend"
+
+#: addons/payments/includes/admin-pages.php:828 blocks/details/index.php:110
+#: blocks/single-data-table/index.php:166 includes/defaults.php:132
+#: includes/gallery.php:465
+msgid "Description"
+msgstr "Beschrijving"
+
+#: includes/gallery.php:545
+msgid "Dimensions:"
+msgstr "Afmetingen:"
+
+#: admin/options.php:150
+msgid "Disable"
+msgstr "Uitschakelen"
+
+#: addons/core/includes/admin-pages.php:434
+msgid "Disabled"
+msgstr "Uitgeschakeld"
+
+#: addons/core/includes/admin-pages.php:443
+msgid "Display Ads As"
+msgstr "Advertenties weergeven als"
+
+#: includes/admin-pages.php:147
+msgid "Display contact form on the Ad details pages."
+msgstr "Toon contactformulier op de advertentiedetailpagina."
+
+#: addons/featured/featured.php:71
+msgid "Display this listing as featured."
+msgstr "Toon deze vermelding als uitgelicht."
+
+#: includes/class-widget-categories.php:43
+msgid "Displays list of available categories."
+msgstr "Een lijst van beschikbare categorieën weergeven."
+
+#: includes/class-widget-ads.php:52
+msgid "Displays list of recent ads."
+msgstr "Toont een lijst met recente advertenties."
+
+#: addons/core/includes/admin-pages.php:317
+msgid "Do not show Ad images (and other files) in Media Library."
+msgstr ""
+"Toon geen advertentieafbeeldingen (en andere bestanden) in de "
+"mediabibliotheek."
+
+#: blocks/single-gallery/templates/gallery.php:51
+#: includes/class-gallery-helper.php:217 includes/class-gallery-helper.php:361
+#: includes/gallery.php:349
+msgid "Download"
+msgstr "Download"
+
+#: includes/class-gallery-helper.php:251 includes/class-gallery-helper.php:411
+#: includes/gallery.php:443
+msgid "Download File"
+msgstr "Download bestand"
+
+#: includes/functions-blocks.php:826
+msgid "Draft Templates"
+msgstr "Concept templates"
+
+#: includes/gallery.php:123
+msgid "Drop files here to add them."
+msgstr "Sleep bestanden naar dit vak om ze toe te voegen."
+
+#: addons/styling/includes/admin-pages.php:90
+msgid "Dropdown"
+msgstr "Dropdown"
+
+#: addons/core/admin/types-list.php:76 addons/core/admin/types-list.php:137
+#: addons/payments/admin/pricing-list.php:64
+#: addons/payments/admin/pricing-list.php:66 includes/admin-post-type.php:377
+#: templates/manage.php:60
+msgid "Edit"
+msgstr "Bewerken"
+
+#: includes/class-types-admin.php:112
+msgid "Edit '%s'"
+msgstr "Bewerk '%s'"
+
+#: includes/class-types-admin.php:147
+msgid "Edit '%s' Taxonomy"
+msgstr "Bewerk '%s' taxonomie"
+
+#: wpadverts.php:242
+msgid "Edit Classified"
+msgstr "Bewerk advertentie"
+
+#: addons/core/admin/types-list.php:61
+msgid "Edit Classified Type"
+msgstr "Bewerk advertentie type"
+
+#: includes/admin-post-type.php:377
+msgid "Edit date and time"
+msgstr "Datum en tijd bewerken"
+
+#: includes/gallery.php:352
+msgid "Edit File"
+msgstr "Bestand bewerken"
+
+#: includes/gallery.php:503 wpadverts.php:405
+msgid "Edit Image"
+msgstr "Bewerk afbeelding"
+
+#: blocks/publish/templates/publish-preview.php:27
+#: blocks/publish/templates/publish-preview.php:73 templates/add-preview.php:9
+msgid "Edit Listing"
+msgstr "Vermelding bewerken"
+
+#: addons/payments/includes/admin-pages.php:176
+msgid "Edit Pricing"
+msgstr "Prijzen bewerken"
+
+#: addons/core/admin/types-list.php:114
+msgid "Edit Taxonomy"
+msgstr "Bewerk taxonomie"
+
+#: includes/class-types-admin.php:617
+msgid "Editor"
+msgstr "Redacteur"
+
+#: includes/functions.php:2248
+msgid "Egyptian Pound"
+msgstr "Egyptische pond"
+
+#: addons/bank-transfer/bank-transfer.php:73
+#: addons/payments/admin/payment-history-list.php:80
+#: addons/payments/includes/admin-pages.php:714 includes/defaults.php:66
+#: includes/defaults.php:336 includes/defaults.php:346
+#: includes/functions-blocks.php:956 includes/functions.php:2751
+msgid "Email"
+msgstr "E-mail"
+
+#: addons/emails/includes/class-field-name-email.php:68
+msgid "Email Address (e.g. user@example.com)"
+msgstr "E-mailadres (bijv. gebruiker@example.com)"
+
+#: addons/emails/includes/class-emails-admin.php:344
+msgid "Email Name"
+msgstr "E-mail naam"
+
+#: addons/emails/admin/emails-list.php:50
+msgid "Email Subject"
+msgstr "E-mail onderwerp"
+
+#: addons/emails/includes/class-emails-admin.php:175
+msgid "Email template has been saved."
+msgstr "E-mail template is opgeslagen."
+
+#: addons/emails/admin/emails-edit.php:16
+#: addons/emails/admin/emails-list.php:16 addons/emails/admin/options.php:15
+msgid "Email Templates"
+msgstr "E-mail templates"
+
+#: includes/admin-pages.php:123
+msgid "Emails"
+msgstr "E-mails"
+
+#: includes/admin-pages.php:124
+msgid ""
+"Emails module sends transactional emails to users and allows editing the "
+"email templates content."
+msgstr ""
+"De e-mailmodule stuurt transactie e-mails naar gebruikers en maakt het "
+"bewerken van de inhoud van de e-mail template mogelijk."
+
+#: addons/core/includes/admin-pages.php:294
+msgid "Empty Price Text"
+msgstr "Lege prijstekst"
+
+#: admin/options.php:152
+msgid "Enable"
+msgstr "Activeer"
+
+#: addons/payments/includes/admin-pages.php:80
+msgid ""
+"Enable at least one <a href='%s'>Payment Gateway</a> before selecting "
+"default."
+msgstr ""
+"Schakel ten minste één <a href='%s'>betalingsgateway</a> in voordat je "
+"standaard selecteert."
+
+#: addons/core/admin/types-edit-post.php:24
+msgid "Enable comments for these ads now"
+msgstr "Schakel nu reacties voor deze advertenties in"
+
+#: includes/class-moderate-admin.php:144
+msgid "Enable Honeypot"
+msgstr "Honeypot inschakelen"
+
+#: includes/admin-pages.php:153
+msgid "Enable Real-Time Messaging with Sellers Using Better Messages"
+msgstr ""
+"Maak realtime berichtenverkeer met verkopers mogelijk met Better Messages"
+
+#: addons/emails/includes/class-emails-admin.php:353
+msgid "Enable sending this message."
+msgstr "Schakel verzenden van dit bericht in."
+
+#: includes/class-moderate-admin.php:174
+msgid "Enable Timetrap"
+msgstr "Timetrap inschakelen"
+
+#: addons/core/includes/admin-pages.php:433
+msgid "Enabled"
+msgstr "Ingeschakeld"
+
+#: includes/functions.php:2241
+msgid "Euros"
+msgstr "Euro's"
+
+#: includes/events.php:64
+msgid "Every 5 minutes"
+msgstr "Elke 5 minuten"
+
+#: addons/styling/includes/admin-pages.php:78
+msgid "Example Header"
+msgstr "Voorbeeld header"
+
+#: blocks/single-data-table/index.php:159 includes/class-rest-blocks.php:169
+#: includes/class-types-admin.php:620
+msgid "Excerpt"
+msgstr "Samenvatting"
+
+#: includes/class-types-admin.php:585
+msgid "Exclude From Search"
+msgstr "Uitsluiten van zoeken"
+
+#: includes/class-types-admin.php:588
+msgid "Exclude posts with this post type from front end search results."
+msgstr "Sluit berichten met dit berichttype uit van front-end zoekresultaten."
+
+#: includes/admin-pages.php:202
+msgid ""
+"Expand your classifieds site globally with seamless multi-currency support."
+msgstr ""
+"Breid uw advertentiesite uit naar de rest van de wereld met naadloze "
+"ondersteuning voor meerdere valuta."
+
+#: includes/admin-post-type.php:506 includes/admin-post-type.php:746
+msgid "Expired"
+msgstr "Verlopen"
+
+#: wpadverts.php:226
+msgid "Expired <span class=\"count\">(%s)</span>"
+msgid_plural "Expired <span class=\"count\">(%s)</span>"
+msgstr[0] "<span class=\"count\">(%s)</span> verlopen"
+msgstr[1] "<span class=\"count\">(%s)</span> verlopen"
+
+#: addons/payments/includes/class-emails-integration.php:254
+msgid "Expired Ad has been renewed (action required)."
+msgstr "Verlopen advertentie is vernieuwd (actie vereist)."
+
+#: addons/payments/includes/class-emails-integration.php:239
+msgid "Expired Ad has been renewed."
+msgstr "Verlopen advertentie is verlengd."
+
+#: addons/core/includes/admin-pages.php:395
+msgid "Expired Ad HTTP Status"
+msgstr "HTTP-status van verlopen advertentie"
+
+#: addons/core/includes/admin-pages.php:388
+#: addons/core/includes/admin-pages.php:389
+msgid "Expired Ads Handling"
+msgstr "Verlopen advertentie verwerking"
+
+#: includes/admin-post-type.php:748
+msgid "Expired:"
+msgstr "Verlopen:"
+
+#: includes/admin-post-type.php:364
+msgid "Expired: <b>%s</b>"
+msgstr "Verlopen: <b>%s</b>"
+
+#: includes/admin-post-type.php:578
+msgid "Expires"
+msgstr "Verloopt"
+
+#: templates/manage.php:39
+msgid "Expires %s"
+msgstr "Verloopt %s"
+
+#: includes/admin-post-type.php:747
+msgid "Expires:"
+msgstr "Verloopt:"
+
+#: includes/admin-post-type.php:366
+msgid "Expires: <b>%s</b>"
+msgstr "Vervalt: <b>%s</b>"
+
+#: addons/styling/admin/options.php:63 addons/styling/admin/options.php:195
+#: addons/styling/admin/options.php:366
+msgid "Extra Large"
+msgstr "Extra groot"
+
+#: addons/styling/admin/options.php:59 addons/styling/admin/options.php:191
+#: addons/styling/admin/options.php:362
+msgid "Extra Small"
+msgstr "Extra klein"
+
+#: addons/styling/admin/options.php:74 addons/styling/admin/options.php:206
+#: addons/styling/admin/options.php:377
+msgid "Extra Thick"
+msgstr "Extra vet"
+
+#: addons/payments/payments.php:88
+msgid "Failed <span class=\"count\">(%s)</span>"
+msgid_plural "Failed <span class=\"count\">(%s)</span>"
+msgstr[0] "Mislukt <span class=\"count\">(%s)</span>"
+msgstr[1] "Mislukt <span class=\"count\">(%s)</span>"
+
+#: addons/payments/payments.php:83
+msgctxt "failed status payment"
+msgid "Failed"
+msgstr "Mislukt"
+
+#: addons/featured/featured.php:161
+msgid "Feature this ad - it will be styled differently and sticky"
+msgstr "Toon deze advertentie - deze wordt anders gestyled en sticky"
+
+#: addons/featured/featured.php:256 addons/featured/featured.php:292
+#: addons/featured/featured.php:315 includes/gallery.php:335
+#: includes/gallery.php:453
+msgid "Featured"
+msgstr "Uitgelicht"
+
+#: addons/featured/admin/options.php:15 includes/admin-pages.php:140
 msgid "Featured Ads"
 msgstr "Aanbevolen advertenties"
 
-#: addons/featured/admin/options.php:22
-msgid "http://wpadverts.com/documentation/featured-ads/"
-msgstr "http://wpadverts.com/documentation/featured-ads/"
+#: includes/class-widget-ads.php:175
+msgid "Featured Only"
+msgstr "Alleen uitgelicht"
 
-#: addons/featured/admin/options.php:22
-msgid "View Documentation"
-msgstr "Documentatie bekijken"
+#: includes/admin-pages.php:137
+msgid "Features"
+msgstr "Functies"
 
-#: addons/featured/featured.php:69
-msgid "Display this listing as featured."
-msgstr "Toon deze advertentie als aanbevolen."
+#: includes/admin-pages.php:166
+msgid "Fee Per Category"
+msgstr "Vergoeding per categorie"
 
-#: addons/featured/featured.php:159
-msgid "Feature this ad - it will be styled differently and sticky"
+#: includes/defaults.php:327
+msgid "Field cannot be empty."
+msgstr "Veld mag niet leeg zijn."
+
+#: includes/ajax.php:345
+msgid "File could not be deleted."
+msgstr "Bestand kon niet worden verwijderd."
+
+#: includes/ajax.php:414
+msgid "File does not exist."
+msgstr "Bestand bestaat niet."
+
+#: includes/gallery.php:529
+msgid "File name:"
+msgstr "Bestandsnaam:"
+
+#: includes/gallery.php:541
+msgid "File size:"
+msgstr "Bestandsgrootte:"
+
+#: includes/gallery.php:533
+msgid "File type:"
+msgstr "Bestandstype:"
+
+#: blocks/single-gallery/templates/gallery.php:47
+msgid "File: "
+msgstr "Bestand:"
+
+#: addons/core/includes/admin-pages.php:548
+msgid "Fill"
+msgstr "Vullen"
+
+#: addons/payments/templates/publish-payment.php:52
+msgid "Fill Payment Form"
+msgstr "Vul het betalingsformulier in"
+
+#: addons/emails/admin/emails-list.php:40
+#: addons/emails/admin/emails-list.php:135
+#: addons/payments/admin/payment-history-list.php:68
+msgid "Filter"
+msgstr "Filter"
+
+#: addons/core/admin/types-icon-picker.php:7
+msgid "Filter ..."
+msgstr "Filter…"
+
+#: addons/emails/admin/emails-list.php:29
+#: addons/emails/admin/emails-list.php:128
+msgid "Filter By Module"
+msgstr "Filteren op module"
+
+#: addons/emails/admin/emails-list.php:35
+msgid "Filter By Recipient"
+msgstr "Filteren op ontvanger"
+
+#: includes/admin-pages.php:417
+msgid "Filter Icons ..."
+msgstr "Filter pictogrammen..."
+
+#: templates/list.php:91
+msgid "Filter Results"
+msgstr "Resultaten filteren"
+
+#: addons/emails/includes/class-field-name-email.php:82
+msgid "First Name"
+msgstr "Voornaam"
+
+#: addons/styling/admin/options.php:335
+msgid "Flat"
+msgstr "Vlak"
+
+#: includes/gallery.php:575
+msgid "Flip Horizontally"
+msgstr "Horizontaal spiegelen"
+
+#: includes/gallery.php:574
+msgid "Flip Vertically"
+msgstr "Verticaal spiegelen"
+
+#: addons/styling/admin/options.php:79 addons/styling/admin/options.php:211
+msgid "Font Weight"
+msgstr "Lettertype gewicht"
+
+#: addons/styling/admin/options.php:18
+msgid "Forms"
+msgstr "Formulieren"
+
+#: addons/payments/admin/pricing-list.php:84 addons/payments/payments.php:343
+#: addons/payments/payments.php:398 addons/payments/payments.php:482
+#: addons/payments/payments.php:935
+msgid "Free"
+msgstr "Gratis"
+
+#: addons/payments/payments.php:1064
+msgid "Free Renewal automatically marked as completed."
+msgstr "Gratis verlenging automatisch gemarkeerd als voltooid."
+
+#: addons/payments/payments.php:1049
+msgid "Free Renewals cannot be used more than once every %d days."
 msgstr ""
-"Licht deze advertentie uit - weergave in een andere stijl en de advertentie "
-"wordt \"sticky\"."
+"Gratis verlengingen kunnen niet meer dan eens per %d dagen worden gebruikt."
 
-#: addons/featured/featured.php:248 addons/featured/featured.php:284
-#: addons/featured/featured.php:307 includes/gallery.php:104
-#: includes/gallery.php:221
-msgid "Featured"
-msgstr "Aanbevolen"
+#: addons/emails/includes/class-emails-admin.php:367
+msgid "From"
+msgstr "Van"
 
+#: blocks/list/index.php:170 blocks/manage/class-manage-engine.php:42
+#: blocks/search/index.php:142 includes/shortcodes.php:112
+msgid "From A to Z"
+msgstr "Van A naar Z"
+
+#: addons/contact-form/includes/admin-pages.php:112
+msgid "From Email"
+msgstr "Van e-mail"
+
+#: addons/contact-form/includes/admin-pages.php:105
+msgid "From Name"
+msgstr "Van naam"
+
+#: blocks/list/index.php:171 blocks/manage/class-manage-engine.php:43
+#: blocks/search/index.php:143 includes/shortcodes.php:113
+msgid "From Z to A"
+msgstr "Van Z naar A"
+
+#: addons/styling/admin/options.php:64 addons/styling/admin/options.php:196
+#: addons/styling/admin/options.php:367
+msgid "Full"
+msgstr "Volledig"
+
+#: addons/emails/includes/class-field-name-email.php:64
+msgid "Full Name"
+msgstr "Volledige naam"
+
+#: includes/class-gallery-helper.php:319
+msgid "Full Screen"
+msgstr "Volledig scherm"
+
+#: addons/core/admin/moderate.php:16 addons/core/admin/options-gallery.php:16
+#: addons/core/admin/options.php:16 addons/core/admin/types-edit-post.php:7
+#: addons/core/admin/types-list.php:24 includes/admin-post-type.php:555
+#: includes/defaults.php:120
+msgid "Gallery"
+msgstr "Galerij"
+
+#: includes/gallery.php:818
+msgid "Gallery - Full Size"
+msgstr "Galerij - volle grootte"
+
+#: includes/gallery.php:823
+msgid "Gallery - Slider"
+msgstr "Galerij - slider"
+
+#: addons/core/includes/admin-pages.php:508
+msgid "Gallery Pagination"
+msgstr "Galerij paginering"
+
+#: addons/core/includes/admin-pages.php:556
+#: addons/core/includes/admin-pages.php:557
+msgid "Gallery Upload"
+msgstr "Galerij upload"
+
+#: addons/payments/admin/payment-history-edit.php:36
+msgid "Gateway"
+msgstr "Methode"
+
+#: addons/core/admin/types-edit-post.php:68
+msgid "General"
+msgstr "Algemeen"
+
+#: admin/options.php:141
+msgid "Get This Addon"
+msgstr "Verkrijg deze add-on"
+
+#: templates/manage-edit.php:2
+msgid "Go Back"
+msgstr "Ga terug"
+
+#: blocks/manage/templates/manage-edit.php:16
+msgid "Go back"
+msgstr "Ga terug"
+
+#: blocks/manage/index.php:54
+msgid "Go back to ads list"
+msgstr "Ga terug naar het advertentie overzicht"
+
+#: includes/class-widget-categories.php:273
+msgid "Go Up (%s)"
+msgstr "Ga omhoog (%s)"
+
+#: includes/class-widget-categories.php:275
+msgid "Go Up (Home)"
+msgstr "Ga omhoog (Home)"
+
+#: addons/styling/admin/options.php:325
+msgid "Gray"
+msgstr "Grijs"
+
+#. Author of the plugin/theme
+msgid "Greg Winiarski"
+msgstr "Greg Winiarski"
+
+#: templates/list.php:50
+msgid "Grid"
+msgstr "Raster"
+
+#: addons/core/includes/admin-pages.php:446
+msgid "Grid (2 or more columns)"
+msgstr "Raster (2 of meer kolommen)"
+
+#: addons/emails/admin/emails-edit.php:51
+msgid "Header Name"
+msgstr "Headernaam"
+
+#: addons/payments/includes/class-emails-integration.php:165
+msgid ""
+"Hello\n"
+"your Ad titled '{$advert.post_title}' has been renewed and is visible on "
+"site again.\n"
+"\n"
+"To view your Ad you can use the link below:\n"
+"{$advert.ID|get_permalink}"
+msgstr ""
+"Hallo\n"
+"Jouw advertentie met de titel '{$advert.post_title}' is vernieuwd en is weer "
+"zichtbaar op de site.\n"
+"\n"
+"Om jouw advertentie te bekijken kan je onderstaande link gebruiken:\n"
+"{$advert.ID|get_permalink}"
+
+#: addons/payments/includes/class-emails-integration.php:240
+msgid ""
+"Hello,\n"
+"Ad titled '%s' has been renewed and published.\n"
+"\n"
+"You can view the Ad here:\n"
+"{$advert.ID|get_permalink}\n"
+"\n"
+"You can edit the Ad here:\n"
+"{$advert|admin_edit_url}"
+msgstr ""
+"Hallo,\n"
+"Advertentie getiteld '%s' is vernieuwd en gepubliceerd.\n"
+"\n"
+"Je kan de advertentie hier bekijken:\n"
+"{$advert.ID|get_permalink}\n"
+"\n"
+"Je kan de advertentie hier bewerken:\n"
+"{$advert|admin_edit_url}"
+
+#: addons/payments/includes/class-emails-integration.php:255
+msgid ""
+"Hello,\n"
+"Ad titled '{$advert.post_title}' has been renewed and is pending approval.\n"
+"\n"
+"You can view the Ad here:\n"
+"{$advert.ID|get_permalink}\n"
+"\n"
+"You can edit the Ad here:\n"
+"{$advert|admin_edit_url}"
+msgstr ""
+"Hallo,\n"
+"Advertentie getiteld '{$advert.post_title}' is vernieuwd en wacht op "
+"goedkeuring.\n"
+"Je kan de advertentie hier bekijken:\n"
+"{$advert.ID|get_permalink}\n"
+"\n"
+"Je kan de advertentie hier bewerken:\n"
+"{$advert|admin_edit_url}"
+
+#: addons/emails/includes/class-emails-messages.php:231
+msgid ""
+"Hello,\n"
+"Ad titled '{$advert.post_title}' has been updated by the user and is pending "
+"moderation.\n"
+"\n"
+"You can edit the Ad here:\n"
+"{$advert|admin_edit_url}\n"
+"\n"
+"Please either Publish or Trash it then the owner will be notified."
+msgstr ""
+"Hallo,\n"
+"De advertentie met de titel '{$advert.post_title}' is bijgewerkt door de "
+"gebruiker en wacht op moderatie.\n"
+"\n"
+"Je kunt de advertentie hier bewerken:\n"
+"{$advert|admin_edit_url}\n"
+"\n"
+"Publiceer de advertentie of verwijder deze. De eigenaar wordt dan op de "
+"hoogte gesteld."
+
+#: addons/payments/includes/class-emails-integration.php:195
+msgid ""
+"Hello,\n"
+"new Ad titled '{$advert.post_title}' (ID {$advert.ID}) has been posted and "
+"is pending payment.\n"
+"\n"
+"You will be notified again when the payment will be processed.\n"
+"\n"
+"You can edit the Ad here:\n"
+"{$advert|admin_edit_url}"
+msgstr ""
+"Hallo,\n"
+"nieuwe advertentie getiteld '{$advert.post_title}' (ID {$advert.ID}) is "
+"geplaatst en wacht op betaling.\n"
+"\n"
+"Je krijgt weer bericht wanneer de betaling wordt verwerkt.\n"
+"\n"
+"Je kan de advertentie hier bewerken:\n"
+"{$advert|admin_edit_url}"
+
+#: addons/emails/includes/class-emails-messages.php:203
+#: addons/payments/includes/class-emails-integration.php:225
+msgid ""
+"Hello,\n"
+"new Ad titled '{$advert.post_title}' has been published.\n"
+"\n"
+"You can view the Ad here:\n"
+"{$advert.ID|get_permalink}\n"
+"\n"
+"You can edit the Ad here:\n"
+"{$advert|admin_edit_url}"
+msgstr ""
+"Hallo,\n"
+"nieuwe advertentie getiteld '{$advert.post_title}' is gepubliceerd.\n"
+"\n"
+"Je kan de advertentie hier bekijken:\n"
+"{$advert.ID|get_permalink}\n"
+"\n"
+"Je kan de advertentie hier bewerken:\n"
+"{$advert|admin_edit_url}"
+
+#: addons/emails/includes/class-emails-messages.php:217
+msgid ""
+"Hello,\n"
+"New Ad titled '{$advert.post_title}' has been saved and is pending "
+"moderation.\n"
+"\n"
+"You can edit the Ad here:\n"
+"{$advert|admin_edit_url}\n"
+"\n"
+"Please either Publish or Trash it then the owner will be notified."
+msgstr ""
+"Hallo,\n"
+"Nieuwe advertentie met de titel '{$advert.post_title}' is opgeslagen en "
+"wacht op moderatie.\n"
+"\n"
+"Je kan de advertentie hier bewerken:\n"
+"{$advert|admin_edit_url}\n"
+"\n"
+"Publiceer het of gooi het in de prullenbak, dan wordt de eigenaar op de "
+"hoogte gesteld."
+
+#: addons/payments/includes/class-emails-integration.php:210
+msgid ""
+"Hello,\n"
+"the payment for Ad '{$advert.post_title}' has been completed.\n"
+"\n"
+"You can view the payment details here:\n"
+"{$payment|admin_edit_url}"
+msgstr ""
+"Hallo,\n"
+"de betaling voor advertentie '{$advert.post_title}' is voltooid.\n"
+"\n"
+"Je kan de betalingsgegevens hier bekijken:\n"
+"{$payment|admin_edit_url}"
+
+#: addons/emails/includes/class-emails-messages.php:175
+msgid ""
+"Hello,\n"
+"we are sorry to inform you that your Ad titled '{$advert.post_title}' has "
+"been rejected by the administrator and will not be published."
+msgstr ""
+"Hallo,\n"
+"het spijt ons je te moeten meedelen dat je advertentie met de titel "
+"'{$advert.post_title}' is afgewezen door de beheerder en niet zal worden "
+"gepubliceerd."
+
+#: addons/payments/includes/class-emails-integration.php:120
+msgid ""
+"Hello,\n"
+"we have received your order {$payment|payment_order_id} and we are "
+"processing your payment.\n"
+"\n"
+"Created By: {$payment|meta:adverts_person}\n"
+"Order Date: {$payment.post_date|format_date}\n"
+"To Pay: {$payment|payment_to_pay}\n"
+"\n"
+"If you were unable to finish the payment on site you can do it using the "
+"link below.\n"
+"{$payment|payment_complete_url}"
+msgstr ""
+"Hallo,\n"
+"we hebben je bestelling {$payment|payment_order_id} ontvangen en we zijn je "
+"betaling aan het verwerken.\n"
+"\n"
+"Gemaakt door: {$payment|meta:adverts_person}\n"
+"Besteldatum: {$payment.post_date|format_date}\n"
+"Betalen: {$payment|payment_to_pay}\n"
+"\n"
+"Als je de betaling niet ter plaatse kon afronden, kun je dat doen via "
+"onderstaande link.\n"
+"{$betaling|payment_complete_url}"
+
+#: addons/emails/includes/class-emails-messages.php:161
+msgid ""
+"Hello,\n"
+"your Ad titled '{$advert.post_title} has been approved.\n"
+"\n"
+"To view your Ad you can use the link below:\n"
+"{$advert.ID|get_permalink}"
+msgstr ""
+"Hallo,\n"
+"je advertentie met de titel '{$advert.post_title} is goedgekeurd.\n"
+"\n"
+"Om jouw advertentie te bekijken kan je onderstaande link gebruiken:\n"
+"{$advert.ID|get_permalink}"
+
+#: addons/payments/includes/class-emails-integration.php:150
+msgid ""
+"Hello,\n"
+"your Ad titled '{$advert.post_title}' has been approved.\n"
+"\n"
+"To view your Ad you can use the link below:\n"
+"{$advert.ID|get_permalink}"
+msgstr ""
+"Hallo,\n"
+"je advertentie met de titel '{$advert.post_title}' is goedgekeurd.\n"
+"\n"
+"Om je advertentie te bekijken kan je onderstaande link gebruiken:\n"
+"{$advert.ID|get_permalink}"
+
+#: addons/emails/includes/class-emails-messages.php:133
+msgid ""
+"Hello,\n"
+"your Ad titled '{$advert.post_title}' has been published.\n"
+"\n"
+"To view your Ad you can use the link below:\n"
+"{$advert.ID|get_permalink}"
+msgstr ""
+"Hallo,\n"
+"je advertentie met de titel '{$advert.post_title}' is gepubliceerd.\n"
+"\n"
+"Om jouw advertentie te bekijken kan je onderstaande link gebruiken:\n"
+"{$advert.ID|get_permalink}"
+
+#: addons/emails/includes/class-emails-messages.php:147
+msgid ""
+"Hello,\n"
+"your Ad titled '{$advert.post_title}' has been saved and is pending "
+"moderation.\n"
+"\n"
+"Once the administrator will approve or reject your Ad you will be notified "
+"by email."
+msgstr ""
+"Hallo,\n"
+"je advertentie met de titel '{$advert.post_title}' is opgeslagen en wacht op "
+"moderatie.\n"
+"\n"
+"Zodra de beheerder jouw advertentie goedkeurt of afwijst, word je per e-mail "
+"op de hoogte gesteld."
+
+#: addons/payments/includes/class-emails-integration.php:105
+msgid ""
+"Hello,\n"
+"your Ad titled '{$advert.post_title}' has been saved and is pending payment."
+"\n"
+"\n"
+"We will notify you once the payment will be processed."
+msgstr ""
+"Hallo,\n"
+"je advertentie met de titel '{$advert.post_title}' is opgeslagen en wacht op "
+"betaling.\n"
+"\n"
+"We laten het je weten zodra de betaling is verwerkt."
+
+#: addons/emails/includes/class-emails-messages.php:189
+msgid ""
+"Hello,\n"
+"your Ad titled '{$advert.post_title}' has expired and is no longer available "
+"on site."
+msgstr ""
+"Hallo,\n"
+"je advertentie met de titel '{$advert.post_title}' is verlopen en is niet "
+"langer beschikbaar op de site."
+
+#: addons/payments/includes/class-emails-integration.php:180
+msgid ""
+"Hello,\n"
+"your Ad titled '{$post.post_title}' has been renewed and is pending "
+"moderation.\n"
+"\n"
+"Once the administrator will approve or reject your Ad you will be notified "
+"by email."
+msgstr ""
+"Hallo,\n"
+"Je advertentie met de titel '{$post.post_title}' is vernieuwd en wacht op "
+"moderatie.\n"
+"\n"
+"Zodra de beheerder de advertentie goedkeurt of afwijst, word je per e-mail "
+"op de hoogte gesteld."
+
+#: addons/payments/includes/class-emails-integration.php:135
+msgid ""
+"Hello,\n"
+"your order {$payment|payment_order_id} has been proccessed and marked as "
+"completed."
+msgstr ""
+"Hallo,\n"
+"je bestelling {$payment|payment_order_id} is verwerkt en gemarkeerd als "
+"voltooid."
+
+#: includes/admin-pages.php:84
+msgid "Here you can configure most basic options, applicable on any site."
+msgstr ""
+"Hier kan je de meeste basisopties voor advertenties configureren die op elke "
+"site van toepassing zijn."
+
+#: addons/styling/admin/options.php:388
+msgid "Hide"
+msgstr "Verbergen"
+
+#: includes/class-widget-categories.php:92
+msgid "Hide empty"
+msgstr "Verberg leeg"
+
+#: addons/payments/admin/payment-history-list.php:65
+msgid "Hide Free"
+msgstr "Verberg gratis"
+
+#: includes/class-types-admin.php:713
+msgid "Hierarchical"
+msgstr "Hiërarchisch"
+
+#: includes/class-moderate-admin.php:112
+msgid ""
+"HINT: Jeff Starr from PerishablePress.com compiled a great <a href=\"https:"
+"//perishablepress.com/wp/wp-content/online/code/wordpress-ultimate-comment-"
+"blacklist.txt\">list of common spam phrases</a>."
+msgstr ""
+"HINT: Jeff Starr van PerishablePress.com heeft een geweldige <a href=\"https:"
+"//perishablepress.com/wp/wp-content/online/code/wordpress-ultimate-comment-"
+"blacklist.txt\">lijst met veelvoorkomende spamwoorden samengesteld</a>."
+
+#: includes/class-moderate-admin.php:135
+msgid "Honeypot"
+msgstr "Honeypot"
+
+#: includes/class-moderate-admin.php:157
+msgid "Honeypot Name"
+msgstr "Honeypot naam"
+
+#: includes/class-moderate-admin.php:150
+msgid "Honeypot Title"
+msgstr "Honeypot titel"
+
+#: includes/functions.php:2249
+msgid "Hong Kong Dollar"
+msgstr "Hong Kong dollar"
+
+#: addons/core/includes/admin-pages.php:550
+msgid "How images should be displayed in the gallery."
+msgstr "Hoe afbeeldingen in de galerij moeten worden weergegeven."
+
+#: includes/defaults.php:315
+msgid "HTML - removes unsafe HTML tags and attributes."
+msgstr "HTML - verwijdert onveilige HTML-tags en -attributen."
+
+#. Plugin URI of the plugin/theme
+msgid "https://wpadverts.com/"
+msgstr "https://wpadverts.com/"
+
+#: includes/functions.php:2250
+msgid "Hungarian Forint"
+msgstr "Hongaarse forint"
+
+#: includes/admin-pages.php:420
+msgid "Icons V4"
+msgstr "Pictogrammen V6"
+
+#: includes/admin-pages.php:421
+msgid "Icons V6"
+msgstr "Pictogrammen V6"
+
+#: addons/payments/admin/payment-history-list.php:78
+#: blocks/single-data-table/index.php:145 includes/class-rest-blocks.php:161
+msgid "ID"
+msgstr "ID"
+
+#: addons/core/includes/admin-pages.php:563
+msgid "Image Editor"
+msgstr "Afbeelding editor"
+
+#: addons/core/includes/admin-pages.php:573
+msgid "Image Editor Capability"
+msgstr "Afbeelding editor rechten"
+
+#: addons/core/includes/admin-pages.php:542
+msgid "Image Fit"
+msgstr "Afbeelding fit"
+
+#: includes/gallery.php:819
+msgid ""
+"Image in original size - used on classified details page in the gallery."
+msgstr ""
+"Afbeelding in originele grootte - gebruikt op de geclassificeerde "
+"detailpagina in de galerij."
+
+#: includes/gallery.php:570
+msgid "Image Manipulation"
+msgstr "Afbeeldings-manipulatie"
+
+#: includes/gallery.php:834
+msgid "Image resized to %d x %d - the image visible in upload preview."
+msgstr ""
+"Afbeelding aangepast naar %d x %d - de afbeelding zichtbaar in "
+"uploadvoorbeeld."
+
+#: includes/gallery.php:824
+msgid ""
+"Image resized to %d x %d - used in the images slider on classified details "
+"page."
+msgstr ""
+"Afbeelding aangepast naar %d x %d - gebruikt in de slider voor afbeeldingen "
+"op de pagina met geclassificeerde details."
+
+#: includes/gallery.php:829
+msgid "Image resized to %d x %d - used on the classifieds list."
+msgstr ""
+"Afbeelding aangepast naar %d x %d - gebruikt op de lijst met advertenties."
+
+#: includes/gallery.php:581
+msgid "Image Size"
+msgstr "Afbeeldingsgrootte"
+
+#: addons/core/includes/admin-pages.php:583
+#: addons/core/includes/admin-pages.php:584
+msgid "Image Sizes"
+msgstr "Afbeeldingsformaten"
+
+#: includes/admin-post-type.php:622
+msgid "in %s"
+msgstr "in %s"
+
+#: includes/gallery.php:409
+msgid ""
+"In 'Preview' select 'Video' and click 'Capture ...' button to generate "
+"thumbnails."
+msgstr ""
+"In 'Preview' selecteer 'Video' en klik op de knop 'Opnemen...' om thumbnails "
+"te genereren."
+
+#: blocks/manage/templates/manage-list-item.php:49 templates/manage.php:26
+msgid "Inactive — This Ad expired."
+msgstr "Inactief — Deze advertentie is verlopen."
+
+#: blocks/manage/templates/manage-list-item.php:43 templates/manage.php:22
+msgid "Inactive — This Ad is in moderation."
+msgstr "Inactief — Deze advertentie is met behandeling."
+
+#: addons/payments/payments.php:1246 addons/payments/payments.php:1286
+msgid "Inactive — Waiting for payment."
+msgstr "Non-actief - Wacht op betaling."
+
+#: includes/ajax.php:341
+msgid "Incorrect attachment ID."
+msgstr "Onjuiste bijlage-ID."
+
+#: includes/ajax.php:386
+msgid "Incorrect field name."
+msgstr "Onjuiste veldnaam."
+
+#: includes/ajax.php:247 includes/ajax.php:466 includes/ajax.php:562
+#: includes/ajax.php:638 includes/ajax.php:851
+msgid "Incorrect Post or Attachment ID."
+msgstr "Onjuist bericht- of bijlage-ID."
+
+#: blocks/manage/class-manage-engine.php:248 includes/shortcodes.php:436
+#: includes/shortcodes.php:540
+msgid "Incorrect post status [%s]."
+msgstr "Onjuiste berichtstatus [%s]."
+
+#: includes/defaults.php:388
+msgid "Incorrect string length."
+msgstr "Onjuiste string lengte."
+
+#: includes/functions.php:2252
+msgid "Indian Rupees"
+msgstr "Indiase roepie"
+
+#: addons/styling/admin/options.php:347
+msgid "Inside"
+msgstr "Binnen"
+
+#: includes/defaults.php:301
+msgid "Integer - converts string to absolute integer."
+msgstr "Integer - converteert een string naar geheel getal."
+
+#: includes/admin-pages.php:103
+msgid ""
+"Integrate user Ads with BuddyPress profiles, registration and private "
+"messages."
+msgstr ""
+"Integreer gebruikersadvertenties met BuddyPress-profielen, registratie en "
+"privéberichten."
+
+#: addons/styling/admin/options.php:386
+msgid "Interline"
+msgstr "tussenlijn"
+
+#: includes/ajax.php:1000
+msgid "Invalid Nonce."
+msgstr "Ongeldige nonce."
+
+#: includes/class-types-admin.php:220 includes/class-types-admin.php:248
+#: includes/class-types-admin.php:294
+msgid "Invalid nonce."
+msgstr "Ongeldige nonce."
+
+#: includes/ajax.php:1278 includes/ajax.php:1325
+msgid "Invalid param name."
+msgstr "Ongeldige parameternaam."
+
+#: includes/class-form.php:176 includes/class-upload-helper.php:122
+msgid "Invalid value."
+msgstr "Ongeldige waarde."
+
+#: includes/functions.php:2268
+msgid "Iranian Rial"
+msgstr "Iraanse rial"
+
+#: addons/emails/includes/class-emails-admin.php:351
+msgid "Is Active"
+msgstr "Is actief"
+
+#: includes/class-moderate-admin.php:141 includes/class-moderate-admin.php:171
+msgid "Is Enabled"
+msgstr "Is ingeschakeld"
+
+#: includes/defaults.php:366
+msgid "Is Integer"
+msgstr "Is integer"
+
+#: includes/defaults.php:376
+msgid "Is Number"
+msgstr "Is nummer"
+
+#: includes/defaults.php:325
+msgid "Is Required"
+msgstr "Is vereist"
+
+#: includes/functions.php:2251
+msgid "Israeli Shekel"
+msgstr "Israëlische sjekel"
+
+#: includes/functions.php:3235
+msgid ""
+"It seems you are not the post %d author. Please refresh the page and try "
+"again."
+msgstr ""
+"Het lijkt erop dat je niet auteur van het bericht %d bent. Ververs de pagina "
+"en probeer het opnieuw."
+
+#: blocks/manage/index.php:53
+msgid "Item deleted successfully."
+msgstr "Item succesvol verwijderd."
+
+#: includes/defaults.php:90
+msgid "Item Information"
+msgstr "Item informatie"
+
+#: addons/payments/admin/payment-history-list.php:177
+msgid "Items: <strong>%d</strong>. Revenue <strong>%s</strong>."
+msgstr "Artikelen: <strong>%d</strong>. Opbrengst <strong>%s</strong>."
+
+#: includes/functions.php:2253
+msgid "Japanese Yen"
+msgstr "Japanse yen"
+
+#: includes/class-widget-ads.php:93
+msgid "Keyword"
+msgstr "Trefwoord"
+
+#: includes/defaults.php:169
+msgid "Keyword ..."
+msgstr "Trefwoord ..."
+
+#: includes/functions.php:2254
+msgid "Kuwaiti Dinar"
+msgstr "Kuwaiti dinar"
+
+#: includes/class-types-admin.php:579 includes/class-types-admin.php:699
+msgid "Label"
+msgstr "Label"
+
+#: addons/core/admin/types-edit-post.php:69
+msgid "Labels"
+msgstr "Labels"
+
+#: addons/styling/admin/options.php:62 addons/styling/admin/options.php:194
+#: addons/styling/admin/options.php:365 addons/styling/admin/options.php:399
+msgid "Large"
+msgstr "Groot"
+
+#: addons/payments/admin/payment-history-list.php:56
+msgid "Last month"
+msgstr "Afgelopen maand"
+
+#: addons/emails/includes/class-field-name-email.php:97
+msgid "Last Name"
+msgstr "Achternaam"
+
+#: includes/gallery.php:549
+msgid "Length:"
+msgstr "Lengte:"
+
+#: includes/class-updates-manager.php:116
+msgid "License"
+msgstr "Licentie"
+
+#: includes/class-updates-manager.php:316
+#: includes/class-updates-manager.php:331
+msgid "License ..."
+msgstr "Licentie ..."
+
+#: addons/core/includes/admin-pages.php:533
+msgid "Lightbox"
+msgstr "Lightbox"
+
+#: templates/list.php:51
+msgid "List"
+msgstr "Lijst"
+
+#: addons/core/includes/admin-pages.php:447
+msgid "List (1 column)"
+msgstr "Lijst (1 kolom)"
+
+#: addons/payments/payments.php:354
+msgid "Listing"
+msgstr "Vermelding"
+
+#: addons/payments/payments.php:320 addons/payments/payments.php:906
+msgid "Listing Information"
+msgstr "Vermeldingsinformatie"
+
+#: addons/payments/payments.php:1515
+msgid "Listing Type"
+msgstr "Vermeldingstype"
+
+#: blocks/details/index.php:101 blocks/single-data-table/index.php:229
+#: blocks/single-data-table/index.php:236 includes/class-rest-blocks.php:209
+#: includes/class-rest-blocks.php:247 includes/class-widget-ads.php:98
+#: includes/defaults.php:154 templates/single.php:60
+msgid "Location"
+msgstr "Locatie"
+
+#: includes/class-rest-blocks.php:213
+msgid "Location (Formatted)"
+msgstr "Locatie (opgemaakt)"
+
+#: includes/defaults.php:181
+msgid "Location ..."
+msgstr "Locatie..."
+
+#: includes/admin-pages.php:160
+msgid "Locations Taxonomy, Google Maps integration and more."
+msgstr "Locaties taxonomie, Google Maps integratie en meer."
+
+#: blocks/manage/class-manage-engine.php:63
+#: blocks/single-contact/templates/contact-disabled.php:28
+msgid "Login"
+msgstr "Login"
+
+#: includes/admin-post-type.php:331
+msgid "M j, Y @ G:i"
+msgstr "M j, Y @ G:i"
+
+#: wpadverts.php:408
+msgid "Main"
+msgstr "Hoofd"
+
+#: includes/functions.php:2255
+msgid "Malaysian Ringgits"
+msgstr "Maleisische ringgit"
+
+#: blocks/manage/class-manage-engine.php:166
+msgid "Manage"
+msgstr "Beheren"
+
+#: addons/core/includes/admin-pages.php:332
+msgid "Manage Moderation"
+msgstr "Moderatie beheren"
+
+#: includes/admin-pages.php:159
+msgid "Maps And Locations"
+msgstr "Kaarten en locaties"
+
+#: includes/admin-pages.php:187
+msgid "Mark As Sold"
+msgstr "Markeren als verkocht"
+
+#: includes/class-moderate-admin.php:123
+msgid "Match exact phrases"
+msgstr "Match exacte zinnen"
+
+#: includes/class-moderate-admin.php:122
+msgid "Match partial phrases"
+msgstr "Match gedeeltelijk zinnen"
+
+#: includes/defaults.php:400
+msgid "Max Choices"
+msgstr "Maximale keuzes"
+
+#: addons/core/includes/admin-pages.php:689
+msgid "max. height"
+msgstr "max. hoogte"
+
+#: includes/class-moderate-admin.php:97
+msgid "Max. Links In The Content"
+msgstr "Maximaal aantal links in de inhoud"
+
+#: addons/core/includes/admin-pages.php:684
+msgid "max. width"
+msgstr "max. breedte"
+
+#: addons/core/includes/admin-pages.php:314
+msgid "Media Library"
+msgstr "Mediabibliotheek"
+
+#: addons/styling/admin/options.php:61 addons/styling/admin/options.php:193
+#: addons/styling/admin/options.php:346 addons/styling/admin/options.php:364
+#: addons/styling/admin/options.php:398
+msgid "Medium"
+msgstr "Medium"
+
+#: includes/class-types-admin.php:606
+msgid "Menu Icon"
+msgstr "Menu pictogram"
+
+#: includes/class-types-admin.php:594
+msgid "Menu Position"
+msgstr "Menu positie"
+
+#: addons/bank-transfer/includes/admin-pages.php:74
+#: addons/contact-form/contact-form.php:584
+msgid "Message"
+msgstr "Bericht"
+
+#: addons/emails/admin/emails-list.php:54
+msgid "Message Enabled"
+msgstr "Bericht ingeschakeld"
+
+#: includes/functions.php:2256
+msgid "Mexican Peso"
+msgstr "Mexicaanse peso"
+
+#: blocks/single-data-table/index.php:187
+#: blocks/single-data-table/index.php:194
+msgid "Modified"
+msgstr "Aangepast"
+
+#: includes/class-rest-blocks.php:185
+msgid "Modified Date"
+msgstr "Gewijzigde datum"
+
+#: includes/class-rest-blocks.php:189
+msgid "Modified Date (GMT)"
+msgstr "Gewijzigde datum (GMT)"
+
+#: addons/emails/admin/emails-list.php:79
+msgid "Module / %s"
+msgstr "Module / %s"
+
+#: wpadverts.php:672
+msgid "Module activated successfully."
+msgstr "Module succesvol geactiveerd."
+
+#: includes/admin-pages.php:80
+msgid "Modules"
+msgstr "Modules"
+
+#: admin/options.php:87
+msgid "Modules and Extensions"
+msgstr "Modules en uitbreidingen"
+
+#: includes/defaults.php:287
+msgid "Money - converts string formatted as price to float."
+msgstr "Geld - converteert een string die is opgemaakt als prijs naar float."
+
+#: templates/manage.php:78
+msgid "More"
+msgstr "Meer"
+
+#: blocks/list/index.php:164 blocks/manage/class-manage-engine.php:36
+#: blocks/search/index.php:136 includes/shortcodes.php:106
+msgid "Most Expensive First"
+msgstr "Duurste eerst"
+
+#: addons/core/admin/types-list.php:48 addons/core/admin/types-list.php:100
+#: includes/class-types-admin.php:572 includes/class-types-admin.php:692
+msgid "Name"
+msgstr "Naam"
+
+#: includes/admin-pages.php:195
+msgid "Native analytics implementation independent of any third parties."
+msgstr "Native analytics-implementatie, onafhankelijk van derde partijen."
+
+#: includes/admin-post-type.php:606
+msgid "Never"
+msgstr "Nooit"
+
+#: addons/payments/payments.php:442 addons/payments/payments.php:523
+#: includes/admin-post-type.php:291 includes/admin-post-type.php:343
+#: includes/admin-post-type.php:351
+msgid "Never Expires"
+msgstr "Verloopt nooit"
+
+#: addons/payments/includes/class-emails-integration.php:224
+msgid "New Ad has been paid and published"
+msgstr "Nieuwe advertentie is betaald en gepubliceerd"
+
+#: addons/emails/includes/class-emails-messages.php:202
+msgid "New Ad has been published."
+msgstr "Er is een nieuwe advertentie geplaatst."
+
+#: addons/payments/includes/class-emails-integration.php:194
+msgid "New Ad has been saved (waiting for payment)."
+msgstr "Nieuwe advertentie is opgeslagen (wacht op betaling)."
+
+#: addons/emails/includes/class-emails-messages.php:216
+msgid "New Ad is pending (action required)."
+msgstr "Nieuwe advertentie is in behandeling (actie vereist)."
+
+#: wpadverts.php:243
+msgid "New Classified"
+msgstr "Nieuwe advertentie"
+
+#: addons/payments/admin/pricing-list.php:73
+msgid "New Post"
+msgstr "Nieuw bericht"
+
+#: addons/payments/includes/admin-pages.php:808
+msgid "New Posting"
+msgstr "Nieuwe plaatsing"
+
+#: addons/payments/includes/admin-pages.php:162
+msgid "New pricing has been added."
+msgstr "Er zijn nieuwe prijzen toegevoegd."
+
+#: includes/functions.php:2258
+msgid "New Zealand Dollar"
+msgstr "Nieuw-Zeelandse dollar"
+
+#: blocks/list/index.php:156 blocks/list/index.php:184
+#: blocks/manage/class-manage-engine.php:28
+#: blocks/manage/class-manage-engine.php:110 blocks/search/index.php:128
+#: blocks/search/index.php:150 includes/shortcodes.php:98
+#: includes/shortcodes.php:120
+msgid "Newest First"
+msgstr "Nieuwste eerst"
+
+#: includes/class-gallery-helper.php:461 includes/class-gallery-helper.php:550
+msgid "Next"
+msgstr "Volgende"
+
+#: addons/core/includes/admin-pages.php:510
+msgid "Next and Previous Buttons"
+msgstr "Vorige en Volgende knoppen"
+
+#: addons/payments/admin/payment-history-list.php:167
+msgid "Next automatic cleanup <strong>%s</strong>."
+msgstr "Volgende automatische opschoning <strong>%s</strong>."
+
+#: includes/functions.php:2257
+msgid "Nigerian Naira"
+msgstr "Nigeriaanse naira"
+
+#: blocks/categories/templates/categories-all.php:43
+#: includes/class-widget-categories.php:326
+#: includes/class-widget-categories.php:393 templates/categories-all.php:53
+#: templates/categories-top.php:24
+msgid "No categories found."
+msgstr "Geen categorieën gevonden."
+
+#: wpadverts.php:247
+msgid "No Classifieds found"
+msgstr "Geen advertenties gevonden"
+
+#: wpadverts.php:248
+msgid "No Classifieds found in the Trash"
+msgstr "Geen advertenties gevonden in de prullenbak"
+
+#: blocks/single-value/index.php:72
+msgid "no data selected!"
+msgstr "geen gegevens geselecteerd!"
+
+#: addons/payments/templates/add-payment.php:27
+#: addons/payments/templates/publish-payment.php:36
+msgid "No Payment Gateway Enabled!"
+msgstr "Geen betalingsgateway ingeschakeld!"
+
+#: blocks/list/templates/list.php:161
+#: blocks/manage/templates/manage-list.php:165 wpadverts.php:392
+msgid "No results found."
+msgstr "Geen resultaten gevonden."
+
+#: addons/payments/includes/admin-pages.php:485
+msgid "No temporary payments to delete at this time."
+msgstr "Er zijn momenteel geen tijdelijke betalingen om te verwijderen."
+
+#: addons/styling/admin/options.php:58 addons/styling/admin/options.php:71
+#: addons/styling/admin/options.php:190 addons/styling/admin/options.php:203
+#: addons/styling/admin/options.php:361 addons/styling/admin/options.php:374
+#: addons/styling/admin/options.php:396 includes/admin-post-type.php:639
+msgid "None"
+msgstr "Geen"
+
+#: addons/styling/admin/options.php:334 addons/styling/admin/options.php:344
+msgid "None (default styling)"
+msgstr "Geen (standaardstijl)"
+
+#: includes/class-types-admin.php:800
+msgid "None - you will need to create your own templates."
+msgstr "Geen - je moet je eigen templates maken."
+
+#: addons/styling/admin/options.php:82 addons/styling/admin/options.php:214
+msgid "Normal"
+msgstr "Normaal"
+
+#: includes/functions.php:2259
+msgid "Norwegian Krone"
+msgstr "Noorse kroon"
+
+#: includes/defaults.php:308
+msgid "Number - converts string to a number."
+msgstr "Nummer - converteert een string naar een getal."
+
+#: addons/core/includes/admin-pages.php:284
+msgid "Number of days Ad will be visible by default."
+msgstr "Aantal dagen dat een advertentie standaard zichtbaar is."
+
+#: addons/payments/includes/admin-pages.php:844
+msgid "Number of days the Ad will be visible."
+msgstr "Aantal dagen dat de advertentie zichtbaar is."
+
+#: addons/core/includes/admin-pages.php:527
+msgid "Number of thumbnails to scroll when clicking Previous or Next buttons."
+msgstr ""
+"Aantal thumbnails om te scrollen bij het klikken op de knop Vorige of "
+"Volgende."
+
+#: addons/core/includes/admin-pages.php:520
+msgid "Number of thumbnails to show below gallery."
+msgstr "Aantal thumbnails dat onder de galerij moet worden weergegeven."
+
+#: includes/admin-post-type.php:309 wpadverts.php:395 wpadverts.php:499
+msgid "OK"
+msgstr "OK"
+
+#: blocks/list/index.php:157 blocks/manage/class-manage-engine.php:29
+#: blocks/search/index.php:129 includes/shortcodes.php:99
+msgid "Oldest First"
+msgstr "Oudste eerst"
+
+#: includes/defaults.php:413
+msgid "One or more selected values are not available in the options list."
+msgstr ""
+"Een of meer geselecteerde waarden zijn niet beschikbaar in de optielijst."
+
+#: blocks/manage/class-manage-engine.php:54
+msgid "Only logged in users can access this page."
+msgstr "Alleen ingelogde gebruikers hebben toegang tot deze pagina."
+
+#: blocks/publish/class-publish-engine.php:682
+#: includes/class-shortcode-adverts-add.php:581 includes/shortcodes.php:279
+msgid ""
+"Only logged in users can access this page. <a href=\"%1$s\">Login</a> or <a "
+"href=\"%2$s\">Register</a>."
+msgstr ""
+"Alleen ingelogde gebruikers hebben toegang tot deze pagina. <a href=\"%1$s\">"
+"Inloggen</a> of <a href=\"%2$s\">Registreren</a>."
+
+#: blocks/single-contact/index.php:79
+msgid "Only logged-in members can contact sellers."
+msgstr "Alleen ingelogde gebruikers kunnen contact opnemen met verkopers."
+
+#: wpadverts.php:393
+msgid "Open"
+msgstr "Openen"
+
+#: addons/emails/admin/emails-edit.php:17
+#: addons/emails/admin/emails-list.php:17 addons/emails/admin/options.php:16
 #: addons/payments/admin/options.php:15
 #: addons/payments/admin/pricing-edit.php:16
 #: addons/payments/admin/pricing-list.php:16 includes/admin-pages.php:38
 msgid "Options"
 msgstr "Opties"
+
+#: includes/gallery.php:108
+msgid "or drag and drop."
+msgstr "of slepen en neerzetten."
+
+#: includes/class-widget-ads.php:149
+msgid "Order"
+msgstr "Bestelling"
+
+#: includes/gallery.php:616
+msgid "Original size:"
+msgstr "Originele grootte:"
+
+#: addons/emails/admin/emails-list.php:95 addons/styling/admin/options.php:382
+msgid "Other"
+msgstr "Andere"
+
+#: addons/payments/admin/payment-history-edit.php:82
+msgid "Paid"
+msgstr "Betaald"
+
+#: includes/class-gallery-helper.php:301
+msgid "Pause"
+msgstr "Pauzeer"
+
+#: addons/payments/admin/payment-history-edit.php:31
+msgid "Payment"
+msgstr "Betaling"
+
+#: addons/payments/includes/admin-pages.php:298
+msgid "Payment #%d does not exist or was deleted."
+msgstr "Betaling #%d bestaat niet of is verwijderd."
+
+#: addons/payments/includes/class-emails-integration.php:134
+#: addons/payments/includes/class-emails-integration.php:209
+msgid "Payment Completed ({$payment|payment_order_id})."
+msgstr "Betaling voltooid ({$payment|payment_order_id})."
+
+#: addons/bank-transfer/admin/options.php:15
+msgid "Payment Gateway / Bank Transfer"
+msgstr "Betalingsgateway / Bankoverschrijving"
+
+#: addons/bank-transfer/includes/admin-pages.php:65
+msgid "Payment gateway name visible in the frontend when making a payment."
+msgstr ""
+"Naam van de betalingsgateway zichtbaar in de frontend bij het doen van een "
+"betaling."
+
+#: includes/admin-pages.php:210
+msgid "Payment Gateways"
+msgstr "Betaling gateways"
+
+#: addons/payments/admin/payment-history-list.php:16
+#: addons/payments/payments.php:1118
+msgid "Payment History"
+msgstr "Betalingsgeschiedenis"
+
+#: addons/payments/admin/payment-history-edit.php:16
+msgid "Payment History Edit"
+msgstr "Betalingsgeschiedenis bewerking"
+
+#: addons/payments/admin/payment-history-edit.php:143
+msgid "Payment Log"
+msgstr "Betalingslog"
+
+#: addons/payments/includes/admin-pages.php:347
+msgid ""
+"Payment Method [%s] assigned to this Payment does not exist or was disabled."
+msgstr ""
+"Betalingsmethode [%s] toegewezen aan deze betaling bestaat niet of is "
+"uitgeschakeld."
+
+#: addons/bank-transfer/includes/admin-pages.php:64
+msgid "Payment Name"
+msgstr "Naam betaling"
+
+#: addons/payments/includes/class-emails-integration.php:119
+msgid "Payment Pending ({$payment|payment_order_id})."
+msgstr "Betaling in behandeling ({$payment|payment_order_id})."
+
+#: addons/payments/includes/admin-pages.php:394
+msgid "Payment updated."
+msgstr "Betaling is geüpdatet."
+
+#: addons/payments/includes/class-emails-integration.php:78
+#: includes/admin-pages.php:89
+msgid "Payments"
+msgstr "Betalingen"
+
+#: includes/admin-pages.php:220
+msgid "PayPal Payments Standard, allow users to pay for ads via PayPal."
+msgstr ""
+"Standaard PayPal Payments, stelt gebruikers in staat om via PayPal voor "
+"advertenties te betalen."
+
+#: includes/admin-pages.php:219
+msgid "PayPal Standard"
+msgstr "Standaard PayPal"
+
+#: addons/payments/payments.php:97 addons/payments/payments.php:112
+msgid "Pending <span class=\"count\">(%s)</span>"
+msgid_plural "Pending <span class=\"count\">(%s)</span>"
+msgstr[0] "<span class=\"count\">(%s)</span> in behandeling"
+msgstr[1] "<span class=\"count\">(%s)</span> in behandeling"
+
+#: includes/functions.php:2947
+msgid "Pending Ads"
+msgstr "Advertenties in afwachting"
+
+#: addons/payments/includes/admin-pages.php:649
+#: addons/payments/includes/admin-pages.php:681
+msgid "Pending Payment"
+msgstr "In afwachting van betaling"
+
+#: addons/payments/payments.php:92
+msgctxt "pending status payment"
+msgid "Pending"
+msgstr "In afwachting"
+
+#: includes/class-types-admin.php:645 includes/class-types-admin.php:722
+msgid "Permalink Prefix"
+msgstr "Permalink voorvoegsel"
+
+#: includes/functions.php:2260
+msgid "Philippine Pesos"
+msgstr "Filippijnse peso's"
+
+#: addons/contact-form/contact-form.php:80
+#: addons/contact-form/includes/class-block-details.php:102
+#: addons/contact-form/includes/class-block-details.php:123
+#: includes/functions-blocks.php:961 includes/functions.php:2746
+msgid "Phone"
+msgstr "Telefoon"
+
+#: addons/contact-form/includes/admin-pages.php:79 includes/defaults.php:78
+msgid "Phone Number"
+msgstr "Telefoonnummer"
+
+#: includes/class-moderate-admin.php:120
+msgid "Phrases Matching"
+msgstr "Zinnen die overeenkomen"
+
+#: addons/payments/templates/add-payment.php:44
+#: addons/payments/templates/publish-payment.php:63
+msgid "Place Order"
+msgstr "Plaats bestelling"
+
+#: includes/class-gallery-helper.php:300
+msgid "Play"
+msgstr "Afspelen"
+
+#: blocks/single-contact/index.php:80
+msgid "Please login or register to to send a message."
+msgstr "Log in of registreer om een bericht te sturen"
+
+#: blocks/single-gallery/templates/gallery.php:34
+msgid ""
+"Please use a different browser or download the video and play on your device."
+msgstr ""
+"Gebruik een andere browser of download de video en speel deze af op uw "
+"apparaat."
+
+#: includes/functions.php:2261
+msgid "Polish Zloty"
+msgstr "Poolse zloty"
+
+#: wpadverts.php:223
+msgctxt "post"
+msgid "Expired"
+msgstr "Verlopen"
+
+#: addons/payments/payments.php:110
+msgctxt "post"
+msgid "Pending"
+msgstr "In afwachting"
+
+#: wpadverts.php:230
+msgctxt "post"
+msgid "Temporary"
+msgstr "Tijdelijk"
+
+#: includes/class-rest-blocks.php:177
+msgid "Post Date"
+msgstr "Berichtdatum"
+
+#: includes/class-rest-blocks.php:221
+msgid "Post date (Formatted)"
+msgstr "Bericht datum (opgemaakt)"
+
+#: includes/class-rest-blocks.php:181
+msgid "Post Date (GMT)"
+msgstr "Bericht datum (GMT)"
+
+#: blocks/manage/class-manage-engine.php:287 includes/shortcodes.php:477
+msgid "Post has been updated."
+msgstr "Bericht is geüpdatet."
+
+#: includes/functions.php:3243
+msgid "Post ID not provided."
+msgstr "Bericht-ID niet opgegeven."
+
+#: includes/class-types-admin.php:236
+msgid "Post Type configuration restored to default."
+msgstr "Advertentie instellingen teruggezet naar standaard."
+
+#: wpadverts.php:238
+msgctxt "post type general name"
+msgid "Classifieds"
+msgstr "Advertenties"
+
+#: wpadverts.php:239
+msgctxt "post type singular name"
+msgid "Classified"
+msgstr "Advertentie"
+
+#: includes/class-types-admin.php:464
+msgid "Post Type updated."
+msgstr "Berichttype bijgewerkt."
+
+#: includes/class-types-admin.php:157
+msgid "Post Types"
+msgstr "Bericht typen"
+
+#: includes/admin-post-type.php:196
+msgid "Post updated, but some required data is not filled properly."
+msgstr ""
+"Bericht geüpdatet, echter sommige vereiste gegevens zijn niet correct "
+"ingevuld."
+
+#: includes/ajax.php:1008 includes/ajax.php:1069
+msgid "Post with given ID does not exist."
+msgstr "Bericht met opgegeven ID bestaat niet."
+
+#: includes/ajax.php:1215
+msgid "Post you are trying to delete does not belong to you."
+msgstr "Bericht die je probeert te verwijderen, is niet van jou."
+
+#: includes/ajax.php:1207
+msgid "Post you are trying to delete does not exist."
+msgstr "Het bericht dat je probeert te verwijderen bestaat niet."
+
+#: addons/payments/payments.php:1483
+msgid "Posting"
+msgstr "Plaatsen"
+
+#: addons/core/includes/admin-pages.php:471
+msgid "Posts Per Page"
+msgstr "Berichten per pagina"
+
+#: includes/functions.php:2242
+msgid "Pounds Sterling"
+msgstr "Pond sterling"
+
+#: addons/core/includes/admin-pages.php:358
+msgid "Prefix - $10"
+msgstr "Voorvoegsel - $10"
+
+#: blocks/publish/templates/publish-preview.php:16
+#: includes/class-shortcode-adverts-add.php:320
+#: includes/class-shortcode-adverts-add.php:450 includes/gallery.php:484
+#: templates/add.php:47 templates/manage.php:58
+msgid "Preview"
+msgstr "Voorbeeld bekijken"
+
+#: templates/manage-edit.php:8
+msgid "Preview Ad"
+msgstr "Voorbeeld advertentie"
+
+#: blocks/publish/class-publish-engine.php:342
+#: blocks/publish/class-publish-engine.php:516
+msgid "Preview Listing"
+msgstr "Voorbeeld advertentie"
+
+#: includes/class-types-admin.php:657 includes/class-types-admin.php:744
+msgid ""
+"Preview: %s To create more advanced permalink schemes consider using a "
+"plugin like <a href=\"https://wordpress.org/plugins/custom-post-type-"
+"permalinks/\">Custom Post Types Permalinks</a>."
+msgstr ""
+"Voorbeeld: %s als je meer geavanceerde permalink schema's wil maken, kan je "
+"overwegen een plugin te gebruiken zoals <a href=\"https://wordpress."
+"org/plugins/custom-post-type-permalinks/\">Custom Post Types Permalinks</a>."
+
+#: includes/class-gallery-helper.php:457 includes/class-gallery-helper.php:517
+msgid "Previous"
+msgstr "Vorige"
+
+#: addons/payments/admin/pricing-list.php:50
+#: addons/payments/includes/admin-pages.php:834 blocks/list/index.php:161
+#: blocks/manage/class-manage-engine.php:33 blocks/search/index.php:133
+#: blocks/single-data-table/index.php:222
+#: blocks/single-data-table/index.php:243 includes/admin-post-type.php:576
+#: includes/class-rest-blocks.php:205 includes/class-rest-blocks.php:251
+#: includes/class-widget-ads.php:138 includes/defaults.php:142
+#: includes/shortcodes.php:103
+msgid "Price"
+msgstr "Prijs"
+
+#: includes/class-rest-blocks.php:217
+msgid "Price (Formatted)"
+msgstr "Prijs (opgemaakt)"
+
+#: includes/class-widget-ads.php:116
+msgid "Price Max."
+msgstr "Max. prijs"
+
+#: includes/class-widget-ads.php:110
+msgid "Price Min."
+msgstr "Min. prijs"
 
 #: addons/payments/admin/options.php:16
 #: addons/payments/admin/pricing-edit.php:18
@@ -290,1430 +2869,1362 @@ msgstr "Opties"
 msgid "Pricing"
 msgstr "Prijzen"
 
-#: addons/payments/admin/payment-history-edit.php:16
-msgid "Payment History Edit"
-msgstr "Betaalgeschiedenis bewerken"
-
-#: addons/payments/admin/payment-history-edit.php:28
-msgid "Payment"
-msgstr "Betaling"
-
-#: addons/payments/admin/payment-history-edit.php:33
-msgid "Gateway"
-msgstr "Gateway"
-
-#: addons/payments/admin/payment-history-edit.php:44
-msgid "Created"
-msgstr "Aangemaakt"
-
-#: addons/payments/admin/payment-history-edit.php:51
-msgid "User IP"
-msgstr "IP-adres gebruiker"
-
-#: addons/payments/admin/payment-history-edit.php:60
-#: addons/payments/admin/payment-history-list.php:72
-msgid "Status"
-msgstr "Status"
-
-#: addons/payments/admin/payment-history-edit.php:72
-msgid "To Pay"
-msgstr "Te betalen"
-
-#: addons/payments/admin/payment-history-edit.php:79
-msgid "Paid"
-msgstr "Betaald"
-
-#: addons/payments/admin/payment-history-edit.php:90
-msgid "Update Payment"
-msgstr "Betaling bijwerken"
-
-#: addons/payments/admin/payment-history-edit.php:108
-msgid "Purchase Details"
-msgstr "Aankoopdetails"
-
-#: addons/payments/admin/payment-history-edit.php:113
-msgid "Purchase Type"
-msgstr "Type aankoop"
-
-#: addons/payments/admin/payment-history-edit.php:116
-#: addons/payments/admin/payment-history-list.php:113
-msgid "Posting"
-msgstr "Post"
-
-#: addons/payments/admin/payment-history-edit.php:118
-#: addons/payments/admin/payment-history-list.php:115
-#: addons/payments/admin/pricing-list.php:74
-msgid "Renewal"
-msgstr "Verlengen"
-
-#: addons/payments/admin/payment-history-edit.php:126
-msgid "Listing Type"
-msgstr "Lijsttype"
-
-#: addons/payments/admin/payment-history-edit.php:138
-msgid "Purchased Item"
-msgstr "Gekocht item"
-
-#: addons/payments/admin/payment-history-edit.php:156
-msgid "Customer Details"
-msgstr "Klantgegevens"
-
-#: addons/payments/admin/payment-history-edit.php:174
-msgid "Payment Log"
-msgstr "Betalingslogboek"
-
-#: addons/payments/admin/payment-history-list.php:16
-#: addons/payments/payments.php:742
-msgid "Payment History"
-msgstr "Betalingsgeschiedenis"
-
-#: addons/payments/admin/payment-history-list.php:23
-msgid "All"
-msgstr "Alles"
-
-#: addons/payments/admin/payment-history-list.php:36
-#: addons/payments/admin/payment-history-list.php:148
-#: addons/payments/admin/pricing-list.php:32
-#: addons/payments/admin/pricing-list.php:115
-msgid "Bulk Actions"
-msgstr "Bulkacties"
-
-#: addons/payments/admin/payment-history-list.php:40
-#: addons/payments/admin/payment-history-list.php:88
-#: addons/payments/admin/payment-history-list.php:152
-#: addons/payments/admin/pricing-list.php:33
-#: addons/payments/admin/pricing-list.php:66
-#: addons/payments/admin/pricing-list.php:116 templates/manage.php:56
-#: templates/manage.php:57
-msgid "Delete"
-msgstr "Verwijderen"
-
-#: addons/payments/admin/payment-history-list.php:43
-#: addons/payments/admin/payment-history-list.php:154
-#: addons/payments/admin/pricing-list.php:36
-#: addons/payments/admin/pricing-list.php:118
-msgid "Apply"
-msgstr "Toepassen"
-
-#: addons/payments/admin/payment-history-list.php:49
-msgid "All dates"
-msgstr "Alle datums"
-
-#: addons/payments/admin/payment-history-list.php:50
-msgid "This month"
-msgstr "Deze maand"
-
-#: addons/payments/admin/payment-history-list.php:51
-msgid "Last month"
-msgstr "Afgelopen maand"
-
-#: addons/payments/admin/payment-history-list.php:56
-msgid "Filter"
-msgstr "Filteren"
-
-#: addons/payments/admin/payment-history-list.php:66
-msgid "ID"
-msgstr "ID"
-
-#: addons/payments/admin/payment-history-list.php:67
-msgid "User"
-msgstr "Gebruiker"
-
-#: addons/payments/admin/payment-history-list.php:69
-#: includes/admin-post-type.php:552 templates/list.php:52
-msgid "Date"
-msgstr "Datum"
-
-#: addons/payments/admin/payment-history-list.php:70
-msgid "Amount"
-msgstr "Bedrag"
-
-#: addons/payments/admin/payment-history-list.php:71
-#: addons/payments/admin/pricing-list.php:48
-msgid "Type"
-msgstr "Lijsttype"
-
-#: addons/payments/admin/payment-history-list.php:85
-#: addons/payments/admin/payment-history-list.php:87
-msgid "View Order"
-msgstr "Bestelling bekijken"
-
-#: addons/payments/admin/payment-history-list.php:137
-#: addons/payments/admin/pricing-list.php:104
-msgid "&laquo;"
-msgstr "&laquo;"
-
-#: addons/payments/admin/payment-history-list.php:138
-#: addons/payments/admin/pricing-list.php:105
-msgid "&raquo;"
-msgstr "&raquo;"
-
-#: addons/payments/admin/pricing-edit.php:19
-#: addons/payments/admin/pricing-list.php:19
-msgid "Add New"
-msgstr "Toevoegen"
-
-#: addons/payments/admin/pricing-list.php:47
-#: addons/payments/includes/admin-pages.php:665
-#: includes/admin-post-type.php:548 includes/class-widget-ads.php:77
-#: includes/class-widget-ads.php:128 includes/class-widget-categories.php:74
-#: includes/defaults.php:96 includes/gallery.php:98 includes/gallery.php:216
-msgid "Title"
-msgstr "Titel"
-
-#: addons/payments/admin/pricing-list.php:49
-#: addons/payments/includes/admin-pages.php:680
-#: includes/admin-post-type.php:549 includes/class-widget-ads.php:133
-#: includes/defaults.php:130
-msgid "Price"
-msgstr "Prijs"
-
-#: addons/payments/admin/pricing-list.php:50
-#: addons/payments/includes/admin-pages.php:689
-msgid "Visible"
-msgstr "Zichtbaar"
-
-#: addons/payments/admin/pricing-list.php:63
-#: addons/payments/admin/pricing-list.php:65 includes/admin-post-type.php:370
-#: templates/manage.php:55
-msgid "Edit"
-msgstr "Bewerken"
-
-#: addons/payments/admin/pricing-list.php:72
-msgid "New Post"
-msgstr "Bericht"
-
-#: addons/payments/admin/pricing-list.php:83 addons/payments/payments.php:299
-#: addons/payments/payments.php:353 addons/payments/payments.php:615
-msgid "Free"
-msgstr "Gratis"
-
-#: addons/payments/admin/pricing-list.php:89
-msgid "1 day"
-msgid_plural "%s days"
-msgstr[0] "1 dag"
-msgstr[1] "%s dagen"
-
-#: addons/payments/includes/admin-pages.php:75
-msgid ""
-"Enable at least one <a href='%s'>Payment Gateway</a> before selecting "
-"default."
-msgstr ""
-"Schakel ten minste één <a href='%s'>Betaalgateway</a> in voordat je een "
-"standaard selecteert."
-
-#: addons/payments/includes/admin-pages.php:88
-msgid "Create at least one <a href='%s'>Pricing</a> before selecting default."
-msgstr ""
-"Maak ten minste één <a href='%s'>set van prijzen</a> aan voordat je een "
-"standaard selecteert."
-
-#: addons/payments/includes/admin-pages.php:127
-#: addons/payments/includes/admin-pages.php:128
-msgid "Add Pricing"
-msgstr "Prijzen toevoegen"
-
-#: addons/payments/includes/admin-pages.php:149
-#: addons/payments/includes/admin-pages.php:195
-#: addons/payments/includes/admin-pages.php:310
-msgid "There was an error while saving pricing in database."
-msgstr ""
-"Er is een fout opgetreden bij het opslaan van de prijzen in de database."
-
-#: addons/payments/includes/admin-pages.php:153
-msgid "New pricing has been added."
-msgstr "Nieuwe prijzen zijn toegevoegd."
-
-#: addons/payments/includes/admin-pages.php:167
-msgid "Edit Pricing"
-msgstr "Prijzen bewerken"
-
-#: addons/payments/includes/admin-pages.php:168
-msgid "Update Pricing"
-msgstr "Prijzen bijwerken"
-
-#: addons/payments/includes/admin-pages.php:197
-msgid "Pricing updated."
-msgstr "Prijzen bijgewerkt."
-
-#: addons/payments/includes/admin-pages.php:210
-msgid "Adverts Pricing with given ID does not exist."
-msgstr "Advertentie-prijzen met opgegeven ID bestaan niet."
-
-#: addons/payments/includes/admin-pages.php:217
+#: addons/payments/includes/admin-pages.php:234
 msgid "Pricing deleted."
 msgstr "Prijzen verwijderd."
 
-#: addons/payments/includes/admin-pages.php:237
-msgid "1 Pricing deleted."
-msgid_plural "%s Pricings deleted."
-msgstr[0] "1 prijzen-set verwijderd."
-msgstr[1] "%s prijzen-sets verwijderd."
-
-#: addons/payments/includes/admin-pages.php:283
-msgid ""
-"Payment Method [%s] assigned to this Payment does not exist or was disabled."
-msgstr ""
-"Betalingsmethode [%s] toegewezen aan deze betaling bestaat niet of is "
-"uitgeschakeld."
-
-#: addons/payments/includes/admin-pages.php:300
-msgid "<strong>%1$s</strong> changed payment status to <strong>%2$s</strong>"
-msgstr ""
-"Gebruiker <strong>%1$s</strong> heeft betaalstatus aangepast naar <strong>"
-"%2$s</strong>."
-
-#: addons/payments/includes/admin-pages.php:312
-msgid "Payment updated."
-msgstr "Betaling bijgewerkt."
-
-#: addons/payments/includes/admin-pages.php:326
-msgid "Adverts Payment with given ID does not exist."
-msgstr "Betaling voor advertentie met opgegeven ID bestaat niet."
-
-#: addons/payments/includes/admin-pages.php:333
-#: addons/payments/includes/admin-pages.php:365
-msgid "1 Payment deleted."
-msgid_plural "%s Payments deleted."
-msgstr[0] "1 betaling verwijderd."
-msgstr[1] "%s betalingen verwijderd."
-
-#: addons/payments/includes/admin-pages.php:381
-msgid "Status for selected Payments was changed to: %s"
-msgstr "Status voor geselecteerde betalingen is veranderd in: %s"
-
-#: addons/payments/includes/admin-pages.php:406
-msgid "%1$s %2$d"
-msgstr "%1$s %2$d"
-
-#: addons/payments/includes/admin-pages.php:498
-msgid "View order"
-msgstr "Bestelling bekijken"
-
-#: addons/payments/includes/admin-pages.php:503
-msgid "Abandoned"
-msgstr "Afgebroken"
-
-#: addons/payments/includes/admin-pages.php:511
-#: addons/payments/includes/admin-pages.php:543
-msgid "Pending Payment"
-msgstr "In afwachting van betaling"
-
-#: addons/payments/includes/admin-pages.php:547
-#: includes/class-updates-manager.php:332 templates/manage-edit.php:47
-msgid "Update"
-msgstr "Bijwerken"
-
-#: addons/payments/includes/admin-pages.php:566
-msgid "User ID"
-msgstr "Gebruikersnaam"
-
-#: addons/payments/includes/admin-pages.php:625
-msgid "Default Payment Gateway"
-msgstr "Standaard betaalgateway"
-
-#: addons/payments/includes/admin-pages.php:634
-msgid "Default Pricing"
-msgstr "Standaardprijzen"
-
-#: addons/payments/includes/admin-pages.php:650
+#: addons/payments/includes/admin-pages.php:804
 msgid "Pricing Type"
-msgstr "Type aankoop"
+msgstr "Prijstype"
 
-#: addons/payments/includes/admin-pages.php:654
-msgid "New Advert Posting"
-msgstr "Advertentie-categorieën"
+#: addons/payments/includes/admin-pages.php:210
+msgid "Pricing updated."
+msgstr "Prijs geüpdatet."
 
-#: addons/payments/includes/admin-pages.php:655
-msgid "Advert Renewal"
-msgstr "Advertentie verlengen"
+#: addons/styling/admin/options.php:16 addons/styling/admin/options.php:161
+msgid "Primary Button"
+msgstr "Primaire knop"
 
-#: addons/payments/includes/admin-pages.php:674 includes/defaults.php:120
-#: includes/gallery.php:113 includes/gallery.php:227
-msgid "Description"
-msgstr "Omschrijving"
+#: addons/styling/admin/options.php:165
+msgid "Primary Button Hover"
+msgstr "Primaire knop hover"
 
-#: addons/payments/includes/admin-pages.php:690
-msgid "Number of days the Ad will be visible."
-msgstr "Aantal dagen dat de advertentie zichtbaar is."
+#: includes/admin-pages.php:174
+msgid ""
+"Protect your forms from SPAM using easy easy for humans and hard for bots "
+"captcha."
+msgstr ""
+"Bescherm je formulieren tegen SPAM met captcha gemakkelijk voor mensen en "
+"moeilijk voor bots."
 
-#: addons/payments/payments.php:67
-msgid "Unread <span class=\"count\">(%s)</span>"
-msgid_plural "Unread <span class=\"count\">(%s)</span>"
-msgstr[0] "Ongelezen <span class=\"count\">(%s)</span>"
-msgstr[1] "Ongelezen <span class=\"count\">(%s)</span>"
+#: includes/defaults.php:338
+msgid "Provided email address is invalid."
+msgstr "Opgegeven e-mailadres is ongeldig."
 
-#: addons/payments/payments.php:76
-msgid "Failed <span class=\"count\">(%s)</span>"
-msgid_plural "Failed <span class=\"count\">(%s)</span>"
-msgstr[0] "Mislukt <span class=\"count\">(%s)</span>"
-msgstr[1] "Mislukt <span class=\"count\">(%s)</span>"
+#: includes/defaults.php:424
+msgid "Provided text is invalid."
+msgstr "De opgegeven tekst is ongeldig."
 
-#: addons/payments/payments.php:85 addons/payments/payments.php:100
-msgid "Pending <span class=\"count\">(%s)</span>"
-msgid_plural "Pending <span class=\"count\">(%s)</span>"
-msgstr[0] "Uitstaande verzoeken <span class=\"count\">%s</span>"
-msgstr[1] "Uitstaande verzoeken <span class=\"count\">%s</span>"
+#: includes/defaults.php:358
+msgid "Provided URL is invalid."
+msgstr "De opgegeven URL is ongeldig."
 
-#: addons/payments/payments.php:94
+#: includes/defaults.php:378
+msgid "Provided value is not a number."
+msgstr "Opgegeven waarde is geen getal."
+
+#: includes/defaults.php:368
+msgid "Provided value is not an integer."
+msgstr "De opgegeven waarde is geen integer."
+
+#: blocks/publish/templates/publish-save.php:34
+msgid "Publish another Ad"
+msgstr "Publiceer nog een advertentie"
+
+#: blocks/list/index.php:154 blocks/list/index.php:183
+#: blocks/list/index.php:184 blocks/manage/class-manage-engine.php:26
+#: blocks/manage/class-manage-engine.php:109
+#: blocks/manage/class-manage-engine.php:110 blocks/search/index.php:126
+#: blocks/search/index.php:149 blocks/search/index.php:150
+#: includes/class-widget-ads.php:128 includes/shortcodes.php:96
+#: includes/shortcodes.php:119 includes/shortcodes.php:120
+msgid "Publish Date"
+msgstr "Publicatiedatum"
+
+#: blocks/publish/class-publish-engine.php:339
+#: blocks/publish/class-publish-engine.php:514
+#: blocks/publish/templates/publish-preview.php:41
+#: blocks/publish/templates/publish-preview.php:87
+#: includes/class-shortcode-adverts-add.php:317
+#: includes/class-shortcode-adverts-add.php:448 templates/add-preview.php:16
+msgid "Publish Listing"
+msgstr "Vermelding publiceren"
+
+#: blocks/manage/templates/manage-list.php:171
+msgid "Publish your first Ad"
+msgstr "Publiceer je eerste advertentie"
+
+#: blocks/single-data-table/index.php:173
+#: blocks/single-data-table/index.php:180
+#: blocks/single-data-table/index.php:250
+msgid "Published"
+msgstr "Gepubliceerd"
+
+#: blocks/manage/templates/manage-list-item.php:55
+msgid "Published  — %s"
+msgstr "Gepubliceerd — %s"
+
+#: blocks/details/templates/single.php:28
+#: blocks/single-author/templates/list.php:19
+msgid "Published %1$s - %2$s ago"
+msgstr "%1$s - %2$s geleden gepubliceerd"
+
+#: templates/single.php:24
+msgid "Published: %1$s (%2$s ago)"
+msgstr "Gepubliceerd: %1$s (%2$s geleden)"
+
+#: addons/payments/admin/payment-history-edit.php:110
+msgid "Purchase Details"
+msgstr "Aankoop details"
+
+#: addons/payments/payments.php:1508
+msgid "Purchase Type"
+msgstr "Aankoop type"
+
+#: addons/payments/payments.php:1527
+msgid "Purchased Item"
+msgstr "Gekocht item"
+
+#: includes/functions.php:2275
+msgid "Qatari Riyal"
+msgstr "Qatari riyal"
+
+#: addons/styling/includes/admin-pages.php:116
+msgid "Radio"
+msgstr "Radio"
+
+#: blocks/list/index.php:175 includes/class-widget-ads.php:143
+msgid "Random"
+msgstr "Willekeurig"
+
+#: blocks/list/index.php:177
+msgid "Random Order"
+msgstr "Willekeurige volgorde"
+
+#: includes/class-moderate-admin.php:194
+msgid ""
+"Random password that will encrypt the Timetrap, you can generate one <a "
+"href='https://www.random.org/passwords/'>here</a>. If left empty then one of "
+"security keys in your wp-config.php file will be used."
+msgstr ""
+"Willekeurig wachtwoord dat de Timetrap versleutelt, je kan er <a href='https:"
+"//www.random.org/passwords/'>hier</a> één aanmaken. Indien leeg gelaten, zal "
+"een van de beveiligingssleutels in je wp-config.php bestand worden gebruikt."
+
+#: addons/emails/admin/emails-list.php:102
+msgid "Read when this message is sent ..."
+msgstr "Lees wanneer dit bericht wordt verzonden..."
+
+#: includes/admin-pages.php:173
+msgid "reCAPTCHA"
+msgstr "reCAPTCHA"
+
+#: addons/emails/admin/emails-list.php:51
+msgid "Recipient"
+msgstr "Ontvanger"
+
+#: includes/gallery.php:619
+msgid "Recommended size:"
+msgstr "Aanbevolen grootte:"
+
+#: addons/core/includes/admin-pages.php:407
+msgid "Redirect URL"
+msgstr "Omleiding URL"
+
+#: includes/functions.php:2064
+msgid "Redirecting"
+msgstr "Omleiden"
+
+#: addons/payments/payments.php:106
 msgid "Refunded <span class=\"count\">(%s)</span>"
 msgid_plural "Refunded <span class=\"count\">(%s)</span>"
 msgstr[0] "Terugbetaald <span class=\"count\">(%s)</span>"
 msgstr[1] "Terugbetaald <span class=\"count\">(%s)</span>"
 
-#: addons/payments/payments.php:279 addons/payments/payments.php:593
-msgid "Listing Information"
-msgstr "Lijstinformatie"
+#: addons/payments/payments.php:101
+msgctxt "refunded status payment"
+msgid "Refunded"
+msgstr "Terugbetaald"
 
-#: addons/payments/payments.php:310
-msgid "Listing"
-msgstr "Lijst"
+#: blocks/manage/class-manage-engine.php:64
+#: blocks/single-contact/templates/contact-disabled.php:32
+msgid "Register"
+msgstr "Registreren"
 
-#: addons/payments/payments.php:380
-msgid "Visible 1 day"
-msgid_plural "Visible %d days"
-msgstr[0] "Zichtbaar 1 dag"
-msgstr[1] "Zichtbaar %d dagen"
+#: includes/class-widget-ads.php:176
+msgid "Regular Only"
+msgstr "Alleen regulier"
 
-#: addons/payments/payments.php:438 includes/shortcodes.php:327
-msgid "Thank you for submitting your ad!"
-msgstr "Bedankt voor het indienen van deze advertentie!"
-
-#: addons/payments/payments.php:552
-msgid "Renew Ad"
-msgstr "Advertentie verlengen"
-
-#: addons/payments/payments.php:582
+#: includes/class-types-admin.php:465 includes/class-types-admin.php:542
 msgid ""
-"Cannot renew Ads with status 'pending', <a href=\"%s\">cancel and go back</a>"
-"."
+"Remember to reset permalinks by clicking \"Save Changes\" button in the <a "
+"href=\"%s\">Permalinks</a> panel."
 msgstr ""
-"Kan geen advertenties verlengen met de status 'in behandeling', <a "
-"href=\"%s\">annuleren en terug</a> ."
+"Vergeet niet om permalinks opnieuw in te stellen door op de knop "
+"\"Wijzigingen opslaan\" in het <a href=\"%s\">Permalinks</a>-paneel te "
+"klikken."
 
-#: addons/payments/payments.php:656
+#: includes/class-types-admin.php:806
+msgid "Renderer Template"
+msgstr "Renderer template"
+
+#: includes/class-types-admin.php:793
+msgid "Renderer Type"
+msgstr "Renderer type"
+
+#: addons/core/admin/types-edit-post.php:70
+msgid "Rendering"
+msgstr "Weergave"
+
+#: addons/payments/payments.php:977 addons/payments/payments.php:993
 msgid "Renew"
 msgstr "Verlengen"
 
-#: addons/payments/payments.php:675 addons/payments/payments.php:706
+#: addons/payments/payments.php:1018 addons/payments/payments.php:1081
 msgid "Renew <strong>%s</strong> or <a href=\"%s\">cancel and go back</a>."
 msgstr ""
-"Verlengen van <strong>%s</strong> of <a href=\"%s\">annuleren en terug</a> ."
+"Verleng <strong>%s</strong> of <a href=\"%s\">annuleer en ga terug</a>."
 
-#: addons/payments/payments.php:683
-msgid "Ad <strong>%s</strong> renewed. <a href=\"%s\">Go back to Ads list</a>."
+#: addons/payments/payments.php:826 addons/payments/payments.php:854
+msgid "Renew Ad"
+msgstr "Verleng de advertentie"
+
+#: addons/payments/admin/pricing-list.php:75
+#: addons/payments/includes/admin-pages.php:809
+#: addons/payments/payments.php:1485
+msgid "Renewal"
+msgstr "Verlenging"
+
+#: includes/class-gallery-helper.php:302
+msgid "Replay"
+msgstr "Opnieuw afspelen"
+
+#: addons/styling/admin/options.php:143 addons/styling/admin/options.php:275
+#: addons/styling/admin/options.php:407
+msgid "Reset to defaults"
+msgstr "Resetten naar standaardwaarden"
+
+#: includes/gallery.php:594
+msgid "Restore"
+msgstr "Herstellen"
+
+#: addons/core/admin/types-edit-post.php:88 addons/core/admin/types-list.php:77
+#: addons/core/admin/types-list.php:138
+msgid "Restore Defaults"
+msgstr "Standaardwaarden herstellen"
+
+#: includes/gallery.php:594
+msgid "Restore original image"
+msgstr "Originele afbeelding herstellen"
+
+#: blocks/list/templates/list.php:139
+#: blocks/manage/templates/manage-list.php:141
+msgid "results found."
+msgstr "gevonden resultaten."
+
+#: includes/functions-blocks.php:937
+msgid "Reveal Contact Info"
+msgstr "Toon contactinformatie"
+
+#: includes/gallery.php:573
+msgid "Rotate -90 degrees"
+msgstr "Draai -90 graden"
+
+#: includes/gallery.php:572
+msgid "Rotate 90 degrees"
+msgstr "Draai 90 graden"
+
+#: addons/styling/admin/options.php:394
+msgid "Row Spacing"
+msgstr "Rijafstand"
+
+#: includes/functions.php:2269
+msgid "Russian Rubles"
+msgstr "Russische roebels"
+
+#: includes/functions.php:2270
+msgid "Saudi Riyal"
+msgstr "Saudi riyal"
+
+#: includes/gallery.php:591
+msgid "Save"
+msgstr "Opslaan"
+
+#: addons/styling/admin/options.php:405
+msgid "Save Form Styling Settings"
+msgstr "Sla instellingen voor formulierstijl op"
+
+#: includes/gallery.php:591
+msgid "Save Image"
+msgstr "Afbeelding opslaan"
+
+#: addons/styling/admin/options.php:142
+msgid "Save Primary Button Settings"
+msgstr "Sla de instellingen van de primaire knop op"
+
+#: addons/styling/admin/options.php:273
+msgid "Save Secondary Button Settings"
+msgstr "Sla de instellingen van de secundaire knop op"
+
+#: includes/gallery.php:513
+msgid "Save Thumbnail"
+msgstr "Thumbnail opslaan"
+
+#: includes/gallery.php:585
+msgid "Scale"
+msgstr "Schaal"
+
+#: includes/gallery.php:487
+msgid ""
+"Scroll the video to a selected place and click 'Capture' button to create "
+"video cover."
 msgstr ""
-"Advertentie <strong>%s</strong> verlengd. <a href=\"%s\">Ga terug naar "
-"advertenties</a>."
+"Blader door de video naar een geselecteerde plaats en klik op de knop "
+"'Vastleggen' om een ​​vide omslag te maken."
 
-#: addons/payments/payments.php:707
+#: addons/core/includes/admin-pages.php:526
+msgid "Scrolling Thumbnails"
+msgstr "Scrolling thumbnails"
+
+#: templates/list.php:87
+msgid "SEARCH"
+msgstr "ZOEKEN"
+
+#: addons/core/includes/admin-pages.php:430
+msgid "Search Bar"
+msgstr "Zoekbalk"
+
+#: wpadverts.php:246
+msgid "Search Classifieds"
+msgstr "Zoek advertenties"
+
+#: addons/styling/admin/options.php:17 addons/styling/admin/options.php:294
+msgid "Secondary Button"
+msgstr "Secundaire knop"
+
+#: addons/styling/admin/options.php:298
+msgid "Secondary Button Hover"
+msgstr "Secundaire knop hover"
+
+#: addons/payments/admin/payment-history-edit.php:117
+msgid "Secure Complete Payment URL"
+msgstr "Veilige betalings URL"
+
+#: addons/core/admin/types-icon-picker.php:20
+msgid "Select"
+msgstr "Selecteer"
+
+#: addons/core/admin/types-icon-picker.php:10
+msgid "Select Icon"
+msgstr "Selecteer pictogram"
+
+#: addons/styling/includes/admin-pages.php:93
+msgid "Select Option"
+msgstr "Selecteer optie"
+
+#: wpadverts.php:387
+msgid "Select options ..."
+msgstr "Selecteer opties ..."
+
+#: addons/payments/includes/admin-pages.php:791
+msgid ""
+"Select page where user can complete payments. This should be a page with "
+"[adverts_payments_checkout] shortcode."
+msgstr ""
+"Selecteer pagina waar de gebruiker betalingen kan voltooien. Dit zou een "
+"pagina moeten zijn met de shortcode [adverts_payments_checkout]."
+
+#: addons/payments/templates/publish-payment.php:40
+msgid "Select Payment Method"
+msgstr "Selecteer betaalmethode"
+
+#: addons/payments/payments.php:1082
 msgid "Select renewal option and click \"Renew\" button."
-msgstr "Kies optie tot verlenging en klik op knop \"Verlengen\"."
+msgstr "Selecteer de verlengingsoptie en klik op de knop \"Verlengen\"."
 
-#: addons/payments/payments.php:741
-msgid "Adverts Payment History"
-msgstr "Betalingsgeschiedenis advertenties"
+#: addons/core/includes/admin-pages.php:274
+msgid "Select the main page with list of Ads."
+msgstr "Selecteer de hoofdpagina met een lijst met advertenties."
 
-#: addons/payments/payments.php:865
-msgid "Inactive — Waiting for payment."
-msgstr "Inactief – Wacht op betaling."
+#: wpadverts.php:397
+msgid "Selected"
+msgstr "Geselecteerd"
 
-#: addons/payments/templates/add-payment.php:15
-msgid "Total"
-msgstr "Totaal"
+#: includes/gallery.php:622
+msgid "Selection:"
+msgstr "Selectie:"
 
-#: addons/payments/templates/add-payment.php:27
-msgid "No Payment Gateways Enabled!"
-msgstr "Geen betaalgateways ingeschakeld!"
+#: addons/styling/admin/options.php:83 addons/styling/admin/options.php:215
+msgid "Semi Bold"
+msgstr "Half vet"
 
-#: addons/payments/templates/add-payment.php:44
-msgid "Place Order"
-msgstr "Bestelling plaatsen"
+#: addons/emails/includes/class-emails-admin.php:420
+msgid "Send Admin Notifications To"
+msgstr "Stuur beheerdersmeldingen naar"
 
-#: admin/options.php:26
-msgid "Cannot be disabled"
-msgstr "Kan niet worden uitgeschakeld"
+#: addons/emails/includes/class-emails-admin.php:429
+msgid "Send emails as HTML"
+msgstr "E-mails verzenden als HTML"
 
-#: admin/options.php:27 admin/options.php:35 admin/options.php:49
-msgid "Settings"
-msgstr "Instellingen"
+#: addons/contact-form/contact-form.php:61
+#: addons/contact-form/contact-form.php:118
+#: addons/contact-form/includes/class-block-details.php:40
+#: addons/contact-form/includes/class-block-details.php:234
+msgid "Send Message"
+msgstr "Bericht versturen"
 
-#: admin/options.php:34
-msgid "Addon Uploaded and Activated"
-msgstr "Add-on geüpload en geactiveerd"
-
-#: admin/options.php:37
-msgid "Addon Uploaded but Inactive"
-msgstr "Add-on geüpload maar niet geactiveerd"
-
-#: admin/options.php:38 includes/class-updates-manager.php:317
-msgid "Activate"
-msgstr "Activeren"
-
-#: admin/options.php:41
-msgid "Get This Addon"
-msgstr "Add-on downloaden"
-
-#: admin/options.php:50
-msgid "Disable"
-msgstr "Uit"
-
-#: admin/options.php:52
-msgid "Enable"
-msgstr "Aan"
-
-#: includes/admin-pages.php:37
-msgid "Adverts Options"
-msgstr "Advertentieopties"
-
-#: includes/admin-pages.php:80
-msgid "Modules"
-msgstr "Modules"
-
-#: includes/admin-pages.php:83
-msgid "Core"
-msgstr "Hoofdgedeelte"
-
-#: includes/admin-pages.php:84
-msgid ""
-"Here you can configure most basic Adverts options, applicable on any site."
+#: addons/core/includes/admin-pages.php:335
+msgid "Set Ad status to 'pending' when user updates his Ad in the frontend."
 msgstr ""
-"Hier kunt u de algemene advertentieopties configureren die op elke site "
-"toepassing zijn."
+"Stel de advertentiestatus in op 'in behandeling' wanneer een gebruiker zijn "
+"advertentie in de frontend bijwerkt."
 
-#: includes/admin-pages.php:89
-msgid "Payments"
-msgstr "Betalingen"
+#: includes/admin-pages.php:181
+msgid "Set custom icons (small and big) for each category."
+msgstr "Stel aangepaste pictogrammen in (klein en groot) voor elke categorie."
 
-#: includes/admin-pages.php:90
-msgid "Charge users for posting classified ads on your site."
-msgstr "Laat gebruikers betalen voor het plaatsen van advertenties op uw site."
-
-#: includes/admin-pages.php:95
-msgid "WooCommerce Payments"
-msgstr "WooCommerce-betalingen"
-
-#: includes/admin-pages.php:96
-msgid "Use WooCommerce to charge users for posting classifieds."
-msgstr ""
-"Gebruik WooCommerce om gebruikers te laten betalen voor het plaatsen van "
-"advertenties."
-
-#: includes/admin-pages.php:102
-msgid "BuddyPress Integration"
-msgstr "BuddyPress-integratie"
-
-#: includes/admin-pages.php:103
-msgid ""
-"Integrate user Ads with BuddyPress profiles, registration and private "
-"messages."
-msgstr ""
-"Integreer gebruikersadvertenties met BuddyPress-profielen, -registratie en "
-"privéberichten."
-
-#: includes/admin-pages.php:109
-msgid "Custom Fields"
-msgstr "Aangepaste velden"
-
-#: includes/admin-pages.php:110
-msgid ""
-"Allow users to edit: Add, Search and Contact forms using easy to use drag "
-"and drop editor."
-msgstr ""
-"Gebruikers toestaan om te bewerken: toevoegen, zoeken en contactformulieren "
-"via drag-and-drop editor."
-
-#: includes/admin-pages.php:118
-msgid "Features"
-msgstr "Features"
-
-#: includes/admin-pages.php:122
-msgid "Allow users to post Ads displayed always at the top of the list."
-msgstr ""
-"Gebruikers toestaan om advertenties te plaatsen die altijd bovenaan de lijst "
-"verschijnen."
-
-#: includes/admin-pages.php:128
-msgid ""
-"Display contact form on Ad details pages instead of just the contact "
-"information."
-msgstr ""
-"Contactformulier weergeven op advertentie-detailpagina's in plaats van "
-"alleen de contactgegevens."
-
-#: includes/admin-pages.php:133
-msgid "Maps And Locations"
-msgstr "Kaarten en locaties"
-
-#: includes/admin-pages.php:134
-msgid "Locations Taxonomy, Google Maps integration and more."
-msgstr "Locatie-taxonomie, Google Maps-integratie en meer."
-
-#: includes/admin-pages.php:140
-msgid "Fee Per Category"
-msgstr "Bedrag per categorie"
-
-#: includes/admin-pages.php:141
+#: includes/admin-pages.php:167
 msgid ""
 "Set fee for Ads posting per category or allow to post for free in some "
 "categories."
 msgstr ""
-"Stel de prijs voor advertenties per categorie in of maak advertenties gratis "
-"in sommige categorieën."
+"Stel een vergoeding in voor het plaatsen van advertenties per categorie of "
+"sta toe om gratis te plaatsen in sommige categorieën."
 
-#: includes/admin-pages.php:147
-msgid "reCAPTCHA"
-msgstr "reCAPTCHA"
+#: admin/options.php:127 admin/options.php:135 admin/options.php:149
+msgid "Settings"
+msgstr "Instellingen"
 
-#: includes/admin-pages.php:148
-msgid ""
-"Protect your forms from SPAM using easy easy for humans and hard for bots "
-"captcha."
-msgstr ""
-"Bescherm je formulieren tegen SPAM via een captcha die gemakkelijk is voor "
-"mensen en maar moeilijk voor spambots."
+#: addons/bank-transfer/includes/admin-pages.php:45
+#: addons/contact-form/includes/admin-pages.php:60
+#: addons/core/includes/admin-pages.php:89
+#: addons/core/includes/admin-pages.php:169
+#: addons/emails/includes/class-emails-admin.php:83
+#: addons/payments/includes/admin-pages.php:47
+#: includes/class-moderate-admin.php:56
+msgid "Settings updated."
+msgstr "Instellingen geüpdatet."
 
-#: includes/admin-pages.php:156
-msgid "Payment Gateways"
-msgstr "Betalingsproviders"
+#: addons/styling/admin/options.php:342
+msgid "Shadow"
+msgstr "Schaduw"
 
-#: includes/admin-pages.php:160
-msgid ""
-"Allow users to pay for ad posting using direct bank transfer or cash "
-"payments."
-msgstr ""
-"Sta gebruikers toe om te betalen voor het plaatsen van advertenties via "
-"directe overschrijving of contante betalingen."
+#: includes/class-types-admin.php:798
+msgid "Shortcode - use the old version 1.5 templates."
+msgstr "Shortcode - gebruik de oude versie 1.5 templates."
 
-#: includes/admin-pages.php:165
-msgid "PayPal Standard"
-msgstr "PayPal Standard"
+#: addons/styling/admin/options.php:389
+msgid "Show"
+msgstr "Tonen"
 
-#: includes/admin-pages.php:166
-msgid "PayPal Payments Standard, allow users to pay for ads via PayPal."
-msgstr ""
-"PayPal Payments  Standaard, gebruikers toestaan om via PayPal te betalen "
-"voor advertenties."
+#: includes/functions-blocks.php:924
+msgid "Show Contact Info"
+msgstr "Toon contactinformatie"
 
-#: includes/admin-pages.php:308
-msgid "Category Icon"
-msgstr "Categorie-pictogram"
-
-#: includes/admin-pages.php:311
-msgid "Filter Icons ..."
-msgstr "Filter pictogrammen ..."
-
-#: includes/admin-post-type.php:93
-msgid "Whoops, the provided date is invalid."
-msgstr "Oeps, de opgegeven datum is ongeldig."
-
-#: includes/admin-post-type.php:202
-msgid "Post updated, but some required data is not filled properly."
-msgstr ""
-"Bericht bijgewerkt, maar een aantal vereiste gegevens is niet correct "
-"ingevuld."
-
-#. translators: 1: month number (01, 02, etc.), 2: month abbreviation
-#: includes/admin-post-type.php:274
-msgid "%1$s-%2$s"
-msgstr "%1$s-%2$s"
-
-#: includes/admin-post-type.php:286
-msgid "%1$s %2$s, %3$s @ %4$s : %5$s"
-msgstr "%1$s %2$s, %3$s @ %4$s : %5$s"
-
-#: includes/admin-post-type.php:291 includes/admin-post-type.php:343
-msgid "Never Expires"
-msgstr "Verloopt nooit"
-
-#: includes/admin-post-type.php:309 wpadverts.php:265
-msgid "OK"
-msgstr "OK"
-
-#: includes/admin-post-type.php:310 includes/class-updates-manager.php:333
-#: includes/gallery.php:133 includes/gallery.php:235 templates/manage.php:65
-msgid "Cancel"
-msgstr "Annuleren"
-
-#: includes/admin-post-type.php:331
-msgid "M j, Y @ G:i"
-msgstr "j M Y @ H:i"
-
-#: includes/admin-post-type.php:357
-msgid "Expired: <b>%s</b>"
-msgstr "Verlopen: <b>%s</b>"
-
-#: includes/admin-post-type.php:359
-msgid "Expires: <b>%s</b>"
-msgstr "Verloopt: <b>%s</b>"
-
-#: includes/admin-post-type.php:370
-msgid "Edit date and time"
-msgstr "Datum en tijd bewerken"
-
-#: includes/admin-post-type.php:442
-msgid "(required)"
-msgstr "(verplicht)"
-
-#: includes/admin-post-type.php:479 includes/admin-post-type.php:719
-msgid "Expired"
-msgstr "Verlopen"
-
-#: includes/admin-post-type.php:511
-msgid "Additional Information"
-msgstr "Extra informatie"
-
-#: includes/admin-post-type.php:528 includes/defaults.php:114
-msgid "Gallery"
-msgstr "Overzicht"
-
-#: includes/admin-post-type.php:550
-msgid "Author"
-msgstr "Auteur"
-
-#: includes/admin-post-type.php:551
-msgid "Expires"
-msgstr "Verloopdatum"
-
-#: includes/admin-post-type.php:579
-msgid "Never"
-msgstr "Nooit"
-
-#: includes/admin-post-type.php:584
-msgid "Y/m/d g:i:s A"
-msgstr "Y-m-d H:i:s"
-
-#: includes/admin-post-type.php:592 templates/manage.php:39
-msgid "Y/m/d"
-msgstr "Y-m-d"
-
-#: includes/admin-post-type.php:595
-msgid "in %s"
-msgstr "in %s"
-
-#: includes/admin-post-type.php:597
-msgid "%s ago"
-msgstr "%s geleden"
-
-#: includes/admin-post-type.php:612
-msgid "None"
-msgstr "Geen"
-
-#: includes/admin-post-type.php:720
-msgid "Expires:"
-msgstr "Verloopdatum:"
-
-#: includes/admin-post-type.php:721
-msgid "Expired:"
-msgstr "Verlopen:"
-
-#: includes/admin-post-type.php:722
-msgid ""
-"Start typing user name, email or login below, some suggestions will appear."
-msgstr ""
-"Begin met tikken van gebruikersnaam, e-mail of login. Vervolgens worden "
-"suggesties getoond."
-
-#: includes/ajax.php:62 includes/ajax.php:144 includes/ajax.php:197
-#: includes/ajax.php:234 includes/ajax.php:358
-msgid "Invalid Session. Please refresh the page and try again."
-msgstr "Ongeldige sessie. Vernieuw de pagina en probeer het opnieuw."
-
-#: includes/ajax.php:244
-msgid "Attachment does not exist."
-msgstr "Bijlage bestaat niet."
-
-#: includes/ajax.php:246
-msgid "Incorrect attachment ID."
-msgstr "Onjuist bijlage-ID."
-
-#: includes/ajax.php:250
-msgid "File could not be deleted."
-msgstr "Bestand kan niet verwijderd worden."
-
-#: includes/ajax.php:277 includes/ajax.php:312
-msgid "Post with given ID does not exist."
-msgstr "Post met opgegeven ID bestaat niet."
-
-#: includes/ajax.php:366
-msgid "Post you are trying to delete does not exist."
-msgstr "Post die je probeert te verwijderen bestaat niet."
-
-#: includes/ajax.php:374
-msgid "Post you are trying to delete does not belong to you."
-msgstr "Post die je probeert te verwijderen is niet van jou."
-
-#: includes/ajax.php:382
-msgid "This post is not an Advert."
-msgstr "Deze post is geen advertentie."
-
-#: includes/ajax.php:412
-msgid "Advert <strong>%s</strong> deleted."
-msgstr "Advertentie <strong>%s</strong> verwijderd."
-
-#: includes/class-form.php:169
-msgid "Invalid value."
-msgstr "Ongeldige waarde."
-
-#: includes/class-updates-manager.php:116
-msgid "License"
-msgstr "Licentie"
-
-#: includes/class-updates-manager.php:150
-msgid "Cannot connect to remote server. Please try again later."
-msgstr ""
-"Kan geen verbinding maken met externe server. Probeer het later opnieuw."
-
-#: includes/class-updates-manager.php:316
-#: includes/class-updates-manager.php:331
-msgid "License ..."
-msgstr "Licentie ..."
-
-#: includes/class-updates-manager.php:320
-msgid "Activate your License in order to enable automatic updates."
-msgstr "Activeer je licentie om de automatische updates in te schakelen."
-
-#: includes/class-widget-ads.php:35 includes/class-widget-ads.php:50
-msgid "WPAdverts Ads"
-msgstr "WPAdverts Advertenties"
-
-#: includes/class-widget-ads.php:52
-msgid "Displays list of recent ads."
-msgstr "Toont lijst met recente advertenties."
-
-#: includes/class-widget-ads.php:82
-msgid "Count"
-msgstr "Aantal"
+#: includes/functions.php:2718
+msgid "Show Contact Information"
+msgstr "Toon contactgegevens"
 
 #: includes/class-widget-ads.php:88
-msgid "Keyword"
-msgstr "Trefwoord"
+msgid "Show images on the list."
+msgstr "Toon afbeeldingen op de lijst."
 
-#: includes/class-widget-ads.php:93 includes/defaults.php:142
-#: templates/single.php:52
-msgid "Location"
-msgstr "Plaats"
+#: includes/class-widget-categories.php:134
+msgid "Show multiple category levels"
+msgstr "Laat verschillende categorie niveaus zien"
 
-#: includes/class-widget-ads.php:98 includes/defaults.php:105
-#: templates/single.php:37
-msgid "Category"
-msgstr "Categorie"
+#: addons/contact-form/contact-form.php:73
+msgid "show phone"
+msgstr "toon telefoonnummer"
 
-#: includes/class-widget-ads.php:105
-msgid "Price Min."
-msgstr "Prijs minimaal"
+#: blocks/single-author/templates/list.php:27
+msgid "show phone number"
+msgstr "toon telefoonnummer"
 
-#: includes/class-widget-ads.php:111
-msgid "Price Max."
-msgstr "Prijs maximaal"
+#: addons/contact-form/includes/admin-pages.php:83
+msgid "Show phone number next to contact button."
+msgstr "Toon telefoonnummer naast de contactknop."
 
-#: includes/class-widget-ads.php:117
-msgid "Sort By"
-msgstr "Sorteren op"
-
-#: includes/class-widget-ads.php:123
-msgid "Publish Date"
-msgstr "Publicatiedatum"
-
-#: includes/class-widget-ads.php:139
-msgid "Order"
-msgstr "Volgorde"
-
-#: includes/class-widget-ads.php:145
-msgid "Descending"
-msgstr "Aflopend"
-
-#: includes/class-widget-ads.php:150
-msgid "Ascending"
-msgstr "Oplopend"
-
-#: includes/class-widget-ads.php:161
-msgid "Show featured Ads only."
-msgstr "Toon alleen aanbevolen advertenties."
-
-#: includes/class-widget-ads.php:484 templates/list.php:76
-msgid "There are no ads matching your search criteria."
-msgstr "Er zijn geen advertenties die voldoen aan uw zoekcriteria."
-
-#: includes/class-widget-categories.php:30
-#: includes/class-widget-categories.php:39
-msgid "Advert Categories"
-msgstr "Advertentie-categorieën"
-
-#: includes/class-widget-categories.php:41
-msgid "Displays list of available categories."
-msgstr "Toont lijst van beschikbare categorieën."
-
-#: includes/class-widget-categories.php:90
-msgid "Hide empty"
-msgstr "Lege verbergen"
-
-#: includes/class-widget-categories.php:104
+#: includes/class-widget-categories.php:106
 msgid "Show post counts"
 msgstr "Berichtaantal tonen"
 
-#: includes/class-widget-categories.php:118
+#: includes/class-gallery-helper.php:448
+msgid "Show Thumbnails ..."
+msgstr "Thumbnails tonen..."
+
+#: includes/class-widget-categories.php:120
 msgid "Show top categories only"
-msgstr "Alleen topcategorieën"
+msgstr "Laat alleen bovenste categorie zien"
 
-#: includes/class-widget-categories.php:180
-msgid "Go Up (%s)"
-msgstr "Omhoog (%s)"
-
-#: includes/class-widget-categories.php:182
-msgid "Go Up (Home)"
-msgstr "Omhoog (Home)"
-
-#: includes/class-widget-categories.php:232 templates/categories-all.php:51
-#: templates/categories-top.php:23
-msgid "No categories found."
-msgstr "Geen categorieën gevonden."
-
-#: includes/defaults.php:44
-msgid "Contact Information"
-msgstr "Contactinformatie"
-
-#: includes/defaults.php:50
-msgid "Account"
-msgstr "Account"
-
-#: includes/defaults.php:90
-msgid "Item Information"
-msgstr "Artikelinformatie"
-
-#: includes/defaults.php:157
-msgid "Keyword ..."
-msgstr "Trefwoord ..."
-
-#: includes/defaults.php:169
-msgid "Location ..."
-msgstr "Locatie ..."
-
-#: includes/defaults.php:267
-msgid "Money - converts string formatted as price to float."
-msgstr ""
-"Money - converteert tekenreeks opgemaakt als prijs naar decimaal getal."
-
-#: includes/defaults.php:274
-msgid "URL - converts string to a valid URL (if possible)."
-msgstr "URL - converteert tekenreeks naar een geldige URL (indien mogelijk)."
-
-#: includes/defaults.php:281
-msgid "Integer - converts string to absolute integer."
-msgstr "Integer - converteert tekenreeks naar absolute integer."
-
-#: includes/defaults.php:288
-msgid "Number - converts string to a number."
-msgstr "Number - converteert string naar een getal."
-
-#: includes/defaults.php:298
-msgid "Is Required"
-msgstr "Is vereist"
-
-#: includes/defaults.php:300
-msgid "Field cannot be empty."
-msgstr "Veld mag niet leeg zijn."
-
-#: includes/defaults.php:311
-msgid "Provided email address is invalid."
-msgstr "Opgegeven emailadres is ongeldig."
-
-#: includes/defaults.php:321
-msgid "Cannot create account. User with this email address already exists."
-msgstr "Kan account niet aanmaken. Gebruiker met dit emailadres bestaat al."
-
-#: includes/defaults.php:329
-msgid "URL"
-msgstr "URL"
-
-#: includes/defaults.php:331
-msgid "Provided URL is invalid."
-msgstr "Opgegeven URL is ongeldig."
-
-#: includes/defaults.php:339
-msgid "Is Integer"
-msgstr "Is een geheel getal"
-
-#: includes/defaults.php:341
-msgid "Provided value is not an integer."
-msgstr "Opgegeven waarde is geen geheel getal."
-
-#: includes/defaults.php:349
-msgid "Is Number"
-msgstr "Numeriek"
-
-#: includes/defaults.php:351
-msgid "Provided value is not a number."
-msgstr "Opgegeven waarde is niet numeriek."
-
-#: includes/defaults.php:359
-msgid "String Length"
-msgstr "Lengte tekenreeks"
-
-#: includes/defaults.php:361
-msgid "Incorrect string length."
-msgstr "Onjuiste lengte van de tekenreeks."
-
-#: includes/defaults.php:363
-msgid "Text needs to be at least %min% characters long."
-msgstr "Tekst dient minstens %min% tekens lang zijn."
-
-#: includes/defaults.php:364
-msgid "Text cannot be longer than %max% characters."
-msgstr "Tekst kan niet langer zijn dan %max% tekens."
-
-#: includes/events.php:58
-msgid "Every 5 minutes"
-msgstr "Elke 5 minuten"
-
-#: includes/functions.php:268
-msgid "Uploaded file is NOT an image"
-msgstr "Geüploade bestand is geen afbeelding"
-
-#: includes/functions.php:397
-msgid "Category: %s"
-msgstr "Categorie: %s"
-
-#: includes/functions.php:1152
-msgid ""
-"You are posting as <strong>%1$s</strong>. <br/>If you want to use a "
-"different account, please <a href=\"%2$s\">logout</a>."
-msgstr ""
-"Je plaatst deze advertentie als <strong>%1$s</strong>.<br/>Als je een andere "
-"account wilt gebruiken, <a href=\"%2$s\">log dan uit</a>."
-
-#: includes/functions.php:1157
-msgid ""
-"Create an account for me so I can manage all my ads from one place (password "
-"will be emailed to you) or <a href=\"%s\">Sign In</a>"
-msgstr ""
-"Maak een account zodat ik al mijn advertenties vanuit één plaats kan beheren "
-"(wachtwoord wordt je via mail toegestuurd) of <a href=\"%s\">log nu in</a>"
-
-#: includes/functions.php:1372
-msgid "Redirecting"
-msgstr "Je wordt doorgestuurd"
-
-#: includes/functions.php:1373
-msgid ""
-"Your are being redirected to Edit page. <a href=\"%s\">Click here</a> if it "
-"is taking to long. "
-msgstr ""
-"Je wordt doorgestuurd naar de bewerkpagina. <a href=\"%s\">Klik hier</a> als "
-"het te lang duurt. "
-
-#: includes/functions.php:1542
-msgid "US Dollars"
-msgstr "Amerikaanse dollar"
-
-#: includes/functions.php:1543
-msgid "Euros"
-msgstr "Euro"
-
-#: includes/functions.php:1544
-msgid "Pounds Sterling"
-msgstr "Pond Sterling"
-
-#: includes/functions.php:1545
-msgid "Australian Dollars"
-msgstr "Australische dollar"
-
-#: includes/functions.php:1546
-msgid "Brazilian Real"
-msgstr "Braziliaanse real"
-
-#: includes/functions.php:1547
-msgid "Canadian Dollars"
-msgstr "Canadese dollar"
-
-#: includes/functions.php:1548
-msgid "Czech Koruna"
-msgstr "Tsjechische kroon"
-
-#: includes/functions.php:1549
-msgid "Danish Krone"
-msgstr "Deense kroon"
-
-#: includes/functions.php:1550
-msgid "Hong Kong Dollar"
-msgstr "Hongkongse dollar"
-
-#: includes/functions.php:1551
-msgid "Hungarian Forint"
-msgstr "Hongaarse forint"
-
-#: includes/functions.php:1552
-msgid "Israeli Shekel"
-msgstr "Israëlische shekel"
-
-#: includes/functions.php:1553
-msgid "Japanese Yen"
-msgstr "Japanse yen"
-
-#: includes/functions.php:1554
-msgid "Malaysian Ringgits"
-msgstr "Maleisische ringgit"
-
-#: includes/functions.php:1555
-msgid "Mexican Peso"
-msgstr "Mexicaanse peso"
-
-#: includes/functions.php:1556
-msgid "New Zealand Dollar"
-msgstr "Nieuw-Zeelandse dollar"
-
-#: includes/functions.php:1557
-msgid "Norwegian Krone"
-msgstr "Noorse kroon"
-
-#: includes/functions.php:1558
-msgid "Philippine Pesos"
-msgstr "Filippijnse peso"
-
-#: includes/functions.php:1559
-msgid "Polish Zloty"
-msgstr "Poolse zloty"
-
-#: includes/functions.php:1560
+#: includes/functions.php:2262
 msgid "Singapore Dollar"
-msgstr "Singaporese dollar"
+msgstr "Singapore dollar"
 
-#: includes/functions.php:1561
-msgid "Swedish Krona"
-msgstr "Zweedse kroon"
+#: addons/styling/admin/options.php:60 addons/styling/admin/options.php:192
+#: addons/styling/admin/options.php:345 addons/styling/admin/options.php:363
+#: addons/styling/admin/options.php:397
+msgid "Small"
+msgstr "Klein"
 
-#: includes/functions.php:1562
-msgid "Swiss Franc"
-msgstr "Zwitserse frank"
+#: addons/styling/admin/options.php:336
+msgid "Solid"
+msgstr "Ononderbroken"
 
-#: includes/functions.php:1563
-msgid "Taiwan New Dollars"
-msgstr "Taiwan New Dollars"
+#: blocks/list/templates/list.php:101
+#: blocks/manage/templates/manage-list.php:103
+#: includes/class-widget-ads.php:122
+msgid "Sort By"
+msgstr "Sorteer op"
 
-#: includes/functions.php:1564
-msgid "Thai Baht"
-msgstr "Thaise baht"
+#: blocks/list/index.php:184 blocks/list/index.php:216
+#: blocks/manage/class-manage-engine.php:110
+#: blocks/manage/class-manage-engine.php:140 blocks/search/index.php:150
+#: blocks/search/index.php:180 includes/shortcodes.php:120
+#: includes/shortcodes.php:150
+msgid "Sort By: %s - %s"
+msgstr "Sorteren op: %s - %s"
 
-#: includes/functions.php:1565
-msgid "Indian Rupee"
-msgstr "Indiase roepie"
-
-#: includes/functions.php:1566
-msgid "Turkish Lira"
-msgstr "Turkse lira"
-
-#: includes/functions.php:1567
-msgid "Iranian Rial"
-msgstr "Iraanse rial"
-
-#: includes/functions.php:1568
-msgid "Russian Rubles"
-msgstr "Russische roebel"
-
-#: includes/functions.php:1569
+#: includes/functions.php:2271
 msgid "South African Rand"
 msgstr "Zuid-Afrikaanse rand"
 
-#: includes/functions.php:1926
-msgid "Show Contact Information"
-msgstr "Contactinformatie tonen"
+#: addons/core/admin/moderate.php:18 addons/core/admin/options-gallery.php:18
+#: addons/core/admin/options.php:18 addons/core/admin/types-edit-post.php:9
+#: addons/core/admin/types-list.php:26 includes/defaults.php:422
+msgid "Spam"
+msgstr "Spam"
 
-#: includes/gallery.php:44
-msgid "Allowed Files"
-msgstr "Toegestane bestanden"
+#: includes/functions.php:2272
+msgid "Sri Lankan Rupees"
+msgstr "Sri Lankaanse roepies"
 
-#: includes/gallery.php:65 includes/gallery.php:150
-msgid "Drop Images Here"
-msgstr "Afbeeldingen hier naartoe slepen"
+#: wpadverts.php:400
+msgid "start typing here ..."
+msgstr "begin hier met typen ..."
 
-#: includes/gallery.php:66 includes/gallery.php:151
-msgid "browse files ..."
-msgstr "Door bestanden bladeren ..."
-
-#: includes/gallery.php:77
-msgid "Close"
-msgstr "Sluiten"
-
-#: includes/gallery.php:81 wpadverts.php:195
-msgid "Edit Image"
-msgstr "Afbeelding bewerken"
-
-#: includes/gallery.php:85 includes/gallery.php:210
-msgid "Image Properties"
-msgstr "Afbeeldingseigenschappen"
-
-#: includes/gallery.php:108 includes/gallery.php:223
-msgid "Use this image as main image"
-msgstr "Gebruik deze afbeelding als hoofdafbeelding"
-
-#: includes/gallery.php:134 includes/gallery.php:236
-msgid "Update and Close"
-msgstr "Bijwerken en sluiten"
-
-#: includes/shortcodes.php:308
-msgid "There are errors in your form. Please correct them before proceeding."
-msgstr "Je formulier bevat fouten. Corrigeer ze voordat je verder gaat."
-
-#: includes/shortcodes.php:361
+#: includes/admin-post-type.php:749
 msgid ""
-"Only logged in users can access this page. <a href=\"%1$s\">Login</a> or <a "
-"href=\"%2$s\">Register</a>."
+"Start typing user name, email or login below, some suggestions will appear."
 msgstr ""
-"Alleen ingelogde gebruikers kunnen toegang krijgen tot deze pagina. <a "
-"href=\"%1$s\">Login</a> or <a href=\"%2$s\">Registeren</a>"
+"Begin met het typen van gebruikersnaam, e-mail of login hieronder, enkele "
+"suggesties zullen verschijnen."
 
-#: includes/shortcodes.php:477
-msgid "Ad does not exist."
-msgstr "Advertentie bestaat niet."
+#: addons/payments/admin/payment-history-edit.php:63
+#: addons/payments/admin/payment-history-list.php:84
+msgid "Status"
+msgstr "Status"
 
-#: includes/shortcodes.php:483
-msgid "You do not own this Ad."
-msgstr "Je bent niet de eigenaar van deze advertentie."
+#: addons/payments/includes/admin-pages.php:473
+msgid "Status for selected Payments was changed to: %s"
+msgstr "Status voor geselecteerde betalingen is gewijzigd in: %s"
 
-#: includes/shortcodes.php:491
-msgid "Incorrect post status [%s]."
-msgstr "Onjuist berichtstatus [%s]."
+#: includes/defaults.php:386
+msgid "String Length"
+msgstr "String lengte"
 
-#: includes/shortcodes.php:538
-msgid "Post has been updated."
-msgstr "Bericht is bijgewerkt."
+#: includes/admin-pages.php:226
+msgid "Stripe"
+msgstr "Streep"
 
-#: includes/shortcodes.php:542
-msgid "Cannot update. There are errors in your form."
-msgstr "Kan niet bijwerken. Je formulier bevat fouten."
+#: addons/styling/admin/options.php:332
+msgid "Style"
+msgstr "Stijl"
 
-#: templates/add-preview.php:8
-msgid "Edit Listing"
-msgstr "Bewerken"
+#: addons/contact-form/contact-form.php:573
+#: addons/emails/includes/class-emails-admin.php:361
+msgid "Subject"
+msgstr "Onderwerp"
 
-#: templates/add-preview.php:14
-msgid "Publish Listing"
-msgstr "Plaatsen"
+#: addons/core/includes/admin-pages.php:359
+msgid "Suffix - 10$"
+msgstr "Achtervoegsel - 10$"
 
-#: templates/add-save.php:5
-msgid ""
-"Your ad has been put into moderation, please wait for admin to approve it."
-msgstr "Je advertentie moet nog goedgekeurd worden door een beheerder."
+#: includes/class-types-admin.php:612
+msgid "Supports"
+msgstr "Ondersteunt"
 
-#: templates/add-save.php:7
-msgid ""
-"Your ad has been published. You can view it here \"<a href=\"%1$s\">%2$s</a>"
-"\"."
-msgstr ""
-"Je advertentie is gepubliceerd. Je kunt hem hier bekijken \"<a href=\"%1$s\">"
-"%2$s</a>\"."
+#: includes/functions.php:2263
+msgid "Swedish Krona"
+msgstr "Zweedse kroon"
 
-#: templates/add.php:47
-msgid "Preview"
-msgstr "Voorbeeld"
+#: includes/functions.php:2264
+msgid "Swiss Franc"
+msgstr "Zwitserse frank"
 
-#: templates/categories-all.php:39
-msgid "<em>View All &raquo;</em>"
-msgstr "<em>Alles bekijken &raquo;</ em>"
+#: addons/core/includes/admin-pages.php:483
+msgid "Switch Views"
+msgstr "Van weergave wisselen"
 
-#: templates/list.php:48
-msgid "Grid"
-msgstr "Grid"
+#: includes/functions.php:2265
+msgid "Taiwan New Dollars"
+msgstr "Taiwanese nieuwe dollars"
 
-#: templates/list.php:49
-msgid "List"
-msgstr "Lijst"
+#: addons/core/admin/types-list.php:92 includes/class-types-admin.php:638
+msgid "Taxonomies"
+msgstr "Taxonomieën"
 
-#: templates/list.php:57
-msgid "Advanced Search"
-msgstr "Uitgebreid zoeken"
+#: includes/class-types-admin.php:307
+msgid "Taxonomy configuration restored to default."
+msgstr "Taxonomie instellingen hersteld naar standaard."
 
-#: templates/list.php:59
-msgid "SEARCH"
-msgstr "ZOEKEN"
+#: wpadverts.php:276
+msgctxt "taxonomy general name"
+msgid "Adverts Categories"
+msgstr "Advertentie categorieën"
 
-#: templates/list.php:63
-msgid "Filter Results"
-msgstr "Resultaat"
+#: wpadverts.php:277
+msgctxt "taxonomy singular name"
+msgid "Advert Category"
+msgstr "Advertentie categorie"
 
-#: templates/manage-edit.php:2
-msgid "Go Back"
-msgstr "Terug"
+#: includes/class-types-admin.php:541
+msgid "Taxonomy updated."
+msgstr "Taxonomie geüpdatet."
 
-#: templates/manage-edit.php:3
-msgid "View Ad"
-msgstr "Advertentie bekijken"
+#: includes/functions-blocks.php:816
+msgid "Template with a sidebar"
+msgstr "Template met zijbalk"
 
-#: templates/manage.php:22
-msgid "Inactive — This Ad is in moderation."
-msgstr "Inactief – Deze advertentie wordt gemodereerd."
-
-#: templates/manage.php:26
-msgid "Inactive — This Ad expired."
-msgstr "Inactief – Deze advertentie is verlopen."
-
-#: templates/manage.php:39
-msgid "Expires %s"
-msgstr "Verloopt: <b>%s</b>"
-
-#: templates/manage.php:54
-msgid "View"
-msgstr "Bekijken"
-
-#: templates/manage.php:62
-msgid "Are you sure?"
-msgstr "Weet je het zeker?"
-
-#: templates/manage.php:64
-msgid "Yes"
-msgstr "Ja"
-
-#: templates/manage.php:73
-msgid "More"
-msgstr "Meer"
-
-#: templates/manage.php:87
-msgid "You do not have any Ads posted yet."
-msgstr "Je hebt nog geen advertenties gepubliceerd."
-
-#: templates/single.php:19
-msgid "by <strong>%s</strong>"
-msgstr "door <strong>%s</strong>"
-
-#: templates/single.php:20
-msgid "Published: %1$s (%2$s ago)"
-msgstr "Gepubliceerd: %1$s (%2$s geleden)"
-
-#: wpadverts.php:84
-msgid "Expired <span class=\"count\">(%s)</span>"
-msgid_plural "Expired <span class=\"count\">(%s)</span>"
-msgstr[0] "Verlopen <span class=\"count\">(%s)</span>"
-msgstr[1] "Verlopen <span class=\"count\">(%s)</span>"
-
-#: wpadverts.php:92
+#: wpadverts.php:234
 msgid "Temporary <span class=\"count\">(%s)</span>"
 msgid_plural "Temporary <span class=\"count\">(%s)</span>"
 msgstr[0] "Tijdelijk <span class=\"count\">(%s)</span>"
 msgstr[1] "Tijdelijk <span class=\"count\">(%s)</span>"
 
-#: wpadverts.php:99
-msgid "Add New Classified"
-msgstr "Nieuwe advertentie toevoegen"
+#: addons/payments/payments.php:65
+msgctxt "temporary status payment"
+msgid "Temporary"
+msgstr "Tijdelijk"
 
-#: wpadverts.php:100
-msgid "Edit Classified"
-msgstr "Advertentie bewerken"
+#: addons/styling/admin/options.php:95 addons/styling/admin/options.php:121
+#: addons/styling/admin/options.php:227 addons/styling/admin/options.php:252
+msgid "Text"
+msgstr "Tekst"
 
-#: wpadverts.php:101
-msgid "New Classified"
-msgstr "Nieuwe advertentie"
+#: includes/defaults.php:391
+msgid "Text cannot be longer than %max% characters."
+msgstr "Tekst mag niet langer zijn dan %max% tekens."
 
-#: wpadverts.php:102
-msgid "All Classifieds"
-msgstr "Alle advertenties"
+#: includes/defaults.php:426
+msgid "Text cannot have more than %max_links% links."
+msgstr "Tekst mag niet meer dan %max_links% links bevatten."
 
-#: wpadverts.php:103
-msgid "View Classified"
+#: includes/defaults.php:427
+msgid "Text contains phrases that are considered SPAM."
+msgstr "Tekst bevat zinnen die als SPAM worden beschouwd."
+
+#: includes/defaults.php:390
+msgid "Text needs to be at least %min% characters long."
+msgstr "Tekst moet minimaal %min% tekens lang zijn."
+
+#: includes/functions.php:2266
+msgid "Thai Baht"
+msgstr "Thaise baht"
+
+#: blocks/publish/class-publish-engine.php:584
+#: includes/class-shortcode-adverts-add.php:497
+msgid "Thank you for submitting your ad!"
+msgstr "Bedankt voor het plaatsen van je advertentie!"
+
+#: includes/defaults.php:478
+msgid "The file size is incorrect."
+msgstr "De bestandsgrootte is onjuist."
+
+#: includes/defaults.php:484
+msgid "The image max. height should be %max_height%."
+msgstr "De afbeelding max. hoogte moet %max_height% zijn."
+
+#: includes/defaults.php:482
+msgid "The image max. width should be %max_width%."
+msgstr "De afbeelding max. breedte moet %max_width% zijn."
+
+#: includes/defaults.php:483
+msgid "The image min. height should be %min_height%."
+msgstr "De afbeelding min. hoogte moet %min_height% zijn."
+
+#: includes/defaults.php:481
+msgid "The image min. width should be %min_width%."
+msgstr "De afbeelding min. breedte moet %min_width% zijn."
+
+#: addons/core/includes/admin-pages.php:567
+msgid "The library used for processing uploaded images."
+msgstr ""
+"De bibliotheek die wordt gebruikt voor het verwerken van geüploade "
+"afbeeldingen."
+
+#. Description of the plugin/theme
+msgid "The lightweight WordPress classifieds plugin done right."
+msgstr "De lichtgewicht plugin voor WordPress advertenties is goed gelukt."
+
+#: includes/defaults.php:455
+msgid "The max. allowed file size is %max%."
+msgstr "De maximale toegestane bestandsgrootte is %max%."
+
+#: includes/defaults.php:456
+msgid "The min. allowed file size is %min%."
+msgstr "De minimale toegestane bestandsgrootte is %min%."
+
+#: addons/payments/includes/shortcodes.php:68
+msgid "The payment does not exist or the payment hash is incorrect."
+msgstr "De betaling bestaat niet of de betalinghash is onjuist."
+
+#: addons/payments/includes/shortcodes.php:104
+msgid ""
+"The payment has been already approved and your Ad should be published soon."
+msgstr ""
+"De betaling is al goedgekeurd en je advertentie zal binnenkort moeten worden "
+"gepubliceerd."
+
+#: addons/payments/includes/shortcodes.php:76
+msgid "The provided hash is not assigned to any of the payment objects."
+msgstr ""
+"Het verstrekte hash is niet toegewezen aan een van de betalingsobjecten."
+
+#: addons/payments/includes/shortcodes.php:56
+msgid "The provided payment hash could not be found."
+msgstr "Het opgegeven betalingshekje (#) kan niet worden gevonden."
+
+#: addons/core/includes/admin-pages.php:295
+msgid "The text to display instead of price if item price was not provided."
+msgstr ""
+"De tekst die moet worden weergegeven in plaats van de prijs als de prijs "
+"niet is opgegeven."
+
+#: addons/core/admin/types-edit-post.php:24
+msgid "There are <strong>%d</strong> published ads with comments disabled."
+msgstr ""
+"Er zijn <strong>%d</strong> gepubliceerde advertenties met reacties "
+"uitgeschakeld."
+
+#: includes/class-types-admin.php:414 includes/class-types-admin.php:487
+msgid "There are errors in your form"
+msgstr "Er zitten fouten in je formulier"
+
+#: addons/bank-transfer/includes/admin-pages.php:47
+#: addons/contact-form/contact-form.php:156
+#: addons/contact-form/contact-form.php:516
+#: addons/contact-form/includes/admin-pages.php:62
+#: addons/contact-form/includes/class-block-details.php:309
+#: addons/core/includes/admin-pages.php:91
+#: addons/core/includes/admin-pages.php:171
+#: addons/emails/includes/class-emails-admin.php:85
+#: addons/emails/includes/class-emails-admin.php:177
+#: addons/payments/includes/admin-pages.php:49
+#: addons/payments/includes/admin-pages.php:166
+#: addons/payments/includes/admin-pages.php:213
+#: addons/payments/includes/admin-pages.php:397
+#: includes/class-moderate-admin.php:58
+msgid "There are errors in your form."
+msgstr "Er staan ​​fouten in je formulier."
+
+#: blocks/publish/class-publish-engine.php:506
+#: includes/class-shortcode-adverts-add.php:440
+msgid "There are errors in your form. Please correct them before proceeding."
+msgstr ""
+"Er staan ​​fouten in je formulier. Corrigeer ze voordat je verder gaat."
+
+#: includes/class-widget-ads.php:542 templates/list.php:104
+msgid "There are no ads matching your search criteria."
+msgstr "Er zijn geen advertenties die voldoen aan jouw zoekcriteria."
+
+#: blocks/list/templates/list.php:162
+msgid "There aren't any results matching your search query."
+msgstr "Er zijn geen resultaten die overeenkomen met je zoekopdracht."
+
+#: blocks/manage/index.php:55
+msgid "There was an error while deleting."
+msgstr "Er is een fout opgetreden bij het verwijderen."
+
+#: includes/class-types-admin.php:280
+msgid "There was an error while executing a MySQL query."
+msgstr "Er is een fout opgetreden bij het uitvoeren van een MySQL-query."
+
+#: addons/payments/includes/admin-pages.php:158
+#: addons/payments/includes/admin-pages.php:208
+#: addons/payments/includes/admin-pages.php:392
+msgid "There was an error while saving pricing in database."
+msgstr "Er is een fout opgetreden bij het opslaan van prijzen in de database."
+
+#: addons/styling/admin/options.php:73 addons/styling/admin/options.php:205
+#: addons/styling/admin/options.php:376
+msgid "Thick"
+msgstr "Vet"
+
+#: addons/styling/admin/options.php:72 addons/styling/admin/options.php:81
+#: addons/styling/admin/options.php:204 addons/styling/admin/options.php:213
+#: addons/styling/admin/options.php:375
+msgid "Thin"
+msgstr "Dun"
+
+#: addons/core/includes/admin-pages.php:303
+msgid "This date format will be used on the ads list and details pages."
+msgstr "Datum format wordt gebruikt op de advertentielijst en detailpagina's."
+
+#: includes/defaults.php:467
+msgid "This file type is not allowed."
+msgstr "Dit bestandstype is niet toegestaan."
+
+#: addons/core/includes/admin-pages.php:605
+msgid "This image size is being used in gallery thumbnails."
+msgstr "Deze afbeeldingsgrootte wordt gebruikt in galerij thumbnails."
+
+#: addons/core/includes/admin-pages.php:598
+msgid "This image size is being used in the [adverts_list] shortcode."
+msgstr "Dit afbeeldingsformaat wordt gebruikt in de shortcode [adverts_list]."
+
+#: addons/core/includes/admin-pages.php:591
+msgid ""
+"This image size is being used in the image slider on Advert details pages."
+msgstr ""
+"Deze afbeeldingsgrootte wordt gebruikt in de afbeelding slider op pagina's "
+"met advertentiedetails."
+
+#: addons/payments/admin/payment-history-list.php:55
+msgid "This month"
+msgstr "Deze maand"
+
+#: addons/payments/includes/shortcodes.php:84
+msgid "This payment has already been paid."
+msgstr "Deze betaling is al betaald."
+
+#: includes/functions.php:3292
+msgid "This post cannot be edited by annonymous users."
+msgstr "Dit bericht kan niet worden bewerkt door anonieme gebruikers."
+
+#: includes/functions.php:3300
+msgid "This post does not belong to you."
+msgstr "Dit bericht is niet van jou."
+
+#: includes/functions.php:3273
+msgid "This post does not exist."
+msgstr "Dit bericht bestaat niet."
+
+#: includes/ajax.php:1223 includes/functions.php:3318
+msgid "This post is not an Advert."
+msgstr "Dit bericht is geen advertentie."
+
+#: includes/class-types-admin.php:716
+msgid "This taxonomy is hierarchical."
+msgstr "Deze taxonomie is hiërarchisch."
+
+#: includes/gallery.php:405
+msgid "This video does not have thumbnails yet. "
+msgstr "Deze video heeft nog geen thumbnails. "
+
+#: addons/core/includes/admin-pages.php:382
+msgid "Thousands Separator"
+msgstr "Scheidingsteken duizendtallen"
+
+#: includes/gallery.php:833
+msgid "Thumbnail"
+msgstr "Thumbnail"
+
+#: includes/class-types-admin.php:619
+msgid "Thumbnail (Featured Image)"
+msgstr "Thumbnail (uitgelichte afbeelding)"
+
+#: addons/core/includes/admin-pages.php:511
+msgid "Thumbnails Slider"
+msgstr "Thumbnails slider"
+
+#: includes/class-moderate-admin.php:165
+msgid "Time Trap"
+msgstr "Timetrap"
+
+#: includes/class-moderate-admin.php:181
+msgid "Timetrap Delta (in seconds)"
+msgstr "Timetrap delta (in seconden)"
+
+#: includes/class-moderate-admin.php:193
+msgid "Timetrap Key"
+msgstr "Timetrap sleutel"
+
+#: addons/payments/admin/pricing-list.php:48
+#: addons/payments/includes/admin-pages.php:819
+#: addons/styling/includes/admin-pages.php:84 blocks/list/index.php:168
+#: blocks/manage/class-manage-engine.php:40 blocks/search/index.php:140
+#: blocks/single-data-table/index.php:152 includes/admin-post-type.php:575
+#: includes/class-rest-blocks.php:165 includes/class-types-admin.php:616
+#: includes/class-widget-ads.php:77 includes/class-widget-ads.php:133
+#: includes/class-widget-categories.php:76 includes/defaults.php:96
+#: includes/gallery.php:460 includes/shortcodes.php:110
+msgid "Title"
+msgstr "Titel"
+
+#: addons/emails/includes/class-emails-admin.php:374
+msgid "To"
+msgstr "Naar"
+
+#: addons/payments/admin/payment-history-edit.php:75
+msgid "To Pay"
+msgstr "Te betalen"
+
+#: addons/payments/templates/add-payment.php:15
+#: addons/payments/templates/publish-payment.php:25
+msgid "Total"
+msgstr "Totaal"
+
+#: includes/class-gallery-helper.php:453
+msgid "Total Files"
+msgstr "Totaal aantal bestanden"
+
+#: includes/class-types-admin.php:621
+msgid "Trackbacks"
+msgstr "Trackbacks"
+
+#: addons/styling/admin/options.php:326
+msgid "True Gray"
+msgstr "Echt grijs"
+
+#: includes/functions.php:2267
+msgid "Turkish Lira"
+msgstr "Turkse lira"
+
+#: addons/payments/admin/payment-history-list.php:83
+#: addons/payments/admin/pricing-list.php:49
+msgid "Type"
+msgstr "Type"
+
+#: wpadverts.php:399
+msgid "Type in the box above to see suggestions ..."
+msgstr "Typ in de box hierboven om suggesties te zien ..."
+
+#: addons/core/admin/moderate.php:17 addons/core/admin/options-gallery.php:17
+#: addons/core/admin/options.php:17 addons/core/admin/types-edit-post.php:8
+#: addons/core/admin/types-list.php:25
+msgid "Types"
+msgstr "Types"
+
+#: includes/functions.php:2273
+msgid "UAE Dirham"
+msgstr "VAE dirham"
+
+#: includes/functions.php:2274
+msgid "Ukrainian hryvnia"
+msgstr "Oekraïense hryvnia"
+
+#: includes/gallery.php:576
+msgid "Undo"
+msgstr "Ongedaan maken"
+
+#: addons/emails/admin/emails-list.php:78
+msgid "Unknown"
+msgstr "Onbekend"
+
+#: addons/payments/payments.php:70 addons/payments/payments.php:79
+msgid "Unread <span class=\"count\">(%s)</span>"
+msgid_plural "Unread <span class=\"count\">(%s)</span>"
+msgstr[0] "Ongelezen <span class=\"count\">(%s)</span>"
+msgstr[1] "Ongelezen <span class=\"count\">(%s)</span>"
+
+#: addons/payments/includes/admin-pages.php:685
+#: blocks/manage/class-manage-engine.php:320
+#: includes/class-moderate-admin.php:7 includes/class-types-admin.php:114
+#: includes/class-types-admin.php:149 includes/class-updates-manager.php:332
+#: templates/manage-edit.php:74
+msgid "Update"
+msgstr "Update"
+
+#: includes/gallery.php:473
+msgid "Update Description"
+msgstr "Beschrijving updaten"
+
+#: addons/emails/includes/class-emails-admin.php:165
+msgid "Update Message Template"
+msgstr "Bericht template updaten"
+
+#: addons/bank-transfer/includes/admin-pages.php:36
+#: addons/contact-form/includes/admin-pages.php:41
+#: addons/core/includes/admin-pages.php:50
+#: addons/core/includes/admin-pages.php:110
+#: addons/emails/includes/class-emails-admin.php:65
+#: addons/payments/includes/admin-pages.php:39
+#: addons/styling/includes/admin-pages.php:61
+msgid "Update Options"
+msgstr "Update opties"
+
+#: addons/payments/admin/payment-history-edit.php:93
+msgid "Update Payment"
+msgstr "Update betaling"
+
+#: addons/payments/includes/admin-pages.php:177
+msgid "Update Pricing"
+msgstr "Prijs updaten"
+
+#: includes/gallery.php:107
+msgid "Upload a file"
+msgstr "Een bestand uploaden"
+
+#: includes/defaults.php:476
+msgid "Upload Dimensions"
+msgstr "Afmetingen uploaden"
+
+#: includes/defaults.php:436
+msgid "Upload Limit"
+msgstr "Uploadlimiet"
+
+#: addons/core/includes/admin-pages.php:604
+msgid "Upload Thumbnail"
+msgstr "Upload thumbnail"
+
+#: includes/defaults.php:451 includes/defaults.php:465
+msgid "Upload Type"
+msgstr "Uploadtype"
+
+#: includes/functions.php:268
+msgid "Uploaded file is NOT an image"
+msgstr "Het geüploade bestand is GEEN afbeelding"
+
+#: includes/gallery.php:537
+msgid "Uploaded on:"
+msgstr "Geüpload op:"
+
+#: includes/defaults.php:356
+msgid "URL"
+msgstr "URL"
+
+#: includes/defaults.php:294
+msgid "URL - converts string to a valid URL (if possible)."
+msgstr "URL - converteert een string naar geldige URL (indien mogelijk)."
+
+#: includes/functions.php:2240
+msgid "US Dollars"
+msgstr "US dollars"
+
+#: includes/class-types-admin.php:797
+msgid "Use default method."
+msgstr "Gebruik de standaardmethode."
+
+#: includes/class-types-admin.php:735
+msgid "Use hierarchical URLs."
+msgstr "Gebruik hiërarchische URL's."
+
+#: includes/gallery.php:455
+msgid "Use this image as main image"
+msgstr "Gebruik deze afbeelding als hoofdafbeelding"
+
+#: includes/admin-pages.php:96
+msgid "Use WooCommerce to charge users for posting ads on your website."
+msgstr ""
+"Gebruik WooCommerce om gebruikers te laten betalen voor het plaatsen van "
+"advertenties op jouw website."
+
+#: addons/emails/admin/emails-list.php:36
+#: addons/emails/admin/emails-list.php:91
+#: addons/payments/admin/payment-history-list.php:79
+msgid "User"
+msgstr "Gebruiker"
+
+#: addons/payments/includes/admin-pages.php:313
+msgid "User ID"
+msgstr "Gebruikers ID"
+
+#: addons/payments/admin/payment-history-edit.php:54
+msgid "User IP"
+msgstr "Gebruiker IP"
+
+#: addons/contact-form/includes/admin-pages.php:96
+msgid "User needs to click a link to reveal a phone number."
+msgstr ""
+"De gebruiker moet op een link klikken om een ​​telefoonnummer weer te geven."
+
+#: addons/emails/includes/class-emails-messages.php:230
+msgid "User updated his Ad (action required)."
+msgstr "Gebruiker heeft zijn advertentie bijgewerkt (actie vereist)."
+
+#: addons/bank-transfer/includes/admin-pages.php:77
+msgid ""
+"User will see this message when asked to make payment, make sure that "
+"instructions here will make it as easy as possible to make a payment.<br/>"
+"Allowed variables:<br/>- {total} - total amount to pay (for example $10.00)"
+"<br/>- {order_number} - unique order number<br/>To revert to default message "
+"remove whole text from editor and save the form."
+msgstr ""
+"De gebruiker ziet dit bericht wanneer hem wordt gevraagd om te betalen. Zorg "
+"ervoor dat de instructies hier het betalen zo gemakkelijk mogelijk maken."
+"<br/>Toegestane variabelen:<br/>- {total} - totaal te betalen bedrag "
+"(voorbeeld $10,00)<br/>- {order_number} - uniek ordernummer<br/>Om terug te "
+"keren naar het standaardbericht, verwijder je de hele tekst uit de editor en "
+"sla je het formulier op."
+
+#: includes/admin-pages.php:117
+msgid "Using Authors module users can create and manage their profiles."
+msgstr "Met de Authors module kunnen gebruikers een profiel maken en beheren."
+
+#: includes/defaults.php:411
+msgid "Verify Choices"
+msgstr "Verifieer keuzes"
+
+#: includes/gallery.php:339 includes/gallery.php:487
+msgid "Video"
+msgstr "Video"
+
+#: blocks/manage/class-manage-engine.php:336 includes/gallery.php:347
+#: templates/manage.php:56
+msgid "View"
+msgstr "Bekijken"
+
+#: templates/manage-edit.php:5
+msgid "View Ad"
 msgstr "Advertentie bekijken"
 
-#: wpadverts.php:104
-msgid "Search Classifieds"
-msgstr "Advertenties zoeken"
+#: blocks/manage/templates/manage-list.php:175
+#: blocks/publish/templates/publish-save.php:38
+msgid "View ads list"
+msgstr "Advertentielijst bekijken"
 
-#: wpadverts.php:105
-msgid "No Classifieds found"
-msgstr "Geen advertenties gevonden"
+#: wpadverts.php:245
+msgid "View Classified"
+msgstr "Bekijk advertenties"
 
-#: wpadverts.php:106
-msgid "No Classifieds found in the Trash"
-msgstr "Geen advertenties gevonden in de prullenbak"
+#: addons/featured/admin/options.php:22
+msgid "View Documentation"
+msgstr "Bekijk documentatie"
 
-#: wpadverts.php:108
-msgid "Classifieds"
-msgstr "Advertenties"
-
-#: wpadverts.php:185
-msgid "Select options ..."
-msgstr "Selecteren ..."
-
-#: wpadverts.php:190
-msgid "No results found."
-msgstr "Geen resultaten gevonden."
-
-#: wpadverts.php:196
-msgid "Delete Image"
-msgstr "Afbeelding verwijderen"
-
-#: wpadverts.php:197
+#: wpadverts.php:407
 msgid "View Full Image"
 msgstr "Bekijk de volledige afbeelding"
 
-#: wpadverts.php:198
-msgid "Main"
-msgstr "Standaard"
+#: addons/payments/admin/payment-history-list.php:97
+#: addons/payments/admin/payment-history-list.php:99
+msgid "View Order"
+msgstr "Bekijk bestelling"
 
-#: wpadverts.php:384
-msgid "Module activated successfully."
-msgstr "Module succesvol geactiveerd."
+#: addons/payments/includes/admin-pages.php:636
+msgid "View order"
+msgstr "Bestelling bekijken"
+
+#: addons/payments/admin/pricing-list.php:51
+#: addons/payments/includes/admin-pages.php:843
+msgid "Visible"
+msgstr "Zichtbaar"
+
+#: addons/payments/payments.php:440 addons/payments/payments.php:521
+msgid "Visible 1 day"
+msgid_plural "Visible %d days"
+msgstr[0] "1 dag zichtbaar"
+msgstr[1] "Zichtbaar %d dagen"
+
+#: addons/core/includes/admin-pages.php:519
+msgid "Visible Thumbnails"
+msgstr "Zichtbare thumbnails"
+
+#: includes/admin-pages.php:130
+msgid ""
+"Visually adjust forms and buttons styling for seamless integration with your "
+"theme."
+msgstr ""
+"Pas visueel de vormgeving van formulieren en knoppen aan voor een naadloze "
+"integratie met jouw thema."
+
+#: includes/class-gallery-helper.php:311
+msgid "Volume Down"
+msgstr "Volume omlaag"
+
+#: includes/class-gallery-helper.php:314
+msgid "Volume Up"
+msgstr "Volume omhoog"
+
+#: addons/styling/admin/options.php:327
+msgid "Warm Gray"
+msgstr "Warm grijs"
+
+#: includes/class-moderate-admin.php:111
+msgid ""
+"When a classified contains any of these words in its content, it will return "
+"an error message. One word or phrase per line."
+msgstr ""
+"Wanneer een advertentie een van deze woorden in de inhoud bevat, wordt een "
+"foutmelding geretourneerd. Eén woord of zin per regel."
+
+#: includes/admin-post-type.php:91
+msgid "Whoops, the provided date is invalid."
+msgstr "Oeps, de opgegeven datum is ongeldig."
+
+#: includes/admin-pages.php:95
+msgid "WooCommerce Payments"
+msgstr "WooCommerce Betalingen"
 
 #. Plugin Name of the plugin/theme
 msgid "WP Adverts"
 msgstr "WP Adverts"
 
-#. Plugin URI of the plugin/theme
-msgid "https://wpadverts.com/"
-msgstr "https://wpadverts.com/"
+#: includes/functions-blocks.php:840
+msgid "WP Templates"
+msgstr "WP templates"
 
-#. Description of the plugin/theme
-msgid "The lightweight WordPress classifieds plugin done right."
+#: includes/class-widget-ads.php:35 includes/class-widget-ads.php:50
+msgid "WPAdverts Ads"
+msgstr "WPAdverts Advertenties"
+
+#: includes/admin-post-type.php:619 templates/manage.php:39
+msgid "Y/m/d"
+msgstr "Y/m/d"
+
+#: includes/admin-post-type.php:611
+msgid "Y/m/d g:i:s A"
+msgstr "j F Y H:i"
+
+#: templates/manage.php:69
+msgid "Yes"
+msgstr "Ja"
+
+#: includes/class-timetrap.php:43 includes/class-timetrap.php:123
+msgid "You are filling the forms too fast!"
+msgstr "Je vult de formulieren te snel in!"
+
+#: includes/functions.php:1771
+msgid ""
+"You are posting as <strong>%1$s</strong>. <br/>If you want to use a "
+"different account, please <a href=\"%2$s\">logout</a>."
 msgstr ""
-"De lichtgewicht WordPress-plugin voor regeladvertenties. Op de goede manier."
+"Je bericht als <strong>%1$s</strong>. <br/>Als je een ander account wil "
+"gebruiken, <a href=\"%2$s\">log dan uit</a>."
 
-#. Author of the plugin/theme
-msgid "Greg Winiarski"
-msgstr "Greg Winiarski"
+#: includes/shortcodes.php:549
+msgid ""
+"You are seeing a post preview. This page is not publicly available. <a "
+"href=\"%s\">Go back</a>"
+msgstr ""
+"Je ziet een berichtvoorbeeld. Deze pagina is niet openbaar beschikbaar. <a "
+"href=\"%s\">Ga terug</a>"
 
-#: addons/payments/payments.php:62
-msgctxt "completed status payment"
-msgid "Completed"
-msgstr "Voltooid"
+#: includes/class-types-admin.php:224 includes/class-types-admin.php:252
+msgid "You are trying to restore unsupported post type."
+msgstr "Je probeert een niet-ondersteund berichttype te herstellen."
 
-#: addons/payments/payments.php:71
-msgctxt "failed status payment"
-msgid "Failed"
-msgstr "Mislukt"
+#: includes/class-types-admin.php:640
+msgid ""
+"You can assign taxonomies to this post type while <a href=\"%s\">creating or "
+"editing</a> them."
+msgstr ""
+"Je kan taxonomieën aan dit berichttype toewijzen terwijl je ze <a "
+"href=\"%s\">maakt of bewerkt</a>."
 
-#: addons/payments/payments.php:80
-msgctxt "pending status payment"
-msgid "Pending"
-msgstr "In behandeling"
+#: includes/ajax.php:1269 includes/ajax.php:1316
+msgid "You cannot access this page."
+msgstr "Je hebt geen toegang tot deze pagina."
 
-#: addons/payments/payments.php:89
-msgctxt "refunded status payment"
-msgid "Refunded"
-msgstr "Terugbetaald"
+#: includes/ajax.php:450 includes/ajax.php:547 includes/ajax.php:618
+#: includes/ajax.php:838
+msgid "You cannot edit images."
+msgstr "Je kan geen afbeeldingen bewerken."
 
-#: addons/payments/payments.php:98
-msgctxt "post"
-msgid "Pending"
-msgstr "In behandeling"
+#: includes/defaults.php:402
+msgid "You cannot select more than %max_choices% items."
+msgstr "Je kan niet meer dan %max_choices% items selecteren."
 
-#: wpadverts.php:81
-msgctxt "post"
-msgid "Expired"
-msgstr "Verlopen"
+#: includes/defaults.php:440
+msgid "You cannot upload more than %max% files."
+msgstr "Je mag niet meer dan %max% bestanden uploaden."
 
-#: wpadverts.php:88
-msgctxt "post"
-msgid "Temporary"
-msgstr "Tĳdelĳk"
+#: templates/manage.php:94
+msgid "You do not have any Ads posted yet."
+msgstr "Je hebt nog geen advertenties geplaatst."
 
-#: wpadverts.php:96
-msgctxt "post type general name"
-msgid "Classifieds"
-msgstr "Advertenties"
+#: blocks/manage/templates/manage-list.php:166
+msgid "You do not have any items posted yet."
+msgstr "Je hebt nog geen artikelen geplaatst."
 
-#: wpadverts.php:97
-msgctxt "post type singular name"
-msgid "Classified"
-msgstr "Advertentie"
+#: blocks/manage/class-manage-engine.php:238 includes/shortcodes.php:424
+#: includes/shortcodes.php:528
+msgid "You do not own this Ad."
+msgstr "Je bent niet de eigenaar van deze advertentie."
 
-#: wpadverts.php:98
-msgctxt "classified"
-msgid "Add New"
-msgstr "Toevoegen"
+#: includes/defaults.php:441
+msgid "You need to upload at least %min% files."
+msgstr "Je moet minimaal %min% bestanden uploaden."
+
+#: addons/emails/includes/class-emails-messages.php:160
+msgid "Your Ad has been approved by administrator."
+msgstr "Je advertentie is goedgekeurd door de beheerder."
+
+#: addons/payments/includes/class-emails-integration.php:149
+msgid "Your Ad has been paid and published."
+msgstr "Je advertentie is betaald en gepubliceerd."
+
+#: addons/emails/includes/class-emails-messages.php:132
+msgid "Your Ad has been published."
+msgstr "Je advertentie is gepubliceerd."
+
+#: blocks/publish/templates/publish-save.php:15 templates/add-save.php:7
+msgid ""
+"Your ad has been published. You can view it here \"<a href=\"%1$s\">%2$s</a>"
+"\"."
+msgstr ""
+"Je advertentie is gepubliceerd. Je kan je advertentie hier \"<a "
+"href=\"%1$s\">%2$s</a>\" bekijken."
+
+#: blocks/publish/templates/publish-save.php:13 templates/add-save.php:5
+msgid ""
+"Your ad has been put into moderation, please wait for admin to approve it."
+msgstr "Je advertentie is gemodereerd, wacht tot de beheerder deze goedkeurt."
+
+#: addons/emails/includes/class-emails-messages.php:174
+msgid "Your Ad has been rejected by administrator."
+msgstr "Je advertentie is afgewezen door de beheerder."
+
+#: addons/emails/includes/class-emails-messages.php:146
+msgid "Your Ad has been saved (pending moderation)."
+msgstr "Je advertentie is opgeslagen (in afwachting van moderatie)."
+
+#: addons/payments/includes/class-emails-integration.php:104
+msgid "Your Ad has been saved (waiting for payment)."
+msgstr "Je advertentie is opgeslagen (wacht op betaling)."
+
+#: addons/emails/includes/class-emails-messages.php:188
+msgid "Your Ad has expired."
+msgstr "Je advertentie is verlopen."
+
+#: includes/functions.php:2065
+msgid ""
+"Your are being redirected to Edit page. <a href=\"%s\">Click here</a> if it "
+"is taking to long. "
+msgstr ""
+"Je wordt omgeleid naar de pagina Bewerken. <a href=\"%s\">Klik hier</a> als "
+"het te lang duurt. "
+
+#: blocks/single-gallery/templates/gallery.php:33
+msgid "Your browser cannot play this video."
+msgstr "Uw browser kan deze video niet afspelen."
+
+#: includes/class-gallery-helper.php:360
+msgid ""
+"Your browser cannot play this video. Please use a different browser or "
+"download the video and play on your device."
+msgstr ""
+"Je browser kan deze video niet afspelen. Gebruik een andere browser of "
+"download de video en speel deze af op jouw apparaat."
+
+#: addons/contact-form/contact-form.php:562
+msgid "Your Email"
+msgstr "Jouw e-mail"
+
+#: addons/payments/includes/class-emails-integration.php:179
+msgid "Your expired Ad has been renewed and is panding approval."
+msgstr "Jouw verlopen advertentie is vernieuwd en wacht op goedkeuring."
+
+#: addons/payments/includes/class-emails-integration.php:164
+msgid "Your expired Ad has been renewed and published."
+msgstr "Jouw verlopen advertentie is vernieuwd en gepubliceerd."
+
+#: addons/contact-form/contact-form.php:149
+#: addons/contact-form/contact-form.php:507
+#: addons/contact-form/includes/class-block-details.php:302
+msgid "Your message has been sent."
+msgstr "Je bericht is verzonden."
+
+#: addons/contact-form/contact-form.php:552
+msgid "Your Name"
+msgstr "Jouw naam"
+
+#: includes/gallery.php:621
+msgid "Zoom:"
+msgstr "Zoom:"
+
+#: addons/contact-form/includes/class-emails-integration.php:70
+msgid ""
+"{$form.message_body}\n"
+"\n"
+"URL: {$advert.ID|get_permalink}\n"
+"Price: {$advert.ID|adverts_get_the_price}"
+msgstr ""
+"{$form.message_body}\n"
+"\n"
+"URL: {$advert.ID|get_permalink}\n"
+"Prijs: {$advert.ID|adverts_get_the_price}"
+
+#: includes/functions-blocks.php:763 includes/functions-blocks.php:780
+msgid "~ no title ~"
+msgstr "~ geen titel ~"

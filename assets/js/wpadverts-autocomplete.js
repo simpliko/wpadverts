@@ -116,6 +116,7 @@ WPADVERTS.Autocomplete.prototype.Open = function() {
     }
 
     if(this._firstLoad) {
+        // maybe?
         this.Load();
         this._firstLoad = false;
     }

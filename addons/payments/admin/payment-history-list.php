@@ -40,7 +40,7 @@
     <select name="action" id="wpjb-action1">
         <option selected="selected" value=""><?php _e("Bulk Actions") ?></option>
         <?php foreach(array("pending", "completed", "failed", "refunded") as $status): ?>
-        <option value="set-status-<?php echo $status ?>"><?php esc_html_e( sprintf( __("Set status: %s", "wpadverts"), get_post_status_object( $status )->label ) ) ?></option>
+        <option value="set-status-<?php echo $status ?>"><?php printf( esc_html__( 'Set status: %s', 'wpadverts' ), get_post_status_object( $status )->label ); ?></option>
         <?php endforeach; ?>
         <option value="delete"><?php _e("Delete") ?></option>
     </select>
@@ -151,7 +151,7 @@
         <select name="action2" id="wpjb-action2">
             <option selected="selected" value=""><?php _e("Bulk Actions", "wpadverts") ?></option>
             <?php foreach(array("pending", "completed", "failed", "refunded") as $status): ?>
-            <option value="set-status-<?php echo $status ?>"><?php esc_html_e( sprintf( __("Set status: %s", "wpadverts"), get_post_status_object( $status )->label ) ) ?></option>
+            <option value="set-status-<?php echo $status ?>"><?php printf( esc_html__("Set status: %s", "wpadverts"), get_post_status_object( $status )->label ) ?></option>
             <?php endforeach; ?>
             <option value="delete"><?php _e("Delete", "wpadverts") ?></option>
         </select>
@@ -188,3 +188,4 @@
 </form>
     
 </div>
+

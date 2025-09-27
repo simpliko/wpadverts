@@ -289,7 +289,7 @@ function adverts_admin_page_extensions() {
         }
         
         if( $module_current === null ) {
-            esc_html_e( sprintf( __( "Module [%s] does not exist.", "wpadverts" ), $name ) );
+            printf( esc_html__( 'Module [%s] does not exist.', 'wpadverts' ), $name );
             return;
         }
 
@@ -484,3 +484,4 @@ function adverts_save_category($term_id, $tt_id) {
     }
 
 }
+

@@ -439,7 +439,7 @@ function adverts_payments_field_payment($field) {
                         <?php if( $visible > 0 ): ?>
                         <?php printf( _n("Visible 1 day", "Visible %d days", $visible, "wpadverts"), $visible) ?>
                         <?php else: ?>
-                        <?php echo esc_html_e( "Never Expires", "wpadverts" ) ?>
+                        <?php esc_html_e( "Never Expires", "wpadverts" ) ?>
                         <?php endif; ?>
                     </span>
 
@@ -520,7 +520,7 @@ function adverts_payments_field_payment_block( $field ) {
                         <?php if( $visible > 0 ): ?>
                         <?php printf( _n("Visible 1 day", "Visible %d days", $visible, "wpadverts"), $visible) ?>
                         <?php else: ?>
-                        <?php echo esc_html_e( "Never Expires", "wpadverts" ) ?>
+                        <?php esc_html_e( "Never Expires", "wpadverts" ) ?>
                         <?php endif; ?>
                     </span>
                     <?php do_action("adverts_payments_features", $post->ID ) ?>
@@ -1519,7 +1519,7 @@ function adext_payments_details_box( $payment ) {
                 <?php echo adverts_price( get_post_meta( $listing->ID, "adverts_price", true ) ) ?>
             </span>
             <?php else: ?>
-            <?php esc_html_e( sprintf( __("Listing [%d] no longer exists.", "wpadverts"), $listing_id ) ) ?>
+            <?php printf( esc_html__("Listing [%d] no longer exists.", "wpadverts"), $listing_id ) ?>
             <?php endif; ?>
         </div>
 
@@ -1532,7 +1532,7 @@ function adext_payments_details_box( $payment ) {
                 <a href="<?php echo admin_url('post.php?post='.$post->ID.'&action=edit') ?>"><?php esc_html_e($post->post_title) ?></a>
             </span>
             <?php else: ?>
-            <?php esc_html_e( sprintf( __("Ad [%d] no longer exists.", "wpadverts"), $listing_id ) ) ?>
+            <?php printf( esc_html__("Ad [%d] no longer exists.", "wpadverts"), $listing_id ) ?>
             <?php endif; ?>
         </div>
 
@@ -1634,4 +1634,6 @@ function adext_payments_format_order_id( $post ) {
     }
     
     return apply_filters("adext_payments_format_order_id", "#".str_pad($post_id, 6, "0", STR_PAD_LEFT), $post_id );
+
 }
+

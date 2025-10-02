@@ -17,22 +17,19 @@ class Adverts_Rest_Blocks {
         foreach( $post_types as $post_type ) {
             //print_r($post_type);
             $post_type_object = get_post_type_object( $post_type );
-            
-            $post_type_object->taxonomies; // !!!
+
+            $taxonomies = [];
+            foreach( get_object_taxonomies( $post_type ) as $taxonomy_name ) {
+                $taxonomies[] = [
+                    "name" => $taxonomy_name,
+                    "label" => get_taxonomy( $taxonomy_name )->label
+                ];
+            }
 
             $item = array(
                 "post_type" => $post_type,
                 "label" => $post_type_object->label,
-                "taxonomies" => array( 
-                    0 => array(
-                        "name" => "advert_category",
-                        "label" => "Advert Category"
-                    ),                    
-                    1 => array(
-                        "name" => "advert_location",
-                        "label" => "Advert Location"
-                    ),
-                ),
+                "taxonomies" => $taxonomies,
                 "form_schemes_default" => $this->get_form_schemes_default( $post_type ), 
                 "form_schemes" => $this->get_form_schemes( $post_type ),
                 "contact" => $this->get_contact_options()

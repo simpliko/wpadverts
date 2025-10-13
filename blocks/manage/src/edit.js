@@ -428,7 +428,9 @@ class Edit extends Component {
             alt_source,
             color_price,
             color_title,
-            color_bg_featured
+            color_bg_featured,
+            login_url,
+            register_url
         } = attributes;
 
         const { show_instructions } = this.state;
@@ -651,6 +653,20 @@ class Edit extends Component {
                                 onChange={this.onChangeOrderBy}
                             />
 
+                        </PanelBody>
+
+                        <PanelBody title="URLs" initialOpen={ false }>
+                            <TextControl
+                                label="Login URL"
+                                value={login_url}
+                                onChange={(value) => this.props.setAttributes({login_url:value})}
+                            />
+
+                            <TextControl
+                                label="Registration URL"
+                                value={register_url}
+                                onChange={(value) => this.props.setAttributes({register_url:value})}
+                            />
                         </PanelBody>
 
                     </InspectorControls>

@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classifieds script, classifieds p
 Requires PHP: 5.6
 Requires at least: 5.7
 Tested up to: 6.8
-Stable tag: 2.2.7
+Stable tag: 2.2.8
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,12 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 2.2.8 - 2025-10-13 =
+
+* FEATURE: Custom login and registration URLs in the Classifieds Manage block.
+* FIXED: Incorrectly used esc_html_e() function in a couple of files.
+* FIXED: Not all taxonomies being loaded via the REST API. 
 
 = 2.2.7 - 2025-08-07 =
 

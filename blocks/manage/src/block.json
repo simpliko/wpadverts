@@ -136,6 +136,14 @@
         "secondary_button": {
             "type": "object",
             "default": {}
+        },
+        "login_url": {
+            "type": "string",
+            "default": ""
+        },
+        "register_url": {
+            "type": "string",
+            "default": ""
         }
     }
 }

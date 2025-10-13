@@ -48,11 +48,21 @@ class Adverts_Block_Manage_Engine {
 
     public function main( $atts = array() ) {
 
+        $permalink = get_permalink();
+        $login_url = $atts["login_url"];
+        $register_url = $atts["register_url"];
+        
+        if( empty( $login_url ) ) {
+            $login_url = wp_login_url( $permalink );
+        }
+        if( empty( $register_url ) ) {
+            $register_url = wp_registration_url();
+        }
+        
         if(!get_current_user_id()) {
 
-            $permalink = get_permalink();
             $message = __('Only logged in users can access this page.', "wpadverts");
-            $parsed = sprintf($message, wp_login_url( $permalink ), wp_registration_url( $permalink ) );
+            $parsed = sprintf($message, $login_url, $register_url );
             
             return $this->flash( array( 
                 "info" => array( 
@@ -60,8 +70,8 @@ class Adverts_Block_Manage_Engine {
                         "message" => $parsed, 
                         "icon" => "fa fa-lock",
                         "link" => array(
-                            array( "title" => __( "Login", "wpadverts" ), "url" => wp_login_url( $permalink ) ),
-                            array( "title" => __( "Register", "wpadverts" ), "url" => wp_registration_url() ),
+                            array( "title" => __( "Login", "wpadverts" ), "url" => $login_url ),
+                            array( "title" => __( "Register", "wpadverts" ), "url" => $register_url ),
                         ) 
 
                     ),  

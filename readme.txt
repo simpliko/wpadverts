@@ -125,6 +125,11 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
+= 2.2.9 - 2025-12-01 =
+
+* FIXED: Web accessibility (ADA) improvments for blocks.
+* FIXED: Few typos fixed.
+
 = 2.2.8 - 2025-10-13 =
 
 * FEATURE: Custom login and registration URLs in the Classifieds Manage block.

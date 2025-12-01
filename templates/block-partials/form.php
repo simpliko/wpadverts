@@ -58,10 +58,10 @@ $_btn_classes = isset( $_btn_classes ) ? $_btn_classes : ["top" => "wpa-form-but
                             <?php endif; ?>
                         </div>
                     <?php else: ?>
-                        <div data-name="<?php echo esc_attr( $field["name"] ) ?>" data-field="<?php echo esc_attr( wpadverts_block_field_short_name($field ) ) ?>" class="wpa-field-wrap <?php echo sprintf( "wpa-field--%s", $field["name"] ) ?> <?php echo esc_attr( $width ) ?> <?php echo adverts_field_has_errors($field) ? "wpa-field-error" : "" ?>">
+                        <div role="group" aria-labelledby="<?php echo esc_attr( sprintf( "wpa-label--%s", $field["name"] ) ) ?>" data-name="<?php echo esc_attr( $field["name"] ) ?>" data-field="<?php echo esc_attr( wpadverts_block_field_short_name($field ) ) ?>" class="wpa-field-wrap <?php echo sprintf( "wpa-field--%s", $field["name"] ) ?> <?php echo esc_attr( $width ) ?> <?php echo adverts_field_has_errors($field) ? "wpa-field-error" : "" ?>">
                             <?php if( isset( $field["label"] ) && ! empty( $field["label"] ) ): ?>
                             <span class="wpa-field-label">
-                                <span class="wpa-field-label-text"><?php echo esc_html( $field["label"] ) ?></span>
+                                <span class="wpa-field-label-text" id="<?php echo esc_attr( sprintf( "wpa-label--%s", $field["name"] ) ) ?>"><?php echo esc_html( $field["label"] ) ?></span>
                                 <?php if(adverts_field_is_required($field)): ?>
                                 <span class="wpa-field-asterisk">*</span>
                                 <?php endif; ?>

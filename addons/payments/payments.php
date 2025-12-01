@@ -507,7 +507,8 @@ function adverts_payments_field_payment_block( $field ) {
         <div class="atw-flex atw-items-center atw-p-3 atw-mb-3 atw-rounded-md atw-border atw-border-solid atw-border-gray-100 -atw-bg-gray-50 <?php if($is_disabled): ?>adverts-listing-type-x-disabled<?php endif; ?>">
 
             <label class="atw-flex-none atw-pr-3 " for="<?php echo esc_attr( $field["name"] . "_" . $option["value"] ) ?>">
-                <input name="<?php echo esc_attr( $field["name"] ) ?>" class="atw-bg-white atw-border atw-border-solid atw-border-300" id="<?php echo esc_attr( $field["name"] . "_" . $option["value"] ) ?>" type="radio" value="<?php echo $post->ID ?>" <?php checked($post->ID, $field["value"]) ?> <?php disabled( $is_disabled ) ?> />
+                <input aria-label="<?php echo esc_html( $post->post_title ) ?>" name="<?php echo esc_attr( $field["name"] ) ?>" class="atw-bg-white atw-border atw-border-solid atw-border-300" id="<?php echo esc_attr( $field["name"] . "_" . $option["value"] ) ?>" type="radio" value="<?php echo $post->ID ?>" <?php checked($post->ID, $field["value"]) ?> <?php disabled( $is_disabled ) ?> />
+
             </label>
 
             <div class="atw-flex-1">

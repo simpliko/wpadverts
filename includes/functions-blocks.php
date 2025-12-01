@@ -153,6 +153,10 @@ function wpadverts_block_button( $args = array(), $options = array() ) {
     //print_r($args);
     //print_r($options);
 
+    if( !is_array( $options ) ) {
+        $options = [];
+    }
+
     if( isset( $_customize[ $args["type"] ] ) ) {
 
         if( ! isset( $options["customize"] ) || ! $options["customize"] ) {

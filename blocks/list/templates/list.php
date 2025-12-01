@@ -83,10 +83,10 @@ $grid_cols = sprintf("%s %s", $grid_cols_arr[ $atts["grid_columns_mobile"] ], $g
                 <?php if( $switch_views ): ?>
                 <div class="atw-flex atw-align-baseline atw-leading-none atw-space-x-2">
                     <div class="atw-align-baseline">
-                        <a href="<?php echo esc_html( add_query_arg( "display", "list" ) ) ?>" class="js-wpa-view-list <?php echo $display == "wpa-list-view" ? "wpa-selected" : "" ?> atw-no-underline"><i class="fas fa-th-list atw-text-gray-400 atw-text-2xl md:atw-text-xl atw-leading-1 atw-align-baseline atw-block atw-transition atw-duration-100"></i></a>
+                        <a href="<?php echo esc_html( add_query_arg( "display", "list" ) ) ?>" class="js-wpa-view-list <?php echo $display == "wpa-list-view" ? "wpa-selected" : "" ?> atw-no-underline" aria-label="<?php echo esc_attr_e("Icon for list view", "wpadverts") ?>"><i class="fas fa-th-list atw-text-gray-400 atw-text-2xl md:atw-text-xl atw-leading-1 atw-align-baseline atw-block atw-transition atw-duration-100"></i></a>
                     </div>
                     <div class="atw-align-baseline">
-                        <a href="<?php echo esc_html( add_query_arg( "display", "grid" ) ) ?>" class="js-wpa-view-grid <?php echo $display == "wpa-grid-view" ? "wpa-selected" : "" ?> atw-no-underline"><i class="fas fa-th-large atw-text-gray-400 atw-text-2xl md:atw-text-xl atw-leading-1 atw-align-baseline"></i></a>
+                        <a href="<?php echo esc_html( add_query_arg( "display", "grid" ) ) ?>" class="js-wpa-view-grid <?php echo $display == "wpa-grid-view" ? "wpa-selected" : "" ?> atw-no-underline" aria-label="<?php echo esc_attr_e("Icon for grid view", "wpadverts") ?>"><i class="fas fa-th-large atw-text-gray-400 atw-text-2xl md:atw-text-xl atw-leading-1 atw-align-baseline"></i></a>
                     </div>
                 </div>
                 <?php endif; ?>

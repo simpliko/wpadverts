@@ -25,18 +25,18 @@
         
         <?php foreach($form->get_fields() as $field): ?>
         
-        <div class="adverts-control-group <?php echo esc_attr( str_replace("_", "-", $field["type"] ) . " adverts-field-name-" . $field["name"] ) ?> <?php if(adverts_field_has_errors($field)): ?>adverts-field-error<?php endif; ?>">
+        <div role="group" aria-labelledby="<?php echo esc_attr( sprintf( "wpa-label--%s", $field["name"] ) ) ?>" class="adverts-control-group <?php echo esc_attr( str_replace("_", "-", $field["type"] ) . " adverts-field-name-" . $field["name"] ) ?> <?php if(adverts_field_has_errors($field)): ?>adverts-field-error<?php endif; ?>">
             
             <?php if($field["type"] == "adverts_field_header"): ?>
             <div class="adverts-field-header">
-                <span class="adverts-field-header-title"><?php echo esc_html($field["label"]) ?></span>
+                <span id="<?php echo esc_attr( sprintf( "wpa-label--%s", $field["name"] ) ) ?>" class="adverts-field-header-title"><?php echo esc_html($field["label"]) ?></span>
                 <?php if( isset( $field["description"] ) ): ?>
                 <span class="adverts-field-header-description"><?php echo esc_html( $field["description"] ) ?></span>
                 <?php endif; ?>
             </div>
             <?php else: ?>
             
-            <label for="<?php echo esc_attr($field["name"]) ?>">
+            <label id="<?php echo esc_attr( sprintf( "wpa-label--%s", $field["name"] ) ) ?>" for="<?php echo esc_attr($field["name"]) ?>">
                 <?php if( isset( $field["label"] ) && ! empty( $field["label"] ) ): ?>
                     <?php echo esc_html($field["label"]) ?>
                     <?php if(adverts_field_is_required($field)): ?>

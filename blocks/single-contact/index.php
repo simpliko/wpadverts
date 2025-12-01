@@ -77,7 +77,7 @@ class Adverts_Block_Single_Contact {
         } else if($atts["requires"] && ! current_user_can( $atts["requires"] ) ) {
             $params = array(
                 "message_header" =>  __("Only logged-in members can contact sellers.", "wpadverts"),
-                "message" => __("Please login or register to to send a message.", "wpadverts"),
+                "message" => __("Please login or register to send a message.", "wpadverts"),
                 "show_buttons" => true
             );
             return $this->render_disabled( $atts, $params );

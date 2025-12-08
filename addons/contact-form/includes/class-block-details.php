@@ -291,8 +291,11 @@ class Adext_Contact_Form_Block_Details {
                 do_action( "adext_contact_form_send", $post_id, $form );
                 
                 // delete uploaded files ($form)
-                $uniqid = sanitize_file_name( adverts_request( "wpadverts-form-upload-uniqid" ) );
-                adext_contact_form_delete_tmp_files( $form->get_scheme(), $uniqid );
+                $request_uniqid = adverts_request( "wpadverts-form-upload-uniqid" );
+                if(is_string( $request_uniqid ) ) {
+                    $uniqid = sanitize_file_name( $request_uniqid );
+                    adext_contact_form_delete_tmp_files( $form->get_scheme(), $uniqid );
+                }
                 
                 $bind = array();
                 $bind["_wpadverts_checksum"] = adverts_request( "_wpadverts_checksum" );

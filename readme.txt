@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classifieds script, classifieds p
 Requires PHP: 5.6
 Requires at least: 5.7
 Tested up to: 6.9
-Stable tag: 2.2.10
+Stable tag: 2.2.11
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,12 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 2.2.11 - 2026-01-05 =
+
+* FIXED: Broken Access Control in [adverts_block] shortcode.
+* FIXED: Error when submitting contact form via AJAX request.
+* FEATURE: Additional CSS classes for buttons in the Classifieds Single Contact block.
 
 = 2.2.10 - 2025-12-08 =
 

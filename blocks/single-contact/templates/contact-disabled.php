@@ -25,11 +25,11 @@
                 <span class="atw-flex atw-flex-row atw-pb-3 atw-w-full atw-flex-col md:atw-flex-row">
 
                     <form action="<?php echo esc_attr( $url_login ) ?>" class="atw-p-3 atw-flex-grow">
-                        <?php wpadverts_block_button( array( "text" => __("Login","wpadverts"), "type" => "secondary", "action" => "submit" )); ?>
+                        <?php wpadverts_block_button( array( "text" => __("Login","wpadverts"), "type" => "secondary", "action" => "submit", "class"=>"wpa-cd-btn-login" )); ?>
                     </form>
 
                     <form action="<?php echo esc_attr( $url_register ) ?>" method="get" class="atw-p-3 atw-flex-grow">
-                        <?php wpadverts_block_button( array( "text" => __("Register", "wpadverts"), "type" => "secondary", "action" => "submit" )); ?>
+                        <?php wpadverts_block_button( array( "text" => __("Register", "wpadverts"), "type" => "secondary", "action" => "submit", "class"=>"wpa-cd-btn-register" )); ?>
                     </form>
                 </span>
                 <?php endif; ?>

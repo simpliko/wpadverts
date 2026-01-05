@@ -17,7 +17,7 @@
             <div class="atw-relative atw-flex atw-flex-col <?php echo esc_attr( $options_flex ) ?>">
                 <?php foreach( $contact_options as $contact_option ): ?>
                 <?php if( $contact_option["is_active"] && $contact_option["is_visible"] ): ?>
-                <div class="atw-flex-auto atw-mx-1 atw-mb-3">
+                <div class="contact-details-buttons-list atw-flex-auto atw-mx-1 atw-mb-3">
                 <?php 
                     echo wpadverts_block_button( 
                         $contact_option, 

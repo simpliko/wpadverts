@@ -494,8 +494,10 @@ function adext_contact_form_ajax_submit() {
         do_action( "adext_contact_form_send", $post_id, $form );
             
         // delete uploaded files ($form)
-        $uniqid = sanitize_file_name( adverts_request( "wpadverts-form-upload-uniqid" ) );
-        adext_contact_form_delete_tmp_files( $form->get_scheme(), $uniqid );
+        $uniqid = sanitize_file_name( adverts_request( "wpadverts-form-upload-uniqid", "" ) );
+        if( $uniqid !== "" ) {
+            adext_contact_form_delete_tmp_files( $form->get_scheme(), $uniqid );
+        }
             
         $bind = array();
         $bind["_wpadverts_checksum"] = adverts_request( "_wpadverts_checksum" );

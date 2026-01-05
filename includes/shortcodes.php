@@ -719,5 +719,11 @@ function shortcode_adverts_block( $atts = array() ) {
         }
     }
 
+    $allowed_types = ["page"];
+
+    if( ! in_array( $post->post_type, $allowed_types ) ) {
+        return sprintf( "<strong>ERROR</strong> Only posts of type %s are allowed (%s given).", join(", ", $allowed_types), esc_html( $post->post_type ) );
+    }
+
     return do_blocks( $post->post_content );
 }

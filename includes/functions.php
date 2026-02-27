@@ -2154,7 +2154,7 @@ function adverts_walk_category_dropdown_tree() {
     // the user's options are the third parameter
     if ( empty($args[2]['walker']) || !is_a($args[2]['walker'], 'Walker') ) {
         include_once ADVERTS_PATH . '/includes/class-walker-category-options.php';
-        $walker = new Adverts_Walker_Category_Dropdown;
+        $walker = new Adverts_Walker_Category_Options;
     } else {
         $walker = $args[2]['walker'];
     }

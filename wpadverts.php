@@ -6,7 +6,7 @@
  * Author: Greg Winiarski
  * Text Domain: wpadverts
  * Domain Path: /languages
- * Version: 2.2.11
+ * Version: 2.2.12
  * 
  * Adverts is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -70,7 +70,7 @@ $adverts_namespace['config'] = array(
         'hide_images_in_media_library' => 0,
         'delete_from_media_library' => 0,
         'adverts_manage_moderate' => 0,
-        'block_date_format' => 'd/m/Y'
+        'block_date_format' => 'd/m/Y',
         
     )
 );

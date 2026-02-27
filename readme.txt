@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classifieds script, classifieds p
 Requires PHP: 5.6
 Requires at least: 5.7
 Tested up to: 6.9
-Stable tag: 2.2.11
+Stable tag: 2.2.12
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,11 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 2.2.12 - 2026-03-02 =
+
+* FIXED: Backward incompatible change to [adverts_block]. Read more here https://wpadverts.com/blog/backward-incompatibility-in-version-2-2-12/
+* FIXED: Fatal error when deleting temporary files.
 
 = 2.2.11 - 2026-01-05 =
 

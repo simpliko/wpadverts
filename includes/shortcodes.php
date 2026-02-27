@@ -725,5 +725,15 @@ function shortcode_adverts_block( $atts = array() ) {
         return sprintf( "<strong>ERROR</strong> Only posts of type %s are allowed (%s given).", join(", ", $allowed_types), esc_html( $post->post_type ) );
     }
 
+    $allowed_stats = ["publish"];
+
+    if( apply_filters( "wpadverts_allow_draft_templates", false ) === true ) {
+        $allowed_stats[] = "draft";
+    }
+
+    if( !in_array( $post->post_status, $allowed_stats ) ) {
+        return sprintf( "<strong>ERROR</strong> Only pages with status '%s' can be used as templates.", join( "', '", $allowed_stats ) );
+    }
+
     return do_blocks( $post->post_content );
 }

@@ -127,7 +127,7 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 = 2.3.0 - 2026-03-02 =
 
-* FIXED: Backward incompatible change to [adverts_block]. Read more here https://wpadverts.com/blog/backward-incompatibility-in-version-2-2-12/
+* FIXED: Backward incompatible change to [adverts_block]. Read more here https://wpadverts.com/blog/backward-incompatibility-in-version-2-3-0/
 * FIXED: Fatal error when deleting temporary files.
 
 = 2.2.11 - 2026-01-05 =

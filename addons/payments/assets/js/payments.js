@@ -20,6 +20,7 @@ WPADVERTS.Payments = {
         var $ = jQuery;
         var data = {
             action: "adext_payments_render",
+            nonce: $(".adverts-payment-data").data("nonce"),
             gateway: $(WPADVERTS.Payments.Tab.Link + ".current").data("tab"),
             page_id: $(".adverts-payment-data").data("page-id"),
             listing_id: $(".adverts-payment-data").data("listing-id"),
@@ -116,6 +117,7 @@ jQuery(function($) {
 
         var data = {
             action: "adext_payments_render",
+            nonce: $(".adverts-payment-data").data("nonce"),
             gateway: $(this).data("tab"),
             page_id: $(".adverts-payment-data").data("page-id"),
             listing_id: $(".adverts-payment-data").data("listing-id"),

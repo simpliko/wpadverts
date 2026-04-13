@@ -27,7 +27,37 @@ function adext_payments_ajax_render() {
     
     $payment_id = absint( adverts_request( "payment_id" ) );
     $listing_id = get_post_meta( $payment_id, "_adverts_pricing_id", true );
+    $object_id = adverts_request( "object_id" );
     
+    $nonce = sprintf( "adext-payment-%d-%d-%d", $payment_id, $listing_id, $object_id );
+
+    if( ! wp_verify_nonce( adverts_request( "nonce" ), $nonce ) ) {
+        echo json_encode([
+            "result" => 0,
+            "html" => sprintf('<div>%s</div>', __("Incorrect user nonce.","wpadverts")),
+            "execute" => null
+        ]);
+        exit;
+    }
+
+    if( get_post_type( $payment_id ) !== "adverts-payment" ) {
+        echo json_encode([
+            "result" => 0,
+            "html" => sprintf('<div>%s</div>', __("Incorrect object type.","wpadverts")),
+            "execute" => null
+        ]);
+        exit;
+    }
+
+    if( absint( get_post( $payment_id )->post_author ) !== absint( get_current_user_id() ) ) {
+        echo json_encode([
+            "result" => 0,
+            "html" => sprintf('<div>%s</div>', __("You do not own this payment.","wpadverts")),
+            "execute" => null
+        ]);
+        exit;
+    }
+
     $response = null;
     
     $data = array();

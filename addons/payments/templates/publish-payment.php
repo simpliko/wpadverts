@@ -39,7 +39,9 @@
 
     <span class="atw-block atw-pt-6 atw-pb-3 atw-text-base atw-font-bold"><?php _e( "Select Payment Method", "wpadverts" ) ?></span>
 
-    <div class="jswpa-payment-tabs wpa-tabs adverts-payment-data" data-page-id="<?php esc_attr_e(get_the_ID()) ?>" data-listing-id="<?php echo esc_attr($listing->ID) ?>" data-object-id="<?php echo esc_attr($post->ID) ?>" data-object-type="<?php echo esc_attr( get_post_meta( $payment->ID, '_adverts_payment_for', true ) ) ?>" data-payment-id="<?php echo esc_attr($payment->ID) ?>" data-is-block="1">
+    <?php $nonce = wp_create_nonce( sprintf( "adext-payment-%d-%d-%d", $payment->ID, $listing->ID, $post->ID ) )?>
+
+    <div class="jswpa-payment-tabs wpa-tabs adverts-payment-data" data-nonce="<?php echo esc_attr( $nonce ) ?>" data-page-id="<?php esc_attr_e(get_the_ID()) ?>" data-listing-id="<?php echo esc_attr($listing->ID) ?>" data-object-id="<?php echo esc_attr($post->ID) ?>" data-object-type="<?php echo esc_attr( get_post_meta( $payment->ID, '_adverts_payment_for', true ) ) ?>" data-payment-id="<?php echo esc_attr($payment->ID) ?>" data-is-block="1">
         <?php foreach($gateways as $g_name => $gateway): ?>
         <div class="jswpa-payment-tab-link wpa-tab-link <?php if($g_name==adverts_config("payments.default_gateway")):?>current<?php endif; ?>" data-tab="<?php echo esc_attr($g_name) ?>">
             <i class="fa fa-circle-check"></i>

@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classifieds script, classifieds p
 Requires PHP: 5.6
 Requires at least: 5.7
 Tested up to: 6.9
-Stable tag: 2.3.0
+Stable tag: 2.3.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,12 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 2.3.1 - 2026-04-13 = 
+
+* FIXED: Broken Access Control in [advert_single] shortcode.
+* FIXED: Broken access control in adext_payments_ajax_render.
+* LANGUAGE: Updated German translation
 
 = 2.3.0 - 2026-03-02 =
 

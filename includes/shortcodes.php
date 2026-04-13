@@ -668,7 +668,28 @@ function shortcode_advert_single( $atts = array() ) {
     ), $atts ) );
 
     ob_start();
-        
+      
+    $post = get_post( $post_id );
+    $allowed_types = wpadverts_get_post_types();
+
+    if( ! is_object( $post ) ) {
+        return sprintf( "<strong>ERROR</strong> Template with ID '%d' does not exist.", absint( $post_id ) );
+    }
+
+    if( ! in_array( $post->post_type, $allowed_types ) ) {
+        return sprintf( "<strong>ERROR</strong> Only posts of type %s are allowed (%s given).", join(", ", $allowed_types), esc_html( $post->post_type ) );
+    }
+
+    $allowed_stats = ["publish"];
+
+    if( apply_filters( "wpadverts_allow_draft_templates", false ) === true ) {
+        $allowed_stats[] = "draft";
+    }
+
+    if( !in_array( $post->post_status, $allowed_stats ) ) {
+        return sprintf( "<strong>ERROR</strong> Only pages with status '%s' can be used as templates.", join( "', '", $allowed_stats ) );
+    }
+
     $post_content = get_post( $post_id )->post_content;
     $post_content = wp_kses($post_content, wp_kses_allowed_html( 'post' ) );
     $post_content = apply_filters( "adverts_the_content", $post_content );

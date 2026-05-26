@@ -126,7 +126,7 @@ function adverts_gallery_upload() {
         }
         
         
-        echo json_encode($status);
+        wp_send_json($status);
         exit;
     }
     
@@ -138,7 +138,7 @@ function adverts_gallery_upload() {
     }
     
     if( isset( $args["ignore-post-id"] ) && $args["ignore-post-id"] ) {
-        echo json_encode( adverts_upload_file_data( $status, $post, $v->get_uniquid() ) );
+        wp_send_json( adverts_upload_file_data( $status, $post, $v->get_uniquid() ) );
         exit;
     }
     
@@ -146,7 +146,7 @@ function adverts_gallery_upload() {
     
     if( $v->is_file() ) {
         // move to "id" folder
-        echo json_encode( adverts_upload_file_data( $status, $post, $v->get_uniquid() ) );
+        wp_send_json( adverts_upload_file_data( $status, $post, $v->get_uniquid() ) );
         exit;
         
     } else {
@@ -211,7 +211,7 @@ function adverts_gallery_upload() {
 
         include_once ADVERTS_PATH . 'includes/gallery.php';
 
-        echo json_encode( adverts_upload_item_data( $attach_id ) );
+        wp_send_json( adverts_upload_item_data( $attach_id ) );
         exit;
     }
 };
@@ -242,7 +242,7 @@ function adverts_gallery_update() {
     $attach = get_post( $attach_id );
     
     if( $attach->post_parent != $post_id ) {
-        echo json_encode( array( 
+        wp_send_json( array( 
             "result" => 0, 
             "error" => __( "Incorrect Post or Attachment ID.", "wpadverts" ) 
         ) );
@@ -256,7 +256,7 @@ function adverts_gallery_update() {
     ));
     
     if($result instanceof WP_Error) {
-        echo json_encode( array( "result" => 0, "error" => $result->get_error_message() ) );
+        wp_send_json( array( "result" => 0, "error" => $result->get_error_message() ) );
         exit;
     }
     
@@ -268,7 +268,7 @@ function adverts_gallery_update() {
         delete_post_meta( $post_id, '_thumbnail_id' );
     }
     
-    echo json_encode( array( "result" => 1, "file" => adverts_upload_item_data( $attach_id ) ) );
+    wp_send_json( array( "result" => 1, "file" => adverts_upload_item_data( $attach_id ) ) );
     exit;
 }
 
@@ -313,7 +313,7 @@ function adverts_gallery_update_order() {
     
     update_post_meta( $post_id, $meta_key, $clean_ordered_keys_json );
 
-    echo json_encode( array( "result" => 1 ) );
+    wp_send_json( array( "result" => 1 ) );
     exit;
 }
 
@@ -336,13 +336,13 @@ function adverts_gallery_delete() {
     _adverts_ajax_check_post_ownership( $attach->post_parent );
     
     if ( $attach === null ) {
-        echo json_encode( array( "result" => 0, "error" => __( "Attachment does not exist.", "wpadverts" ) ) );
+        wp_send_json( array( "result" => 0, "error" => __( "Attachment does not exist.", "wpadverts" ) ) );
     } elseif ( $attach->post_parent != absint( $post_id ) ) {
-        echo json_encode( array( "result" => 0, "error" => __( "Incorrect attachment ID.", "wpadverts" ) ) );
+        wp_send_json( array( "result" => 0, "error" => __( "Incorrect attachment ID.", "wpadverts" ) ) );
     } elseif ( wp_delete_attachment( $attach_id ) ) {
-        echo json_encode( array( "result" => 1 ) );
+        wp_send_json( array( "result" => 1 ) );
     } else {
-        echo json_encode( array( "result" => 0, "error" => __( "File could not be deleted.", "wpadverts" ) ) );
+        wp_send_json( array( "result" => 0, "error" => __( "File could not be deleted.", "wpadverts" ) ) );
     }
     
     exit;
@@ -383,7 +383,7 @@ function adverts_gallery_delete_file() {
     }
     
     if( $field === null ) {
-        echo json_encode( array( "result" => 0, "error" => __( "Incorrect field name.", "wpadverts" ) )  );
+        wp_send_json( array( "result" => 0, "error" => __( "Incorrect field name.", "wpadverts" ) )  );
         exit;
     }
     
@@ -411,7 +411,7 @@ function adverts_gallery_delete_file() {
     } else if( file_exists( $file_tmp ) ) {
         $file = $file_tmp;
     } else {
-        echo json_encode( array( "result" => 0, "error" => __( "File does not exist.", "wpadverts" ), "args" => array() ) );
+        wp_send_json( array( "result" => 0, "error" => __( "File does not exist.", "wpadverts" ), "args" => array() ) );
         exit;
     }
 
@@ -425,7 +425,7 @@ function adverts_gallery_delete_file() {
         $files = glob( $file . "/*" );
     } while( empty( $files ) );
 
-    echo json_encode( array( "result" => 1 ) );
+    wp_send_json( array( "result" => 1 ) );
     exit;
 }
 
@@ -445,7 +445,7 @@ function adverts_gallery_image_stream() {
     $post_id = _adverts_ajax_verify_post_id( true );
     
     if( ! adverts_user_can_edit_image() ) {
-        echo json_encode( array( 
+        wp_send_json( array( 
             "result" => 0, 
             "error" => __( "You cannot edit images.", "wpadverts" ) 
         ) );
@@ -461,7 +461,7 @@ function adverts_gallery_image_stream() {
     _adverts_ajax_check_post_ownership( $post_id );
     
     if( $attach->post_parent != $post_id ) {
-        echo json_encode( array( 
+        wp_send_json( array( 
             "result" => 0, 
             "error" => __( "Incorrect Post or Attachment ID.", "wpadverts" ) 
         ) );
@@ -497,7 +497,7 @@ function adverts_gallery_image_stream() {
     $image = wp_get_image_editor( $attached_file );
 
     if( is_wp_error($image) ) {
-        echo json_encode( array(
+        wp_send_json( array(
             "result" => 0,
             "error" => $image->get_error_message()
         ) );
@@ -542,7 +542,7 @@ function adverts_gallery_image_restore() {
     $post_id = _adverts_ajax_verify_post_id( true );
     
     if( ! adverts_user_can_edit_image() ) {
-        echo json_encode( array( 
+        wp_send_json( array( 
             "result" => 0, 
             "error" => __( "You cannot edit images.", "wpadverts" ) 
         ) );
@@ -557,7 +557,7 @@ function adverts_gallery_image_restore() {
     $attach = get_post( $attach_id );
     
     if( $attach->post_parent != $post_id ) {
-        echo json_encode( array( 
+        wp_send_json( array( 
             "result" => 0, 
             "error" => __( "Incorrect Post or Attachment ID.", "wpadverts" ) 
         ) );
@@ -591,7 +591,7 @@ function adverts_gallery_image_restore() {
     $result->result = 1;
     $result->file = adverts_upload_item_data( $attach_id );
     
-    echo json_encode( $result );
+    wp_send_json( $result );
     exit;
 }
 
@@ -613,7 +613,7 @@ function adverts_gallery_image_save() {
     $post_id = _adverts_ajax_verify_post_id( true );
 
     if( ! adverts_user_can_edit_image() ) {
-        echo json_encode( array( 
+        wp_send_json( array( 
             "result" => 0, 
             "error" => __( "You cannot edit images.", "wpadverts" ) 
         ) );
@@ -633,7 +633,7 @@ function adverts_gallery_image_save() {
     _adverts_ajax_check_post_ownership( $post_id );
 
     if( $attach->post_parent != $post_id ) {
-        echo json_encode( array( 
+        wp_send_json( array( 
             "result" => 0, 
             "error" => __( "Incorrect Post or Attachment ID.", "wpadverts" ) 
         ) );
@@ -661,7 +661,7 @@ function adverts_gallery_image_save() {
     $image = wp_get_image_editor( $attached_file );
 
     if( is_wp_error($image) ) {
-        echo json_encode( array(
+        wp_send_json( array(
             "result" => 0,
             "error" => $image->get_error_message()
         ) );
@@ -722,7 +722,7 @@ function adverts_gallery_image_save() {
     $saved = $image->save( $new_path );
     
     if(!$saved) {
-        echo json_encode( array(
+        wp_send_json( array(
             "result" => 0,
             "error" => $image->get_error_message()
         ) );
@@ -809,7 +809,7 @@ function adverts_gallery_image_save() {
     
     $return->result = 1;
     $return->file = adverts_upload_item_data( $attach_id );
-    echo json_encode( $return );
+    wp_send_json( $return );
             
     exit;
 }
@@ -833,7 +833,7 @@ function adverts_gallery_video_cover() {
     $post_id = _adverts_ajax_verify_post_id( true );
     
     if( ! adverts_user_can_edit_image() ) {
-        echo json_encode( array( 
+        wp_send_json( array( 
             "result" => 0, 
             "error" => __( "You cannot edit images.", "wpadverts" ) 
         ) );
@@ -846,7 +846,7 @@ function adverts_gallery_video_cover() {
     _adverts_ajax_check_post_ownership( $post_id );
     
     if( $attach->post_parent != $post_id ) {
-        echo json_encode( array( 
+        wp_send_json( array( 
             "result" => 0, 
             "error" => __( "Incorrect Post or Attachment ID.", "wpadverts" ) 
         ) );
@@ -876,7 +876,7 @@ function adverts_gallery_video_cover() {
     
     $ifp = @ fopen( $new_file, 'wb' );
     if ( ! $ifp ) {
-        echo json_encode( array( 
+        wp_send_json( array( 
             "result" => 0, 
             "error" => sprintf( __( 'Could not write file %s' ), $new_file_name )
         ) );
@@ -903,7 +903,7 @@ function adverts_gallery_video_cover() {
         // file not readable, delete it
         wp_delete_file( $new_file );
         
-        echo json_encode( array( 
+        wp_send_json( array( 
             "result" => 0, 
             "error" => $image->get_error_message()
         ) );
@@ -950,7 +950,7 @@ function adverts_gallery_video_cover() {
         $file = $image->save( dirname( $new_file ) . "/" . $interm_file_name );
 
         if( is_wp_error( $file ) ) {
-            echo json_encode( array( 
+            wp_send_json( array( 
                 "result" => 0, 
                 "error" => $file->get_error_message()
             ) );
@@ -967,7 +967,7 @@ function adverts_gallery_video_cover() {
     
     wp_update_attachment_metadata( $attach_id, $meta );
     
-    echo json_encode( array( 
+    wp_send_json( array( 
         "result" => 1, 
         "file" => adverts_upload_item_data( $attach_id )
     ) );
@@ -995,7 +995,7 @@ function adverts_show_contact() {
     $nonce = sprintf( "wpadverts-show-contact-info--%d", absint( $id ) );
     
     if( ! wp_verify_nonce( $security, $nonce ) ) { 
-        echo json_encode( array( 
+        wp_send_json( array( 
             'result' => 0,
             'error' => __("Invalid Nonce.", "wpadverts")
         ));
@@ -1003,7 +1003,7 @@ function adverts_show_contact() {
     }
 
     if( $post === null || ! wpadverts_post_type( $post ) ) {
-        echo json_encode( array( 
+        wp_send_json( array( 
             'result' => 0,
             'error' => __("Post with given ID does not exist.", "wpadverts")
         ));
@@ -1033,9 +1033,9 @@ function adverts_show_contact() {
             );
         }
 
-        echo json_encode( $result );
+        wp_send_json( $result );
     } else {
-        echo json_encode( array(
+        wp_send_json( array(
             'result' => 1,
             'email' => esc_html( get_post_meta( $id, 'adverts_email', true ) ),
             'phone' => esc_html( get_post_meta( $id, 'adverts_phone', true ) )
@@ -1064,7 +1064,7 @@ function adverts_delete_tmp() {
     $post = get_post($id);
     
     if( $post === null || $post->post_status != adverts_tmp_post_status()) {
-        echo json_encode( array( 
+        wp_send_json( array( 
             'result' => 0,
             'error' => __("Post with given ID does not exist.", "wpadverts")
         ));
@@ -1082,7 +1082,7 @@ function adverts_delete_tmp() {
     
     adverts_delete_post( $id );
     
-    echo json_encode( array(
+    wp_send_json( array(
         'result' => 1
     ));
     
@@ -1126,7 +1126,7 @@ function adverts_delete_tmp_files() {
     }
 
     if( empty( $fields ) ) {
-        echo json_encode( array( "result" => -1  ) );
+        wp_send_json( array( "result" => -1  ) );
         exit;
     }
     
@@ -1164,7 +1164,7 @@ function adverts_delete_tmp_files() {
         } // endforeach
     }
     
-    echo json_encode( array( "result" => 1 ) );
+    wp_send_json( array( "result" => 1 ) );
     exit;
 }
 
@@ -1226,7 +1226,7 @@ function adverts_delete() {
     
     if( $result !== null ) {
         if( $is_ajax ) {
-            echo json_encode( $result );
+            wp_send_json( $result );
             exit;
         } else {
             wp_die( $result["error"] );
@@ -1249,7 +1249,7 @@ function adverts_delete() {
     if(adverts_request("redirect_to") ) {
         wp_redirect( adverts_request( "redirect_to" ) );
     } else if( $is_ajax ) {
-        echo json_encode( array( 
+        wp_send_json( array( 
             "result" => 1, 
             "message" => sprintf( __( "Advert <strong>%s</strong> deleted.", "wpadverts" ), $post_title )
         ) );
@@ -1267,7 +1267,7 @@ function wpadverts_admin_styling_save() {
 
     if( ! current_user_can( "manage_options" ) ) {
         $response["error"] = __( "You cannot access this page.", "wpadverts" );
-        echo json_encode( $response );
+        wp_send_json( $response );
         exit;
     }
 
@@ -1276,7 +1276,7 @@ function wpadverts_admin_styling_save() {
 
     if( ! in_array( adverts_request( "param" ), $keys ) ) {
         $response["error"] = __( "Invalid param name.", "wpadverts" );
-        echo json_encode( $response );
+        wp_send_json( $response );
         exit;
     }
 
@@ -1301,7 +1301,7 @@ function wpadverts_admin_styling_save() {
 
     $response["status"] = 1;
 
-    echo json_encode( $response );
+    wp_send_json( $response );
     exit;
 }
 
@@ -1314,7 +1314,7 @@ function wpadverts_admin_styling_reset() {
 
     if( ! current_user_can( "manage_options" ) ) {
         $response["error"] = __( "You cannot access this page.", "wpadverts" );
-        echo json_encode( $response );
+        wp_send_json( $response );
         exit;
     }
 
@@ -1323,7 +1323,7 @@ function wpadverts_admin_styling_reset() {
 
     if( ! in_array( adverts_request( "param" ), $keys ) ) {
         $response["error"] = __( "Invalid param name.", "wpadverts" );
-        echo json_encode( $response );
+        wp_send_json( $response );
         exit;
     }
 
@@ -1342,6 +1342,6 @@ function wpadverts_admin_styling_reset() {
 
     $response["status"] = 1;
 
-    echo json_encode( $response );
+    wp_send_json( $response );
     exit;
 }

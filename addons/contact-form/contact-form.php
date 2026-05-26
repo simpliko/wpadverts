@@ -539,7 +539,7 @@ function adext_contact_form_ajax_submit() {
             "errors" => $errors
         );
 
-        echo json_encode( $response );
+        wp_send_json( $response );
         exit;
     }
 

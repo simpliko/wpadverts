@@ -190,7 +190,7 @@ class Adverts_Field_Autocomplete {
             ), $term );
         }
         
-        echo json_encode( $response );
+        wp_send_json( $response );
         exit;
     }
 }

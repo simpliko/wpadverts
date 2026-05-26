@@ -3179,7 +3179,7 @@ function _adverts_ajax_verify_checksum( ) {
             $error = __( "Checksum does not exist. Please refresh the page and try again.", "wpadverts" );
         }
         
-        echo json_encode( array( 
+        wp_send_json( array( 
             "result" => 0, 
             "error" => $error
         ) );
@@ -3230,7 +3230,7 @@ function _adverts_ajax_verify_post_id( $is_required = false ) {
     $post_id_nonce = adverts_request( "_post_id_nonce" );
 
     if( $post_id > 0 && ! wp_verify_nonce( $post_id_nonce, "wpadverts-publish-" . $post_id ) ) {
-        echo json_encode( array( 
+        wp_send_json( array( 
             "result" => 0, 
             "error" => sprintf( __( "It seems you are not the post %d author. Please refresh the page and try again.", "wpadverts" ), $post_id ) 
         ) );
@@ -3238,7 +3238,7 @@ function _adverts_ajax_verify_post_id( $is_required = false ) {
     }
 
     if( $is_required && $post_id < 1 ) {
-        echo json_encode( array( 
+        wp_send_json( array( 
             "result" => 0, 
             "error" => __( "Post ID not provided.", "wpadverts" )
         ) );
@@ -3274,7 +3274,7 @@ function _adverts_ajax_check_post_ownership( $advert_id, $return = false ) {
         );
         
         if( $return !== false ) {
-            echo json_encode( $result );
+            wp_send_json( $result );
             exit;
         } else {
             return $result;
@@ -3304,7 +3304,7 @@ function _adverts_ajax_check_post_ownership( $advert_id, $return = false ) {
 
     if( $result !== null ) {
         if( $return !== false ) {
-            echo json_encode( $result );
+            wp_send_json( $result );
             exit;
         } else {
             return $result;
@@ -3320,7 +3320,7 @@ function _adverts_ajax_check_post_ownership( $advert_id, $return = false ) {
     } 
 
     if( $return !== false ) {
-        echo json_encode( $result );
+        wp_send_json( $result );
         exit;
     } else {
         return $result;

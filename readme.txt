@@ -125,7 +125,7 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
-= 2.3.1 - 2026-06-02 = 
+= 2.3.2 - 2026-06-02 = 
 
 * FIXED: Cross Site Scripting (XSS) fix.
 

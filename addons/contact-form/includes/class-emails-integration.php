@@ -56,26 +56,6 @@ class Adext_Contact_Form_Emails_Integration {
      * @return  array               Modified list of messages
      */
     public function register_messages( $messages ) {
-
-        $body = __("{\$form.message_body}\n\nURL: {\$advert.ID|get_permalink}\nPrice: {\$advert.ID|adverts_get_the_price}", "wpadverts" );
-        
-        if( adverts_config("emails.enable_html_emails") == 1 ){
-            $body =  __(
-                    '<p>{$form.message_body}</p>
-                    <p>
-                        <strong>URL:</strong>
-                        <a href="{$advert.ID|get_permalink}">
-                            {$advert.ID|get_permalink}
-                        </a>
-                    </p>
-                    <p>
-                        <strong>Price:</strong>
-                        {$advert.ID|adverts_get_the_price}
-                    </p>',
-                    "wpadverts"
-                );
-        }
-
         $messages["contact-form::on_contact_form_sent"] = array(
             "name" => "contact-form::on_contact_form_sent",
             "action" => "adext_contact_form_send",
@@ -87,7 +67,7 @@ class Adext_Contact_Form_Emails_Integration {
             "from" => array( "name" => adverts_config( "contact_form.from_name"), "email" => adverts_config( "contact_form.from_email") ),
             "to" => "{\$advert|contact_email}",
             "subject" => __( "[{\$advert.post_title}] {\$form.message_subject}.", "wpadverts" ),
-            "body" => $body,
+            "body" => __("{\$form.message_body}\n\nURL: {\$advert.ID|get_permalink}\nPrice: {\$advert.ID|adverts_get_the_price}", "wpadverts"),
             "headers" => array(
                 array( 'name' => 'Reply-To', 'value' => "{\$form.message_name} <{\$form.message_email}>")
             ),

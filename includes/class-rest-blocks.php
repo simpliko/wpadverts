@@ -47,7 +47,6 @@ class Adverts_Rest_Blocks {
     }
 
     public function classifieds_types_perms() {
-        return true;
         return current_user_can( 'edit_pages' );
     }
 

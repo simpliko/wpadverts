@@ -11,3 +11,4 @@ blocks.min.css
 
 babelrc.js.save
 .DS_Store
+.env

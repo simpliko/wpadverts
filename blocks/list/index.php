@@ -63,8 +63,6 @@ class Adverts_Block_List {
 
     public function render( $atts = array() ) {
 
-        $atts = $this->handlePayload( $atts );
-
         $height = wpadverts_block_img_options( "height" );
         $display = adverts_request( "display", $atts["display"] );
 
@@ -306,15 +304,6 @@ class Adverts_Block_List {
         );
 
         return $arr[ $field['meta']['search_type'] ];
-    }
-
-    public function handlePayload( $atts ) {
-        if( adverts_request( "payload" ) == "1" ) {
-            $request_body = file_get_contents('php://input');
-            return json_decode( $request_body, true );
-        } else {
-            return $atts;
-        }
     }
 
     protected function _get_tax_query( $atts ) {

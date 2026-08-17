@@ -56,8 +56,6 @@ class Adverts_Block_Publish {
     
     public function render( $atts = array() ) {
 
-        $atts = $this->handlePayload( $atts );
-
         if( ! wpadverts_load_assets_globally() ) {
             wp_enqueue_style( 'wpadverts-blocks' );
             wp_enqueue_script( 'wpadverts-block-publish' );
@@ -69,12 +67,4 @@ class Adverts_Block_Publish {
         return $engine->main( $atts );
     }
 
-    public function handlePayload( $atts ) {
-        if( adverts_request( "payload" ) == "1" ) {
-            $request_body = file_get_contents('php://input');
-            return json_decode( $request_body, true );
-        } else {
-            return $atts;
-        }
-    }
 }

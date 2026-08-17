@@ -294,6 +294,10 @@ function wpadverts_block_button( $args = array(), $options = array() ) {
     <?php
 }
 
+function wpadverts_block_css_color( $color ) {
+    return sanitize_hex_color( $color );
+}
+
 function wpadverts_block_button_css( $type, $args, $rule_prefix = "" ) {
 
     $_customize = array(
@@ -306,13 +310,13 @@ function wpadverts_block_button_css( $type, $args, $rule_prefix = "" ) {
         $args = array_merge( $args, $_options );
     }
 
-    $color_text     = isset( $args["color_text"] )      ? $args["color_text"]       : null;
-    $color_bg       = isset( $args["color_bg"] )        ? $args["color_bg"]         : null;
-    $color_border   = isset( $args["color_border"] )    ? $args["color_border"]     : null;
+    $color_text     = isset( $args["color_text"] )      ? wpadverts_block_css_color( $args["color_text"] )      : null;
+    $color_bg       = isset( $args["color_bg"] )        ? wpadverts_block_css_color( $args["color_bg"] )        : null;
+    $color_border   = isset( $args["color_border"] )    ? wpadverts_block_css_color( $args["color_border"] )    : null;
     
-    $color_text_h   = isset( $args["color_text_h"] )    ? $args["color_text_h"]     : null;
-    $color_bg_h     = isset( $args["color_bg_h"] )      ? $args["color_bg_h"]       : null;
-    $color_border_h = isset( $args["color_border_h"] )  ? $args["color_border_h"]   : null;
+    $color_text_h   = isset( $args["color_text_h"] )    ? wpadverts_block_css_color( $args["color_text_h"] )    : null;
+    $color_bg_h     = isset( $args["color_bg_h"] )      ? wpadverts_block_css_color( $args["color_bg_h"] )      : null;
+    $color_border_h = isset( $args["color_border_h"] )  ? wpadverts_block_css_color( $args["color_border_h"] )  : null;
     
     $button_class = sprintf( "wpa-btn-%s", $type );
 

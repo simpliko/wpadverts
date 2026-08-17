@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classifieds script, classifieds p
 Requires PHP: 5.6
 Requires at least: 5.7
 Tested up to: 7.0
-Stable tag: 2.3.2
+Stable tag: 2.3.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,16 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 2.3.4 - 2026-08-25 =
+
+* FIXED: Removed handlePayload() method that was no longer being used.
+* FIXED: Sanitization of the custom HEX colors used in blocks.
+
+= 2.3.3 - 2026-08-05
+
+* FEATURE: All blocks JavaScript code rebuilt using modern tools.
+* FIXED: Incorrect access privileges in one of endpoints.
 
 = 2.3.2 - 2026-06-02 = 
 

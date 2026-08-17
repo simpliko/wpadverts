@@ -47,18 +47,7 @@ class Adverts_Block_Search {
 
     }
     
-    public function handlePayload( $atts ) {
-        if( adverts_request( "payload" ) == "1" ) {
-            $request_body = file_get_contents('php://input');
-            return json_decode( $request_body, true );
-        } else {
-            return $atts;
-        }
-    }
-
     public function render( $atts = array() ) {
-        
-        $atts = $this->handlePayload( $atts );
 
         if( ! wpadverts_load_assets_globally() ) {
             wp_enqueue_style( 'wpadverts-blocks' );

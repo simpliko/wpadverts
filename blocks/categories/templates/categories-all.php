@@ -1,14 +1,20 @@
+<?php
+$color_bg = wpadverts_block_css_color( $color_bg );
+$color_border = wpadverts_block_css_color( $color_border );
+$color_icon = wpadverts_block_css_color( $color_icon );
+$color_text = wpadverts_block_css_color( $color_text );
+?>
 <style type="text/css">
 .wpa-block-categories-item {
-    background: <?php echo $color_bg ?>;
-    border-color: <?php echo $color_border ?>;
+    background: <?php echo esc_html( $color_bg ); ?>;
+    border-color: <?php echo esc_html( $color_border ); ?>;
 }
 .wpa-block-categories-icon:before {
-    color: <?php echo $color_icon ?>;
+    color: <?php echo esc_html( $color_icon ); ?>;
 }
 .wpa-block-categories-title,
 .wpa-block-categories-title > a {
-    color: <?php echo $color_text ?>
+    color: <?php echo esc_html( $color_text ); ?>;
 }
 </style>
 

@@ -47,25 +47,28 @@ if( $loop->found_posts === 0 ) {
 $grid_cols = sprintf("%s %s", $grid_cols_arr[ $atts["grid_columns_mobile"] ], $grid_cols_md_arr[ $atts["grid_columns"] ] );
 
 //echo "<pre>"; print_r($atts);print_r($params);echo "</pre>";
+$color_title = wpadverts_block_css_color( $atts['color_title'] );
+$color_price = wpadverts_block_css_color( $atts['color_price'] );
+$color_bg_featured = wpadverts_block_css_color( $atts['color_bg_featured'] );
 ?>
 
 <style type="text/css">
-    <?php if( $atts["color_title"]): ?>
+    <?php if( $color_title ): ?>
     .wpa-result-title-text {
-        color: <?php echo $atts["color_title"] ?>;
+        color: <?php echo esc_html( $color_title ); ?>;
     }
     <?php endif; ?>
-    <?php if( $atts["color_price"]): ?>
+    <?php if( $color_price ): ?>
     .wpa-result-last-text {
-        color: <?php echo $atts["color_price"] ?>;
+        color: <?php echo esc_html( $color_price ); ?>;
     }
     <?php endif; ?>
-    <?php if( $atts["color_bg_featured"]): ?>
+    <?php if( $color_bg_featured ): ?>
     .wpadverts-block-manage .advert-is-featured {
-        background-color: <?php echo $atts["color_bg_featured"] ?>;
+        background-color: <?php echo esc_html( $color_bg_featured ); ?>;
     }
     .wpadverts-block-manage .advert-is-featured:hover {
-        background-color: <?php echo $atts["color_bg_featured"] ?>;
+        background-color: <?php echo esc_html( $color_bg_featured ); ?>;
         filter: brightness(0.975);
     }
     <?php endif; ?>

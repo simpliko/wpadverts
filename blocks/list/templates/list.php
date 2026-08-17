@@ -15,6 +15,9 @@ $sort_current_title = "Publish Date";
 
 $show_image_column      = ( isset( $atts['show_image_column'] ) && $atts['show_image_column'] ) ? true : false;
 $show_price_column      = ( isset( $atts['show_price_column'] ) && $atts['show_price_column'] ) ? true : false;
+$color_title            = wpadverts_block_css_color( $atts['color_title'] );
+$color_price            = wpadverts_block_css_color( $atts['color_price'] );
+$color_bg_featured      = wpadverts_block_css_color( $atts['color_bg_featured'] );
 
 $grid_cols_arr = array(
     1 => "atw-grid-cols-1",
@@ -51,22 +54,22 @@ $grid_cols = sprintf("%s %s", $grid_cols_arr[ $atts["grid_columns_mobile"] ], $g
 ?>
 
 <style type="text/css">
-    <?php if( $atts["color_title"]): ?>
+    <?php if( $color_title ): ?>
     .wpa-result-title-text {
-        color: <?php echo $atts["color_title"] ?>;
+        color: <?php echo esc_html( $color_title ); ?>;
     }
     <?php endif; ?>
-    <?php if( $atts["color_price"]): ?>
+    <?php if( $color_price ): ?>
     .wpa-result-last-text {
-        color: <?php echo $atts["color_price"] ?>;
+        color: <?php echo esc_html( $color_price ); ?>;
     }
     <?php endif; ?>
-    <?php if( $atts["color_bg_featured"]): ?>
+    <?php if( $color_bg_featured ): ?>
     .wpadverts-block-list .advert-is-featured {
-        background-color: <?php echo $atts["color_bg_featured"] ?>;
+        background-color: <?php echo esc_html( $color_bg_featured ); ?>;
     }
     .wpadverts-block-list .advert-is-featured:hover {
-        background-color: <?php echo $atts["color_bg_featured"] ?>;
+        background-color: <?php echo esc_html( $color_bg_featured ); ?>;
         filter: brightness(0.975);
     }
     <?php endif; ?>

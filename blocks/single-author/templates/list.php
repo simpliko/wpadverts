@@ -1,4 +1,4 @@
-<div class="wpadverts-cpt <?php echo sprintf( "wpadverts-cpt-", $atts["post_type"] ) ?> atw-w-full atw-flex atw-flex-col">
+<div class="wpadverts-cpt <?php echo sprintf( "wpadverts-cpt-", $atts["post_type"] ?? '' ) ?> atw-w-full atw-flex atw-flex-col">
 
     <div class="atw-flex atw-flex-col md:atw-flex-row">
         <div class="atw-flex atw-grow ">

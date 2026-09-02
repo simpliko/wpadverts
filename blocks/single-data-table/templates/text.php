@@ -1,5 +1,5 @@
 
-<div class="wpadverts-cpt <?php echo sprintf( "wpadverts-cpt-", $atts["post_type"] ) ?> wpadverts-cpt-data-table wpadverts-cpt-data-table-text atw-w-full atw-flex atw-flex-col">
+<div class="wpadverts-cpt <?php echo sprintf( "wpadverts-cpt-", $atts["post_type"] ?? '' ) ?> wpadverts-cpt-data-table wpadverts-cpt-data-table-text atw-w-full atw-flex atw-flex-col">
 
     <div class="atw-mb-6">
         <?php foreach( $data_table as $content ): ?>

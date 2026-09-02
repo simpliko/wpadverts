@@ -1,6 +1,6 @@
-<div class="wpadverts-cpt <?php echo sprintf( "wpadverts-cpt-", $atts["post_type"] ) ?> wpadverts-cpt-data-table wpadverts-cpt-data-table-grid atw-w-full atw-flex atw-flex-col">
+<div class="wpadverts-cpt <?php echo sprintf( "wpadverts-cpt-", $atts["post_type"] ?? '' ) ?> wpadverts-cpt-data-table wpadverts-cpt-data-table-grid atw-w-full atw-flex atw-flex-col">
 
-    <div class="atw-grid atw-grid-cols-1 <?php echo $cols_class ?> <?php if( $atts["closed_top"] ): ?>atw-mt-6<?php endif; ?>">
+    <div class="atw-grid atw-grid-cols-1 <?php echo $cols_class ?> <?php if( $atts["closed_top"] ?? false ): ?>atw-mt-6<?php endif; ?>">
     <?php foreach( $data_table as $data ): ?>
         <?php if( $data["value"] !== false ): ?>
         <div class="atw-border-none atw-border-gray-100 atw-pb-2">

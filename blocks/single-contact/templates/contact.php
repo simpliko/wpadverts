@@ -1,4 +1,4 @@
-<div class="wpadverts-cpt <?php echo sprintf( "wpadverts-cpt-", $atts["post_type"] ) ?> wpadverts-cpt-single-contact atw-w-full atw-flex atw-flex-col">
+<div class="wpadverts-cpt <?php echo sprintf( "wpadverts-cpt-", $atts["post_type"] ?? '' ) ?> wpadverts-cpt-single-contact atw-w-full atw-flex atw-flex-col">
 
 <style type="text/css">
     <?php if( isset( $atts["primary_button"] ) && is_array( $atts["primary_button"] ) ): ?>

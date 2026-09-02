@@ -2,7 +2,7 @@
 Plugin URI: https://wpadverts.com/
 Contributors: gwin
 Tags: classifieds, classified, classified ads, classifieds script, classifieds plugin
-Requires PHP: 5.6
+Requires PHP: 7.0
 Requires at least: 5.7
 Tested up to: 7.0
 Stable tag: 2.3.4
@@ -125,10 +125,11 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
-= 2.3.4 - 2026-08-25 =
+= 2.3.4 - 2026-09-02 =
 
 * FIXED: Removed handlePayload() method that was no longer being used.
 * FIXED: Sanitization of the custom HEX colors used in blocks.
+* API: Minimum required PHP version bumped to 7.0
 
 = 2.3.3 - 2026-08-05
 

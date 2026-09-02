@@ -13,7 +13,7 @@ $redirect_to  = isset( $atts["redirect_to"] ) ? $atts["redirect_to"] : "";
 
 <div class="wpadverts-blocks wpadverts-block-search atw-flex atw-flex-col">
 
-    <form action="<?php echo esc_attr( $redirect_to ) ?>" method="get" class="wpadverts-form <?php echo str_replace( "wpa-form-interline", "", wpadverts_block_form_styles( $atts["form"] ) ) ?>  atw-block atw-py-0">
+    <form action="<?php echo esc_attr( $redirect_to ) ?>" method="get" class="wpadverts-form <?php echo str_replace( "wpa-form-interline", "", wpadverts_block_form_styles( $atts["form"] ?? array() ) ) ?>  atw-block atw-py-0">
         
         <?php foreach($form->get_fields( array( "type" => array( "adverts_field_hidden" ) ) ) as $field): ?>
         <?php call_user_func( adverts_field_get_renderer($field), $field, $form ) ?>

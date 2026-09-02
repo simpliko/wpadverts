@@ -47,9 +47,9 @@ if( $loop->found_posts === 0 ) {
 $grid_cols = sprintf("%s %s", $grid_cols_arr[ $atts["grid_columns_mobile"] ], $grid_cols_md_arr[ $atts["grid_columns"] ] );
 
 //echo "<pre>"; print_r($atts);print_r($params);echo "</pre>";
-$color_title = wpadverts_block_css_color( $atts['color_title'] );
-$color_price = wpadverts_block_css_color( $atts['color_price'] );
-$color_bg_featured = wpadverts_block_css_color( $atts['color_bg_featured'] );
+$color_title = wpadverts_block_css_color( $atts['color_title'] ?? '' );
+$color_price = wpadverts_block_css_color( $atts['color_price'] ?? '#b91c1c' );
+$color_bg_featured = wpadverts_block_css_color( $atts['color_bg_featured'] ?? '' );
 ?>
 
 <style type="text/css">

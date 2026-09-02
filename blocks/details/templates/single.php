@@ -8,7 +8,7 @@
     <?php wpadverts_block_button_css( "secondary", isset( $atts["secondary_button"] ) ? $atts["secondary_button"] : array() ) ?>
 </style>
 
-<div class="wpadverts-cpt <?php echo sprintf( "wpadverts-cpt-", $atts["post_type"] ) ?> atw-w-full atw-flex atw-flex-col">
+<div class="wpadverts-cpt <?php echo sprintf( "wpadverts-cpt-", $atts["post_type"] ?? '' ) ?> atw-w-full atw-flex atw-flex-col">
 
     <?php do_action( "adverts_tpl_single_top", $post_id, true ) ?>
 

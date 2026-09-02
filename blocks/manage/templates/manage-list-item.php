@@ -24,7 +24,7 @@
 
             <div class="wpa-result-title atw-mb-1 atw-leading-snug">
                 <a href="<?php echo esc_attr( add_query_arg( "advert_id", get_the_ID() )) ?>" title="<?php echo esc_attr( get_the_title() ) ?>" class="wpa-result-link atw-inline-block atw-no-underline ">
-                    <span class="wpa-result-title-text atw-inline-block atw-max-h-16 atw-text-gray-700 atw-text-lg atw-leading-tight atw-font-semibold "><?php echo esc_html( wpadverts_get_object_value( get_the_ID(), $atts["title_source"] ) ) ?></span>
+                    <span class="wpa-result-title-text atw-inline-block atw-max-h-16 atw-text-gray-700 atw-text-lg atw-leading-tight atw-font-semibold "><?php echo esc_html( wpadverts_get_object_value( get_the_ID(), $atts["title_source"] ?? '' ) ) ?></span>
                     <?php do_action( "adverts_list_after_title", get_the_ID() ) ?>
                 </a>
             </div>
@@ -33,7 +33,7 @@
 
                 <?php $post = get_post( get_the_ID() ) ?>
                 
-                <?php foreach( $atts["data"] as $element ): ?>
+                <?php foreach( ( $atts["data"] ?? [] ) as $element ): ?>
                     <?php echo wrap( get_the_ID(), $element["name"], sprintf( "wpa-result-meta--%s", $element["name"] ) ) ?>
                 <?php endforeach; ?>
 
@@ -75,7 +75,7 @@
         </div>        
         <div class="wpa-grid-only wpa-detail-right wpa-result-last ">
             <div class="atw-flex atw-flex-row atw-items-center atw-pt-2">
-                <?php echo wpadverts_block_button( $button_s1_args, $atts["secondary_button"] ) ?>
+                <?php echo wpadverts_block_button( $button_s1_args, $atts[\"secondary_button\"] ?? array() ) ?>
             </div>
         </div>
         <?php endif; ?>

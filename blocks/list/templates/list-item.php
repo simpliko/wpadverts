@@ -10,9 +10,9 @@
     <?php if( $show_image_column ): ?>
     <div class="atw-flex atw-flex-none atw-items-center">
         
-        <?php if( $atts["display"] == "list" ): ?>
+        <?php if( ( $atts["display"] ?? '' ) == "list" ): ?>
         <?php include apply_filters( "wpadverts/blocks/load/template", dirname( __FILE__ ) . "/list-item-img-list.php", $atts )?>
-        <?php elseif( $atts["display"] == "grid" ): ?>
+        <?php elseif( ( $atts["display"] ?? '' ) == "grid" ): ?>
         <?php include apply_filters( "wpadverts/blocks/load/template", dirname( __FILE__ ) . "/list-item-img-grid.php", $atts )?>
         <?php endif; ?>
 
@@ -25,14 +25,14 @@
 
             <div class="wpa-result-title atw-mb-1 atw-leading-snug">
                 <a href="<?php the_permalink() ?>" title="<?php echo esc_attr( get_the_title() ) ?>" class="wpa-result-link atw-inline-block atw-no-underline ">
-                    <span class="wpa-result-title-text atw-inline-block atw-max-h-16 atw-text-gray-700 atw-text-lg atw-leading-tight atw-font-semibold atw-break-normal"><?php echo esc_html( wpadverts_get_object_value( get_the_ID(), $atts["title_source"] ) ) ?></span>
+                    <span class="wpa-result-title-text atw-inline-block atw-max-h-16 atw-text-gray-700 atw-text-lg atw-leading-tight atw-font-semibold atw-break-normal"><?php echo esc_html( wpadverts_get_object_value( get_the_ID(), $atts["title_source"] ?? '' ) ) ?></span>
                     <?php do_action( "adverts_list_after_title", get_the_ID(), true ) ?>
                 </a>
             </div>
 
             <div class="wpa-result-meta atw-flex atw-flex-none atw-text-base atw-font-medium atw-text-gray-500">
 
-                <?php foreach( $atts["data"] as $element ): ?>
+                <?php foreach( ( $atts["data"] ?? [] ) as $element ): ?>
                 <?php echo wrap( get_the_ID(), $element["name"], sprintf( "wpa-result-meta--%s", $element["name"] ) ) ?>
                 <?php endforeach; ?>
 
@@ -43,7 +43,7 @@
 
         <?php if( $show_price_column ): ?>
         <div class="wpa-detail-right wpa-result-last atw-flex atw-items-center ">
-            <?php echo wrap( get_the_ID(), $atts["alt_source"], "wpa-result-last-text atw-font-bold atw-text-lg " . (!$atts["color_price"] ? "atw-text-red-700" : "") )  ?>
+            <?php echo wrap( get_the_ID(), $atts["alt_source"] ?? '', "wpa-result-last-text atw-font-bold atw-text-lg " . (!( $atts["color_price"] ?? '' ) ? "atw-text-red-700" : "") )  ?>
         </div>
         <?php endif; ?>
         

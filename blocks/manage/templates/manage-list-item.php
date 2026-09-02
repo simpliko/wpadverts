@@ -75,7 +75,7 @@
         </div>        
         <div class="wpa-grid-only wpa-detail-right wpa-result-last ">
             <div class="atw-flex atw-flex-row atw-items-center atw-pt-2">
-                <?php echo wpadverts_block_button( $button_s1_args, $atts[\"secondary_button\"] ?? array() ) ?>
+                <?php echo wpadverts_block_button( $button_s1_args, $atts["secondary_button"] ?? array() ) ?>
             </div>
         </div>
         <?php endif; ?>

@@ -442,14 +442,14 @@ function wpadverts_get_object_taxonomy( $object_id, $path ) {
     $content = "";
 
     if(!is_array($terms)) {
-        return apply_filters( "wpadverts/block/object/taxonomy", $content, $terms );
+        return wp_kses_post( apply_filters( "wpadverts/block/object/taxonomy", $content, $terms ) );
     }
 
     foreach($terms as $c) {
-        $content .= apply_filters( "wpadverts/block/object/taxonomy/term", sprintf( '<div>%s</div>', $c->name ), $c ); 
+        $content .= apply_filters( "wpadverts/block/object/taxonomy/term", sprintf( '<div>%s</div>', esc_html( $c->name ) ), $c );
     }
 
-    return apply_filters( "wpadverts/block/object/taxonomy", $content, $terms );
+    return wp_kses_post( apply_filters( "wpadverts/block/object/taxonomy", $content, $terms ) );
 }
 
 function wpadverts_get_object_value( $object_id, $path ) {
@@ -474,16 +474,27 @@ function wpadverts_get_object_value( $object_id, $path ) {
     return $value;
 }
 
+function wpadverts_block_escape_object_value( $value, $path ) {
+    list( $type ) = explode( "__", $path, 2 );
+
+    if( in_array( $type, array( "pattern", "taxonomy" ), true ) ) {
+        return wp_kses_post( $value );
+    }
+
+    return esc_html( $value );
+}
 
 
 function wpadverts_block_tpl_wrap( $post_id, $path, $classes = "") {
     $value = wpadverts_get_object_value( $post_id, $path );
 
     if( $value ) {
-        return sprintf( 
-            '<div class="%s">%s</div>', 
-            $classes, 
-            apply_filters( "wpadverts/block/tpl/wrap/value", $value, $post_id, $path ) 
+        $value = apply_filters( "wpadverts/block/tpl/wrap/value", $value, $post_id, $path );
+
+        return sprintf(
+            '<div class="%s">%s</div>',
+            esc_attr( $classes ),
+            wpadverts_block_escape_object_value( $value, $path )
         );
     }
 }

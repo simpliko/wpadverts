@@ -79,6 +79,8 @@ class Adverts_Block_Single_Value {
             return "";
         }
 
+        $value = wpadverts_block_escape_object_value( $value, $atts["data"][0] );
+
         if( $atts["render_as"] == "text" ) {
             return $value;
         }

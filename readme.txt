@@ -4,8 +4,8 @@ Contributors: gwin
 Tags: classifieds, classified, classified ads, classifieds script, classifieds plugin
 Requires PHP: 7.0
 Requires at least: 5.7
-Tested up to: 7.0
-Stable tag: 2.3.4
+Tested up to: 7.1
+Stable tag: 2.3.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,12 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 2.3.5 - 2026-10-07 =
+
+* FEATURE: Requests to the updates server are now sent using GET method and are cached for an hour.
+* FIXED: Data table block display for views with multiple elements.
+* FIXED: XSS hardening
 
 = 2.3.4 - 2026-09-02 =
 

@@ -152,6 +152,7 @@ Adverts::instance()->set("form", array(
             "type" => "adverts_field_text",
             "order" => 12,
             "label" => __( "Location", "wpadverts" ),
+            "filter" => array( array( "name" => "kses" ) ),
         ),
     )
 ));

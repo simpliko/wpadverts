@@ -199,35 +199,35 @@ class Adverts_Block_Single_Data_Table {
                 "type" => "__builtin",
                 "icon" => "fas fa-user",
                 "label" => __("Contact Person", "wpadverts"),
-                "value" => get_post_meta( $post_id, "adverts_person", true )
+                "value" => esc_html( get_post_meta( $post_id, "adverts_person", true ) )
             ],             
             [
                 "name" => "meta__adverts_email",
                 "type" => "__builtin",
                 "icon" => "fas fa-envelope",
                 "label" => __("Contact Email", "wpadverts"),
-                "value" => get_post_meta( $post_id, "adverts_email", true )
+                "value" => esc_html( get_post_meta( $post_id, "adverts_email", true ) )
             ],             
             [
                 "name" => "meta__adverts_phone",
                 "type" => "__builtin",
                 "icon" => "fas fa-phone",
                 "label" => __("Contact Phone", "wpadverts"),
-                "value" => get_post_meta( $post_id, "adverts_phone", true )
+                "value" => esc_html( get_post_meta( $post_id, "adverts_phone", true ) )
             ],             
             [
                 "name" => "meta__adverts_price",
                 "type" => "__builtin",
                 "icon" => "fas fa-dollar",
                 "label" => __("Price", "wpadverts"),
-                "value" => get_post_meta( $post_id, "adverts_price", true )
+                "value" => esc_html( get_post_meta( $post_id, "adverts_price", true ) )
             ],              
             [
                 "name" => "meta__adverts_location",
                 "type" => "__builtin",
                 "icon" => "fas fa-location-dot",
                 "label" => __("Location", "wpadverts"),
-                "value" => get_post_meta( $post_id, "adverts_location", true )
+                "value" => esc_html( get_post_meta( $post_id, "adverts_location", true ) )
             ],             
             [
                 "name" => "pattern__location",
@@ -292,7 +292,8 @@ class Adverts_Block_Single_Data_Table {
                     "type" => $data["field"]["type"],
                     "icon" => $data["icon"],
                     "label" => $data["label"],
-                    "value" => $data["value"]
+                    "value" => $data["value"],
+                    "row_classes" => $data["row_classes"] ?? ""
                 ];
             }
 

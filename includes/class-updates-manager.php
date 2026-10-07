@@ -200,11 +200,30 @@ class Adverts_Updates_Manager
             $args["license"] = $this->license;
         }
         
-        $request = wp_remote_post($url, array("body"=>$args));
+        //$request = wp_remote_post($url, array("body"=>$args));
 
-        if (!is_wp_error($request) || wp_remote_retrieve_response_code($request) === 200) {
-            return json_decode($request["body"]);
-	} else {
+        $query_string = "";
+        if( ! empty( $args ) ) {
+            $query_string = "?" . http_build_query( $args );
+        }
+
+        $request_hash = sprintf( "wpadverts_remote_%s_%s", $this->slug, $action );
+        $request_cache = get_transient( $request_hash );
+
+        if( $request_cache !== false ) {
+            $cached_response = json_decode( $request_cache );
+            $cached_response->is_cached = 1;
+            return $cached_response;
+        }
+
+        $request = wp_remote_get( $url . $query_string );
+
+        if ( ! is_wp_error($request) || wp_remote_retrieve_response_code( $request ) === 200) {
+            if( ! in_array( $action, ["license"] ) ) {
+                set_transient( $request_hash, $request["body"], 3600 );
+            }
+            return json_decode( $request["body"] );
+	    } else {
             return false;
         }
     }

@@ -303,7 +303,7 @@ class Adverts_Block_Publish_Engine {
         ) );
 
         if( ! isset( $possible_actions[ $action ] ) ) {
-            return sprintf( "Incorrect action name [%s].", $action );
+            return sprintf( "Incorrect action name [%s].", esc_html($action) );
         }
 
         $next_action = $possible_actions[$action];

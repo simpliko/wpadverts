@@ -6,7 +6,7 @@
  * Author: Greg Winiarski
  * Text Domain: wpadverts
  * Domain Path: /languages
- * Version: 2.3.4
+ * Version: 2.3.5
  * 
  * Adverts is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

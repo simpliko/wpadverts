@@ -5,7 +5,7 @@ Tags: classifieds, classified, classified ads, classifieds script, classifieds p
 Requires PHP: 7.0
 Requires at least: 5.7
 Tested up to: 7.1
-Stable tag: 2.3.5
+Stable tag: 2.3.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,11 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 "Save Changes" button without actually changing anything, this should reset router and fix URLs.
 
 == Changelog ==
+
+= 2.3.6 - 2026-11-17 =
+
+* FEATURE: Longer cache for updates API calls.
+* FIXED: XSS hardening.
 
 = 2.3.5 - 2026-10-07 =
 

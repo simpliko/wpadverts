@@ -72,13 +72,13 @@ function adext_contact_form( $post_id ) {
                     ...
                     <a href="#" class="wpadverts-reveal-button" style="font-weight: normal; font-size:0.9rem"><?php esc_html_e( "show phone", "wpadverts" ) ?></a>
                 </strong>
-                <a href="#" class="wpadverts-reveal-final" data-partial="<?php echo $ph2 ?>" style="display: none"></a>
+                <a href="#" class="wpadverts-reveal-final" data-partial="<?php echo esc_attr( $ph2 ) ?>" style="display: none"></a>
                 <span class="adverts-icon-phone"></span>
             </span>
             <?php else: ?>
             <span class="adverts-button" style="background-color: transparent; cursor: auto">
                 <?php esc_html_e( "Phone", "wpadverts" ) ?>
-                <a href="tel:<?php echo esc_html( $phone ) ?>"><?php echo esc_html( $phone ) ?></a>
+                <a href="tel:<?php echo esc_attr( $phone ) ?>"><?php echo esc_html( $phone ) ?></a>
                 <span class="adverts-icon-phone"></span>
             </span>
             <?php endif; ?>

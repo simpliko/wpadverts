@@ -86,7 +86,7 @@ class Adext_Contact_Form_Block_Details {
 
         if( $phone_reveal == 1) {
             $pb = array( 
-                "html" => sprintf( __('Call <span data-ph1="%s" class="wpadverts-phone">%s...</span> <a href="#" class="wpadverts-phone-reveal">show phone</a>', "wpadverts"), $ph1, $ph1 ), 
+                "html" => sprintf( __('Call <span data-ph1="%s" class="wpadverts-phone">%s...</span> <a href="#" class="wpadverts-phone-reveal">show phone</a>', "wpadverts"), esc_attr( $ph1 ), esc_html( $ph1 ) ), 
                 "icon" => "fas fa-phone-alt", 
                 "class" => "wpadverts-reveal-phone",
                 "type" => "secondary",
@@ -107,7 +107,7 @@ class Adext_Contact_Form_Block_Details {
             );
         } else {
             $pb = array( 
-                "html" => sprintf( __('Call <span data-ph1="%s" class="wpadverts-phone">%s</span>', "wpadverts"), $ph1, $phone ), 
+                "html" => sprintf( __('Call <span data-ph1="%s" class="wpadverts-phone">%s</span>', "wpadverts"), esc_attr( $ph1 ), esc_html( $phone ) ), 
                 "icon" => "fas fa-phone-alt", 
                 "class" => "wpadverts-reveal-phone",
                 "type" => "secondary",

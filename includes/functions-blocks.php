@@ -269,7 +269,7 @@ function wpadverts_block_button( $args = array(), $options = array() ) {
 
     $attr_list = array();
     foreach( $atts["attr"] as $k => $v) {
-        $attr_list[] = sprintf( '%s="%s"', $k, $v );
+        $attr_list[] = sprintf( '%s="%s"', esc_attr( $k ), esc_attr( $v ) );
     }
 
     $__load = array(

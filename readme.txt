@@ -125,7 +125,7 @@ Most likely rewrite rules were not registered properly for some reason. Go to wp
 
 == Changelog ==
 
-= 2.3.6 - 2026-11-17 =
+= 2.3.6 - 2026-11-24 =
 
 * FEATURE: Longer cache for updates API calls.
 * FIXED: XSS hardening.

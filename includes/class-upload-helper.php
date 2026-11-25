@@ -93,7 +93,19 @@ class Adverts_Upload_Helper {
      */
     public function check( $file ) {
         foreach($this->_validator as $v) {
-            $v = array_merge($this->get_validator( $v["name"] ), $v);
+            if( ! is_array( $v ) || ! isset( $v["name"] ) ) {
+                continue;
+            }
+
+            $registered = $this->get_validator( $v["name"] );
+
+            if( ! is_array( $registered ) ) {
+                continue;
+            }
+
+            // The callback always comes from the registered validator.
+            $v = array_merge( $registered, $v );
+            $v["callback"] = $registered["callback"];
 
             if(empty($file) && $v["validate_empty"] === false ) {
                 //continue;

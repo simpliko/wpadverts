@@ -134,8 +134,21 @@ class Adverts_Form
             
             foreach( $field["validator"] as $v ) {
                 
-                $v = array_merge($this->get_validator( $v["name"] ), $v);
-                
+                if( ! is_array( $v ) || ! isset( $v["name"] ) ) {
+                    continue;
+                }
+
+                $registered = $this->get_validator( $v["name"] );
+
+                if( ! is_array( $registered ) ) {
+                    continue;
+                }
+
+                // The callback always comes from the registered validator,
+                // the field definition can only change the params and options.
+                $v = array_merge( $registered, $v );
+                $v["callback"] = $registered["callback"];
+
                 if(isset($this->_form[$name]["value"])) {
                     $value = $this->_form[$name]["value"];
                 } else {

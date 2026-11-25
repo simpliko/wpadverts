@@ -15,7 +15,7 @@
 
                     <?php if( $mime == "image" ): ?>
 
-                    <a data-title="<?php echo wpadverts_block_glightbox_attr($attach->post_excerpt ?? $attach->post_title) ?>" data-description="<?php echo wpadverts_block_glightbox_attr($attach->post_content) ?>" data-desc-position="bottom" href="<?php echo esc_attr( $attach->guid ) ?>" class="wpa-glightbox atw-box-border atw-flex atw-justify-center atw-h-full atw-border atw-border-solid atw-border-gray-100 atw-round atw-mx-1">
+                    <a data-title="<?php echo wpadverts_block_glightbox_attr($attach->post_excerpt ?? $attach->post_title) ?>" data-description="<?php echo wpadverts_block_glightbox_attr($attach->post_content) ?>" data-desc-position="bottom" href="<?php echo esc_url( $attach->guid ) ?>" class="wpa-glightbox atw-box-border atw-flex atw-justify-center atw-h-full atw-border atw-border-solid atw-border-gray-100 atw-round atw-mx-1">
                     
                         <?php $image = wp_get_attachment_image_src( $attach->ID, $gallery_img_size );  ?>
                         <?php if($slider_is_lazy): ?>
@@ -27,9 +27,9 @@
 
                     <?php elseif( $mime == "video" ): ?>
 
-                    <a data-title="<?php echo wpadverts_block_glightbox_attr($attach->post_excerpt ?? $attach->post_title) ?>" data-description="<?php echo wpadverts_block_glightbox_attr($attach->post_content) ?>" data-desc-position="bottom" href="<?php echo esc_attr( $attach->guid ) ?>" class="wpa-glightbox atw-box-border atw-flex atw-justify-center atw-h-full atw-border atw-border-solid atw-border-gray-100 atw-round atw-mx-1">
+                    <a data-title="<?php echo wpadverts_block_glightbox_attr($attach->post_excerpt ?? $attach->post_title) ?>" data-description="<?php echo wpadverts_block_glightbox_attr($attach->post_content) ?>" data-desc-position="bottom" href="<?php echo esc_url( $attach->guid ) ?>" class="wpa-glightbox atw-box-border atw-flex atw-justify-center atw-h-full atw-border atw-border-solid atw-border-gray-100 atw-round atw-mx-1">
                     
-                        <video <?php if(!$custom_controls):?>controls="true"<?php endif; ?> src="<?php echo $attach->guid ?>" preload="metadata" poster="<?php echo adverts_get_post_img_url( $attach, array( $gallery_img_size ) ) ?>" class="atw-m-0 atw-p-0">
+                        <video <?php if(!$custom_controls):?>controls="true"<?php endif; ?> src="<?php echo esc_url( $attach->guid ) ?>" preload="metadata" poster="<?php echo esc_url( adverts_get_post_img_url( $attach, array( $gallery_img_size ) ) ) ?>" class="atw-m-0 atw-p-0">
                             <?php _e("Your browser cannot play this video.", "wpadverts") ?> 
                             <?php _e("Please use a different browser or download the video and play on your device.", "wpadverts" ) ?>
                         </video>
@@ -44,11 +44,11 @@
                             <div class="atw-mx-auto atw-flex atw-flex-col atw-justify-center atw-w-full atw-h-full ">
                                 <div class="atw-flex atw-flex-col atw-my-1 atw-justify-center atw-items-center">
                                     <span class="<?php echo wpadverts_get_file_fa_icon( $attach ) ?> atw-text-6xl atw-text-gray-600 atw-mb-3"></span>
-                                    <span class="atw-text-sm"><?php echo _e("File: ", "wpadverts" ) ?><span class="atw-font-bold"><?php echo basename( $attach->guid ) ?></span></span>
+                                    <span class="atw-text-sm"><?php echo _e("File: ", "wpadverts" ) ?><span class="atw-font-bold"><?php echo esc_html( basename( $attach->guid ) ) ?></span></span>
                                 </div>
                                 <div class="atw-flex atw-mt-3 atw-justify-center atw-h-auto">
                                     <span class="atw-inline-block atw-border atw-text-bold atw-border-solid atw-border-gray-600 atw-text-gray-600 atw-bg-gray-200">
-                                        <span onclick="window.location.href='<?php echo esc_attr( $attach->guid ) ?>'" class="atw-cursor-pointer atw-no-underline atw-inline-block atw-px-6 atw-py-3 atw-uppercase"><?php _e("Download", "wpadverts" ) ?></span>
+                                        <span onclick="window.location.href='<?php echo esc_attr( esc_js( esc_url( $attach->guid ) ) ) ?>'" class="atw-cursor-pointer atw-no-underline atw-inline-block atw-px-6 atw-py-3 atw-uppercase"><?php _e("Download", "wpadverts" ) ?></span>
                                     </span>
                                 </div>
                             </div>

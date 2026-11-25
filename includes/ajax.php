@@ -233,8 +233,8 @@ function adverts_gallery_update() {
     $post_id = _adverts_ajax_verify_post_id( true );
        
     $attach_id = intval( $_POST["attach_id"] );
-    $caption = trim( adverts_request("caption", "" ) );
-    $content = trim( adverts_request("content", "" ) );
+    $caption = sanitize_text_field( adverts_request("caption", "" ) );
+    $content = sanitize_textarea_field( adverts_request("content", "" ) );
     $featured = intval( $_POST["featured"]);
     
     _adverts_ajax_check_post_ownership( $post_id );

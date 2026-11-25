@@ -510,6 +510,27 @@ function wpadverts_block_escape_object_value( $value, $path ) {
 }
 
 
+/**
+ * Escapes text for the GLightbox data-title and data-description attributes.
+ *
+ * GLightbox reads these attributes and inserts them into the lightbox with
+ * innerHTML, so esc_attr() alone is not enough (the browser decodes the
+ * attribute back to markup, and esc_attr() does not double encode entities).
+ * The value is treated as plain text, HTML-escaped for innerHTML and then
+ * escaped again for the attribute.
+ *
+ * @since 2.3.7
+ * @param string $text  Caption or description
+ * @return string       Value safe to print inside a double-quoted attribute
+ */
+function wpadverts_block_glightbox_attr( $text ) {
+    $charset = get_bloginfo( "charset" );
+    $text = html_entity_decode( (string) $text, ENT_QUOTES | ENT_HTML5, $charset );
+    $text = wp_strip_all_tags( $text );
+
+    return htmlspecialchars( htmlspecialchars( $text, ENT_QUOTES, $charset ), ENT_QUOTES, $charset );
+}
+
 function wpadverts_block_tpl_wrap( $post_id, $path, $classes = "") {
     $value = wpadverts_get_object_value( $post_id, $path );
 

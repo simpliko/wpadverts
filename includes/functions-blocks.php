@@ -392,15 +392,40 @@ function wpadverts_block_form_styles( $atts ) {
         2 => ""
     );
 
+    $form_style = apply_filters( "wpadverts/block/form/styles/allowed-style", array(
+        "wpa-unstyled",
+        "wpa-flat",
+        "wpa-solid",
+        "wpa-bottom-border"
+    ) );
+
+    $form_shadow = apply_filters( "wpadverts/block/form/styles/allowed-shadow", array(
+        "wpa-shadow-none",
+        "wpa-shadow-sm",
+        "wpa-shadow-md",
+        "wpa-shadow-inside"
+    ) );
+
     $atts = apply_filters( "wpadverts/block/form/styles/atts", $atts );
 
+    if( ! is_array( $atts ) ) {
+        $atts = array();
+    }
+
+    $style  = isset( $atts["style"] ) && is_string( $atts["style"] ) ? $atts["style"] : "";
+    $shadow = isset( $atts["shadow"] ) && is_string( $atts["shadow"] ) ? $atts["shadow"] : "";
+
+    $border  = isset( $atts["border"] ) && is_scalar( $atts["border"] ) ? absint( $atts["border"] ) : 0;
+    $rounded = isset( $atts["rounded"] ) && is_scalar( $atts["rounded"] ) ? absint( $atts["rounded"] ) : 0;
+    $spacing = isset( $atts["spacing"] ) && is_scalar( $atts["spacing"] ) ? absint( $atts["spacing"] ) : 0;
+
     $form_styles = join( " ", array(
-        isset( $atts["style"] ) ? $atts["style"] : "",
-        isset( $atts["shadow"] ) ? $atts["shadow"] : "",
-        isset( $atts["border"] ) && $atts["border"] ? $form_border[ $atts["border"] ] : $form_border[0],
-        isset( $atts["rounded"] ) && $atts["rounded"] ? $form_rounded[ $atts["rounded"] ] : $form_rounded[0],
-        isset( $atts["spacing"] ) && $atts["spacing"] ? $form_spacing[ $atts["spacing"] ] : $form_spacing[0],
-        isset( $atts["interline"] ) && $atts["interline"] ? "wpa-form-interline" : "",
+        in_array( $style, $form_style, true ) ? $style : "",
+        in_array( $shadow, $form_shadow, true ) ? $shadow : "",
+        isset( $form_border[ $border ] ) ? $form_border[ $border ] : $form_border[0],
+        isset( $form_rounded[ $rounded ] ) ? $form_rounded[ $rounded ] : $form_rounded[0],
+        isset( $form_spacing[ $spacing ] ) ? $form_spacing[ $spacing ] : $form_spacing[0],
+        ! empty( $atts["interline"] ) ? "wpa-form-interline" : "",
         "wpa-padding-sm"
     ) );
 

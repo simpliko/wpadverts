@@ -35,7 +35,7 @@ $_btn_classes = isset( $_btn_classes ) ? $_btn_classes : ["top" => "wpa-form-but
 </style>
 
 <div class="wpadverts-block wpadverts-partial wpadverts-form">
-    <form <?php if($form_id): ?>id="<?php echo esc_attr( $form_id ) ?>"<?php endif; ?> action="<?php echo esc_attr( $redirect_to ) ?>" method="post" class="wpadverts-form <?php echo wpadverts_block_form_styles( $form_style_atts ) ?> <?php echo esc_attr( $form_layout ) ?>  atw-block atw-py-0">
+    <form <?php if($form_id): ?>id="<?php echo esc_attr( $form_id ) ?>"<?php endif; ?> action="<?php echo esc_attr( $redirect_to ) ?>" method="post" class="wpadverts-form <?php echo esc_attr( wpadverts_block_form_styles( $form_style_atts ) ) ?> <?php echo esc_attr( $form_layout ) ?>  atw-block atw-py-0">
 
         <?php foreach($form->get_fields( array( "type" => array( "adverts_field_hidden" ) ) ) as $field): ?>
         <?php call_user_func( adverts_field_get_renderer($field), $field, $form ) ?>
